@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.SessionViews.VoidAccountsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Void Accounts" Style="{StaticResource HeaderStyle3}" />
+
+                <Button  Grid.Row="1" Content="Void Accounts" VerticalAlignment="Top" Command="{Binding VoidAccountCommand}" Style="{StaticResource FlatWhiteMediumButtonStyle}" Margin="20"/>
+
+                <StackPanel Background="White" Grid.Row="1" Margin="20" Visibility="{Binding YesNoVoidAccountDialogVisibility, Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock HorizontalAlignment="Center" FontSize="20" Width="400" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding OutstandingTicketCountMessage}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Yes" Margin="10" Command="{Binding VoidAccountYesCommand}" IsEnabled="{Binding EnableVoidAccountButton}" />
+                        <Button Content="No" Margin="10" Command="{Binding VoidAccountNoCommand}" IsEnabled="{Binding EnableVoidAccountButton}"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

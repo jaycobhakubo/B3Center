@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.ReportViews.SessionReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+             xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Session Report" Style="{StaticResource HeaderStyle3}" />
+
+            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>
+
+            <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />
+        </Grid>
+
+        <Border Grid.Row="1" Name="ReportViewerBorder">
+            <viewer:CrystalReportsViewer Name="ReportViewer" Margin="5,0"/>
+        </Border>
+
+
+        <Grid Grid.Row="1">
+            <Border  Name="SelectDateBorder">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+                    <TextBlock Text="Date"  Style="{StaticResource TextBlockFontStyle1}"/>
+                    <shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <TextBlock Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
+                    <ComboBox  Height="50" 
+                               Width="280"
+                               ItemsSource="{Binding SessionReportSessionList}"
+                               SelectedItem="{Binding SessionReportSessionSelected}"
+                               DisplayMemberPath="DisplayName"
+                               x:Name="SessionCombobox"/>
+
+                    <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.SessionViews.SetOperatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
+    </UserControl.Resources>
+    <Border>
+        <Grid>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Set Operator" Style="{StaticResource HeaderStyle3}" />
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <WrapPanel Name="CharityWrapPanel" Margin="30,0,0,5"/>
+                </ScrollViewer>
+
+                <Border Grid.Row="0" Grid.RowSpan="2" Background="White" Visibility="{Binding StartSessionDisabledVisibility, Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Width="400" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding SessionStartStatusMessage}" Margin="0,120"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

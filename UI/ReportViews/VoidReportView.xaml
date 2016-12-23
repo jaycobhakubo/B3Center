@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.ReportViews.VoidReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+             xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border
+                                  Name="Border"
+                                    CornerRadius="0"
+                                    Background="White">
+
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="10,0">
+                                        <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Width="200" Text="Void Report" Style="{StaticResource HeaderStyle3}"/>
+            
+            <Button Grid.Column="1" Content="New Report" Name="SelectDatesButton" Click="SelectDatesButton_Click" HorizontalAlignment="Right"/>
+            
+            <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />
+        </Grid>
+
+        <Border Grid.Row="1" Name="ReportViewerBorder">
+            <viewer:CrystalReportsViewer  Name="ReportViewer" Margin="5,0" />
+        </Border>
+
+        <Border Grid.Row="1" Name="SelectDateBorder" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <TextBlock Text="Start Date"  Style="{StaticResource TextBlockFontStyle1}"/>
+                <shared:DatePickerUserControl Height="120" HorizontalAlignment="Right" x:Name="StartDateTime" />
+
+                <TextBlock Text="End Date"  Style="{StaticResource TextBlockFontStyle}" />
+                <shared:DatePickerUserControl Height="120" HorizontalAlignment="Right" x:Name="EndDateTime"/>
+
+                <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"/>
+                <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
+                <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

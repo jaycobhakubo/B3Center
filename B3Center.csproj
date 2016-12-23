@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1328EDD3-5063-4ED9-905C-0E892A121D84}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameTech.Elite.Client.Modules.B3Center</RootNamespace>
+    <AssemblyName>GameTech.Elite.B3Center</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>Resources\B3Center.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>http://localhost/GameTech.Elite.B3Center/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>B3CenterKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="SAPBusinessObjects.WPF.Viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\B3CenterController.cs" />
+    <Compile Include="Business\B3CenterException.cs" />
+    <Compile Include="Business\B3CenterModule.cs" />
+    <Compile Include="Business\B3CenterSettings.cs" />
+    <Compile Include="Business\B3Report.cs" />
+    <Compile Include="Business\Operator.cs" />
+    <Compile Include="Business\Session.cs" />
+    <Compile Include="Business\B3Controller.cs" />
+    <Compile Include="Business\GameModels\CrazyBoutGameModel.cs" />
+    <Compile Include="Business\GameModels\GameModel.cs" />
+    <Compile Include="Messages\GetB3AccountNumber.cs" />
+    <Compile Include="Messages\GetB3ColorIcon.cs" />
+    <Compile Include="Messages\GetB3MathGamePlay.cs" />
+    <Compile Include="Messages\GetB3SettingGameEnable.cs" />
+    <Compile Include="Messages\SetB3LoggedChanges.cs" />
+    <Compile Include="Messages\SetB3OperatorMessage.cs" />
+    <Compile Include="Messages\SetB3SettingsMessage.cs" />
+    <Compile Include="Messages\SetGameEnableSQL.cs" />
+    <Compile Include="Messages\VoidB3SessionTicketsMessage.cs" />
+    <Compile Include="Messages\GetB3SessionTicketCountMessage.cs" />
+    <Compile Include="Messages\GetB3BallsMessage.cs" />
+    <Compile Include="Messages\GetB3ReportListMessage.cs" />
+    <Compile Include="Messages\GetB3SessionListMessage.cs" />
+    <Compile Include="Messages\GetB3SettingsMessage.cs" />
+    <Compile Include="Messages\SessionEndMessage.cs" />
+    <Compile Include="Messages\GetSessionOperatorListMessage.cs" />
+    <Compile Include="Messages\SessionStartMessage.cs" />
+    <Compile Include="Messages\SetB3BallsMessage.cs" />
+    <Compile Include="MVVM\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Common.cs" />
+    <Compile Include="UI\CommandHandler.cs" />
+    <Compile Include="UI\Converters.cs" />
+    <Compile Include="UI\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\AccountHistoryReportView.xaml.cs">
+      <DependentUpon>AccountHistoryReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\AccountsReportView.xaml.cs">
+      <DependentUpon>AccountsReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\BallCallReportView.xaml.cs">
+      <DependentUpon>BallCallReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\BingoCardReportView.xaml.cs">
+      <DependentUpon>BingoCardReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\DailyReportView.xaml.cs">
+      <DependentUpon>DailyReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\DetailReportView.xaml.cs">
+      <DependentUpon>DetailReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\DrawerReportView.xaml.cs">
+      <DependentUpon>DrawerReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\JackpotReportView.xaml.cs">
+      <DependentUpon>JackpotReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\MonthlyReportView.xaml.cs">
+      <DependentUpon>MonthlyReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\SessionReportView.xaml.cs">
+      <DependentUpon>SessionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\SessionSummaryView.xaml.cs">
+      <DependentUpon>SessionSummaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\SessionTransactionReportView.xaml.cs">
+      <DependentUpon>SessionTransactionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\VoidReportView.xaml.cs">
+      <DependentUpon>VoidReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\WinnerCardsReportView.xaml.cs">
+      <DependentUpon>WinnerCardsReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\CharityView.xaml.cs">
+      <DependentUpon>CharityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
+      <DependentUpon>PayTableSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shared\SaveCancelCrtl.xaml.cs">
+      <DependentUpon>SaveCancelCrtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\GameBallUserControl.xaml.cs">
+      <DependentUpon>GameBallUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\SessionView.xaml.cs">
+      <DependentUpon>SessionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\SetBallsView.xaml.cs">
+      <DependentUpon>SetBallsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\SetOperatorView.xaml.cs">
+      <DependentUpon>SetOperatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\StartSessionConfirmView.xaml.cs">
+      <DependentUpon>StartSessionConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\EndSessionView.xaml.cs">
+      <DependentUpon>EndSessionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SessionViews\VoidAccountsView.xaml.cs">
+      <DependentUpon>VoidAccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingCrazyBoutView.xaml.cs">
+      <DependentUpon>GameSettingCrazyBoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingJailBreakView.xaml.cs">
+      <DependentUpon>GameSettingJailBreakView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingUkickEmView.xaml.cs">
+      <DependentUpon>GameSettingUkickEmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView.xaml.cs">
+      <DependentUpon>GameSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingWildBallProgView.xaml.cs">
+      <DependentUpon>GameSettingWildBallProgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\OperatorListSettingView.xaml.cs">
+      <DependentUpon>OperatorListSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\PlayerSettingView.xaml.cs">
+      <DependentUpon>PlayerSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\SalesSettingView.xaml.cs">
+      <DependentUpon>SalesSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\ServerGameSettingView.xaml.cs">
+      <DependentUpon>ServerGameSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\SessionSettingView.xaml.cs">
+      <DependentUpon>SessionSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\SettingView.xaml.cs">
+      <DependentUpon>SettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\SystemSettingView.xaml.cs">
+      <DependentUpon>SystemSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shared\DatePickerUserControl.xaml.cs">
+      <DependentUpon>DatePickerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shared\FullScreenUserControl.xaml.cs">
+      <DependentUpon>FullScreenUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SqlConnectionToByPassGtiServerApp.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
+    <Compile Include="Business\IGTIModule.cs" />
+    <Compile Include="Design\DesignController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\SessionViewModel.cs" />
+    <Compile Include="ViewModels\SettingViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MVVM\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\GameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ReportViews\AccountHistoryReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\AccountsReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\BallCallReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\BingoCardReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\DailyReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\DetailReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\DrawerReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\JackpotReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\MonthlyReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\SessionReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\SessionSummaryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\SessionTransactionReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\VoidReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\WinnerCardsReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\CharityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\PayTableSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Shared\SaveCancelCrtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\GameBallUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\SessionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\SetBallsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\SetOperatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\StartSessionConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\EndSessionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SessionViews\VoidAccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingCrazyBoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingJailBreakView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingUkickEmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingWildBallProgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\OperatorListSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\PlayerSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\SalesSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\ServerGameSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\SessionSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\SettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\SystemSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Shared\DatePickerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Shared\FullScreenUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\B3Center.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DLLs\EliteBase\EliteBase.csproj">
+      <Project>{D4D6E9F2-A627-413E-9B45-A20E29680A84}</Project>
+      <Name>EliteBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DLLs\EliteUI\EliteUI.csproj">
+      <Project>{F38D464E-631F-45F3-942F-2C36AA77D04D}</Project>
+      <Name>EliteUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="B3CenterKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fullscreen.png" />
+    <Resource Include="Resources\fullscreen_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="MVVM\Model\" />
+    <Folder Include="MVVM\ViewModel\" />
+    <Folder Include="MVVM\View\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
