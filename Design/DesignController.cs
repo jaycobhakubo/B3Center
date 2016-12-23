@@ -7,7 +7,6 @@
 using System.ComponentModel;
 using System.Windows;
 using GameTech.Elite.Client.Modules.B3Center.UI;
-using GameTech.Elite.Client.Modules.B3Center.MVVM;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {

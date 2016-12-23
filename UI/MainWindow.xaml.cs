@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace GameTech.Elite.Client.Modules.B3Center.MVVM
+namespace GameTech.Elite.Client.Modules.B3Center.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
