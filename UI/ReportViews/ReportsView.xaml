@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:base="clr-namespace:GameTech.Elite.Base;assembly=GameTech.Elite.Base"
+             xmlns:ui="clr-namespace:GameTech.Elite.UI;assembly=GameTech.Elite.UI"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600">
+              d:DesignHeight="620"
+             d:DesignWidth="1000">
+             
+             <!--d:DesignHeight="600" d:DesignWidth="600"-->
     <UserControl.Resources>
    
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
@@ -352,55 +357,54 @@
         </Style>
 
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" Name="ReportMenuColumn"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
+    <DockPanel>
 
-        <Border Grid.Column="1" CornerRadius="0,5,5,0">
-            <ContentPresenter Name="ReportsTransitionControl"/>
-        </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" Name="ReportMenuColumn"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Border>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
 
-                <Button x:Name="btnBackReports" Grid.Row="0"  Grid.Column="0"   
-                               Content="Reports"
-                               Style="{StaticResource FlatDarkBlueButtonStyle4}" />
+            <Border Grid.Column="1" CornerRadius="0,5,5,0">
+                <ContentPresenter Name="ReportsTransitionControl"/>
+            </Border>
 
-                <ScrollViewer Grid.Row="1" Grid.Column="0"  VerticalScrollBarVisibility="Auto" Background="#FF44658D">
-                    <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
-                    <StackPanel Orientation="Vertical" Grid.Row="1">
-                        <ToggleButton Grid.Row="1" Content="Accounts" Name="AccountsToggleButton" Click="MenuToggleButton_Changed" />
-                        <ToggleButton Grid.Row="2" Content="Account History" Click="MenuToggleButton_Changed" Name="AccountHistoryTransToggleButton"/>
-                        <ToggleButton Grid.Row="3" Content="Ball Call" Click="MenuToggleButton_Changed" Name="BallCallToggleButton" />
-                        <ToggleButton Content="Bingo Card"  Name="BingoCardToggleButton" Click="MenuToggleButton_Changed"></ToggleButton>
-                        <ToggleButton Grid.Row="4" Content="Daily" Name="DailyToggleButton" Click="MenuToggleButton_Changed"/>
-                        <ToggleButton Grid.Row="5" Content="Detail" Name="DetailsToggleButton" Click="MenuToggleButton_Changed" />
-                        <ToggleButton Grid.Row="6" Content="Drawer" Name="DrawerToggleButton" Click="MenuToggleButton_Changed"/>
-                        <ToggleButton Grid.Row="7" Content="Jackpot" Name="JackpotToggleButton" Click="MenuToggleButton_Changed" />
-                        <ToggleButton Grid.Row="8" Content="Monthly" Name="MonthlyToggleButton" Click="MenuToggleButton_Changed" />
-                        <ToggleButton Grid.Row="9" Content="Session" Name="SessionToggleButton" Click="MenuToggleButton_Changed" />
-                        <ToggleButton Grid.Row="10" Content="Session Summary" Name="SessioSummaryToggleButton"  Click="MenuToggleButton_Changed"  />
-                        <ToggleButton Grid.Row="11" Content="Session Transaction" Click="MenuToggleButton_Changed" Name="SessionTransToggleButton"/>
-                        <ToggleButton Grid.Row="12" Content="Void" Name="VoidToggleButton"  Click="MenuToggleButton_Changed"/>
-                        <ToggleButton Grid.Row="13" Content="Winner Cards" Name="WinnerCardsTransToggleButton" Click="MenuToggleButton_Changed" />
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>        
-        </Border>
-          
-        <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
-        </Border>
-        <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
-        </Border>
-    </Grid>
+            <Border Style="{DynamicResource DarkBlueBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
+                        <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
+                        <StackPanel Orientation="Vertical" Grid.Row="1">
+                            <ToggleButton Grid.Row="1" Content="Accounts" Name="AccountsToggleButton" Click="MenuToggleButton_Changed" />
+                            <ToggleButton Grid.Row="2" Content="Account History" Click="MenuToggleButton_Changed" Name="AccountHistoryTransToggleButton"/>
+                            <ToggleButton Grid.Row="3" Content="Ball Call" Click="MenuToggleButton_Changed" Name="BallCallToggleButton" />
+                            <ToggleButton Content="Bingo Card"  Name="BingoCardToggleButton" Click="MenuToggleButton_Changed"></ToggleButton>
+                            <ToggleButton Grid.Row="4" Content="Daily" Name="DailyToggleButton" Click="MenuToggleButton_Changed"/>
+                            <ToggleButton Grid.Row="5" Content="Detail" Name="DetailsToggleButton" Click="MenuToggleButton_Changed" />
+                            <ToggleButton Grid.Row="6" Content="Drawer" Name="DrawerToggleButton" Click="MenuToggleButton_Changed"/>
+                            <ToggleButton Grid.Row="7" Content="Jackpot" Name="JackpotToggleButton" Click="MenuToggleButton_Changed" />
+                            <ToggleButton Grid.Row="8" Content="Monthly" Name="MonthlyToggleButton" Click="MenuToggleButton_Changed" />
+                            <ToggleButton Grid.Row="9" Content="Session" Name="SessionToggleButton" Click="MenuToggleButton_Changed" />
+                            <ToggleButton Grid.Row="10" Content="Session Summary" Name="SessioSummaryToggleButton"  Click="MenuToggleButton_Changed"  />
+                            <ToggleButton Grid.Row="11" Content="Session Transaction" Click="MenuToggleButton_Changed" Name="SessionTransToggleButton"/>
+                            <ToggleButton Grid.Row="12" Content="Void" Name="VoidToggleButton"  Click="MenuToggleButton_Changed"/>
+                            <ToggleButton Grid.Row="13" Content="Winner Cards" Name="WinnerCardsTransToggleButton" Click="MenuToggleButton_Changed" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
+            </Border>
+            <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
+            </Border>
+        </Grid>
+    </DockPanel>
+  
 </UserControl>

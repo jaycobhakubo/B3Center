@@ -485,7 +485,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         {
             try
             {
-                MainWindow = new MainWindow(); //(this, new MainViewModel(this), Settings.UseAcceleration);
+                MainWindow = new MainWindow(this, new MainViewModel(this), Settings.UseAcceleration);
                 CurrentView = MainWindow;
             }
             catch(Exception ex)

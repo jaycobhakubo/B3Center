@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="B3 Center -- GameTech International, Inc." 
+     xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI"
     Width="1024"  Height="710" 
     WindowStartupLocation="CenterScreen" Loaded="OnLoaded"
     Style="{DynamicResource EliteWindow}"                          
@@ -17,6 +18,31 @@
     </Window.InputBindings>
 
     <DockPanel x:Name="m_layoutRoot">
+        <Menu x:Name="m_mainMenu" DockPanel.Dock="Top">
+            <MenuItem x:Name="m_helpMenu" Header="_Help">
+                <MenuItem x:Name="m_helpAboutMenuItem" Header="_About" Command="{Binding HelpAboutCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <TabControl Focusable="False">
+           
+            <TabItem Header="Main">
+                <ContentPresenter Name="xTransitionControl" Margin="0" ></ContentPresenter>
+            </TabItem>
+
+            <TabItem Header="Reports">
+
+            </TabItem>
+
+            <TabItem Header="Settings">
+
+            </TabItem>
+
+            <TabItem Header="Operators">
+
+            </TabItem>
+
+        </TabControl>
     </DockPanel>
     
 </ui:EliteWindowBase> 
