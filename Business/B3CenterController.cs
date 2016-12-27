@@ -20,7 +20,6 @@ using GameTech.Elite.Client.Modules.B3Center.UI;
 using GameTech.Elite.Client.Reports;
 using GameTech.Elite.Reports;
 using GameTech.Elite.UI;
-using GameTech.Elite.Client.Modules.B3Center.UI;
 using System.Collections;
 
 
