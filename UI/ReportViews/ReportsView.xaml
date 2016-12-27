@@ -14,7 +14,7 @@
    
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>
+        <!--<Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>-->
         <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultDesignForCheckBox}"/>
 
 
@@ -73,6 +73,13 @@
             <Setter Property="Height" Value="20"/>
             <Setter Property="Padding" Value="0"/>
         </Style>
+        
+        <!--<Style TargetType="{x:Type ListBox}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>-->
 
         <!-- Brushes used in Styling of ScrollViewer -->
         <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
@@ -366,11 +373,11 @@
             </Grid.ColumnDefinitions>
 
 
-            <Border Grid.Column="1" CornerRadius="0,5,5,0">
+            <Border Grid.Column="1" CornerRadius="0,5,5,0"  Style="{DynamicResource LightBlueBorder}" Margin="4">
                 <ContentPresenter Name="ReportsTransitionControl"/>
             </Border>
 
-            <Border Style="{DynamicResource DarkBlueBorder}">
+            <Border Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -378,22 +385,10 @@
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
-                        <StackPanel Orientation="Vertical" Grid.Row="1">
-                            <ToggleButton Grid.Row="1" Content="Accounts" Name="AccountsToggleButton" Click="MenuToggleButton_Changed" />
-                            <ToggleButton Grid.Row="2" Content="Account History" Click="MenuToggleButton_Changed" Name="AccountHistoryTransToggleButton"/>
-                            <ToggleButton Grid.Row="3" Content="Ball Call" Click="MenuToggleButton_Changed" Name="BallCallToggleButton" />
-                            <ToggleButton Content="Bingo Card"  Name="BingoCardToggleButton" Click="MenuToggleButton_Changed"></ToggleButton>
-                            <ToggleButton Grid.Row="4" Content="Daily" Name="DailyToggleButton" Click="MenuToggleButton_Changed"/>
-                            <ToggleButton Grid.Row="5" Content="Detail" Name="DetailsToggleButton" Click="MenuToggleButton_Changed" />
-                            <ToggleButton Grid.Row="6" Content="Drawer" Name="DrawerToggleButton" Click="MenuToggleButton_Changed"/>
-                            <ToggleButton Grid.Row="7" Content="Jackpot" Name="JackpotToggleButton" Click="MenuToggleButton_Changed" />
-                            <ToggleButton Grid.Row="8" Content="Monthly" Name="MonthlyToggleButton" Click="MenuToggleButton_Changed" />
-                            <ToggleButton Grid.Row="9" Content="Session" Name="SessionToggleButton" Click="MenuToggleButton_Changed" />
-                            <ToggleButton Grid.Row="10" Content="Session Summary" Name="SessioSummaryToggleButton"  Click="MenuToggleButton_Changed"  />
-                            <ToggleButton Grid.Row="11" Content="Session Transaction" Click="MenuToggleButton_Changed" Name="SessionTransToggleButton"/>
-                            <ToggleButton Grid.Row="12" Content="Void" Name="VoidToggleButton"  Click="MenuToggleButton_Changed"/>
-                            <ToggleButton Grid.Row="13" Content="Winner Cards" Name="WinnerCardsTransToggleButton" Click="MenuToggleButton_Changed" />
-                        </StackPanel>
+                        <ListBox Margin="15" ItemsSource="{Binding Reports}">
+                            
+                            <!--<ListBox.ItemsSource ="{Binding ReportList}"/>-->
+                        </ListBox>
                     </ScrollViewer>
                 </Grid>
             </Border>

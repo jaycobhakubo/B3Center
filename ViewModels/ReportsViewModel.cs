@@ -5,6 +5,7 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -55,7 +56,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private IEnumerable<string> m_months;
         private IEnumerable<int> m_years;
 
-        private List<B3Report> m_reports;    
+        private List<B3Report> m_reports;
         private Session m_sessionReportSessionSelected;
         private Session m_jackpotReportSessionSelected;
         private Session m_accountHistoryReportSessionSelected;
@@ -120,7 +121,895 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
 
+        #region Member Methods
+
+        /// <summary>
+        /// Initializes the ViewModel with the specified controller.
+        /// </summary>
+        /// <param name="controller">The controller.</param>
+        internal void Initialize(B3Controller controller)
+        {
+            m_controller = controller;
+
+            m_controller.SessionInfoCompleted += OnListInfoDone;
+
+            //set session list
+            foreach (var session in controller.Sessions)
+            {
+                SessionList.Add(session);
+            }
+
+            SessionReportSessionSelected = SessionList.LastOrDefault();
+            JackpotReportSessionSelected = SessionList.LastOrDefault();
+            //AccountHistoryReportSessionSelected  = SessionList.LastOrDefault();
+            //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
+
+            LoadReportList();
+            m_reports = controller.Reports;
+
+        }
+
+        ObservableCollection<string> m_reportList = new ObservableCollection<string>();
+
+        private void LoadReportList()
+        {
+            m_reportList.Clear();
+            m_reportList.Add("Accounts");
+            m_reportList.Add("Account History");
+            m_reportList.Add("Ball Call");
+            m_reportList.Add("Bingo Card");
+            m_reportList.Add("Daily");
+            m_reportList.Add("Detail");
+            m_reportList.Add("Drawer");
+            m_reportList.Add("Jackpot");
+            m_reportList.Add("Monthly");
+            m_reportList.Add("Session");
+            m_reportList.Add("Session Summary");
+            m_reportList.Add("Session Transaction");
+            m_reportList.Add("Void");
+            m_reportList.Add("Winner Cards");
+            Reports = m_reportList;
+        }
+
+
+
+        public ObservableCollection<string> Reports
+        {
+            get;
+            set;
+
+        }
+
+        /// <summary>
+        /// Loads the account report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadAccountReportDocument()
+        {
+            var accountReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Accounts);
+
+            if (accountReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(accountReport);
+
+            Month month;
+            if (!Enum.TryParse(AccountReportMonthSelected, out month))
+            {
+                return null;
+            }
+
+            accountReport.CrystalReportDocument.SetParameterValue("@nMonth", (int)month);
+            accountReport.CrystalReportDocument.SetParameterValue("@nYear", AccountReportYearSelected);
+
+            return accountReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the daily report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadDailyReportDocument(DateTime dateTime, int StaffId, int MachineId)
+        {
+            var dailyReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Daily);
+
+            if (dailyReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(dailyReport);
+
+            dailyReport.CrystalReportDocument.SetParameterValue("@SessionNum", null);
+            dailyReport.CrystalReportDocument.SetParameterValue("@UserId", StaffId);
+            dailyReport.CrystalReportDocument.SetParameterValue("@Station", MachineId);
+            dailyReport.CrystalReportDocument.SetParameterValue("@DateTime", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+
+            return dailyReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the drawer report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadDrawerReportDocument(DateTime dateTime, int MachineID, int StaffId)
+        {
+            var drawerReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Drawer);
+
+            if (drawerReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(drawerReport);
+
+            drawerReport.CrystalReportDocument.SetParameterValue("@MachineID", MachineID);
+            drawerReport.CrystalReportDocument.SetParameterValue("@Station", MachineID);
+            drawerReport.CrystalReportDocument.SetParameterValue("@nDate", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+
+            drawerReport.CrystalReportDocument.SetParameterValue("@UserId", StaffId);
+
+            return drawerReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the detail report document.
+        /// </summary>
+        /// <param name="start">The start.</param>
+        /// <param name="end">The end.</param>
+        /// <returns></returns>
+        internal ReportDocument LoadDetailReportDocument(DateTime start, DateTime end)
+        {
+            var detailReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Detail);
+
+            if (detailReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(detailReport);
+
+            detailReport.CrystalReportDocument.SetParameterValue("@dtStartDateTime", start);
+            detailReport.CrystalReportDocument.SetParameterValue("@dtEndDateTime", end);
+
+
+            return detailReport.CrystalReportDocument;
+        }
+
+
+
+        /// <summary>
+        /// Loads the jackpot report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadJackpotReportDocument(DateTime dateTime, int staffId, int machineId)
+        {
+            var jackpotReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Jackpot);
+
+            if (jackpotReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(jackpotReport);
+
+            var sessionId = JackpotReportSessionSelected.Number;
+
+            jackpotReport.CrystalReportDocument.SetParameterValue("@nSessNum", sessionId);
+            jackpotReport.CrystalReportDocument.SetParameterValue("@UserId", staffId);
+            jackpotReport.CrystalReportDocument.SetParameterValue("@Station", machineId);
+            jackpotReport.CrystalReportDocument.SetParameterValue("@nDate", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+
+            return jackpotReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the monthly report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadMonthlyReportDocument()
+        {
+            var monthlyReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Monthly);
+
+            if (monthlyReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(monthlyReport);
+
+            Month month;
+            if (!Enum.TryParse(MonthlyReportMonthSelected, out month))
+            {
+                return null;
+            }
+
+            monthlyReport.CrystalReportDocument.SetParameterValue("@nMonth", (int)month);
+            monthlyReport.CrystalReportDocument.SetParameterValue("@nYear", MonthlyReportYearSelected);
+
+            return monthlyReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the session transaction report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadSessionTranReportDocument(DateTime dateTime)
+        {
+            var sessionTranReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3SessionTransaction);
+
+            if (sessionTranReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(sessionTranReport);
+
+            if (SessionReportSessionSelected == null)
+            {
+                return null;
+            }
+
+            var sessionId = SessionTranReportSessionSelected.Number;
+
+            sessionTranReport.CrystalReportDocument.SetParameterValue("@SessionNumber", sessionId);
+            sessionTranReport.CrystalReportDocument.SetParameterValue("@DateTime", dateTime);
+
+            return sessionTranReport.CrystalReportDocument;
+        }
+
+
+        /// <summary>
+        /// Loads the session report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadSessionReportDocument(DateTime dateTime, int StaffId, int MachineId)
+        {
+            var sessionReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Session);
+
+            if (sessionReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(sessionReport);
+
+            if (SessionReportSessionSelected == null)
+            {
+                return null;
+            }
+
+            var sessionId = SessionReportSessionSelected.Number;
+
+            sessionReport.CrystalReportDocument.SetParameterValue("@SessionID", sessionId);
+            sessionReport.CrystalReportDocument.SetParameterValue("@DateN", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+            sessionReport.CrystalReportDocument.SetParameterValue("@UserID", StaffId);
+            sessionReport.CrystalReportDocument.SetParameterValue("@Station", MachineId);
+
+
+            return sessionReport.CrystalReportDocument;
+        }
+
+
+        /// <summary>
+        /// Loads the session summary report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadSessionSummaryReportDocument(DateTime dateTime, int StaffId, int MachineId)
+        {
+            var sessionReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3SessionSummary);
+
+            if (sessionReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(sessionReport);
+
+            if (SessionReportSessionSelected == null)
+            {
+                return null;
+            }
+
+            var sessionId = SessionReportSessionSelected.Number;
+
+            sessionReport.CrystalReportDocument.SetParameterValue("@SessionN", sessionId);
+            sessionReport.CrystalReportDocument.SetParameterValue("@DateTime", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+            sessionReport.CrystalReportDocument.SetParameterValue("@UserID", StaffId);
+            sessionReport.CrystalReportDocument.SetParameterValue("@Station", MachineId);
+
+
+            return sessionReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the Account History report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadAccountHistoryReportDocument(DateTime dateTime)
+        {
+            var accountHistoryReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3AccountHistory);
+
+            if (accountHistoryReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(accountHistoryReport);
+
+            if (AccountHistoryReportSessionSelected == null)
+            {
+                return null;
+            }
+
+            var sessionId = AccountHistoryReportSessionSelected.Number;
+
+            accountHistoryReport.CrystalReportDocument.SetParameterValue("@P_Date_", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+            accountHistoryReport.CrystalReportDocument.SetParameterValue("@SessionID_", sessionId);
+            accountHistoryReport.CrystalReportDocument.SetParameterValue("@AccountNumber", AccountHistoryReportAccountSelected);
+
+            return accountHistoryReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the winner cards report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadWinnerCardsReportDocument(DateTime dateTime)
+        {
+            var WinnerCardsReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3WinnerCards);
+
+            if (WinnerCardsReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(WinnerCardsReport);
+
+            if (WinnerCardsReportSessionSelected == null)
+            {
+                return null;
+            }
+
+            var sessionId = WinnerCardsReportSessionSelected.Number;
+
+            WinnerCardsReport.CrystalReportDocument.SetParameterValue("@SessionNum", sessionId);
+            WinnerCardsReport.CrystalReportDocument.SetParameterValue("@DateRun", dateTime.Date.ToString(CultureInfo.InvariantCulture));
+
+            return WinnerCardsReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the ball call report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadBallCallReportDocument(DateTime startDate, DateTime endDate, int ballCalldefID)
+        {
+            var BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallByGame);
+
+            if (ballCalldefID == 1)
+            {
+                if (BallCallReport == null)
+                {
+                    return null;
+                }
+
+                LoadCrystalReport(BallCallReport);
+
+                if (BallCallReportSessionSelected == null)
+                {
+                    return null;
+                }
+
+                var sessionId = BallCallReportSessionSelected.Number;
+
+                BallCallReport.CrystalReportDocument.SetParameterValue("@session", sessionId);
+                BallCallReport.CrystalReportDocument.SetParameterValue("@DateParameter", startDate.Date.ToString(CultureInfo.InvariantCulture));
+
+
+            }
+            else
+            {
+                BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallBySession);
+
+                if (BallCallReport == null)
+                {
+                    return null;
+                }
+
+                LoadCrystalReport(BallCallReport);
+                BallCallReport.CrystalReportDocument.SetParameterValue("@StartDate", startDate.Date.ToString(CultureInfo.InvariantCulture));
+                BallCallReport.CrystalReportDocument.SetParameterValue("@EndDate", endDate.Date.ToString(CultureInfo.InvariantCulture));
+
+            }
+
+            return BallCallReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the void report document.
+        /// </summary>
+        /// <param name="start">The start.</param>
+        /// <param name="end">The end.</param>
+        /// <returns></returns>
+        internal ReportDocument LoadVoidReportDocument(DateTime start, DateTime end)
+        {
+            var voidReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Void);
+
+            if (voidReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(voidReport);
+
+            voidReport.CrystalReportDocument.SetParameterValue("@dtStartDateTime", start);
+            voidReport.CrystalReportDocument.SetParameterValue("@dtEndDateTime", end);
+
+            return voidReport.CrystalReportDocument;
+        }
+
+
+        /// <summary>
+        /// Loads the bingo card report document.
+        /// </summary>
+        /// <returns></returns>
+        internal ReportDocument LoadBingoCardReportDocument(int startCard, int endCard)
+        {
+            var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BingoCardReport);
+
+            if (bingoCardReport == null)
+            {
+                return null;
+            }
+
+            LoadCrystalReport(bingoCardReport);
+
+
+
+            bingoCardReport.CrystalReportDocument.SetParameterValue("@startId", startCard);
+            bingoCardReport.CrystalReportDocument.SetParameterValue("@endId", endCard);
+
+            return bingoCardReport.CrystalReportDocument;
+        }
+
+        /// <summary>
+        /// Loads the crystal report.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        private void LoadCrystalReport(B3Report report)
+        {
+            var server = "B3-Server"; //m_controller.Settings.DatabaseServer;
+            var name = m_controller.Settings.DatabaseName;
+            var user = m_controller.Settings.DatabaseUser;
+            var password = m_controller.Settings.DatabasePassword;
+            //report.LoadCrystalReport(string.Empty, string.Empty, string.Empty, string.Empty);
+            report.LoadCrystalReport(server, name, user, password);
+        }
+
+        /// <summary>
+        /// Updates the jackpot report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void UpdateJackpotReportSessionsByDate(DateTime datetime)
+        {
+            JackpotReportSessionList.Clear();
+            foreach (var session in SessionList)
+            {
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
+
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
+
+                if (sessionStartDateTime.Year == datetime.Year &&
+                    sessionStartDateTime.Month == datetime.Month &&
+                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
+                {
+                    JackpotReportSessionList.Add(session);
+                }
+            }
+
+            JackpotReportSessionSelected = JackpotReportSessionList.LastOrDefault();
+
+            if (JackpotReportSessionList.Count == 0)
+            {
+                EnableJackpotReportButtons = false;
+            }
+            else
+            {
+                EnableJackpotReportButtons = true;
+            }
+        }
+
+        /// <summary>
+        /// Updates the session transaction report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void UpdateSessionTranReportSessionsByDate(DateTime datetime)
+        {
+            SessionTranReportSessionList.Clear();
+
+            foreach (var session in SessionList)
+            {
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
+
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
+
+                if (sessionStartDateTime.Year == datetime.Year &&
+                    sessionStartDateTime.Month == datetime.Month &&
+                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
+                {
+                    SessionTranReportSessionList.Add(session);
+                }
+
+            }
+
+            SessionTranReportSessionSelected = SessionTranReportSessionList.LastOrDefault();
+
+            if (SessionTranReportSessionList.Count == 0)
+            {
+                EnableSessionReportButtons = false;
+            }
+            else
+            {
+                EnableSessionReportButtons = true;
+            }
+        }
+
+        /// <summary>
+        /// Updates the session report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void UpdateSessionReportSessionsByDate(DateTime datetime)
+        {
+            SessionReportSessionList.Clear();
+
+            foreach (var session in SessionList)
+            {
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
+
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
+
+                if (sessionStartDateTime.Year == datetime.Year &&
+                    sessionStartDateTime.Month == datetime.Month &&
+                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
+                {
+                    SessionReportSessionList.Add(session);
+                }
+
+            }
+
+            SessionReportSessionSelected = SessionReportSessionList.LastOrDefault();
+
+            if (SessionReportSessionList.Count == 0)
+            {
+                EnableSessionReportButtons = false;
+            }
+            else
+            {
+                EnableSessionReportButtons = true;
+            }
+
+        }
+
+        /// <summary>
+        /// Updates the session report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void UpdateWinnerCardsSessionsByDate(DateTime datetime)
+        {
+            WinnerCardsReportSessionList.Clear();
+
+            foreach (var session in SessionList)
+            {
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
+
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
+
+                if (sessionStartDateTime.Year == datetime.Year &&
+                    sessionStartDateTime.Month == datetime.Month &&
+                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
+                {
+                    WinnerCardsReportSessionList.Add(session);
+                }
+
+            }
+
+            WinnerCardsReportSessionSelected = WinnerCardsReportSessionList.LastOrDefault();
+
+            if (WinnerCardsReportSessionList.Count == 0)
+            {
+                EnableSessionReportButtons = false;
+            }
+            else
+            {
+                EnableSessionReportButtons = true;
+            }
+
+        }
+
+        /// <summary>
+        /// Updates the ball call report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal bool UpdateBallCallReportSessionsByDate(DateTime datetime)
+        {
+
+            BallCallReportSessionList.Clear();
+
+            foreach (var session in SessionList)
+            {
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
+
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
+
+                if (sessionStartDateTime.Year == datetime.Year &&
+                    sessionStartDateTime.Month == datetime.Month &&
+                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
+                {
+                    BallCallReportSessionList.Add(session);
+                }
+            }
+
+            BallCallReportSessionSelected = BallCallReportSessionList.LastOrDefault();
+
+            if (BallCallReportSessionList.Count == 0)
+            {
+                EnableSessionReportButtons = false;
+            }
+            else
+            {
+                EnableSessionReportButtons = true;
+            }
+
+            return EnableSessionReportButtons;
+        }
+
+        /// <summary>
+        /// Updates the account history report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void UpdateAccountHistoryReportSessionsByDate(DateTime datetime)
+        {
+            AccountHistoryReportSessionList.Clear();
+            EnableAccountHistoryReportButtons = false;
+
+            foreach (var session in SessionList)
+            {
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
+
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
+
+                if (sessionStartDateTime.Year == datetime.Year &&
+                    sessionStartDateTime.Month == datetime.Month &&
+                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
+                {
+                    AccountHistoryReportSessionList.Add(session);
+                }
+
+            }
+
+            if (AccountHistoryReportSessionList.Count != 0)
+            {
+                AccountHistoryReportSessionSelected = AccountHistoryReportSessionList.LastOrDefault();
+            }
+            else
+            {
+                AccountHistoryReportAccountList.Clear();
+                AccountHistoryReportAccountSelected = new int();
+            }
+        }
+
+        /// <summary>
+        /// Updates the Account History report sessions by date.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void UpdateAccountHistoryReportAccountBySession(int SessionNumber)
+        {
+            AccountHistoryReportAccountList.Clear();
+            AccountHistoryReportAccountSelected = new int();
+            Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SessionNumber);
+            msg.Send();
+            AccountList = new ObservableCollection<int>();
+            AccountList = msg.AccountNumberList;
+
+            foreach (int account in AccountList)
+            {
+                AccountHistoryReportAccountList.Add(account);
+            }
+
+            if (AccountHistoryReportAccountList.Count != 0)
+            {
+                AccountHistoryReportAccountSelected = AccountHistoryReportAccountList.LastOrDefault();
+                EnableAccountHistoryReportButtons = true;
+            }
+            else
+            {
+                EnableAccountHistoryReportButtons = false;
+            }
+        }
+
+        /// <summary>
+        /// Load item for ball call report definition list.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        internal void LoadBallCallReportDefList()
+        {
+            BallCallReportDefList.Add("By Session");
+            BallCallReportDefList.Add("By Game");
+
+            BallCallReportDefSelected = BallCallReportDefList.LastOrDefault();
+        }
+
+        internal bool ValidateUserInputForBingoCardReport(int startingCardN, int EndingCardN)
+        {
+            bool IsValid = false;
+            if (startingCardN != 0 && EndingCardN != 0)
+            {
+                if (startingCardN > EndingCardN)
+                {
+
+                }
+                else
+                {
+                    IsValid = true;
+                }
+            }
+            else
+            {
+                // IsValid = false;
+            }
+
+            EnableBingoCardReportButtons = IsValid;
+            return IsValid;
+
+        }
+
+
+
+        /// <summary>
+        /// Prints the report.
+        /// </summary>
+        /// <param name="reportId">The report identifier.</param>
+        /// <param name="report">The report.</param>
+        /// <returns></returns>
+        internal bool PrintReport(ReportId reportId, ReportDocument report)
+        {
+            var returnValue = false;
+            switch (reportId)
+            {
+                case ReportId.B3Accounts:
+                case ReportId.B3Detail:
+                case ReportId.B3Monthly:
+                case ReportId.B3Void:
+                    {
+                        //try to print to report printer
+                        returnValue = TryPrintGlobalPrinter(report);
+                    }
+                    break;
+
+                case ReportId.B3Daily:
+                case ReportId.B3Drawer:
+                case ReportId.B3Jackpot:
+                case ReportId.B3Session:
+                    {
+                        //try to print to receipt printer
+                        returnValue = TryPrintReceiptPrinter(report);
+
+                        //if unsuccessful then try to print to report printer
+                        if (!returnValue)
+                        {
+                            returnValue = TryPrintReceiptPrinter(report);
+                        }
+                    }
+                    break;
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Tries the print receipt printer.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <returns></returns>
+        private bool TryPrintReceiptPrinter(ReportDocument report)
+        {
+            var returnValue = true;
+            try
+            {
+                report.PrintOptions.PrinterName = Settings.ReceiptPrinterName;
+                report.PrintToPrinter(1, true, 0, 0);
+            }
+            catch (Exception)
+            {
+                //if throw exception then set flag to false
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Tries the print global printer.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <returns></returns>
+        private bool TryPrintGlobalPrinter(ReportDocument report)
+        {
+            var returnValue = true;
+            try
+            {
+                report.PrintOptions.PrinterName = Settings.PrinterName;
+                report.PrintToPrinter(1, true, 0, 0);
+            }
+            catch (Exception)
+            {
+                //if throw exception then set flag to false
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Called when [list information done].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="AsyncCompletedEventArgs"/> instance containing the event data.</param>
+        private void OnListInfoDone(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                //update session list
+                if (m_controller.Sessions.Count != SessionList.Count)
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        //clear and redefine list
+                        SessionList.Clear();
+                        foreach (var session in m_controller.Sessions)
+                        {
+                            SessionList.Add(session);
+                        }
+
+                        SessionReportSessionSelected = SessionList.LastOrDefault();
+                        JackpotReportSessionSelected = SessionList.LastOrDefault();
+                    }));
+                }
+            }
+        }
+
+        #endregion
+
         #region Properties
+
+
 
         /// <summary>
         /// Gets the singleton instance of ReportsViewModel.
@@ -177,6 +1066,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+
         /// <summary>
         /// Gets or sets the session list.
         /// </summary>
@@ -211,7 +1102,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             set
             {
-               m_accountList = value;
+                m_accountList = value;
                 RaisePropertyChanged("AccountList");
             }
         }
@@ -422,7 +1313,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         AccountHistoryReportAccountSelected = new int();
                     }
                     RaisePropertyChanged("AccountHistoryReportSessionSelected");
-                   
+
                 }
             }
         }
@@ -715,7 +1606,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <value>
         /// <c>true</c> if [enable daily report buttons]; otherwise, <c>false</c>.
         /// </value>
-        public bool EnableJackpotReportButtons 
+        public bool EnableJackpotReportButtons
         {
             get { return m_enableJackpotReportButtons; }
             set
@@ -749,7 +1640,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </value>
         public bool EnableAccountHistoryReportButtons
         {
-            get { return  m_enableAccountHistoryReportButtons; }
+            get { return m_enableAccountHistoryReportButtons; }
             set
             {
                 m_enableAccountHistoryReportButtons = value;
@@ -783,862 +1674,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         #endregion
-
-        #region Member Methods
-
-        /// <summary>
-        /// Initializes the ViewModel with the specified controller.
-        /// </summary>
-        /// <param name="controller">The controller.</param>
-        internal void Initialize(B3Controller controller)
-        {
-            m_controller = controller;
-
-            m_controller.SessionInfoCompleted += OnListInfoDone;
-
-            //set session list
-            foreach (var session in controller.Sessions)
-            {
-                SessionList.Add(session);
-            }
-
-            SessionReportSessionSelected = SessionList.LastOrDefault();
-            JackpotReportSessionSelected = SessionList.LastOrDefault();
-            //AccountHistoryReportSessionSelected  = SessionList.LastOrDefault();
-            //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
-
-            m_reports = controller.Reports;
-        }
-
-        /// <summary>
-        /// Loads the account report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadAccountReportDocument()
-        {
-            var accountReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Accounts);
-
-            if (accountReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(accountReport);
-
-            Month month;
-            if (!Enum.TryParse(AccountReportMonthSelected, out month))
-            {
-                return null;
-            }
-
-            accountReport.CrystalReportDocument.SetParameterValue("@nMonth", (int)month);
-            accountReport.CrystalReportDocument.SetParameterValue("@nYear", AccountReportYearSelected);
-
-            return accountReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the daily report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadDailyReportDocument(DateTime dateTime, int StaffId, int MachineId)
-        {
-            var dailyReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Daily);
-
-            if (dailyReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(dailyReport);
-
-            dailyReport.CrystalReportDocument.SetParameterValue("@SessionNum", null);
-            dailyReport.CrystalReportDocument.SetParameterValue("@UserId", StaffId);
-            dailyReport.CrystalReportDocument.SetParameterValue("@Station", MachineId);
-            dailyReport.CrystalReportDocument.SetParameterValue("@DateTime", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-
-            return dailyReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the drawer report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadDrawerReportDocument(DateTime dateTime, int MachineID, int StaffId)
-        {
-            var drawerReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Drawer);
-
-            if (drawerReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(drawerReport);
-
-            drawerReport.CrystalReportDocument.SetParameterValue("@MachineID", MachineID);
-            drawerReport.CrystalReportDocument.SetParameterValue("@Station", MachineID);
-            drawerReport.CrystalReportDocument.SetParameterValue("@nDate", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-
-            drawerReport.CrystalReportDocument.SetParameterValue("@UserId", StaffId);
-          
-            return drawerReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the detail report document.
-        /// </summary>
-        /// <param name="start">The start.</param>
-        /// <param name="end">The end.</param>
-        /// <returns></returns>
-        internal ReportDocument LoadDetailReportDocument(DateTime start, DateTime end)
-        {
-            var detailReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Detail);
-
-            if (detailReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(detailReport);
-
-            detailReport.CrystalReportDocument.SetParameterValue("@dtStartDateTime", start);
-            detailReport.CrystalReportDocument.SetParameterValue("@dtEndDateTime", end);
-
-
-            return detailReport.CrystalReportDocument;
-        }
-
-     
-
-        /// <summary>
-        /// Loads the jackpot report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadJackpotReportDocument(DateTime dateTime, int staffId, int machineId)
-        {
-            var jackpotReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Jackpot);
-
-            if (jackpotReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(jackpotReport);
-
-            var sessionId = JackpotReportSessionSelected.Number;
-
-            jackpotReport.CrystalReportDocument.SetParameterValue("@nSessNum", sessionId);
-            jackpotReport.CrystalReportDocument.SetParameterValue("@UserId", staffId);
-            jackpotReport.CrystalReportDocument.SetParameterValue("@Station", machineId);
-            jackpotReport.CrystalReportDocument.SetParameterValue("@nDate", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-
-            return jackpotReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the monthly report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadMonthlyReportDocument()
-        {
-            var monthlyReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Monthly);
-
-            if (monthlyReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(monthlyReport);
-
-            Month month;
-            if (!Enum.TryParse(MonthlyReportMonthSelected, out month))
-            {
-                return null;
-            }
-
-            monthlyReport.CrystalReportDocument.SetParameterValue("@nMonth", (int)month);
-            monthlyReport.CrystalReportDocument.SetParameterValue("@nYear", MonthlyReportYearSelected);
-
-            return monthlyReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the session transaction report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadSessionTranReportDocument(DateTime dateTime)
-        {
-            var sessionTranReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3SessionTransaction);
-
-            if (sessionTranReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(sessionTranReport);
-
-            if (SessionReportSessionSelected == null)
-            {
-                return null;
-            }
-
-            var sessionId = SessionTranReportSessionSelected.Number;
-
-            sessionTranReport.CrystalReportDocument.SetParameterValue("@SessionNumber", sessionId);
-            sessionTranReport.CrystalReportDocument.SetParameterValue("@DateTime", dateTime);
-
-            return sessionTranReport.CrystalReportDocument;
-        }
-
-
-        /// <summary>
-        /// Loads the session report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadSessionReportDocument(DateTime dateTime, int StaffId, int MachineId)
-        {
-            var sessionReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Session);
-
-            if (sessionReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(sessionReport);
-
-            if (SessionReportSessionSelected == null)
-            {
-                return null;
-            }
-
-            var sessionId = SessionReportSessionSelected.Number;
-
-            sessionReport.CrystalReportDocument.SetParameterValue("@SessionID", sessionId);
-            sessionReport.CrystalReportDocument.SetParameterValue("@DateN", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-            sessionReport.CrystalReportDocument.SetParameterValue("@UserID", StaffId);
-            sessionReport.CrystalReportDocument.SetParameterValue("@Station", MachineId);
-        
-
-            return sessionReport.CrystalReportDocument;
-        }
-
-
-        /// <summary>
-        /// Loads the session summary report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadSessionSummaryReportDocument(DateTime dateTime, int StaffId, int MachineId)
-        {
-            var sessionReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3SessionSummary);
-
-            if (sessionReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(sessionReport);
-
-            if (SessionReportSessionSelected == null)
-            {
-                return null;
-            }
-
-            var sessionId = SessionReportSessionSelected.Number;
-
-            sessionReport.CrystalReportDocument.SetParameterValue("@SessionN", sessionId);
-            sessionReport.CrystalReportDocument.SetParameterValue("@DateTime", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-            sessionReport.CrystalReportDocument.SetParameterValue("@UserID", StaffId);
-            sessionReport.CrystalReportDocument.SetParameterValue("@Station", MachineId);
-
-
-            return sessionReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the Account History report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadAccountHistoryReportDocument(DateTime dateTime)
-        {
-            var accountHistoryReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3AccountHistory);
-
-            if (accountHistoryReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(accountHistoryReport);
-
-            if (AccountHistoryReportSessionSelected == null)
-            {
-                return null;
-            }
-
-            var sessionId = AccountHistoryReportSessionSelected.Number;
-
-            accountHistoryReport.CrystalReportDocument.SetParameterValue("@P_Date_", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-            accountHistoryReport.CrystalReportDocument.SetParameterValue("@SessionID_", sessionId);
-            accountHistoryReport.CrystalReportDocument.SetParameterValue("@AccountNumber", AccountHistoryReportAccountSelected);
-
-            return accountHistoryReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the winner cards report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadWinnerCardsReportDocument(DateTime dateTime)
-        {
-            var WinnerCardsReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3WinnerCards);
-
-            if (WinnerCardsReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(WinnerCardsReport);
-
-            if (WinnerCardsReportSessionSelected  == null)
-            {
-                return null;
-            }
-
-            var sessionId = WinnerCardsReportSessionSelected.Number;
-
-            WinnerCardsReport.CrystalReportDocument.SetParameterValue("@SessionNum", sessionId);
-            WinnerCardsReport.CrystalReportDocument.SetParameterValue("@DateRun", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-
-            return WinnerCardsReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the ball call report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadBallCallReportDocument(DateTime startDate, DateTime endDate, int ballCalldefID)
-        {
-            var BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallByGame);
-
-            if (ballCalldefID == 1)
-            {
-                if (BallCallReport == null)
-                {
-                    return null;
-                }
-
-                LoadCrystalReport(BallCallReport);
-
-                if (BallCallReportSessionSelected == null)
-                {
-                    return null;
-                }
-
-                var sessionId = BallCallReportSessionSelected.Number;
-
-                BallCallReport.CrystalReportDocument.SetParameterValue("@session", sessionId);
-                BallCallReport.CrystalReportDocument.SetParameterValue("@DateParameter", startDate.Date.ToString(CultureInfo.InvariantCulture));
-
-
-            }
-            else
-            {
-                BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallBySession);
-
-                if (BallCallReport == null)
-                {
-                    return null;
-                }
-
-                LoadCrystalReport(BallCallReport);
-                BallCallReport.CrystalReportDocument.SetParameterValue("@StartDate", startDate.Date.ToString(CultureInfo.InvariantCulture));
-                BallCallReport.CrystalReportDocument.SetParameterValue("@EndDate",  endDate.Date.ToString(CultureInfo.InvariantCulture));
-
-            }
-
-            return BallCallReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the void report document.
-        /// </summary>
-        /// <param name="start">The start.</param>
-        /// <param name="end">The end.</param>
-        /// <returns></returns>
-        internal ReportDocument LoadVoidReportDocument(DateTime start, DateTime end)
-        {
-            var voidReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3Void);
-
-            if (voidReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(voidReport);
-
-            voidReport.CrystalReportDocument.SetParameterValue("@dtStartDateTime", start);
-            voidReport.CrystalReportDocument.SetParameterValue("@dtEndDateTime", end);
-
-            return voidReport.CrystalReportDocument;
-        }
-
-
-        /// <summary>
-        /// Loads the bingo card report document.
-        /// </summary>
-        /// <returns></returns>
-        internal ReportDocument LoadBingoCardReportDocument(int startCard, int endCard)
-        {
-            var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BingoCardReport);
-
-            if (bingoCardReport == null)
-            {
-                return null;
-            }
-
-            LoadCrystalReport(bingoCardReport);
-
-
-
-            bingoCardReport.CrystalReportDocument.SetParameterValue("@startId", startCard);
-            bingoCardReport.CrystalReportDocument.SetParameterValue("@endId", endCard);
-
-            return bingoCardReport.CrystalReportDocument;
-        }
-
-        /// <summary>
-        /// Loads the crystal report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        private void LoadCrystalReport(B3Report report)
-        {
-            var server = "B3-Server"; //m_controller.Settings.DatabaseServer;
-            var name = m_controller.Settings.DatabaseName;
-            var user = m_controller.Settings.DatabaseUser;
-            var password = m_controller.Settings.DatabasePassword;
-            //report.LoadCrystalReport(string.Empty, string.Empty, string.Empty, string.Empty);
-            report.LoadCrystalReport(server, name, user, password);
-        }
-
-        /// <summary>
-        /// Updates the jackpot report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void UpdateJackpotReportSessionsByDate(DateTime datetime)
-        {
-            JackpotReportSessionList.Clear();
-            foreach (var session in SessionList)
-            {
-                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
-                  var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
-
-                  if (sessionStartDateTime == sessionEndDateTime)
-                  {
-                      sessionEndDateTime = DateTime.Today;
-                  }
-
-                if (sessionStartDateTime.Year == datetime.Year &&
-                    sessionStartDateTime.Month == datetime.Month &&
-                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
-                {
-                    JackpotReportSessionList.Add(session);
-                }
-            }
-
-            JackpotReportSessionSelected = JackpotReportSessionList.LastOrDefault();
-
-            if (JackpotReportSessionList.Count == 0)
-            {
-                EnableJackpotReportButtons = false;
-            }
-            else
-            {
-                EnableJackpotReportButtons = true;
-            }
-        }
-
-          /// <summary>
-        /// Updates the session transaction report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void UpdateSessionTranReportSessionsByDate(DateTime datetime)
-        {          
-            SessionTranReportSessionList.Clear();
-
-            foreach (var session in SessionList)
-            {
-                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
-                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
-
-                if (sessionStartDateTime == sessionEndDateTime)
-                {
-                    sessionEndDateTime = DateTime.Today;
-                }
-
-                if (sessionStartDateTime.Year == datetime.Year &&
-                    sessionStartDateTime.Month == datetime.Month &&
-                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
-
-                {
-                    SessionTranReportSessionList.Add(session);
-                }
-              
-            }
-
-            SessionTranReportSessionSelected = SessionTranReportSessionList.LastOrDefault();
-
-            if (SessionTranReportSessionList.Count == 0)
-            {
-                EnableSessionReportButtons = false;
-            }
-            else
-            {
-                EnableSessionReportButtons = true;
-            }
-        }
-
-        /// <summary>
-        /// Updates the session report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void UpdateSessionReportSessionsByDate(DateTime datetime)
-        {
-            SessionReportSessionList.Clear();
-
-            foreach (var session in SessionList)
-            {
-                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
-                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
-
-                if (sessionStartDateTime == sessionEndDateTime)
-                {
-                    sessionEndDateTime = DateTime.Today;
-                }
-
-                if (sessionStartDateTime.Year == datetime.Year &&
-                    sessionStartDateTime.Month == datetime.Month &&
-                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
-
-                {
-                    SessionReportSessionList.Add(session);
-                }
-              
-            }
-
-            SessionReportSessionSelected = SessionReportSessionList.LastOrDefault();
-
-            if (SessionReportSessionList.Count == 0)
-            {
-                EnableSessionReportButtons = false;
-            }
-            else
-            {
-                EnableSessionReportButtons = true;
-            }
-
-        }
-
-        /// <summary>
-        /// Updates the session report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void UpdateWinnerCardsSessionsByDate(DateTime datetime)
-        {
-            WinnerCardsReportSessionList.Clear();
-
-            foreach (var session in SessionList)
-            {
-                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
-                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
-
-                if (sessionStartDateTime == sessionEndDateTime)
-                {
-                    sessionEndDateTime = DateTime.Today;
-                }
-
-                if (sessionStartDateTime.Year == datetime.Year &&
-                    sessionStartDateTime.Month == datetime.Month &&
-                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
-
-                {
-                    WinnerCardsReportSessionList.Add(session);
-                }
-              
-            }
-
-            WinnerCardsReportSessionSelected = WinnerCardsReportSessionList.LastOrDefault();
-
-            if (WinnerCardsReportSessionList.Count == 0)
-            {
-                EnableSessionReportButtons = false;
-            }
-            else
-            {
-                EnableSessionReportButtons = true;
-            }
-
-        }
-
-        /// <summary>
-        /// Updates the ball call report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal bool UpdateBallCallReportSessionsByDate(DateTime datetime)
-        {
-
-            BallCallReportSessionList.Clear();
-
-            foreach (var session in SessionList)
-            {
-                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
-                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
-
-                if (sessionStartDateTime == sessionEndDateTime)
-                {
-                    sessionEndDateTime = DateTime.Today;
-                }
-
-                if (sessionStartDateTime.Year == datetime.Year &&
-                    sessionStartDateTime.Month == datetime.Month &&
-                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
-
-                {
-                    BallCallReportSessionList.Add(session);
-                }      
-            }
-
-            BallCallReportSessionSelected = BallCallReportSessionList.LastOrDefault();
-
-            if (BallCallReportSessionList.Count == 0)
-            {
-                EnableSessionReportButtons = false;
-            }
-            else
-            {
-                EnableSessionReportButtons = true;
-            }
-
-            return EnableSessionReportButtons;
-        }
-
-        /// <summary>
-        /// Updates the account history report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void UpdateAccountHistoryReportSessionsByDate(DateTime datetime)
-        {
-            AccountHistoryReportSessionList.Clear();
-            EnableAccountHistoryReportButtons = false;
-
-            foreach (var session in SessionList)
-            {
-                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
-                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
-
-                if (sessionStartDateTime == sessionEndDateTime)
-                {
-                    sessionEndDateTime = DateTime.Today;
-                }
-
-                if (sessionStartDateTime.Year == datetime.Year &&
-                    sessionStartDateTime.Month == datetime.Month &&
-                    (sessionStartDateTime.Day <= datetime.Day && sessionEndDateTime.Day >= datetime.Day))
-                {
-                    AccountHistoryReportSessionList.Add(session);
-                }
-              
-            }
-
-            if (AccountHistoryReportSessionList.Count != 0)
-            {
-                AccountHistoryReportSessionSelected = AccountHistoryReportSessionList.LastOrDefault();
-            }
-            else
-            {
-                AccountHistoryReportAccountList.Clear();
-                AccountHistoryReportAccountSelected = new int();
-            }
-        }
-
-        /// <summary>
-        /// Updates the Account History report sessions by date.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void UpdateAccountHistoryReportAccountBySession(int SessionNumber)
-        {
-            AccountHistoryReportAccountList.Clear();
-            AccountHistoryReportAccountSelected = new int();
-           Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SessionNumber);
-           msg.Send();
-           AccountList = new ObservableCollection<int>();
-           AccountList = msg.AccountNumberList;
-
-            foreach (int account in AccountList)
-            {
-                AccountHistoryReportAccountList.Add(account);
-            }
-
-            if (AccountHistoryReportAccountList.Count != 0)
-            {
-                AccountHistoryReportAccountSelected = AccountHistoryReportAccountList.LastOrDefault();
-                EnableAccountHistoryReportButtons = true;
-            }
-            else
-            {
-                EnableAccountHistoryReportButtons = false;
-            }
-        }
-
-        /// <summary>
-        /// Load item for ball call report definition list.
-        /// </summary>
-        /// <param name="datetime">The datetime.</param>
-        internal void LoadBallCallReportDefList()
-        {
-            BallCallReportDefList.Add("By Session");
-            BallCallReportDefList.Add("By Game");
-
-             BallCallReportDefSelected  = BallCallReportDefList.LastOrDefault();
-        }
-
-        internal bool ValidateUserInputForBingoCardReport(int startingCardN, int EndingCardN)
-        {
-            bool IsValid = false;
-            if (startingCardN != 0 && EndingCardN  != 0)
-            {
-                if (startingCardN > EndingCardN)
-                {
-
-                }
-                else
-                {
-                    IsValid = true;
-                }
-            }
-            else
-            {
-               // IsValid = false;
-            }
-
-            EnableBingoCardReportButtons = IsValid;
-            return IsValid;
-
-        }
-
-
-
-        /// <summary>
-        /// Prints the report.
-        /// </summary>
-        /// <param name="reportId">The report identifier.</param>
-        /// <param name="report">The report.</param>
-        /// <returns></returns>
-        internal bool PrintReport(ReportId reportId, ReportDocument report)
-        {
-            var returnValue = false;
-            switch (reportId)
-            {
-                case ReportId.B3Accounts:
-                case ReportId.B3Detail:
-                case ReportId.B3Monthly:
-                case ReportId.B3Void:
-                    {
-                        //try to print to report printer
-                        returnValue = TryPrintGlobalPrinter(report);
-                    }
-                    break;
-
-                case ReportId.B3Daily:
-                case ReportId.B3Drawer:
-                case ReportId.B3Jackpot:
-                case ReportId.B3Session:
-                    {
-                        //try to print to receipt printer
-                        returnValue = TryPrintReceiptPrinter(report);
-
-                        //if unsuccessful then try to print to report printer
-                        if (!returnValue)
-                        {
-                            returnValue = TryPrintReceiptPrinter(report);
-                        }
-                    }
-                    break;
-            }
-
-            return returnValue;
-        }
-
-        /// <summary>
-        /// Tries the print receipt printer.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <returns></returns>
-        private bool TryPrintReceiptPrinter(ReportDocument report)
-        {
-            var returnValue = true;
-            try
-            {
-                report.PrintOptions.PrinterName = Settings.ReceiptPrinterName;
-                report.PrintToPrinter(1, true, 0, 0);
-            }
-            catch (Exception)
-            {
-                //if throw exception then set flag to false
-                returnValue = false;
-            }
-
-            return returnValue;
-        }
-
-        /// <summary>
-        /// Tries the print global printer.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <returns></returns>
-        private bool TryPrintGlobalPrinter(ReportDocument report)
-        {
-            var returnValue = true;
-            try
-            {
-                report.PrintOptions.PrinterName = Settings.PrinterName;
-                report.PrintToPrinter(1, true, 0, 0);
-            }
-            catch (Exception)
-            {
-                //if throw exception then set flag to false
-                returnValue = false;
-            }
-
-            return returnValue;
-        }
-
-        /// <summary>
-        /// Called when [list information done].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="AsyncCompletedEventArgs"/> instance containing the event data.</param>
-        private void OnListInfoDone(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Error == null)
-            {
-                //update session list
-                if (m_controller.Sessions.Count != SessionList.Count)
-                {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        //clear and redefine list
-                        SessionList.Clear();
-                        foreach (var session in m_controller.Sessions)
-                        {
-                            SessionList.Add(session);
-                        }
-
-                        SessionReportSessionSelected = SessionList.LastOrDefault();
-                        JackpotReportSessionSelected = SessionList.LastOrDefault();
-                    }));
-                }
-            }
-        }
-
-        #endregion
     }
+      
 }

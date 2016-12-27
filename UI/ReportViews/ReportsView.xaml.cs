@@ -114,22 +114,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
             m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
+            ReportsTransitionControl.Content = m_bingoCardReportView;
+
             m_menuItems = new List<ToggleButton>
             {
-                AccountsToggleButton,
-                DailyToggleButton,
-                DetailsToggleButton,
-                DrawerToggleButton,
-                JackpotToggleButton,
-                MonthlyToggleButton,
-                SessionToggleButton,
-                VoidToggleButton,
-                AccountHistoryTransToggleButton,
-                BallCallToggleButton,
-                SessioSummaryToggleButton,
-                SessionTransToggleButton,
-                WinnerCardsTransToggleButton,
-                BingoCardToggleButton,
+                //AccountsToggleButton,
+                //DailyToggleButton,
+                //DetailsToggleButton,
+                //DrawerToggleButton,
+                //JackpotToggleButton,
+                //MonthlyToggleButton,
+                //SessionToggleButton,
+                //VoidToggleButton,
+                //AccountHistoryTransToggleButton,
+                //BallCallToggleButton,
+                //SessioSummaryToggleButton,
+                //SessionTransToggleButton,
+                //WinnerCardsTransToggleButton,
+                //BingoCardToggleButton,
             };
         }
 
