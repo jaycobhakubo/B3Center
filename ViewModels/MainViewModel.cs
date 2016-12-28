@@ -43,26 +43,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionVm = SessionViewModel.Instance;
             SessionVm.Initialize(controller.B3Controller);
 
+            ReportsVm = ReportsViewModel.Instance;
+            ReportsVm.Initialize(controller.B3Controller);
+
+            SettingVm = SettingViewModel.Instance;
+            SettingVm.Initialize(controller.B3Controller);
+
             HideAllBtnViewModel();
             //No need to initialize if staff dont have permission.
-            foreach (int moduleFeatureID in controller.ModuleFeatureList)
-            {
-                switch (moduleFeatureID)
-                {
-                    case 43://Reports
-                            ReportsVm = ReportsViewModel.Instance;
-                            ReportsVm.Initialize(controller.B3Controller);
-                            IsReportVisible = Visibility.Visible;
-                    break;
+            //foreach (int moduleFeatureID in controller.ModuleFeatureList)
+            //{
+            //    switch (moduleFeatureID)
+            //    {
+            //        case 43://Reports
+            //                ReportsVm = ReportsViewModel.Instance;
+            //                ReportsVm.Initialize(controller.B3Controller);
+            //                IsReportVisible = Visibility.Visible;
+            //        break;
 
-                    case 44://Settings
-                        SettingVm = SettingViewModel.Instance;
-                        SettingVm.Initialize(controller.B3Controller);
-                        IsSettingVisible = Visibility.Visible;
-                     break;
-                }
+            //        case 44://Settings
+            //            SettingVm = SettingViewModel.Instance;
+            //            SettingVm.Initialize(controller.B3Controller);
+            //            IsSettingVisible = Visibility.Visible;
+            //         break;
+            //    }
 
-            }
+            //}
 
             FileExitCommand = new RelayCommand(parameter => Exit());            // Create the commands.
             PropertyChangedEventManager.AddListener(Controller, this, string.Empty);            // Listen for changes to the parent and children.
