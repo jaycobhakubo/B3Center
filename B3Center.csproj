@@ -244,6 +244,7 @@
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel\AccountHistoryReportVm.cs" />
     <Compile Include="ViewModels\ReportViewModel\AccountReportVm.cs" />
+    <Resource Include="ScriptTrialAndError\binding_listbox_selectedItemchanged.txt" />
     <Content Include="ViewModels\ReportsViewModel.txt">
       <SubType>Code</SubType>
     </Content>

@@ -17,16 +17,42 @@
              <!--d:DesignHeight="600" d:DesignWidth="600"-->
     <UserControl.Resources>
 
-        <!--<DataTemplate DataType="{x:Type vm:AccountHistoryReportVm}">
-            <v:AccountHistoryReportView  DataContext="{Binding x}" />
+        <DataTemplate DataType="{x:Type vm:AccountHistoryReportVm}">
+            <v:AccountHistoryReportView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:AccountReportVm}">
+            <v:AccountReportView />
         </DataTemplate>
 
 
-        <DataTemplate DataType="{x:Type vm:AccountReportVm}">
-            <v:AccountsReportView  DataContext="{Binding y}" />
-        </DataTemplate>-->
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="SlugContainer" Background="Transparent" BorderBrush="Black" BorderThickness="1" CornerRadius="2" Margin="0,5,0,0" Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- snipped for brevity -->
+
+                                <ContentPresenter Grid.Row="1" />
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </UserControl.Resources>
+    
     
     
     <DockPanel>
