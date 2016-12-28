@@ -60,16 +60,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                 throw new ArgumentNullException("parent");
 
             InitializeComponent();
-            //m_originalMenuColumnWidth = MenuColumn.Width;
 
-            //m_menuItems = new List<ToggleButton> 
-            //{
-            //    SessionToggleButton, 
-            //    ReportsToggleButton,
-            //    SettingsToggleButton
-            //};
-
-            //set datacontext
             DataContext = mainViewModel;
             ParentController = parent;
 

@@ -5,6 +5,8 @@
     Title="B3 Center -- GameTech International, Inc." 
      xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
      xmlns:localSettings="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
+    
+    
     Width="1024"  Height="710" 
     WindowStartupLocation="CenterScreen" Loaded="OnLoaded"
     Style="{DynamicResource EliteWindow}"                          
@@ -14,13 +16,9 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
-        <Style TargetType="{x:Type ListBox}">
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="Light"/>
-        </Style>
-        
+     
+
+
     </Window.Resources>
     
     <Window.InputBindings>
@@ -45,7 +43,7 @@
             </TabItem>
 
             <TabItem Header="Settings">
-                <localSettings:SettingView DataContext="{Binding SettingVm}" />
+              
             </TabItem>
 
             <TabItem Header="Operators">

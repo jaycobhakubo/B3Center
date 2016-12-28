@@ -6,7 +6,8 @@
               xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
-              d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
+              d:DesignHeight="600" d:DesignWidth="600" >
+    <!--Loaded="UserControl_Loaded"-->
     <UserControl.Resources>
         <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
     </UserControl.Resources>
@@ -25,7 +26,8 @@
 
             <TextBlock Grid.Column="0" Text="Account History Report" Style="{StaticResource HeaderStyle3}" TextWrapping="Wrap" />
 
-            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>
+            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right"/>
+            <!--<Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>-->
 
             <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />
         </Grid>
@@ -55,8 +57,10 @@
                                 SelectedItem="{Binding  AccountHistoryReportAccountSelected}"
                               />
 
-                    <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
+                    <!--<Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
+                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>-->
+                    <Button Content="View Report" Margin="5,15,5,5" Name="ViewReportButton" />
+                    <Button Content="Print Report" Name="PrintReportButton" IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.ReportViews.MonthlyReportView"
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.ReportViews.AccountsReportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-              xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
-              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
-              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500" Loaded="UserControl_Loaded">
+             xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+             xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500" >
+
+    <!--Loaded="UserControl_Loaded"-->
     <UserControl.Resources>
         <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
     </UserControl.Resources>
@@ -16,17 +18,18 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        
         <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Width="200" Text="Monthly Report" Style="{StaticResource HeaderStyle3}" />
-
-            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>
-
+            <TextBlock Grid.Column="0" Text="Accounts Outstanding Report" Style="{StaticResource HeaderStyle3}" TextWrapping="Wrap"/>
+            
+            <Button Grid.Column="1" Content="New Report" Name="NewReportButton"   HorizontalAlignment="Right"/>
+            <!--<Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>-->
             <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />
         </Grid>
 
@@ -42,24 +45,25 @@
                         <TextBlock Width="140" HorizontalAlignment="Left"  Text="Month"  Padding="5,5,0,2" Style="{StaticResource TextBlockFontStyle2}"/>
                         <TextBlock Width="90"  HorizontalAlignment="Left"  Text="Year"  Padding="5,5,0,2" Style="{StaticResource TextBlockFontStyle2}"/>
                     </WrapPanel>
-                 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <ComboBox  Height="50" 
+                       
+                        <ComboBox  Height="50"
                                    Width="140"
                                    ItemsSource="{Binding Months}"
-                                   SelectedItem="{Binding MonthlyReportMonthSelected}"
-                                   Name="MonthCombobox"
-                                   Margin="2,0"/>
-                        
-                        <ComboBox  Height="50"
+                                   SelectedItem="{Binding AccountReportMonthSelected}"
+                                   Name="MonthCombobox" Margin="2,0"/>
+
+                            <ComboBox  Height="50"
                                    Width="90"
                                    ItemsSource="{Binding Years}"
-                                   SelectedItem="{Binding MonthlyReportYearSelected}"
-                                   Name="YearCombobox" 
-                                   Margin="2,0"/>
+                                   SelectedItem="{Binding AccountReportYearSelected}"
+                                   Name="YearCombobox" Margin="2,0"/>
+
                     </StackPanel>
-                    <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
+                    <Button Content="View Report" Name="ViewReportButton" Margin="5,15,5,5"/>
+                    <Button Content="Print Report"   Name="PrintReportButton"/>
+                    <!--<Button Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="5,15,5,5"/>
+                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>-->
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>
