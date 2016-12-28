@@ -380,7 +380,7 @@
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
-                        <ListBox Margin="15" ItemsSource="{Binding Reports}">
+                        <ListBox Margin="15" ItemsSource="{Binding Reports}" SelectedItem="{Binding ReportSelected}">
                             
                             <!--<ListBox.ItemsSource ="{Binding ReportList}"/>-->
                         </ListBox>

@@ -149,7 +149,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         }
 
+
+
+
         ObservableCollection<string> m_reportList = new ObservableCollection<string>();
+
+        public ObservableCollection<string> Reports
+        {
+            get { return m_reportList; }
+            set { m_reportList = value; }
+
+        }
 
         private void LoadReportList()
         {
@@ -168,16 +178,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_reportList.Add("Session Transaction");
             m_reportList.Add("Void");
             m_reportList.Add("Winner Cards");
+            m_reportSelected = m_reportList.FirstOrDefault();
         }
 
 
+        private string m_reportSelected;
 
-        public ObservableCollection<string> Reports
-        {
-            get { return m_reportList; }
-            set {m_reportList = value; }
-
-        }
+        public string ReportSeleccted
+            {
+            get { return m_reportSelected; }
+            set { m_reportSelected = value; }
+            }
 
         /// <summary>
         /// Loads the account report document.
