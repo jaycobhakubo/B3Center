@@ -58,9 +58,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private CommandHandler m_valueCollectionChanged;
         private List<B3SettingGlobal> m_systemSettings;//What is the best way to habndle collection of data?
 
-
-  
-
         #region CONSTRUCTOR
 
         private SettingViewModel()
@@ -81,30 +78,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        
             m_controller = controller;
             m_systemSettings =  m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == (int)B3SettingCategory.SystemSettings).ToList();
-           
-           // m_systemSettingsNew = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == (int)B3SettingCategory.SystemSettings));
-          //  var check = m_systemSettings == m_systemSettingsNew;
-            //m_systemSettings.CollectionChanged += new NotifyCollectionChangedEventHandler(HandleChange);
+       
             LoadCurrencyList(); 
-            GetCurrentMemberValues();//Setting Value to controls
+            GetCurrentMemberValues();
+            LoadSettingsMainList();
             m_canExecute = true;
 
         }
 
-        //private void HandleChange(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.NewItems != null)
-        //        foreach (var x in e.NewItems)
-        //        {
-        //            Console.WriteLine(x);
-        //        }
+        private ObservableCollection<string> m_settingsMainList = new ObservableCollection<string>();
 
-        //    if (e.OldItems != null)
-        //        foreach (var y in e.OldItems)
-        //        {
-        //            Console.WriteLine(y);
-        //        }
-        //}
+        private void LoadSettingsMainList()
+        {
+            m_settingsMainList.Clear();
+            m_settingsMainList.Add("Games");
+            m_settingsMainList.Add("Player");
+            m_settingsMainList.Add("Sales");
+            m_settingsMainList.Add("Session");
+            m_settingsMainList.Add("System");
+
+        }
+
+        public ObservableCollection<string> SettingsMainList
+        {
+            get { return m_settingsMainList; }
+            set { m_settingsMainList = value; }
+        }
+
+
+
 
         public static SettingViewModel Instance
         {
@@ -140,27 +142,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //Get all the information that want to be saved
         public void  Saved()
         {
-            //m_savedCommand.isSuccess = true; //Success
+      
             try
             {
-                //IList<B3SettingGlobal> CurrentValueSystemSetting;
-                //CurrentValueSystemSetting = m_systemSettings;
+               
                 SetNewMemberValues();
                 List<SettingMember> m_lSystemSettings_SettingMember = new List<SettingMember>();   
 
                 foreach (B3SettingGlobal sg in m_systemSettings)
                 {
-                    //string OldValue = m_systemSettings.Single(l => l.B3SettingID == sg.B3SettingID).B3SettingValue;
-
-                    //if (sg.B3SettingValue != OldValue)
-                    //{
+                    
                         SettingMember sm = new SettingMember();
                         sm.m_settingID = sg.B3SettingID;
                         sm.m_gameID = sg.B3GameID;
                         sm.m_value = sg.B3SettingValue;
                         sm.m_oldValue = "";
                         m_lSystemSettings_SettingMember.Add(sm);
-                    //}             
+                              
                 }
 
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
@@ -170,14 +168,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             catch
             {
-                //m_savedCommand.isSuccess = false;
+              
             }
 
     
            
         }
 
-       //public B3SettingGlobal(int B3SettingID_, int B3SettingCategoryID_, int B3GameID_, string B3SettingValue_)
+
 
         #endregion
 
@@ -186,20 +184,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetNewMemberValues()
         {
-            //You have the new value for handpaytrigger how do want to handle it\
-            //How do we saves the old value
-            //set the new value
-            //This will trigger the even collectionchanged
+            
             m_systemSettings.Single(l => l.B3SettingID == (int)B3SettingDescription.HandPayTrigger).B3SettingValue = m_handPayTrigger;
         }
 
-        //public class SettingMember
-        //{
-        //    public int m_settingID;
-        //    public int m_gameID;
-        //    public string m_value;
-        //    public string m_oldValue;
-        //}
+      
 
       
         internal void LoadCurrencyList()
@@ -239,7 +228,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         #endregion
-
 
         #region PROPERTIES SYSTEM SETTINGS
 

@@ -74,12 +74,7 @@
             <Setter Property="Padding" Value="0"/>
         </Style>
         
-        <!--<Style TargetType="{x:Type ListBox}">
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="Light"/>
-        </Style>-->
+      
 
         <!-- Brushes used in Styling of ScrollViewer -->
         <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />

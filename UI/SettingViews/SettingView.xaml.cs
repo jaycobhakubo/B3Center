@@ -76,24 +76,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
             if (SettingViewModel.Instance.IsClassIIB3GameEnable == true)
             {
-                m_serverGameView = new ServerGameSettingView(B3Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
-                ServerGameSettingToggleButton.Visibility = Visibility.Visible;
+                //m_serverGameView = new ServerGameSettingView(B3Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+                //ServerGameSettingToggleButton.Visibility = Visibility.Visible;
             }
             else
             {
-                ServerGameSettingToggleButton.Visibility = Visibility.Collapsed;
+                //ServerGameSettingToggleButton.Visibility = Visibility.Collapsed;
             }
 
-            m_menuItems = new List<ToggleButton>
-            {
-               GameSettingToggleButton,
-               SystemSettingToggleButton,
-               PlayerSettingToggleButton,
-               SalesSettingToggleButton,
-               SessionSettingToggleButton,
-               ServerGameSettingToggleButton,
-               OperatorSettingToggleButton
-            };
+            //m_menuItems = new List<ToggleButton>
+            //{
+            //   GameSettingToggleButton,
+            //   SystemSettingToggleButton,
+            //   PlayerSettingToggleButton,
+            //   SalesSettingToggleButton,
+            //   SessionSettingToggleButton,
+            //   ServerGameSettingToggleButton,
+            //   OperatorSettingToggleButton
+            //};
 
             m_btnSave = m_gamesView.btnSave;
             m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);

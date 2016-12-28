@@ -168,15 +168,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_reportList.Add("Session Transaction");
             m_reportList.Add("Void");
             m_reportList.Add("Winner Cards");
-            Reports = m_reportList;
         }
 
 
 
         public ObservableCollection<string> Reports
         {
-            get;
-            set;
+            get { return m_reportList; }
+            set {m_reportList = value; }
 
         }
 
