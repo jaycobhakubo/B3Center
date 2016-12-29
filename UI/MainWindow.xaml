@@ -39,7 +39,7 @@
 
             <TabItem Header="Reports">
                 <!--<ContentPresenter Name="ReportTransitionControl" Margin="0" ></ContentPresenter>-->
-                <localReports:ReportsView DataContext="{Binding ReportsVm}" />
+                <localReports:ReportView DataContext="{Binding ReportVm}" />
             </TabItem>
 
             <TabItem Header="Settings">

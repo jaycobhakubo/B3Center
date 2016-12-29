@@ -117,8 +117,9 @@
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
     <Compile Include="Business\B3Controller.cs" />
-    <Compile Include="Model\GameModels\CrazyBoutGameModel.cs" />
-    <Compile Include="Model\GameModels\GameModel.cs" />
+    <Compile Include="Helpers\Selecteditem.cs" />
+    <Compile Include="Model\CrazyBoutGameModel.cs" />
+    <Compile Include="Model\GameModel.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
     <Compile Include="Messages\GetB3ColorIcon.cs" />
     <Compile Include="Messages\GetB3MathGamePlay.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Messages\GetSessionOperatorListMessage.cs" />
     <Compile Include="Messages\SessionStartMessage.cs" />
     <Compile Include="Messages\SetB3BallsMessage.cs" />
+    <Compile Include="Model\Reports.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -157,8 +159,8 @@
     <Compile Include="UI\ReportViews\AccountReportView.xaml.cs">
       <DependentUpon>AccountReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\ReportsView.xaml.cs">
-      <DependentUpon>ReportsView.xaml</DependentUpon>
+    <Compile Include="UI\ReportViews\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\CharityView.xaml.cs">
       <DependentUpon>CharityView.xaml</DependentUpon>
@@ -241,11 +243,11 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ReportViewModel\AccountHistoryReportVm.cs" />
-    <Compile Include="ViewModels\ReportViewModel\AccountReportVm.cs" />
-    <Resource Include="ScriptTrialAndError\binding_listbox_selectedItemchanged.txt" />
-    <Content Include="ViewModels\ReportsViewModel.txt">
+    <Compile Include="ViewModels\ReportVm.cs" />
+    <Compile Include="ViewModels\ReportVmAccountHistory.cs" />
+    <Compile Include="ViewModels\ReportVmAccount.cs" />
+    <Resource Include="UI\ScriptTrialAndError\binding_listbox_selectedItemchanged.txt" />
+    <Content Include="ViewModels\ReportVm.txt">
       <SubType>Code</SubType>
     </Content>
     <Compile Include="ViewModels\SessionViewModel.cs" />
@@ -268,7 +270,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\ReportViews\ReportsView.xaml">
+    <Page Include="UI\ReportViews\ReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -422,6 +424,7 @@
   <ItemGroup>
     <Resource Include="Design\Xaml\ReportsView.xaml.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -16,7 +16,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// <summary>
     /// Interaction logic for ReportsView.xaml
     /// </summary>
-    public partial class ReportsView
+    public partial class ReportView
     {
         #region Local Variables
 
@@ -50,7 +50,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportsView"/> class. Initializes all Reports.
         /// </summary>
-        public ReportsView()
+        public ReportView()
         {
             InitializeComponent();
 

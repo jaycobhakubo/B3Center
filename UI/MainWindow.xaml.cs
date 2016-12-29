@@ -29,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
         private readonly GridLength m_collapsedMenuColumnWidth = new GridLength(0);
         private readonly List<ToggleButton> m_menuItems;
         private readonly SessionView m_sessionView;
-        private readonly ReportsView m_reportsView;
+        private readonly ReportView m_reportsView;
         private readonly SettingView m_settingsView;
         private B3Setting B3Setting;
         private Button m_btnSave;
