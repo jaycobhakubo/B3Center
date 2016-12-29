@@ -14,7 +14,6 @@ using GameTech.Elite.Client.Modules.B3Center.Business.GameModels;
 using GameTech.Elite.UI;
 using System.Collections;
 using System.Windows;
-using GameTech.Elite.Client.Modules.B3Center.ViewModels.ReportViewModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -25,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     {
         #region Constructors
 
-        private ReportsViewModel rvm;
+        private ReportVm m_reportView;
 
         /// <summary>
         /// Initializes a new instance of the MainVeiwModel class.
@@ -49,7 +48,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionVm = SessionViewModel.Instance;
             SessionVm.Initialize(controller.B3Controller);
 
-            rvm = new ReportsViewModel(controller.B3Controller);
+            m_reportView = new ReportVm(controller.B3Controller);
 
 
             SettingVm = SettingViewModel.Instance;
@@ -170,10 +169,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <summary>
         /// Gets or set the sub view model: reports view model.
         /// </summary>
-        public ReportsViewModel ReportsVm
-        { 
-            get {return rvm;}
-            set { rvm = value; } 
+        public ReportVm ReportsVm
+        {
+            get { return m_reportView; }
+            set { m_reportView = value; } 
         
         
         }

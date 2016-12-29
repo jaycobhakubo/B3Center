@@ -5,7 +5,7 @@ using System.Text;
 using GameTech.Elite.Base;
     
 
-namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.ReportViewModel
+namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class AccountHistoryReportVm : ViewModelBase
     {     

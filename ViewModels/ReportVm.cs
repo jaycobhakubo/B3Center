@@ -16,28 +16,18 @@ using CrystalDecisions.CrystalReports.Engine;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Reports;
-using GameTech.Elite.Client.Modules.B3Center.ViewModels.ReportViewModel;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels;
+using GameTech.Elite.Client.Modules.B3Center.Model;
 using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
 using System.Windows.Controls;
 
-//US1618: B3 Session Report
-//US4300: B3 Daily Report
-//US4301: B3 Monthly Report
-//US4317: B3 Void Report
-//US4316: B3 Detail Report
-//US4315: B3 Drawer Report
-//US4314: B3 Jackpot Report
-//US4302: B3 Accounts Report
-//US4369: B3 Center: Option to print reports without previewing the report.
-//US4377: B3 Center: Generate the Monthly report by month and year.
-//US4373: B3 Center: Generate the Accounts Report by month and year.
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
-    internal class ReportsViewModel : ViewModelBase
+    internal class ReportVm : ViewModelBase
     {
 
-
+        #region
         private bool m_enableJackpotReportButtons;
         private bool m_enableSessionReportButtons;
         private bool m_enableAccountHistoryReportButtons;
@@ -72,41 +62,75 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private int m_monthlyReportYearSelected;
         private string m_accountReportMonthSelected;
         private int m_accountReportYearSelected;
-        private static volatile ReportsViewModel m_instance;
+        private static volatile ReportVm m_instance;
         private static readonly object m_syncRoot = new Object();
         private int m_accountNumberSelected;
 
         private AccountHistoryReportVm m_vm = new AccountHistoryReportVm();
         private AccountReportVm m_vm2 = new AccountReportVm();
 
+        //public   AccountHistoryReportView xyz
+        //{ 
+        //    get; 
+        //    set; 
+        //}
+
+        //public  AccountsReportView xyz2
+        //{
+        //    get;
+        //    set;
+        //}
 
 
-        public   AccountHistoryReportView xyz
-        { 
-            get; 
-            set; 
+        //public ContentPresenter ReportTransitionControlContent
+        //{
+        //    get { return m_reportTCContent; }
+        //    set { m_reportTCContent = value;}
+        //}
+
+        #endregion
+
+
+        ObservableCollection<Model.Reports> m_reportList;// = new ObservableCollection<Model.Reports>();
+
+        public ObservableCollection<Model.Reports> ReportsList
+        {
+            get { return m_reportList; }
+            set { m_reportList = value; }
         }
 
-        public  AccountsReportView xyz2
+ 
+        private AccountsReportView m_accountReport;
+        private AccountHistoryReportView m_accountHistory;
+
+        
+
+
+        public ReportVm(B3Controller controller)
         {
-            get;
-            set;
+            m_reportList = new ObservableCollection<Model.Reports>()
+            {
+                new Model.Reports(){ReportID = 1, ReportName = "Accounts", ReportView = new AccountsReportView() {DataContext =  new AccountReportVm() }},
+               new Model.Reports(){ReportID = 1, ReportName = "Account History", ReportView = new AccountHistoryReportView() {DataContext =  new AccountHistoryReportVm() }}
+            };
         }
 
 
-        public ContentPresenter ReportTransitionControlContent
+        private Report m_reportSelected;
+
+        public Report ReportSelected
         {
-            get { return m_reportTCContent; }
-            set { m_reportTCContent = value;}
+            get { return m_reportSelected; }
+            set 
+            { 
+                m_reportSelected = value; 
+               RaisePropertyChanged("ReportSelected");
+            
+            }
         }
 
-        private ContentPresenter m_reportTCContent = new ContentPresenter();
 
-
-        public ReportsViewModel(B3Controller controller)
-        {
-
-
+/*
             m_controller = controller;
 
             m_controller.SessionInfoCompleted += OnListInfoDone;
@@ -125,47 +149,47 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             xyz = new AccountHistoryReportView() { DataContext = m_vm };
             xyz2 = new AccountsReportView() { DataContext = m_vm2 };
             m_reportTCContent.Content = xyz2;          
-
-        }
+*/
+       // }
 
    
-        ObservableCollection<string> m_reportList = new ObservableCollection<string>();
+       
 
-        public ObservableCollection<string> Reports
-        {
-            get { return m_reportList; }
-            set { m_reportList = value; }
-
-        }
-
-        private void LoadReportList()
-        {
-            m_reportList.Clear();
-            m_reportList.Add("Accounts");
-            m_reportList.Add("Account History");
-            m_reportList.Add("Ball Call");
-            m_reportList.Add("Bingo Card");
-            m_reportList.Add("Daily");
-            m_reportList.Add("Detail");
-            m_reportList.Add("Drawer");
-            m_reportList.Add("Jackpot");
-            m_reportList.Add("Monthly");
-            m_reportList.Add("Session");
-            m_reportList.Add("Session Summary");
-            m_reportList.Add("Session Transaction");
-            m_reportList.Add("Void");
-            m_reportList.Add("Winner Cards");
-            m_reportSelected = m_reportList.FirstOrDefault();
-        }
+        //private void LoadReportList()
+        //{
+        //    m_reportList.Clear();
+        //    m_reportList.Add("Accounts");
+        //    m_reportList.Add("Account History");
+        //    m_reportList.Add("Ball Call");
+        //    m_reportList.Add("Bingo Card");
+        //    m_reportList.Add("Daily");
+        //    m_reportList.Add("Detail");
+        //    m_reportList.Add("Drawer");
+        //    m_reportList.Add("Jackpot");
+        //    m_reportList.Add("Monthly");
+        //    m_reportList.Add("Session");
+        //    m_reportList.Add("Session Summary");
+        //    m_reportList.Add("Session Transaction");
+        //    m_reportList.Add("Void");
+        //    m_reportList.Add("Winner Cards");
+        //    m_reportSelected = m_reportList.FirstOrDefault();
+        //}
 
 
-        private string m_reportSelected;
 
-        public string ReportSeleccted
-        {
-            get { return m_reportSelected; }
-            set { m_reportSelected = value; }
-        }
+
+
+      
+
+        //private void ActivateReportView(string reportSelected)
+        //{
+        //    switch (reportSelected)
+        //    {
+        //        case "Accounts":
+        //            break;
+
+        //    }
+        //}
 
 
         /// <summary>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using GameTech.Elite.Base;
 
-namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.ReportViewModel
+namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class AccountReportVm : ViewModelBase
     {
@@ -13,7 +13,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.ReportViewModel
 
        public AccountReportVm()
         {
-
+           
         }
 
         //public static AccountReportVm Instance
