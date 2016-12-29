@@ -17,13 +17,13 @@
              <!--d:DesignHeight="600" d:DesignWidth="600"-->
     <UserControl.Resources>
 
-        <DataTemplate DataType="{x:Type vm:AccountHistoryReportVm}">
+        <!--<DataTemplate DataType="{x:Type vm:AccountHistoryReportVm}">
             <v:AccountHistoryReportView />
-        </DataTemplate>
+        </DataTemplate>-->
 
-        <DataTemplate DataType="{x:Type vm:AccountReportVm}">
+        <!--<DataTemplate DataType="{x:Type vm:AccountReportVm}">
             <v:AccountReportView />
-        </DataTemplate>
+        </DataTemplate>-->
 
 
         <Style TargetType="{x:Type ListBoxItem}">
