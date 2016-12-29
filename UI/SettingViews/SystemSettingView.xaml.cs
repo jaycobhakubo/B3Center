@@ -74,12 +74,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         {
             InitializeComponent();
             m_B3Settings = B3Settings;
-            //PopulateComboBoxControls();
-            //PopulateDataIntoVar();
-            //PopulateDataIntoControls();
+            PopulateComboBoxControls();
+            PopulateDataIntoVar();
+            PopulateDataIntoControls();
             m_saveCancelCtrl = new SaveCancelCrtl();
             m_btnSave = m_saveCancelCtrl.btnSave;
-            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
             m_btnCancel = m_saveCancelCtrl.btnCancel;
             m_btnCancel.Click += new RoutedEventHandler(m_btnCancel_Click);
             SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
@@ -130,7 +130,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void PopulateDataIntoControls()
         {
-            //txtbxHandPayoutTrigger.Text = m_handPayoutTrigger.ToString();
+            txtbxHandPayoutTrigger.Text = m_handPayoutTrigger.ToString();
             txtbxMinimumPlayers.Text = m_minimumPlayers.ToString();
             txtbxVipPointPlayer.Text = m_vipPointMultiPlayer.ToString();
             txtbxMagCardStart.Text = m_magcardSentinelStart.ToString();
@@ -472,7 +472,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private void PopulateComboBoxControls()
         {
             cmbxMainVol.ItemsSource = cmbxValue(0, 10);
-
+           
             List<string> CurrencyItems = new List<string>();//Harcoded no table currency available in db.
             CurrencyItems.Add("CREDIT");
             CurrencyItems.Add("DOLLAR");
@@ -569,41 +569,41 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             ReloadDataIntoControls();
         }
 
-        //void m_btnSave_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (ValidateUserInput() == false)
-        //    {
-        //        return;
-        //    }
+        void m_btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (ValidateUserInput() == false)
+            {
+                return;
+            }
 
-        //    List<SettingMember> lSettingMember = new List<SettingMember>();
-        //    lSettingMember = ListOfSettingIDToBeUpdated();//knc
+            List<SettingMember> lSettingMember = new List<SettingMember>();
+            lSettingMember = ListOfSettingIDToBeUpdated();
 
-        //    if (lSettingMember.Count != 0)
-        //    {
-        //        Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-        //        SetB3SettingsMessage msg = new SetB3SettingsMessage(lSettingMember);
-        //        msg.Send();
-        //        Mouse.OverrideCursor = null;
+            if (lSettingMember.Count != 0)
+            {
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                SetB3SettingsMessage msg = new SetB3SettingsMessage(lSettingMember);
+                msg.Send();
+                Mouse.OverrideCursor = null;
 
-        //        if (msg.ReturnCode != ServerReturnCode.Success)
-        //            throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+                if (msg.ReturnCode != ServerReturnCode.Success)
+                    throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
 
-        //        if (lSettingMember.Exists(l => l.m_settingID == 54))//North Dakota Mode
-        //        {
-        //            m_isNDSettingEnable = (lSettingMember.Single(l => l.m_settingID == 54).m_value == "T" ? true : false);
-        //        }
+                if (lSettingMember.Exists(l => l.m_settingID == 54))//North Dakota Mode
+                {
+                    m_isNDSettingEnable = (lSettingMember.Single(l => l.m_settingID == 54).m_value == "T" ? true : false);                   
+                }
 
-        //        if (lSettingMember.Exists(l => l.m_settingID == 53))//Common RNG Ball Call
-        //        {
-        //            var viewModel = SessionViewModel.Instance;
-        //            viewModel.UpdateIsBallCallPermission(lSettingMember.Single(l => l.m_settingID == 53).m_value == "T" ? true : false);
-        //        }
+                if (lSettingMember.Exists(l => l.m_settingID == 53))//Common RNG Ball Call
+                {      
+                    var viewModel = SessionViewModel.Instance;
+                    viewModel.UpdateIsBallCallPermission(lSettingMember.Single(l => l.m_settingID == 53).m_value == "T" ? true : false);
+                }
 
-        //        RepopulateNewSaveData(lSettingMember);
-        //        lblSavedNotification.Visibility = Visibility.Visible;
-        //    }
-        //}
+                RepopulateNewSaveData(lSettingMember);
+                lblSavedNotification.Visibility = Visibility.Visible;
+            }
+        }
 
         private void Grid_GotFocus(object sender, RoutedEventArgs e)
         {

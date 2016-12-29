@@ -14,54 +14,12 @@
               d:DesignHeight="620"
              d:DesignWidth="1000">
              
-             <!--d:DesignHeight="600" d:DesignWidth="600"-->
     <UserControl.Resources>
 
-        <!--<DataTemplate DataType="{x:Type vm:AccountHistoryReportVm}">
-            <v:AccountHistoryReportView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type vm:AccountReportVm}">
-            <v:AccountReportView />
-        </DataTemplate>-->
-
     </UserControl.Resources>
-    
-   
-    <DockPanel>
+    <Grid>
+        <Button Content="MAIN" FontSize="100"></Button>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" Name="ReportMenuColumn"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    </Grid>
 
-
-            <Border Grid.Column="1" CornerRadius="0,5,5,0"  Style="{DynamicResource LightBlueBorder}" Margin="4">
-                <ContentPresenter Name="ReportsTransitionControl" Content="{Binding CurrentReportSelected}"/>
-            </Border>
-
-            <Border Style="{DynamicResource DarkBlueBorder}" Margin="4">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Margin="15"  ItemsSource="{Binding ReportsList}" SelectedItem="{Binding ReportSelected}" DisplayMemberPath="DisplayName">
-                         
-                        </ListBox>
-                    </ScrollViewer>
-                </Grid>
-            </Border>
-
-            <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
-            </Border>
-            <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
-            </Border>
-        </Grid>
-    </DockPanel>
-  
 </UserControl>

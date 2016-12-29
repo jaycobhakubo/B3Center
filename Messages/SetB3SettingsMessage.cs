@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
@@ -47,6 +46,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
       }
     
-     
+        public class SettingMember
+        {
+            public int m_settingID;
+            public int m_gameID;
+            public string m_value;
+            public string m_oldValue;
+        }
 
 }

@@ -113,13 +113,13 @@
     <Compile Include="Business\B3CenterException.cs" />
     <Compile Include="Business\B3CenterModule.cs" />
     <Compile Include="Business\B3CenterSettings.cs" />
+    <Compile Include="Business\B3GameSetting.cs" />
     <Compile Include="Business\B3Report.cs" />
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
     <Compile Include="Business\B3Controller.cs" />
-    <Compile Include="Helpers\Selecteditem.cs" />
-    <Compile Include="Model\CrazyBoutGameModel.cs" />
-    <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Business\GameModels\CrazyBoutGameModel.cs" />
+    <Compile Include="Business\GameModels\GameModel.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
     <Compile Include="Messages\GetB3ColorIcon.cs" />
     <Compile Include="Messages\GetB3MathGamePlay.cs" />
@@ -138,29 +138,60 @@
     <Compile Include="Messages\GetSessionOperatorListMessage.cs" />
     <Compile Include="Messages\SessionStartMessage.cs" />
     <Compile Include="Messages\SetB3BallsMessage.cs" />
-    <Compile Include="Model\Reports.cs" />
-    <Compile Include="UI\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
-    <Compile Include="Helpers\CommandHandler.cs" />
-    <Compile Include="Helpers\Converters.cs" />
-    <Compile Include="UI\GameViews\GameView.xaml.cs">
+    <Compile Include="UI\Converters.cs" />
+    <Compile Include="UI\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ReportViews\AccountHistoryReportView.xaml.cs">
       <DependentUpon>AccountHistoryReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\AccountReportView.xaml.cs">
-      <DependentUpon>AccountReportView.xaml</DependentUpon>
+    <Compile Include="UI\ReportViews\AccountsReportView.xaml.cs">
+      <DependentUpon>AccountsReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\ReportView.xaml.cs">
-      <DependentUpon>ReportView.xaml</DependentUpon>
+    <Compile Include="UI\ReportViews\BallCallReportView.xaml.cs">
+      <DependentUpon>BallCallReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\BingoCardReportView.xaml.cs">
+      <DependentUpon>BingoCardReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\DailyReportView.xaml.cs">
+      <DependentUpon>DailyReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\DetailReportView.xaml.cs">
+      <DependentUpon>DetailReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\DrawerReportView.xaml.cs">
+      <DependentUpon>DrawerReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\JackpotReportView.xaml.cs">
+      <DependentUpon>JackpotReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\MonthlyReportView.xaml.cs">
+      <DependentUpon>MonthlyReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\SessionReportView.xaml.cs">
+      <DependentUpon>SessionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\SessionSummaryView.xaml.cs">
+      <DependentUpon>SessionSummaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\SessionTransactionReportView.xaml.cs">
+      <DependentUpon>SessionTransactionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\VoidReportView.xaml.cs">
+      <DependentUpon>VoidReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\WinnerCardsReportView.xaml.cs">
+      <DependentUpon>WinnerCardsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\CharityView.xaml.cs">
       <DependentUpon>CharityView.xaml</DependentUpon>
@@ -234,31 +265,30 @@
     <Compile Include="UI\Shared\FullScreenUserControl.xaml.cs">
       <DependentUpon>FullScreenUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SqlConnectionToByPassGtiServerApp.cs" />
+    <Compile Include="UI\SqlConnectionToByPassGtiServerApp.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Business\IGTIModule.cs" />
     <Compile Include="Design\DesignController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ReportVm.cs" />
-    <Compile Include="ViewModels\ReportVmAccountHistory.cs" />
-    <Compile Include="ViewModels\ReportVmAccount.cs" />
-    <Resource Include="UI\ScriptTrialAndError\binding_listbox_selectedItemchanged.txt" />
-    <Content Include="ViewModels\ReportVm.txt">
-      <SubType>Code</SubType>
-    </Content>
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UI\GameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\GameViews\GameView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -266,11 +296,59 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\ReportViews\AccountReportView.xaml">
+    <Page Include="UI\ReportViews\AccountsReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\ReportViews\ReportView.xaml">
+    <Page Include="UI\ReportViews\BallCallReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\BingoCardReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\DailyReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\DetailReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\DrawerReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\JackpotReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\MonthlyReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\SessionReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\SessionSummaryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\SessionTransactionReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\VoidReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\WinnerCardsReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -422,9 +500,17 @@
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Design\Xaml\ReportsView.xaml.txt" />
+    <Resource Include="UI\MainWindow.xaml.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="UI\MainWindow.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ViewModels\MainViewModel.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\ReportViews\ReportsView.xaml.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

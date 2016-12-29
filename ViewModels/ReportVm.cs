@@ -91,28 +91,62 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
 
 
-        ObservableCollection<Model.Reports> m_reportList;// = new ObservableCollection<Model.Reports>();
+        ObservableCollection<Model.Reports> m_reportList2;// = new ObservableCollection<Model.Reports>();
 
-        public ObservableCollection<Model.Reports> ReportsList
+        public ObservableCollection<Model.Reports> ReportsList2
+        {
+            get 
+            { 
+                return m_reportList2; 
+            }
+            set 
+            { 
+                m_reportList2 = value;
+                RaisePropertyChanged("ReportsList2");
+            }
+        }
+
+
+
+        public ReportVm(B3Controller controller)
+        {
+
+
+            //m_reportList2 = new ObservableCollection<Model.Reports>()
+            //{
+            //    new Model.Reports(){ReportID = 1, ReportName = "Accounts"}, //ReportView = new AccountsReportView() {DataContext =  new AccountReportVm() }},
+            //   new Model.Reports(){ReportID = 1, ReportName = "Account History"}//, ReportView = new AccountHistoryReportView() {DataContext =  new AccountHistoryReportVm() }}
+            //};
+        }
+
+
+        public List<string> textx1
         {
             get { return m_reportList; }
             set { m_reportList = value; }
         }
 
- 
-        private AccountsReportView m_accountReport;
-        private AccountHistoryReportView m_accountHistory;
-
-        
+        List<string> m_reportList = new List<string>();
 
 
-        public ReportVm(B3Controller controller)
+        private void LoadReportList()
         {
-            m_reportList = new ObservableCollection<Model.Reports>()
-            {
-                new Model.Reports(){ReportID = 1, ReportName = "Accounts", ReportView = new AccountsReportView() {DataContext =  new AccountReportVm() }},
-               new Model.Reports(){ReportID = 1, ReportName = "Account History", ReportView = new AccountHistoryReportView() {DataContext =  new AccountHistoryReportVm() }}
-            };
+            m_reportList.Clear();
+            m_reportList.Add("Accounts");
+            m_reportList.Add("Account History");
+            m_reportList.Add("Ball Call");
+            m_reportList.Add("Bingo Card");
+            m_reportList.Add("Daily");
+            m_reportList.Add("Detail");
+            m_reportList.Add("Drawer");
+            m_reportList.Add("Jackpot");
+            m_reportList.Add("Monthly");
+            m_reportList.Add("Session");
+            m_reportList.Add("Session Summary");
+            m_reportList.Add("Session Transaction");
+            m_reportList.Add("Void");
+            m_reportList.Add("Winner Cards");
+            //m_reportSelected = m_reportList.FirstOrDefault();
         }
 
 
@@ -152,28 +186,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 */
        // }
 
-   
-       
 
-        //private void LoadReportList()
-        //{
-        //    m_reportList.Clear();
-        //    m_reportList.Add("Accounts");
-        //    m_reportList.Add("Account History");
-        //    m_reportList.Add("Ball Call");
-        //    m_reportList.Add("Bingo Card");
-        //    m_reportList.Add("Daily");
-        //    m_reportList.Add("Detail");
-        //    m_reportList.Add("Drawer");
-        //    m_reportList.Add("Jackpot");
-        //    m_reportList.Add("Monthly");
-        //    m_reportList.Add("Session");
-        //    m_reportList.Add("Session Summary");
-        //    m_reportList.Add("Session Transaction");
-        //    m_reportList.Add("Void");
-        //    m_reportList.Add("Winner Cards");
-        //    m_reportSelected = m_reportList.FirstOrDefault();
-        //}
+        
 
 
 

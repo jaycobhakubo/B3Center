@@ -42,7 +42,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private bool m_enableVoidAccountButton;
         private bool m_isUserPermission_BallCallSet;
         private Visibility m_SetBallIsVisible;
-        private  B3Controller m_controller;
+        private B3Controller m_controller;
         private static volatile SessionViewModel m_instance;
         private static readonly object m_syncRoot = new Object();
         #endregion
@@ -100,7 +100,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set { m_isOperatorListModify = value; }
         }
 
-        public B3CenterSettings Settings//knc
+        public B3CenterSettings Settings
         {
             get
             {
@@ -110,13 +110,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
 
                 return m_controller.Settings;
-            }
-            set
-            {
-                if (m_controller.Settings != value)
-                {
-                   // m_controller.Settings = value;
-                }
             }
         }
         

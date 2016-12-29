@@ -124,7 +124,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
                 case "StartSessionToggleButton":
                     {
 
-                        if (viewModel.Settings.IsMultiOperator)//knc
+                        if (viewModel.Settings.IsMultiOperator)
                         {
                             view = m_setOperatorView;
                         

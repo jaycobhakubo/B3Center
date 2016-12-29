@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.ReportViews.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+   
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="215"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Margin="4">
+            <Border Style="{DynamicResource DarkBlueBorder}" Padding="0">
+                <Label Content="Please select a discount to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ContentPresenter Name="MainWindowTransitionControl" Margin="0" Loaded="MainWindowTransitionControl_Loaded" />
+        </Grid>
+
+        <Border Grid.Column="1" CornerRadius="0,5,5,0">
+            <ContentPresenter Name="ReportsTransitionControl"/>
+        </Border>
+
+        <Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--<RowDefinition Height="100"></RowDefinition>-->
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="btnBackReports" Grid.Row="0"  Grid.Column="0"   
+                               Content="Reports"
+                               Style="{StaticResource FlatDarkBlueButtonStyle4}" Visibility="Collapsed"/>
+
+                <ScrollViewer Grid.Row="1" Grid.Column="0"  VerticalScrollBarVisibility="Auto" Background="#FF44658D">
+                   
+                </ScrollViewer>
+            </Grid>        
+        </Border>
+          
+        <Border Grid.Column="1" Background="White" Opacity=".9"  Margin="0,100,0,0">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
+        </Border>
+        <Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
+        </Border>
+    </Grid>
+</UserControl>

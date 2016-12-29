@@ -9,56 +9,47 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using CrystalDecisions.ReportAppServer;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 using GameTech.Elite.UI;
 using SAPBusinessObjects.WPF.Viewer;
 
+//US4302: B3 Accounts Report
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
     /// <summary>
-    /// Interaction logic for AccountHistoryReportView.xaml
+    /// Interaction logic for AccountsReportView.xaml
     /// </summary>
-    public partial class AccountHistoryReportView 
+    public partial class AccountsReportView
     {
-
-        public AccountHistoryReportView()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountsReportView"/> class.
+        /// </summary>
+        public AccountsReportView()
         {
             InitializeComponent();
 
             ReportViewer.ViewerCore.Zoom(85);
             ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-            
+
 
             NewReportButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
             SelectDateBorder.Visibility = Visibility.Visible;
-        }
 
+        }
+        
         /// <summary>
-        /// Handles the Loaded event of the UserControl control.
+        /// Handles the Click event of the ViewReportButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            ReportViewer.Owner = Window.GetWindow(this);
-            if (ReportViewer.ViewerCore.ActiveViewIndex != -1)
-            {
-                ReportViewer.Focusable = true;
-                ReportViewer.Focus();
-            }
-           
-            UpdateAccountHistoryReportSessionList();
-        }
-
         private void ViewReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
 
-            if (SessionCombobox.SelectedItem == null)
+            if (MonthCombobox.SelectedItem == null)
             {
                 return;
             }
@@ -69,7 +60,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 viewModel.IsLoading = true;
                 try
                 {
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadAccountReportDocument();
 
                     if (report == null)
                     {
@@ -107,6 +98,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         }
 
+        /// <summary>
+        /// Handles the Loaded event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReportViewer.Owner = Window.GetWindow(this);
+            if (ReportViewer.ViewerCore.ActiveViewIndex != -1)
+            {
+                ReportViewer.Focusable = true;
+                ReportViewer.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the SelectNewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void SelectNewReportButton_Click(object sender, RoutedEventArgs e)
         {
             NewReportButton.Visibility = Visibility.Hidden;
@@ -114,10 +125,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             SelectDateBorder.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Handles the Click event of the Print Report Button.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void PrintReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
 
             Task.Factory.StartNew(() =>
             {
@@ -127,11 +142,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = true;
 
                     //load report
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadAccountReportDocument();
 
                     //try to print
                     //if failed to print directly, then let the user select printer manually
-                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3AccountHistory, report))
+                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3Accounts, report))
                     {
                         //display print dialog
                         Dispatcher.Invoke(new Action(() =>
@@ -145,7 +160,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                             }
                         }));
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -163,19 +177,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = false;
                 }
             });
-        }
-
-        private void DateTime_ChangedEvent(object sender, EventArgs e)
-        {
-            UpdateAccountHistoryReportSessionList();
-        }
-
-        private void UpdateAccountHistoryReportSessionList()
-        {
-            var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
-            viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
         }
     }
 }

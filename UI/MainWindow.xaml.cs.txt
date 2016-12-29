@@ -25,7 +25,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
     {
         #region Local Variables
 
-        //private readonly GridLength m_originalMenuColumnWidth;
+        private readonly GridLength m_originalMenuColumnWidth;
         private readonly  GridLength m_collapsedMenuColumnWidth = new GridLength(0);
         private readonly List<ToggleButton> m_menuItems;
         private readonly SessionView m_sessionView;
@@ -60,13 +60,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                 throw new ArgumentNullException("parent");
 
             InitializeComponent();
-            //m_originalMenuColumnWidth = MenuColumn.Width;
+            m_originalMenuColumnWidth = MenuColumn.Width;
 
             m_menuItems = new List<ToggleButton> 
             {
-                //SessionToggleButton, 
-                //ReportsToggleButton,
-                //SettingsToggleButton
+                SessionToggleButton, 
+                ReportsToggleButton,
+                SettingsToggleButton
             };
 
             //set datacontext
@@ -147,7 +147,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ReportsViewOnFullScreenEvent(object sender, EventArgs eventArgs)
         {
-            //MenuColumn.Width = m_collapsedMenuColumnWidth;
+            MenuColumn.Width = m_collapsedMenuColumnWidth;
         }
 
         /// <summary>
@@ -165,8 +165,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
             }
 
             UserControl view = null;
-            //MenuColumn.Width = GridLength.Auto;
-            //brdrMenuColumn.Visibility = Visibility.Collapsed;
+            MenuColumn.Width = GridLength.Auto;
+            brdrMenuColumn.Visibility = Visibility.Collapsed;
 
             switch (toggleButton.Name)
             {
@@ -213,11 +213,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                         menuItem.IsChecked = false;
                     }
                 }
-                //MainWindowTransitionControl.Content = view;
+                MainWindowTransitionControl.Content = view;
             }
             else
             {
-                //MainWindowTransitionControl.Content = null;
+                MainWindowTransitionControl.Content = null;
             }
         }
 
@@ -252,22 +252,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
 
         void m_btnBack_Click(object sender, RoutedEventArgs e)
         {
-            //MenuColumn.Width = new GridLength(200, GridUnitType.Pixel);
-            //brdrMenuColumn.Visibility = Visibility.Visible;
+            MenuColumn.Width = new GridLength(200, GridUnitType.Pixel);
+            brdrMenuColumn.Visibility = Visibility.Visible;
 
-            //foreach (var menuItem in m_menuItems)
-            //{                  
-            //        menuItem.IsChecked = false;             
-            //}
+            foreach (var menuItem in m_menuItems)
+            {                  
+                    menuItem.IsChecked = false;             
+            }
 
-            //MainWindowTransitionControl.Content = null;
+            MainWindowTransitionControl.Content = null;
         }
 
 
         private void m_tglbtnOperator_Checked(object sender, RoutedEventArgs e)
         {   
-            //MenuColumn.Width = GridLength.Auto;
-            //brdrMenuColumn.Visibility = Visibility.Collapsed;
+            MenuColumn.Width = GridLength.Auto;
+            brdrMenuColumn.Visibility = Visibility.Collapsed;
         }
 
 

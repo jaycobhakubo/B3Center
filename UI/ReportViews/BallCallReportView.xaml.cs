@@ -18,22 +18,66 @@ using SAPBusinessObjects.WPF.Viewer;
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
     /// <summary>
-    /// Interaction logic for AccountHistoryReportView.xaml
+    /// Interaction logic for BallCallReportView.xaml
     /// </summary>
-    public partial class AccountHistoryReportView 
+    public partial class BallCallReportView : UserControl
     {
+        private int m_ballcallDefID;
 
-        public AccountHistoryReportView()
+        public BallCallReportView()
         {
             InitializeComponent();
-
             ReportViewer.ViewerCore.Zoom(85);
             ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-            
 
             NewReportButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
             SelectDateBorder.Visibility = Visibility.Visible;
+            LoadBallCallReportDefList();
+        }
+
+
+        private void EnableOrDisablePrintOrViewButton()
+        {
+            var start = StartDateTime.GetDateTime();
+            var end = EndDateTime.GetDateTime();
+
+            if (DateTime.Compare(start, end) > 0)
+            {
+                ErrorTextBlock.Text = Properties.Resources.ErrorEndDateOccuresBeforStartDate;
+                ViewReportButton.IsEnabled = false;
+                PrintReportButton.IsEnabled = false;
+            }
+            else
+            {
+                ErrorTextBlock.Text = string.Empty;
+                ViewReportButton.IsEnabled = true;
+                PrintReportButton.IsEnabled = true;
+            }
+
+        }
+
+        private void UpdateBallCallReportSessionList()
+        {
+            var viewModel = ReportsViewModel.Instance;
+            var dateTime = StartDateTime.GetDateTime();
+
+            if (viewModel.UpdateBallCallReportSessionsByDate(dateTime) == false)
+            {
+                if (ViewReportButton.IsEnabled) ViewReportButton.IsEnabled = false;
+                if (PrintReportButton.IsEnabled)PrintReportButton.IsEnabled = false;
+            }else
+            {
+                if (!ViewReportButton.IsEnabled) ViewReportButton.IsEnabled = true;
+                if (!PrintReportButton.IsEnabled) PrintReportButton.IsEnabled = true;
+
+            }
+        }
+
+        private void LoadBallCallReportDefList()
+        {
+            var viewModel = ReportsViewModel.Instance;
+            viewModel.LoadBallCallReportDefList();
         }
 
         /// <summary>
@@ -49,16 +93,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 ReportViewer.Focusable = true;
                 ReportViewer.Focus();
             }
-           
-            UpdateAccountHistoryReportSessionList();
+            UpdateBallCallReportSessionList();
         }
 
+        /// <summary>
+        /// Handles the Click event of the ViewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ViewReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
             var dateTime = StartDateTime.GetDateTime();
+            var endDateTime = EndDateTime.GetDateTime();
 
-            if (SessionCombobox.SelectedItem == null)
+            if (SessionCombobox.SelectedItem == null && m_ballcallDefID == 1)
             {
                 return;
             }
@@ -69,8 +118,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 viewModel.IsLoading = true;
                 try
                 {
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
-
+                    var report = viewModel.LoadBallCallReportDocument(dateTime, endDateTime, m_ballcallDefID);
+                 
                     if (report == null)
                     {
                         viewModel.IsLoading = false;
@@ -107,6 +156,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         }
 
+        /// <summary>
+        /// Handles the Click event of the SelectNewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void SelectNewReportButton_Click(object sender, RoutedEventArgs e)
         {
             NewReportButton.Visibility = Visibility.Hidden;
@@ -114,10 +168,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             SelectDateBorder.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Handles the Click event of the PrintReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void PrintReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
             var dateTime = StartDateTime.GetDateTime();
+             var endDateTime = EndDateTime.GetDateTime();
 
             Task.Factory.StartNew(() =>
             {
@@ -126,12 +186,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     //update ui with printing message
                     viewModel.IsPrinting = true;
 
-                    //load report
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    //load report 
+           
+                    var report = viewModel.LoadBallCallReportDocument(dateTime, endDateTime, m_ballcallDefID);
 
                     //try to print
                     //if failed to print directly, then let the user select printer manually
-                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3AccountHistory, report))
+                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3Session, report))
                     {
                         //display print dialog
                         Dispatcher.Invoke(new Action(() =>
@@ -167,15 +228,40 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         private void DateTime_ChangedEvent(object sender, EventArgs e)
         {
-            UpdateAccountHistoryReportSessionList();
+            if (m_ballcallDefID == 1)
+            {
+                UpdateBallCallReportSessionList();
+            } 
+            else if (m_ballcallDefID == 0)
+            {
+                EnableOrDisablePrintOrViewButton();
+            }
         }
 
-        private void UpdateAccountHistoryReportSessionList()
+        private void BallCallDefCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
-            viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
+            ComboBox cmbx = (ComboBox)sender;
+            if (cmbx.SelectedIndex == 1)
+            {
+                m_ballcallDefID = 1;
+                SessionCombobox.Visibility = Visibility.Visible;
+                lblBallCallSession.Visibility = Visibility.Visible;
+                lblBallCallCategory.Visibility = Visibility.Visible;
+                EndDateTime.Visibility = Visibility.Collapsed;
+                txtblkStartDate.Text = "Date";
+                txtblkEndDate.Visibility = Visibility.Collapsed;
+                UpdateBallCallReportSessionList();
+            }
+            else if (cmbx.SelectedIndex == 0)
+            {
+                m_ballcallDefID = 0;
+                SessionCombobox.Visibility = Visibility.Collapsed;
+                EndDateTime.Visibility = Visibility.Visible;
+                txtblkStartDate.Text = "Start Date";
+                txtblkEndDate.Visibility = Visibility.Visible;
+                lblBallCallSession.Visibility = Visibility.Collapsed;
+                EnableOrDisablePrintOrViewButton();
+            }
         }
     }
 }

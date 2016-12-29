@@ -22,7 +22,6 @@ using GameTech.Elite.Reports;
 using GameTech.Elite.UI;
 using System.Collections;
 
-
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
     /// <summary>
@@ -41,12 +40,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         private MessageRouter m_msgRouter;
         private B3CenterSettings m_settings;
         private LoadingForm m_loadingForm;
-
-        private IEnumerable m_moduleFeaturesList;
-        private const int B3SessionChangedCommandId = 2030;
-
         private Window m_mainWindow;
         private Window m_currentWindow;
+        private IEnumerable m_moduleFeaturesList;
+        private const int B3SessionChangedCommandId = 2030;
         #endregion
 
         #region Member Methods
@@ -113,7 +110,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             CreateApplication();
 
-            if(!LoadSettings(operatorId, machineId))//knc
+            if(!LoadSettings(operatorId, machineId))
                 return IsInitialized;
 
             if (!GetB3UserModulePermission())
@@ -147,7 +144,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             // Have the controller notified when the main window opens.
             MainWindow.Loaded += MainWindowLoaded;
-           
 
             IsInitialized = true;
 
@@ -328,7 +324,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         /// <param name="machineId">The id of the machine to use in the
         /// settings messages.</param>
         /// <returns>true if success; otherwise false.</returns>
-        private bool LoadSettings(int operatorId, int machineId)//knc
+        private bool LoadSettings(int operatorId, int machineId)
         {
             try
             {
@@ -365,7 +361,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
     
 
-        private void GetB3Settings()//knc
+        private void GetB3Settings()
         {
             var message = new GetB3SettingsMessage();
             message.Send();
@@ -503,7 +499,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         /// </summary>
         public void Run()
         {
-            if (IsInitialized && MainWindow != null)
+            if(IsInitialized && MainWindow != null)
             {
                 Logger.Log("Starting B3Center.", LoggerLevel.Information);
 
@@ -770,7 +766,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             }
         }
 
-
         /// <summary>
         /// Gets the application's main window.
         /// </summary>
@@ -787,7 +782,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             }
         }
 
-   
         /// <summary>
         /// Gets the current, active view.
         /// </summary>
@@ -810,7 +804,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         /// <summary>
         /// Gets the B3 Center's settings.
         /// </summary>
-        public B3CenterSettings Settings//knc
+        public B3CenterSettings Settings
         {
             get
             {

@@ -9,27 +9,28 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 using GameTech.Elite.UI;
 using SAPBusinessObjects.WPF.Viewer;
 
+//US4301: B3 Monthly Report
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
     /// <summary>
-    /// Interaction logic for AccountHistoryReportView.xaml
+    /// Interaction logic for MonthlyReportView.xaml
     /// </summary>
-    public partial class AccountHistoryReportView 
+    public partial class MonthlyReportView
     {
-
-        public AccountHistoryReportView()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MonthlyReportView"/> class.
+        /// </summary>
+        public MonthlyReportView()
         {
             InitializeComponent();
 
             ReportViewer.ViewerCore.Zoom(85);
             ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-            
 
             NewReportButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
@@ -49,16 +50,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 ReportViewer.Focusable = true;
                 ReportViewer.Focus();
             }
-           
-            UpdateAccountHistoryReportSessionList();
         }
 
+        /// <summary>
+        /// Handles the Click event of the ViewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ViewReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
 
-            if (SessionCombobox.SelectedItem == null)
+            if (MonthCombobox.SelectedItem == null)
             {
                 return;
             }
@@ -69,7 +72,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 viewModel.IsLoading = true;
                 try
                 {
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadMonthlyReportDocument();
 
                     if (report == null)
                     {
@@ -85,7 +88,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     }));
                 }
                 catch (Exception ex)
-                {
+                {                    
                     //display message box on UI thread
                     Dispatcher.Invoke(new Action(() =>
                     {
@@ -107,6 +110,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         }
 
+        /// <summary>
+        /// Handles the Click event of the SelectNewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void SelectNewReportButton_Click(object sender, RoutedEventArgs e)
         {
             NewReportButton.Visibility = Visibility.Hidden;
@@ -114,10 +122,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             SelectDateBorder.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Handles the Click event of the PrintReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void PrintReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
 
             Task.Factory.StartNew(() =>
             {
@@ -127,11 +139,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = true;
 
                     //load report
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadMonthlyReportDocument();
 
                     //try to print
                     //if failed to print directly, then let the user select printer manually
-                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3AccountHistory, report))
+                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3Monthly, report))
                     {
                         //display print dialog
                         Dispatcher.Invoke(new Action(() =>
@@ -163,19 +175,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = false;
                 }
             });
-        }
-
-        private void DateTime_ChangedEvent(object sender, EventArgs e)
-        {
-            UpdateAccountHistoryReportSessionList();
-        }
-
-        private void UpdateAccountHistoryReportSessionList()
-        {
-            var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
-            viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
         }
     }
 }

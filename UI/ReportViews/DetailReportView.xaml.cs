@@ -9,29 +9,35 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 using GameTech.Elite.UI;
 using SAPBusinessObjects.WPF.Viewer;
 
+//US4316: B3 Detail Report
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
     /// <summary>
-    /// Interaction logic for AccountHistoryReportView.xaml
+    /// Interaction logic for DetailReportView.xaml
     /// </summary>
-    public partial class AccountHistoryReportView 
+    public partial class DetailReportView
     {
-
-        public AccountHistoryReportView()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DetailReportView"/> class.
+        /// </summary>
+        public DetailReportView()
         {
             InitializeComponent();
 
             ReportViewer.ViewerCore.Zoom(85);
             ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-            
 
-            NewReportButton.Visibility = Visibility.Hidden;
+            StartDateTime.SetDateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0);
+
+            StartDateTime.DateTimeChangedEvent += DateTime_DateTimeChangedEvent;
+            EndDateTime.DateTimeChangedEvent += DateTime_DateTimeChangedEvent;
+
+            SelectDatesButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
             SelectDateBorder.Visibility = Visibility.Visible;
         }
@@ -49,27 +55,51 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 ReportViewer.Focusable = true;
                 ReportViewer.Focus();
             }
-           
-            UpdateAccountHistoryReportSessionList();
         }
 
+        /// <summary>
+        /// Handles the DateTimeChangedEvent event of the Start/End DateTime control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        void DateTime_DateTimeChangedEvent(object sender, EventArgs e)
+        {
+            var start = StartDateTime.GetDateTime();
+            var end = EndDateTime.GetDateTime();
+
+            if (DateTime.Compare(start, end) > 0)
+            {
+                ErrorTextBlock.Text = Properties.Resources.ErrorEndDateOccuresBeforStartDate;
+                ViewReportButton.IsEnabled = false;
+                PrintReportButton.IsEnabled = false;
+            }
+            else
+            {
+                ErrorTextBlock.Text = string.Empty;
+                ViewReportButton.IsEnabled = true;
+                PrintReportButton.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the ViewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ViewReportButton_Click(object sender, RoutedEventArgs e)
         {
+            var start = StartDateTime.GetDateTime();
+            var end = EndDateTime.GetDateTime();
+
             var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
-
-            if (SessionCombobox.SelectedItem == null)
-            {
-                return;
-            }
-
+            
             //Load Report
             Task.Factory.StartNew(() =>
             {
-                viewModel.IsLoading = true;
                 try
                 {
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    viewModel.IsLoading = true;
+                    var report = viewModel.LoadDetailReportDocument(start, end);
 
                     if (report == null)
                     {
@@ -101,23 +131,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 }
             });
 
-            NewReportButton.Visibility = Visibility.Visible;
+            SelectDatesButton.Visibility = Visibility.Visible;
             ReportViewerBorder.Visibility = Visibility.Visible;
             SelectDateBorder.Visibility = Visibility.Hidden;
 
         }
 
-        private void SelectNewReportButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Click event of the SelectDatesButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void SelectDatesButton_Click(object sender, RoutedEventArgs e)
         {
-            NewReportButton.Visibility = Visibility.Hidden;
+            SelectDatesButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
             SelectDateBorder.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Handles the Click event of the PrintReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void PrintReportButton_Click(object sender, RoutedEventArgs e)
         {
+            var start = StartDateTime.GetDateTime();
+            var end = EndDateTime.GetDateTime();
             var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
 
             Task.Factory.StartNew(() =>
             {
@@ -127,11 +168,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = true;
 
                     //load report
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadDetailReportDocument(start, end);
 
                     //try to print
                     //if failed to print directly, then let the user select printer manually
-                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3AccountHistory, report))
+                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3Detail, report))
                     {
                         //display print dialog
                         Dispatcher.Invoke(new Action(() =>
@@ -163,19 +204,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = false;
                 }
             });
-        }
-
-        private void DateTime_ChangedEvent(object sender, EventArgs e)
-        {
-            UpdateAccountHistoryReportSessionList();
-        }
-
-        private void UpdateAccountHistoryReportSessionList()
-        {
-            var viewModel = ReportsViewModel.Instance;
-            var dateTime = StartDateTime.GetDateTime();
-            viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
         }
     }
 }

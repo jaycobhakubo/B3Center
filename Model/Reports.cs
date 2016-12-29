@@ -29,12 +29,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         }
 
 
-        private UserControl m_reportView;
-       public UserControl ReportView
-        {
-            get { return m_reportView; }
-            set { m_reportView = value; }
-        }
+       // private UserControl m_reportView;
+       //public UserControl ReportView
+       // {
+       //     get { return m_reportView; }
+       //     set { m_reportView = value; }
+       // }
 
        public string DisplayName
        {
@@ -43,5 +43,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
 
     }
 
+
+    //SelectedItem="{Binding ReportSelected}" DisplayMemberPath="DisplayName">
     
 }

@@ -7,13 +7,13 @@
              d:DesignHeight="619" d:DesignWidth="1003">
     <UserControl.Resources>
 
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <!--<BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
         <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>-->
     </UserControl.Resources>
     
-    <Border >
+    <!--<Border >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -21,7 +21,6 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="1" CornerRadius="0,5,5,0">
-
                 <ContentPresenter Name="SessionTransitionControl" />
             </Border>
 
@@ -29,17 +28,12 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
-                        <RowDefinition ></RowDefinition>
-                        <!--<RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>-->
+                        <RowDefinition ></RowDefinition>                    
                     </Grid.RowDefinitions>
 
                     <Button x:Name="btnBackSessions" Grid.Row="0"  Grid.Column="0"   
                                Content="Session"
                                Style="{StaticResource FlatDarkBlueButtonStyle4}"  />
-                    <!--<TextBlock Grid.Row="0" Text="Session" Style="{StaticResource HeaderStyle2}" />-->
                     <StackPanel Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -49,8 +43,7 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
                             <ToggleButton  Grid.Row="0"  Height="50" Name="StartSessionToggleButton" Content="Start" Click="MenuToggleButton_Changed" Visibility="{Binding StartSessionIsVisible}"/>
-                            <ToggleButton  Height="50" Grid.Row="1" Name="StopSessionToggleButton" Content="Stop" Click="MenuToggleButton_Changed" Visibility="{Binding EndSessionIsVisible}" />
-                            <!--<ToggleButton  Height="50" Grid.Row="2" Name="SetBallsToggleButton" Content="Set Balls" Click="MenuToggleButton_Changed"  Visibility="{Binding SetBallsMenuVisibility, Converter={StaticResource VisibilityConverter}}"/>-->
+                            <ToggleButton  Height="50" Grid.Row="1" Name="StopSessionToggleButton" Content="Stop" Click="MenuToggleButton_Changed" Visibility="{Binding EndSessionIsVisible}" />                         
                             <ToggleButton  Height="50" Grid.Row="2" Name="SetBallsToggleButton" Content="Set Balls" Click="MenuToggleButton_Changed"  Visibility="{Binding SetBallIsVisible}"/>
                             <ToggleButton  Height="50" Grid.Row="3" Name="VoidAccountsToggleButton" Content="Void Accounts" Click="MenuToggleButton_Changed"  Visibility="{Binding EndSessionDisabledVisibility, Converter={StaticResource VisibilityConverter}}"/>
                            
@@ -62,5 +55,5 @@
                 </Grid>
             </Border>
         </Grid>
-    </Border>
+    </Border>-->
 </UserControl>

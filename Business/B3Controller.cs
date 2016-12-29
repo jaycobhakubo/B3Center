@@ -450,13 +450,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         public B3CenterSettings Settings 
         {
             get { return Parent.Settings; }
-            //set
-            //{
-            //    if (Parent.Settings != value)
-            //    {
-            //        Parent.Settings = value;
-            //    }
-            //}
         }
 
         public List<B3Report> Reports { get; set; }

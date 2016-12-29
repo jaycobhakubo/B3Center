@@ -56,8 +56,7 @@
     		VerticalAlignment="Center" 
     		Width="175" 
     		Tag="1"
-    		BorderBrush="White" TabIndex="1" 
-                Command="{Binding SavedCommand}"/>
+    		BorderBrush="White" TabIndex="1" />
 
         <Button Grid.Column="2" 
                 Content="Cancel" 

@@ -14,22 +14,24 @@ using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 using GameTech.Elite.UI;
 using SAPBusinessObjects.WPF.Viewer;
 
+//US1618: B3 Session Report
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
     /// <summary>
-    /// Interaction logic for AccountHistoryReportView.xaml
+    /// Interaction logic for SessionReportView.xaml
     /// </summary>
-    public partial class AccountHistoryReportView 
+    public partial class SessionReportView
     {
-
-        public AccountHistoryReportView()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SessionReportView"/> class.
+        /// </summary>
+        public SessionReportView()
         {
             InitializeComponent();
 
             ReportViewer.ViewerCore.Zoom(85);
             ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-            
 
             NewReportButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
@@ -49,10 +51,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 ReportViewer.Focusable = true;
                 ReportViewer.Focus();
             }
-           
-            UpdateAccountHistoryReportSessionList();
+            UpdateSessionReportSessionList();
         }
 
+        /// <summary>
+        /// Handles the Click event of the ViewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ViewReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
@@ -69,7 +75,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 viewModel.IsLoading = true;
                 try
                 {
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadSessionReportDocument(dateTime ,SettingViewModel.Instance.StaffId, SettingViewModel.Instance.MachineId);
 
                     if (report == null)
                     {
@@ -85,7 +91,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     }));
                 }
                 catch (Exception ex)
-                {
+                {                    
                     //display message box on UI thread
                     Dispatcher.Invoke(new Action(() =>
                     {
@@ -107,6 +113,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         }
 
+        /// <summary>
+        /// Handles the Click event of the SelectNewReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void SelectNewReportButton_Click(object sender, RoutedEventArgs e)
         {
             NewReportButton.Visibility = Visibility.Hidden;
@@ -114,6 +125,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             SelectDateBorder.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Handles the Click event of the PrintReportButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void PrintReportButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = ReportsViewModel.Instance;
@@ -127,11 +143,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = true;
 
                     //load report
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadSessionReportDocument(dateTime, SettingViewModel.Instance.StaffId, SettingViewModel.Instance.MachineId);
 
                     //try to print
                     //if failed to print directly, then let the user select printer manually
-                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3AccountHistory, report))
+                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3Session, report))
                     {
                         //display print dialog
                         Dispatcher.Invoke(new Action(() =>
@@ -148,7 +164,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
                 }
                 catch (Exception ex)
-                {
+                {                    
                     //display message box on UI thread
                     Dispatcher.Invoke(new Action(() =>
                     {
@@ -167,15 +183,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         private void DateTime_ChangedEvent(object sender, EventArgs e)
         {
-            UpdateAccountHistoryReportSessionList();
+            UpdateSessionReportSessionList();
         }
 
-        private void UpdateAccountHistoryReportSessionList()
+        private void UpdateSessionReportSessionList()
         {
             var viewModel = ReportsViewModel.Instance;
             var dateTime = StartDateTime.GetDateTime();
-            viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
+
+            viewModel.UpdateSessionReportSessionsByDate(dateTime);
         }
     }
 }

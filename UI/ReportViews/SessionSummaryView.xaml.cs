@@ -14,22 +14,19 @@ using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 using GameTech.Elite.UI;
 using SAPBusinessObjects.WPF.Viewer;
 
-
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
     /// <summary>
-    /// Interaction logic for AccountHistoryReportView.xaml
+    /// Interaction logic for SessionSummaryView.xaml
     /// </summary>
-    public partial class AccountHistoryReportView 
+    public partial class SessionSummaryView 
     {
-
-        public AccountHistoryReportView()
+        public SessionSummaryView()
         {
             InitializeComponent();
 
             ReportViewer.ViewerCore.Zoom(85);
             ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-            
 
             NewReportButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
@@ -49,8 +46,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 ReportViewer.Focusable = true;
                 ReportViewer.Focus();
             }
-           
-            UpdateAccountHistoryReportSessionList();
+            UpdateSessionReportSessionList();
         }
 
         private void ViewReportButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +65,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 viewModel.IsLoading = true;
                 try
                 {
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadSessionSummaryReportDocument(dateTime, SettingViewModel.Instance.StaffId, SettingViewModel.Instance.MachineId);
 
                     if (report == null)
                     {
@@ -127,11 +123,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     viewModel.IsPrinting = true;
 
                     //load report
-                    var report = viewModel.LoadAccountHistoryReportDocument(dateTime);
+                    var report = viewModel.LoadSessionSummaryReportDocument(dateTime, SettingViewModel.Instance.StaffId, SettingViewModel.Instance.MachineId);
 
                     //try to print
                     //if failed to print directly, then let the user select printer manually
-                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3AccountHistory, report))
+                    if (!viewModel.PrintReport(Elite.Reports.ReportId.B3SessionSummary, report))
                     {
                         //display print dialog
                         Dispatcher.Invoke(new Action(() =>
@@ -167,15 +163,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         private void DateTime_ChangedEvent(object sender, EventArgs e)
         {
-            UpdateAccountHistoryReportSessionList();
+            UpdateSessionReportSessionList();
         }
 
-        private void UpdateAccountHistoryReportSessionList()
+        private void UpdateSessionReportSessionList()
         {
             var viewModel = ReportsViewModel.Instance;
             var dateTime = StartDateTime.GetDateTime();
-            viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
+
+            viewModel.UpdateSessionReportSessionsByDate(dateTime);
         }
+
     }
 }

@@ -106,13 +106,10 @@
 
             <!--Hand Payout Trigger-->
             <Label Content="Hand Pay Trigger" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Height="Auto"/>
-            <TextBox Name="txtbxHandPayoutTrigger" Grid.Column="1"   Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Bottom"  TabIndex="2" Tag="42" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="14" 
-                     Text ="{Binding HandPayTrigger}"
-                     />
+            <TextBox Name="txtbxHandPayoutTrigger" Grid.Column="1"   Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" TabIndex="2" Tag="42" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="14" />
 
             <StackPanel Name="stkpnlSystemSetting2" Grid.Row="9" Grid.Column="3" Grid.RowSpan="6" Margin="0,0,0,35">
-                <CheckBox Name="chkbxDualAccount" Content="Dual Account" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="13" VerticalAlignment="Bottom"  Width="113" Tag="51" TabIndex="12" Margin="0 31 0 0"
-                          IsChecked="{Binding DualAccount}"/>
+                <CheckBox Name="chkbxDualAccount" Content="Dual Account" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="13" VerticalAlignment="Bottom"  Width="113" Tag="51" TabIndex="12" Margin="0 31 0 0"/>
                 <CheckBox Name="chkbxMultiOperator" Content="Multi Operator" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Bottom" Tag="52" TabIndex="13" Margin="0 30 0 0"/>
                 <CheckBox Name="chkbxNorthDakotaMode" Content="North Dakota Mode" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Bottom" TabIndex="15" Tag="54" Margin="0 30 0 0"/>
                 <CheckBox Name="chkbxEnableUK" Content="Enable UK" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="15" VerticalAlignment="Bottom" Tag="50" TabIndex="11" Margin="0 30 0 0"/>
@@ -219,10 +216,7 @@
             	x:Name="cmbxCurrency" 
             	Grid.Row="3" Grid.Column="3"
             	VerticalAlignment="Bottom"  TabIndex="9" Height="22" 
-            	FontWeight="Light" FontFamily="Segoe UI" Tag="47" 
-                ItemsSource="{Binding Currency}"
-                               SelectedItem="{Binding CurrencySelected}"
-                                            />
+            	FontWeight="Light" FontFamily="Segoe UI" Tag="47" />
             <TextBox 
             	x:Name="txtbxMinimumPlayers" 
             	Grid.Column="3"   
