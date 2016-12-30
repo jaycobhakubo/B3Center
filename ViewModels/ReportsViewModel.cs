@@ -15,6 +15,9 @@ using CrystalDecisions.CrystalReports.Engine;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Reports;
+using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
+using System.Windows.Controls;
+
 
 //US1618: B3 Session Report
 //US4300: B3 Daily Report
@@ -72,6 +75,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private static readonly object m_syncRoot = new Object();
         private int m_accountNumberSelected;
 
+
+        //Reports
+        private AccountsReportView m_accountsReportView;// = new AccountsReportView;
+        private  DailyReportView m_dailyReportView;
+        private DetailReportView m_detailReportView;
+        private DrawerReportView m_drawerReportView;
+        private  JackpotReportView m_jackpotReportView;
+        private MonthlyReportView m_monthlyReportView;
+        private  SessionReportView m_sessionReportView;
+        private  VoidReportView m_voidReportView;
+        private SessionSummaryView m_sessionsummaryReportView;
+        private AccountHistoryReportView m_accountHistoryReportView;
+        private WinnerCardsReportView m_winnerCardsReportView;
+        private BallCallReportView m_ballCallReportView;
+        private SessionTransactionReportView m_sessionTranReportView;
+        private BingoCardReportView m_bingoCardReportView;
+
         #endregion
 
         #region Constructors
@@ -117,30 +137,96 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             IsLoading = false;
             IsPrinting = false;
 
-           
-            ReportLista.Add("A report");
-            ReportLista.Add("B report");
-            ReportSelected.FirstOrDefault();
+            
 
         }
 
-        public string ReportSelected
+
+        /// <summary>
+        /// Initializes the ViewModel with the specified controller.
+        /// </summary>
+        /// <param name="controller">The controller.</param>
+        internal void Initialize(B3Controller controller)
         {
-            get;
-            set;
+            m_controller = controller;
+
+            m_controller.SessionInfoCompleted += OnListInfoDone;
+
+            //set session list
+            foreach (var session in controller.Sessions)
+            {
+                SessionList.Add(session);
+            }
+
+            SessionReportSessionSelected = SessionList.LastOrDefault();
+            JackpotReportSessionSelected = SessionList.LastOrDefault();
+            //AccountHistoryReportSessionSelected  = SessionList.LastOrDefault();
+            //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
+
+
+            m_accountsReportView = new AccountsReportView();
+            m_accountsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_accountsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_dailyReportView = new DailyReportView();
+            m_dailyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_dailyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_detailReportView = new DetailReportView();
+            m_detailReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_detailReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_drawerReportView = new DrawerReportView();
+            m_drawerReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_drawerReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_jackpotReportView = new JackpotReportView();
+            m_jackpotReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_jackpotReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_monthlyReportView = new MonthlyReportView();
+            m_monthlyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_monthlyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_sessionReportView = new SessionReportView();
+            m_sessionReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_sessionReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_voidReportView = new VoidReportView();
+            m_voidReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_voidReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_sessionsummaryReportView = new SessionSummaryView();
+            m_sessionsummaryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_sessionsummaryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_accountHistoryReportView = new AccountHistoryReportView();
+            m_accountHistoryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            m_accountHistoryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_winnerCardsReportView = new WinnerCardsReportView();
+            m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            m_winnerCardsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_ballCallReportView = new BallCallReportView();
+            m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_sessionTranReportView = new SessionTransactionReportView();
+            m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_bingoCardReportView = new BingoCardReportView();
+            m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+
+            m_reports = controller.Reports;
+            LoadReportList();
+            
         }
 
-        List<string> ReportLista = new List<string>();
 
-        public IList<string> ReportList
-        {
-            get { return ReportLista; }
-        }
 
-         
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets the singleton instance of ReportsViewModel.
@@ -165,6 +251,46 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+        private void LoadReportList()
+        {
+            m_reportList.Clear();
+            m_reportList.Add("Accounts");
+            m_reportList.Add("Account History");
+            m_reportList.Add("Ball Call");
+            m_reportList.Add("Bingo Card");
+            m_reportList.Add("Daily");
+            m_reportList.Add("Detail");
+            m_reportList.Add("Drawer");
+            m_reportList.Add("Jackpot");
+            m_reportList.Add("Monthly");
+            m_reportList.Add("Session");
+            m_reportList.Add("Session Summary");
+            m_reportList.Add("Session Transaction");
+            m_reportList.Add("Void");
+            m_reportList.Add("Winner Cards");
+            ReportSelected = m_reportList.FirstOrDefault();
+        }
+
+        public string ReportSelected
+        {
+            get;
+            set;
+        }
+
+        private List<string> m_reportList = new List<string>();
+
+        public List<string> ReportList
+        {
+            get { return m_reportList; }
+        }
+
+         
+        #endregion
+
+        #region Properties
+
+      
         /// <summary>
         /// Gets or sets the months.
         /// </summary>
@@ -806,30 +932,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #region Member Methods
 
-        /// <summary>
-        /// Initializes the ViewModel with the specified controller.
-        /// </summary>
-        /// <param name="controller">The controller.</param>
-        internal void Initialize(B3Controller controller)
-        {
-            m_controller = controller;
-
-            m_controller.SessionInfoCompleted += OnListInfoDone;
-
-            //set session list
-            foreach (var session in controller.Sessions)
-            {
-                SessionList.Add(session);
-            }
-
-            SessionReportSessionSelected = SessionList.LastOrDefault();
-            JackpotReportSessionSelected = SessionList.LastOrDefault();
-            //AccountHistoryReportSessionSelected  = SessionList.LastOrDefault();
-            //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
-
-            m_reports = controller.Reports;
-        }
-
+      
         /// <summary>
         /// Loads the account report document.
         /// </summary>
@@ -1629,6 +1732,145 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
 
             return returnValue;
+        }
+
+
+
+        
+        /// <summary>
+        /// Called when [full screen event].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnFullScreenEvent(object sender, EventArgs eventArgs)
+        {
+  
+            var handler = FullScreenEvent;
+            if (handler != null)
+            {
+                handler(sender, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Called when [exit screen event].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnExitScreenEvent(object sender, EventArgs eventArgs)
+        {
+
+            var handler = ExitScreenEvent;
+            if (handler != null)
+            {
+                handler(sender, EventArgs.Empty);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Occurs when [full screen event].
+        /// </summary>
+        public event EventHandler<EventArgs> FullScreenEvent;
+
+        /// <summary>
+        /// Occurs when [exit screen event].
+        /// </summary>
+        public event EventHandler<EventArgs> ExitScreenEvent;
+        
+
+
+
+
+        private UserControl m_selectedReportView = new UserControl();
+
+        public UserControl SelectedReportView
+        {
+            get { return m_selectedReportView; }
+            set { m_selectedReportView = value;  }
+        }
+
+        private void SelectionChanged(string ReportName)
+        {
+
+            UserControl view = null;
+        
+            switch (ReportName)
+            {
+                case "AccountsToggleButton":
+                    {
+                        view = m_accountsReportView;
+                        break;
+                    }
+                case "Daily":
+                    {
+                        view = m_dailyReportView;
+                        break;
+                    }
+                case "Detail":
+                    {
+                        view = m_detailReportView;
+                        break;
+                    }
+                case "Drawer":
+                    {
+                        view = m_drawerReportView;
+                        break;
+                    }
+                case "Jackpot":
+                    {
+                        view = m_jackpotReportView;
+                        break;
+                    }
+                case "Monthly":
+                    {
+                        view = m_monthlyReportView;
+                        break;
+                    }
+                case "Session":
+                    {
+                        view = m_sessionReportView;
+                        break;
+                    }
+                case "Void":
+                    {
+                        view = m_voidReportView;
+                        break;
+                    }
+                case "Session Summary":
+                    {
+                        view = m_sessionsummaryReportView;
+                        break;
+                    }
+                case "Account History":
+                    {
+                        view = m_accountHistoryReportView;
+                        break;
+                    }
+                case "Winner Cards":
+                    {
+                        view = m_winnerCardsReportView;
+                        break;
+                    }
+                case "Ball Call":
+                    {
+                        view = m_ballCallReportView;
+                        break;
+                    }
+                case "Session Transaction":
+                    {
+                        view = m_sessionTranReportView;
+                        break;
+                    }
+                case "Bingo Card":
+                    {
+                        view = m_bingoCardReportView;
+                        break;
+                    }
+            }
+
+            m_selectedReportView = view;
         }
 
         /// <summary>

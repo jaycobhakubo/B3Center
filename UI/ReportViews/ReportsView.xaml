@@ -18,8 +18,7 @@
 
 
             <Border Grid.Column="1" CornerRadius="0,5,5,0"  Style="{DynamicResource LightBlueBorder}" Margin="4">
-                <ContentPresenter Name="ReportsTransitionControl" />
-                <!--Content="{Binding ReportTransitionControlContent}"/>-->
+                <ContentPresenter Name="ReportsTransitionControl" Content="{Binding SelectedReportView}"/>
             </Border>
 
             <Border Style="{DynamicResource DarkBlueBorder}" Margin="4">
@@ -30,7 +29,7 @@
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
-                        <ListBox Margin="15"  ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}">
+                        <ListBox Name="lstbx_ReportList" Margin="15"  ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}" SelectionChanged="ListBox_SelectionChanged">
                             <!--<ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>

@@ -27,7 +27,7 @@
 
             <Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>
 
-            <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />
+            <!--<shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
         </Grid>
 
         <Border Grid.Row="1" Name="ReportViewerBorder">
@@ -39,7 +39,7 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                     <TextBlock Text="Date"  Style="{StaticResource TextBlockFontStyle1}"/>
-                    <shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"  DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <!--<shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"  DateTimeChangedEvent="DateTime_ChangedEvent"/>-->
                     <TextBlock Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
                     <ComboBox  Height="50" 
                                Width="280"
