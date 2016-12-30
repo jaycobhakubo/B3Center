@@ -28,7 +28,7 @@
             
             <Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>
             
-            <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />
+            <!--<shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
         </Grid>
 
         <Border Grid.Row="1" Name="ReportViewerBorder">

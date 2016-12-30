@@ -30,7 +30,7 @@
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
-                        <ListBox Margin="15" >
+                        <ListBox Margin="15"  ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}">
                             <!--<ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>

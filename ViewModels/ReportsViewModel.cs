@@ -116,8 +116,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             IsLoading = false;
             IsPrinting = false;
+
+           
+            ReportLista.Add("A report");
+            ReportLista.Add("B report");
+            ReportSelected.FirstOrDefault();
+
         }
 
+        public string ReportSelected
+        {
+            get;
+            set;
+        }
+
+        List<string> ReportLista = new List<string>();
+
+        public IList<string> ReportList
+        {
+            get { return ReportLista; }
+        }
+
+         
         #endregion
 
         #region Properties
