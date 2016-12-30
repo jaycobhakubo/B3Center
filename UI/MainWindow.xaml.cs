@@ -84,12 +84,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                 switch (moduleFeatureID)
                 {
                     case 43://Reports
-                                m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
-                                m_reportsView.FullScreenEvent += ReportsViewOnFullScreenEvent;
-                                m_reportsView.ExitScreenEvent += ReportsViewOnExitFullScreenEvent;    
+                                //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
+                                //m_reportsView.FullScreenEvent += ReportsViewOnFullScreenEvent;
+                                //m_reportsView.ExitScreenEvent += ReportsViewOnExitFullScreenEvent;    
 
                                 //m_btnBackReports = m_reportsView.btnBackReports;
-                                m_btnBackReports.Click += new RoutedEventHandler(m_btnBack_Click);
+                                //m_btnBackReports.Click += new RoutedEventHandler(m_btnBack_Click);
                         break;
 
                     case 44://Settings
@@ -181,8 +181,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                     }
                 case "ReportsToggleButton":
                     {
-                        m_reportsView.ClearSelected();
-                        view = m_reportsView;
+                        //m_reportsView.ClearSelected();
+                        //view = m_reportsView;
 
                         //MenuColumn.Width = GridLength.Auto;
                         //brdrMenuColumn.Visibility = Visibility.Collapsed;
