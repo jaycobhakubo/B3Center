@@ -8,44 +8,51 @@
     <UserControl.Resources>
    
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="215"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1" Margin="4">
-            <Border Style="{DynamicResource DarkBlueBorder}" Padding="0">
-                <Label Content="Please select a discount to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <DockPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" Name="ReportMenuColumn"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Border Grid.Column="1" CornerRadius="0,5,5,0"  Style="{DynamicResource LightBlueBorder}" Margin="4">
+                <ContentPresenter Name="ReportsTransitionControl" />
+                <!--Content="{Binding ReportTransitionControlContent}"/>-->
             </Border>
-            <ContentPresenter Name="MainWindowTransitionControl" Margin="0" Loaded="MainWindowTransitionControl_Loaded" />
+
+            <Border Style="{DynamicResource DarkBlueBorder}" Margin="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
+                        <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
+                        <ListBox Margin="15" >
+                            <!--<ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>-->
+                            <!--<ListBox.ItemsSource ="{Binding ReportList}"/>-->
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0">
+
+                <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">-->
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
+            </Border>
+            <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->
+                <Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
+            </Border>
         </Grid>
-
-        <Border Grid.Column="1" CornerRadius="0,5,5,0">
-            <ContentPresenter Name="ReportsTransitionControl"/>
-        </Border>
-
-        <Border>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <!--<RowDefinition Height="100"></RowDefinition>-->
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Button x:Name="btnBackReports" Grid.Row="0"  Grid.Column="0"   
-                               Content="Reports"
-                               Style="{StaticResource FlatDarkBlueButtonStyle4}" Visibility="Collapsed"/>
-
-                <ScrollViewer Grid.Row="1" Grid.Column="0"  VerticalScrollBarVisibility="Auto" Background="#FF44658D">
-                   
-                </ScrollViewer>
-            </Grid>        
-        </Border>
-          
-        <Border Grid.Column="1" Background="White" Opacity=".9"  Margin="0,100,0,0">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
-        </Border>
-        <Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
-        </Border>
-    </Grid>
+    </DockPanel>
 </UserControl>

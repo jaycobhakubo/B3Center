@@ -88,7 +88,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                                 m_reportsView.FullScreenEvent += ReportsViewOnFullScreenEvent;
                                 m_reportsView.ExitScreenEvent += ReportsViewOnExitFullScreenEvent;    
 
-                                m_btnBackReports = m_reportsView.btnBackReports;
+                                //m_btnBackReports = m_reportsView.btnBackReports;
                                 m_btnBackReports.Click += new RoutedEventHandler(m_btnBack_Click);
                         break;
 

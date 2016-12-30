@@ -43,6 +43,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionVm = SessionViewModel.Instance;
             SessionVm.Initialize(controller.B3Controller);
 
+
+            ReportsVm = ReportsViewModel.Instance;
+            ReportsVm.Initialize(controller.B3Controller);
+            IsReportVisible = Visibility.Visible;
+
             HideAllBtnViewModel();
             //No need to initialize if staff dont have permission.
             foreach (int moduleFeatureID in controller.ModuleFeatureList)
@@ -50,9 +55,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 switch (moduleFeatureID)
                 {
                     case 43://Reports
-                            ReportsVm = ReportsViewModel.Instance;
-                            ReportsVm.Initialize(controller.B3Controller);
-                            IsReportVisible = Visibility.Visible;
+                            //ReportsVm = ReportsViewModel.Instance;
+                            //ReportsVm.Initialize(controller.B3Controller);
+                            //IsReportVisible = Visibility.Visible;
                     break;
 
                     case 44://Settings
