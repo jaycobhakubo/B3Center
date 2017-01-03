@@ -74,8 +74,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
             ParentController = parent;    
 
             m_sessionView = new SessionView { DataContext = mainViewModel.SessionVm };
-            m_btnBackSessions = m_sessionView.btnBackSessions;
-            m_btnBackSessions.Click += new RoutedEventHandler(m_btnBack_Click);
+            m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };
+            //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
+            //m_btnBackSessions = m_sessionView.btnBackSessions;
+            //m_btnBackSessions.Click += new RoutedEventHandler(m_btnBack_Click);
 
 
             //No need to initialize if staff dont have permission.
@@ -93,19 +95,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                         break;
 
                     case 44://Settings
-                            m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };   
+                            //m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };   
 
-                            m_btnSave = m_settingsView.btnSave;
-                            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+                            //m_btnSave = m_settingsView.btnSave;
+                            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
 
-                            m_tglbtnOperator = m_settingsView.OperatorSettingToggleButton;
-                            m_tglbtnOperator.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
+                            //m_tglbtnOperator = m_settingsView.OperatorSettingToggleButton;
+                            //m_tglbtnOperator.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
 
-                            m_tglbtnGameSettings = m_settingsView.GameSettingToggleButton;
-                            m_tglbtnGameSettings.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
+                            //m_tglbtnGameSettings = m_settingsView.GameSettingToggleButton;
+                            //m_tglbtnGameSettings.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
 
-                            m_btnBackSettings = m_settingsView.btnBackSettings;
-                            m_btnBackSettings.Click += new RoutedEventHandler(m_btnBack_Click);
+                            //m_btnBackSettings = m_settingsView.btnBackSettings;
+                            //m_btnBackSettings.Click += new RoutedEventHandler(m_btnBack_Click);
 
                         break;
                 }

@@ -43,13 +43,13 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0">
+            <!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0">-->
 
-                <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">-->
+                <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
             </Border>
-            <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->
-                <Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
             </Border>
         </Grid>

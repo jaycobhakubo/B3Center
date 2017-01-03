@@ -25,8 +25,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         private readonly List<ToggleButton> m_menuItems;
         private int m_staffId;
         private int m_machineId;
-
-     
        // #endregion
 
         #region Constructor
@@ -100,84 +98,83 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
             //m_menuItems = new List<ToggleButton>
             //{
-                //AccountsToggleButton,
-                //DailyToggleButton,
-                //DetailsToggleButton,
-                //DrawerToggleButton,
-                //JackpotToggleButton,
-                //MonthlyToggleButton,
-                //SessionToggleButton,
-                //VoidToggleButton,
-                //AccountHistoryTransToggleButton,
-                //BallCallToggleButton,
-                //SessioSummaryToggleButton,
-                //SessionTransToggleButton,
-                //WinnerCardsTransToggleButton,
-                //BingoCardToggleButton,
+            //AccountsToggleButton,
+            //DailyToggleButton,
+            //DetailsToggleButton,
+            //DrawerToggleButton,
+            //JackpotToggleButton,
+            //MonthlyToggleButton,
+            //SessionToggleButton,
+            //VoidToggleButton,
+            //AccountHistoryTransToggleButton,
+            //BallCallToggleButton,
+            //SessioSummaryToggleButton,
+            //SessionTransToggleButton,
+            //WinnerCardsTransToggleButton,
+            //BingoCardToggleButton,
             //};
+            //LoadBallCallReportDefList();
         }
 
         #endregion
 
-
-
         #region Events
 
-        ///// <summary>
-        ///// Occurs when [full screen event].
-        ///// </summary>
-        //public event EventHandler<EventArgs> FullScreenEvent;
+        /// <summary>
+        /// Occurs when [full screen event].
+        /// </summary>
+        public event EventHandler<EventArgs> FullScreenEvent;
 
-        ///// <summary>
-        ///// Occurs when [exit screen event].
-        ///// </summary>
-        //public event EventHandler<EventArgs> ExitScreenEvent;
+        /// <summary>
+        /// Occurs when [exit screen event].
+        /// </summary>
+        public event EventHandler<EventArgs> ExitScreenEvent;
 
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var viewModel = ReportsViewModel.Instance;
-            viewModel.LoadBallCallReportDefList();
+        {            var viewModel = ReportsViewModel.Instance;
+            viewModel.SelectionChanged(((ListBox)sender).SelectedValue.ToString());
+
         }
 
         #endregion
 
         #region Private Methods
 
-        ///// <summary>
-        ///// Called when [full screen event].
-        ///// </summary>
-        ///// <param name="sender">The sender.</param>
-        ///// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        //private void OnFullScreenEvent(object sender, EventArgs eventArgs)
-        //{
-        //    ReportMenuColumn.Width = m_collapsedMenuColumnWidth;
-        //    var handler = FullScreenEvent;
-        //    if (handler != null)
-        //    {
-        //        handler(sender, EventArgs.Empty);
-        //    }
-        //}
+        /// <summary>
+        /// Called when [full screen event].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnFullScreenEvent(object sender, EventArgs eventArgs)
+        {
+            ReportMenuColumn.Width = m_collapsedMenuColumnWidth;
+            var handler = FullScreenEvent;
+            if (handler != null)
+            {
+                handler(sender, EventArgs.Empty);
+            }
+        }
 
-        ///// <summary>
-        ///// Called when [exit screen event].
-        ///// </summary>
-        ///// <param name="sender">The sender.</param>
-        ///// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        //private void OnExitScreenEvent(object sender, EventArgs eventArgs)
-        //{
-        //    //ReportMenuColumn.Width = m_originalMenuColumnWidth;
-        //    var handler = ExitScreenEvent;
-        //    if (handler != null)
-        //    {
-        //        handler(sender, EventArgs.Empty);
-        //    }
-        //}
+        /// <summary>
+        /// Called when [exit screen event].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnExitScreenEvent(object sender, EventArgs eventArgs)
+        {
+            //ReportMenuColumn.Width = m_originalMenuColumnWidth;
+            var handler = ExitScreenEvent;
+            if (handler != null)
+            {
+                handler(sender, EventArgs.Empty);
+            }
+        }
 
-     
+
 
         #endregion
-        
+
         #region Public Methods
 
         /// <summary>

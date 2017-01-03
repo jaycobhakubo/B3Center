@@ -77,20 +77,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         //Reports
-        private AccountsReportView m_accountsReportView;// = new AccountsReportView;
-        private  DailyReportView m_dailyReportView;
-        private DetailReportView m_detailReportView;
-        private DrawerReportView m_drawerReportView;
-        private  JackpotReportView m_jackpotReportView;
-        private MonthlyReportView m_monthlyReportView;
-        private  SessionReportView m_sessionReportView;
-        private  VoidReportView m_voidReportView;
-        private SessionSummaryView m_sessionsummaryReportView;
-        private AccountHistoryReportView m_accountHistoryReportView;
-        private WinnerCardsReportView m_winnerCardsReportView;
-        private BallCallReportView m_ballCallReportView;
-        private SessionTransactionReportView m_sessionTranReportView;
-        private BingoCardReportView m_bingoCardReportView;
+        private AccountsReportView m_accountsReportView = new AccountsReportView();// = new AccountsReportView;
+        private  DailyReportView m_dailyReportView = new DailyReportView();
+        private DetailReportView m_detailReportView = new DetailReportView();
+        private DrawerReportView m_drawerReportView = new DrawerReportView();
+        private  JackpotReportView m_jackpotReportView = new JackpotReportView();
+        private MonthlyReportView m_monthlyReportView = new MonthlyReportView();
+        private  SessionReportView m_sessionReportView = new SessionReportView();
+        private  VoidReportView m_voidReportView = new VoidReportView();
+        private SessionSummaryView m_sessionsummaryReportView = new SessionSummaryView();
+        private AccountHistoryReportView m_accountHistoryReportView = new AccountHistoryReportView();
+        private WinnerCardsReportView m_winnerCardsReportView = new WinnerCardsReportView();
+        private BallCallReportView m_ballCallReportView = new BallCallReportView();
+        private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
+        private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
 
         #endregion
 
@@ -137,7 +137,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             IsLoading = false;
             IsPrinting = false;
 
-            
+            LoadBallCallReportDefList();
 
         }
 
@@ -284,7 +284,105 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get { return m_reportList; }
         }
+        private UserControl m_selectedReportView = new UserControl();
 
+
+        public UserControl SelectedReportView
+        {
+            get {
+                return m_selectedReportView;
+            }
+            set
+            {
+
+                m_selectedReportView = value;
+                    RaisePropertyChanged("SelectedReportView");
+            }
+        }
+
+        public void SelectionChanged(string ReportName)
+        {
+
+            UserControl view = null;
+
+            switch (ReportName)
+            {
+                case "Accounts":
+                    {
+                        view = m_accountsReportView;
+                        break;
+                    }
+                case "Daily":
+                    {
+                        view = m_dailyReportView;
+                        break;
+                    }
+                case "Detail":
+                    {
+                        view = m_detailReportView;
+                        break;
+                    }
+                case "Drawer":
+                    {
+                        view = m_drawerReportView;
+                        break;
+                    }
+                case "Jackpot":
+                    {
+                        view = m_jackpotReportView;
+                        break;
+                    }
+                case "Monthly":
+                    {
+                        view = m_monthlyReportView;
+                        break;
+                    }
+                case "Session":
+                    {
+                        view = m_sessionReportView;
+                        break;
+                    }
+                case "Void":
+                    {
+                        view = m_voidReportView;
+                        break;
+                    }
+                case "Session Summary":
+                    {
+                        view = m_sessionsummaryReportView;
+                        break;
+                    }
+                case "Account History":
+                    {
+                        view = m_accountHistoryReportView;
+                        break;
+                    }
+                case "Winner Cards":
+                    {
+                        view = m_winnerCardsReportView;
+                        break;
+                    }
+                case "Ball Call":
+                    {
+                        view = m_ballCallReportView;
+                        break;
+                    }
+                case "Session Transaction":
+                    {
+                        view = m_sessionTranReportView;
+                        break;
+                    }
+                case "Bingo Card":
+                    {
+                        view = m_bingoCardReportView;
+                        break;
+                    }
+            }
+
+            SelectedReportView = view;
+        }
+
+      
          
         #endregion
 
@@ -1783,95 +1881,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
 
-        private UserControl m_selectedReportView = new UserControl();
+      
 
-        public UserControl SelectedReportView
-        {
-            get { return m_selectedReportView; }
-            set { m_selectedReportView = value;  }
-        }
-
-        private void SelectionChanged(string ReportName)
-        {
-
-            UserControl view = null;
-        
-            switch (ReportName)
-            {
-                case "AccountsToggleButton":
-                    {
-                        view = m_accountsReportView;
-                        break;
-                    }
-                case "Daily":
-                    {
-                        view = m_dailyReportView;
-                        break;
-                    }
-                case "Detail":
-                    {
-                        view = m_detailReportView;
-                        break;
-                    }
-                case "Drawer":
-                    {
-                        view = m_drawerReportView;
-                        break;
-                    }
-                case "Jackpot":
-                    {
-                        view = m_jackpotReportView;
-                        break;
-                    }
-                case "Monthly":
-                    {
-                        view = m_monthlyReportView;
-                        break;
-                    }
-                case "Session":
-                    {
-                        view = m_sessionReportView;
-                        break;
-                    }
-                case "Void":
-                    {
-                        view = m_voidReportView;
-                        break;
-                    }
-                case "Session Summary":
-                    {
-                        view = m_sessionsummaryReportView;
-                        break;
-                    }
-                case "Account History":
-                    {
-                        view = m_accountHistoryReportView;
-                        break;
-                    }
-                case "Winner Cards":
-                    {
-                        view = m_winnerCardsReportView;
-                        break;
-                    }
-                case "Ball Call":
-                    {
-                        view = m_ballCallReportView;
-                        break;
-                    }
-                case "Session Transaction":
-                    {
-                        view = m_sessionTranReportView;
-                        break;
-                    }
-                case "Bingo Card":
-                    {
-                        view = m_bingoCardReportView;
-                        break;
-                    }
-            }
-
-            m_selectedReportView = view;
-        }
+       
 
         /// <summary>
         /// Called when [list information done].

@@ -33,7 +33,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             NewReportButton.Visibility = Visibility.Hidden;
             ReportViewerBorder.Visibility = Visibility.Hidden;
             SelectDateBorder.Visibility = Visibility.Visible;
-            LoadBallCallReportDefList();
+    
         }
 
 
