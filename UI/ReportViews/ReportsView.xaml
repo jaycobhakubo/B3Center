@@ -17,7 +17,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <Border Grid.Column="1" CornerRadius="0,5,5,0"  Style="{DynamicResource LightBlueBorder}" Margin="4">
+            <Border Grid.Column="1"   Style="{DynamicResource LightBlueBorder}" Margin="4">
                 <ContentPresenter Name="ReportsTransitionControl" Content="{Binding SelectedReportView}"/>
             </Border>
 

@@ -30,11 +30,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private Button m_btnBackOperatorSettingFromGameSetting;
         private ToggleButton m_toggleButton;
 
-        //public Button btnSave
-        //{
-        //    get { return m_btnSave; }
-        //    set { m_btnSave = value; }
-        //}
+        public Button btnSave
+        {
+            get { return m_btnSave; }
+            set { m_btnSave = value; }
+        }
 
         public Button btnbtnBackOperatorSetting
         {
@@ -60,46 +60,46 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         public SettingView()
         {
             InitializeComponent();
-            //B3Setting b3GameSetting = new B3Setting();
-            //b3GameSetting.B3GameSetting_ = SettingViewModel.Instance.Settings.B3GameSetting_;//Game enabled 
-            //b3GameSetting.B3SettingGlobal_ = SettingViewModel.Instance.Settings.B3SettingGlobal_;//All settings
-            //b3GameSetting.ListB3mathGamePlay_ = SettingViewModel.Instance.Settings.B3GameMathPlay_;
-            //m_gamesView = new GameSettingView(b3GameSetting);
-            //m_systemSettingView = new SystemSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 7).ToList());
-            //m_playerSettingView = new PlayerSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 3).ToList());
-            //m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
-            //m_sessionView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
-            //m_operatorView = new OperatorSettingView();
+            B3Setting b3GameSetting = new B3Setting();
+            b3GameSetting.B3GameSetting_ = SettingViewModel.Instance.Settings.B3GameSetting_;//Game enabled 
+            b3GameSetting.B3SettingGlobal_ = SettingViewModel.Instance.Settings.B3SettingGlobal_;//All settings
+            b3GameSetting.ListB3mathGamePlay_ = SettingViewModel.Instance.Settings.B3GameMathPlay_;
+            m_gamesView = new GameSettingView(b3GameSetting);
+            m_systemSettingView = new SystemSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 7).ToList());
+            m_playerSettingView = new PlayerSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 3).ToList());
+            m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
+            m_sessionView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
+            m_operatorView = new OperatorSettingView();
 
-            //if (SettingViewModel.Instance.IsClassIIB3GameEnable == true)
-            //{
-            //    m_serverGameView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
-            //    //ServerGameSettingToggleButton.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    //ServerGameSettingToggleButton.Visibility = Visibility.Collapsed;
-            //}
+            if (SettingViewModel.Instance.IsClassIIB3GameEnable == true)
+            {
+                m_serverGameView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+                ServerGameSettingToggleButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ServerGameSettingToggleButton.Visibility = Visibility.Collapsed;
+            }
 
-            //m_menuItems = new List<ToggleButton>
-            //{
-            //   GameSettingToggleButton,
-            //   SystemSettingToggleButton,
-            //   PlayerSettingToggleButton,
-            //   SalesSettingToggleButton,
-            //   SessionSettingToggleButton,
-            //   ServerGameSettingToggleButton,
-            //   OperatorSettingToggleButton
-            //};
+            m_menuItems = new List<ToggleButton>
+            {
+               GameSettingToggleButton,
+               SystemSettingToggleButton,
+               PlayerSettingToggleButton,
+               SalesSettingToggleButton,
+               SessionSettingToggleButton,
+               ServerGameSettingToggleButton,
+               OperatorSettingToggleButton
+            };
 
-            //m_btnSave = m_gamesView.btnSave;
-            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+            m_btnSave = m_gamesView.btnSave;
+            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
 
-            //m_btnBackOperatorSetting = m_operatorView.btnBackOperatorSettings;
-            //m_btnBackOperatorSetting.Click += new RoutedEventHandler(m_btnBackOperatorSetting_Click);
+            m_btnBackOperatorSetting = m_operatorView.btnBackOperatorSettings;
+            m_btnBackOperatorSetting.Click += new RoutedEventHandler(m_btnBackOperatorSetting_Click);
 
-            //m_btnBackOperatorSettingFromGameSetting = m_gamesView.btnBackOperatorSettingsFromGameSettings;
-            //m_btnBackOperatorSettingFromGameSetting.Click += new RoutedEventHandler(m_btnBackOperatorSetting_Click);
+            m_btnBackOperatorSettingFromGameSetting = m_gamesView.btnBackOperatorSettingsFromGameSettings;
+            m_btnBackOperatorSettingFromGameSetting.Click += new RoutedEventHandler(m_btnBackOperatorSetting_Click);
            
         }
 
@@ -119,13 +119,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         #region EVENTS
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var viewModel = SettingViewModel.Instance;
-            viewModel.SelectionChanged(((ListBox)sender).SelectedValue.ToString());
-
-        }
-
         void m_btnBackOperatorSetting_Click(object sender, RoutedEventArgs e)
         {
             brdrSettingMenuCol.Visibility = Visibility.Visible;
@@ -133,13 +126,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             ClearSelected();
         }
 
-        //void m_btnSave_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (m_toggleButton.Name == "GameSettingToggleButton")
-        //    {
-        //        m_B3Setting = m_gamesView.B3_Setting;
-        //    }          
-        //}
+        void m_btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_toggleButton.Name == "GameSettingToggleButton")
+            {
+                m_B3Setting = m_gamesView.B3_Setting;
+            }          
+        }
 
         
 
@@ -163,7 +156,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                     {
                         m_gamesView.ClearSelected();
                         m_btnSave = m_gamesView.btnSave;
-                        //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+                        m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
                         view = m_gamesView;
                         break;
                     }
@@ -172,7 +165,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         {
                             m_systemSettingView.ReloadDataIntoControls();
                             m_btnSave = m_systemSettingView.btnSave;
-                            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+                            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
                             view = m_systemSettingView; 
                             break;
                         }

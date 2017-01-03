@@ -81,7 +81,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="54"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="54"/>
@@ -97,7 +97,7 @@
                 <RowDefinition Height="54"/>
       
                 <RowDefinition />
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="Auto"/>
 
             </Grid.RowDefinitions>
             <!--Site Name-->
@@ -167,7 +167,7 @@
                 <CheckBox Name="chkbxCommonRNGBallCall" Content="Common RNG Ball Call" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="9" VerticalAlignment="Bottom" TabIndex="14" Tag="53" Margin="0 31 0 0"/>
             </StackPanel>
 
-                <Grid Grid.Row="19" Grid.Column="2" Grid.ColumnSpan="6">
+                <!--<Grid Grid.Row="19" Grid.Column="2" Grid.ColumnSpan="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2"></ColumnDefinition>
@@ -176,9 +176,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="5"></RowDefinition>
-                </Grid.RowDefinitions>
+                </Grid.RowDefinitions>-->
 
-                <Border
+                <!--<Border
                         Grid.Row="0"
                     	Height="43" 
                     	Width="360"
@@ -190,11 +190,11 @@
                     		Height="43" 
                     		VerticalAlignment="Bottom" 
                     		HorizontalAlignment="Left" Visibility="Hidden"/>
-                </Border>
+                </Border>-->
 
-            </Grid>
+            <!--</Grid>-->
 
-            <Grid Grid.Column="3" Grid.ColumnSpan="3">
+            <!--<Grid Grid.Column="3" Grid.ColumnSpan="3">
                 <Label x:Name="lblSavedNotification"
                             Background="#44658D"
                                Foreground="White"
@@ -210,8 +210,8 @@
                                >
 
                 </Label>
-            </Grid>
-            <Label x:Name="lblNewOperator" Content="System" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" FontSize="26" Height="Auto" Width="163" Margin="0,7.5"/>
+            </Grid>-->
+            <!--<Label x:Name="lblNewOperator" Content="System" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" FontSize="26" Height="Auto" Width="163" Margin="0,7.5"/>-->
             <ComboBox 
             	x:Name="cmbxCurrency" 
             	Grid.Row="3" Grid.Column="3"

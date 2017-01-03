@@ -28,21 +28,73 @@
             </Border>
             </Grid>
 
-            <Border Name="brdrSettingMenuCol" Grid.Column="0" Style="{DynamicResource DarkBlueBorder}" Margin="4">
+            <Border Name="brdrSettingMenuCol" Grid.Column="0" Background="#FF44658D">
                 <Grid Name="gridSetting">
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition />
+                       
                     </Grid.RowDefinitions>
-
-                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
-                        <ListBox Margin="15" ItemsSource="{Binding SettingsMainList}">
-
-                            <!--<ListBox.ItemsSource ="{Binding ReportList}"/>-->
-                        </ListBox>
-                    </ScrollViewer>
+                    <Button x:Name="btnBackSettings" Grid.Row="0"  Grid.Column="0"   
+                               Content="Settings"
+                               Style="{StaticResource FlatDarkBlueButtonStyle4}"  />
+                    <!--<TextBlock Grid.Row="0" Text="Settings" Style="{StaticResource HeaderStyle2}" />-->
+                    <ToggleButton 
+                        Grid.Row="1" 
+                        Name="GameSettingToggleButton" 
+                        Content="Games" 
+                        Click="MenuToggleButton_Changed"
+                        Checked="OperatorSettingToggleButton_Checked" />
+                    <ToggleButton 
+                        Grid.Row="7" 
+                        Name="SystemSettingToggleButton" 
+                        Content="System" 
+                        Click="MenuToggleButton_Changed"/>
+                    <ToggleButton 
+                        Grid.Row="8" 
+                        Name="PayTableSettingToggleButton" 
+                        Content="Pay Table"
+                        Visibility="Hidden"
+                        Click="MenuToggleButton_Changed"/>
+                    <ToggleButton 
+                        Grid.Row="3" 
+                        Name="PlayerSettingToggleButton" 
+                        Content="Player" 
+                        Click="MenuToggleButton_Changed"/>
+                    <ToggleButton 
+                        Grid.Row="4" 
+                        Name="SalesSettingToggleButton" 
+                        Content="Sales" 
+                        Click="MenuToggleButton_Changed"/>
+                    <ToggleButton 
+                        Grid.Row="6" 
+                        Name="SessionSettingToggleButton" 
+                        Content="Session" 
+                        Click="MenuToggleButton_Changed"/>
+                    <ToggleButton 
+                        Grid.Row="5" 
+                        Name="ServerGameSettingToggleButton" 
+                        Content="Server Game"     
+                        Click="MenuToggleButton_Changed"
+                        Height="50"
+                        />
+                    
+                    <ToggleButton 
+                        Grid.Row="2" 
+                        Name="OperatorSettingToggleButton" 
+                        Content="Operator"                   
+                        Click="MenuToggleButton_Changed" Checked="OperatorSettingToggleButton_Checked"/>
+               
                 </Grid>
-            </Border>         
+            </Border>
         </Grid>
     </Border>
 </UserControl>

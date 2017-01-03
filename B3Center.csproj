@@ -55,6 +55,7 @@
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -525,6 +526,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\ReportViews\AccountHistoryReportView.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\SettingViews\SettingView.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\SettingViews\SettingView.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ViewModels\SettingViewModel.cs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,8 +7,8 @@
              d:DesignHeight="710" d:DesignWidth="1003">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>
+        <!--<Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>-->
     </UserControl.Resources>
     <Border >
         <Grid >
@@ -17,82 +17,84 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                
-                <Border Grid.Row="1" Grid.Column="1" CornerRadius="0,5,5,0">
-                <ContentPresenter Name="SettingTransitionControl" />
-            </Border>
-            </Grid>
-
-            <Border Name="brdrSettingMenuCol" Grid.Column="0" Background="#FF44658D">
-                <Grid Name="gridSetting">
+            <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
+
                         <RowDefinition />
-                       
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Button x:Name="btnBackSettings" Grid.Row="0"  Grid.Column="0"   
-                               Content="Settings"
-                               Style="{StaticResource FlatDarkBlueButtonStyle4}"  />
-                    <!--<TextBlock Grid.Row="0" Text="Settings" Style="{StaticResource HeaderStyle2}" />-->
-                    <ToggleButton 
-                        Grid.Row="1" 
-                        Name="GameSettingToggleButton" 
-                        Content="Games" 
-                        Click="MenuToggleButton_Changed"
-                        Checked="OperatorSettingToggleButton_Checked" />
-                    <ToggleButton 
-                        Grid.Row="7" 
-                        Name="SystemSettingToggleButton" 
-                        Content="System" 
-                        Click="MenuToggleButton_Changed"/>
-                    <ToggleButton 
-                        Grid.Row="8" 
-                        Name="PayTableSettingToggleButton" 
-                        Content="Pay Table"
-                        Visibility="Hidden"
-                        Click="MenuToggleButton_Changed"/>
-                    <ToggleButton 
-                        Grid.Row="3" 
-                        Name="PlayerSettingToggleButton" 
-                        Content="Player" 
-                        Click="MenuToggleButton_Changed"/>
-                    <ToggleButton 
-                        Grid.Row="4" 
-                        Name="SalesSettingToggleButton" 
-                        Content="Sales" 
-                        Click="MenuToggleButton_Changed"/>
-                    <ToggleButton 
-                        Grid.Row="6" 
-                        Name="SessionSettingToggleButton" 
-                        Content="Session" 
-                        Click="MenuToggleButton_Changed"/>
-                    <ToggleButton 
-                        Grid.Row="5" 
-                        Name="ServerGameSettingToggleButton" 
-                        Content="Server Game"     
-                        Click="MenuToggleButton_Changed"
-                        Height="50"
-                        />
-                    
-                    <ToggleButton 
-                        Grid.Row="2" 
-                        Name="OperatorSettingToggleButton" 
-                        Content="Operator"                   
-                        Click="MenuToggleButton_Changed" Checked="OperatorSettingToggleButton_Checked"/>
-               
+
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}">
+                        <ContentPresenter Name="SettingTransitionControl" Content="{Binding SelectedSettingView}"/>
+                    </Border>
+
+                    <Border Grid.Row="1"  Margin="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
+                                <Grid Grid.Column="1" Grid.Row="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Save"
+                                HorizontalAlignment="Right" 
+                                x:Name="btnSave"
+                                VerticalAlignment="Top"
+                             
+                                Tag="1"/>
+                                    <!--Click="btnSave_Click"-->
+                                    <Button Grid.Column="1"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Cancel"
+                                HorizontalAlignment="Left"
+                                Name="btnCancel" 
+                                VerticalAlignment="Top"
+                            />
+                                    <!--Click="btnCancel_Click"-->
+
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                                <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                            </Border>
+
+
+                        </Grid>
+                    </Border>
+
+
+                </Grid>
+            </Border>
+
+
+
+                <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
+                        <ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >
+                        
+                        </ListBox>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </Grid>

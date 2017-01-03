@@ -74,7 +74,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
             ParentController = parent;    
 
             m_sessionView = new SessionView { DataContext = mainViewModel.SessionVm };
-            m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };
+            //m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };
             //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
             //m_btnBackSessions = m_sessionView.btnBackSessions;
             //m_btnBackSessions.Click += new RoutedEventHandler(m_btnBack_Click);

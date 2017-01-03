@@ -82,9 +82,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
             m_btnCancel = m_saveCancelCtrl.btnCancel;
             m_btnCancel.Click += new RoutedEventHandler(m_btnCancel_Click);
-            SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
-            SaveCancelTransition.Visibility = Visibility.Visible;
-            lblSavedNotification.Visibility = Visibility.Hidden;
+            //SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
+            //SaveCancelTransition.Visibility = Visibility.Visible;
+            //lblSavedNotification.Visibility = Visibility.Hidden;
         }
 
         #endregion
@@ -542,7 +542,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void ClearSavedNotification()
         {
-            if (lblSavedNotification.Visibility != Visibility.Hidden) lblSavedNotification.Visibility = Visibility.Hidden;
+            //if (lblSavedNotification.Visibility != Visibility.Hidden) lblSavedNotification.Visibility = Visibility.Hidden;
         }
 
         #endregion
@@ -601,7 +601,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 }
 
                 RepopulateNewSaveData(lSettingMember);
-                lblSavedNotification.Visibility = Visibility.Visible;
+                //lblSavedNotification.Visibility = Visibility.Visible;
             }
         }
 

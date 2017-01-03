@@ -274,10 +274,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ReportSelected = m_reportList.FirstOrDefault();
         }
 
+        private string m_reportSelected; 
         public string ReportSelected
         {
-            get;
-            set;
+            get { return m_reportSelected; }
+            set 
+            { 
+                m_reportSelected = value;
+                RaisePropertyChanged("ReportSelected");
+            }
         }
 
         private List<string> m_reportList = new List<string>();
@@ -286,6 +291,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get { return m_reportList; }
         }
+        
         private UserControl m_selectedReportView = new UserControl();
 
 
@@ -380,6 +386,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break;
                     }
             }
+
 
             SelectedReportView = view;
         }

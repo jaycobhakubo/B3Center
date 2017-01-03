@@ -8,6 +8,7 @@
     xmlns:ui="clr-namespace:GameTech.Elite.UI;assembly=GameTech.Elite.UI"
                     
      xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
+     xmlns:localSettings="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
    
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
      WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
@@ -35,7 +36,7 @@
             
             <TabItem Header="Setting" >
                 <Border>
-                    <TextBlock Text="SETTING" FontSize="120"></TextBlock>
+                    <localSettings:SettingView DataContext="{Binding SettingVm}" />
                 </Border>
             </TabItem>
             

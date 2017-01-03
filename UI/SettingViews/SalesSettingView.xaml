@@ -7,8 +7,8 @@
                   d:DesignHeight="710" d:DesignWidth="824">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultDesignForCheckBox}"/>
+        <!--<Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultDesignForCheckBox}"/>-->
 
         <Style  TargetType="TextBox">
             <Setter Property="Background" Value="White" />
@@ -81,10 +81,10 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Name="stkpnlSalesSetting1" Grid.Row="1" Grid.Column="1">
               
@@ -112,7 +112,7 @@
                 <CheckBox Name="chkbxQuickSales" Content="Quick Sales" Margin="0 31 0 0" HorizontalAlignment="Left"  TabIndex="3" Tag="28" />
             </StackPanel>
           
-            <Grid Grid.Row="18" Grid.ColumnSpan="6">
+            <!--<Grid Grid.Row="18" Grid.ColumnSpan="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2"></ColumnDefinition>
@@ -135,11 +135,11 @@
                     		Height="43" 
                     		VerticalAlignment="Bottom" 
                     		HorizontalAlignment="Left" Visibility="Hidden"/>
-                </Border>
+                </Border>-->
 
-            </Grid>
+            <!--</Grid>-->
 
-            <Grid Grid.Column="3" Grid.ColumnSpan="3">
+            <!--<Grid Grid.Column="3" Grid.ColumnSpan="3">
                 <Label x:Name="lblSavedNotification"
                             Background="#44658D"
                                Foreground="White"
@@ -155,8 +155,8 @@
                                >
 
                 </Label>
-            </Grid>
-            <Label 
+            </Grid>-->
+            <!--<Label 
                 x:Name="lblNewOperator" 
                 Content="Sales" 
                 Grid.Column="1"
@@ -166,7 +166,7 @@
                 FontSize="26" 
                 Height="Auto" 
                 Width="163" 
-                Margin="0,7.5"/>
+                Margin="0,7.5"/>-->
 
 
         </Grid>
