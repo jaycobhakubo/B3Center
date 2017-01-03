@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 
-namespace GameTech.Elite.Client.Modules.B3Center.UI
+namespace GameTech.Elite.Client.Modules.B3Center.Helper
 {
     /// <summary>
     /// Use to bypass gtiserver.

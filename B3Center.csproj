@@ -121,6 +121,10 @@
     <Compile Include="Business\B3Controller.cs" />
     <Compile Include="Business\GameModels\CrazyBoutGameModel.cs" />
     <Compile Include="Business\GameModels\GameModel.cs" />
+    <Compile Include="Helpers\CommandHandler.cs" />
+    <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\Selecteditem.cs" />
+    <Compile Include="Helpers\SqlConnectionToByPassGtiServerApp.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
     <Compile Include="Messages\GetB3ColorIcon.cs" />
     <Compile Include="Messages\GetB3MathGamePlay.cs" />
@@ -145,7 +149,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
-    <Compile Include="UI\Converters.cs" />
     <Compile Include="UI\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
@@ -266,7 +269,6 @@
     <Compile Include="UI\Shared\FullScreenUserControl.xaml.cs">
       <DependentUpon>FullScreenUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SqlConnectionToByPassGtiServerApp.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Business\IGTIModule.cs" />
     <Compile Include="Design\DesignController.cs" />

@@ -8,7 +8,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 //Hello there
-namespace GameTech.Elite.Client.Modules.B3Center.UI
+namespace GameTech.Elite.Client.Modules.B3Center.Helper
 {
 
     public class MultiplyConverter : IMultiValueConverter

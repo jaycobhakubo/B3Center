@@ -17,6 +17,7 @@ using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Reports;
 using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 
 //US1618: B3 Session Report
@@ -138,6 +139,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             IsPrinting = false;
 
             LoadBallCallReportDefList();
+            m_canExecute = true;
 
         }
 
@@ -1914,5 +1916,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         #endregion
+
+        #region Command
+
+        private bool m_canExecute;
+
+        private ICommand m_clickCommand;
+        public ICommand ClickCommand
+        {
+            get
+            {
+                return m_clickCommand ?? (m_clickCommand = new B3Center.Helper.CommandHandler(() => MyAction(), m_canExecute));
+            }
+        }
+
+
+        public void MyAction()
+        {
+            MessageBox.Show("Hello");
+        }
+
+        #endregion
+
     }
 }
