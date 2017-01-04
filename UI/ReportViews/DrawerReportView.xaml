@@ -39,8 +39,8 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                     <!--<shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"/>-->
-                    <Button Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="5,15,5,5"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
+                    <Button Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="0,15,0,5"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

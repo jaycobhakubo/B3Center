@@ -6,9 +6,11 @@
               xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
-              d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
+              d:DesignHeight="600" d:DesignWidth="600" >
+    <!--Loaded="UserControl_Loaded"-->
     <UserControl.Resources>
-        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+        <!--<Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>-->
+       
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -39,24 +41,24 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                     <TextBlock Text="Date"  Style="{StaticResource TextBlockFontStyle1}"/>
-                    <shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"  DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"  DateTimeChangedEvent="DateTime_ChangedEvent"/>
                     <TextBlock Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
-                    <ComboBox  Height="50" 
+                    <ComboBox 
                                Width="280"
                                ItemsSource="{Binding AccountHistoryReportSessionList}"
                                SelectedItem="{Binding AccountHistoryReportSessionSelected}"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox"/>
                     <TextBlock Text="Account Number"   Style="{StaticResource TextBlockFontStyle}"/>
-                    <ComboBox  Height="50" 
+                    <ComboBox 
                                Width="280"                               
                                x:Name="AccountNumberCombobox"
                                 ItemsSource="{Binding AccountHistoryReportAccountList}"
                                 SelectedItem="{Binding AccountHistoryReportAccountSelected}"
                               />
 
-                    <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
+                    <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableAccountHistoryReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

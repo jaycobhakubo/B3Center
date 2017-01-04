@@ -7,6 +7,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows;
 //Hello there
 namespace GameTech.Elite.Client.Modules.B3Center.Helper
 {
@@ -29,5 +30,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helper
         {
             throw new Exception("Not implemented");
         }
-    } 
+    }
+
+   
 }

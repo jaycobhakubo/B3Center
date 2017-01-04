@@ -67,13 +67,13 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
 
                 <TextBlock Text="Start Date"  Style="{StaticResource TextBlockFontStyle1}"/>
-                <shared:DatePickerUserControl Height="120" HorizontalAlignment="Right" x:Name="StartDateTime" />
+                <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" />
 
                 <TextBlock Text="End Date"  Style="{StaticResource TextBlockFontStyle}" />
-                <shared:DatePickerUserControl Height="120" HorizontalAlignment="Right" x:Name="EndDateTime"/>
+                <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="EndDateTime"/>
 
-                <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"/>
-                <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
+                <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"/>
+                <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
                 <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
             </StackPanel>
         </Border>

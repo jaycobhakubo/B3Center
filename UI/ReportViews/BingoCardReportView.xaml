@@ -8,50 +8,7 @@
              mc:Ignorable="d" 
               d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
-        <Style  TargetType="TextBox">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontWeight" Value="Regular" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="280"/>
-            <Setter Property="Padding" Value="8,0,0,0"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border SnapsToDevicePixels="True"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" >
-                            <ScrollViewer 
-                                x:Name="PART_ContentHost" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="Blue"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="False">
-                                <Setter Property="BorderBrush" Value="LightGray"/>
-                            </Trigger>
-
-                            <Trigger Property="IsReadOnly" Value="True">
-                                <Setter Property="Background" Value="LightGray"></Setter>
-                            </Trigger>
-
-                        </ControlTemplate.Triggers>
-
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+      
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -96,8 +53,8 @@
                                PreviewKeyDown="txtbxStartingCard_PreviewKeyDown" 
                              PreviewTextInput ="txtbxNumericOnly_PreviewTextInput"></TextBox>
 
-                    <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableBingoCardReportButtons}"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableBingoCardReportButtons}"/>
+                    <Button Content="View Report" Margin="0,15,0,5"  Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableBingoCardReportButtons}"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableBingoCardReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

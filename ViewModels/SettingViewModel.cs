@@ -99,6 +99,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return m_settingList; }
         }
 
+        private int m_borderValue;
+
+        public int SetBorderValue
+        {
+            get { return m_borderValue; }
+            set
+            {
+                if (m_borderValue != value)
+                {
+                    m_borderValue = value;
+                    RaisePropertyChanged("SetBorderValue");
+                }
+            }
+        }
+
         public void LoadSetting()
         {
             m_settingList.Clear();
@@ -147,6 +162,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
 
             UserControl view = null;
+            if (SettingName == "Games")
+            {
+                SetBorderValue = 0;
+            }
+            else
+            {
+                SetBorderValue = 2;
+            }
 
             switch (SettingName)
             {

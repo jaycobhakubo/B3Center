@@ -6,9 +6,9 @@
              xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500" Loaded="UserControl_Loaded">
+            Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+       
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -37,9 +37,9 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                     <TextBlock Text="Date"  Style="{StaticResource TextBlockFontStyle1}"/>
-                    <shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"/>
-                    <Button Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="5,15,5,5"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
+                    <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"/>
+                    <Button Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="0,15,0,5"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
                 </StackPanel>
             </Border>

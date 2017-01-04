@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="710" d:DesignWidth="1003">
     <UserControl.Resources>
-        <ResourceDictionary>
+        <!--<ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/OriginalStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        </ResourceDictionary>
+            <Converters:ValueToBoolConverter x:Key="ConvertValueToBool" />
+        </ResourceDictionary>-->
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
+
     </UserControl.Resources>
     <Border >
         <Grid >
@@ -28,7 +33,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}">
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="{Binding SetBorderValue }">
                         <ContentPresenter Margin="0,0,0,0" Name="SettingTransitionControl" Content="{Binding SelectedSettingView}" />
                     </Border>
 

@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+        <!--<Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>-->
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -43,23 +43,24 @@
                         <TextBlock Width="140" HorizontalAlignment="Left"  Text="Month"  Padding="5,5,0,2" Style="{StaticResource TextBlockFontStyle2}"/>
                         <TextBlock Width="90"  HorizontalAlignment="Left"  Text="Year"  Padding="5,5,0,2" Style="{StaticResource TextBlockFontStyle2}"/>
                     </WrapPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <DockPanel Width="280" HorizontalAlignment="Center">
                        
-                        <ComboBox  Height="50"
+                        <ComboBox  DockPanel.Dock="Left"
                                    Width="140"
                                    ItemsSource="{Binding Months}"
                                    SelectedItem="{Binding AccountReportMonthSelected}"
-                                   Name="MonthCombobox" Margin="2,0"/>
+                                   Name="MonthCombobox" Margin="0,0,1,0"/>
 
-                            <ComboBox  Height="50"
-                                   Width="90"
+                            <ComboBox  DockPanel.Dock="Right"
+                                
                                    ItemsSource="{Binding Years}"
                                    SelectedItem="{Binding AccountReportYearSelected}"
-                                   Name="YearCombobox" Margin="2,0"/>
+                                   Name="YearCombobox" Margin="1,0,0,0"/>
+                    
 
-                    </StackPanel>
-                    <Button Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="5,15,5,5"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
+                    </DockPanel>
+                    <Button Width="280" Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="0,15,0,5"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

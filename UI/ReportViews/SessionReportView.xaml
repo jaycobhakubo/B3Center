@@ -39,17 +39,17 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                     <TextBlock Text="Date"  Style="{StaticResource TextBlockFontStyle1}"/>
-                    <shared:DatePickerUserControl Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <shared:DatePickerUserControl HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
                     <TextBlock Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
-                    <ComboBox  Height="50" 
+                    <ComboBox  
                                Width="280"
                                ItemsSource="{Binding SessionReportSessionList}"
                                SelectedItem="{Binding SessionReportSessionSelected}"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox"/>
 
-                    <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

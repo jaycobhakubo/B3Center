@@ -9,7 +9,9 @@
              d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -41,7 +43,7 @@
                     <TextBlock Name="lblBallCallCategory" Text="Category"  Style="{StaticResource TextBlockFontStyle1}"/>
                     <ComboBox  
                         Grid.Row="0"
-                               Height="50" 
+                              
                                Width="280"                              
                                x:Name="BallCallDefCombobox"
                                ItemsSource="{Binding BallCallReportDefList}"
@@ -49,21 +51,21 @@
                                Margin="0,0,0,5" SelectionChanged="BallCallDefCombobox_SelectionChanged"/>
 
                     <TextBlock x:Name="txtblkStartDate" Text="Start Date"  Style="{StaticResource TextBlockFontStyle}"/>
-                    <shared:DatePickerUserControl  Grid.Row="1" Height="50" HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
                     <TextBlock x:Name="txtblkEndDate" Text="End Date"  Style="{StaticResource TextBlockFontStyle}" />
-                    <shared:DatePickerUserControl  Grid.Row="1" Height="50" HorizontalAlignment="Right" x:Name="EndDateTime" ShowTime="False" Margin="0,0,0,0" DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right" x:Name="EndDateTime" ShowTime="False" Margin="0,0,0,0" DateTimeChangedEvent="DateTime_ChangedEvent"/>
                     <TextBlock Name="lblBallCallSession" Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
                     <ComboBox  
                         Grid.Row="2"
-                        Height="50" 
+                    
                                Width="280"
                                ItemsSource="{Binding BallCallReportSessionList}"
                                SelectedItem="{Binding BallCallReportSessionSelected}"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox"/>
 
-                    <Button Content="View Report" Margin="5,15,5,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
-                    <Button Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>
