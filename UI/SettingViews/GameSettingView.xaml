@@ -30,28 +30,28 @@
             </MenuItem>
         </Menu>-->
         <TabControl Focusable="False">
-            <TabItem Header="Session">
+            <TabItem Header="Crazy Bout">
                 <Border>
-                    <TextBlock Text="SESSION" FontSize="120"></TextBlock>
+                    <!--<TextBlock Text="Crazy Bout" FontSize="120"></TextBlock>-->
                 </Border>
             </TabItem>
 
-            <TabItem Header="Report">
+            <TabItem Header="JailBreak">
                 <Border>
 
                     <!--<localReports:ReportsView DataContext="{Binding ReportsVm}" />-->
                 </Border>
             </TabItem>
 
-            <TabItem Header="Setting" >
+            <TabItem Header="Maya Money" >
                 <Border>
                     <!--<localSettings:SettingView DataContext="{Binding SettingVm}" />-->
                 </Border>
             </TabItem>
 
-            <TabItem Header="Operator">
+            <TabItem Header="76 Bingo">
                 <Border>
-                    <TextBlock Text="OPERATOR" FontSize="120"></TextBlock>
+                    <!--<TextBlock Text="OPERATOR" FontSize="120"></TextBlock>-->
                 </Border>
             </TabItem>
         </TabControl>
