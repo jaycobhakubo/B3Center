@@ -286,6 +286,10 @@
     <Compile Include="ViewModels\SettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\OriginalStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\GameView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
