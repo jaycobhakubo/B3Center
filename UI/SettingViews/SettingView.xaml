@@ -6,9 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="710" d:DesignWidth="1003">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <!--<Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/OriginalStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Border >
         <Grid >

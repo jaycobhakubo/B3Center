@@ -6,12 +6,7 @@
              mc:Ignorable="d" 
             d:DesignHeight="710" d:DesignWidth="824">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/OriginalStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="VisibilityConverter" /> 
-        </ResourceDictionary>
+       
         <!--<BooleanToVisibilityConverter x:Key="VisibilityConverter" />-->
         <!--<ResourceDictionary Source="\Resources\OriginalStyle.xaml"></ResourceDictionary>-->
     </UserControl.Resources>
