@@ -102,7 +102,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void LoadSetting()
         {
             m_settingList.Clear();
-            //m_settingList.Add("Games");
+            m_settingList.Add("Games");
             m_settingList.Add("System");
             m_settingList.Add("Player");
             m_settingList.Add("Sales");
@@ -150,11 +150,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             switch (SettingName)
             {
-                //case "Games":
-                //    {
-                //        view = m_gameSettingView;
-                //        break;
-                //    }
+                case "Games":
+                    {
+                        view = m_gameSettingView;
+                        break;
+                    }
                 case "System":
                     {
                         view = m_systemSettingView;

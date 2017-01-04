@@ -45,12 +45,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private bool m_isGameEnable = false;
         private B3Setting m_B3Setting;
         private int m_gameID;
-        private ContentPresenter GameSettingTransitionControl = new ContentPresenter();
-        private ToggleButton tglBtnEnable = new ToggleButton();
-        private Label lblSavedNotification = new Label();
-
-        private Label lblEnable= new Label();
-
 
         #endregion
 
@@ -91,8 +85,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             m_btnSave.Click += new RoutedEventHandler (m_btnSave_Click);
             m_btnCancel = m_saveCancelCtrl.btnCancel;
             m_btnCancel.Click += new RoutedEventHandler(m_btnCancel_Click);
-            //SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
-            //lblSavedNotification.Visibility = Visibility.Hidden;
+            SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
+            lblSavedNotification.Visibility = Visibility.Hidden;
         }
      
         #endregion
@@ -162,7 +156,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                             }
                     }
                     m_menuItems.Add(TempTglBtnName);
-                    //stackpanel1.Children.Add(TempTglBtnName);
+                    stackpanel1.Children.Add(TempTglBtnName);
                 }
             }
         }
@@ -175,15 +169,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
                 {
                     menuItem.IsChecked = false;
-                    //GameSettingTransitionControl.Content = null;
-                    //tglBtnEnable.Visibility = Visibility.Hidden;
-                    //lblEnable.Visibility = Visibility.Hidden;
-                    //SaveCancelTransition.Visibility = Visibility.Hidden;
+                    GameSettingTransitionControl.Content = null;
+                    tglBtnEnable.Visibility = Visibility.Hidden;
+                    lblEnable.Visibility = Visibility.Hidden;
+                    SaveCancelTransition.Visibility = Visibility.Hidden;
                     m_selectedGame = "";
                     ClearSavedNotification();
                 }
             }
-            //lblB3GameName.Content = string.Empty;
+            lblB3GameName.Content = string.Empty;
         }
 
         public void ClearSavedNotification()
@@ -458,19 +452,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
             if (toggleButton.IsChecked == false)
             {
-                //GameSettingTransitionControl.Content = null;
-                //tglBtnEnable.Visibility = Visibility.Hidden;
-                //lblEnable.Visibility = Visibility.Hidden;
-                //SaveCancelTransition.Visibility = Visibility.Hidden;
-                //m_selectedGame = "";
-                //lblB3GameName.Content = string.Empty;
-                //return;
+                GameSettingTransitionControl.Content = null;
+                tglBtnEnable.Visibility = Visibility.Hidden;
+                lblEnable.Visibility = Visibility.Hidden;
+                SaveCancelTransition.Visibility = Visibility.Hidden;
+                m_selectedGame = "";
+                lblB3GameName.Content = string.Empty;
+                return;
             }
             else
             {
-                //tglBtnEnable.Visibility = Visibility.Visible;
-                //lblEnable.Visibility = Visibility.Visible;
-                //SaveCancelTransition.Visibility = Visibility.Visible;
+                tglBtnEnable.Visibility = Visibility.Visible;
+                lblEnable.Visibility = Visibility.Visible;
+                SaveCancelTransition.Visibility = Visibility.Visible;
             }
 
             List<SettingMember> lSettingID = new List<SettingMember>();
@@ -507,11 +501,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
                         if (m_B3Setting.B3GameSetting_[1].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsJailBreak.ListOfSettingIDToBeUpdated(2);
@@ -533,11 +527,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         m_gameID = 2;
                         if (m_B3Setting.B3GameSetting_[2].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsMayaMoney.ListOfSettingIDToBeUpdated(3);
@@ -558,11 +552,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         m_gameID = 3;
                         if (m_B3Setting.B3GameSetting_[3].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsSpirit76.ListOfSettingIDToBeUpdated(4);
@@ -582,11 +576,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         m_gameID = 4;
                         if (m_B3Setting.B3GameSetting_[4].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsTimeBomb.ListOfSettingIDToBeUpdated(5);
@@ -606,11 +600,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         m_gameID = 5;
                         if (m_B3Setting.B3GameSetting_[5].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsUkickEm.ListOfSettingIDToBeUpdated();
@@ -630,11 +624,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         m_gameID = 6;
                         if (m_B3Setting.B3GameSetting_[6].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsWildBall.ListOfSettingIDToBeUpdated(7);
@@ -654,11 +648,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         m_gameID = 7;
                         if (m_B3Setting.B3GameSetting_[7].IsEnabled == true)
                         {
-                            //tglBtnEnable.IsChecked = true;
+                            tglBtnEnable.IsChecked = true;
                         }
                         else
                         {
-                            //tglBtnEnable.IsChecked = false;
+                            tglBtnEnable.IsChecked = false;
                         }
 
                         lSettingID = m_gsWilfFireProg.ListOfSettingIDToBeUpdated();
@@ -673,14 +667,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
             switch(m_gameID)
             {
-                //case 0: lblB3GameName.Content =  "Crazy Bout"; break;
-                //case 1: lblB3GameName.Content = "JailBreak"; break;
-                //case 2: lblB3GameName.Content = "Maya Money"; break;
-                //case 3: lblB3GameName.Content = "76 Bingo"; break;
-                //case 4: lblB3GameName.Content = "Time Bomb";  break;
-                //case 5: lblB3GameName.Content = "U Kick Em"; break;
-                //case 6: lblB3GameName.Content = "WildFire w/Bonus"; break;
-                //case 7: lblB3GameName.Content = "WildFire"; break;
+                case 0: lblB3GameName.Content =  "Crazy Bout"; break;
+                case 1: lblB3GameName.Content = "JailBreak"; break;
+                case 2: lblB3GameName.Content = "Maya Money"; break;
+                case 3: lblB3GameName.Content = "76 Bingo"; break;
+                case 4: lblB3GameName.Content = "Time Bomb";  break;
+                case 5: lblB3GameName.Content = "U Kick Em"; break;
+                case 6: lblB3GameName.Content = "WildFire w/Bonus"; break;
+                case 7: lblB3GameName.Content = "WildFire"; break;
         }
            
             //We have to uncheck any previously checked buttons
@@ -887,11 +881,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                   {
                       if (m_B3Setting.B3GameSetting_[7].IsEnabled == true)
                       {
-                          //tglBtnEnable.IsChecked = true;
+                          tglBtnEnable.IsChecked = true;
                       }
                       else
                       {
-                          //tglBtnEnable.IsChecked = false;
+                          tglBtnEnable.IsChecked = false;
                       }
 
                       lSettingID = m_gsWilfFireProg.ListOfSettingIDToBeUpdated();

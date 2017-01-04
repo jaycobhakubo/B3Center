@@ -69,7 +69,7 @@
         </Style>
     </UserControl.Resources>
     <Border>
-        <Grid Name="gridSessionSettings" GotFocus="Grid_GotFocus">
+        <Grid Name="gridSessionSettings" GotFocus="Grid_GotFocus" Margin="0,20,0,0">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75"/>

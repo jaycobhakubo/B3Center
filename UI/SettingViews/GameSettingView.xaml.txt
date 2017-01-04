@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-            >
+            d:DesignHeight="710" d:DesignWidth="674">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
 
-        <!--<Style x:Name="FlatLableStyle" TargetType= "Label">
+        <Style x:Name="FlatLableStyle" TargetType= "Label">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="15" />
@@ -17,47 +17,11 @@
             <Setter Property="FontWeight" Value="Light"/>
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>-->
+        </Style>
 
      
     </UserControl.Resources>
-
-
-    <Border x:Name="m_layoutRoot">
-        <!--<Menu x:Name="m_mainMenu" DockPanel.Dock="Top">
-            <MenuItem x:Name="m_fileMenu" Header="_File">
-                <MenuItem x:Name="m_fileExitMenuItem" Header="E_xit" Command="{Binding FileExitCommand}" />
-            </MenuItem>
-        </Menu>-->
-        <TabControl Focusable="False">
-            <TabItem Header="Session">
-                <Border>
-                    <TextBlock Text="SESSION" FontSize="120"></TextBlock>
-                </Border>
-            </TabItem>
-
-            <TabItem Header="Report">
-                <Border>
-
-                    <!--<localReports:ReportsView DataContext="{Binding ReportsVm}" />-->
-                </Border>
-            </TabItem>
-
-            <TabItem Header="Setting" >
-                <Border>
-                    <!--<localSettings:SettingView DataContext="{Binding SettingVm}" />-->
-                </Border>
-            </TabItem>
-
-            <TabItem Header="Operator">
-                <Border>
-                    <TextBlock Text="OPERATOR" FontSize="120"></TextBlock>
-                </Border>
-            </TabItem>
-        </TabControl>
-    </Border>
-
-    <!--<Border >
+    <Border >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Name="GameColumn" Width="200"/>
@@ -169,7 +133,7 @@
 
             </Grid>
 
-            --><!--<Border Grid.Column="0" Background="#FF8EAFD4">--><!--
+            <!--<Border Grid.Column="0" Background="#FF8EAFD4">-->
             <Border  Name="brdrGamesList" Grid.Column="0" Background="#FF44658D">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -183,5 +147,5 @@
                 </Grid>
             </Border>
         </Grid>
-    </Border>-->
+    </Border>
 </UserControl>

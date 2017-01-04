@@ -70,7 +70,7 @@
         </Style>
     </UserControl.Resources>
     <Border>
-        <Grid Name="gridSalesSettings" GotFocus="Grid_GotFocus">
+        <Grid Name="gridSalesSettings" GotFocus="Grid_GotFocus" Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="279"/>
