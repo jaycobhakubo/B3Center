@@ -49,7 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                 ReportViewer.Focusable = true;
                 ReportViewer.Focus();
             }
-           
+
             UpdateAccountHistoryReportSessionList();
         }
 
@@ -175,7 +175,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             var viewModel = ReportsViewModel.Instance;
             var dateTime = StartDateTime.GetDateTime();
             viewModel.UpdateAccountHistoryReportSessionsByDate(dateTime);
-           
+
         }
     }
 }

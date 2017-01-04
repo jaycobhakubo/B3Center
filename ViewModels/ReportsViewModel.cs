@@ -18,6 +18,7 @@ using GameTech.Elite.Reports;
 using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GameTech.Elite.Client.Modules.B3Center.Model;
 
 
 //US1618: B3 Session Report
@@ -76,6 +77,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private static readonly object m_syncRoot = new Object();
         private int m_accountNumberSelected;
 
+    
 
         //Reports
         private AccountsReportView m_accountsReportView = new AccountsReportView();// = new AccountsReportView;
@@ -92,6 +94,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private BallCallReportView m_ballCallReportView = new BallCallReportView();
         private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
         private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
+        private AcctHistoryReportView m_acctHistoryReportView;
+
+
 
         #endregion
 
@@ -141,9 +146,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             LoadBallCallReportDefList();
             m_canExecute = true;
 
+      
+
         }
 
+       
 
+       
         /// <summary>
         /// Initializes the ViewModel with the specified controller.
         /// </summary>
@@ -224,10 +233,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             m_reports = controller.Reports;
             LoadReportList();
+
+            m_rptTempModel.ReportTitle = "Account History Report";
+            m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
+            m_accountHistoryReportView = new AccountHistoryReportView();
+            //m_acctHistoryReportView = new AcctHistoryReportView() { DataContext = ReportTempVm };
             
         }
 
-
+      
 
 
         /// <summary>
@@ -317,7 +331,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 case "Accounts":
                     {
-                        view = m_accountsReportView;
+                        view = m_acctHistoryReportView;
                         break;
                     }
                 case "Daily":

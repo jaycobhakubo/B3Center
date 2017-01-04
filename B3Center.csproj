@@ -120,8 +120,6 @@
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
     <Compile Include="Business\B3Controller.cs" />
-    <Compile Include="Business\GameModels\CrazyBoutGameModel.cs" />
-    <Compile Include="Business\GameModels\GameModel.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\Selecteditem.cs" />
@@ -145,6 +143,11 @@
     <Compile Include="Messages\GetSessionOperatorListMessage.cs" />
     <Compile Include="Messages\SessionStartMessage.cs" />
     <Compile Include="Messages\SetB3BallsMessage.cs" />
+    <Compile Include="Model\CrazyBoutGameModel.cs" />
+    <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Model\ReportParameterModel.cs" />
+    <Compile Include="Model\Reports.cs" />
+    <Compile Include="Model\ReportTemplateModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -159,6 +162,9 @@
     </Compile>
     <Compile Include="UI\ReportViews\AccountsReportView.xaml.cs">
       <DependentUpon>AccountsReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\AcctHistoryReportView.xaml.cs">
+      <DependentUpon>AcctHistoryReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ReportViews\BallCallReportView.xaml.cs">
       <DependentUpon>BallCallReportView.xaml</DependentUpon>
@@ -181,8 +187,14 @@
     <Compile Include="UI\ReportViews\MonthlyReportView.xaml.cs">
       <DependentUpon>MonthlyReportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ReportViews\ReportParameter.xaml.cs">
+      <DependentUpon>ReportParameter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ReportViews\ReportsView.xaml.cs">
       <DependentUpon>ReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReportViews\ReportTemplate.xaml.cs">
+      <DependentUpon>ReportTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ReportViews\SessionReportView.xaml.cs">
       <DependentUpon>SessionReportView.xaml</DependentUpon>
@@ -282,11 +294,17 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ReportParameterViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\ReportTemplateViewModel.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\NewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\OriginalStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,6 +324,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ReportViews\AccountsReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\AcctHistoryReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,7 +359,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ReportViews\ReportParameter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ReportViews\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\ReportTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -546,6 +576,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\SettingViews\GameSettingView.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Business\GameModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

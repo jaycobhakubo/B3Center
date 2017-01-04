@@ -9,11 +9,11 @@
        
         <!--<ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/OriginalStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/NewStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         </ResourceDictionary>-->
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
     </UserControl.Resources>
     <DockPanel>
 
@@ -24,41 +24,98 @@
             </Grid.ColumnDefinitions>
 
 
-            <Border Grid.Column="1"   Style="{DynamicResource LightBlueBorder}" Margin="4">
-                <ContentPresenter Name="ReportsTransitionControl" Content="{Binding SelectedReportView}"/>
+            <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"  Style="{DynamicResource LightBlueBorderNoBackGround}" Margin="8">
+                        <ContentPresenter Margin="0,0,0,0" Name="ReportsTransitionControl" Content="{Binding SelectedReportView}" />
+                    </Border>
+
+                    <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
+                    </Border>
+                    <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                      
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
+                    </Border>-->
+                    <!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->
+
+
+                    <Border Grid.Row="1" Margin="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
+                                <Grid Grid.Column="1" Grid.Row="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="View Report"
+                                HorizontalAlignment="Right" 
+                                x:Name="btnSave"
+                                VerticalAlignment="Top"
+                             
+                                Tag="1"/>
+                                    <!--Click="btnSave_Click"-->
+                                    <Button Grid.Column="1"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Print Report"
+                                HorizontalAlignment="Left"
+                                Name="btnCancel" 
+                                VerticalAlignment="Top"
+                            />
+                                    <!--Click="btnCancel_Click"-->
+
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                                <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                            </Border>
+
+
+                        </Grid>
+                    </Border>
+
+
+                </Grid>
             </Border>
 
-            <Border Style="{DynamicResource DarkBlueBorder}" Margin="4">
+            <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <!--<TextBlock Grid.Row="0" Text="Reports" Style="{StaticResource HeaderStyle2}"/>-->
                         <ListBox Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}" SelectionChanged="ListBox_SelectionChanged">
-                            <!--<ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>-->
-                            <!--<ListBox.ItemsSource ="{Binding ReportList}"/>-->
+
                         </ListBox>
                     </ScrollViewer>
                 </Grid>
             </Border>
 
-            <!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0">-->
 
-                <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
-            </Border>
-            <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
-            </Border>
+          
+
         </Grid>
     </DockPanel>
 </UserControl>

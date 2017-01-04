@@ -8,37 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
-        <Style TargetType="{x:Type ComboBoxItem}">
-            <Setter Property="SnapsToDevicePixels" Value="true" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="MinHeight" Value="40"/>
-            <Setter Property="FontWeight" Value="Regular" />
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBoxItem">
-                        <Border
-                                  Name="Border"
-                                    CornerRadius="0"
-                                    Background="White">
-
-                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="10,0">
-                                        <ContentPresenter />
-                            </TextBlock>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsHighlighted" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+      
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
