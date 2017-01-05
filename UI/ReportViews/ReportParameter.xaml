@@ -9,12 +9,19 @@
     <Grid>
         <Border  Name="SelectDateBorder">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                <TextBlock Text="Date"/>
-                <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" />
-                
+
+
+                <TextBlock Text="Start Date" Name="StartDateTimepar" Visibility="{Binding StartEndDateWTime}" />
+                <shared:DatePickerUserControl  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" />
+                <TextBlock Text="End Date" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
+                <shared:DatePickerUserControl  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"/>
+
+                <TextBlock Name="DatePar" Text="Date" Visibility="{Binding DateInput}"/>
+                <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Visibility="{Binding ElementName=DatePar, Path=Visibility }" />
+
                 <WrapPanel Margin="0 0 5 0">
-                    <TextBlock Width="140" HorizontalAlignment="Left"  Text="Month"  Padding="5,5,0,2" />
-                    <TextBlock Width="90"  HorizontalAlignment="Left"  Text="Year"  Padding="5,5,0,2"/>
+                    <TextBlock Name="MonthPar" Width="140" HorizontalAlignment="Left"  Text="Month"  Padding="5,5,0,2" Visibility="{Binding MonthYearInput}"/>
+                    <TextBlock Name="YearPar" Width="90"  HorizontalAlignment="Left"  Text="Year"  Padding="5,5,0,2"  Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
                 </WrapPanel>
                 <DockPanel Width="280" HorizontalAlignment="Center">
 
@@ -22,34 +29,39 @@
                                    Width="140"
                                    ItemsSource="{Binding Months}"
                                    SelectedItem="{Binding MonthSelected}"
-                                   Name="MonthCombobox" Margin="0,0,1,0"/>
+                                   Name="MonthCombobox" Margin="0,0,1,0"
+                               Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
 
                     <ComboBox  DockPanel.Dock="Right"
                                 
                                    ItemsSource="{Binding Years}"
                                    SelectedItem="{Binding AccountReportYearSelected}"
-                                   Name="YearCombobox" Margin="1,0,0,0"/>
-                    </DockPanel>
-                <TextBlock x:Name="txtblkStartDate" Text="Start Date"  />
-                <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right"  ShowTime="False" Margin="0,0,0,5" />
-                <TextBlock x:Name="txtblkEndDate" Text="End Date"  />
-                <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right" x:Name="EndDateTime" ShowTime="False" Margin="0,0,0,0"/>
-                <TextBlock Text="Session"  />
+                                   Name="YearCombobox" Margin="1,0,0,0" 
+                                Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
+                </DockPanel>
+                <TextBlock x:Name="txtblkStartDate" Text="Start Date"  Visibility="{Binding StartEndDate}"/>
+                <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right"  ShowTime="False" Margin="0,0,0,5" Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
+                <TextBlock x:Name="txtblkEndDate" Text="End Date"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
+                <shared:DatePickerUserControl  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"  HorizontalAlignment="Right" x:Name="EndDateTime" ShowTime="False" Margin="0,0,0,0"/>
+                <TextBlock Text="Session" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
                                Width="280"
                                ItemsSource="{Binding AccountHistoryReportSessionList}"
                                SelectedItem="{Binding AccountHistoryReportSessionSelected}"
                                DisplayMemberPath="DisplayName"
-                               x:Name="SessionCombobox"/>
-                <TextBlock Text="Account Number"  />
+                               x:Name="SessionCombobox"
+                     Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"
+                        />
+                <TextBlock Text="Account Number" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
                 <ComboBox 
                                Width="280"                               
                                x:Name="AccountNumberCombobox"
                                 ItemsSource="{Binding AccountHistoryReportAccountList}"
                                 SelectedItem="{Binding AccountHistoryReportAccountSelected}"
+                     Visibility="{Binding ElementName=AcctPar, Path=Visibility}"
                               />
 
-                <TextBlock Name="lblBallCallCategory" Text="Category"  />
+                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}"  />
                 <ComboBox  
                         Grid.Row="0"
                               
@@ -57,20 +69,18 @@
                                x:Name="BallCallDefCombobox"
                                ItemsSource="{Binding BallCallReportDefList}"
                                SelectedItem="{Binding BallCallReportDefSelected}"
-                               Margin="0,0,0,5" />
+                               Margin="0,0,0,5" 
+                     Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
+                    />
 
-                <TextBlock Text="Starting Card"   />
+                <TextBlock Text="Starting Card"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
                 <TextBox MaxLength="6" Name="txtbxStartingCard" 
-                           
+                           Text="{Binding StartingCard}"  Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"
                               ></TextBox>
 
-                <TextBlock Text="Ending Card" />
-                <TextBox  MaxLength="6" Name="txtbxEndingCard" />
-                         
-                <TextBlock Text="Start Date" />
-                <shared:DatePickerUserControl  HorizontalAlignment="Right" />
-                <TextBlock Text="End Date"   />
-                <shared:DatePickerUserControl  HorizontalAlignment="Right" />
+                <TextBlock Text="Ending Card" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
+                <TextBox  MaxLength="6" Name="txtbxEndingCard" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" />
+
 
             </StackPanel>
         </Border>

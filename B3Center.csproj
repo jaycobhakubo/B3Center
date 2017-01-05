@@ -145,6 +145,7 @@
     <Compile Include="Messages\SetB3BallsMessage.cs" />
     <Compile Include="Model\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Model\ReportModel.cs" />
     <Compile Include="Model\ReportParameterModel.cs" />
     <Compile Include="Model\Reports.cs" />
     <Compile Include="Model\ReportTemplateModel.cs" />

@@ -97,6 +97,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private AcctHistoryReportView m_acctHistoryReportView;
 
 
+        private ObservableCollection<ReportModel> m_reportdef;
+        public ObservableCollection<ReportModel> ReportDef
+        {
+            get { return m_reportdef; }
+            set
+            {
+                m_reportdef = value;
+                RaisePropertyChanged("ReportDef");
+            }
+        }
 
         #endregion
 
@@ -107,6 +117,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         private ReportsViewModel()
         {
+
+            ReportDef = new ObservableCollection<ReportModel>
+            {
+                new ReportModel {reportTitle="Account",  reportTemplate= new ReportTemplate(new ReportTemplateViewModel(SetReportTemplateModel("Account", new string [] {"MonthYear" } )))}
+                 //new ReportModel {reportTitle="Account History",  reportTemplate= new ReportTemplate(new ReportTemplateViewModel(SetReportTemplateModel("Account History")))}
+            };
+
+
             SessionList = new ObservableCollection<Session>();
             JackpotReportSessionList = new ObservableCollection<Session>();
             SessionReportSessionList = new ObservableCollection<Session>();
@@ -234,8 +252,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_reports = controller.Reports;
             LoadReportList();
 
-            m_rptTempModel.ReportTitle = "Account History Report";
-            m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
+            //m_rptTempModel.ReportTitle = "Account History Report";
+            //m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
             m_accountHistoryReportView = new AccountHistoryReportView();
             //m_acctHistoryReportView = new AcctHistoryReportView() { DataContext = ReportTempVm };
             

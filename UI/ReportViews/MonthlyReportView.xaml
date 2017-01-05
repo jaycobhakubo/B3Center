@@ -47,10 +47,10 @@
                         <ComboBox  DockPanel.Dock="Left"
                                    Width="140"
                                    ItemsSource="{Binding Months}"
-                                   SelectedItem="{Binding MonthlyReportMonthSelected}"
+                     
                                    Name="MonthCombobox"
                                    Margin="0,0,1,0"/>
-
+                        <!--SelectedItem="{Binding MonthlyReportMonthSelected}"-->
                         <ComboBox  
                             DockPanel.Dock="Right"
                                   
