@@ -6,7 +6,7 @@
              xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="650" Loaded="UserControl_Loaded">
+            Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <!--<Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
         <Style TargetType="{x:Type ComboBoxItem}">
@@ -58,7 +58,7 @@
 
             <Button Grid.Column="1" Content="New Report" Name="SelectDatesButton" Click="SelectDatesButton_Click" HorizontalAlignment="Right"/>
 
-            <shared:FullScreenUserControl Grid.Column="2" Grid.Row="0"  x:Name="FullScreenButton" />
+            <shared:FullScreenUserControl Grid.Column="2" Grid.Row="0"  x:Name="FullScreenButton" Visibility="Hidden" />
         </Grid>
         
         <Border Grid.Row="1" Name="ReportViewerBorder" >

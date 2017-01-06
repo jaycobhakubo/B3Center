@@ -610,7 +610,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             ClearSavedNotification();
             if (isValidateOk == false)
             {
-                SetBorderBrushToDefault();
+                //SetBorderBrushToDefault();
                 isValidateOk = true;
             }
         }

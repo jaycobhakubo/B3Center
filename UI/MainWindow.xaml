@@ -15,11 +15,11 @@
     <ui:EliteWindowBase.Resources>
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
-        <Menu x:Name="m_mainMenu" DockPanel.Dock="Top">
+        <!--<Menu x:Name="m_mainMenu" DockPanel.Dock="Top">
             <MenuItem x:Name="m_fileMenu" Header="_File">
                 <MenuItem x:Name="m_fileExitMenuItem" Header="E_xit" Command="{Binding FileExitCommand}" />
             </MenuItem>
-        </Menu>
+        </Menu>-->
         <TabControl Focusable="False">
             <TabItem Header="Session">
                 <Border>

@@ -162,11 +162,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void SetBorderBrushToDefault()
         {
-            txtbxMinPlayers.BorderBrush = Brushes.LightGray;
-            txtbxGameStartDelay.BorderBrush = Brushes.LightGray;
-            txtbxWaitCountDown.BorderBrush = Brushes.LightGray;
-            txtbxConsolationPrize.BorderBrush = Brushes.LightGray;
-            txtbxGameRecallPassword.BorderBrush = Brushes.LightGray;
+            //txtbxMinPlayers.BorderBrush = Brushes.LightGray;
+            //txtbxGameStartDelay.BorderBrush = Brushes.LightGray;
+            //txtbxWaitCountDown.BorderBrush = Brushes.LightGray;
+            //txtbxConsolationPrize.BorderBrush = Brushes.LightGray;
+            //txtbxGameRecallPassword.BorderBrush = Brushes.LightGray;
         }
 
         /// <summary>

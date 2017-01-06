@@ -393,7 +393,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private void Grid_GotFocus(object sender, RoutedEventArgs e)
         {
             ClearSavedNotification();
-            SetBorderBrushToDefault();
+            //SetBorderBrushToDefault();
         }
 
         private void txtbxNumericOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)

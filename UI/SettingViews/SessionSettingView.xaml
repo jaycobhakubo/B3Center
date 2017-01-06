@@ -4,37 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="710" d:DesignWidth="824">
+           >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-       
     </UserControl.Resources>
     <Border>
-        <Grid Name="gridSessionSettings" GotFocus="Grid_GotFocus" Margin="0,20,0,0">
+        <Grid Name="gridSessionSettings" GotFocus="Grid_GotFocus" >
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="279"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
                 <ColumnDefinition Width="75"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
 
-        
-
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>              
-                <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
-            <StackPanel Name="stkpnlSessionSetting" Grid.Column="1" Grid.Row="1" Height="Auto">
-                <Label x:Name="lblCallSpeedMin_Copy" Grid.Row="7" Grid.Column="3" Content="Payout Limit" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="130"  Height="Auto" Margin="0 0 0 0" Padding="0 0 0 2"/>
-                <TextBox Name="txtbxPayoutLimit" Grid.Column="3"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" TabIndex="1" Tag="39" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" />
-                <Label x:Name="lblCallSpeedMin_Copy1" Grid.Row="7" Grid.Column="3" Content="Jackpot Limit" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="130"  Height="Auto"/>
-                <TextBox Name="txtbxJackpotLimit" Grid.Column="3"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" TabIndex="2" Tag="40"  PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
-                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Grid.Column="3" HorizontalAlignment="Left"  Grid.Row="7"  TabIndex="3" Tag="41"  Margin="0 31 0 0"/>
+
+
+            <StackPanel Name="stkpnlSessionSetting" Grid.Column="1" Grid.Row="1">
+                <Label x:Name="lblCallSpeedMin_Copy"  Grid.Column="3" Content="Payout Limit" />
+                <TextBox Name="txtbxPayoutLimit"   TabIndex="1" Tag="39" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" />
+                <!--<Label x:Name="lblCallSpeedMin_Copy1" Grid.Row="7" Grid.Column="3" Content="Jackpot Limit" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="130"  Height="Auto"/>-->
+                <Label x:Name="lblCallSpeedMin_Copy1"  Content="Jackpot Limit" />
+                <TextBox Name="txtbxJackpotLimit"   TabIndex="2" Tag="40"  PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
+                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Tag="41" />
             </StackPanel>
             
            

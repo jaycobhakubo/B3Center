@@ -192,7 +192,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void SetBorderBrushToDefault()
         {
-            txtbxLogRecycleDays.BorderBrush = Brushes.LightGray;
+            //txtbxLogRecycleDays.BorderBrush = Brushes.LightGray;
         }
 
         /// <summary>

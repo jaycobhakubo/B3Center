@@ -10,87 +10,32 @@
        
     </UserControl.Resources>
     <Border>
-        <Grid Name="gridServerMessage" GotFocus="gridServerMessage_GotFocus" Margin="0,20,0,0">
+        <Grid Name="gridServerMessage" GotFocus="gridServerMessage_GotFocus">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="279"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
                 <ColumnDefinition Width="75"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-
             </Grid.RowDefinitions>
-            
-            <StackPanel Name="stkpnlServerGame" Grid.Row="1" Grid.Column="1">
-                <Label x:Name="lblCallSpeedMin_Copy"  Content="Min Player"  Height="Auto" Margin="0" Padding="0 0 0 2"/>
-                <TextBox Name="txtbxMinPlayers"  TextWrapping="Wrap" VerticalAlignment="Bottom" Text=""  Height="31" Tag="34" TabIndex="1" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" LostFocus="txtbxMinPlayers_LostFocus"  />
-                <Label x:Name="lblCallSpeedMin_Copy1" Content="Game Start Delay(sec)"  Height="Auto"/>
-                <TextBox Name="txtbxGameStartDelay" TextWrapping="Wrap" VerticalAlignment="Bottom" Text=""   Tag="35" TabIndex="2" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"   />
-                <Label x:Name="lblCallSpeedMin_Copy2" Content="Consolation Prize" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="130"  Height="Auto"/>
-                <TextBox Name="txtbxConsolationPrize"  TextWrapping="Wrap" VerticalAlignment="Bottom" Text=""  Height="31" Tag="36" TabIndex="3"  PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
-                <Label x:Name="lblCallSpeedMin_Copy3" Content="Game Recall Password" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="193"  Height="Auto"/>
-                <TextBox Name="txtbxGameRecallPassword" TextWrapping="Wrap" VerticalAlignment="Bottom" Text=""   Height="31" Tag="37" TabIndex="4" MaxLength="25"   />
-                <Label x:Name="lblCallSpeedMin_Copy4"  Content="Wait Count Down(sec)" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="225"  Height="Auto"/>
-                <TextBox Name="txtbxWaitCountDown"  TextWrapping="Wrap" VerticalAlignment="Bottom" Text=""   Height="31" Tag="38" TabIndex="5"  PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
+
+
+            <StackPanel Name="stkpnlServerGame"  Grid.Column="1" Grid.Row="0">
+                <Label x:Name="lblCallSpeedMin_Copy"  Content="Min Player" />
+                <TextBox Name="txtbxMinPlayers"    Tag="34" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" LostFocus="txtbxMinPlayers_LostFocus"  />
+                <Label x:Name="lblCallSpeedMin_Copy1" Content="Game Start Delay(sec)"  />
+                <TextBox Name="txtbxGameStartDelay"   Tag="35" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"   />
+                <Label x:Name="lblCallSpeedMin_Copy2" Content="Consolation Prize"     />
+                <TextBox Name="txtbxConsolationPrize"  Tag="36"   PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
+                <Label x:Name="lblCallSpeedMin_Copy3" Content="Game Recall Password" />
+                <TextBox Name="txtbxGameRecallPassword"   Tag="37"  MaxLength="25"   />
+                <Label x:Name="lblCallSpeedMin_Copy4"  Content="Wait Count Down(sec)" />
+                <TextBox Name="txtbxWaitCountDown"   Tag="38"   PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
             </StackPanel>
-                      
-          
-        
-           
-          
 
-            <!--<Grid Grid.Row="19" Grid.ColumnSpan="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="5"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Border
-                        Grid.Row="0"
-                    	Height="43" 
-                    	Width="360"
-                    	HorizontalAlignment ="Right"
-                        VerticalAlignment="Bottom"
-                        >
-                    <ContentPresenter 
-                    		x:Name="SaveCancelTransition" 
-                    		Height="43" 
-                    		VerticalAlignment="Bottom" 
-                    		HorizontalAlignment="Left" Visibility="Hidden"/>
-                </Border>
-
-            </Grid>-->
-
-            <!--<Grid Grid.Column="3" Grid.ColumnSpan="3">
-                <Label x:Name="lblSavedNotification"
-                            Background="#44658D"
-                               Foreground="White"
-                               FontStyle="Italic"
-                               FontWeight="ExtraLight"
-                                Grid.Column="5"
-                                Content="Saved Successfully"
-                                Padding="5,2,5,3"
-                                VerticalContentAlignment="Center"
-                                VerticalAlignment="Top" 
-                                HorizontalAlignment="Right"
-                               Style="{x:Null}"
-                               >
-
-                </Label>
-            </Grid>-->
-            <!--<Label x:Name="lblNewOperator" Content="Server Game" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" FontSize="26" Height="Auto" Width="163" Margin="0,7.5"/>-->
         </Grid>
     </Border>
 </UserControl>
