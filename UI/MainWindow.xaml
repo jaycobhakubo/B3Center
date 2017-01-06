@@ -9,6 +9,7 @@
                     
      xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
      xmlns:localSettings="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
+     xmlns:localOperators="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
    
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
      WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
@@ -42,7 +43,7 @@
             
             <TabItem Header="Operator">
                 <Border>
-                    <TextBlock Text="OPERATOR" FontSize="120"></TextBlock>
+                    <!--<localOperators:OperatorView/>-->
                 </Border>
             </TabItem>
         </TabControl>

@@ -18,7 +18,7 @@ using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
+namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
 {
     /// <summary>
     /// Interaction logic for CharityView.xaml

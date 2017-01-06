@@ -7,13 +7,6 @@
              d:DesignHeight="600" d:DesignWidth="600">
     <UserControl.Resources>
        
-        <!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/NewStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        </ResourceDictionary>-->
-
     </UserControl.Resources>
     <DockPanel>
 
@@ -49,16 +42,6 @@
                             </ContentPresenter.Resources>
                         </ContentPresenter>
                     </Border>
-
-                    <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
-                    </Border>
-                    <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                      
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
-                    </Border>-->
-                    <!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->
-
 
                     <Border Grid.Row="1" Margin="8">
                         <Grid>
@@ -133,3 +116,21 @@
         </Grid>
     </DockPanel>
 </UserControl>
+
+
+<!--<ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/NewStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        </ResourceDictionary>-->
+
+
+<!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
+                    </Border>
+                    <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                      
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
+                    </Border>-->
+<!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->

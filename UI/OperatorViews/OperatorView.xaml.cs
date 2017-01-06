@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 
-namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
+namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
 {
  
 
     /// <summary>
     /// Interaction logic for OperatorSettingView.xaml
     /// </summary>
-    public partial class OperatorSettingView : UserControl
+    public partial class OperatorView : UserControl
     {
 
         #region MEMBER VARIABLEs
@@ -35,13 +35,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private Button m_btnSave;
         private Button m_btnDelete;
         private int m_currentOperatorSelected;
+        private Button btnBackOperatorSettings;
+        private Button btnNewOperator;
+        private Panel stkpnlOperatorList;
         UserControl view;
 
         #endregion
 
         #region CONSTRUCTORs
 
-        public OperatorSettingView()      
+        public OperatorView()      
         {
             InitializeComponent();
             m_operators  = SettingViewModel.Instance.Operators;     

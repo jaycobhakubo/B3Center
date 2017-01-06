@@ -34,7 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SalesSettingView m_salesSettingView;// = new SalesSettingView();
         private PlayerSettingView m_playerSettingView;// = new PlayerSettingView();
         private SessionSettingView m_sessionSettingView;// = new SessionSettingView();
-        private  OperatorSettingView m_operatorView;
+        //private  OperatorView m_operatorView;
 
 
         private SettingViewModel()
@@ -75,7 +75,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_playerSettingView = new PlayerSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 3).ToList());
             m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
             m_sessionSettingView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
-            m_operatorView = new OperatorSettingView();
+            //m_operatorView = new OperatorView();
             m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
 
             if (IsClassIIB3GameEnable == true)

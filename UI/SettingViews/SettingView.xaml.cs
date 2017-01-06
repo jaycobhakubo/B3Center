@@ -22,7 +22,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private readonly SalesSettingView m_salesSettingView;
         private readonly SessionSettingView m_sessionView;
         private readonly ServerGameSettingView m_serverGameView;
-        private readonly OperatorSettingView m_operatorView;
+        //private readonly OperatorView m_operatorView;
         private readonly List<ToggleButton> m_menuItems;
         private B3Setting m_B3Setting;
         private Button m_btnSave;
@@ -200,12 +200,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                             view = m_serverGameView;
                             break;
                         }
-                case "OperatorSettingToggleButton":
-                        {
-                            m_operatorView.ClearSelected();
-                            view = m_operatorView;                                                
-                            break;
-                        }                    
+                //case "OperatorSettingToggleButton":
+                //        {
+                //            m_operatorView.ClearSelected();
+                //            view = m_operatorView;                                                
+                //            break;
+                //        }                    
             }
 
 

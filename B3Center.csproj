@@ -208,7 +208,7 @@
     <Compile Include="UI\ReportViews\WinnerCardsReportView.xaml.cs">
       <DependentUpon>WinnerCardsReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\CharityView.xaml.cs">
+    <Compile Include="UI\OperatorViews\CharityView.xaml.cs">
       <DependentUpon>CharityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
@@ -253,8 +253,8 @@
     <Compile Include="UI\SettingViews\GameSettingWildBallProgView.xaml.cs">
       <DependentUpon>GameSettingWildBallProgView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\OperatorListSettingView.xaml.cs">
-      <DependentUpon>OperatorListSettingView.xaml</DependentUpon>
+    <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
+      <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\PlayerSettingView.xaml.cs">
       <DependentUpon>PlayerSettingView.xaml</DependentUpon>
@@ -384,7 +384,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\CharityView.xaml">
+    <Page Include="UI\OperatorViews\CharityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,7 +444,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\OperatorListSettingView.xaml">
+    <Page Include="UI\OperatorViews\OperatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

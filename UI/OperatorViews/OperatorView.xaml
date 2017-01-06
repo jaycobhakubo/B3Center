@@ -1,29 +1,23 @@
-﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.SettingView"
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews.OperatorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="710" d:DesignWidth="1003"
-         
-             >
+             d:DesignHeight="710" d:DesignWidth="674">
     <UserControl.Resources>
-        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,15,0,2"/>
-        </Style>
-    
-        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Margin" Value="0,30,0,0"></Setter>
-            <Setter Property="Height" Value="22"/>
-        </Style>
-
-        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-        </Style>
- 
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
+
+    <!--<Border Grid.Column="1" >
+        <ContentPresenter 
+                            KeyboardNavigation.TabNavigation="Local"
+                            Name="CharityTransitionControl"                          
+                          >
+
+        </ContentPresenter>
+    </Border>-->
+
     <Border >
         <Grid >
             <Grid.ColumnDefinitions>
@@ -39,8 +33,10 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
+                    
+                    
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="{Binding SetBorderValue }">
-                        <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Center"  Name="SettingTransitionControl" Content="{Binding SelectedSettingView}" Margin="0,15,0,0"/>
+                        <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Center"  Name="CharityTransitionControl" Content="{Binding SelectedOperatorView}" Margin="0,15,0,0"/>
                     </Border>
 
                     <Border Grid.Row="1"  Margin="8">
@@ -98,15 +94,15 @@
 
 
 
-                <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+            <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >
-                        
+                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding OperatorList}" SelectedItem="{Binding OperatorSelected}"  >
+
                         </ListBox>
                     </ScrollViewer>
                 </Grid>
@@ -116,11 +112,3 @@
 </UserControl>
 
 
-<!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/OriginalStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-            <Converters:ValueToBoolConverter x:Key="ConvertValueToBool" />
-        </ResourceDictionary>-->
-<!--<BooleanToVisibilityConverter x:Key="VisibilityConverter" />-->
