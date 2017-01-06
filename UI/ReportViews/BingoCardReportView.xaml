@@ -40,21 +40,21 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
 
-                    <TextBlock Text="Starting Card"   Style="{StaticResource TextBlockFontStyle1}"/>
+                    <TextBlock Text="Starting Card"   />
                     <TextBox MaxLength="6" Name="txtbxStartingCard" 
                              PreviewKeyDown="txtbxStartingCard_PreviewKeyDown" 
                              PreviewTextInput ="txtbxNumericOnly_PreviewTextInput"
                              TextChanged="txtbxEndingCard_TextChanged"
                               ></TextBox>
 
-                    <TextBlock Text="Ending Card"  Style="{StaticResource TextBlockFontStyle}"/>
+                    <TextBlock Text="Ending Card"  />
                     <TextBox  MaxLength="6" Name="txtbxEndingCard" 
                            TextChanged="txtbxEndingCard_TextChanged"
                                PreviewKeyDown="txtbxStartingCard_PreviewKeyDown" 
                              PreviewTextInput ="txtbxNumericOnly_PreviewTextInput"></TextBox>
 
-                    <Button Visibility="Collapsed" Content="View Report" Margin="0,15,0,5"  Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableBingoCardReportButtons}"/>
-                    <Button Visibility="Collapsed" Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableBingoCardReportButtons}"/>
+                    <Button  Visibility="Hidden" Content="View Report" Margin="0,15,0,5"  Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableBingoCardReportButtons}"/>
+                    <Button  Visibility="Hidden" Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableBingoCardReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

@@ -37,9 +37,9 @@
         <Grid Grid.Row="1">
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                    <TextBlock Text="Date"  Style="{StaticResource TextBlockFontStyle1}"/>
+                    <TextBlock Text="Date"  />
                     <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
-                    <TextBlock Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
+                    <TextBlock Text="Session"  />
                     <ComboBox  
                                Width="280"
                                ItemsSource="{Binding JackpotReportSessionList}"

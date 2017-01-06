@@ -2,6 +2,17 @@
 // This is an unpublished work protected under the copyright laws of the United
 // States and other countries.  All rights reserved.  Should publication occur
 // the following will apply:  © 2015 GameTech International, Inc.
+//US1618: B3 Session Report
+//US4300: B3 Daily Report
+//US4301: B3 Monthly Report
+//US4317: B3 Void Report
+//US4316: B3 Detail Report
+//US4315: B3 Drawer Report
+//US4314: B3 Jackpot Report
+//US4302: B3 Accounts Report
+//US4369: B3 Center: Option to print reports without previewing the report.
+//US4377: B3 Center: Generate the Monthly report by month and year.
+//US4373: B3 Center: Generate the Accounts Report by month and year.
 #endregion
 
 using System;
@@ -19,19 +30,6 @@ using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GameTech.Elite.Client.Modules.B3Center.Model;
-
-
-//US1618: B3 Session Report
-//US4300: B3 Daily Report
-//US4301: B3 Monthly Report
-//US4317: B3 Void Report
-//US4316: B3 Detail Report
-//US4315: B3 Drawer Report
-//US4314: B3 Jackpot Report
-//US4302: B3 Accounts Report
-//US4369: B3 Center: Option to print reports without previewing the report.
-//US4377: B3 Center: Generate the Monthly report by month and year.
-//US4373: B3 Center: Generate the Accounts Report by month and year.
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -58,7 +56,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<string> m_ballCallReportDefList;
 
         private IEnumerable<string> m_months;
-        private IEnumerable<int> m_years;
+        private IEnumerable<string> m_years;
 
         private List<B3Report> m_reports;    
         private Session m_sessionReportSessionSelected;
@@ -70,9 +68,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private string m_ballCallReportDefSelected;
         private int m_accountHistoryReportAccountSelected;
         private string m_monthlyReportMonthSelected;
-        private int m_monthlyReportYearSelected;
+        private string m_monthlyReportYearSelected;
         private string m_accountReportMonthSelected;
-        private int m_accountReportYearSelected;
+        private string m_accountReportYearSelected;
         private static volatile ReportsViewModel m_instance;
         private static readonly object m_syncRoot = new Object();
         private int m_accountNumberSelected;
@@ -120,10 +118,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
 
-            var years = new List<int>();
+            var years = new List<string>();
             for (var i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
             {
-                years.Add(i);
+                years.Add(i.ToString());
             }
 
             Years = years;
@@ -134,11 +132,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             //Set MonthlyReport
             MonthlyReportMonthSelected = currentMonth;
-            MonthlyReportYearSelected = currentYear;
+            MonthlyReportYearSelected = currentYear.ToString();
 
             //Set Account Report
             AccountReportMonthSelected = currentMonth;
-            AccountReportYearSelected = currentYear;
+            AccountReportYearSelected = currentYear.ToString();
 
             IsLoading = false;
             IsPrinting = false;
@@ -431,7 +429,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public IEnumerable<int> Years
+        public IEnumerable<string> Years
         {
             get
             {
@@ -876,7 +874,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <value>
         /// The monthly report year selected.
         /// </value>
-        public int MonthlyReportYearSelected
+        public string MonthlyReportYearSelected
         {
             get
             {
@@ -921,7 +919,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <value>
         /// The account report year selected.
         /// </value>
-        public int AccountReportYearSelected
+        public string AccountReportYearSelected
         {
             get
             {

@@ -34,12 +34,12 @@
         </Border>
 
         <Border Grid.Row="1" Name="SelectDateBorder" >
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
 
-                <TextBlock Text="Start Date"  Style="{StaticResource TextBlockFontStyle1}"/>
+                <TextBlock Text="Start Date"/>
                 <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="StartDateTime" />
 
-                <TextBlock Text="End Date"  Style="{StaticResource TextBlockFontStyle}" />
+                <TextBlock Text="End Date"   />
                 <shared:DatePickerUserControl  HorizontalAlignment="Right" x:Name="EndDateTime"/>
 
                 <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"/>

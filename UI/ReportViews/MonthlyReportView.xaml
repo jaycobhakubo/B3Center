@@ -8,7 +8,8 @@
               mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>
+        <!--<Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>-->
+        <!--<Style TargetType="{x:Type TextBlock}"></Style>-->
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -39,8 +40,8 @@
             <Border  Name="SelectDateBorder">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                     <WrapPanel Margin="0 0 5 0">
-                        <TextBlock Width="140" HorizontalAlignment="Left"  Text="Month"  Padding="5,5,0,2" Style="{StaticResource TextBlockFontStyle2}"/>
-                        <TextBlock Width="90"  HorizontalAlignment="Left"  Text="Year"  Padding="5,5,0,2" Style="{StaticResource TextBlockFontStyle2}"/>
+                        <TextBlock Width="140" HorizontalAlignment="Left"  Text="Month" />
+                        <TextBlock Width="90"  HorizontalAlignment="Left"  Text="Year"  />
                     </WrapPanel>
 
                     <DockPanel Width="280" HorizontalAlignment="Center">

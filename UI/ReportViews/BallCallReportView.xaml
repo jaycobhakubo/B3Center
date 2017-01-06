@@ -40,7 +40,7 @@
         <Grid Grid.Row="1">
             <Border  Name="SelectDateBorder">
                 <StackPanel Name="stkpnlParameter" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                    <TextBlock Name="lblBallCallCategory" Text="Category"  Style="{StaticResource TextBlockFontStyle1}"/>
+                    <TextBlock Name="lblBallCallCategory" Text="Category" />
                     <ComboBox  
                         Grid.Row="0"
                               
@@ -48,13 +48,13 @@
                                x:Name="BallCallDefCombobox"
                                ItemsSource="{Binding BallCallReportDefList}"
                                SelectedItem="{Binding BallCallReportDefSelected}"
-                               Margin="0,0,0,5" SelectionChanged="BallCallDefCombobox_SelectionChanged"/>
+                              SelectionChanged="BallCallDefCombobox_SelectionChanged"/>
 
-                    <TextBlock x:Name="txtblkStartDate" Text="Start Date"  Style="{StaticResource TextBlockFontStyle}"/>
-                    <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False" Margin="0,0,0,5" DateTimeChangedEvent="DateTime_ChangedEvent"/>
-                    <TextBlock x:Name="txtblkEndDate" Text="End Date"  Style="{StaticResource TextBlockFontStyle}" />
+                    <TextBlock x:Name="txtblkStartDate" Text="Start Date"  />
+                    <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right" x:Name="StartDateTime" ShowTime="False"  DateTimeChangedEvent="DateTime_ChangedEvent"/>
+                    <TextBlock x:Name="txtblkEndDate" Text="End Date"  />
                     <shared:DatePickerUserControl  Grid.Row="1"  HorizontalAlignment="Right" x:Name="EndDateTime" ShowTime="False" Margin="0,0,0,0" DateTimeChangedEvent="DateTime_ChangedEvent"/>
-                    <TextBlock Name="lblBallCallSession" Text="Session"  Style="{StaticResource TextBlockFontStyle}"/>
+                    <TextBlock Name="lblBallCallSession" Text="Session"  />
                     <ComboBox  
                         Grid.Row="2"
                     
