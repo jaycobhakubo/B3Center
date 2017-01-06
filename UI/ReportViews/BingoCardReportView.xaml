@@ -53,8 +53,8 @@
                                PreviewKeyDown="txtbxStartingCard_PreviewKeyDown" 
                              PreviewTextInput ="txtbxNumericOnly_PreviewTextInput"></TextBox>
 
-                    <Button Content="View Report" Margin="0,15,0,5"  Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableBingoCardReportButtons}"/>
-                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableBingoCardReportButtons}"/>
+                    <Button Visibility="Collapsed" Content="View Report" Margin="0,15,0,5"  Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableBingoCardReportButtons}"/>
+                    <Button Visibility="Collapsed" Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableBingoCardReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

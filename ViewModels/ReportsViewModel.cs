@@ -94,7 +94,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private BallCallReportView m_ballCallReportView = new BallCallReportView();
         private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
         private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
-        private AcctHistoryReportView m_acctHistoryReportView;
+   
 
 
 
@@ -234,9 +234,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_reports = controller.Reports;
             LoadReportList();
 
-            m_rptTempModel.ReportTitle = "Account History Report";
-            m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
-            m_accountHistoryReportView = new AccountHistoryReportView();
+            //m_rptTempModel.ReportTitle = "Account History Report";
+            //m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
+            //m_accountHistoryReportView = new AccountHistoryReportView();
             //m_acctHistoryReportView = new AcctHistoryReportView() { DataContext = ReportTempVm };
             
         }
@@ -331,7 +331,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 case "Accounts":
                     {
-                        view = m_acctHistoryReportView;
+                        view = m_accountsReportView;
                         break;
                     }
                 case "Daily":

@@ -64,8 +64,8 @@
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox"/>
 
-                    <Button Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
-                    <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Visibility="Collapsed" Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
+                    <Button Visibility="Collapsed" Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>

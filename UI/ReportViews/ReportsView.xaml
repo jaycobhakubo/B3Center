@@ -33,7 +33,13 @@
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="0"  Style="{DynamicResource LightBlueBorderNoBackGround}" Margin="8">
-                        <ContentPresenter Margin="0,0,0,0" Name="ReportsTransitionControl" Content="{Binding SelectedReportView}" />
+                        <ContentPresenter Margin="0,0,0,0" Name="ReportsTransitionControl" Content="{Binding SelectedReportView}" >
+                            <ContentPresenter.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
                     </Border>
 
                     <!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
