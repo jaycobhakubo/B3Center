@@ -23,41 +23,40 @@
 
 
             <StackPanel Grid.Column="1" Grid.Row="1">
-                <Label Content="Operator Name" HorizontalAlignment="Left"   VerticalAlignment="Top"  Margin="0" Padding="0 0 0 2" />
-                <TextBox Name="txtbxOperatorName" TextWrapping="Wrap" VerticalAlignment="Bottom" MaxLength="18" TabIndex="1" />
+                <Label Content="Operator Name" />
+                <TextBox Name="txtbxOperatorName"  MaxLength="18"  />
 
-                <Label Content="Description" HorizontalAlignment="Left"   VerticalAlignment="Top" />
-                <TextBox Name="txtbxOperatorNameDescription"   TextWrapping="Wrap" VerticalAlignment="Bottom"  Grid.RowSpan="3" VerticalContentAlignment="Top"  TabIndex="2" MaxLength="40" MaxLines="1" />
+                <Label Content="Description"  />
+                <TextBox Name="txtbxOperatorNameDescription"   MaxLength="40" MaxLines="1" />
 
-                <Label Content="Address"    VerticalAlignment="Top"  />
-                <TextBox Name="txtbxAddress" Grid.Column="1"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom" MaxLength="60" TabIndex="4" />
+                <Label Content="Address"    />
+                <TextBox Name="txtbxAddress"  MaxLength="60"  />
 
-                <Label Content="City"  HorizontalAlignment="Left"   VerticalAlignment="Top" />
-                <TextBox Name="txtbxCity" Grid.Column="1"   Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Bottom" MaxLength="15" TabIndex="5" />
+                <Label Content="City"  />
+                <TextBox Name="txtbxCity"   MaxLength="15"  />
 
-                <Label  Content="State"  VerticalAlignment="Top" />
-                <TextBox x:Name="txtbxState" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="White" Grid.Column="1" Grid.Row="11" MaxLength="15" TabIndex="6"   />
+                <Label  Content="State"   />
+                <TextBox x:Name="txtbxState"   MaxLength="15"   />
 
-                <Label  Content="Zip Code" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <TextBox x:Name="txtbxZipCode" TextWrapping="Wrap" VerticalAlignment="Bottom"   MaxLength="5" TabIndex="7" PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput"/>
+                <Label  Content="Zip Code" />
+                <TextBox x:Name="txtbxZipCode"  MaxLength="5"  PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput"/>
 
-                <Label Content="Contact Name" VerticalAlignment="Top" />
-                <TextBox Name="txtbxContactName" Grid.Column="3"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom" MaxLength="30" TabIndex="3" />
+                <Label Content="Contact Name" />
+                <TextBox Name="txtbxContactName" MaxLength="30" />
 
             </StackPanel>
             
             <StackPanel Grid.Row="1" Grid.Column="3">
 
 
-                <Label Content="Icon Color"  VerticalAlignment="Top" Margin="0" Padding="0 0 0 2"/>
-                <ComboBox Name="cmbxIconColor" Grid.Column="3"   VerticalAlignment="Bottom" TabIndex="10" Height="22"
-                	FontWeight="Light" FontFamily="Segoe UI"  Grid.Row="5" />
+                <Label Content="Icon Color" />
+                <ComboBox Name="cmbxIconColor" />
 
-                <Label Content="Phone Number" VerticalAlignment="Top"   Padding="0 0 0 2"/>
-                <TextBox  Name="txtbxPhoneNumber" Grid.Column="3"   Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Bottom" MaxLength="14" TabIndex="8" />
+                <Label Content="Phone Number" />
+                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14"  />
 
-                <Label Content="Fax Number"  VerticalAlignment="Top"/>
-                <TextBox Name="txtbxFaxNumber"  TextWrapping="Wrap" VerticalAlignment="Bottom" MaxLength="14" TabIndex="9"  />
+                <Label Content="Fax Number"  />
+                <TextBox Name="txtbxFaxNumber" MaxLength="14"  />
 
             </StackPanel>
 

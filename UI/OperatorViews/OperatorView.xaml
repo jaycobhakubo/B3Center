@@ -5,9 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d" 
-             d:DesignHeight="710" d:DesignWidth="674">
+   >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,15,0,2"/>
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="0,30,0,0"></Setter>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="22"/>
+        </Style>
+
+
     </UserControl.Resources>
 
     <!--<Border Grid.Column="1" >
@@ -36,8 +51,8 @@
 
                     
                     
-                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="{Binding SetBorderValue }">
-                        <local:CharityView/>
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
+                        <local:CharityView VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
 
                     <Border Grid.Row="1"  Margin="8">

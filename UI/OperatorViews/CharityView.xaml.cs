@@ -357,7 +357,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         private void Grid_GotFocus(object sender, RoutedEventArgs e)
         {
             ClearSavedNotification();
-            SetBorderBrushToDefault();
+            //SetBorderBrushToDefault();
         }
 
         void m_btnCancel_Click(object sender, RoutedEventArgs e)
