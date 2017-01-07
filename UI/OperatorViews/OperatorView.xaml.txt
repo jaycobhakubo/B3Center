@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d" 
              d:DesignHeight="710" d:DesignWidth="674">
     <UserControl.Resources>
@@ -37,7 +36,7 @@
                     
                     
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="{Binding SetBorderValue }">
-                        <local:CharityView/>
+                        <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Center"  Name="CharityTransitionControl" Content="{Binding SelectedOperatorView}" Margin="0,15,0,0"/>
                     </Border>
 
                     <Border Grid.Row="1"  Margin="8">

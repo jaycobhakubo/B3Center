@@ -33,14 +33,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         private readonly CharityView m_charity;
         private CharityView m_newOperator;
         private Button m_btnSave;
-        private Button m_btnDelete = new Button();
+        private Button m_btnDelete;
         private int m_currentOperatorSelected;
         private Button btnBackOperatorSettings;
         private Button btnNewOperator;
-        //private Button m_btnDelete;
-        private Panel stkpnlOperatorList = new StackPanel();
-        private Label lblSavedNotification;
-        private ContentPresenter CharityTransitionControl = new ContentPresenter();
+        private Panel stkpnlOperatorList;
         UserControl view;
 
         #endregion
@@ -53,7 +50,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             m_operators  = SettingViewModel.Instance.Operators;     
             m_charity = new CharityView();
             m_btnSave = m_charity.BtnSave;
-            //m_btnDelete = m_charity.btnDelete;
+            m_btnDelete = m_charity.btnDelete;
             m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
             m_btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
             m_currentOperatorSelected = 0;
@@ -98,8 +95,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
                         {
                             tgb.IsChecked = true;
                             view = m_charity;
-                            //CharityTransitionControl.Content = view;
-                            //m_charity.lblSavedNotification.Visibility = Visibility.Visible;
+                            CharityTransitionControl.Content = view;
+                            m_charity.lblSavedNotification.Visibility = Visibility.Visible;
                             m_charity.LoadDataIntoVar(Convert.ToInt32(m_currentOperatorSelected));
                         }
                     
@@ -155,7 +152,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
 
               if (toggleButton.IsChecked == false)
               {
-                  //CharityTransitionControl.Content = null;
+                  CharityTransitionControl.Content = null;
          
                   return;
               }
@@ -182,7 +179,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
                       }
                   }
 
-                  //CharityTransitionControl.Content = view;
+                  CharityTransitionControl.Content = view;
               }
               else
               {
@@ -223,7 +220,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
               m_newOperator.NewOperator = true;
               Button NewOperatorSaveBtn =  m_newOperator.BtnSave;
               NewOperatorSaveBtn.Click += new RoutedEventHandler(m_nobtnSave_Click);
-              //CharityTransitionControl.Content = m_newOperator;
+              CharityTransitionControl.Content = m_newOperator;
             
           }
 
@@ -266,7 +263,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         {
             m_currentOperatorSelected = m_charity.CurrentOperatorId;
             FillOperatorList();
-            //CharityTransitionControl.Content = null;
+            CharityTransitionControl.Content = null;
         }
 
           #endregion

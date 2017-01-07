@@ -43,7 +43,7 @@
             
             <TabItem Header="Operator">
                 <Border>
-                    <!--<localOperators:OperatorView/>-->
+                    <localOperators:OperatorView/>
                 </Border>
             </TabItem>
         </TabControl>

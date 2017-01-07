@@ -193,8 +193,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                     }
                     case "SettingsToggleButton":
                     {
-                        m_settingsView.ClearSelected();
-                        view = m_settingsView;
+                        //m_settingsView.ClearSelected();
+                        //view = m_settingsView;
                         break;
                    }
 

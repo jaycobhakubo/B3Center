@@ -78,20 +78,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
             m_btnCancel = m_saveCancelCtrl.btnCancel;
             m_btnCancel.Click += new RoutedEventHandler(m_btnCancel_Click);
-            //SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
-            //SaveCancelTransition.Visibility = Visibility.Visible;
+            SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
+            SaveCancelTransition.Visibility = Visibility.Visible;
             m_b3IconColor =  SettingViewModel.Instance.Settings.B3IconColor_;
             cmbxIconColor.ItemsSource = m_b3IconColor.OrderBy(l => l.ColorValue).Select(l => l.ColorValue).ToList();
-            lblNewOperator = new Label();
             lblNewOperator.Visibility = Visibility.Visible;
-            btnDelete = new Button();
             btnDelete.Visibility = Visibility.Hidden;
-            lblSavedNotification = new Label();
             lblSavedNotification.Visibility = Visibility.Hidden;
 
         }
 
-        public Button btnDelete { get; set; }
    
         public void LoadDataIntoVar(int operatorID)
         {
@@ -158,8 +154,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             cmbxIconColor.SelectedIndex = cmbxIconColor.Items.IndexOf(m_colorDef);
             lblNewOperator.Content = m_operatorname;
         }
-
-        public Label lblNewOperator { get; set; }
 
         private bool IsModify(Operator NewOperatorSetting )
         {
@@ -331,8 +325,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
                 }
             }
         }
-
-        public Label lblSavedNotification { get; set; }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {

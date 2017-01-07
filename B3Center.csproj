@@ -145,6 +145,7 @@
     <Compile Include="Messages\SetB3BallsMessage.cs" />
     <Compile Include="Model\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Model\OperatorModel.cs" />
     <Compile Include="Model\ReportParameterModel.cs" />
     <Compile Include="Model\Reports.cs" />
     <Compile Include="Model\ReportTemplateModel.cs" />
@@ -291,6 +292,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\OperatorViewModel.cs" />
     <Compile Include="ViewModels\ReportParameterViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ReportTemplateViewModel.cs" />
@@ -572,6 +574,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\GameModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\OperatorViews\OperatorView.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\OperatorViews\OperatorView.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\OperatorViews\CharityView.xaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\OperatorViews\CharityView.xaml.cs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

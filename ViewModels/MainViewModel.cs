@@ -161,7 +161,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <summary>
         /// Gets or set the sub view model: reports view model.
         /// </summary>
-        public ReportsViewModel ReportsVm { get; set; }
+        public ReportsViewModel ReportsVm { get; private set; }
 
        /// <summary>
        /// Gets or set the sub view model: setting view model.
