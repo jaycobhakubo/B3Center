@@ -73,6 +73,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         public CharityView()
         {
             InitializeComponent();
+            DataContext = this;
             m_saveCancelCtrl = new SaveCancelCrtl();
             m_btnSave = m_saveCancelCtrl.btnSave;
             m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
