@@ -28,20 +28,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
 
         #region MEMBER VARIABLEs
 
-        private ObservableCollection<GameTech.Elite.Client.Modules.B3Center.Business.Operator> m_operators;
-        private readonly List<ToggleButton> m_menuItems = new List<ToggleButton>();
-        private readonly CharityView m_charity;
-        private CharityView m_newOperator;
-        private Button m_btnSave;
-        private Button m_btnDelete = new Button();
-        private int m_currentOperatorSelected;
-        private Button btnBackOperatorSettings;
-        private Button btnNewOperator;
-        //private Button m_btnDelete;
-        private Panel stkpnlOperatorList = new StackPanel();
-        private Label lblSavedNotification;
-        private ContentPresenter CharityTransitionControl = new ContentPresenter();
-        UserControl view;
+        //private ObservableCollection<GameTech.Elite.Client.Modules.B3Center.Business.Operator> m_operators;
+        //private readonly List<ToggleButton> m_menuItems = new List<ToggleButton>();
+        //private readonly CharityView m_charity = new CharityView();
+        ////private CharityView m_newOperator;
+        //private Button m_btnSave;
+        //private Button m_btnDelete = new Button();
+        //private int m_currentOperatorSelected;
+        //private Button btnBackOperatorSettings;
+        //private Button btnNewOperator;
+        ////private Button m_btnDelete;
+        //private Panel stkpnlOperatorList = new StackPanel();
+        //private Label lblSavedNotification;
+        //private ContentPresenter CharityTransitionControl = new ContentPresenter();
+        //UserControl view = new UserControl();
 
         #endregion
 
@@ -50,14 +50,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         public OperatorView()      
         {
             InitializeComponent();
-            m_operators  = SettingViewModel.Instance.Operators;     
-            m_charity = new CharityView();
-            m_btnSave = m_charity.BtnSave;
-            //m_btnDelete = m_charity.btnDelete;
-            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
-            m_btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
-            m_currentOperatorSelected = 0;
-            FillOperatorList();
+            DataContext = this;
+            //m_operators  = SettingViewModel.Instance.Operators;     
+            //m_charity = new CharityView();
+            //m_btnSave = m_charity.BtnSave;
+            ////m_btnDelete = m_charity.btnDelete;
+            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+            //m_btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
+            //m_currentOperatorSelected = 0;
+            //FillOperatorList();
         }
 
         #endregion
@@ -69,42 +70,42 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         /// </summary>
           private void FillOperatorList()
         {
-            if (stkpnlOperatorList.Children.Count > 0)
-            {
-                stkpnlOperatorList.Children.Clear();
-            }
+            //if (stkpnlOperatorList.Children.Count > 0)
+            //{
+            //    stkpnlOperatorList.Children.Clear();
+            //}
 
-            m_operators = SettingViewModel.Instance.Operators;     
+            //m_operators = SettingViewModel.Instance.Operators;     
 
-            if (m_operators != null)
-            {
-                foreach (GameTech.Elite.Client.Modules.B3Center.Business.Operator  Operator_  in (m_operators.OrderBy(l => l.OperatorName).ToList()))
-                {
+            //if (m_operators != null)
+            //{
+            //    foreach (GameTech.Elite.Client.Modules.B3Center.Business.Operator  Operator_  in (m_operators.OrderBy(l => l.OperatorName).ToList()))
+            //    {
                    
-                        ToggleButton tgb = new ToggleButton();
-                        tgb.SetResourceReference(Control.StyleProperty, "ToggleButtonDarkBlueStyle");
-                        tgb.Content = Operator_.OperatorName;
-                        tgb.Height = 50;
-                        tgb.Width = 200;
-                        tgb.FontSize = 15;
-                        tgb.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        tgb.HorizontalAlignment = HorizontalAlignment.Left;
-                        tgb.Click += MenuToggleButton_Changed;
-                        tgb.Tag = Operator_.OperatorId;//This  is unique
-                        m_menuItems.Add(tgb);
-                        stkpnlOperatorList.Children.Add(tgb);
+            //            ToggleButton tgb = new ToggleButton();
+            //            tgb.SetResourceReference(Control.StyleProperty, "ToggleButtonDarkBlueStyle");
+            //            tgb.Content = Operator_.OperatorName;
+            //            tgb.Height = 50;
+            //            tgb.Width = 200;
+            //            tgb.FontSize = 15;
+            //            tgb.HorizontalContentAlignment = HorizontalAlignment.Left;
+            //            tgb.HorizontalAlignment = HorizontalAlignment.Left;
+            //            tgb.Click += MenuToggleButton_Changed;
+            //            tgb.Tag = Operator_.OperatorId;//This  is unique
+            //            m_menuItems.Add(tgb);
+            //            stkpnlOperatorList.Children.Add(tgb);
 
-                        if (m_currentOperatorSelected == Operator_.OperatorId)
-                        {
-                            tgb.IsChecked = true;
-                            view = m_charity;
-                            //CharityTransitionControl.Content = view;
-                            //m_charity.lblSavedNotification.Visibility = Visibility.Visible;
-                            m_charity.LoadDataIntoVar(Convert.ToInt32(m_currentOperatorSelected));
-                        }
+            //            if (m_currentOperatorSelected == Operator_.OperatorId)
+            //            {
+            //                tgb.IsChecked = true;
+            //                view = m_charity;
+            //                //CharityTransitionControl.Content = view;
+            //                //m_charity.lblSavedNotification.Visibility = Visibility.Visible;
+            //                m_charity.LoadDataIntoVar(Convert.ToInt32(m_currentOperatorSelected));
+            //            }
                     
-                }
-            }
+            //    }
+            //}
         }
 
         /// <summary>
@@ -113,20 +114,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
 
           public void ClearSelected()
           {
-              foreach (var menuItem in m_menuItems)
-              {
-                  if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
-                  {
-                      menuItem.IsChecked = false;
-                      CharityTransitionControl.Content = null;
+              //foreach (var menuItem in m_menuItems)
+              //{
+              //    if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
+              //    {
+              //        menuItem.IsChecked = false;
+              //        CharityTransitionControl.Content = null;
 
-                  }
-              }
+              //    }
+              //}
 
-              if (CharityTransitionControl.Content != null)
-              {
-                  CharityTransitionControl.Content = null;
-              }
+              //if (CharityTransitionControl.Content != null)
+              //{
+              //    CharityTransitionControl.Content = null;
+              //}
 
           }
 
@@ -142,61 +143,61 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
           private void MenuToggleButton_Changed(object sender, RoutedEventArgs e)
           {
 
-              var toggleButton = sender as ToggleButton;
+         //     var toggleButton = sender as ToggleButton;
 
 
 
-              if (toggleButton == null)
-              {
-                  return;
-              }
+         //     if (toggleButton == null)
+         //     {
+         //         return;
+         //     }
 
-              view = null;
+         //     view = null;
 
-              if (toggleButton.IsChecked == false)
-              {
-                  //CharityTransitionControl.Content = null;
+         //     if (toggleButton.IsChecked == false)
+         //     {
+         //         //CharityTransitionControl.Content = null;
          
-                  return;
-              }
+         //         return;
+         //     }
 
-         //Load data.
-              m_charity.NewOperator = false;
-              m_charity.ClearSavedNotification();
-              m_charity.LoadDataIntoVar(Convert.ToInt32(toggleButton.Tag));
+         ////Load data.
+         //     m_charity.NewOperator = false;
+         //     m_charity.ClearSavedNotification();
+         //     m_charity.LoadDataIntoVar(Convert.ToInt32(toggleButton.Tag));
              
-              view = m_charity;
+         //     view = m_charity;
 
-              if (toggleButton.IsChecked == true)
-              {
-                  foreach (var menuItem in m_menuItems)
-                  {
-                      if (Equals(menuItem, toggleButton))
-                      {
-                          continue;
-                      }
+         //     if (toggleButton.IsChecked == true)
+         //     {
+         //         foreach (var menuItem in m_menuItems)
+         //         {
+         //             if (Equals(menuItem, toggleButton))
+         //             {
+         //                 continue;
+         //             }
 
-                      if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
-                      {
-                          menuItem.IsChecked = false;
-                      }
-                  }
+         //             if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
+         //             {
+         //                 menuItem.IsChecked = false;
+         //             }
+         //         }
 
-                  //CharityTransitionControl.Content = view;
-              }
-              else
-              {
+         //         //CharityTransitionControl.Content = view;
+         //     }
+         //     else
+         //     {
 
-                      foreach (var menuItem in m_menuItems)
-                      {
-                          if (Equals(menuItem, toggleButton))
-                          {
-                              menuItem.IsChecked = true;
+         //             foreach (var menuItem in m_menuItems)
+         //             {
+         //                 if (Equals(menuItem, toggleButton))
+         //                 {
+         //                     menuItem.IsChecked = true;
 
-                          }
-                      }
+         //                 }
+         //             }
                
-              }
+         //     }
           }
 
 
@@ -218,12 +219,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         /// <param name="e"></param>
           private void btnNewOperator_Click(object sender, RoutedEventArgs e)
           {
-              ClearSelected();
-              m_newOperator = new CharityView();
-              m_newOperator.NewOperator = true;
-              Button NewOperatorSaveBtn =  m_newOperator.BtnSave;
-              NewOperatorSaveBtn.Click += new RoutedEventHandler(m_nobtnSave_Click);
-              //CharityTransitionControl.Content = m_newOperator;
+              //ClearSelected();
+              //m_newOperator = new CharityView();
+              //m_newOperator.NewOperator = true;
+              //Button NewOperatorSaveBtn =  m_newOperator.BtnSave;
+              //NewOperatorSaveBtn.Click += new RoutedEventHandler(m_nobtnSave_Click);
+              ////CharityTransitionControl.Content = m_newOperator;
             
           }
 
@@ -235,11 +236,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         /// <param name="e"></param>
           void m_btnSave_Click(object sender, RoutedEventArgs e)
           {
-              if (m_charity.IsOperatorRenamed)
-              {
-                  m_currentOperatorSelected = m_charity.CurrentOperatorId;
-                  FillOperatorList();
-              }            
+              //if (m_charity.IsOperatorRenamed)
+              //{
+              //    m_currentOperatorSelected = m_charity.CurrentOperatorId;
+              //    FillOperatorList();
+              //}            
           }
 
         /// <summary>
@@ -249,11 +250,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         /// <param name="e"></param>
           void m_nobtnSave_Click(object sender, RoutedEventArgs e)
           {
-              if (m_newOperator.NewOperator == true)
-              {
-                  m_currentOperatorSelected = m_newOperator.CurrentOperatorId;
-                  FillOperatorList();
-              }
+              //if (m_newOperator.NewOperator == true)
+              //{
+              //    m_currentOperatorSelected = m_newOperator.CurrentOperatorId;
+              //    FillOperatorList();
+              //}
           }
 
          
@@ -264,8 +265,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         /// <param name="e"></param>
         void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            m_currentOperatorSelected = m_charity.CurrentOperatorId;
-            FillOperatorList();
+            //m_currentOperatorSelected = m_charity.CurrentOperatorId;
+            //FillOperatorList();
             //CharityTransitionControl.Content = null;
         }
 
