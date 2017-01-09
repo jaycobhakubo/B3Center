@@ -15,9 +15,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private Operator m_operator;
 
-        public CharityViewModel()
+        public CharityViewModel(List<B3IconColor> b3Iconcolor)
         {
-         
+            B3IconColor = b3Iconcolor;
         }
 
 
@@ -26,9 +26,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return m_operator; }
             set
             {
-                m_operator = value; 
+                m_operator = value;
+                SelectedColor = m_B3IconColor.Single(l => l.ColorID == value.IconColor);
                 RaisePropertyChanged("Operatorc");
                 
+            }
+        }
+
+        private B3IconColor m_selectedColor;
+        public B3IconColor SelectedColor
+        {
+            get { return m_selectedColor; }
+            set
+            {
+                m_selectedColor = value;
+                RaisePropertyChanged("SelectedColor");
+            }
+        }
+
+
+        private List<B3IconColor> m_B3IconColor;
+        public List<B3IconColor> B3IconColor
+        {
+            get {return m_B3IconColor; }
+            set
+            {
+                m_B3IconColor = value;
+                RaisePropertyChanged("B3IconColor");
             }
         }
 

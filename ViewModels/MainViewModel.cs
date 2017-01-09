@@ -65,7 +65,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             }
 
-            OperatorVm = new OperatorViewModel(controller.B3Controller.Operators); 
+            var testxx = controller.B3Controller.Settings.B3IconColor_;
+
+            OperatorVm = new OperatorViewModel(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_); 
 
             //OperatorVm = new OperatorViewModel();
 

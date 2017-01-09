@@ -12,6 +12,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class OperatorViewModel : GameTech.Elite.Base.ViewModelBase
     {
+
+
+        public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
+        {
+            operators = operators_;
+            m_charityVm = new CharityViewModel(b3Iconcolor);
+            selectedOperator = operators.FirstOrDefault();
+
+        }
+
         //This is where get the operator message happen.
 
         private ObservableCollection<Operator> m_operators;
@@ -66,15 +76,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set { m_operatorso = value; }
         }
 
-        public OperatorViewModel(ObservableCollection<Operator> operators_)
-        {
-            operators = operators_;
-            m_charityVm = new CharityViewModel();
-            selectedOperator = operators.FirstOrDefault();
-          
-            //charityVm = new CharityViewModel(selectedOperator);
-           // var testop = GameTech.Elite.Base.Operator;
-        }
 
         //public string OperatorName
         //{

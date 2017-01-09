@@ -62,7 +62,7 @@
 
 
                 <Label Content="Icon Color" />
-                <ComboBox Name="cmbxIconColor" />
+                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding B3IconColor}" DisplayMemberPath="ColorValue" SelectedItem="{Binding SelectedColor}"/>
 
                 <Label Content="Phone Number" />
                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding Path=	Operatorc.PhoneNumber}"
