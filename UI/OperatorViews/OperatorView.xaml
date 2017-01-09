@@ -8,6 +8,7 @@
    >
 
     <UserControl.Resources>
+        
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="Padding" Value="0"/>
@@ -53,7 +54,7 @@
                     
                     
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
-                        <local:CharityView VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
                 
                     </Border>
 
@@ -119,12 +120,12 @@
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding OperatorList}" SelectedItem="{Binding OperatorSelected}"  >
-
+                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding operators}" SelectedItem="{Binding selectedOperator}">
                         </ListBox>
                     </ScrollViewer>
                 </Grid>
             </Border>
+            <!--SelectedItem="{Binding OperatorSelected}"  >-->
         </Grid>
     </Border>
 </UserControl>

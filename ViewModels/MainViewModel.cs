@@ -14,6 +14,7 @@ using GameTech.Elite.Client.Modules.B3Center.Business.GameModels;
 using GameTech.Elite.UI;
 using System.Collections;
 using System.Windows;
+using GameTech.Elite.Client.Modules.B3Center.Model;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -41,10 +42,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             //GameVm = new GameViewModel(games);
             SessionVm = SessionViewModel.Instance;
-            SessionVm.Initialize(controller.B3Controller);
-
-
-   
+            SessionVm.Initialize(controller.B3Controller); 
 
             HideAllBtnViewModel();
             //No need to initialize if staff dont have permission.
@@ -67,9 +65,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             }
 
+            OperatorVm = new OperatorViewModel(controller.B3Controller.Operators); 
+
+            //OperatorVm = new OperatorViewModel();
+
+
+
             FileExitCommand = new RelayCommand(parameter => Exit());            // Create the commands.
             PropertyChangedEventManager.AddListener(Controller, this, string.Empty);            // Listen for changes to the parent and children.
         }
+
+        //private ObservableCollection<OperatorModel> m_operator;
 
         #endregion
 
@@ -167,6 +173,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        /// Gets or set the sub view model: setting view model.
        /// </summary>
         public SettingViewModel SettingVm { get; private set; }
+
+        public OperatorViewModel OperatorVm { get; private set; }
+
 
         #endregion
 

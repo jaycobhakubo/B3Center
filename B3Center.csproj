@@ -143,6 +143,7 @@
     <Compile Include="Messages\GetSessionOperatorListMessage.cs" />
     <Compile Include="Messages\SessionStartMessage.cs" />
     <Compile Include="Messages\SetB3BallsMessage.cs" />
+    <Compile Include="Model\CharityModel.cs" />
     <Compile Include="Model\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\OperatorModel.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="UI\Shared\FullScreenUserControl.xaml.cs">
       <DependentUpon>FullScreenUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CharityViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Business\IGTIModule.cs" />
     <Compile Include="Design\DesignController.cs" />
