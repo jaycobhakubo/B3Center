@@ -7,174 +7,153 @@
          >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultDesignForCheckBox}"/>
-
-        <Style  TargetType="TextBox">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Height" Value="31"/>
-            <Setter Property="Padding" Value="8,0,0,0"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
+        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+        <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}">
+            <Setter Property="BorderBrush" Value="#D5DFE5"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Text" Value="00.00"/>
-
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border SnapsToDevicePixels="True"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" >
-                            <ScrollViewer 
-                                x:Name="PART_ContentHost" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="Blue"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="False">
-                                <Setter Property="BorderBrush" Value="LightGray"/>
-                            </Trigger>
-
-                            <Trigger Property="IsReadOnly" Value="True">
-                                <Setter Property="Background" Value="LightGray"></Setter>
-                            </Trigger>
-
-                        </ControlTemplate.Triggers>
-
-
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="6"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
+                            <!--<Border Background="Transparent" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" x:Name="Header" Grid.Column="1" Padding="0" Grid.Row="0" Grid.RowSpan="2">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>-->
+                            <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border   Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
+                                <Border.OpacityMask>
+                                    <MultiBinding ConverterParameter="6" Converter="{StaticResource BorderGapMaskConverter}">
+                                        <Binding ElementName="Header" Path="ActualWidth"/>
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Border.OpacityMask>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <!--<Border BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>-->
+                                </Border>
+                            </Border>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Padding" Value="0 0 0 2"/>
-        </Style>
 
     </UserControl.Resources>
     <Border>
         <Grid Name="gridCrazyBout">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="54"/>
-                <RowDefinition Height="15"/>
-                <RowDefinition Height="54"/>
-                <RowDefinition Height="15"/>
-                <RowDefinition Height="54"/>
-                <RowDefinition x:Name="rowDefCallSpeedMargin" Height="15"/>
-                <RowDefinition  x:Name="rowDefCallSpeedItems" Height="54"/>
-                <RowDefinition  Height="15"/>
-                <RowDefinition Height="54"/>
-                <RowDefinition Height="120"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="279"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
                 <ColumnDefinition Width="75"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="1"  Content="Game Pay Table"  VerticalAlignment="Top"  />
-            <ComboBox Name="cmbxGamePayTable" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Bottom"  TabIndex="1" 
-                        	FontWeight="Light" FontFamily="Segoe UI" Tag="58"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <Label Content="Max Bet Level" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3"   Width="115" />
-            <ComboBox 
+            <StackPanel Grid.Column="1">
+                <Label  Content="Game Pay Table"  />
+                <ComboBox Name="cmbxGamePayTable" Tag="58"/>
+
+                <Label Content="Max Bet Level" />
+                <ComboBox 
                 Name="cmbxMaxBetLevel" 
-                FontWeight="Light" 
-                FontFamily="Segoe UI" 
-                Grid.Row="3" 
-                Grid.Column="1"       
-                VerticalAlignment="Bottom"        
-                TabIndex="2" Height="22" Tag="9"             
+               Tag="9"             
                 >
-            </ComboBox>
+                </ComboBox>
 
-            <Label x:Name="lblMaxCards" Grid.Row="5" Grid.Column="1" Content="Max Cards" HorizontalAlignment="Left"   Width="87"/>
-            <ComboBox 
+                <Label x:Name="lblMaxCards"  Content="Max Cards"/>
+                <ComboBox 
                 x:Name="cmbxMaxcards" 
-                Grid.Row="5" 
-                Grid.Column="1" 
-VerticalAlignment="Bottom" TabIndex="3" Height="22" 
-                FontWeight="Light" FontFamily="Segoe UI" Tag="10">
-            </ComboBox>
+                 Tag="10">
+                </ComboBox>
 
-            <Label x:Name="lblCallSpeedMin" Grid.Row="7" Grid.Column="1" Content="Call Speed Min"    />
-            <ComboBox 
+                <Label x:Name="lblCallSpeedMin"  Content="Call Speed Min"    />
+                <ComboBox 
             	x:Name="cmbxCallSpeedMin" 
-            	Grid.Row="7" 
-            	Grid.Column="1" 
-            	VerticalAlignment="Bottom" TabIndex="3" Height="22" 
-            	FontWeight="Light" FontFamily="Segoe UI" Tag="59"/>
+            	 Tag="59"/>
 
-            <Label x:Name="lblCallSpeedOrMax" Grid.Row="9" Grid.Column="1" Content="Call Speed Max"    />
-            <ComboBox 
+                <Label x:Name="lblCallSpeedOrMax"  Content="Call Speed Max"    />
+                <ComboBox 
             	x:Name="cmbxCallSpeedOrMax" 
-            	Grid.Row="9" 
-            	Grid.Column="1" 
-            	VerticalAlignment="Bottom" TabIndex="3" Height="22" 
-            	FontWeight="Light" FontFamily="Segoe UI" Tag="11">
-            </ComboBox>
+            	 Tag="11">
+                </ComboBox>
+                <Label   Content="Game Denominations" />
+                <!--<Style x:Key="LightBlueBorder" TargetType="{x:Type Border}">
+                    <Setter Property="BorderBrush" Value="{StaticResource BlueBrush}" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="CornerRadius" Value="4" />
+                    <Setter Property="Background" Value="{StaticResource LightBlueBrush}" />
+                </Style>-->
+                <GroupBox  Background="White"   BorderThickness="2" BorderBrush="{StaticResource BlueBrush}" Margin="-1,0,-1,0" Padding="15,0,0,3" Style="{DynamicResource GroupBoxStyle1}" >
 
-            <StackPanel Name="stkpnlGameSettingCrazyBout" Grid.Column="3" Grid.Row="1" Grid.RowSpan="6">
-                <CheckBox Name="chkbxAutoPlay" Grid.Row="1" Grid.Column="3"  Content="Auto Play" HorizontalAlignment="Left" VerticalAlignment="Bottom" TabIndex="15" Height="Auto" Width="Auto" Tag="13"  Margin="0 31 0 0" />
-                <CheckBox Name="chkbxHideSerialNumber" Grid.Row="3" Grid.Column="3"  Content="Hide Serial Number" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Bottom" TabIndex="16" Height="Auto" Tag="14"  Margin="0 30 0 0" />
-                <CheckBox Name="chkbxSingleOfferBonus" Grid.Row="5" Grid.Column="3" Content="Single Offer Bonus" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="Auto" TabIndex="17" Height="Auto" Tag="15" Margin="0 30 0 0" />
-                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed" Grid.Row="7" Grid.Column="3"  Content="Auto Call" HorizontalAlignment="Left"  VerticalAlignment="Bottom" TabIndex="14" Height="Auto" Width="Auto" Tag="12" Margin="0 30 0 0" />
+
+
+                    <Grid >
+                        <Grid.Resources>
+
+                            <Style TargetType="CheckBox" >
+                                <Setter Property="Margin" Value="0,0,0,0"></Setter>
+                                <Setter Property="Height" Value="18"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+
+
+
+                        </Grid.ColumnDefinitions>
+
+
+                        <CheckBox Name="chkbxDenom01" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0"   TabIndex="6" Tag="1" />
+                        <CheckBox Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" />
+                        <CheckBox Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  />
+                        <CheckBox Name="chkbxDenom25"  Content="0.25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TabIndex="9" Tag="4"  />
+                        <CheckBox Name="chkbxDenom50"  Content="0.50" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TabIndex="10" Tag="5" />
+                        <CheckBox Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" />
+                        <CheckBox Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" />
+                        <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" />
+
+                    </Grid>
+                </GroupBox>
 
             </StackPanel>
-            
-           
 
-            <Grid Name="gridDenom" Grid.Column="1" Grid.Row="10"  VerticalAlignment="Bottom" Height="90" Width="400"  Grid.ColumnSpan="2" HorizontalAlignment="Left" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition />
+            <StackPanel Grid.Column="3">
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
+                <CheckBox Name="chkbxAutoPlay"   Content="Auto Play" />
+                <CheckBox Name="chkbxHideSerialNumber" Content="Hide Serial Number"  />
+                <CheckBox Name="chkbxSingleOfferBonus" Content="Single Offer Bonus"  />
+                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
 
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
+            </StackPanel>
 
-
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-
-                <Label  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"  Content="Game Denominations" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="154" VerticalContentAlignment="Center" Padding="0" />
-                <CheckBox Name="chkbxDenom01"   Grid.Row="1" Grid.Column="0" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left" TabIndex="6" Tag="1" />
-                <CheckBox Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" />
-                <CheckBox Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  />
-                <CheckBox Name="chkbxDenom25"  Content="0.25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TabIndex="9" Tag="4"  />
-                <CheckBox Name="chkbxDenom50"  Content="0.50" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TabIndex="10" Tag="5" />
-                <CheckBox Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" />
-                <CheckBox Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" />
-                <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" />
-            </Grid>
+            <!--<StackPanel Name="stkpnlGameSettingCrazyBout" Grid.Column="3" >-->
 
         </Grid>
     </Border>

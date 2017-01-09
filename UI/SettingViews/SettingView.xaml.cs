@@ -111,7 +111,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
                 {
                     menuItem.IsChecked = false;
-                    SettingTransitionControl.Content = null;
+                    //SettingTransitionControl.Content = null;
                 }
             }
         }
@@ -162,7 +162,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 case "GameSettingToggleButton":
                     {
                         m_gamesView.ClearSelected();
-                        m_btnSave = m_gamesView.btnSave;
+                        //m_btnSave = m_gamesView.btnSave;
                         //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
                         view = m_gamesView;
                         break;
@@ -225,11 +225,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
                 }
 
-                SettingTransitionControl.Content = view;
+                //SettingTransitionControl.Content = view;
             }
             else
             {
-                SettingTransitionControl.Content = null;
+                //SettingTransitionControl.Content = null;
             }
         }
 

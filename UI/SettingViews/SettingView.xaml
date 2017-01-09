@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+                 xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
              mc:Ignorable="d" 
       
              >
@@ -39,7 +40,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
+                    <!--<Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
                         <Border.Resources>
                             <Style
                              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
@@ -49,6 +50,18 @@
                             </Style>
                         </Border.Resources>
                         <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Center"  Name="SettingTransitionControl" Content="{Binding SelectedSettingView}" Margin="0,15,0,0"/>
+                    </Border>-->
+
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
+                        <Border.Resources>
+                            <Style
+                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,15,0,2"/>
+
+                            </Style>
+                        </Border.Resources>
+                        <local:GameSettingView ></local:GameSettingView>
                     </Border>
 
                     <Border Grid.Row="1"  Margin="8">
