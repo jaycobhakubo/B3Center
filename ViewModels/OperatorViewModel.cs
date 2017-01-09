@@ -36,8 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set
             {
                 m_selectedOperator = value;
-                m_charityVm.SetSelecteOperator(value);
-                charityVm = m_charityVm;
+                charityVm.Operatorc = value;
                 RaisePropertyChanged("selectedOperator");
             }
         }

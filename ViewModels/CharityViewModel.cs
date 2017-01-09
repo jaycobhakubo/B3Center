@@ -14,18 +14,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //private ObservableCollection<CharityModel> m_charity = new ObservableCollection<CharityModel>();
 
         private Operator m_operator;
-        //private string m_operatorName;
 
         public CharityViewModel()
         {
          
         }
 
-        public void SetSelecteOperator(Operator operator_)
-        {
-            Operatorc = operator_;
-            cOperatorName = m_operator.OperatorName; 
-        }
+        //public void SetSelectedOperator(Operator operator_)
+        //{
+        //    Operatorc = operator_;
+
+        
+
+        //}
 
         public Operator Operatorc
         {
@@ -38,67 +39,67 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public string cOperatorName
-        {
-            get;
-            set;
-            //get
-            //{
-            //    return m_operator.OperatorName; //"Helloaaa";
-            //}
-            //set
-            //{
-            //    m_operator.OperatorName = value;
-            //    RaisePropertyChanged("CharityOperatorName");
-            //}
+        //public string cOperatorName
+        //{
+        //    get;
+        //    set;
+        //    //get
+        //    //{
+        //    //    return m_operator.OperatorName; //"Helloaaa";
+        //    //}
+        //    //set
+        //    //{
+        //    //    m_operator.OperatorName = value;
+        //    //    RaisePropertyChanged("CharityOperatorName");
+        //    //}
 
-        }
+        //}
 
-        public string cDescription
-        { 
-            get; set; 
-        }
+        //public string cDescription
+        //{ 
+        //    get; set; 
+        //}
 
-        public string cAddress
-        {
-            get;
-            set;
-        }
+        //public string cAddress
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string cCity
-        {
-            get;
-            set;
-        }
+        //public string cCity
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string cState
-        {
-            get;
-            set;
-        }
+        //public string cState
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string cZipCode
-        {
-            get;
-            set;
-        }
+        //public string cZipCode
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string cIconColor
-        {
-            get;
-            set;
-        }
+        //public string cIconColor
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string cPhoneNumber
-        {
-            get;
-            set;
-        }
+        //public string cPhoneNumber
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string cFaxNumber
-        {
-            get;
-            set;
-        }
+        //public string cFaxNumber
+        //{
+        //    get;
+        //    set;
+        //}
     }
 }

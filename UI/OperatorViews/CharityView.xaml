@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
                  xmlns:OperatorVm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels"
+        
              mc:Ignorable="d" 
 >
     <UserControl.Resources>
+        
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
     <Border>
@@ -27,26 +29,32 @@
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Label Content="Operator Name" />
                 <TextBox 
-                         Text="{Binding cOperatorName, Mode=OneWay}" MaxLength="18"                                              
+                         Text="{Binding Path=Operatorc.OperatorName}" MaxLength="18"                                              
                          />
 
                 <Label Content="Description"  />
-                <TextBox    Text="{Binding cDescription}"  MaxLength="40" MaxLines="1" />
+                <TextBox    Text="{Binding Path=Operatorc.OperatorNameDescription}"
+ MaxLength="40" MaxLines="1" />
 
                 <Label Content="Address"    />
-                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding cAddress}" />
+                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding Path=Operatorc.Address}"
+ />
 
                 <Label Content="City"  />
-                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding cCity}"/>
+                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding Path=	Operatorc.City}"
+/>
 
                 <Label  Content="State"   />
-                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding cState}"/>
+                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding Path=	Operatorc.State}"
+/>
 
                 <Label  Content="Zip Code" />
-                <TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding cZipCode}" PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput"/>
+                <TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding Path=	Operatorc.ZipCode}"
+ PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput"/>
 
                 <Label Content="Contact Name" />
-                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding cContactName}"/>
+                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding Path=	Operatorc.ContactName}"
+/>
 
             </StackPanel>
             
@@ -57,10 +65,12 @@
                 <ComboBox Name="cmbxIconColor" />
 
                 <Label Content="Phone Number" />
-                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding cPhoneNumber}" />
+                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding Path=	Operatorc.PhoneNumber}"
+ />
 
                 <Label Content="Fax Number"  />
-                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding cFaxNumber}" />
+                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding Path=	Operatorc.FaxNumber}"
+ />
 
             </StackPanel>
 
