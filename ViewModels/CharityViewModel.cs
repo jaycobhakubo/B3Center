@@ -24,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void SetSelecteOperator(Operator operator_)
         {
             Operatorc = operator_;
-            CharityOperatorName = m_operator.OperatorName; 
+            cOperatorName = m_operator.OperatorName; 
         }
 
         public Operator Operatorc
@@ -38,7 +38,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public string CharityOperatorName
+        public string cOperatorName
         {
             get;
             set;
@@ -52,6 +52,53 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //    RaisePropertyChanged("CharityOperatorName");
             //}
 
+        }
+
+        public string cDescription
+        { 
+            get; set; 
+        }
+
+        public string cAddress
+        {
+            get;
+            set;
+        }
+
+        public string cCity
+        {
+            get;
+            set;
+        }
+
+        public string cState
+        {
+            get;
+            set;
+        }
+
+        public string cZipCode
+        {
+            get;
+            set;
+        }
+
+        public string cIconColor
+        {
+            get;
+            set;
+        }
+
+        public string cPhoneNumber
+        {
+            get;
+            set;
+        }
+
+        public string cFaxNumber
+        {
+            get;
+            set;
         }
     }
 }

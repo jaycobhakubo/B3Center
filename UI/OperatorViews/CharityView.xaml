@@ -27,26 +27,26 @@
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Label Content="Operator Name" />
                 <TextBox 
-                         Text="{Binding CharityOperatorName, Mode=OneWay}" MaxLength="18"                                              
+                         Text="{Binding cOperatorName, Mode=OneWay}" MaxLength="18"                                              
                          />
 
                 <Label Content="Description"  />
-                <TextBox    Text="{Binding OperatorName}"  MaxLength="40" MaxLines="1" />
+                <TextBox    Text="{Binding cDescription}"  MaxLength="40" MaxLines="1" />
 
                 <Label Content="Address"    />
-                <TextBox Name="txtbxAddress"  MaxLength="60"  />
+                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding cAddress}" />
 
                 <Label Content="City"  />
-                <TextBox Name="txtbxCity"   MaxLength="15"  />
+                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding cCity}"/>
 
                 <Label  Content="State"   />
-                <TextBox x:Name="txtbxState"   MaxLength="15"   />
+                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding cState}"/>
 
                 <Label  Content="Zip Code" />
-                <TextBox x:Name="txtbxZipCode"  MaxLength="5"  PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput"/>
+                <TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding cZipCode}" PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput"/>
 
                 <Label Content="Contact Name" />
-                <TextBox Name="txtbxContactName" MaxLength="30" />
+                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding cContactName}"/>
 
             </StackPanel>
             
@@ -57,10 +57,10 @@
                 <ComboBox Name="cmbxIconColor" />
 
                 <Label Content="Phone Number" />
-                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14"  />
+                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding cPhoneNumber}" />
 
                 <Label Content="Fax Number"  />
-                <TextBox Name="txtbxFaxNumber" MaxLength="14"  />
+                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding cFaxNumber}" />
 
             </StackPanel>
 
