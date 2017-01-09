@@ -11,7 +11,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class CharityViewModel : GameTech.Elite.Base.ViewModelBase
     {
-        //private ObservableCollection<CharityModel> m_charity = new ObservableCollection<CharityModel>();
+
 
         private Operator m_operator;
 
@@ -20,13 +20,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
          
         }
 
-        //public void SetSelectedOperator(Operator operator_)
-        //{
-        //    Operatorc = operator_;
-
-        
-
-        //}
 
         public Operator Operatorc
         {

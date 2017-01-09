@@ -33,7 +33,7 @@
                          />
 
                 <Label Content="Description"  />
-                <TextBox    Text="{Binding Path=Operatorc.OperatorNameDescription}"
+                <TextBox    Text="{Binding Path=Operatorc.OperatorNameDescription, Mode=OneWay}"
  MaxLength="40" MaxLines="1" />
 
                 <Label Content="Address"    />
