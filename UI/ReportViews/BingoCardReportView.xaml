@@ -8,7 +8,10 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}"></Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="22.22"></Setter>
+        </Style>
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

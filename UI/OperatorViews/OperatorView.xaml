@@ -23,7 +23,9 @@
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
         </Style>
-
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="22.22"></Setter>
+        </Style>
 
     </UserControl.Resources>
 
@@ -66,7 +68,7 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
                                     <Label x:Name="txtblckErr" FontWeight="Bold" />
@@ -76,8 +78,9 @@
                             <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
                                 <Grid Grid.Column="1" Grid.Row="14">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                             
                                     </Grid.ColumnDefinitions>
                                     <Button Grid.Column="0"
                                 Margin="15,15" Height="40" Width="140" 

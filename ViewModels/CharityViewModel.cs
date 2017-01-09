@@ -14,6 +14,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         private Operator m_operator;
+        private B3IconColor m_selectedColor;
+        private List<B3IconColor> m_B3IconColor = new List<Business.B3IconColor>();
 
         public CharityViewModel(List<B3IconColor> b3Iconcolor)
         {
@@ -33,7 +35,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private B3IconColor m_selectedColor;
+        
         public B3IconColor SelectedColor
         {
             get { return m_selectedColor; }
@@ -45,7 +47,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        private List<B3IconColor> m_B3IconColor;
+       
         public List<B3IconColor> B3IconColor
         {
             get {return m_B3IconColor; }
