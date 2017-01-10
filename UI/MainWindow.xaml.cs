@@ -28,7 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
         //private readonly GridLength m_originalMenuColumnWidth;
         private readonly  GridLength m_collapsedMenuColumnWidth = new GridLength(0);
         private readonly List<ToggleButton> m_menuItems;
-        private readonly SessionView m_sessionView;
+        private readonly MainViewSession m_sessionView;
         private readonly ReportsView m_reportsView;
         private readonly SettingView m_settingsView;
         private B3Setting B3Setting;
@@ -71,9 +71,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
 
             //set datacontext
             DataContext = mainViewModel;
-            ParentController = parent;    
+            ParentController = parent;
 
-            m_sessionView = new SessionView { DataContext = mainViewModel.SessionVm };
+            m_sessionView = new MainViewSession { DataContext = mainViewModel.SessionVm };
             //m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };
             //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
             //m_btnBackSessions = m_sessionView.btnBackSessions;

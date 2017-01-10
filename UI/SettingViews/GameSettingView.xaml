@@ -4,11 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-              xmlns:localrrr="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
+              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
             >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-      
+        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+        <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
+            <Setter Property="BorderBrush" Value="#FF0050AA"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="6"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
+                            <!--<Border Background="Transparent" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" x:Name="Header" Grid.Column="1" Padding="0" Grid.Row="0" Grid.RowSpan="2">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>-->
+                            <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border   Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
+                                <Border.OpacityMask>
+                                    <MultiBinding ConverterParameter="6" Converter="{StaticResource BorderGapMaskConverter}">
+                                        <Binding ElementName="Header" Path="ActualWidth"/>
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Border.OpacityMask>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <!--<Border BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>-->
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--<Color x:Key="Blue2">#FF0050AA</Color>-->
         <!--<Style x:Name="FlatLableStyle" TargetType= "Label">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="Black" />
@@ -46,51 +89,51 @@
                
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <localrrr:GameSettingCrazyBoutView/>
+                        <local:GameSettingCrazyBoutView/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="JailBreak">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <localrrr:GameSettingJailBreak/>
+                        <local:GameSettingJailBreak/>
                         <!--<localReports:ReportsView DataContext="{Binding ReportsVm}" />-->
                     </Border>
                 </TabItem>
 
                 <TabItem Header="Maya Money">
                     <Border>
-                        <localrrr:GameSettingMayaMoney HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSettingMayaMoney HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="76 Bingo">
                     <Border>
-                        <localrrr:GameSetting76Bingo HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSetting76Bingo HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="Time Bomb">
                     <Border>
-                        <localrrr:GameSettingTimeBomb HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSettingTimeBomb HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="U kick Em" >
                     <Border>
-                        <localrrr:GameSettingUkickEm HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSettingUkickEm HorizontalAlignment="Center" Margin="0,15,0,0"/>
                         <!--<localSettings:SettingView DataContext="{Binding SettingVm}" />-->
                     </Border>
                 </TabItem>
 
-                <TabItem Header="WildFire w/Bonus">
+                <TabItem Header="WildFire w/Bonus" Margin="-5,-3,1,0">
                     <Border>
-                        <localrrr:GameSettingWildFire HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSettingWildFire HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="WildFire">
                     <Border>
-                        <localrrr:GameSettingWildBall HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSettingWildBall HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
                

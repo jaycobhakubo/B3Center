@@ -24,7 +24,7 @@
         <TabControl Focusable="False">
             <TabItem Header="Session">
                 <Border>
-                    <TextBlock Text="SESSION" FontSize="120"></TextBlock>
+                    <!--<TextBlock Text="SESSION" FontSize="120"></TextBlock>-->
                 </Border>
             </TabItem>
       
