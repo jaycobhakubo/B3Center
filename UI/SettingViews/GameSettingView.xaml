@@ -51,23 +51,50 @@
                 </TabItem>
 
                 <TabItem Header="JailBreak">
-                    <Border>
-
+                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
+                        <localrrr:GameSettingJailBreak/>
                         <!--<localReports:ReportsView DataContext="{Binding ReportsVm}" />-->
                     </Border>
                 </TabItem>
 
-                <TabItem Header="Maya Money" >
+                <TabItem Header="Maya Money">
                     <Border>
-                        <!--<localSettings:SettingView DataContext="{Binding SettingVm}" />-->
+                        <localrrr:GameSettingMayaMoney HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="76 Bingo">
                     <Border>
-                        <!--<TextBlock Text="OPERATOR" FontSize="120"></TextBlock>-->
+                        <localrrr:GameSetting76Bingo HorizontalAlignment="Center" Margin="0,15,0,0"/>
                     </Border>
                 </TabItem>
+
+                <TabItem Header="Time Bomb">
+                    <Border>
+                        <localrrr:GameSettingTimeBomb HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="U kick Em" >
+                    <Border>
+                        <localrrr:GameSettingUkickEm HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <!--<localSettings:SettingView DataContext="{Binding SettingVm}" />-->
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="WildFire w/Bonus">
+                    <Border>
+                        <localrrr:GameSettingWildFire HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="WildFire">
+                    <Border>
+                        <localrrr:GameSettingWildBall HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                    </Border>
+                </TabItem>
+               
+             
             </TabControl>
         </Grid>
     </Border>

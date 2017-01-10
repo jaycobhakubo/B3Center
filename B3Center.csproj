@@ -156,7 +156,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
-    <Compile Include="UI\GameView.xaml.cs">
+    <Compile Include="Trash%28SaveForReference%29\UI\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ReportViews\AccountHistoryReportView.xaml.cs">
@@ -189,8 +189,8 @@
     <Compile Include="UI\ReportViews\ReportParameter.xaml.cs">
       <DependentUpon>ReportParameter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\ReportsView.xaml.cs">
-      <DependentUpon>ReportsView.xaml</DependentUpon>
+    <Compile Include="UI\ReportViews\MainViewReport.xaml.cs">
+      <DependentUpon>MainViewReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ReportViews\ReportTemplate.xaml.cs">
       <DependentUpon>ReportTemplate.xaml</DependentUpon>
@@ -216,8 +216,28 @@
     <Compile Include="UI\OperatorViews\CharityView.xaml.cs">
       <DependentUpon>CharityView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\NonGameSetting.xaml.cs">
-      <DependentUpon>NonGameSetting.xaml</DependentUpon>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
+      <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingTimeBomb.xaml.cs">
+      <DependentUpon>GameSettingTimeBomb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSetting76Bingo.xaml.cs">
+      <DependentUpon>GameSetting76Bingo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingMayaMoney.xaml.cs">
+      <DependentUpon>GameSettingMayaMoney.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingJailBreak.xaml.cs">
+      <DependentUpon>GameSettingJailBreak.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingUkickEm.xaml.cs">
+      <DependentUpon>GameSettingUkickEm.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildBall.xaml.cs">
+      <DependentUpon>GameSettingWildBall.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
@@ -246,19 +266,19 @@
     <Compile Include="UI\SessionViews\VoidAccountsView.xaml.cs">
       <DependentUpon>VoidAccountsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingCrazyBoutView.xaml.cs">
-      <DependentUpon>GameSettingCrazyBoutView.xaml</DependentUpon>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingCrazyBout.xaml.cs">
+      <DependentUpon>GameSettingCrazyBout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingJailBreakView.xaml.cs">
+    <Compile Include="UI\SettingViews\GameSettingView\Old\GameSettingJailBreakView.xaml.cs">
       <DependentUpon>GameSettingJailBreakView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingUkickEmView.xaml.cs">
+    <Compile Include="UI\SettingViews\GameSettingView\Old\GameSettingUkickEmView.xaml.cs">
       <DependentUpon>GameSettingUkickEmView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\GameSettingView.xaml.cs">
       <DependentUpon>GameSettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingWildBallProgView.xaml.cs">
+    <Compile Include="UI\SettingViews\GameSettingView\Old\GameSettingWildBallProgView.xaml.cs">
       <DependentUpon>GameSettingWildBallProgView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
@@ -276,8 +296,8 @@
     <Compile Include="UI\SettingViews\SessionSettingView.xaml.cs">
       <DependentUpon>SessionSettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\SettingView.xaml.cs">
-      <DependentUpon>SettingView.xaml</DependentUpon>
+    <Compile Include="UI\SettingViews\MainViewSetting.xaml.cs">
+      <DependentUpon>MainViewSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\SystemSettingView.xaml.cs">
       <DependentUpon>SystemSettingView.xaml</DependentUpon>
@@ -316,7 +336,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\GameView.xaml">
+    <Page Include="Trash%28SaveForReference%29\UI\GameView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -366,7 +386,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\ReportViews\ReportsView.xaml">
+    <Page Include="UI\ReportViews\MainViewReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -402,7 +422,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\NonGameSetting.xaml">
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingTimeBomb.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSetting76Bingo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingMayaMoney.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingJailBreak.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingUkickEm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingWildBall.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -442,15 +486,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingCrazyBoutView.xaml">
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingCrazyBout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingJailBreakView.xaml">
+    <Page Include="UI\SettingViews\GameSettingView\Old\GameSettingJailBreakView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingUkickEmView.xaml">
+    <Page Include="UI\SettingViews\GameSettingView\Old\GameSettingUkickEmView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -458,7 +502,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingWildBallProgView.xaml">
+    <Page Include="UI\SettingViews\GameSettingView\Old\GameSettingWildBallProgView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -482,7 +526,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\SettingView.xaml">
+    <Page Include="UI\SettingViews\MainViewSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -550,58 +594,58 @@
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\MainWindow.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\MainWindow.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\MainWindow.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\MainWindow.xaml.cs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ViewModels\MainViewModel.cs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\ReportViews\ReportsView.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\ReportsView.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\ReportViews\ReportsView.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\ReportsView.xaml.cs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ViewModels\ReportsViewModel.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\ReportViews\AccountHistoryReportView.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\AccountHistoryReportView.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\ReportViews\AccountHistoryReportView.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\AccountHistoryReportView.xaml.cs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\SettingViews\SettingView.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\SettingView.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\SettingViews\SettingView.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\SettingView.xaml.cs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ViewModels\SettingViewModel.cs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\SettingViews\GameSettingView.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\GameSettingView.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\SettingViews\GameSettingView.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\GameSettingView.xaml.cs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\GameModels\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\OperatorViews\OperatorView.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\OperatorView.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\OperatorViews\OperatorView.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\OperatorView.xaml.cs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\OperatorViews\CharityView.xaml.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\CharityView.xaml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\OperatorViews\CharityView.xaml.cs.txt" />
+    <Resource Include="Trash%28SaveForReference%29\UI\CharityView.xaml.cs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

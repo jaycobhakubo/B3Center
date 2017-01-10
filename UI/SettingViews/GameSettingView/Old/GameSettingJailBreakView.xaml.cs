@@ -22,7 +22,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// <summary>
     /// Interaction logic for GameSettingJailBreak.xaml
     /// </summary>
-    public partial class GameSettingJailBreak : UserControl
+    public partial class GameSettingJailBreakView : UserControl
     {
         #region MEMBER VARIABLES
 
@@ -53,7 +53,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         #region CONSTRUCTOR
 
-        public GameSettingJailBreak(List<B3SettingGlobal> B3SettingJailBreak, List<B3MathGamePay> ListB3MathGamePlay)
+        public GameSettingJailBreakView(List<B3SettingGlobal> B3SettingJailBreak, List<B3MathGamePay> ListB3MathGamePlay)
         {
             InitializeComponent();
             m_B3SettingJailBreak = B3SettingJailBreak;

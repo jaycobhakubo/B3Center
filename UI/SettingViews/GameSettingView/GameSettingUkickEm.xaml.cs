@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
     /// <summary>
-    /// Interaction logic for NonGameSetting.xaml
+    /// Interaction logic for GameSettingJailBreak2.xaml
     /// </summary>
-    public partial class NonGameSetting : UserControl
+    public partial class GameSettingUkickEm : UserControl
     {
-        public NonGameSetting()
+        public GameSettingUkickEm()
         {
             InitializeComponent();
         }
