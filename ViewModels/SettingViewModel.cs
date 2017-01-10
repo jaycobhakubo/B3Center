@@ -70,7 +70,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             b3GameSetting.B3GameSetting_ = Settings.B3GameSetting_;//Game enabled 
             b3GameSetting.B3SettingGlobal_ = Settings.B3SettingGlobal_;//All settings
             b3GameSetting.ListB3mathGamePlay_ = Settings.B3GameMathPlay_;
-            //m_gameSettingView = new GameSettingView(b3GameSetting);
+            m_gameSettingView = new GameSettingView();// m_gameSettingView = new GameSettingView(b3GameSetting);
             m_systemSettingView = new SystemSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 7).ToList());
             m_playerSettingView = new PlayerSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 3).ToList());
             m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());

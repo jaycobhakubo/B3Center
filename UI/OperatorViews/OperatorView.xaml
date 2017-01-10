@@ -10,10 +10,7 @@
     <UserControl.Resources>
         
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,15,0,2"/>
-        </Style>
+     
 
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
@@ -56,6 +53,14 @@
                     
                     
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
+                        <Border.Resources>
+                            <Style
+                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,15,0,2"/>
+
+                            </Style>
+                        </Border.Resources>
                         <local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
                 
                     </Border>
@@ -68,7 +73,7 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
                                     <Label x:Name="txtblckErr" FontWeight="Bold" />
@@ -103,7 +108,7 @@
                                 </Grid>
                             </Border>
                             <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
-                                <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                                <Label  HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
                             </Border>
 
 
