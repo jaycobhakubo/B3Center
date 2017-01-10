@@ -61,7 +61,7 @@
 
                             </Style>
                         </Border.Resources>
-                        <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Center" Name="SettingTransitionControl" Content="{Binding SelectedSettingView}" Margin="0,15,0,0"/>
+                        <ContentPresenter  Name="SettingTransitionControl" Content="{Binding SelectedSettingView}"/>
                         <!--<local:GameSettingView ></local:GameSettingView>-->
                     </Border>
 

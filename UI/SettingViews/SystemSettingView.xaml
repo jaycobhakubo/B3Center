@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+          
              mc:Ignorable="d"              
          >
     <UserControl.Resources>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
-    
-    <Border>
-        <Grid Name="gridSystemSettings" GotFocus="Grid_GotFocus">
+    <Grid>
+        <Border    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" >
+        <Grid  Name="gridSystemSettings" GotFocus="Grid_GotFocus">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -85,4 +86,5 @@
 
         </Grid>
     </Border>
+    </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
     <Border>
-        <Grid Name="gridSessionSettings" GotFocus="Grid_GotFocus" >
+        <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" Name="gridSessionSettings" GotFocus="Grid_GotFocus" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

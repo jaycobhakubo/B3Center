@@ -10,7 +10,7 @@
     </UserControl.Resources>
     
     <Border>
-        <Grid Name="gridSalesSettings" GotFocus="Grid_GotFocus" >
+        <Grid Name="gridSalesSettings" GotFocus="Grid_GotFocus" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>

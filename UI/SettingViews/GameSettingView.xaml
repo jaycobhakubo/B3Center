@@ -23,7 +23,7 @@
     </UserControl.Resources>
 
 
-    <Border x:Name="m_layoutRoot">
+    <Border x:Name="m_layoutRoot" >
         <Grid Name="gridServerMessage" >
             <Grid.Resources>
 </Grid.Resources>
@@ -42,7 +42,7 @@
                 <MenuItem x:Name="m_fileExitMenuItem" Header="E_xit" Command="{Binding FileExitCommand}" />
             </MenuItem>
         </Menu>-->
-            <TabControl Focusable="False"  Background="Transparent">
+            <TabControl Focusable="False"  Background="Transparent" >
                
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">

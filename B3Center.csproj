@@ -216,6 +216,9 @@
     <Compile Include="UI\OperatorViews\CharityView.xaml.cs">
       <DependentUpon>CharityView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SettingViews\NonGameSetting.xaml.cs">
+      <DependentUpon>NonGameSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
@@ -396,6 +399,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\OperatorViews\CharityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\NonGameSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

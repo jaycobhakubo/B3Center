@@ -52,7 +52,7 @@
 
                     
                     
-                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
                         <Border.Resources>
                             <Style
                              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
