@@ -42,25 +42,12 @@
                 <ComboBox 
             	x:Name="cmbxCallSpeedMin" 
             	 Tag="59"/>
-                <!--<Style x:Key="LightBlueBorder" TargetType="{x:Type Border}">
-                    <Setter Property="BorderBrush" Value="{StaticResource BlueBrush}" />
-                    <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="CornerRadius" Value="4" />
-                    <Setter Property="Background" Value="{StaticResource LightBlueBrush}" />
-                </Style>-->
-
             </StackPanel>
-
             <StackPanel Grid.Column="3">
-
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto Play" />
                 <CheckBox Name="chkbxHideSerialNumber" Content="Hide Serial Number"  />
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
-
             </StackPanel>
-
-            <!--<StackPanel Name="stkpnlGameSettingCrazyBout" Grid.Column="3" >-->
-
         </Grid>
     </Border>
 </UserControl>

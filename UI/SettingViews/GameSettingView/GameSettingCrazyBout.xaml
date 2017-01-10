@@ -50,19 +50,10 @@
             	 Tag="11">
                 </ComboBox>
                 <Label   Content="Game Denominations" />
-                <!--<Style x:Key="LightBlueBorder" TargetType="{x:Type Border}">
-                    <Setter Property="BorderBrush" Value="{StaticResource BlueBrush}" />
-                    <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="CornerRadius" Value="4" />
-                    <Setter Property="Background" Value="{StaticResource LightBlueBrush}" />
-                </Style>-->
                 <GroupBox  Background="White"   BorderThickness="2"  Margin="-1,0,-1,0" Padding="15,0,0,3" Style="{DynamicResource GroupBoxStyle1}" >
-
-
-
+                    
                     <Grid >
                         <Grid.Resources>
-
                             <Style TargetType="CheckBox" >
                                 <Setter Property="Margin" Value="0,0,0,0"></Setter>
                                 <Setter Property="Height" Value="18"/>
@@ -72,21 +63,13 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
-
-
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
-
-
-
                         </Grid.ColumnDefinitions>
-
-
                         <CheckBox Name="chkbxDenom01" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0"   TabIndex="6" Tag="1" />
                         <CheckBox Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" />
                         <CheckBox Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  />
@@ -95,23 +78,15 @@
                         <CheckBox Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" />
                         <CheckBox Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" />
                         <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" />
-
                     </Grid>
                 </GroupBox>
-
             </StackPanel>
-
             <StackPanel Grid.Column="3">
-
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto Play" />
                 <CheckBox Name="chkbxHideSerialNumber" Content="Hide Serial Number"  />
                 <CheckBox Name="chkbxSingleOfferBonus" Content="Single Offer Bonus"  />
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
-
             </StackPanel>
-
-            <!--<StackPanel Name="stkpnlGameSettingCrazyBout" Grid.Column="3" >-->
-
         </Grid>
     </Border>
 </UserControl>

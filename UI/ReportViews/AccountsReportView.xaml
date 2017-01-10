@@ -8,71 +8,73 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <!--<Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>-->
-        <!--<Style TargetType="{x:Type TextBlock}"></Style>-->
     </UserControl.Resources>
-    <Grid>
+    <Border BorderBrush="Black" BorderThickness="2">
+    <Grid Width="633" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="28"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        
-        <Grid Grid.Row="0" >
+          
+            <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Accounts Outstanding Report" Style="{StaticResource HeaderStyle3}" TextWrapping="Wrap"/>
+            <TextBlock Grid.Column="0" Text="Accounts Outstanding Report" Style="{StaticResource HeaderStyle3}" 
+                       TextWrapping="Wrap" FontFamily="Trebuchet MS" FontWeight="Light"
+                       Margin="0,0,0,0" Padding="0,0,0,0"
+                       />
             
             <Button Grid.Column="1" Content="New Report" Name="NewReportButton" Click="SelectNewReportButton_Click" HorizontalAlignment="Right"/>
 
             <shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" Visibility="Hidden" />
         </Grid>
+        
 
-        <Border Grid.Row="1" Name="ReportViewerBorder">
+                <Border Grid.Row="1" Name="ReportViewerBorder">
             <viewer:CrystalReportsViewer Name="ReportViewer" Margin="5,0"/>
         </Border>
 
 
         <Grid Grid.Row="1">
-            <Border  Name="SelectDateBorder">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                    <WrapPanel Margin="0 0 5 0">
-                        <TextBlock Width="140" HorizontalAlignment="Left"  Text="Month"  />
-                        <TextBlock Width="90"  HorizontalAlignment="Left"  Text="Year" />
-                    </WrapPanel>
-                    <DockPanel Width="280" HorizontalAlignment="Center">
 
-                        <ComboBox  DockPanel.Dock="Left"
-                               
-                                   Width="140"
+                <StackPanel Width="279" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0">
+                    <!--<WrapPanel Margin="0 0 5 0">-->
+                        <Label  Content="Month"  />
+                    <ComboBox 
                                    ItemsSource="{Binding Months}"
                                    SelectedItem="{Binding AccountReportMonthSelected}"
-                                   Name="MonthCombobox" Margin="0,0,1,0">
-                           
-                        </ComboBox>
+                                   Name="MonthCombobox" >
 
-                        <ComboBox  DockPanel.Dock="Right"
-                              
+                    </ComboBox>
+
+                    <Label  Content="Year" />
+                    <!--</WrapPanel>-->
+                    <!--<DockPanel Width="280" HorizontalAlignment="Center">-->
+
+                  
+                        <ComboBox  
                                    ItemsSource="{Binding Years}"
                                    SelectedItem="{Binding AccountReportYearSelected}"
-                                   Name="YearCombobox" Margin="1,0,0,0">
+                                   Name="YearCombobox" >
                            
                         </ComboBox>
 
 
 
 
-                    </DockPanel>
+                    <!--</DockPanel>-->
                     <Button Width="280" Content="View Report" Click="ViewReportButton_Click" Name="ViewReportButton" Margin="0,15,0,5"/>
                     <Button Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton"/>
                     <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>
 
                 </StackPanel>
-            </Border>
+  
         </Grid>
     </Grid>
+    </Border>
 </UserControl>

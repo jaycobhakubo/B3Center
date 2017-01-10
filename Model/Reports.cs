@@ -13,7 +13,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
 
         }
 
-
         private string m_reportName;
         public string ReportName
         {
@@ -28,22 +27,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
             set { m_reportID = value; }
         }
 
-
-       // private UserControl m_reportView;
-       //public UserControl ReportView
-       // {
-       //     get { return m_reportView; }
-       //     set { m_reportView = value; }
-       // }
-
        public string DisplayName
        {
            get { return string.Format("{0}", ReportName); }
        }
 
     }
-
-
-    //SelectedItem="{Binding ReportSelected}" DisplayMemberPath="DisplayName">
-    
+   
 }

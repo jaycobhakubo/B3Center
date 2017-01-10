@@ -40,17 +40,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <!--<Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" >
-                        <Border.Resources>
-                            <Style
-                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="0,15,0,2"/>
-                         
-                            </Style>
-                        </Border.Resources>
-                        <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Center"  Name="SettingTransitionControl" Content="{Binding SelectedSettingView}" Margin="0,15,0,0"/>
-                    </Border>-->
+
 
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
                         <Border.Resources>

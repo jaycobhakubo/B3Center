@@ -6,7 +6,19 @@
              mc:Ignorable="d" 
             >
     <UserControl.Resources>
-       
+
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="0,30,0,0"></Setter>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="22"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="22.22"></Setter>
+        </Style>
     </UserControl.Resources>
     <DockPanel>
 
@@ -25,22 +37,26 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"  Style="{DynamicResource LightBlueBorderNoBackGround}" Margin="8">
-                        <ContentPresenter Margin="0,0,0,0" Name="ReportsTransitionControl" Content="{Binding SelectedReportView}" >
-                            <ContentPresenter.Resources>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                </Style>
-                                <Style  TargetType="{x:Type TextBlock}">
-                                    <Setter Property="FontFamily" Value="Segoe UI"/>
-                                    <Setter Property="FontWeight" Value="Light"/>
-                                    <Setter Property="SnapsToDevicePixels" Value="True" />
-                                    <Setter Property="Padding" Value="0,5,0,2"/>
-                                    <Setter Property="Margin" Value="0,0,5,0"/>
-                                    <Setter Property="FontSize" Value="15"/>
-                                </Style>
-                            </ContentPresenter.Resources>
-                        </ContentPresenter>
+                    <Border Grid.Row="0"  Style="{DynamicResource LightBlueBorderNoBackGround}" Margin="8" BorderThickness="0">
+                        <Border.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </Style>
+                            <!--<Style  TargetType="{x:Type TextBlock}">
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontWeight" Value="Light"/>
+                                <Setter Property="SnapsToDevicePixels" Value="True" />
+                                <Setter Property="Padding" Value="0,5,0,2"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                                <Setter Property="FontSize" Value="15"/>
+                            </Style>-->
+                            <Style
+                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,15,0,2"/>
+                            </Style>
+                        </Border.Resources>
+                            <ContentPresenter  Name="ReportsTransitionControl"  Content="{Binding SelectedReportView}" ></ContentPresenter>
                     </Border>
 
                     <Border Grid.Row="1" Margin="8">
