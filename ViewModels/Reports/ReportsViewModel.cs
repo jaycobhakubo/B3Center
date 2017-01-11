@@ -30,6 +30,7 @@ using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GameTech.Elite.Client.Modules.B3Center.Model;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -89,7 +90,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SessionSummaryView m_sessionsummaryReportView = new SessionSummaryView();
         private AccountHistoryReportView m_accountHistoryReportView = new AccountHistoryReportView();
         private WinnerCardsReportView m_winnerCardsReportView = new WinnerCardsReportView();
-        private BallCallReportView m_ballCallReportView = new BallCallReportView();
+        private BallCallReportView m_ballCallReportView;
         private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
         private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
    
@@ -217,9 +218,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
             m_winnerCardsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_ballCallReportView = new BallCallReportView();
-            m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            m_ballCallReportView = new BallCallReportView(m_ballcallvm = new ballcallVm(getrtm(1)));
+            //m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            //m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
             m_sessionTranReportView = new SessionTransactionReportView();
             m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
@@ -239,8 +240,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             
         }
 
-      
 
+        private ReportTemplateModel getrtm(int rid)
+        {
+            ReportTemplateModel result = new ReportTemplateModel();
+            List<string> par = new List<string>();
+            switch (rid)
+            {
+                case 1:
+                    {
+                        result.ReportTitle = "Ball Call";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        break;
+                    }
+            }
+            return result;
+        }
+
+        private ballcallVm m_ballcallvm;
+        public ballcallVm ballcallvm
+        {
+            get { return m_ballcallvm; }
+            set
+            {
+                m_ballcallvm = value;
+                RaisePropertyChanged("ballcallvm");
+            }
+        }
 
         /// <summary>
         /// Gets the singleton instance of ReportsViewModel.

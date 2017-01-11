@@ -15,7 +15,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
     /// <summary>
     ///     Interaction logic for DateTimePickerUserControl.xaml
     /// </summary>
-    public partial class DatePickerUserControl
+    public partial class DatePickerUserControl : UserControl
     {
         #region local variables
 

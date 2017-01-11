@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                 xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+                 xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
              mc:Ignorable="d" 
            >
     <Grid>
@@ -20,14 +21,18 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="{Binding ReportTitle}" Grid.Column="0"  TextWrapping="Wrap" />
-            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right"/>       
+            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right"/>
+            <!--<local:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
         </Grid>
         <Border Grid.Row="1" Name="ReportViewerBorder">
-            <viewer:CrystalReportsViewer Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>
+            <viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>
         </Border>
         <Grid Grid.Row="1">
-            <Border  Name="ReportParameter"></Border>
-         </Grid>
-                
+            <Border  Name="SelectDateBorder">
+
+                <!--<local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>-->
+            </Border>
+        </Grid>
+
     </Grid>
 </UserControl>

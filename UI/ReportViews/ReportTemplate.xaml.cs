@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameTech.Elite.Client.Modules.B3Center.ViewModels;
+using SAPBusinessObjects.WPF.Viewer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// </summary>
     public partial class ReportTemplate : UserControl
     {
-        public ReportTemplate()
+        public ReportTemplate(/*ReportTemplateViewModel reportvm*/)
         {
             InitializeComponent();
+            DataContext = this;
+            ReportViewer.ViewerCore.Zoom(85);
+            ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
+
+            NewReportButton.Visibility = Visibility.Hidden;
+            ReportViewerBorder.Visibility = Visibility.Hidden;
+            SelectDateBorder.Visibility = Visibility.Visible;
         }
     }
 }

@@ -143,13 +143,14 @@
     <Compile Include="Messages\GetSessionOperatorListMessage.cs" />
     <Compile Include="Messages\SessionStartMessage.cs" />
     <Compile Include="Messages\SetB3BallsMessage.cs" />
-    <Compile Include="Model\CharityModel.cs" />
-    <Compile Include="Model\CrazyBoutGameModel.cs" />
+    <Compile Include="Model\Operator\CharityModel.cs" />
+    <Compile Include="Model\Report\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
-    <Compile Include="Model\OperatorModel.cs" />
-    <Compile Include="Model\ReportParameterModel.cs" />
-    <Compile Include="Model\Reports.cs" />
-    <Compile Include="Model\ReportTemplateModel.cs" />
+    <Compile Include="Model\Operator\OperatorModel.cs" />
+    <Compile Include="Model\Report\ReportParameterModel.cs" />
+    <Compile Include="Model\Report\Reports.cs" />
+    <Compile Include="Model\Report\ReportTemplateModel.cs" />
+    <Compile Include="Model\Report\BallCallModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -321,9 +322,10 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\OperatorViewModel.cs" />
-    <Compile Include="ViewModels\ReportParameterViewModel.cs" />
-    <Compile Include="ViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ReportTemplateViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ballcallVm.cs" />
+    <Compile Include="ViewModels\Reports\ReportParameterViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ReportTemplateViewModel.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
   </ItemGroup>
