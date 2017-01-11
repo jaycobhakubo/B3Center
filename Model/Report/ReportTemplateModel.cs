@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GameTech.Elite.Base;
-
+using SAPBusinessObjects.WPF.Viewer;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model
 {
@@ -22,6 +22,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
                 set;
             }
 
+
+            public CrystalReportsViewer CrystalReportViewer
+            {
+                get;
+                set;
+            }
         
     }
 }

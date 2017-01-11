@@ -24,11 +24,12 @@
             <Button Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right"/>
             <!--<local:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
         </Grid>
-        <Border Grid.Row="1" Name="ReportViewerBorder">
-            <viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>
+        <Border Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}">
+            <ContentPresenter Content="{Binding vReportViewer}" Visibility="{Binding crVisibility}"></ContentPresenter>
+            <!--<viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>-->
         </Border>
         <Grid Grid.Row="1">
-            <Border  Name="SelectDateBorder">
+            <Border  Visibility="{Binding ReportParameterVisible}">
 
                 <local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>
             </Border>

@@ -31,6 +31,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports;
+using GameTech.Elite.Client.Modules.B3Center.Helper;
+using System.Threading.Tasks;
+using SAPBusinessObjects.WPF.Viewer;
+using GameTech.Elite.UI;
+using System.Windows.Threading;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -96,8 +101,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private BingoCardView m_bingoCardReportView;
 
 
-
-
+  
         #endregion
 
         #region Constructors
@@ -255,14 +259,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
+                        result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         break;
                     }
                 case 2:
                     {
                         result.ReportTitle = "Bingo Card";
-                        par.Add("StartEndCard");
-         
+                        par.Add("StartEndCard");     
                         result.ReportParameter = par;
+                        result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         break;
                     }
             }
@@ -1977,21 +1982,66 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region Command
 
         private bool m_canExecute;
-
-        private ICommand m_clickCommand;
-        public ICommand ClickCommand
+        private ICommand m_viewReportcmd;
+        public ICommand ViewReportcmd
         {
             get
             {
-                return m_clickCommand ?? (m_clickCommand = new B3Center.Helper.CommandHandler(() => MyAction(), m_canExecute));
+                return m_viewReportcmd ?? (m_viewReportcmd = new B3Center.Helper.CommandHandler(() => ViewReport(), m_canExecute));
             }
         }
 
 
-        public void MyAction()
+        public void ViewReport()
         {
-            MessageBox.Show("Hello");
+            CrystalReportsViewer tempcr = new CrystalReportsViewer();
+
+            Task.Factory.StartNew(() =>
+            {
+                IsLoading = true;
+                try
+                {
+                    var report = LoadBingoCardReportDocument(1, 10);
+
+                    if (report == null)
+                    {
+                        IsLoading = false;
+                        return;
+                    }
+
+                    //Dispatcher.Invoke(new Action(() =>
+                    //{
+                        tempcr.ViewerCore.ReportSource = report;
+                        tempcr.Focusable = true;
+                        tempcr.Focus();
+                    //}));
+                }
+                catch (Exception ex)
+                {
+                    //display message box on UI thread
+                    //Dispatcher.Invoke(new Action(() =>
+                    //{
+                        //error
+                        MessageWindow.Show(
+                            string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
+                                ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
+                    //}));
+                }
+                finally
+                {
+                   IsLoading = false;
+                }
+            });
+
+            m_ballcallvm.SetReportViewerCr(tempcr);
+            
+            //NewReportButton.Visibility = Visibility.Visible;
+            //ReportViewerBorder.Visibility = Visibility.Visible;
+            //SelectDateBorder.Visibility = Visibility.Hidden;
+
         }
+
+       
 
         #endregion
 

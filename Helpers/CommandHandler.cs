@@ -28,11 +28,5 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helper
         {
             m_action();
         }
-
-        //public bool isSuccess
-        //{
-        //    get;
-        //    set;
-        //}
     }
 }

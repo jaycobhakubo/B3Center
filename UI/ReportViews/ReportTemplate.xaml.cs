@@ -25,12 +25,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         {
             InitializeComponent();
             DataContext = this;
-            ReportViewer.ViewerCore.Zoom(85);
-            ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
+            //ReportViewer.ViewerCore.Zoom(85);
+            //ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
 
             NewReportButton.Visibility = Visibility.Hidden;
-            ReportViewerBorder.Visibility = Visibility.Hidden;
-            SelectDateBorder.Visibility = Visibility.Visible;
+            //ReportViewerBorder.Visibility = Visibility.Hidden;
+            //SelectDateBorder.Visibility = Visibility.Visible;
         }
     }
 }
