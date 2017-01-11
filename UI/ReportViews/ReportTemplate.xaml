@@ -5,26 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                 xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
                  xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
+                xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
            >
+    <UserControl.Resources>
+
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="315"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="28"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding ReportTitle}" Grid.Column="0"  TextWrapping="Wrap" />
-            <Button Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right"/>
-            <!--<local:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
+            <TextBlock Text="{Binding ReportTitle}" Grid.Column="0"   />
+            <!--<Button Grid.Column="0"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="View Report"
+                                HorizontalAlignment="Right" 
+                                x:Name="btnSave"
+                                VerticalAlignment="Top"
+                                            Command="{Binding ViewReportcmd}"
+                                Tag="1"/>-->
+            <!--<Button Height="40" Width="140" Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right" Visibility="Visible"/>-->
+            <!--<shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
+            <Button Content="X" Grid.Column="2" Command="{Binding CloseCRViewercmd}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
         </Grid>
-        <Border Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}">
+        <Border Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}">
             <ContentPresenter Content="{Binding vReportViewer}" Visibility="{Binding crVisibility}"></ContentPresenter>
             <!--<viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>-->
         </Border>

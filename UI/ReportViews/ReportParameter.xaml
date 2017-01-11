@@ -79,7 +79,7 @@
                               ></TextBox>
 
                 <TextBlock Text="Ending Card" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
-                <TextBox  MaxLength="6" Name="txtbxEndingCard" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" />
+                <TextBox  MaxLength="6" Name="txtbxEndingCard" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" Text="{Binding EndingCard}"/>
                 <!--<Button Visibility="Collapsed" Content="View Report" Margin="0,15,0,5" Click="ViewReportButton_Click" Name="ViewReportButton"  IsEnabled="{Binding EnableSessionReportButtons}"/>
                 <Button Visibility="Collapsed" Width="280" Content="Print Report" Click="PrintReportButton_Click" Name="PrintReportButton" IsEnabled="{Binding EnableSessionReportButtons}"/>
                 <TextBlock HorizontalAlignment="Center" Name="ErrorTextBlock" Foreground="Red"/>-->

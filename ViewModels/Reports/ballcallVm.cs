@@ -24,6 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
             this.vReportViewer = crv;
             this.ReportParameterVisible = System.Windows.Visibility.Hidden;
             this.ReportViewerVisibility = System.Windows.Visibility.Visible;
+            //this.CanExecutei = true;
             //NewReportButton.Visibility = Visibility.Visible;
             //ReportViewerBorder.Visibility = Visibility.Visible;
             //SelectDateBorder.Visibility = Visibility.Hidden;

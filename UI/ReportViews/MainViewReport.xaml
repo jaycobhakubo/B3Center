@@ -33,7 +33,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" Name="ReportMenuColumn"/>
+                <ColumnDefinition Width="Auto" Name="ReportMenuColumn"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -68,7 +68,7 @@
                             <ContentPresenter  Name="ReportsTransitionControl"  Content="{Binding SelectedReportView}" ></ContentPresenter>
                     </Border>
 
-                    <Border Grid.Row="1" Margin="8">
+                    <Border Visibility="{Binding ViewPrintButtonVisibility}" Grid.Row="1" Margin="8" Name="brdrViewPrint">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -121,7 +121,7 @@
                 </Grid>
             </Border>
 
-            <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+            <Border Visibility="{Binding ElementName=brdrViewPrint, Path=Visibility}" Name="brdrSettingMenuCol" Width="192" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>

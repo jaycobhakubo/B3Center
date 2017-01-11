@@ -28,6 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ReportParameterVisible = Visibility.Visible;
             ReportViewerVisibility = Visibility.Hidden;
            m_parVm = new ReportParameterViewModel(reportParameterList);
+           m_canExecute = true;
        
         }
 
@@ -105,10 +106,46 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public void ViewReport()
+       public ICommand CloseCRViewercmd
+       {
+           get
+           {
+               return m_CloseCRViewercmd ?? (m_CloseCRViewercmd = new B3Center.Helper.CommandHandler(() => CloseCRViewer(), m_canExecute));
+           }
+       }
+
+           private bool m_canExecute;
+           //public bool CanExecutei
+           //{
+           //    get { return m_canExecute; }
+           //    set { m_canExecute = value;
+           //    RaisePropertyChanged("CanExecutei");
+           //    }
+           //}
+
+           private ICommand m_CloseCRViewercmd;
+
+
+
+           public void CloseCRViewer()
         {
 
-           
+            ReportViewerVisibility = Visibility.Hidden;
+            ReportParameterVisible = Visibility.Visible;
+   
+
         }
+
+           private Visibility m_closeCRViewerVis;
+           public Visibility CloseCRViewerVis
+           {
+               get { return m_closeCRViewerVis; }
+               set 
+               {
+                   m_closeCRViewerVis = value;
+                   RaisePropertyChanged("CloseCRViewerVis");
+               }
+           }
+
     }
 }

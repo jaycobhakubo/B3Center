@@ -1487,6 +1487,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             bingoCardReport.CrystalReportDocument.SetParameterValue("@startId", startCard);
             bingoCardReport.CrystalReportDocument.SetParameterValue("@endId", endCard);
 
+            //bingoCardReport.CrystalReportDocument.SetParameterValue("@SessionNum", 1);
+            //bingoCardReport.CrystalReportDocument.SetParameterValue("@GamingDate", "1/1/2000 00:00:00");
+
+
             return bingoCardReport.CrystalReportDocument;
         }
 
@@ -1496,10 +1500,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <param name="report">The report.</param>
         private void LoadCrystalReport(B3Report report)
         {
-            var server = "B3-Server"; //m_controller.Settings.DatabaseServer;
+            var server = "b3-server";//m_controller.Settings.DatabaseServer;
             var name = m_controller.Settings.DatabaseName;
             var user = m_controller.Settings.DatabaseUser;
-            var password = m_controller.Settings.DatabasePassword;
+            var password = "cobalt$45";//m_controller.Settings.DatabasePassword;
             //report.LoadCrystalReport(string.Empty, string.Empty, string.Empty, string.Empty);
             report.LoadCrystalReport(server, name, user, password);
         }
@@ -1977,6 +1981,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private Visibility m_viewPrintButtonVisibility;
+        public Visibility ViewPrintButtonVisibility
+        {
+            get { return m_viewPrintButtonVisibility; }
+            set 
+            { 
+                m_viewPrintButtonVisibility = value;
+                RaisePropertyChanged("ViewPrintButtonVisibility");
+            
+            }
+        }
+
         #endregion
 
         #region Command
@@ -1994,11 +2010,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void ViewReport()
         {
-            CrystalReportsViewer tempcr = new CrystalReportsViewer();
 
-            Task.Factory.StartNew(() =>
-            {
-                IsLoading = true;
+
+            CrystalReportsViewer tempcr = new CrystalReportsViewer();
+            tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
+     
+     
+            ViewPrintButtonVisibility = Visibility.Collapsed;
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    IsLoading = true;
                 try
                 {
                     var report = LoadBingoCardReportDocument(1, 10);
@@ -2031,7 +2053,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                    IsLoading = false;
                 }
-            });
+            //});
 
             m_ballcallvm.SetReportViewerCr(tempcr);
             

@@ -20,7 +20,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ReportParameterViewModel(List<string> paramlist)
         {
             Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
-            StartingCard = "235456";
+            StartingCard = "1";
+            EndingCard = "10";
             m_paramList = paramlist;
             HideAllparameter();
             HideEnableParamControls(paramlist);
@@ -189,6 +190,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 m_startingCard = value;
                 RaisePropertyChanged("StartingCard");
+            }
+        }
+
+        private string m_endingCard;
+        public string EndingCard
+        {
+            get { return m_endingCard; }
+            set
+            {
+                m_endingCard = value;
+                RaisePropertyChanged("EndingCard");
             }
         }
 
