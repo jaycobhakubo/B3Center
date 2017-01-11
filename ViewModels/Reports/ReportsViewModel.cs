@@ -92,8 +92,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private WinnerCardsReportView m_winnerCardsReportView = new WinnerCardsReportView();
         private BallCallReportView m_ballCallReportView;
         private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
-        private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
-   
+        //private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
+        private BingoCardView m_bingoCardReportView;
+
 
 
 
@@ -226,9 +227,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
             m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_bingoCardReportView = new BingoCardReportView();
-            m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            m_bingoCardReportView = new BingoCardView(m_ballcallvm = new ballcallVm(getrtm(2)));
+            //m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            //m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
             m_reports = controller.Reports;
             LoadReportList();
@@ -250,8 +251,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case 1:
                     {
                         result.ReportTitle = "Ball Call";
+                        par.Add("Category");
                         par.Add("Date");
                         par.Add("Session");
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case 2:
+                    {
+                        result.ReportTitle = "Bingo Card";
+                        par.Add("StartEndCard");
+         
                         result.ReportParameter = par;
                         break;
                     }

@@ -10,7 +10,17 @@
         <Border  Name="SelectDateBorder">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
 
-
+                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}"  />
+                <ComboBox  
+                        Grid.Row="0"
+                              
+                               Width="280"                              
+                               x:Name="BallCallDefCombobox"
+                               ItemsSource="{Binding BallCallReportDefList}"
+                               SelectedItem="{Binding BallCallReportDefSelected}"
+                               Margin="0,0,0,5" 
+                     Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
+                    />
                 <TextBlock Text="Start Date" Name="StartDateTimepar" Visibility="{Binding StartEndDateWTime}" />
                 <shared:DatePickerUserControl  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" />
                 <TextBlock Text="End Date" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
@@ -61,17 +71,7 @@
                      Visibility="{Binding ElementName=AcctPar, Path=Visibility}"
                               />
 
-                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}"  />
-                <ComboBox  
-                        Grid.Row="0"
-                              
-                               Width="280"                              
-                               x:Name="BallCallDefCombobox"
-                               ItemsSource="{Binding BallCallReportDefList}"
-                               SelectedItem="{Binding BallCallReportDefSelected}"
-                               Margin="0,0,0,5" 
-                     Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
-                    />
+          
 
                 <TextBlock Text="Starting Card"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
                 <TextBox MaxLength="6" Name="txtbxStartingCard" 

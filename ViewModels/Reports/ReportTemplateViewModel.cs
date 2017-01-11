@@ -20,7 +20,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ReportTemplate_Vm = reportTemplateModel;
             ReportTitle = ReportTemplate_Vm.ReportTitle;
             reportParameterList = ReportTemplate_Vm.ReportParameter;
-           // m_parVm = new ReportParameterViewModel(reportParameterList);
+           m_parVm = new ReportParameterViewModel(reportParameterList);
         }
 
         private List<string> reportParameterList;
