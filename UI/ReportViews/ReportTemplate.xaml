@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="28"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding ReportTitle}" Grid.Column="0"   />
+            <TextBlock Text="{Binding Path=ReportTitle}" Grid.Column="0"   />
             <!--<Button Grid.Column="0"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="View Report"
@@ -36,13 +36,14 @@
             <!--<Button Height="40" Width="140" Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right" Visibility="Visible"/>-->
             <!--<shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
             <Button Content="X" Grid.Column="2" Command="{Binding CloseCRViewercmd}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
+            <!--<Button x:Name="button" Content="Button" Grid.Column="1" HorizontalAlignment="Right"/>-->
         </Grid>
-        <Border Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}">
+        <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}">
             <ContentPresenter Content="{Binding vReportViewer}" Visibility="{Binding crVisibility}"></ContentPresenter>
             <!--<viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>-->
         </Border>
         <Grid Grid.Row="1">
-            <Border  Visibility="{Binding ReportParameterVisible}">
+            <Border  Visibility="{Binding ReportParameterVisible, UpdateSourceTrigger=PropertyChanged}">
 
                 <local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>
             </Border>

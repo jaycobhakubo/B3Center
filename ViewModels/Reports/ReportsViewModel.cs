@@ -164,6 +164,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(B3Controller controller)
         {
             m_controller = controller;
+            PropertyChangedEventManager.AddListener(m_controller, this, string.Empty);
 
             m_controller.SessionInfoCompleted += OnListInfoDone;
 
@@ -231,7 +232,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
             m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_bingoCardReportView = new BingoCardView(m_ballcallvm = new ballcallVm(getrtm(2)));
+            m_bingoCardReportView = new BingoCardView(m_bingocardvm = new ballcallVm(getrtm(2)));
             //m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
             //m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
@@ -260,6 +261,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         par.Add("Session");
                         result.ReportParameter = par;
                         result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case 2:
@@ -268,6 +271,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         par.Add("StartEndCard");     
                         result.ReportParameter = par;
                         result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
             }
@@ -282,6 +287,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 m_ballcallvm = value;
                 RaisePropertyChanged("ballcallvm");
+            }
+        }
+
+        private ballcallVm m_bingocardvm;
+        public ballcallVm bingocardvm
+        {
+            get { return m_bingocardvm; }
+            set
+            {
+                m_bingocardvm = value;
+                RaisePropertyChanged("bingocardvm");
             }
         }
 
@@ -1981,17 +1997,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private Visibility m_viewPrintButtonVisibility;
-        public Visibility ViewPrintButtonVisibility
-        {
-            get { return m_viewPrintButtonVisibility; }
-            set 
-            { 
-                m_viewPrintButtonVisibility = value;
-                RaisePropertyChanged("ViewPrintButtonVisibility");
+        //private Visibility m_viewPrintButtonVisibility;
+        //public Visibility ViewPrintButtonVisibility
+        //{
+            //get { return m_viewPrintButtonVisibility; }
+            //set 
+            //{ 
+            //    m_viewPrintButtonVisibility = value;
+            //    RaisePropertyChanged("ViewPrintButtonVisibility");
             
-            }
-        }
+            //}
+
+            //get { return m_ballcallvm.bcvm.ReportParameterVisible; }
+            //set
+            //{
+            //    m_ballcallvm.bcvm.ReportParameterVisible = value;
+            //    RaisePropertyChanged("ViewPrintButtonVisibility");
+
+            //}
+        //}
 
         #endregion
 
@@ -2011,12 +2035,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void ViewReport()
         {
 
-
+            
             CrystalReportsViewer tempcr = new CrystalReportsViewer();
             tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
      
      
-            ViewPrintButtonVisibility = Visibility.Collapsed;
+            //ViewPrintButtonVisibility = Visibility.Collapsed;
 
             //Task.Factory.StartNew(() =>
             //{
@@ -2054,16 +2078,48 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                    IsLoading = false;
                 }
             //});
+           DefaultViewMode= Visibility.Collapsed;
+            CRViewMode = Visibility.Visible;
+            m_bingocardvm.vReportViewer = tempcr;
+        }
 
-            m_ballcallvm.SetReportViewerCr(tempcr);
-            
-            //NewReportButton.Visibility = Visibility.Visible;
-            //ReportViewerBorder.Visibility = Visibility.Visible;
-            //SelectDateBorder.Visibility = Visibility.Hidden;
+       public Visibility CRViewMode
+        {
+            get
+            {
+                return m_bingocardvm.ReportViewerVisibility;
+            }
+            set
+            {
+                m_bingocardvm.ReportViewerVisibility = value;
+                RaisePropertyChanged("CRViewMode");
+            }
 
         }
 
-       
+        public Visibility DefaultViewMode
+        {
+            get
+            {
+                return m_bingocardvm.ReportParameterVisible;
+            }
+            set
+            {
+                m_bingocardvm.ReportParameterVisible = value;
+                RaisePropertyChanged("DefaultViewMode");
+            }
+
+        }
+
+        public ReportTemplateModel gg
+        {
+            get { return m_bingocardvm.ReportTemplate_Vm; }
+            set
+            {
+                m_bingocardvm.ReportTemplate_Vm = value;
+                RaisePropertyChanged("gg");
+            }
+        } 
 
         #endregion
 

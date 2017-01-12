@@ -68,7 +68,7 @@
                             <ContentPresenter  Name="ReportsTransitionControl"  Content="{Binding SelectedReportView}" ></ContentPresenter>
                     </Border>
 
-                    <Border Visibility="{Binding ViewPrintButtonVisibility}" Grid.Row="1" Margin="8" Name="brdrViewPrint">
+                    <Border Visibility="{Binding DefaultViewMode}" Grid.Row="1" Margin="8" Name="brdrViewPrint">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>

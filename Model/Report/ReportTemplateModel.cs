@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GameTech.Elite.Base;
 using SAPBusinessObjects.WPF.Viewer;
+using System.Windows;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model
 {
@@ -28,6 +29,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
                 get;
                 set;
             }
-        
+
+        public Visibility ReportViewerm
+        { get; set; }
+
+        public Visibility DefaultViewerm
+        { get; set; }
+
+        //public Visibility HideCRReportViewer
+        //{ get; set; }
+
     }
 }

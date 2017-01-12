@@ -25,7 +25,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public Operator Operatorc
         {
-            get { return m_operator; }
+            get {
+                return 
+                    m_operator; }
             set
             {
                 m_operator = value;

@@ -23,10 +23,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
         {
             ReportTemplate_Vm = reportTemplateModel;
-            ReportTitle = ReportTemplate_Vm.ReportTitle;
+            //ReportTitle = ReportTemplate_Vm.ReportTitle;
             reportParameterList = ReportTemplate_Vm.ReportParameter;
-            ReportParameterVisible = Visibility.Visible;
-            ReportViewerVisibility = Visibility.Hidden;
+            //ReportParameterVisible = Visibility.Visible;
+            //ReportViewerVisibility = ReportTemplate_Vm.ShowCRReportViewer;
            m_parVm = new ReportParameterViewModel(reportParameterList);
            m_canExecute = true;
        
@@ -49,16 +49,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
         private string m_reportTitle;
         public string ReportTitle
         {
-            get { return m_reportTitle; }
+            get { return ReportTemplate_Vm.ReportTitle; }
             set
             {
-                if (m_reportTitle != value)
+                if (ReportTemplate_Vm.ReportTitle != value)
                 {
-                    m_reportTitle = value;
+                    ReportTemplate_Vm.ReportTitle = value;
                     RaisePropertyChanged("ReportTitle");
                 }
             }
@@ -78,10 +77,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private CrystalReportsViewer m_selectedCrystalReportViewer;
         public CrystalReportsViewer vReportViewer
         {
-            get { return m_selectedCrystalReportViewer; }
+            get { return ReportTemplate_Vm.CrystalReportViewer; }
             set
             {
-                m_selectedCrystalReportViewer = value;
+                ReportTemplate_Vm.CrystalReportViewer = value;
                 RaisePropertyChanged("vReportViewer");
             }
         }
@@ -89,24 +88,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private Visibility m_reportParameterVisibility;
         public Visibility ReportParameterVisible
         {
-            get { return m_reportParameterVisibility; }
-            set { m_reportParameterVisibility = value;
-            RaisePropertyChanged("ReportParameterVisible");
+            get { return ReportTemplate_Vm.DefaultViewerm; }
+            set
+            {
+                ReportTemplateModel testdd = ReportTemplate_Vm;
+                testdd.DefaultViewerm = value;
+                ReportTemplate_Vm = testdd;
+     //           ReportTemplate_Vm.DefaultViewerm = value;
+                RaisePropertyChanged("ReportParameterVisible");
             }
         }
 
         private Visibility m_ReportViewerVisibility;
         public Visibility ReportViewerVisibility
         {
-            get { return m_ReportViewerVisibility; }
+            //get { return m_ReportViewerVisibility; }
+            //set
+            //{
+            //    m_ReportViewerVisibility = value;
+            //    RaisePropertyChanged("ReportViewerVisibility");
+            //}
+
+            get { return ReportTemplate_Vm.ReportViewerm; }
             set
             {
-                m_ReportViewerVisibility = value;
+                ReportTemplate_Vm.ReportViewerm = value;
                 RaisePropertyChanged("ReportViewerVisibility");
             }
         }
 
-       public ICommand CloseCRViewercmd
+        public ICommand CloseCRViewercmd
        {
            get
            {
@@ -132,6 +143,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             ReportViewerVisibility = Visibility.Hidden;
             ReportParameterVisible = Visibility.Visible;
+   
    
 
         }

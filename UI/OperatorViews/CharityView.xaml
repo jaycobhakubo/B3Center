@@ -31,7 +31,7 @@
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Label Content="Operator Name" />
                 <TextBox Height="22.22"
-                         Text="{Binding Path=Operatorc.OperatorName}" MaxLength="18"                                              
+                         Text="{Binding  Operatorc.OperatorName, Mode=TwoWay}" MaxLength="18"                                              
                          />
 
                 <Label Content="Description"  />
