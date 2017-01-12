@@ -10,6 +10,7 @@ using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using SAPBusinessObjects.WPF.Viewer;
 using System.ComponentModel;
+using GameTech.Elite.UI;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -29,10 +30,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //ReportParameterVisible = Visibility.Visible;
             //ReportViewerVisibility = ReportTemplate_Vm.ShowCRReportViewer;
            m_parVm = new ReportParameterViewModel(reportParameterList);
-           m_canExecute = true;
-       
+           //m_canExecute = true;
+           CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }
-
+        public ICommand CloseViewReportCommand { get; set; }
         private List<string> reportParameterList;
 
         private void SetReportparameter()
@@ -118,15 +119,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public ICommand CloseCRViewercmd
-       {
-           get
-           {
-               return m_CloseCRViewercmd ?? (m_CloseCRViewercmd = new B3Center.Helper.CommandHandler(() => CloseCRViewer(), m_canExecute));
-           }
-       }
+       // public ICommand CloseCRViewercmd
+       //{
+       //    get
+       //    {
+       //        return m_CloseCRViewercmd ?? (m_CloseCRViewercmd = new B3Center.Helper.CommandHandler(() => CloseCRViewer(), m_canExecute));
+       //    }
+       //}
 
-           private bool m_canExecute;
+           //private bool m_canExecute;
            //public bool CanExecutei
            //{
            //    get { return m_canExecute; }
@@ -135,19 +136,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
            //    }
            //}
 
-           private ICommand m_CloseCRViewercmd;
 
 
+           public void CloseViewReport()
+           {
+               //ReportViewerVisibility = Visibility.Hidden;
+               //ReportParameterVisible = Visibility.Visible;
+               var x = ReportsViewModel.Instance;
+               x.DefaultViewMode = Visibility.Visible;
+               x.CRViewMode = Visibility.Collapsed;
+           }
 
-           public void CloseCRViewer()
-        {
-
-            ReportViewerVisibility = Visibility.Hidden;
-            ReportParameterVisible = Visibility.Visible;
-   
-   
-
-        }
 
            private Visibility m_closeCRViewerVis;
            public Visibility CloseCRViewerVis

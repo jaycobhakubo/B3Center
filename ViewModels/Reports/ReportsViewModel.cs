@@ -237,7 +237,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             LoadReportList();
 
             ViewReportCommand = new RelayCommand(parameter => ViewReportRel());
-            CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
+        
 
             //m_rptTempModel.ReportTitle = "Account History Report";
             //m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
@@ -247,16 +247,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        public void CloseViewReport()
-        {
-            MessageBox.Show("Hello");
-        }
-
+ 
 
         
 
         public ICommand ViewReportCommand { get; set; }
-        public ICommand CloseViewReportCommand { get; set; }
+
 
         public void ViewReportRel()
         {
@@ -304,8 +300,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                    IsLoading = false;
                 }
             //});
-           DefaultViewMode= Visibility.Collapsed;
-            CRViewMode = Visibility.Visible;
+                DefaultViewMode = Visibility.Collapsed;
+                CRViewMode = Visibility.Visible;
+                //m_bingocardvm.ReportViewerVisibility = Visibility.Visible;
+                //m_bingocardvm.ReportParameterVisible = Visibility.Collapsed;
             m_bingocardvm.vReportViewer = tempcr;
         
 
@@ -389,6 +387,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+        
 
         private void LoadReportList()
         {
