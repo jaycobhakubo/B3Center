@@ -93,7 +93,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private  SessionReportView m_sessionReportView = new SessionReportView();
         private  VoidReportView m_voidReportView = new VoidReportView();
         private SessionSummaryView m_sessionsummaryReportView = new SessionSummaryView();
-        private AccountHistoryReportView m_accountHistoryReportView = new AccountHistoryReportView();
+        private AccountHistoryReportView m_accountHistoryReportView;
         private WinnerCardsReportView m_winnerCardsReportView = new WinnerCardsReportView();
         private BallCallReportView m_ballCallReportView;
         private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
@@ -213,9 +213,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_sessionsummaryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
             m_sessionsummaryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_accountHistoryReportView = new AccountHistoryReportView();
-            m_accountHistoryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_accountHistoryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            m_accountHistoryReportView = new AccountHistoryReportView(m_ballcallvm = new ballcallVm(getrtm(3)));
+            //m_accountHistoryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_accountHistoryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
             m_winnerCardsReportView = new WinnerCardsReportView();
             m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
@@ -236,78 +236,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_reports = controller.Reports;
             LoadReportList();
 
-            ViewReportCommand = new RelayCommand(parameter => ViewReportRel());
-        
-
-            //m_rptTempModel.ReportTitle = "Account History Report";
-            //m_rptTemplateViewModel = new ReportTemplateViewModel(m_rptTempModel);
-            //m_accountHistoryReportView = new AccountHistoryReportView();
-            //m_acctHistoryReportView = new AcctHistoryReportView() { DataContext = ReportTempVm };
+            SetCommand();
+         
             
         }
 
 
- 
-
-        
-
-        public ICommand ViewReportCommand { get; set; }
-
-
-        public void ViewReportRel()
-        {
-
-              
-            CrystalReportsViewer tempcr = new CrystalReportsViewer();
-            tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
      
-     
-            //ViewPrintButtonVisibility = Visibility.Collapsed;
-
-            //Task.Factory.StartNew(() =>
-            //{
-            //    IsLoading = true;
-                try
-                {
-                    var report = LoadBingoCardReportDocument(1, 10);
-
-                    if (report == null)
-                    {
-                        IsLoading = false;
-                        return;
-                    }
-
-                    //Dispatcher.Invoke(new Action(() =>
-                    //{
-                        tempcr.ViewerCore.ReportSource = report;
-                        tempcr.Focusable = true;
-                        tempcr.Focus();
-                    //}));
-                }
-                catch (Exception ex)
-                {
-                    //display message box on UI thread
-                    //Dispatcher.Invoke(new Action(() =>
-                    //{
-                        //error
-                        MessageWindow.Show(
-                            string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
-                                ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
-                    //}));
-                }
-                finally
-                {
-                   IsLoading = false;
-                }
-            //});
-                DefaultViewMode = Visibility.Collapsed;
-                CRViewMode = Visibility.Visible;
-                //m_bingocardvm.ReportViewerVisibility = Visibility.Visible;
-                //m_bingocardvm.ReportParameterVisible = Visibility.Collapsed;
-            m_bingocardvm.vReportViewer = tempcr;
-        
-
-        }
 
 
         private ReportTemplateModel getrtm(int rid)
@@ -332,6 +267,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         result.ReportTitle = "Bingo Card";
                         par.Add("StartEndCard");     
+                        result.ReportParameter = par;
+                        result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case 3:
+                    {
+                        result.ReportTitle = "Accounts Outstanding";
+                        par.Add("MonthYear");
                         result.ReportParameter = par;
                         result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
@@ -2062,29 +2007,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        //private Visibility m_viewPrintButtonVisibility;
-        //public Visibility ViewPrintButtonVisibility
-        //{
-            //get { return m_viewPrintButtonVisibility; }
-            //set 
-            //{ 
-            //    m_viewPrintButtonVisibility = value;
-            //    RaisePropertyChanged("ViewPrintButtonVisibility");
-            
-            //}
-
-            //get { return m_ballcallvm.bcvm.ReportParameterVisible; }
-            //set
-            //{
-            //    m_ballcallvm.bcvm.ReportParameterVisible = value;
-            //    RaisePropertyChanged("ViewPrintButtonVisibility");
-
-            //}
-        //}
-
+        
         #endregion
 
-        #region Command
 
 
 
@@ -2117,7 +2042,86 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         }
 
-      
+
+        #region Command
+
+
+
+        private void SetCommand()
+        {
+            ViewReportCommand = new RelayCommand(parameter => ViewReportRel());
+        }
+
+
+        public ICommand ViewReportCommand { get; set; }
+
+
+
+
+        public void ViewReportRel()
+        {
+            CrystalReportsViewer tempcr = new CrystalReportsViewer();
+            tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
+
+
+            //ViewPrintButtonVisibility = Visibility.Collapsed;
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    IsLoading = true;
+            try
+            {
+                var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BingoCardReport);
+
+
+                if (bingoCardReport == null)
+                {
+                    return;
+                }
+                LoadCrystalReport(bingoCardReport);
+
+                //var report = LoadBingoCardReportDocument(1, 1);
+                var report = m_bingocardvm.LoadReportDocument(bingoCardReport);
+
+
+                if (report == null)
+                {
+                    IsLoading = false;
+                    return;
+                }
+
+                //Dispatcher.Invoke(new Action(() =>
+                //{
+                tempcr.ViewerCore.ReportSource = report;
+                tempcr.Focusable = true;
+                tempcr.Focus();
+                //}));
+            }
+            catch (Exception ex)
+            {
+                //display message box on UI thread
+                //Dispatcher.Invoke(new Action(() =>
+                //{
+                //error
+                MessageWindow.Show(
+                    string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
+                        ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
+                //}));
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+            //});
+            DefaultViewMode = Visibility.Collapsed;
+            CRViewMode = Visibility.Visible;
+            //m_bingocardvm.ReportViewerVisibility = Visibility.Visible;
+            //m_bingocardvm.ReportParameterVisible = Visibility.Collapsed;
+            m_bingocardvm.vReportViewer = tempcr;
+
+
+        }
+
 
         #endregion
 

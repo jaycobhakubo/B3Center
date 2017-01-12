@@ -104,13 +104,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private Visibility m_ReportViewerVisibility;
         public Visibility ReportViewerVisibility
         {
-            //get { return m_ReportViewerVisibility; }
-            //set
-            //{
-            //    m_ReportViewerVisibility = value;
-            //    RaisePropertyChanged("ReportViewerVisibility");
-            //}
-
+           
             get { return ReportTemplate_Vm.ReportViewerm; }
             set
             {
@@ -119,29 +113,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-       // public ICommand CloseCRViewercmd
-       //{
-       //    get
-       //    {
-       //        return m_CloseCRViewercmd ?? (m_CloseCRViewercmd = new B3Center.Helper.CommandHandler(() => CloseCRViewer(), m_canExecute));
-       //    }
-       //}
-
-           //private bool m_canExecute;
-           //public bool CanExecutei
-           //{
-           //    get { return m_canExecute; }
-           //    set { m_canExecute = value;
-           //    RaisePropertyChanged("CanExecutei");
-           //    }
-           //}
-
-
+   
 
            public void CloseViewReport()
            {
-               //ReportViewerVisibility = Visibility.Hidden;
-               //ReportParameterVisible = Visibility.Visible;
                var x = ReportsViewModel.Instance;
                x.DefaultViewMode = Visibility.Visible;
                x.CRViewMode = Visibility.Collapsed;
@@ -157,7 +132,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                    m_closeCRViewerVis = value;
                    RaisePropertyChanged("CloseCRViewerVis");
                }
-           }
-
+           }     
     }
 }

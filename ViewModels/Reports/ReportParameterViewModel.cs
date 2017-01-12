@@ -13,16 +13,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     public class ReportParameterViewModel : ViewModelBase
     {
-        private List<ReportParameterModel> m_reportParameterModel;
+        private ReportParameterModel m_reportParameterModel;
         private List<string> m_paramList;
         //private List<Visibility> m_ParameterList2;
 
         public ReportParameterViewModel(List<string> paramlist)
         {
             Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
-            StartingCard = "1";
-            EndingCard = "10";
             m_paramList = paramlist;
+            m_reportParameterModel = new ReportParameterModel();
             HideAllparameter();
             HideEnableParamControls(paramlist);
         }
@@ -157,14 +156,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public ObservableCollection<ReportParameterModel> reportParameterModel
+        public ReportParameterModel reportParameterModel
         {
-            get;
-            set;
-            //get { return m_reportParameterModel; }
-            //set { m_reportParameterModel = value;
-            //RaisePropertyChanged("reportParameterModel");
-            //}
+      
+            get { return m_reportParameterModel; }
+            set { m_reportParameterModel = value;
+            RaisePropertyChanged("reportParameterModel");
+            }
         }
 
         private IEnumerable<string> m_months;
@@ -183,23 +181,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         private string m_startingCard;
-        public string StartingCard
+        public int StartingCard
         {
-            get { return m_startingCard; }
+            get { return m_reportParameterModel.b3StartingCard; }
             set
             {
-                m_startingCard = value;
+                m_reportParameterModel.b3StartingCard = value;
                 RaisePropertyChanged("StartingCard");
             }
         }
 
         private string m_endingCard;
-        public string EndingCard
+        public int EndingCard
         {
-            get { return m_endingCard; }
+            get { return m_reportParameterModel.b3EndingCard; }
             set
             {
-                m_endingCard = value;
+                m_reportParameterModel.b3EndingCard = value;
                 RaisePropertyChanged("EndingCard");
             }
         }
