@@ -95,7 +95,7 @@
                                 HorizontalAlignment="Right" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                                            Command="{Binding ViewReportcmd}"
+                                            Command="{Binding ViewReportCommand}"
                                 Tag="1"/>
                                     <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="1"

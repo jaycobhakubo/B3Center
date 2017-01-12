@@ -6,6 +6,7 @@
                 xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
                  xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
                 xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+                   xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels"
              mc:Ignorable="d" 
            >
     <UserControl.Resources>
@@ -35,7 +36,7 @@
                                 Tag="1"/>-->
             <!--<Button Height="40" Width="140" Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right" Visibility="Visible"/>-->
             <!--<shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
-            <Button Content="X" Grid.Column="2" Command="{Binding CloseCRViewercmd}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
+            <Button Content="X" Grid.Column="2"  Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
             <!--<Button x:Name="button" Content="Button" Grid.Column="1" HorizontalAlignment="Right"/>-->
         </Grid>
         <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}">
@@ -43,9 +44,11 @@
             <!--<viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>-->
         </Border>
         <Grid Grid.Row="1">
-            <Border  Visibility="{Binding ReportParameterVisible, UpdateSourceTrigger=PropertyChanged}">
+            <!--<Border  Visibility="{Binding ReportParameterVisible, UpdateSourceTrigger=PropertyChanged}">-->
+            <Border  Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vm:ReportsViewModel}}, Path=DefaultViewMode}">
 
-                <local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>
+
+                    <local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>
             </Border>
         </Grid>
 

@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using SAPBusinessObjects.WPF.Viewer;
+using System.ComponentModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
