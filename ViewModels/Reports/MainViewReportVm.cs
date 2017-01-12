@@ -295,6 +295,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
+                case ReportId.B3Daily:
+                    {
+                        result.ReportTitle = "Daily";
+                        par.Add("Date");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3Detail:
+                    {
+                        result.ReportTitle = "Detail";
+                        par.Add("StartEndDate");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3Drawer:
+                    {
+                        result.ReportTitle = "Drawer";
+                        //par.Add("StartEndCard");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
               
             }
             return result;
@@ -492,8 +522,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_accountsReportView;
                         break;
                     }
+                case "Account History":
+                    {
+                        m_accountHistoryReportView = new AccountHistoryReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3AccountHistory)));
+                        view = m_accountHistoryReportView;
+                        break;
+                    }
+                case "Ball Call":
+                    {
+                        m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallByGame)));
+                        view = m_ballCallReportView;
+                        break;
+                    }
+                case "Bingo Card":
+                    {
+                        m_bingoCardReportView = new BingoCardView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BingoCardReport)));
+                        view = m_bingoCardReportView;
+                        break;
+                    }
                 case "Daily":
                     {
+                        m_dailyReportView = new DailyReportView();
                         view = m_dailyReportView;
                         break;
                     }
@@ -532,32 +581,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_sessionsummaryReportView;
                         break;
                     }
-                case "Account History":
-                    {
-                     m_accountHistoryReportView =   new AccountHistoryReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3AccountHistory)));
-                        view = m_accountHistoryReportView;
-                        break;
-                    }
+             
                 case "Winner Cards":
                     {
                         view = m_winnerCardsReportView;
                         break;
                     }
-                case "Ball Call":
-                    {
-                        view = m_ballCallReportView;
-                        break;
-                    }
+              
                 case "Session Transaction":
                     {
                         view = m_sessionTranReportView;
                         break;
                     }
-                case "Bingo Card":
-                    {
-                        view = m_bingoCardReportView;
-                        break;
-                    }
+           
             }
 
 
