@@ -324,10 +324,10 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\OperatorViewModel.cs" />
-    <Compile Include="ViewModels\Reports\ballcallVm.cs" />
-    <Compile Include="ViewModels\Reports\ReportParameterViewModel.cs" />
-    <Compile Include="ViewModels\Reports\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\Reports\ReportTemplateViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ReportBaseVm.cs" />
+    <Compile Include="ViewModels\Reports\ReportParameterVm.cs" />
+    <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
+    <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
   </ItemGroup>

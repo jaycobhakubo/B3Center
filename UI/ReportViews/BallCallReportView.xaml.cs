@@ -24,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     {
         private int m_ballcallDefID;
 
-        public BallCallReportView(ballcallVm bvm)
+        public BallCallReportView(ReportBaseVm bvm)
         {
 
             InitializeComponent();

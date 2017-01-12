@@ -84,7 +84,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     
 
         //Reports
-        private AccountsReportView m_accountsReportView = new AccountsReportView();// = new AccountsReportView;
+        private AccountsReportView m_accountsReportView;// = new AccountsReportView();// = new AccountsReportView;
         private  DailyReportView m_dailyReportView = new DailyReportView();
         private DetailReportView m_detailReportView = new DetailReportView();
         private DrawerReportView m_drawerReportView = new DrawerReportView();
@@ -161,7 +161,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(B3Controller controller)
         {
             m_controller = controller;
-          
+            m_reports = controller.Reports;
 
             m_controller.SessionInfoCompleted += OnListInfoDone;
 
@@ -177,63 +177,65 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
 
 
-            m_accountsReportView = new AccountsReportView();
-            m_accountsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_accountsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_accountsReportView = new AccountsReportView();
+            //m_accountsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_accountsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_dailyReportView = new DailyReportView();
-            m_dailyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_dailyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_dailyReportView = new DailyReportView();
+            //m_dailyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_dailyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_detailReportView = new DetailReportView();
-            m_detailReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_detailReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_detailReportView = new DetailReportView();
+            //m_detailReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_detailReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_drawerReportView = new DrawerReportView();
-            m_drawerReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_drawerReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_drawerReportView = new DrawerReportView();
+            //m_drawerReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_drawerReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_jackpotReportView = new JackpotReportView();
-            m_jackpotReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_jackpotReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_jackpotReportView = new JackpotReportView();
+            //m_jackpotReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_jackpotReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_monthlyReportView = new MonthlyReportView();
-            m_monthlyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_monthlyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_monthlyReportView = new MonthlyReportView();
+            //m_monthlyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_monthlyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_sessionReportView = new SessionReportView();
-            m_sessionReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_sessionReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_sessionReportView = new SessionReportView();
+            //m_sessionReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_sessionReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_voidReportView = new VoidReportView();
-            m_voidReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_voidReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_voidReportView = new VoidReportView();
+            //m_voidReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_voidReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_sessionsummaryReportView = new SessionSummaryView();
-            m_sessionsummaryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            m_sessionsummaryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_sessionsummaryReportView = new SessionSummaryView();
+            //m_sessionsummaryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
+            //m_sessionsummaryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_accountHistoryReportView = new AccountHistoryReportView(m_ballcallvm = new ballcallVm(getrtm(3)));
+
+
+            //m_accountHistoryReportView = new AccountHistoryReportView(m_rptBaseVm = new BallcallVm(getrtm(ReportId.B3AccountHistory)));
             //m_accountHistoryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
             //m_accountHistoryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_winnerCardsReportView = new WinnerCardsReportView();
-            m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            m_winnerCardsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_winnerCardsReportView = new WinnerCardsReportView();
+            //m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            //m_winnerCardsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_ballCallReportView = new BallCallReportView(m_ballcallvm = new ballcallVm(getrtm(1)));
-            //m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new BallcallVm(getrtm(ReportId.B3BallCallByGame)));
+            ////m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            ////m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_sessionTranReportView = new SessionTransactionReportView();
-            m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_sessionTranReportView = new SessionTransactionReportView();
+            //m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            //m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_bingoCardReportView = new BingoCardView(m_bingocardvm = new ballcallVm(getrtm(2)));
-            //m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
+            //m_bingoCardReportView = new BingoCardView(m_bingocardvm = new BallcallVm(getrtm(ReportId.B3BingoCardReport)));
+            ////m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
+            ////m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
 
-            m_reports = controller.Reports;
+            
             LoadReportList();
 
             SetCommand();
@@ -242,72 +244,74 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-     
-
-
-        private ReportTemplateModel getrtm(int rid)
+        private ReportTemplateModel getrtm(ReportId b3rpt)
         {
             ReportTemplateModel result = new ReportTemplateModel();
             List<string> par = new List<string>();
-            switch (rid)
+            switch (b3rpt)
             {
-                case 1:
+                case ReportId.B3Accounts:
+                    {
+                        result.ReportTitle = "Accounts Outstanding";
+                        par.Add("MonthYear");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3AccountHistory:
+                    {
+                        result.ReportTitle = "Account History";
+                     
+                        par.Add("Date");
+                        par.Add("Session");
+                        par.Add("AccountNumber");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3BallCallByGame:
                     {
                         result.ReportTitle = "Ball Call";
                         par.Add("Category");
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
-                case 2:
+                case ReportId.B3BingoCardReport:
                     {
                         result.ReportTitle = "Bingo Card";
                         par.Add("StartEndCard");     
                         result.ReportParameter = par;
-                        result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
-                case 3:
-                    {
-                        result.ReportTitle = "Accounts Outstanding";
-                        par.Add("MonthYear");
-                        result.ReportParameter = par;
-                        result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
+              
             }
             return result;
         }
 
-        private ballcallVm m_ballcallvm;
-        public ballcallVm ballcallvm
+        private ReportBaseVm m_rptBaseVm;
+        public ReportBaseVm RptBaseVm
         {
-            get { return m_ballcallvm; }
+            get { return m_rptBaseVm; }
             set
             {
-                m_ballcallvm = value;
-                RaisePropertyChanged("ballcallvm");
+                m_rptBaseVm = value;
+                RaisePropertyChanged("RptBaseVm");
             }
         }
 
-        private ballcallVm m_bingocardvm;
-        public ballcallVm bingocardvm
-        {
-            get { return m_bingocardvm; }
-            set
-            {
-                m_bingocardvm = value;
-                RaisePropertyChanged("bingocardvm");
-            }
-        }
+    
 
         /// <summary>
         /// Gets the singleton instance of ReportsViewModel.
@@ -338,37 +342,123 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private void LoadReportList()
         {
             m_reportList.Clear();
-            m_reportList.Add("Accounts");
-            m_reportList.Add("Account History");
-            m_reportList.Add("Ball Call");
-            m_reportList.Add("Bingo Card");
-            m_reportList.Add("Daily");
-            m_reportList.Add("Detail");
-            m_reportList.Add("Drawer");
-            m_reportList.Add("Jackpot");
-            m_reportList.Add("Monthly");
-            m_reportList.Add("Session");
-            m_reportList.Add("Session Summary");
-            m_reportList.Add("Session Transaction");
-            m_reportList.Add("Void");
-            m_reportList.Add("Winner Cards");
+            foreach (B3Report b3rpt in m_reports)
+            {
+                B3Report temp = new B3Report();
+                temp = b3rpt;
+                switch (b3rpt.Id)
+                {
+                    case ReportId.B3AccountHistory:
+                        {
+                            temp.DisplayName = "Account History";
+                            break;
+                        }
+                    case ReportId.B3Accounts:
+                        {
+                            temp.DisplayName = "Accounts";
+                            break;
+                        }
+                    case ReportId.B3BallCallByGame:
+                        {
+                            temp.DisplayName = "Ball Call";
+                            break;
+                        }
+                    case ReportId.B3BingoCardReport:
+                        {
+                            temp.DisplayName = "Bingo Card";
+                            break;
+                        }
+                    case ReportId.B3Daily:
+                        {
+                            temp.DisplayName = "Daily";
+                            break;
+                        }
+                    case ReportId.B3Detail:
+                        {
+                            temp.DisplayName = "Detail";
+                            break;
+                        }
+                    case ReportId.B3Drawer:
+                        {
+                            temp.DisplayName = "Drawer";
+                            break;
+                        }
+                    case ReportId.B3Jackpot:
+                        {
+                            temp.DisplayName = "Jackpot";
+                            break;
+                        }
+                    case ReportId.B3Monthly:
+                        {
+                            temp.DisplayName = "Monthly";
+                            break;
+                        }
+                    case ReportId.B3Session:
+                        {
+                            temp.DisplayName = "Session";
+                            break;
+                        }
+
+                    case ReportId.B3SessionSummary:
+                        {
+                            temp.DisplayName = "Session Summary";
+                            break;
+                        }
+                    case ReportId.B3SessionTransaction:
+                        {
+                            temp.DisplayName = "Session Transaction";
+                            break;
+                        }
+                    case ReportId.B3Void:
+                        {
+                            temp.DisplayName = "Void";
+                            break;
+                        }
+                    case ReportId.B3WinnerCards:
+                        {
+                            temp.DisplayName = "Winner Cards";
+                            break;
+                        }
+
+                }
+                if (!string.IsNullOrEmpty(temp.DisplayName))
+                {
+                    m_reportList.Add(temp);
+                }
+                m_reportList = m_reportList.OrderBy(l => l.DisplayName).ToList();
+            }
+            //m_reportList.Add("Accounts");
+            //m_reportList.Add("Account History");
+            //m_reportList.Add("Ball Call");
+            //m_reportList.Add("Bingo Card");
+            //m_reportList.Add("Daily");
+            //m_reportList.Add("Detail");
+            //m_reportList.Add("Drawer");
+            //m_reportList.Add("Jackpot");
+            //m_reportList.Add("Monthly");
+            //m_reportList.Add("Session");
+            //m_reportList.Add("Session Summary");
+            //m_reportList.Add("Session Transaction");
+            //m_reportList.Add("Void");
+            //m_reportList.Add("Winner Cards");
             ReportSelected = m_reportList.FirstOrDefault();
         }
 
-        private string m_reportSelected; 
-        public string ReportSelected
+        private B3Report m_reportSelected; 
+        public B3Report ReportSelected
         {
             get { return m_reportSelected; }
             set 
             { 
                 m_reportSelected = value;
+                SelectionChanged(value.DisplayName);
                 RaisePropertyChanged("ReportSelected");
             }
         }
 
-        private List<string> m_reportList = new List<string>();
+        private List<B3Report> m_reportList = new List<B3Report>();
 
-        public List<string> ReportList
+        public List<B3Report> ReportList
         {
             get { return m_reportList; }
         }
@@ -391,13 +481,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void SelectionChanged(string ReportName)
         {
-
+            //Reinitialize every selection changed rather than storing.
             UserControl view = null;
 
             switch (ReportName)
             {
                 case "Accounts":
                     {
+                        m_accountsReportView = new AccountsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Accounts)));
                         view = m_accountsReportView;
                         break;
                     }
@@ -443,6 +534,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case "Account History":
                     {
+                     m_accountHistoryReportView =   new AccountHistoryReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3AccountHistory)));
                         view = m_accountHistoryReportView;
                         break;
                     }
@@ -2018,11 +2110,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_bingocardvm.ReportViewerVisibility;
+                return m_rptBaseVm.ReportViewerVisibility;
             }
             set
             {
-                m_bingocardvm.ReportViewerVisibility = value;
+                m_rptBaseVm.ReportViewerVisibility = value;
                 RaisePropertyChanged("CRViewMode");
             }
 
@@ -2032,11 +2124,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_bingocardvm.ReportParameterVisible;
+                return m_rptBaseVm.ReportParameterVisible;
             }
             set
             {
-                m_bingocardvm.ReportParameterVisible = value;
+                m_rptBaseVm.ReportParameterVisible = value;
                 RaisePropertyChanged("DefaultViewMode");
             }
 
@@ -2049,7 +2141,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetCommand()
         {
-            ViewReportCommand = new RelayCommand(parameter => ViewReportRel());
+            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
         }
 
 
@@ -2058,12 +2150,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
 
-        public void ViewReportRel()
+        public void ViewReportRel(ReportId reportID)
         {
             CrystalReportsViewer tempcr = new CrystalReportsViewer();
             tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
 
 
+            
             //ViewPrintButtonVisibility = Visibility.Collapsed;
 
             //Task.Factory.StartNew(() =>
@@ -2071,7 +2164,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //    IsLoading = true;
             try
             {
-                var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BingoCardReport);
+                var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == /*ReportId.B3BingoCardReport*/ reportID);
 
 
                 if (bingoCardReport == null)
@@ -2081,7 +2174,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 LoadCrystalReport(bingoCardReport);
 
                 //var report = LoadBingoCardReportDocument(1, 1);
-                var report = m_bingocardvm.LoadReportDocument(bingoCardReport);
+                var report = m_rptBaseVm.LoadReportDocument(bingoCardReport);
 
 
                 if (report == null)
@@ -2117,7 +2210,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CRViewMode = Visibility.Visible;
             //m_bingocardvm.ReportViewerVisibility = Visibility.Visible;
             //m_bingocardvm.ReportParameterVisible = Visibility.Collapsed;
-            m_bingocardvm.vReportViewer = tempcr;
+            m_rptBaseVm.vReportViewer = tempcr;
 
 
         }

@@ -22,6 +22,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         //public string parameter { get; set; }
         //public bool isEnable { get; set; }
 
+        private DateTime m_date;
+        public DateTime Date_ { get; set; }
+
         private IEnumerable<string> m_dateMonth;
         public IEnumerable<string> dateMonth { get; set; }
 

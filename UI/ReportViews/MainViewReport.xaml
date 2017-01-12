@@ -128,7 +128,7 @@
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}" SelectionChanged="ListBox_SelectionChanged">
+                        <ListBox Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}" DisplayMemberPath="DisplayName"  >
 
                         </ListBox>
                     </ScrollViewer>

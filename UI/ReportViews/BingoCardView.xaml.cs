@@ -20,7 +20,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// </summary>
     public partial class BingoCardView : UserControl
     {
-        public BingoCardView(ballcallVm bcvm)
+        public BingoCardView(ReportBaseVm bcvm)
         {
             InitializeComponent();
             DataContext = bcvm;

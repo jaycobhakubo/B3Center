@@ -58,6 +58,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         /// <summary>
+        /// Gets or sets the display name.
+        /// </summary>
+        public string DisplayName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Loads the crystal report.
         /// </summary>
         /// <param name="server">The server.</param>

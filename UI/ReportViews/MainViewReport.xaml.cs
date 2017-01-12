@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
@@ -131,11 +132,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         public event EventHandler<EventArgs> ExitScreenEvent;
 
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {            var viewModel = ReportsViewModel.Instance;
-            viewModel.SelectionChanged(((ListBox)sender).SelectedValue.ToString());
+        //private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{           
+        //    var viewModel = ReportsViewModel.Instance;
+        //    B3Report b3rpt = (B3Report)sender;
+      
 
-        }
+        //    viewModel.SelectionChanged(b3rpt.DisplayName);
+
+        //}
 
         #endregion
 

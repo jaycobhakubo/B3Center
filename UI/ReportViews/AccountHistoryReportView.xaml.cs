@@ -24,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     public partial class AccountHistoryReportView 
     {
 
-        public AccountHistoryReportView(ballcallVm bcvm)
+        public AccountHistoryReportView(ReportBaseVm bcvm)
         {
             InitializeComponent();
             DataContext = bcvm;
