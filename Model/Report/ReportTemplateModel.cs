@@ -30,6 +30,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
                 set;
             }
 
+            public ReportParameterModel rptParModel
+            {
+                get;
+                set;
+            }
+
         public Visibility ReportViewerm
         { get; set; }
 

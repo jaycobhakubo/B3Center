@@ -20,7 +20,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     public partial class ReportTemplateViewModel :ViewModelBase
     {
         private ReportTemplateModel m_reportTemplateModel; //= new ReportTemplateModel();
-        private ReportParameterModel m_reportParModel;
+       
+        //private ReportParameterModel m_reportParModel;
+        //public ReportParameterModel ReportParModel
+        //{
+        //    get { return m_reportParModel;
+        //    RaisePropertyChanged("ReportParModel");
+        //    }
+
+        //}
 
         public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
         {
@@ -29,7 +37,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterList = ReportTemplate_Vm.ReportParameter;
             //ReportParameterVisible = Visibility.Visible;
             //ReportViewerVisibility = ReportTemplate_Vm.ShowCRReportViewer;
-           m_parVm = new ReportParameterViewModel(reportParameterList);
+           m_parVm = new ReportParameterViewModel(reportParameterList, reportTemplateModel.rptParModel );
            //m_canExecute = true;
            CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }

@@ -170,7 +170,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //set session list
             foreach (var session in controller.Sessions)
             {
-                SessionList.Add(session);
+                SessionList.Add(session);//knc
             }
 
             //SessionReportSessionSelected = SessionList.LastOrDefault();
@@ -250,12 +250,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             ReportTemplateModel result = new ReportTemplateModel();
             List<string> par = new List<string>();
+            ReportParameterModel temprptparmodel = new ReportParameterModel();
+   
             switch (b3rpt)
             {
                 case ReportId.B3Accounts:
                     {
-                        result.ReportTitle = "Accounts Outstanding";
                         par.Add("MonthYear");
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Accounts Outstanding";              
                         result.ReportParameter = par;
                         //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
@@ -264,12 +267,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3AccountHistory:
                     {
+
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Account History";
                      
                         par.Add("Date");
                         par.Add("Session");
                         par.Add("AccountNumber");
+                
                         result.ReportParameter = par;
+                        
                         //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
@@ -277,6 +285,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3BallCallByGame:
                     {
+
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Ball Call";
                         par.Add("Category");
                         par.Add("Date");
@@ -289,6 +300,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3BingoCardReport:
                     {
+                        //temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Bingo Card";
                         par.Add("StartEndCard");     
                         result.ReportParameter = par;
@@ -299,6 +312,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Daily:
                     {
+                        //temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Daily";
                         par.Add("Date");
                         result.ReportParameter = par;
@@ -309,6 +324,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Detail:
                     {
+                        //temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Detail";
                         par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
@@ -319,6 +336,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Drawer:
                     {
+                        //temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Drawer";
                         //par.Add("StartEndCard");
                         result.ReportParameter = par;
@@ -329,6 +348,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Jackpot:
                     {
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Jackpot";
                         par.Add("Date");
                         par.Add("Session");
@@ -340,6 +361,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Monthly:
                     {
+                        //temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Monthly";
                         par.Add("MonthYear");
                         result.ReportParameter = par;
@@ -350,6 +373,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Session:
                     {
+
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session";
                         par.Add("Date");
                         par.Add("Session");
@@ -361,6 +387,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3SessionSummary:
                     {
+
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session Summary";
                         par.Add("Date");
                         par.Add("Session");
@@ -372,6 +401,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3SessionTransaction:
                     {
+
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session Transaction";
                         par.Add("Date");
                         par.Add("Session");
@@ -383,6 +415,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Void:
                     {
+                        //temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Void";
                         par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
@@ -393,6 +427,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3WinnerCards:
                     {
+
+                        temprptparmodel.SessionList = SessionList;
+                        temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Winners Card";
                         par.Add("Date");
                         par.Add("Session");
@@ -403,6 +440,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break;
                     }
             }
+            result.rptParModel = temprptparmodel;
             return result;
         }
 
@@ -2000,7 +2038,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
            Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SessionNumber);
            msg.Send();
            AccountList = new ObservableCollection<int>();
-           AccountList = msg.AccountNumberList;
+           //AccountList = msg.AccountNumberList;
 
             foreach (int account in AccountList)
             {
@@ -2275,8 +2313,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void ViewReportRel(ReportId reportID)
         {
-            CrystalReportsViewer tempcr = new CrystalReportsViewer();
-            tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
+  
 
 
             
@@ -2285,6 +2322,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //Task.Factory.StartNew(() =>
             //{
             //    IsLoading = true;
+            //reportID = ReportId.B3BallCallBySession;
             try
             {
                 var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == /*ReportId.B3BingoCardReport*/ reportID);

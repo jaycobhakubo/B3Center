@@ -54,11 +54,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         #region CONSTRUCTOR
 
-        public ServerGameSettingView(ServerM ServerSetting)
+        public ServerGameSettingView(/*ServerM ServerSetting*/List<B3SettingGlobal> B3Settings)
         {
             InitializeComponent();
-            DataContext = ServerSetting;
-            List<B3SettingGlobal> B3Settings = new List<B3SettingGlobal>();
+            //DataContext = ServerSetting;
+            //List<B3SettingGlobal> B3Settings = new List<B3SettingGlobal>();
             m_B3Settings = B3Settings;
             PopulateDataIntoVar();
             PopulateDataIntoControls();

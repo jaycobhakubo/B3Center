@@ -56,8 +56,8 @@
                 <TextBlock Text="Session" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
                                Width="280"
-                               ItemsSource="{Binding AccountHistoryReportSessionList}"
-                               SelectedItem="{Binding AccountHistoryReportSessionSelected}"
+                               ItemsSource="{Binding reportParameterModel.SessionList}"
+                               SelectedItem="{Binding SelectedSession}"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox"
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"
@@ -66,8 +66,8 @@
                 <ComboBox 
                                Width="280"                               
                                x:Name="AccountNumberCombobox"
-                                ItemsSource="{Binding AccountHistoryReportAccountList}"
-                                SelectedItem="{Binding AccountHistoryReportAccountSelected}"
+                                ItemsSource="{Binding AccountList}"
+                                SelectedItem="{Binding AccountSelected}"
                      Visibility="{Binding ElementName=AcctPar, Path=Visibility}"
                               />
 

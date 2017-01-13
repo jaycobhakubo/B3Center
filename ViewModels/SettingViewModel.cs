@@ -78,8 +78,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
             m_sessionSettingView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
             //m_operatorView = new OperatorView();
-            //m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
-            m_serverGameSettingView = new ServerGameSettingView(GetServerSetting( b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList()));
+            m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+          //  m_serverGameSettingView = new ServerGameSettingView(GetServerSetting( b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList()));
             if (IsClassIIB3GameEnable == true)
             {
                 //m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());

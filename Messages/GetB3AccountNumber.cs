@@ -16,7 +16,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
         public GetB3AccountNumber(int sessionNumber)
         {
-            AccountNumberList = new ObservableCollection<int>();
+            AccountNumberList = new List<int>();
             m_SessionNumber = sessionNumber;
         }
 
@@ -67,7 +67,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
             }
         }
 
-        public  ObservableCollection<int>  AccountNumberList
+        public  List<int>  AccountNumberList
         {
             get;
             set;

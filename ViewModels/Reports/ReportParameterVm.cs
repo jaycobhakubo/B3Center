@@ -7,6 +7,8 @@ using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using System.Windows;
+using GameTech.Elite.Reports;
+using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -17,11 +19,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private List<string> m_paramList;
         //private List<Visibility> m_ParameterList2;
 
-        public ReportParameterViewModel(List<string> paramlist)
+        public ReportParameterViewModel(List<string> paramlist, ReportParameterModel reportparM)
         {
             Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
             m_paramList = paramlist;
-            m_reportParameterModel = new ReportParameterModel();
+            reportParameterModel = reportparM;//new ReportParameterModel();
             HideAllparameter();
             HideEnableParamControls(paramlist);
         }
@@ -36,6 +38,87 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CategoryInput = Visibility.Collapsed;
             StartEndCardInput = Visibility.Collapsed;
             StartEndDateWTime = Visibility.Collapsed;
+        }
+
+        
+
+        private ObservableCollection<Session> m_sessionList;
+        public ObservableCollection<Session>  SessionList
+        {
+            get { return reportParameterModel.SessionList ; }
+            set 
+            {
+                reportParameterModel.SessionList = value;
+                RaisePropertyChanged("SessionList");
+            }
+        }
+
+        private Session m_SelectedSession;
+        public Session SelectedSession
+        {
+            get{return reportParameterModel.b3Session;}
+            set{
+                reportParameterModel.b3Session = value;
+                SelectionChangedNotProper();
+                RaisePropertyChanged("SelectedSession");
+            }  
+        }
+
+
+
+        private void SelectionChangedNotProper()
+        {
+            if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
+            {
+                Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
+                msg.Send();
+                var AccountListtemp = msg.AccountNumberList;
+                AccountList = AccountListtemp.Select(x => (x.ToString())).ToList();
+                AccountSelected = m_accountList.FirstOrDefault();
+            }
+        }
+
+        private List<string> getAccountListPerSession(int SessionNumber)
+        {
+            m_accountList = new List<string>();
+            if (m_paramList.Contains("AccountNumber"))
+            {
+           
+            }
+            return m_accountList;
+        }
+
+        private List<string> m_accountList;
+        public List<string> AccountList
+        {
+            get { return m_accountList; }
+            set
+            {
+                m_accountList = value;
+                RaisePropertyChanged("AccountList");
+            }
+        }
+
+        private string m_AccountSelected;
+        public string AccountSelected
+        {
+            get { return reportParameterModel.b3AccountNumber; }
+            set
+            {
+                reportParameterModel.b3AccountNumber = value;
+                RaisePropertyChanged("AccountSelected");
+            }
+        }
+
+        private List<string> m_categoryList;
+        public List<string> CategoryList
+        {
+            get { return m_categoryList; }
+            set
+            {
+                m_categoryList = value;
+                RaisePropertyChanged("CategoryList");
+            }
         }
 
         private void HideEnableParamControls(List<string> paramlist)
@@ -181,7 +264,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         private string m_startingCard;
-        public int StartingCard
+        public string StartingCard
         {
             get { return m_reportParameterModel.b3StartingCard; }
             set
@@ -192,7 +275,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         private string m_endingCard;
-        public int EndingCard
+        public string EndingCard
         {
             get { return m_reportParameterModel.b3EndingCard; }
             set
@@ -202,6 +285,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+        public Elite.Reports.ReportId reportid { get; set; }
     }
 }
 
