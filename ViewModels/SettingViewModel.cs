@@ -18,6 +18,8 @@ using GameTech.Elite.Client.Modules.B3Center.Properties;
 using System.Linq;
 using GameTech.Elite.Client.Modules.B3Center.UI.SettingViews;
 using System.Windows.Controls;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
+using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -76,11 +78,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
             m_sessionSettingView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
             //m_operatorView = new OperatorView();
-            m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
-
+            //m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+            m_serverGameSettingView = new ServerGameSettingView(GetServerSetting( b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList()));
             if (IsClassIIB3GameEnable == true)
             {
-                m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+                //m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
                 //ServerGameSettingToggleButton.Visibility = Visibility.Visible;
             }
             else
@@ -88,8 +90,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 //ServerGameSettingToggleButton.Visibility = Visibility.Collapsed;
             }
             LoadSetting();
+            SetCommand();
+        }
+
+        private ServerM GetServerSetting(List<B3SettingGlobal> B3Settings)
+        {
+            ServerM tempR = new ServerM();
+            foreach(B3SettingGlobal s in B3Settings)
+            {
+               switch (s.B3SettingID)
+                {
+                    case 34:
+                        {
+
+                            break;
+                        }
+                }
+            }
+
+
+            return tempR;
+        }
+
+        private void SetCommand()
+        {
+            SaveSettingcmd = new RelayCommand(parameter => SaveSetting());
+        }
+
+
+        public ICommand SaveSettingcmd { get; set; }
+
+
+
+
+        public void SaveSetting()
+        {
+            
 
         }
+
 
 
         private List<string> m_settingList = new List<string>();

@@ -150,6 +150,7 @@
     <Compile Include="Model\Report\ReportParameterModel.cs" />
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
+    <Compile Include="Model\Setting\ServerM.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -329,6 +330,7 @@
     <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
+    <Compile Include="ViewModels\Settings\ServerVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

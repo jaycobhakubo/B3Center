@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
+using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
@@ -53,9 +54,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         #region CONSTRUCTOR
 
-        public ServerGameSettingView(List<B3SettingGlobal> B3Settings)
+        public ServerGameSettingView(ServerM ServerSetting)
         {
             InitializeComponent();
+            DataContext = ServerSetting;
+            List<B3SettingGlobal> B3Settings = new List<B3SettingGlobal>();
             m_B3Settings = B3Settings;
             PopulateDataIntoVar();
             PopulateDataIntoControls();

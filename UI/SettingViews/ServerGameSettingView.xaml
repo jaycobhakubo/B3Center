@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
        
     </UserControl.Resources>
+  
     <Border>
         <Grid Name="gridServerMessage" GotFocus="gridServerMessage_GotFocus" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
@@ -25,15 +27,15 @@
 
             <StackPanel Name="stkpnlServerGame"  Grid.Column="1" Grid.Row="0">
                 <Label x:Name="lblCallSpeedMin_Copy"  Content="Min Player" />
-                <TextBox Name="txtbxMinPlayers"    Tag="34" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" LostFocus="txtbxMinPlayers_LostFocus"  />
+                <TextBox Text="{Binding ServerSetting.MinPlayer}" Name="txtbxMinPlayers"    Tag="34" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" LostFocus="txtbxMinPlayers_LostFocus"  />
                 <Label x:Name="lblCallSpeedMin_Copy1" Content="Game Start Delay(sec)"  />
-                <TextBox Name="txtbxGameStartDelay"   Tag="35" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"   />
+                <TextBox Text="{Binding ServerSetting.GameStart}"  Name="txtbxGameStartDelay"   Tag="35" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"   />
                 <Label x:Name="lblCallSpeedMin_Copy2" Content="Consolation Prize"     />
-                <TextBox Name="txtbxConsolationPrize"  Tag="36"   PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
+                <TextBox Text="{Binding ServerSetting.Consolation}" Name="txtbxConsolationPrize"  Tag="36"   PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
                 <Label x:Name="lblCallSpeedMin_Copy3" Content="Game Recall Password" />
-                <TextBox Name="txtbxGameRecallPassword"   Tag="37"  MaxLength="25"   />
+                <TextBox Text="{Binding ServerSetting.GameRecallPassw}" Name="txtbxGameRecallPassword"   Tag="37"  MaxLength="25"   />
                 <Label x:Name="lblCallSpeedMin_Copy4"  Content="Wait Count Down(sec)" />
-                <TextBox Name="txtbxWaitCountDown"   Tag="38"   PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
+                <TextBox Text="{Binding ServerSetting.WaitCountDown}" Name="txtbxWaitCountDown"   Tag="38"   PreviewTextInput="txtbxNumericOnly_PreviewTextInput" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
             </StackPanel>
 
         </Grid>
