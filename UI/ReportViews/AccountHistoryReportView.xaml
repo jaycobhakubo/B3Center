@@ -6,6 +6,7 @@
               xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
                             xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
+             Loaded="UserControl_Loaded"
              mc:Ignorable="d" 
           >
     <!--Loaded="UserControl_Loaded"-->

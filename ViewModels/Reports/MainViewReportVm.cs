@@ -91,12 +91,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private JackpotReportView m_jackpotReportView;// = new JackpotReportView();
         private MonthlyReportView m_monthlyReportView;//= new MonthlyReportView();
         private SessionReportView m_sessionReportView;//= new SessionReportView();
-        private  VoidReportView m_voidReportView = new VoidReportView();
-        private SessionSummaryView m_sessionsummaryReportView = new SessionSummaryView();
+        private VoidReportView m_voidReportView;// = new VoidReportView();
+        private SessionSummaryView m_sessionsummaryReportView;// = new SessionSummaryView();
         private AccountHistoryReportView m_accountHistoryReportView;
-        private WinnerCardsReportView m_winnerCardsReportView = new WinnerCardsReportView();
+        private WinnerCardsReportView m_winnerCardsReportView;// = new WinnerCardsReportView();
         private BallCallReportView m_ballCallReportView;
-        private SessionTransactionReportView m_sessionTranReportView = new SessionTransactionReportView();
+        private SessionTransactionReportView m_sessionTranReportView;// = new SessionTransactionReportView();
         //private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
         private BingoCardView m_bingoCardReportView;
 
@@ -357,6 +357,49 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
+                case ReportId.B3SessionSummary:
+                    {
+                        result.ReportTitle = "Session Summary";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3SessionTransaction:
+                    {
+                        result.ReportTitle = "Session Transaction";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3Void:
+                    {
+                        result.ReportTitle = "Void";
+                        par.Add("StartEndDatewTime");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3WinnerCards:
+                    {
+                        result.ReportTitle = "Winners Card";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
             }
             return result;
         }
@@ -607,28 +650,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_sessionReportView;
                         break;
                     }
-                case "Void":
-                    {
-                        view = m_voidReportView;
-                        break;
-                    }
                 case "Session Summary":
                     {
+                        m_sessionsummaryReportView = new SessionSummaryView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionSummary)));
                         view = m_sessionsummaryReportView;
                         break;
                     }
-             
+                case "Session Transaction":
+                    {
+                        m_sessionTranReportView = new SessionTransactionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionTransaction)));
+                        view = m_sessionTranReportView;
+                        break;
+                    }
+
+                case "Void":
+                    {
+                        m_voidReportView = new VoidReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Void)));
+                        view = m_voidReportView;
+                        break;
+                    }
+              
                 case "Winner Cards":
                     {
+                        m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
                         view = m_winnerCardsReportView;
                         break;
                     }
               
-                case "Session Transaction":
-                    {
-                        view = m_sessionTranReportView;
-                        break;
-                    }
+                
            
             }
 
