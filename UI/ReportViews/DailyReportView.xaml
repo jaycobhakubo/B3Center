@@ -6,12 +6,18 @@
              xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
              xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
+                                xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
             Loaded="UserControl_Loaded">
     <UserControl.Resources>
        
     </UserControl.Resources>
+   
     <Grid>
-        <Grid.RowDefinitions>
+        <local:ReportTemplate DataContext="{Binding bcvm}"></local:ReportTemplate>
+
+    </Grid>
+        
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -44,5 +50,5 @@
                 </StackPanel>
             </Border>
         </Grid>
-    </Grid>
+    </Grid>-->
 </UserControl>

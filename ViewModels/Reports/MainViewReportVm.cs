@@ -85,12 +85,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         //Reports
         private AccountsReportView m_accountsReportView;// = new AccountsReportView();// = new AccountsReportView;
-        private  DailyReportView m_dailyReportView = new DailyReportView();
-        private DetailReportView m_detailReportView = new DetailReportView();
-        private DrawerReportView m_drawerReportView = new DrawerReportView();
-        private  JackpotReportView m_jackpotReportView = new JackpotReportView();
-        private MonthlyReportView m_monthlyReportView = new MonthlyReportView();
-        private  SessionReportView m_sessionReportView = new SessionReportView();
+        private DailyReportView m_dailyReportView;//= new DailyReportView();
+        private DetailReportView m_detailReportView;//= new DetailReportView();
+        private DrawerReportView m_drawerReportView;//= new DrawerReportView();
+        private JackpotReportView m_jackpotReportView;// = new JackpotReportView();
+        private MonthlyReportView m_monthlyReportView;//= new MonthlyReportView();
+        private SessionReportView m_sessionReportView;//= new SessionReportView();
         private  VoidReportView m_voidReportView = new VoidReportView();
         private SessionSummaryView m_sessionsummaryReportView = new SessionSummaryView();
         private AccountHistoryReportView m_accountHistoryReportView;
@@ -308,7 +308,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3Detail:
                     {
                         result.ReportTitle = "Detail";
-                        par.Add("StartEndDate");
+                        par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
                         //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
@@ -325,7 +325,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
-              
+                case ReportId.B3Jackpot:
+                    {
+                        result.ReportTitle = "Jackpot";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3Monthly:
+                    {
+                        result.ReportTitle = "Monthly";
+                        par.Add("MonthYear");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
+                case ReportId.B3Session:
+                    {
+                        result.ReportTitle = "Session";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
+                        result.ReportViewerm = Visibility.Hidden;
+                        result.DefaultViewerm = Visibility.Visible;
+                        break;
+                    }
             }
             return result;
         }
@@ -542,32 +573,37 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case "Daily":
                     {
-                        m_dailyReportView = new DailyReportView();
+                        m_dailyReportView = new DailyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Daily)));
                         view = m_dailyReportView;
                         break;
                     }
                 case "Detail":
                     {
+                        m_detailReportView = new DetailReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Detail)));
                         view = m_detailReportView;
                         break;
                     }
                 case "Drawer":
                     {
+                        m_drawerReportView = new DrawerReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Drawer)));
                         view = m_drawerReportView;
                         break;
                     }
                 case "Jackpot":
                     {
+                        m_jackpotReportView = new JackpotReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Jackpot)));
                         view = m_jackpotReportView;
                         break;
                     }
                 case "Monthly":
                     {
+                        m_monthlyReportView = new MonthlyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Monthly)));
                         view = m_monthlyReportView;
                         break;
                     }
                 case "Session":
                     {
+                        m_sessionReportView = new SessionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Session)));
                         view = m_sessionReportView;
                         break;
                     }

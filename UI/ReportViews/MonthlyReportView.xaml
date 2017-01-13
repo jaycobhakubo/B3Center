@@ -6,12 +6,15 @@
               xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
               xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
               mc:Ignorable="d" 
-              Loaded="UserControl_Loaded">
+                 xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
+            Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <!--<Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle40x40}"/>-->
-        <!--<Style TargetType="{x:Type TextBlock}"></Style>-->
     </UserControl.Resources>
     <Grid>
+        <local:ReportTemplate DataContext="{Binding bcvm}"></local:ReportTemplate>
+
+    </Grid>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
@@ -67,5 +70,5 @@
                 </StackPanel>
             </Border>
         </Grid>
-    </Grid>
+    </Grid>-->
 </UserControl>
