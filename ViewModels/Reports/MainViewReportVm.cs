@@ -100,6 +100,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //private BingoCardReportView m_bingoCardReportView = new BingoCardReportView();
         private BingoCardView m_bingoCardReportView;
 
+        CrystalReportsViewer tempcr = new CrystalReportsViewer();
+        
 
   
         #endregion
@@ -162,7 +164,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             m_controller = controller;
             m_reports = controller.Reports;
-
+            tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
             m_controller.SessionInfoCompleted += OnListInfoDone;
 
             //set session list
@@ -171,8 +173,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 SessionList.Add(session);
             }
 
-            SessionReportSessionSelected = SessionList.LastOrDefault();
-            JackpotReportSessionSelected = SessionList.LastOrDefault();
+            //SessionReportSessionSelected = SessionList.LastOrDefault();
+            //JackpotReportSessionSelected = SessionList.LastOrDefault();
             //AccountHistoryReportSessionSelected  = SessionList.LastOrDefault();
             //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
 
