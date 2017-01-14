@@ -29,18 +29,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
         public ReportDocument LoadReportDocument(B3Report Report/*, int UserId, int StationId*/)
         {
             DateTime tempdate = new DateTime();
-            tempdate = DateTime.Parse("1/13/2017 00:00:00");
+            //tempdate = DateTime.Parse("1/13/2017 00:00:00");
 
              DateTime endtempdate = new DateTime();
-            endtempdate = DateTime.Parse("1/14/2017 00:00:00");
+            //endtempdate = DateTime.Parse("1/14/2017 00:00:00");
 
 
             switch (Report.Id)
             {
                 case ReportId.B3AccountHistory:
                     {
-                      
-                        Report.CrystalReportDocument.SetParameterValue("@P_Date_", tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.reportParameterModel.Date_*/
+                      tempdate = DateTime.Parse(bcvm.parVm.datepickerVm.datepicker.DateFull.ToString());
+                      Report.CrystalReportDocument.SetParameterValue("@P_Date_", tempdate.Date.ToString(CultureInfo.InvariantCulture)); //tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.reportParameterModel.Date_*/
                         Report.CrystalReportDocument.SetParameterValue("@SessionID_", bcvm.parVm.reportParameterModel.b3Session.Number);
                         Report.CrystalReportDocument.SetParameterValue("@AccountNumber", bcvm.parVm.reportParameterModel.b3AccountNumber);
                         break;

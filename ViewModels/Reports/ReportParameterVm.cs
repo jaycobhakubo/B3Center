@@ -9,6 +9,7 @@ using GameTech.Elite.Client.Modules.B3Center.Model;
 using System.Windows;
 using GameTech.Elite.Reports;
 using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -26,6 +27,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterModel = reportparM;//new ReportParameterModel();
             HideAllparameter();
             HideEnableParamControls(paramlist);
+            datepickerVm = new DatePickerVm();
+
         }
 
         private void HideAllparameter()
@@ -40,7 +43,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             StartEndDateWTime = Visibility.Collapsed;
         }
 
-        
+
+
+        private DatePickerVm m_datepickerVm;
+        public DatePickerVm datepickerVm
+        {
+            get { return m_datepickerVm; }
+            set
+            {
+                m_datepickerVm = value;
+              //  RaisePropertyChanged("datepickerVm");
+            }
+        }
+
 
         private ObservableCollection<Session> m_sessionList;
         public ObservableCollection<Session>  SessionList
