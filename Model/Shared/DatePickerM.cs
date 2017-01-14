@@ -31,7 +31,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Shared
             set;
         }
 
+        public string DateDayInt
+        {
+            get;
+            set;
+        }
 
+        public string AMPM
+        {
+            get;
+            set;
+        }
 
     }
 }
