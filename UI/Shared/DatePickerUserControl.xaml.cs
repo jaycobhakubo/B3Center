@@ -63,25 +63,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 
         #region constructor
 
-        private DatePickerM m_datepickerM;
-        public DatePickerM datepickerM
-        {
-            get { return m_datepickerM; }
-            set
-            {
-                m_datepickerM = value;
-            }
-        }
-
-
-
+      
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerUserControl"/> class.
         /// </summary>
         public DatePickerUserControl()
         {
             InitializeComponent();
-            DataContext = datepickerM;
 
             var years = new List<int>();
             for (var i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
@@ -164,9 +152,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
                     int year;
                     if (int.TryParse(YearCombobox.SelectedValue.ToString(), out year))
                     {
-                        datepickerM.DateMonthWord = MonthCombobox.SelectedValue.ToString();
-                        datepickerM.DateYearInt = year.ToString();
-
                         if (year % 4 == 0)
                         {
                             if (year % 100 == 0)
@@ -255,9 +240,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
                     hour += 12;
                 }
             }
-
-           // datepickerM.DateFullwTime = new DateTime(year, month, day, hour, 0, 0);
-
             return new DateTime(year, month, day, hour, 0, 0);
         }
 
@@ -283,8 +265,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
             DayCombobox.SelectedIndex = day - 1;
             AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
             HourCombobox.SelectedIndex = hour % 12;
-
-           // datepickerM.DateFullwTime = GetDateTime();
         }
 
         #endregion

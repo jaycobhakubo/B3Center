@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.Shared.DatePickerUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared"
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <vm:DatePickerVm></vm:DatePickerVm>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style  TargetType="{x:Type TextBlock}">
+         
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  Name="DateGridRow"/>
+            <RowDefinition  Name="SpaceGridRow"/>
+            <RowDefinition  Name="TimeGridRow"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" Margin="0,0,2,0" Name="MonthCombobox"  />
+            <ComboBox Grid.Column="1" Margin="2,0,2,0" Name="DayCombobox" />
+            <ComboBox Grid.Column="2" Margin="2,0,0,0" Name="YearCombobox" ></ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0" Margin="0,4,2,0" Name="HourCombobox" />
+            <ComboBox Grid.Column="1" Margin="2,4,0,0" Name="AmPmCombobox" />
+        </Grid>
+    </Grid>
+</UserControl>

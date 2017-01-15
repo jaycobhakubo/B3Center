@@ -247,6 +247,9 @@
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Shared\DatePickerUserView.xaml.cs">
+      <DependentUpon>DatePickerUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Shared\SaveCancelCrtl.xaml.cs">
       <DependentUpon>SaveCancelCrtl.xaml</DependentUpon>
     </Compile>
@@ -465,6 +468,10 @@
     <Page Include="UI\SettingViews\PayTableSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Shared\DatePickerUserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Shared\SaveCancelCrtl.xaml">
       <SubType>Designer</SubType>
