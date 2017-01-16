@@ -47,7 +47,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region CONSTRUCTOR
 
-        public DatePickerVm(DatePickerM datePickerModel)
+        public DatePickerVm(DatePickerM datePickerModel, bool showTime )
         {
             DatepickerModel = datePickerModel;   
             EventItemChanged();
@@ -55,6 +55,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         }
 
         #endregion
+
+        //public Visibility 
 
         #region MEMBER METHOD
 
