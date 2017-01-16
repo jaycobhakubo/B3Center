@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 {
-    class SelectedItemChangedcmd
+    public static class SelectedItemChangedcmd
     {
             private static readonly DependencyProperty SelectedCommandBehaviorProperty = DependencyProperty.RegisterAttached(
            "SelectedCommandBehavior",

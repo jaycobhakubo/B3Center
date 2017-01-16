@@ -17,7 +17,58 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
     {
        
         
+        
+
+        #region MEMBER VARIABLE AND PROPERTIES
+
+        private bool m_showTime;
+        public bool ShowTime
+        {
+            get
+            {
+                return m_showTime;
+            }
+            set
+            {
+                m_showTime = value;
+            }
+        }
+
+        private string m_dateMonthSelected;
+        public string DateMonthSelected
+        {
+            get
+            { return m_dateMonthSelected; }
+
+            set
+            {
+                if (value != m_dateMonthSelected)
+                {
+                    m_dateMonthSelected = value;
+                    RaisePropertyChanged("DateMonthSelected");
+                }
+            }
+
+        }
+
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public DatePickerVm()
+        {
+            m_showTime = true;
+            PopulateItemList();
+            EventItemChanged();
+          
+        }
+
+        #endregion
+
         #region MEMBER METHOD
+
+       
 
         private void PopulateItemList()
         {
@@ -115,56 +166,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
             return tempResult;
 
-        }
-
-        #endregion
-
-        #region MEMBER VARIABLE AND PROPERTIES
-
-        private bool m_showTime;
-        public bool ShowTime
-        {
-            get
-            {
-                return m_showTime;
-            }
-            set
-            {
-                m_showTime = value;
-            }
-        }
-
-        private string m_dateMonthSelected;
-        public string DateMonthSelected
-        {
-            get
-            { return m_dateMonthSelected; }
-
-            set
-            {
-                if (value != m_dateMonthSelected)
-                {
-                    m_dateMonthSelected = value;
-                    RaisePropertyChanged("DateMonthSelected");
-                }
-            }
-
-        }
-
-
-        #endregion
-
-        #region CONSTRUCTOR
-
-        public DatePickerVm()
-        {
-            m_showTime = true;
-            PopulateItemList();
-
-            DateSelectedChanged = new DelegateCommand<string>(obj =>
-            {
-                DateMonthSelected = obj;
-            });
         }
 
         #endregion
@@ -334,12 +335,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region EVENT (selectionchangedmvvm)
 
-        public ICommand DateSelectedChanged { get; private set; }
-
-        
+        public ICommand YearSelectedChanged { get; private set; }
+        private void EventItemChanged()
+        {
+            YearSelectedChanged = new DelegateCommand<string>(obj =>
+            {
+                m_selectedYear = obj;
+                m_dayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            });
+        }
 
         #endregion
 
+        #region REF
 
         public void SetDateTime(int year, int month, int day, int hour)
         {
@@ -383,12 +391,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
 
         #region Private Methods
-
-
-      
-
-
- 
 
         /// <summary>
         /// Handles the SelectionChanged event of the MonthYearCombobox control.
@@ -487,21 +489,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         //public DateTime GetDateTime()
         //{
         //    //var year = int.Parse(YearCombobox.SelectedValue.ToString());
-            //var month = MonthCombobox.SelectedIndex + 1;
-            //var day = DayCombobox.SelectedIndex + 1;
-            //var hour = HourCombobox.SelectedIndex;// +1;
+        //var month = MonthCombobox.SelectedIndex + 1;
+        //var day = DayCombobox.SelectedIndex + 1;
+        //var hour = HourCombobox.SelectedIndex;// +1;
 
-            //if (AmPmCombobox.SelectedIndex == 1)
-            //{
-            //    if (hour == 12)//there is no 24:00:00 hour
-            //    {
-            //        hour = 0;
-            //    }
-            //    else
-            //    {
-            //        hour += 12;
-            //    }
-            //}
+        //if (AmPmCombobox.SelectedIndex == 1)
+        //{
+        //    if (hour == 12)//there is no 24:00:00 hour
+        //    {
+        //        hour = 0;
+        //    }
+        //    else
+        //    {
+        //        hour += 12;
+        //    }
+        //}
         //    return new DateTime(year, month, day, hour, 0, 0);
         //}
 
@@ -512,7 +514,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <param name="hour">The hour.</param>
-     
+
+        #endregion
         #endregion
     }
 }
