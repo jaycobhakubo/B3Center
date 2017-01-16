@@ -28,6 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         public ReportParameter()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
 

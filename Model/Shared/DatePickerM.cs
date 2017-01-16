@@ -13,10 +13,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Shared
             set;
         }
 
-        public DateTime DateFullwTime
+        public string DateFullwTime
         {
-            get;
-            set;
+            get
+            {
+
+                return (DateMonthWord.ToString() + " " + DateDayInt.ToString() + " " + DateYearInt.ToString() + " " + DateTimestring.ToString() + " " + dateAMPM.ToString());
+            }
+            //set;
         }
 
         public string DateMonthWord
@@ -37,7 +41,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Shared
             set;
         }
 
-        public string AMPM
+        public string DateTimestring
+        {
+            get;
+            set;
+        }
+
+        public string dateAMPM
         {
             get;
             set;

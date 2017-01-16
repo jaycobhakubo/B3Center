@@ -6,18 +6,18 @@
              xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared"
              xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" >
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:DatePickerVm></vm:DatePickerVm>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <UserControl.Resources>
         <Style  TargetType="{x:Type TextBlock}">
          
         </Style>
 
-        <Style x:Key="rrr" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}" >
+        <!--<Style x:Key="rrr" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}" >
             <Setter Property="CommandSelectionChanged:SelectedItemChangedcmd.Command" Value="{Binding DateSelectedChanged}">
             </Setter>
-        </Style>
+        </Style>-->
     </UserControl.Resources>
     <Grid> 
         <Grid.RowDefinitions>
@@ -32,10 +32,9 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}" Style="{StaticResource rrr}" />
-            <!--CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}"-->
+            <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}"/>
             <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}"  />
-            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}"></ComboBox>
+            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}" CommandSelectionChanged:SelectedItemChangedcmd.Command ="{Binding YearSelectedChanged}"></ComboBox>
         </Grid>
 
         <Grid Grid.Row="2">

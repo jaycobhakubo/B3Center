@@ -39,8 +39,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
             {
                 case ReportId.B3AccountHistory:
                     {
-                      //tempdate = DateTime.Parse(bcvm.parVm.datepickerVm.datepicker.DateFull.ToString());
-                      Report.CrystalReportDocument.SetParameterValue("@P_Date_", tempdate.Date.ToString(CultureInfo.InvariantCulture)); //tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.reportParameterModel.Date_*/
+                        var tempdatettt = bcvm.parVm.GetDate();
+                        Report.CrystalReportDocument.SetParameterValue("@P_Date_", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture)); //tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.reportParameterModel.Date_*/
                         Report.CrystalReportDocument.SetParameterValue("@SessionID_", bcvm.parVm.reportParameterModel.b3Session.Number);
                         Report.CrystalReportDocument.SetParameterValue("@AccountNumber", bcvm.parVm.reportParameterModel.b3AccountNumber);
                         break;

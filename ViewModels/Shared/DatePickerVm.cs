@@ -34,30 +34,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             }
         }
 
-        private string m_dateMonthSelected;
-        public string DateMonthSelected
-        {
-            get
-            { return m_dateMonthSelected; }
 
+        private DatePickerM m_datepickerModel;
+        public DatePickerM DatepickerModel
+        {
+            get { return m_datepickerModel; }
             set
             {
-                if (value != m_dateMonthSelected)
-                {
-                    m_dateMonthSelected = value;
-                    RaisePropertyChanged("DateMonthSelected");
-                }
+                m_datepickerModel = value;
+                RaisePropertyChanged("DatepickerModel");
             }
-
         }
-
 
         #endregion
 
         #region CONSTRUCTOR
 
-        public DatePickerVm()
+        public DatePickerVm(DatePickerM datePickerModel)
         {
+            DatepickerModel = datePickerModel;
             m_showTime = true;
             PopulateItemList();
             EventItemChanged();
@@ -73,8 +68,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private void PopulateItemList()
         {
             var currentDateTime = DateTime.Now;
-
-            m_monthList = m_months.ToList();
+            MonthList = m_months.ToList();
             var cMonthint = DateTime.Now.Month;
             var cMonthName = m_months[cMonthint - 1];
             SelectedMonth = cMonthName;
@@ -87,23 +81,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
                 years.Add(i);
             }
 
-            m_yearList = years.Select(i => i.ToString()).ToList();
+            YearList = years.Select(i => i.ToString()).ToList();
             var cYearint = DateTime.Now.Year;
             SelectedYear = cYearint.ToString();
 
-            m_dayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
             var cDayint = DateTime.Now.Day;
             var cDaystring = m_dayOfMonthList[cDayint - 1];
             SelectedDay = cDaystring;
 
             if (m_showTime == true)
             {
-                m_timeList = m_hours.ToList();
+                TimeList_ = m_hours.ToList();
                 var hour = DateTime.Now.Hour % 12;
                 var hourString = m_timeList[hour];
                 SelectedTime = hourString;
 
-                m_ampmList = m_amPm.ToList();
+                AmpmList = m_amPm.ToList();
                 var AMPMindex = DateTime.Now.Hour > 11 ? 1 : 0;
                 var AMPMstring = m_ampmList[AMPMindex];
                 SelectedAmpm = AMPMstring;
@@ -213,13 +207,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region SELECTEDITEM (properties and private member)
 
+
+       
+
         private string m_selectedMonth;
         public string SelectedMonth
         {
-            get { return m_selectedMonth; }
+            get { return DatepickerModel.DateMonthWord; }
             set
             {
-                m_selectedMonth = value;
+                DatepickerModel.DateMonthWord = value;
                 RaisePropertyChanged("SelectedMonth");
             }
         }
@@ -228,10 +225,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private string m_selectedYear;
         public string SelectedYear
         {
-            get { return m_selectedYear; }
+            get { return DatepickerModel.DateYearInt; }
             set
             {
-                m_selectedYear = value;
+                DatepickerModel.DateYearInt = value;
                 RaisePropertyChanged("SelectedYear");
             }
 
@@ -240,10 +237,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private string m_selectedDay;
         public string SelectedDay
         {
-            get { return m_selectedDay; }
+            get { return DatepickerModel.DateDayInt; }
             set
             {
-                m_selectedDay = value;
+                DatepickerModel.DateDayInt = value;
                 RaisePropertyChanged("SelectedDay");
             }
 
@@ -252,10 +249,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private string m_selectedTime;
         public string SelectedTime
         {
-            get { return m_selectedTime; }
+            get { return DatepickerModel.DateTimestring; }
             set
             {
-                m_selectedTime = value;
+                DatepickerModel.DateTimestring = value;
                 RaisePropertyChanged("SelectedTime");
             }
         }
@@ -263,10 +260,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private string m_selectedAmpm;
         public string SelectedAmpm
         {
-            get { return m_selectedAmpm; }
+            get { return DatepickerModel.dateAMPM; }
             set
             {
-                m_selectedAmpm = value;
+                DatepickerModel.dateAMPM = value;
                 RaisePropertyChanged("SelectedAmpm");
             }
         }
@@ -341,7 +338,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             YearSelectedChanged = new DelegateCommand<string>(obj =>
             {
                 m_selectedYear = obj;
-                m_dayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+                MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
             });
         }
 
@@ -521,14 +518,3 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 }
 
 
-
-//private DatePickerM m_datepicker;
-//public DatePickerM datepicker
-//{
-//    get { return m_datepicker; }
-//    set
-//    {
-//        m_datepicker = value;
-//        RaisePropertyChanged("datepicker");
-//    }
-//}

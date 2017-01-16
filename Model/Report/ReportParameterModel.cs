@@ -13,14 +13,17 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 namespace GameTech.Elite.Client.Modules.B3Center.Model
 {
 
-    public class ReportParameterModel
+    public class ReportParameterModel : ViewModelBase
     {
-     
 
+        //private DatePickerM m_datePickerModel;
         public DatePickerM DatePickerModel
         {
-            get;
-            set;
+            get;set;
+            //get { return m_datePickerModel; }
+            //set { m_datePickerModel = value;
+            //    RaisePropertyChanged("DatePickerModel");
+            //}
         }
 
         private DateTime m_date;

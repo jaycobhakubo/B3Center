@@ -18,7 +18,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     public class ReportParameterViewModel : ViewModelBase
     {
         private ReportParameterModel m_reportParameterModel;
-        private DatePickerM m_datepicker;
+        //private DatePickerM m_datepicker;
 
         private List<string> m_paramList;
         //private List<Visibility> m_ParameterList2;
@@ -28,11 +28,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
             m_paramList = paramlist;
             reportParameterModel = reportparM;//new ReportParameterModel();
-            m_StartDatedatepickerVm = new DatePickerVm();//Do we want to pass any value? not for now.
+            DatePickerVm = new DatePickerVm(reportparM.DatePickerModel);///Do we want to pass any value? not for now.
             HideAllparameter();
             HideEnableParamControls(paramlist);
            
 
+        }
+
+        public DateTime GetDate()
+        {
+            DateTime tempResult;// = new DateTime();
+            DateTime.TryParse(reportParameterModel.DatePickerModel.DateFullwTime, out tempResult);
+            return tempResult;
+        }
+
+        public ReportParameterModel reportParameterModel
+        {
+
+            get { return m_reportParameterModel; }
+            set
+            {
+                m_reportParameterModel = value;
+                RaisePropertyChanged("reportParameterModel");
+            }
         }
 
         private void HideAllparameter()
@@ -47,16 +65,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             StartEndDateWTime = Visibility.Collapsed;
         }
 
-
-
-        private DatePickerVm m_StartDatedatepickerVm;
-        public DatePickerVm StartDatedatepickerVm
+        private DatePickerM m_datepickerModel;
+        public DatePickerM datePickermModel
         {
-            get { return m_StartDatedatepickerVm; }
+            get { return reportParameterModel.DatePickerModel; }
             set
             {
-                m_StartDatedatepickerVm = value;
-                 RaisePropertyChanged("StartDatedatepickerVm");
+                reportParameterModel.DatePickerModel = value;
+                RaisePropertyChanged("datePickermModel");
+            }
+
+        }
+
+        private DatePickerVm m_datePickerVm;
+        public DatePickerVm DatePickerVm
+        {
+            get { return m_datePickerVm; }
+            set
+            {
+                m_datePickerVm = value;
+                 RaisePropertyChanged("DatePickerVm");
             }
         }
 
@@ -149,7 +177,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
-                            m_StartDatedatepickerVm = new DatePickerVm();
+                           // DatePickerVm= new DatePickerVm();
                             DateInput = Visibility.Visible;
                             break;
                         }
@@ -160,8 +188,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDate":
                         {
-                            m_StartDatedatepickerVm = new DatePickerVm();
-                            StartEndDate = Visibility.Visible;
+                            //m_StartDatedatepickerVm = new DatePickerVm();
+                            //StartEndDate = Visibility.Visible;
                             break;
                         }
                     case "Session":
@@ -260,14 +288,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public ReportParameterModel reportParameterModel
-        {
-      
-            get { return m_reportParameterModel; }
-            set { m_reportParameterModel = value;
-            RaisePropertyChanged("reportParameterModel");
-            }
-        }
+       
 
         private IEnumerable<string> m_months;
 
