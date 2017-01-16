@@ -11,6 +11,9 @@ using System.Windows;
 using System.Windows.Controls;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
+using Microsoft.Practices.Composite.Presentation;
+using Microsoft.Practices.Composite;
+using Microsoft.Practices.Composite.Presentation.Commands;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 {
