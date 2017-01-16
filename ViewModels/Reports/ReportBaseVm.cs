@@ -17,6 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
             : base(reportTemplateModel)
         {
             bcvm = this;
+            bcvm.parVm.
         }
 
         public ReportTemplateViewModel bcvm

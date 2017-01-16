@@ -185,9 +185,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ReportTemplateModel result = new ReportTemplateModel();
             List<string> par = new List<string>();
             ReportParameterModel temprptparmodel = new ReportParameterModel();
-
-
             temprptparmodel.DatePickerModel = new Model.Shared.DatePickerM();
+            
+
             switch (b3rpt)
             {
                 case ReportId.B3Accounts:

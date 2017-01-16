@@ -49,8 +49,8 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}" />
-            <ComboBox Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" />
+            <ComboBox Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}" Visibility="{Binding ShowTime}"/>
+            <ComboBox Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" Visibility="{Binding ElementName=cmbxName, Path=Visibility}"/>
         </Grid>
     </Grid>
 </UserControl>
