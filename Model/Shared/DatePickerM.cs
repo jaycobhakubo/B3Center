@@ -7,7 +7,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Shared
 {
     public class DatePickerM
     {
-        public string DateFull
+        public DateTime DateFull
         {
             get;
             set;

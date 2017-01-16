@@ -17,11 +17,51 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     public class ReportParameterViewModel : ViewModelBase
     {
-        private ReportParameterModel m_reportParameterModel;
-        //private DatePickerM m_datepicker;
+        #region MEMBER VARIABLE
 
+        private ReportParameterModel m_reportParameterModel;
+
+        private DatePickerM m_datepickerModel;
+        private DatePickerVm m_datePickerVm;
+
+        private ObservableCollection<Session> m_sessionList;
         private List<string> m_paramList;
-        //private List<Visibility> m_ParameterList2;
+        private List<string> m_accountList;
+        private List<string> m_categoryList;
+
+        private Session m_SelectedSession;
+        private string m_AccountSelected;
+        private string m_startingCard;
+        private string m_endingCard;
+
+        private Visibility m_visibility;
+        private IEnumerable<string> m_months;
+
+        #endregion
+
+        #region STATIC (properties and variable)
+        private static readonly object m_syncRoot = new Object();
+        private static volatile ReportParameterViewModel m_instance;
+        public static ReportParameterViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                {
+                    lock (m_syncRoot)
+                    {
+                        //if (m_instance == null)
+
+                    }
+                }
+
+                return m_instance;
+            }
+        }
+
+        #endregion
+
+        #region CONSTRUCTORS
 
         public ReportParameterViewModel(List<string> paramlist, ReportParameterModel reportparM)
         {
@@ -31,97 +71,47 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             DatePickerVm = new DatePickerVm(reportparM.DatePickerModel);///Do we want to pass any value? not for now.
             HideAllparameter();
             HideEnableParamControls(paramlist);
-           
-
         }
 
-        public DateTime GetDate()
-        {
-            DateTime tempResult;// = new DateTime();
-            DateTime.TryParse(reportParameterModel.DatePickerModel.DateFullwTime, out tempResult);
-            return tempResult;
-        }
+        #endregion
 
-        public ReportParameterModel reportParameterModel
+        #region METHOD
+
+        private void UpdateSessionList(DateTime selectedDateTime)
         {
 
-            get { return m_reportParameterModel; }
-            set
+            //AccountHistoryReportSessionList.Clear();
+            //EnableAccountHistoryReportButtons = false;
+
+            SessionList.Clear();
+
+            foreach (var session in SessionList)
             {
-                m_reportParameterModel = value;
-                RaisePropertyChanged("reportParameterModel");
-            }
-        }
+                var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
+                var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
 
-        private void HideAllparameter()
-        {
-            DateInput = Visibility.Collapsed;
-            MonthYearInput = Visibility.Collapsed;
-            StartEndDate = Visibility.Collapsed;
-            SessionInput = Visibility.Collapsed;
-            AccountNumberInput = Visibility.Collapsed;
-            CategoryInput = Visibility.Collapsed;
-            StartEndCardInput = Visibility.Collapsed;
-            StartEndDateWTime = Visibility.Collapsed;
-        }
+                if (sessionStartDateTime == sessionEndDateTime)
+                {
+                    sessionEndDateTime = DateTime.Today;
+                }
 
-        private DatePickerM m_datepickerModel;
-        public DatePickerM datePickermModel
-        {
-            get { return reportParameterModel.DatePickerModel; }
-            set
-            {
-                reportParameterModel.DatePickerModel = value;
-                RaisePropertyChanged("datePickermModel");
+                if (sessionStartDateTime.Year == selectedDateTime.Year &&
+                sessionStartDateTime.Month == selectedDateTime.Month &&
+                (sessionStartDateTime.Day <= selectedDateTime.Day && sessionEndDateTime.Day >= selectedDateTime.Day))
+                {
+                    SessionList.Add(session);
+                }
+
             }
 
-        }
-
-        private DatePickerVm m_datePickerVm;
-        public DatePickerVm DatePickerVm
-        {
-            get { return m_datePickerVm; }
-            set
+            if (SessionList.Count != 0)
             {
-                m_datePickerVm = value;
-                 RaisePropertyChanged("DatePickerVm");
+                SelectedSession = SessionList.LastOrDefault();
             }
-        }
-
-
-        private ObservableCollection<Session> m_sessionList;
-        public ObservableCollection<Session>  SessionList
-        {
-            get { return reportParameterModel.SessionList ; }
-            set 
+            else
             {
-                reportParameterModel.SessionList = value;
-                RaisePropertyChanged("SessionList");
-            }
-        }
-
-        private Session m_SelectedSession;
-        public Session SelectedSession
-        {
-            get{return reportParameterModel.b3Session;}
-            set{
-                reportParameterModel.b3Session = value;
-                SelectionChangedNotProper();
-                RaisePropertyChanged("SelectedSession");
-            }  
-        }
-
-
-
-        private void SelectionChangedNotProper()
-        {
-            if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
-            {
-                Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
-                msg.Send();
-                var AccountListtemp = msg.AccountNumberList;
-                AccountList = AccountListtemp.Select(x => (x.ToString())).ToList();
-                AccountSelected = m_accountList.FirstOrDefault();
+                //AccountHistoryReportAccountList.Clear();
+                //AccountHistoryReportAccountSelected = new int();
             }
         }
 
@@ -130,42 +120,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_accountList = new List<string>();
             if (m_paramList.Contains("AccountNumber"))
             {
-           
+
             }
             return m_accountList;
-        }
-
-        private List<string> m_accountList;
-        public List<string> AccountList
-        {
-            get { return m_accountList; }
-            set
-            {
-                m_accountList = value;
-                RaisePropertyChanged("AccountList");
-            }
-        }
-
-        private string m_AccountSelected;
-        public string AccountSelected
-        {
-            get { return reportParameterModel.b3AccountNumber; }
-            set
-            {
-                reportParameterModel.b3AccountNumber = value;
-                RaisePropertyChanged("AccountSelected");
-            }
-        }
-
-        private List<string> m_categoryList;
-        public List<string> CategoryList
-        {
-            get { return m_categoryList; }
-            set
-            {
-                m_categoryList = value;
-                RaisePropertyChanged("CategoryList");
-            }
         }
 
         private void HideEnableParamControls(List<string> paramlist)
@@ -177,7 +134,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
-                           // DatePickerVm= new DatePickerVm();
+                            // DatePickerVm= new DatePickerVm();
                             DateInput = Visibility.Visible;
                             break;
                         }
@@ -222,7 +179,156 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private void HideAllparameter()
+        {
+            DateInput = Visibility.Collapsed;
+            MonthYearInput = Visibility.Collapsed;
+            StartEndDate = Visibility.Collapsed;
+            SessionInput = Visibility.Collapsed;
+            AccountNumberInput = Visibility.Collapsed;
+            CategoryInput = Visibility.Collapsed;
+            StartEndCardInput = Visibility.Collapsed;
+            StartEndDateWTime = Visibility.Collapsed;
+        }
 
+        private void UpdateAccountList()
+        {
+            if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
+            {
+                Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
+                msg.Send();
+                var AccountListtemp = msg.AccountNumberList;
+                AccountList = AccountListtemp.Select(x => (x.ToString())).ToList();
+                AccountSelected = m_accountList.FirstOrDefault();
+            }
+        }
+
+        public DateTime GetDate()
+        {
+            DateTime tempResult;// = new DateTime();
+            DateTime.TryParse(reportParameterModel.DatePickerModel.DateFullwTime, out tempResult);
+            return tempResult;
+        }
+
+        
+
+        #endregion
+
+        #region PROPERTIES
+
+
+        public DateTime SelectedDateTime
+        {
+            get { return GetDate(); }
+        }     
+
+        public ReportParameterModel reportParameterModel
+        {
+            //get;set;
+            get { return m_reportParameterModel; }
+            set
+            {
+                m_reportParameterModel = value;
+                RaisePropertyChanged("reportParameterModel");
+            }
+        }
+
+
+        public DatePickerM datePickermModel
+        {
+            get { return reportParameterModel.DatePickerModel; }
+            set
+            {
+                reportParameterModel.DatePickerModel = value;
+                RaisePropertyChanged("datePickermModel");
+            }
+
+        }
+
+        public DatePickerVm DatePickerVm
+        {
+            get { return m_datePickerVm; }
+            set
+            {
+                m_datePickerVm = value;
+                RaisePropertyChanged("DatePickerVm");
+            }
+        }
+
+
+        public ObservableCollection<Session>  SessionList
+        {
+            get { return reportParameterModel.SessionList ; }
+            set 
+            {
+                reportParameterModel.SessionList = value;
+                RaisePropertyChanged("SessionList");
+            }
+        }
+
+ 
+        public Session SelectedSession
+        {
+            get{return reportParameterModel.b3Session;}
+            set{
+                reportParameterModel.b3Session = value;
+                UpdateAccountList();
+                RaisePropertyChanged("SelectedSession");
+            }  
+        }
+
+    
+        public string StartingCard
+        {
+            get { return m_reportParameterModel.b3StartingCard; }
+            set
+            {
+                m_reportParameterModel.b3StartingCard = value;
+                RaisePropertyChanged("StartingCard");
+            }
+        }
+
+   
+        public string EndingCard
+        {
+            get { return m_reportParameterModel.b3EndingCard; }
+            set
+            {
+                m_reportParameterModel.b3EndingCard = value;
+                RaisePropertyChanged("EndingCard");
+            }
+        }
+
+        public List<string> AccountList
+        {
+            get { return m_accountList; }
+            set
+            {
+                m_accountList = value;
+                RaisePropertyChanged("AccountList");
+            }
+        }
+
+
+        public string AccountSelected
+        {
+            get { return reportParameterModel.b3AccountNumber; }
+            set
+            {
+                reportParameterModel.b3AccountNumber = value;
+                RaisePropertyChanged("AccountSelected");
+            }
+        }
+
+        public List<string> CategoryList
+        {
+            get { return m_categoryList; }
+            set
+            {
+                m_categoryList = value;
+                RaisePropertyChanged("CategoryList");
+            }
+        }
 
         public Visibility StartEndDateWTime
         {
@@ -274,10 +380,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set;
         }
 
-
-
-
-        private Visibility m_visibility;
         public Visibility setVisibility
         {
             get { return m_visibility; }
@@ -288,9 +390,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-       
 
-        private IEnumerable<string> m_months;
 
         public IEnumerable<string> Months
         {
@@ -305,34 +405,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private string m_startingCard;
-        public string StartingCard
-        {
-            get { return m_reportParameterModel.b3StartingCard; }
-            set
-            {
-                m_reportParameterModel.b3StartingCard = value;
-                RaisePropertyChanged("StartingCard");
-            }
-        }
-
-        private string m_endingCard;
-        public string EndingCard
-        {
-            get { return m_reportParameterModel.b3EndingCard; }
-            set
-            {
-                m_reportParameterModel.b3EndingCard = value;
-                RaisePropertyChanged("EndingCard");
-            }
-        }
-
+       
 
         public Elite.Reports.ReportId reportid { get; set; }
+
+        #endregion
     }
 }
 
-
+#region REF(old script)
 //    class ReportParameterViewModel : ViewModelBase
 //    {
 
@@ -423,3 +504,4 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 //    }
 //}
+#endregion

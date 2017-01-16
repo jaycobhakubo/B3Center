@@ -63,7 +63,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region MEMBER METHOD
 
-       
+        private void GetSelectedDate()
+        {
+            //DateTime 
+        }
 
         private void PopulateItemList()
         {
@@ -164,46 +167,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #endregion
 
-        #region MEMBER VARIABLE (hardcoded)
-        private readonly string[] m_amPm = { "AM", "PM" };
-
-        private readonly string[] m_hours =
-        {
-            "12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00",
-            "10:00", "11:00"
-        };
-
-        private readonly string[] m_months =
-        {
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
-            "Nov", "Dec"
-        };
-
-        private readonly int[] m_thirtyDayMonth =
-        {
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            21, 22, 23, 24, 25, 26, 27, 28, 29, 30
-        };
-
-        private readonly int[] m_thirtyOneDayMonth =
-        {
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-            20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
-        };
-
-        private readonly int[] m_twentyEightDayMonth =
-        {
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-            19, 20, 21, 22, 23, 24, 25, 26, 27, 28
-        };
-
-        private readonly int[] m_twentyNineDayMonth =
-        {
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-            20, 21, 22, 23, 24, 25, 26, 27, 28, 29
-        };
-
-        #endregion
+        
 
         #region SELECTEDITEM (properties and private member)
 
@@ -333,6 +297,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         #region EVENT (selectionchangedmvvm)
 
         public ICommand YearSelectedChanged { get; private set; }
+        public ICommand DateSelectedChanged { get; private set; }
+
         private void EventItemChanged()
         {
             YearSelectedChanged = new DelegateCommand<string>(obj =>
@@ -340,181 +306,232 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
                 m_selectedYear = obj;
                 MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
             });
-        }
 
-        #endregion
-
-        #region REF
-
-        public void SetDateTime(int year, int month, int day, int hour)
-        {
-            //foreach (int item in YearCombobox.Items)
-            //{
-            //    if (item == year)
-            //    {
-            //        YearCombobox.SelectedItem = item;
-            //        break;
-            //    }
-            //}
-
-            //MonthCombobox.SelectedIndex = month - 1;
-            //DayCombobox.SelectedIndex = day - 1;
-            //AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
-            //HourCombobox.SelectedIndex = hour % 12;
-        }
-
-  
-
-
-        #region Events
-
-        /// <summary>
-        /// Occurs when [date time changed event].
-        /// </summary>
-        public event EventHandler<EventArgs> DateTimeChangedEvent;
-
-        #endregion
-
-        #region
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to show the time comboboxes.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [show time]; otherwise, <c>false</c>.
-        /// </value>
-        
-        #endregion
-
-
-        #region Private Methods
-
-        /// <summary>
-        /// Handles the SelectionChanged event of the MonthYearCombobox control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
-        //private void MonthYearCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (MonthCombobox.SelectedValue == null || YearCombobox.SelectedValue == null)
-        //    {
-        //        return;
-        //    }
-
-        //    switch (MonthCombobox.SelectedValue.ToString())
-        //    {
-        //        case "Feb":
-
-        //            //leap year logic:
-        //            //The year is evenly divisible by 4;
-        //            //If the year can be evenly divided by 100, it is NOT a leap year, unless;
-        //            //The year is also evenly divisible by 400. Then it is a leap year.
-        //            int year;
-        //            if (int.TryParse(YearCombobox.SelectedValue.ToString(), out year))
-        //            {
-        //                if (year % 4 == 0)
-        //                {
-        //                    if (year % 100 == 0)
-        //                    {
-        //                        DayCombobox.ItemsSource = year % 400 == 0 ? m_twentyNineDayMonth : m_twentyEightDayMonth;
-        //                        break;
-        //                    }
-
-        //                    DayCombobox.ItemsSource = m_twentyNineDayMonth;
-        //                    break;
-        //                }
-        //            }
-
-        //            DayCombobox.ItemsSource = m_twentyEightDayMonth;
-
-        //            break;
-
-        //        case "Jan":
-        //        case "Mar":
-        //        case "May":
-        //        case "Jul":
-        //        case "Aug":
-        //        case "Oct":
-        //        case "Dec":
-        //            DayCombobox.ItemsSource = m_thirtyOneDayMonth;
-        //            break;
-
-        //        case "Apr":
-        //        case "Jun":
-        //        case "Sep":
-        //        case "Nov":
-        //            DayCombobox.ItemsSource = m_thirtyDayMonth;
-
-        //            break;
-        //    }
-
-
-        //    OnDateTimeChangedEvent();
-        //}
-
-        /// <summary>
-        /// Handles the SelectionChanged event of the Combobox control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
-        //private void Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    OnDateTimeChangedEvent();
-        //}
-
-        /// <summary>
-        /// Called when [date time changed event].
-        /// </summary>
-        private void OnDateTimeChangedEvent()
-        {
-            var handler = DateTimeChangedEvent;
-            if (handler != null)
+            DateSelectedChanged = new DelegateCommand<string>(obj =>
             {
-                handler(this, EventArgs.Empty);
-            }
+        
+               // MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            });
         }
 
-        #endregion
 
 
-        #region Public Methods
-
-        /// <summary>
-        /// Gets the date time.
-        /// </summary>
-        /// <returns></returns>
-        //public DateTime GetDateTime()
-        //{
-        //    //var year = int.Parse(YearCombobox.SelectedValue.ToString());
-        //var month = MonthCombobox.SelectedIndex + 1;
-        //var day = DayCombobox.SelectedIndex + 1;
-        //var hour = HourCombobox.SelectedIndex;// +1;
-
-        //if (AmPmCombobox.SelectedIndex == 1)
-        //{
-        //    if (hour == 12)//there is no 24:00:00 hour
-        //    {
-        //        hour = 0;
-        //    }
-        //    else
-        //    {
-        //        hour += 12;
-        //    }
-        //}
-        //    return new DateTime(year, month, day, hour, 0, 0);
-        //}
-
-        /// <summary>
-        /// Sets the date time.
-        /// </summary>
-        /// <param name="year">The year.</param>
-        /// <param name="month">The month.</param>
-        /// <param name="day">The day.</param>
-        /// <param name="hour">The hour.</param>
 
         #endregion
+
+        #region MEMBER VARIABLE (hardcoded)
+        private readonly string[] m_amPm = { "AM", "PM" };
+
+        private readonly string[] m_hours =
+        {
+            "12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00",
+            "10:00", "11:00"
+        };
+
+        private readonly string[] m_months =
+        {
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
+            "Nov", "Dec"
+        };
+
+        private readonly int[] m_thirtyDayMonth =
+        {
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+        };
+
+        private readonly int[] m_thirtyOneDayMonth =
+        {
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+        };
+
+        private readonly int[] m_twentyEightDayMonth =
+        {
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+            19, 20, 21, 22, 23, 24, 25, 26, 27, 28
+        };
+
+        private readonly int[] m_twentyNineDayMonth =
+        {
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+        };
+
         #endregion
     }
 }
 
 
+#region REF
+
+//public void SetDateTime(int year, int month, int day, int hour)
+//{
+//    //foreach (int item in YearCombobox.Items)
+//    //{
+//    //    if (item == year)
+//    //    {
+//    //        YearCombobox.SelectedItem = item;
+//    //        break;
+//    //    }
+//    //}
+
+//    //MonthCombobox.SelectedIndex = month - 1;
+//    //DayCombobox.SelectedIndex = day - 1;
+//    //AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
+//    //HourCombobox.SelectedIndex = hour % 12;
+//}
+
+
+
+
+//#region Events
+
+///// <summary>
+///// Occurs when [date time changed event].
+///// </summary>
+//public event EventHandler<EventArgs> DateTimeChangedEvent;
+
+//#endregion
+
+//#region
+
+///// <summary>
+///// Gets or sets a value indicating whether to show the time comboboxes.
+///// </summary>
+///// <value>
+/////   <c>true</c> if [show time]; otherwise, <c>false</c>.
+///// </value>
+
+//#endregion
+
+
+//#region Private Methods
+
+///// <summary>
+///// Handles the SelectionChanged event of the MonthYearCombobox control.
+///// </summary>
+///// <param name="sender">The source of the event.</param>
+///// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
+////private void MonthYearCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+////{
+////    if (MonthCombobox.SelectedValue == null || YearCombobox.SelectedValue == null)
+////    {
+////        return;
+////    }
+
+////    switch (MonthCombobox.SelectedValue.ToString())
+////    {
+////        case "Feb":
+
+////            //leap year logic:
+////            //The year is evenly divisible by 4;
+////            //If the year can be evenly divided by 100, it is NOT a leap year, unless;
+////            //The year is also evenly divisible by 400. Then it is a leap year.
+////            int year;
+////            if (int.TryParse(YearCombobox.SelectedValue.ToString(), out year))
+////            {
+////                if (year % 4 == 0)
+////                {
+////                    if (year % 100 == 0)
+////                    {
+////                        DayCombobox.ItemsSource = year % 400 == 0 ? m_twentyNineDayMonth : m_twentyEightDayMonth;
+////                        break;
+////                    }
+
+////                    DayCombobox.ItemsSource = m_twentyNineDayMonth;
+////                    break;
+////                }
+////            }
+
+////            DayCombobox.ItemsSource = m_twentyEightDayMonth;
+
+////            break;
+
+////        case "Jan":
+////        case "Mar":
+////        case "May":
+////        case "Jul":
+////        case "Aug":
+////        case "Oct":
+////        case "Dec":
+////            DayCombobox.ItemsSource = m_thirtyOneDayMonth;
+////            break;
+
+////        case "Apr":
+////        case "Jun":
+////        case "Sep":
+////        case "Nov":
+////            DayCombobox.ItemsSource = m_thirtyDayMonth;
+
+////            break;
+////    }
+
+
+////    OnDateTimeChangedEvent();
+////}
+
+///// <summary>
+///// Handles the SelectionChanged event of the Combobox control.
+///// </summary>
+///// <param name="sender">The source of the event.</param>
+///// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
+////private void Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+////{
+////    OnDateTimeChangedEvent();
+////}
+
+///// <summary>
+///// Called when [date time changed event].
+///// </summary>
+//private void OnDateTimeChangedEvent()
+//{
+//    var handler = DateTimeChangedEvent;
+//    if (handler != null)
+//    {
+//        handler(this, EventArgs.Empty);
+//    }
+//}
+
+//#endregion
+
+
+//#region Public Methods
+
+///// <summary>
+///// Gets the date time.
+///// </summary>
+///// <returns></returns>
+////public DateTime GetDateTime()
+////{
+////    //var year = int.Parse(YearCombobox.SelectedValue.ToString());
+////var month = MonthCombobox.SelectedIndex + 1;
+////var day = DayCombobox.SelectedIndex + 1;
+////var hour = HourCombobox.SelectedIndex;// +1;
+
+////if (AmPmCombobox.SelectedIndex == 1)
+////{
+////    if (hour == 12)//there is no 24:00:00 hour
+////    {
+////        hour = 0;
+////    }
+////    else
+////    {
+////        hour += 12;
+////    }
+////}
+////    return new DateTime(year, month, day, hour, 0, 0);
+////}
+
+///// <summary>
+///// Sets the date time.
+///// </summary>
+///// <param name="year">The year.</param>
+///// <param name="month">The month.</param>
+///// <param name="day">The day.</param>
+///// <param name="hour">The hour.</param>
+
+//#endregion
+//#endregion
+
+#endregion
