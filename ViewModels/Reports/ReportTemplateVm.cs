@@ -19,27 +19,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     public partial class ReportTemplateViewModel :ViewModelBase
     {
-        private ReportTemplateModel m_reportTemplateModel; //= new ReportTemplateModel();
+        private ReportTemplateModel m_reportTemplateModel; 
        
-        //private ReportParameterModel m_reportParModel;
-        //public ReportParameterModel ReportParModel
-        //{
-        //    get { return m_reportParModel;
-        //    RaisePropertyChanged("ReportParModel");
-        //    }
-
-        //}
-
+       
         public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
         {
-            ReportTemplate_Vm = reportTemplateModel;
-            //ReportTitle = ReportTemplate_Vm.ReportTitle;
-            reportParameterList = ReportTemplate_Vm.ReportParameter;
-            //ReportParameterVisible = Visibility.Visible;
-            //ReportViewerVisibility = ReportTemplate_Vm.ShowCRReportViewer;
-           m_parVm = new ReportParameterViewModel(reportParameterList, reportTemplateModel.rptParModel );
-           //m_canExecute = true;
-           CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
+            ReportTemplate_Model  = reportTemplateModel;       
+            reportParameterList = ReportTemplate_Model.ReportParameter;     
+            m_parVm = new ReportParameterViewModel(reportParameterList, reportTemplateModel.rptParModel );       
+            CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }
         public ICommand CloseViewReportCommand { get; set; }
         private List<string> reportParameterList;
@@ -49,25 +37,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         }
 
-        public ReportTemplateModel ReportTemplate_Vm
+        public ReportTemplateModel ReportTemplate_Model
         {
             get { return m_reportTemplateModel; }
             set
             {
                 m_reportTemplateModel = value;
-                RaisePropertyChanged("ReportTemplate_Vm");
+                RaisePropertyChanged("ReportTemplate_Model");
             }
         }
 
         private string m_reportTitle;
         public string ReportTitle
         {
-            get { return ReportTemplate_Vm.ReportTitle; }
+            get { return ReportTemplate_Model.ReportTitle; }
             set
             {
-                if (ReportTemplate_Vm.ReportTitle != value)
+                if (ReportTemplate_Model.ReportTitle != value)
                 {
-                    ReportTemplate_Vm.ReportTitle = value;
+                    ReportTemplate_Model.ReportTitle = value;
                     RaisePropertyChanged("ReportTitle");
                 }
             }
@@ -87,10 +75,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private CrystalReportsViewer m_selectedCrystalReportViewer;
         public CrystalReportsViewer vReportViewer
         {
-            get { return ReportTemplate_Vm.CrystalReportViewer; }
+            get { return ReportTemplate_Model.CrystalReportViewer; }
             set
             {
-                ReportTemplate_Vm.CrystalReportViewer = value;
+                ReportTemplate_Model.CrystalReportViewer = value;
                 RaisePropertyChanged("vReportViewer");
             }
         }
@@ -98,13 +86,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private Visibility m_reportParameterVisibility;
         public Visibility ReportParameterVisible
         {
-            get { return ReportTemplate_Vm.DefaultViewerm; }
+            get { return ReportTemplate_Model.DefaultViewerm; }
             set
             {
-                ReportTemplateModel testdd = ReportTemplate_Vm;
+                ReportTemplateModel testdd = ReportTemplate_Model;
                 testdd.DefaultViewerm = value;
-                ReportTemplate_Vm = testdd;
-     //           ReportTemplate_Vm.DefaultViewerm = value;
+                ReportTemplate_Model = testdd;
+     //           ReportTemplate_Model.DefaultViewerm = value;
                 RaisePropertyChanged("ReportParameterVisible");
             }
         }
@@ -113,10 +101,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public Visibility ReportViewerVisibility
         {
            
-            get { return ReportTemplate_Vm.ReportViewerm; }
+            get { return ReportTemplate_Model.ReportViewerm; }
             set
             {
-                ReportTemplate_Vm.ReportViewerm = value;
+                ReportTemplate_Model.ReportViewerm = value;
                 RaisePropertyChanged("ReportViewerVisibility");
             }
         }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 {
@@ -21,7 +22,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
     {
         public DatePickerUserView()
         {
-            InitializeComponent();       
-        }      
+            DataContext = this;
+            InitializeComponent();
+        }
     }
 }

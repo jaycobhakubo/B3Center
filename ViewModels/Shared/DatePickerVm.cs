@@ -4,11 +4,318 @@ using System.Linq;
 using System.Text;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
+using System.Windows.Controls;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 {
     public class DatePickerVm : ViewModelBase
     {
+
+        #region LIST (properties and private member)
+
+        private List<string> m_monthList;
+        public List<string> MonthList
+        {
+            get { return m_monthList; }
+            set
+            {
+                m_monthList = value;
+                RaisePropertyChanged("MonthList");
+
+            }
+        }
+
+        private List<string> m_yearList;
+        public List<string> YearList
+        {
+            get { return m_yearList; }
+            set
+            {
+                m_yearList = value;
+                RaisePropertyChanged("YearList");
+            }
+        }
+
+        private List<string> m_dayOfMonthList;
+        public List<string> DayOfMonthList
+        {
+            get { return m_dayOfMonthList; }
+            set
+            {
+                m_dayOfMonthList = value;
+                RaisePropertyChanged("DayOfMonthList");
+            }
+        }
+
+        private List<string> m_timeList;
+        public List<string> TimeList_
+        {
+            get { return m_timeList; }
+            set
+            {
+                m_timeList = value;
+                RaisePropertyChanged("TimeList_");
+            }
+        }
+
+        private List<string> m_ampmList;
+        public List<string> AmpmList
+        {
+            get { return m_ampmList; }
+            set
+            {
+                m_ampmList = value;
+                RaisePropertyChanged("AmpmList");
+            }
+        }
+
+        #endregion
+
+        #region SELECTEDITEM (properties and private member)
+
+        private string m_selectedMonth;
+        public string SelectedMonth
+        {
+            get { return m_selectedMonth; }
+            set
+            {
+                m_selectedMonth = value;
+                RaisePropertyChanged("SelectedMonth");
+            }
+        }
+
+      
+        private string m_selectedYear;
+        public string SelectedYear
+        {
+            get { return m_selectedYear; }
+            set
+            {
+                m_selectedYear = value;
+                RaisePropertyChanged("SelectedYear");
+            }
+
+        }
+
+        private string m_selectedDay;
+        public string SelectedDay
+        {
+            get { return m_selectedDay; }
+            set { m_selectedDay = value;
+                RaisePropertyChanged("SelectedDay");
+            }
+
+        }
+
+        private string m_selectedTime;
+        public string SelectedTime
+        {
+            get { return m_selectedTime; }
+            set
+            {
+                m_selectedTime = value;
+                RaisePropertyChanged("SelectedTime");
+            }
+        }
+
+        private string m_selectedAmpm;
+        public string SelectedAmpm
+        {
+            get { return m_selectedAmpm; }
+            set
+            {
+                m_selectedAmpm = value;
+                RaisePropertyChanged("SelectedAmpm");
+            }
+        }
+
+        #endregion
+
+
+
+        private void PopulateItemList()
+        {
+            var currentDateTime = DateTime.Now;
+
+            m_monthList = m_months.ToList();
+            var cMonthint = DateTime.Now.Month;
+            var cMonthName = m_months[cMonthint - 1];
+            SelectedMonth = cMonthName;
+
+            //MonthCombobox.SelectedIndex = DateTime.Now.Month - 1;
+
+            var years = new List<int>();
+            for (var i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
+            {
+                years.Add(i);
+            }
+
+            m_yearList = years.Select(i => i.ToString()).ToList();
+            var cYearint = DateTime.Now.Year;
+            SelectedYear = cYearint.ToString();
+
+            m_dayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            var cDayint = DateTime.Now.Day;
+            var cDaystring = m_dayOfMonthList[cDayint - 1];
+            SelectedDay = cDaystring;
+
+            if (m_showTime == true)
+            {
+                m_timeList = m_hours.ToList();
+                var hour = DateTime.Now.Hour % 12;
+                var hourString = m_timeList[hour];
+                SelectedTime = hourString;
+
+                m_ampmList = m_amPm.ToList();
+                var AMPMindex = DateTime.Now.Hour > 11 ? 1 : 0;
+                var AMPMstring = m_ampmList[AMPMindex];
+                SelectedAmpm = AMPMstring;
+
+            }
+
+        }
+
+        public bool ShowTime
+        {
+            get
+            {
+                return m_showTime;
+            }
+            set
+            {
+                m_showTime = value;
+            }
+        }
+
+        private int[] GetNumOfDayInMonth()
+        {
+            int[] tempResult = {0};
+
+            switch (SelectedMonth)
+            {
+                case "Feb":
+
+                    //leap year logic:
+                    //The year is evenly divisible by 4;
+                    //If the year can be evenly divided by 100, it is NOT a leap year, unless;
+                    //The year is also evenly divisible by 400. Then it is a leap year.
+                    int year;
+                    if (int.TryParse(SelectedYear, out year))
+                    {
+                        if (year % 4 == 0)
+                        {
+                            if (year % 100 == 0)
+                            {
+                         
+                                tempResult = year % 400 == 0 ? m_twentyNineDayMonth : m_twentyEightDayMonth;
+                                break;
+                            }
+
+                            tempResult = m_twentyNineDayMonth;
+                            break;
+                        }
+                    }
+
+                    tempResult = m_twentyEightDayMonth;
+
+                    break;
+
+                case "Jan":
+                case "Mar":
+                case "May":
+                case "Jul":
+                case "Aug":
+                case "Oct":
+                case "Dec":
+                    tempResult = m_thirtyOneDayMonth;
+                    break;
+
+                case "Apr":
+                case "Jun":
+                case "Sep":
+                case "Nov":
+                    tempResult = m_thirtyDayMonth;
+
+                    break;
+            }
+
+            return tempResult;
+           
+        }
+    
+
+
+        public void SetDateTime(int year, int month, int day, int hour)
+        {
+            //foreach (int item in YearCombobox.Items)
+            //{
+            //    if (item == year)
+            //    {
+            //        YearCombobox.SelectedItem = item;
+            //        break;
+            //    }
+            //}
+
+            //MonthCombobox.SelectedIndex = month - 1;
+            //DayCombobox.SelectedIndex = day - 1;
+            //AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
+            //HourCombobox.SelectedIndex = hour % 12;
+        }
+
+
+        public DatePickerVm(/*DatePickerM _datePicker*/)
+        {
+            m_showTime = true;
+            PopulateItemList();
+            //SelectedMonth = m_monthList.FirstOrDefault();
+            //SelectedYear = m_yearList.FirstOrDefault();
+
+
+
+            //MonthCombobox.ItemsSource = m_months;
+            //DayCombobox.ItemsSource = m_thirtyOneDayMonth;
+            //YearCombobox.ItemsSource = years;
+            //HourCombobox.ItemsSource = m_hours;
+            //AmPmCombobox.ItemsSource = m_amPm;
+
+            //YearCombobox.SelectedItem = years.FirstOrDefault();
+            //MonthCombobox.SelectedIndex = DateTime.Now.Month - 1;
+            //DayCombobox.SelectedIndex = DateTime.Now.Day - 1;
+
+            //var hour = DateTime.Now.Hour;
+            //AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
+
+            //HourCombobox.SelectedIndex = hour % 12;
+        }
+
+       
+
+        #region Events
+
+        /// <summary>
+        /// Occurs when [date time changed event].
+        /// </summary>
+        public event EventHandler<EventArgs> DateTimeChangedEvent;
+
+        #endregion
+
+        #region
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show the time comboboxes.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [show time]; otherwise, <c>false</c>.
+        /// </value>
+        
+        #endregion
+
+
+        #region Private Methods
+
+
+      
+
 
         #region local variables
 
@@ -52,77 +359,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         };
 
         #endregion
-
-
-        public DatePickerVm()
-        {
-            var years = new List<int>();
-            for (var i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
-            {
-                years.Add(i);
-            }
-
-            //MonthCombobox.ItemsSource = m_months;
-            //DayCombobox.ItemsSource = m_thirtyOneDayMonth;
-            //YearCombobox.ItemsSource = years;
-            //HourCombobox.ItemsSource = m_hours;
-            //AmPmCombobox.ItemsSource = m_amPm;
-
-            //YearCombobox.SelectedItem = years.FirstOrDefault();
-            //MonthCombobox.SelectedIndex = DateTime.Now.Month - 1;
-            //DayCombobox.SelectedIndex = DateTime.Now.Day - 1;
-
-            //var hour = DateTime.Now.Hour;
-            //AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
-
-            //HourCombobox.SelectedIndex = hour % 12;
-        }
-
-        private DatePickerM m_datepicker;
-        public DatePickerM datepicker
-        {
-            get { return m_datepicker; }
-            set
-            {
-                m_datepicker = value;
-                RaisePropertyChanged("datepicker");
-            }
-        }
-
-        #region Events
-
-        /// <summary>
-        /// Occurs when [date time changed event].
-        /// </summary>
-        public event EventHandler<EventArgs> DateTimeChangedEvent;
-
-        #endregion
-
-        #region
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to show the time comboboxes.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [show time]; otherwise, <c>false</c>.
-        /// </value>
-        public bool ShowTime
-        {
-            get
-            {
-                return m_showTime;
-            }
-            set
-            {
-                m_showTime = value;
-                //TimeGridRow.Height = m_showTime ? DateGridRow.Height : new GridLength(0);
-                //SpaceGridRow.Height = m_showTime ? new GridLength(4) : new GridLength(0);
-            }
-        }
-        #endregion
-
-
-        #region Private Methods
 
         /// <summary>
         /// Handles the SelectionChanged event of the MonthYearCombobox control.
@@ -246,23 +482,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <param name="hour">The hour.</param>
-        public void SetDateTime(int year, int month, int day, int hour)
-        {
-            //foreach (int item in YearCombobox.Items)
-            //{
-            //    if (item == year)
-            //    {
-            //        YearCombobox.SelectedItem = item;
-            //        break;
-            //    }
-            //}
-
-            //MonthCombobox.SelectedIndex = month - 1;
-            //DayCombobox.SelectedIndex = day - 1;
-            //AmPmCombobox.SelectedIndex = hour > 11 ? 1 : 0;
-            //HourCombobox.SelectedIndex = hour % 12;
-        }
-
+     
         #endregion
     }
 }
+
+
+
+//private DatePickerM m_datepicker;
+//public DatePickerM datepicker
+//{
+//    get { return m_datepicker; }
+//    set
+//    {
+//        m_datepicker = value;
+//        RaisePropertyChanged("datepicker");
+//    }
+//}

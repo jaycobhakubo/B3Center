@@ -10,6 +10,7 @@ using System.Windows;
 using GameTech.Elite.Reports;
 using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
+using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -17,17 +18,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     public class ReportParameterViewModel : ViewModelBase
     {
         private ReportParameterModel m_reportParameterModel;
+        private DatePickerM m_datepicker;
+
         private List<string> m_paramList;
         //private List<Visibility> m_ParameterList2;
 
         public ReportParameterViewModel(List<string> paramlist, ReportParameterModel reportparM)
         {
-            Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
+            //Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
             m_paramList = paramlist;
             reportParameterModel = reportparM;//new ReportParameterModel();
+            m_StartDatedatepickerVm = new DatePickerVm();//Do we want to pass any value? not for now.
             HideAllparameter();
             HideEnableParamControls(paramlist);
-            datepickerVm = new DatePickerVm();
+           
 
         }
 
@@ -45,14 +49,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
 
-        private DatePickerVm m_datepickerVm;
-        public DatePickerVm datepickerVm
+        private DatePickerVm m_StartDatedatepickerVm;
+        public DatePickerVm StartDatedatepickerVm
         {
-            get { return m_datepickerVm; }
+            get { return m_StartDatedatepickerVm; }
             set
             {
-                m_datepickerVm = value;
-              //  RaisePropertyChanged("datepickerVm");
+                m_StartDatedatepickerVm = value;
+                 RaisePropertyChanged("StartDatedatepickerVm");
             }
         }
 
@@ -145,6 +149,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
+                            m_StartDatedatepickerVm = new DatePickerVm();
                             DateInput = Visibility.Visible;
                             break;
                         }
@@ -155,6 +160,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDate":
                         {
+                            m_StartDatedatepickerVm = new DatePickerVm();
                             StartEndDate = Visibility.Visible;
                             break;
                         }

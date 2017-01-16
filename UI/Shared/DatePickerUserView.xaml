@@ -26,9 +26,9 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" Margin="0,0,2,0" Name="MonthCombobox"  />
-            <ComboBox Grid.Column="1" Margin="2,0,2,0" Name="DayCombobox" />
-            <ComboBox Grid.Column="2" Margin="2,0,0,0" Name="YearCombobox" ></ComboBox>
+            <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}" />
+            <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}" />
+            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}"  ></ComboBox>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -37,8 +37,8 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.Column="0" Margin="0,4,2,0" Name="HourCombobox" />
-            <ComboBox Grid.Column="1" Margin="2,4,0,0" Name="AmPmCombobox" />
+            <ComboBox Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}" />
+            <ComboBox Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" />
         </Grid>
     </Grid>
 </UserControl>

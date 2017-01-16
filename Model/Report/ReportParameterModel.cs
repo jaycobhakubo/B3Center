@@ -7,26 +7,17 @@ using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 using GameTech.Elite.Reports;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
+using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model
 {
 
     public class ReportParameterModel
     {
-        //public string DateMonthString { get; set; }
-        //public string DateDayInt { get; set; }
-        //public string DateYearInt { get; set; }
-        //public int Session { get; set; }
-        //public int AccountNumber { get; set; }
-        //public string Category { get; set; }
-        //public int StartingCard { get; set; }
-        //public string DateTimeHourMin { get; set; }
-        //public string AMorPM { get; set; }
+     
 
-        //public string parameter { get; set; }
-        //public bool isEnable { get; set; }
-
-        private DatePickerUserControl DatePicker
+        public DatePickerM DatePickerModel
         {
             get;
             set;
@@ -71,6 +62,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
 
     }
 }
+
+
 
 
 //    class ReportParameterModel : ViewModelBase
