@@ -286,15 +286,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region EVENT (selectionchangedmvvm)
 
-        public ICommand YearSelectedChanged { get; private set; }
+        public ICommand YearMonthSelectedChanged { get; private set; }
         public ICommand DateSelectedChanged { get; private set; }
 
         private void EventItemChanged()
         {
-            YearSelectedChanged = new DelegateCommand<string>(obj =>
-            {
-                m_selectedYear = obj;
-                MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            YearMonthSelectedChanged = new DelegateCommand<string>(obj =>
+            {      
+                DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
                 updateItemDateSelected();
             });
 

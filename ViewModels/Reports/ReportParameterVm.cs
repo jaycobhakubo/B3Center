@@ -135,11 +135,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 UpdateAccountList();
         
             }
-            else
-            {
-                //AccountHistoryReportAccountList.Clear();
-                //AccountHistoryReportAccountSelected = new int();
-            }
+           
 
             SessionList = m_sessionList;
         }
