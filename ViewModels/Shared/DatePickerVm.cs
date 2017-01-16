@@ -15,9 +15,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 {
     public class DatePickerVm : ViewModelBase
     {
-       
-        
-        
 
         #region MEMBER VARIABLE AND PROPERTIES
 
@@ -53,21 +50,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         public DatePickerVm(DatePickerM datePickerModel)
         {
             DatepickerModel = datePickerModel;
-            m_showTime = true;
-            PopulateItemList();
+            m_showTime = true;         
             EventItemChanged();
-          
+            PopulateItemList();
         }
 
         #endregion
 
         #region MEMBER METHOD
 
-        private void GetSelectedDate()
-        {
-            //DateTime 
-        }
-
+     
         private void PopulateItemList()
         {
             var currentDateTime = DateTime.Now;
@@ -166,8 +158,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         }
 
         #endregion
-
-        
 
         #region SELECTEDITEM (properties and private member)
 
@@ -301,21 +291,39 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         private void EventItemChanged()
         {
-            YearSelectedChanged = new DelegateCommand<string>(obj =>
-            {
-                m_selectedYear = obj;
-                MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
-            });
+            //YearSelectedChanged = new DelegateCommand<string>(obj =>
+            //{
+            //    m_selectedYear = obj;
+            //    MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            //    updateItemDateSelected();
+            //});
 
             DateSelectedChanged = new DelegateCommand<string>(obj =>
             {
-        
-               // MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+                updateItemDateSelected();
             });
         }
 
 
 
+
+        private DateTime GetSelectedDate()
+        {
+            DateTime tempResult;// = new DateTime();
+            DateTime.TryParse(DatepickerModel.DateFullwTime, out tempResult);
+            return tempResult;
+            //DateTime 
+        }
+
+        private void updateItemDateSelected()
+        {
+            var x = ReportParameterViewModel.Instance;
+            var i = GetSelectedDate();
+             x.UpdateSessionList(i);
+        
+        }
+
+       
 
         #endregion
 

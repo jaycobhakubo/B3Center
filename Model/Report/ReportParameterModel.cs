@@ -61,7 +61,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
 
         public ReportId rptid { get; set; }
 
-        public ObservableCollection<Session> SessionList { get; set; }
+        private ObservableCollection<Session> m_sessionList = new ObservableCollection<Session>();
+        public ObservableCollection<Session> SessionList 
+        { 
+            get {return m_sessionList;}
+            set
+            {
+                m_sessionList = value;
+            }
+        }
 
     }
 }

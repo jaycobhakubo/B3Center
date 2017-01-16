@@ -25,6 +25,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private DatePickerVm m_datePickerVm;
 
         private ObservableCollection<Session> m_sessionList;
+        private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
         private List<string> m_accountList;
         private List<string> m_categoryList;
@@ -40,52 +41,71 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
 
         #region STATIC (properties and variable)
+
         private static readonly object m_syncRoot = new Object();
         private static volatile ReportParameterViewModel m_instance;
+
         public static ReportParameterViewModel Instance
         {
-            get
+       get
             {
                 if (m_instance == null)
                 {
                     lock (m_syncRoot)
                     {
-                        //if (m_instance == null)
-
+                        if (m_instance == null) { }
+                        m_instance = new ReportParameterViewModel();
                     }
                 }
 
                 return m_instance;
             }
+
+          
         }
 
         #endregion
 
         #region CONSTRUCTORS
 
-        public ReportParameterViewModel(List<string> paramlist, ReportParameterModel reportparM)
+        public ReportParameterViewModel()
         {
-            //Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
+    
+        }
+
+
+        internal void Initialize(List<string> paramlist, ReportParameterModel reportparM)
+        {
             m_paramList = paramlist;
+            m_sessionList = new ObservableCollection<Session>();
             reportParameterModel = reportparM;//new ReportParameterModel();
             DatePickerVm = new DatePickerVm(reportparM.DatePickerModel);///Do we want to pass any value? not for now.
+            GetSessionListofAllSession();
             HideAllparameter();
             HideEnableParamControls(paramlist);
         }
+
+      
+
 
         #endregion
 
         #region METHOD
 
-        private void UpdateSessionList(DateTime selectedDateTime)
+        public void GetSessionListofAllSession() //This is bad we should nt get all session available in B3 db. Message should be modify
         {
+            var t = ReportsViewModel.Instance;
+            AllSessionList =  t.SessionList;
+        }
 
-            //AccountHistoryReportSessionList.Clear();
-            //EnableAccountHistoryReportButtons = false;
 
-            SessionList.Clear();
 
-            foreach (var session in SessionList)
+        public void UpdateSessionList(DateTime selectedDateTime)
+        {
+            //ObservableCollection<Session> result = new ObservableCollection<Session>();
+            m_sessionList.Clear();
+
+            foreach (var session in AllSessionList)
             {
                 var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
                 var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
@@ -99,20 +119,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 sessionStartDateTime.Month == selectedDateTime.Month &&
                 (sessionStartDateTime.Day <= selectedDateTime.Day && sessionEndDateTime.Day >= selectedDateTime.Day))
                 {
-                    SessionList.Add(session);
+                    m_sessionList.Add(session);
                 }
 
             }
 
-            if (SessionList.Count != 0)
+            if (m_sessionList.Count != 0)
             {
-                SelectedSession = SessionList.LastOrDefault();
+                SelectedSession = m_sessionList.LastOrDefault();
             }
             else
             {
                 //AccountHistoryReportAccountList.Clear();
                 //AccountHistoryReportAccountSelected = new int();
             }
+
+            SessionList = m_sessionList;
         }
 
         private List<string> getAccountListPerSession(int SessionNumber)
@@ -193,14 +215,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void UpdateAccountList()
         {
-            if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
-            {
-                Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
-                msg.Send();
-                var AccountListtemp = msg.AccountNumberList;
-                AccountList = AccountListtemp.Select(x => (x.ToString())).ToList();
-                AccountSelected = m_accountList.FirstOrDefault();
-            }
+            //if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
+            //{
+            //    Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
+            //    msg.Send();
+            //    var AccountListtemp = msg.AccountNumberList;
+            //    AccountList = AccountListtemp.Select(x => (x.ToString())).ToList();
+            //    AccountSelected = m_accountList.FirstOrDefault();
+            //}
         }
 
         public DateTime GetDate()

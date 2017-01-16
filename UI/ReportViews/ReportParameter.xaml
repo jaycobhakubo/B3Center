@@ -56,7 +56,7 @@
                 <TextBlock Text="Session" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
                                Width="280"
-                               ItemsSource="{Binding reportParameterModel.SessionList}"
+                               ItemsSource="{Binding SessionList}"
                                SelectedItem="{Binding SelectedSession}"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox"

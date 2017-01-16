@@ -14,10 +14,16 @@
          
         </Style>
 
-        <!--<Style x:Key="rrr" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}" >
+        <Style x:Key="YearCmbBxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}" >
+            <Setter Property="CommandSelectionChanged:SelectedItemChangedcmd.Command" Value="{Binding YearSelectedChanged}">
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}" >
             <Setter Property="CommandSelectionChanged:SelectedItemChangedcmd.Command" Value="{Binding DateSelectedChanged}">
             </Setter>
-        </Style>-->
+        </Style>
+
     </UserControl.Resources>
     <Grid> 
         <Grid.RowDefinitions>
@@ -34,7 +40,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}"/>
             <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}"  />
-            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}" CommandSelectionChanged:SelectedItemChangedcmd.Command ="{Binding YearSelectedChanged}"></ComboBox>
+            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}" ></ComboBox>
         </Grid>
 
         <Grid Grid.Row="2">

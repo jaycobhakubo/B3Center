@@ -172,74 +172,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SessionList.Add(session);//knc
             }
-
-            //SessionReportSessionSelected = SessionList.LastOrDefault();
-            //JackpotReportSessionSelected = SessionList.LastOrDefault();
-            //AccountHistoryReportSessionSelected  = SessionList.LastOrDefault();
-            //AccountHistoryReportAccountSelected = AccountList.LastOrDefault();
-
-
-            //m_accountsReportView = new AccountsReportView();
-            //m_accountsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_accountsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_dailyReportView = new DailyReportView();
-            //m_dailyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_dailyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_detailReportView = new DetailReportView();
-            //m_detailReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_detailReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_drawerReportView = new DrawerReportView();
-            //m_drawerReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_drawerReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_jackpotReportView = new JackpotReportView();
-            //m_jackpotReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_jackpotReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_monthlyReportView = new MonthlyReportView();
-            //m_monthlyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_monthlyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_sessionReportView = new SessionReportView();
-            //m_sessionReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_sessionReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_voidReportView = new VoidReportView();
-            //m_voidReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_voidReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_sessionsummaryReportView = new SessionSummaryView();
-            //m_sessionsummaryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_sessionsummaryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-
-
-            //m_accountHistoryReportView = new AccountHistoryReportView(m_rptBaseVm = new BallcallVm(getrtm(ReportId.B3AccountHistory)));
-            //m_accountHistoryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_accountHistoryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_winnerCardsReportView = new WinnerCardsReportView();
-            //m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_winnerCardsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new BallcallVm(getrtm(ReportId.B3BallCallByGame)));
-            ////m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            ////m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_sessionTranReportView = new SessionTransactionReportView();
-            //m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_bingoCardReportView = new BingoCardView(m_bingocardvm = new BallcallVm(getrtm(ReportId.B3BingoCardReport)));
-            ////m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            ////m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            
+      
             LoadReportList();
-
             SetCommand();
          
             
@@ -270,7 +204,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3AccountHistory:
                     {
 
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Account History";
                      
