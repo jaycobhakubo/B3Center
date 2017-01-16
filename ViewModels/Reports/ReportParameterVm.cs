@@ -11,6 +11,8 @@ using GameTech.Elite.Reports;
 using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
+using System.Windows.Input;
+using Microsoft.Practices.Composite.Presentation.Commands;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -76,20 +78,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         internal void Initialize(List<string> paramlist, ReportParameterModel reportparM)
         {
-            m_paramList = paramlist;
-            
+            m_paramList = paramlist;          
             reportParameterModel = reportparM;//new ReportParameterModel();
             m_sessionList = reportParameterModel.SessionList;
             AccountList = reportParameterModel.AccountList;
             DatePickerVm = new DatePickerVm(reportparM.DatePickerModel);///Do we want to pass any value? not for now.
+            EventItemChanged();
             GetSessionListofAllSession();
             UpdateSessionList(DateTime.Now);
+            UpdateAccountList();
             HideAllparameter();
             HideEnableParamControls(paramlist);
+           
         }
 
-      
+        #endregion
 
+
+
+        #region EVENT (selectionchangedmvvm)
+
+        public ICommand SelectedSessioncmd { get; private set; }
+        public ICommand DateSelectedChanged { get; private set; }
+
+        private void EventItemChanged()
+        {
+            SelectedSessioncmd = new DelegateCommand<Session>(obj =>
+            {
+                SelectedSession = obj;
+                if (SelectedSession != null)
+                {
+                    UpdateAccountList();
+                }
+            });
+
+            //DateSelectedChanged = new DelegateCommand<string>(obj =>
+            //{
+              
+            //});
+        }
 
         #endregion
 
@@ -131,9 +158,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (m_sessionList.Count != 0)
             {
 
-                SelectedSession = m_sessionList.LastOrDefault();
-                UpdateAccountList();
-        
+                SelectedSession = m_sessionList.LastOrDefault();     
             }
            
 
