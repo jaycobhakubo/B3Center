@@ -291,12 +291,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         private void EventItemChanged()
         {
-            //YearSelectedChanged = new DelegateCommand<string>(obj =>
-            //{
-            //    m_selectedYear = obj;
-            //    MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
-            //    updateItemDateSelected();
-            //});
+            YearSelectedChanged = new DelegateCommand<string>(obj =>
+            {
+                m_selectedYear = obj;
+                MonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+                updateItemDateSelected();
+            });
 
             DateSelectedChanged = new DelegateCommand<string>(obj =>
             {

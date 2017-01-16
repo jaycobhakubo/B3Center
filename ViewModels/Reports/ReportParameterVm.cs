@@ -27,7 +27,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<Session> m_sessionList;
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
-        private List<string> m_accountList;
+        private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
 
         private Session m_SelectedSession;
@@ -77,10 +77,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(List<string> paramlist, ReportParameterModel reportparM)
         {
             m_paramList = paramlist;
-            m_sessionList = new ObservableCollection<Session>();
+            
             reportParameterModel = reportparM;//new ReportParameterModel();
+            m_sessionList = reportParameterModel.SessionList;
+            AccountList = reportParameterModel.AccountList;
             DatePickerVm = new DatePickerVm(reportparM.DatePickerModel);///Do we want to pass any value? not for now.
             GetSessionListofAllSession();
+            UpdateSessionList(DateTime.Now);
             HideAllparameter();
             HideEnableParamControls(paramlist);
         }
@@ -104,6 +107,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             //ObservableCollection<Session> result = new ObservableCollection<Session>();
             m_sessionList.Clear();
+            AccountList.Clear();
 
             foreach (var session in AllSessionList)
             {
@@ -126,7 +130,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             if (m_sessionList.Count != 0)
             {
+
                 SelectedSession = m_sessionList.LastOrDefault();
+                UpdateAccountList();
+        
             }
             else
             {
@@ -137,9 +144,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionList = m_sessionList;
         }
 
-        private List<string> getAccountListPerSession(int SessionNumber)
+        private void UpdateAccountList()
         {
-            m_accountList = new List<string>();
+
+            if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
+            {         
+                Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
+                msg.Send();
+                var AccountListtemp = msg.AccountNumberList;
+                AccountList = AccountListtemp;
+                AccountSelected = AccountList.FirstOrDefault();
+            }
+        }
+
+        private ObservableCollection<string> getAccountListPerSession(int SessionNumber)
+        {
+            m_accountList = new ObservableCollection<string>();
             if (m_paramList.Contains("AccountNumber"))
             {
 
@@ -213,17 +233,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             StartEndDateWTime = Visibility.Collapsed;
         }
 
-        private void UpdateAccountList()
-        {
-            //if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
-            //{
-            //    Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
-            //    msg.Send();
-            //    var AccountListtemp = msg.AccountNumberList;
-            //    AccountList = AccountListtemp.Select(x => (x.ToString())).ToList();
-            //    AccountSelected = m_accountList.FirstOrDefault();
-            //}
-        }
+     
 
         public DateTime GetDate()
         {
@@ -294,7 +304,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get{return reportParameterModel.b3Session;}
             set{
                 reportParameterModel.b3Session = value;
-                UpdateAccountList();
                 RaisePropertyChanged("SelectedSession");
             }  
         }
@@ -321,12 +330,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public List<string> AccountList
+        public ObservableCollection<string> AccountList
         {
-            get { return m_accountList; }
+            get { return m_reportParameterModel.AccountList; }
             set
             {
-                m_accountList = value;
+                m_reportParameterModel.AccountList = value;
                 RaisePropertyChanged("AccountList");
             }
         }

@@ -71,6 +71,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
             }
         }
 
+        private ObservableCollection<string> m_accountList = new ObservableCollection<string>();
+        public ObservableCollection<string> AccountList
+        {
+            get { return m_accountList; }
+            set
+            {
+                m_accountList = value;
+            }
+        }
+
     }
 }
 
