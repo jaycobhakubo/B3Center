@@ -342,7 +342,7 @@
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\Settings\ServerVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
-    <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
+    <Compile Include="ViewModels\Settings\DatePickerVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\NewStyle.xaml">
@@ -657,7 +657,9 @@
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\GameSettingView.xaml.cs.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Shared\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\OperatorView.xaml.txt" />
   </ItemGroup>

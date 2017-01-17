@@ -17,8 +17,8 @@
                               
                                Width="280"                              
                                x:Name="BallCallDefCombobox"
-                               ItemsSource="{Binding BallCallReportDefList}"
-                               SelectedItem="{Binding BallCallReportDefSelected}"
+                               ItemsSource="{Binding CategoryList}"
+                               SelectedItem="{Binding CategorySelected}"
                                Margin="0,0,0,5" 
                      Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
                     />

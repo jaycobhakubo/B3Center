@@ -19,6 +19,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     public class ReportParameterViewModel : ViewModelBase
     {
+
+
+
         #region MEMBER VARIABLE
 
         private ReportParameterModel m_reportParameterModel;
@@ -29,9 +32,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
   
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
-        //private ObservableCollection<string> m_accountList;
+        private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
-        private ObservableCollection<Session> m_sessionList;
+        private List<Session> m_sessionList;
         private Session m_SelectedSession;
         private string m_AccountSelected;
         private string m_startingCard;
@@ -83,6 +86,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //EventItemChanged();
             HideAllparameter();
             HideEnableParamControls(paramlist);
+
+            SelectedSessioncmd = new DelegateCommand<Session>(obj =>
+            {
+                //SelectedSession = obj;
+                //if (SelectedSession != null)
+                //{
+                UpdateAccountList();
+                //}
+            });
         }
 
         #endregion
@@ -129,7 +141,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void UpdateSessionList(DateTime selectedDateTime)
         {
             //ObservableCollection<Session> result = new ObservableCollection<Session>();
-            m_sessionList.Clear();
+            //m_sessionList.Clear();
             AccountList.Clear();
 
             foreach (var session in AllSessionList)
@@ -153,12 +165,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             if (m_sessionList.Count != 0)
             {
-
+                SessionList = m_sessionList;
                 SelectedSession = m_sessionList.LastOrDefault();     
             }
            
 
-            SessionList = m_sessionList;
+           
         }
 
         private void UpdateAccountList()
@@ -169,8 +181,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
                 msg.Send();
                 var AccountListtemp = msg.AccountNumberList;
-                AccountList = AccountListtemp;
-                AccountSelected = AccountList.FirstOrDefault();
+                m_accountList = AccountListtemp;
+                
             }
         }
 
@@ -211,33 +223,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "Session":
                         {
-                            
+                            //m_sessionList = new ObservableCollection<Session>();
                             GetSessionListofAllSession();
                             m_sessionList = reportParameterModel.SessionList;
                             UpdateSessionList(DateTime.Now);
 
-                            SelectedSessioncmd = new DelegateCommand<Session>(obj =>
+                            if (reportParameterModel.rptid == ReportId.B3AccountHistory)
                             {
-                                SelectedSession = obj;
-                                if (SelectedSession != null)
-                                {
-                                    UpdateAccountList();
-                                }
-                            });
+                               
+                            }
 
                             SessionInput = Visibility.Visible;
                             break;
                         }
                     case "AccountNumber":
-                        {
-                            AccountList = reportParameterModel.AccountList;
+                        { m_accountList = new ObservableCollection<string>();
+                         
                             UpdateAccountList();
+                            AccountList = m_accountList;
+                            AccountSelected = AccountList.FirstOrDefault();
                             AccountNumberInput = Visibility.Visible;
                             break;
                         }
                     case "Category":
                         {
-
+                            m_categoryList = new List<string>();
+                           m_categoryList.Add("By Game");
+                            m_categoryList.Add("By Session");
+                            CategorySelected = m_categoryList.FirstOrDefault();
+                            CategoryList = m_categoryList; 
                             CategoryInput = Visibility.Visible;
                             break;
                         }
@@ -324,7 +338,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        public ObservableCollection<Session>  SessionList
+        public List<Session>  SessionList
         {
             get
             {
@@ -381,7 +395,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set
             {
                 m_reportParameterModel.AccountList = value;
-                RaisePropertyChanged("AccountList");
+                //RaisePropertyChanged("AccountList");
             }
         }
 
@@ -408,6 +422,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("CategoryList");
             }
         }
+
+        public string m_categorySelected;
+        public string CategorySelected
+        {
+            get { return m_categorySelected; }
+            set
+            {
+                m_categorySelected = value;
+                RaisePropertyChanged("CategorySelected");
+            }
+        }
+
 
         public Visibility StartEndDateWTime
         {
