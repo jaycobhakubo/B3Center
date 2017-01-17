@@ -50,10 +50,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         public DatePickerVm(DatePickerM datePickerModel, bool showTime )
         {
             ShowTime = showTime;
-            DatepickerModel = datePickerModel;   
-            EventItemChanged();
+            DatepickerModel = datePickerModel;              
             PopulateItemList();
-            
+            EventItemChanged();
         }
 
         #endregion

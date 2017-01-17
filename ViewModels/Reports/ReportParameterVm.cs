@@ -26,19 +26,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private DatePickerM m_datepickerModel;
         private DatePickerVm m_datePickerVm;
 
-        private ObservableCollection<Session> m_sessionList;
+  
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
         //private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
-
+        private ObservableCollection<Session> m_sessionList;
         private Session m_SelectedSession;
         private string m_AccountSelected;
         private string m_startingCard;
         private string m_endingCard;
 
         private Visibility m_visibility;
-        private IEnumerable<string> m_months;
+        private List<string> m_months;
 
         #endregion
 
@@ -79,21 +79,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(List<string> paramlist, ReportParameterModel reportparM)
         {
             m_paramList = paramlist;          
-            reportParameterModel = reportparM;//new ReportParameterModel();
-            m_sessionList = reportParameterModel.SessionList;
-            AccountList = reportParameterModel.AccountList;
-            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, IsShowTime());///Do we want to pass any value? not for now.
-            EventItemChanged();
-            GetSessionListofAllSession();
-            UpdateSessionList(DateTime.Now);
-            UpdateAccountList();
+            reportParameterModel = reportparM;//new ReportParameterModel();          
+            //EventItemChanged();
             HideAllparameter();
             HideEnableParamControls(paramlist);
-     
-
         }
 
         #endregion
+
+
+
         private bool IsShowTime()
         {
             bool result = false;
@@ -118,23 +113,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ICommand SelectedSessioncmd { get; private set; }
         public ICommand DateSelectedChanged { get; private set; }
 
-        private void EventItemChanged()
-        {
-            SelectedSessioncmd = new DelegateCommand<Session>(obj =>
-            {
-                SelectedSession = obj;
-                if (SelectedSession != null)
-                {
-                    UpdateAccountList();
-                }
-            });
-
-            //DateSelectedChanged = new DelegateCommand<string>(obj =>
-            //{
-              
-            //});
-        }
-
+      
         #endregion
 
         #region METHOD
@@ -195,15 +174,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        //private ObservableCollection<string> getAccountListPerSession(int SessionNumber)
-        //{
-            //m_accountList = new ObservableCollection<string>();
-            //if (m_paramList.Contains("AccountNumber"))
-            //{
-
-            //}
-            //return m_accountList;
-        //}
+     
 
         private void HideEnableParamControls(List<string> paramlist)
         {
@@ -214,33 +185,59 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
-                            // DatePickerVm= new DatePickerVm();
+                            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);///Do we want to pass any value? not for now.
                             DateInput = Visibility.Visible;
                             break;
                         }
                     case "MonthYear":
                         {
+                            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);
+                            Months = DatePickerVm.MonthList;
+                            MonthSelected = m_months.FirstOrDefault();
+                            Years = DatePickerVm.YearList;
+                            YearSelected = m_years.FirstOrDefault();
                             MonthYearInput = Visibility.Visible;
                             break;
                         }
                     case "StartEndDate":
                         {
-                            //m_StartDatedatepickerVm = new DatePickerVm();
-                            //StartEndDate = Visibility.Visible;
+                            //DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);
+                            //Months = DatePickerVm.MonthList;
+                            //MonthSelected = m_months.FirstOrDefault();
+                            //Years = DatePickerVm.YearList;
+                            //YearSelected = m_years.FirstOrDefault();
+                            StartEndDate = Visibility.Visible;
                             break;
                         }
                     case "Session":
                         {
+                            
+                            GetSessionListofAllSession();
+                            m_sessionList = reportParameterModel.SessionList;
+                            UpdateSessionList(DateTime.Now);
+
+                            SelectedSessioncmd = new DelegateCommand<Session>(obj =>
+                            {
+                                SelectedSession = obj;
+                                if (SelectedSession != null)
+                                {
+                                    UpdateAccountList();
+                                }
+                            });
+
                             SessionInput = Visibility.Visible;
                             break;
                         }
                     case "AccountNumber":
                         {
+                            AccountList = reportParameterModel.AccountList;
+                            UpdateAccountList();
                             AccountNumberInput = Visibility.Visible;
                             break;
                         }
                     case "Category":
                         {
+
                             CategoryInput = Visibility.Visible;
                             break;
                         }
@@ -251,6 +248,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDatewTime":
                         {
+                            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, true);
                             StartEndDateWTime = Visibility.Visible;
                             break;
                         }
@@ -471,9 +469,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
-
-        public IEnumerable<string> Months
+        public List<string> Months
         {
             get
             {
@@ -486,7 +482,51 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-       
+        private string m_monthSelected;
+        public string MonthSelected
+        {
+            get
+            {
+                return m_monthSelected;
+            }
+            set
+            {
+                m_monthSelected = value;
+                RaisePropertyChanged("MonthSelected");
+            }
+        }
+
+        private List<string> m_years;
+        public List<string> Years
+        {
+            get
+            {
+                return m_years;
+            }
+            set
+            {
+                m_years = value;
+                RaisePropertyChanged("Years");
+            }
+        }
+
+        private string m_yearSelected;
+        public string YearSelected
+        {
+            get
+            {
+                return m_yearSelected;
+            }
+            set
+            {
+
+                if (m_yearSelected != value)
+                {
+                    m_yearSelected = value;
+                    RaisePropertyChanged("YearSelected");
+                }
+            }
+        }
 
         public Elite.Reports.ReportId reportid { get; set; }
 
@@ -526,33 +566,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 //        }
 
 
-//        private IEnumerable<string> m_months;
-//        public IEnumerable<string> Months 
-//        {
-//            get
-//            {
-//                return m_months;
-//            }
-//            set
-//            {
-//                m_months = value;
-//                RaisePropertyChanged("Months");
-//            }
-//        }
-
-//        private string m_monthSelected;
-//        public string MonthSelected
-//        {
-//            get
-//            {
-//                return m_monthSelected;
-//            }
-//            set
-//            {
-//                m_monthSelected = value;
-//                RaisePropertyChanged("MonthSelected");
-//            }
-//        }
 
 //        private int m_dateDay;
 //        public int DateDay { get; set; }

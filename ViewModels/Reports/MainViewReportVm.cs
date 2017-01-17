@@ -221,7 +221,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3BallCallByGame:
                     {
-
+                       
                         temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Ball Call";
