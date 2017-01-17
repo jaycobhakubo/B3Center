@@ -30,11 +30,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private DatePickerVm m_datePickerVm;
 
   
-        private List<Session> AllSessionList;
+        private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
         private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
-        private List<Session> m_sessionList;
+        private ObservableCollection<Session> m_sessionList;
         private Session m_SelectedSession;
         private string m_AccountSelected;
         private string m_startingCard;
@@ -96,11 +96,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             SelectedSessioncmd = new DelegateCommand<Session>(obj =>
             {
-                //SelectedSession = obj;
-                //if (SelectedSession != null)
-                //{
+         
+            if (obj != null)
+            {
                 UpdateAccountList();
-                //}
+                }
             });
         }
 
@@ -137,10 +137,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void GetSessionListofAllSession() //This is bad we should nt get all session available in B3 db. Message should be modify
         {
             var t = ReportsViewModel.Instance;
-            AllSessionList =  t.SessionList.ToList();
+            AllSessionList =  t.SessionList;
         }
 
-
+        public void ClearSessionList()
+        {
+            m_sessionList = new ObservableCollection<Session>();
+        }
 
         public void UpdateSessionList(DateTime selectedDateTime)
         {
@@ -176,6 +179,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
            
         }
+
+
 
         private void UpdateAccountList()
         {
@@ -342,7 +347,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        public List<Session>  SessionList
+        public ObservableCollection<Session>  SessionList
         {
             get
             {

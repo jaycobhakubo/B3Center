@@ -8,6 +8,11 @@ using System.Windows.Input;
 using Microsoft.Practices.Composite.Presentation.Commands;
 using System.Windows.Controls;
 
+
+/// <summary>
+/// WORKING but not good.
+/// </summary>
+
 namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 {
     public static class SelectedItemChangedcmd

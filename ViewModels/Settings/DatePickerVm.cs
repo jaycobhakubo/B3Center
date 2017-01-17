@@ -50,7 +50,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         public DatePickerVm(DatePickerM datePickerModel, bool showTime )
         {
-            ShowTime = showTime;
+            ShowTime = false;
             DatepickerModel = datePickerModel;              
             PopulateItemList();
             EventItemChanged();
@@ -303,8 +303,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         }
 
 
-
-
         private DateTime GetSelectedDate()
         {
             DateTime tempResult;// = new DateTime();
@@ -317,6 +315,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         {
             var x = ReportParameterViewModel.Instance;
             var i = GetSelectedDate();
+            x.ClearSessionList();// = new ObservableCollection<Business.Session>();
              x.UpdateSessionList(i);
         
         }
