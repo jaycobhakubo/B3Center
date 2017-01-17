@@ -24,6 +24,17 @@
             </Setter>
         </Style>
 
+
+        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}" x:Key="showtime">
+                <Setter Property="Visibility" Value="Collapsed"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowTime}" Value="True">
+                        <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+
     </UserControl.Resources>
     <Grid> 
         <Grid.RowDefinitions>
@@ -49,8 +60,11 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}" Visibility="{Binding ShowTime}"/>
-            <ComboBox Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" Visibility="{Binding ElementName=cmbxName, Path=Visibility}"/>
+            <ComboBox Style="{StaticResource showtime}" Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}">
+                
+             
+            </ComboBox>
+            <ComboBox Visibility="{Binding ElementName=cmbxName, Path=Visibility}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}"/>
         </Grid>
     </Grid>
 </UserControl>

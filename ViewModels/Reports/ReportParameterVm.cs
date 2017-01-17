@@ -82,7 +82,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterModel = reportparM;//new ReportParameterModel();
             m_sessionList = reportParameterModel.SessionList;
             AccountList = reportParameterModel.AccountList;
-            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel);///Do we want to pass any value? not for now.
+            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);///Do we want to pass any value? not for now.
             EventItemChanged();
             GetSessionListofAllSession();
             UpdateSessionList(DateTime.Now);
