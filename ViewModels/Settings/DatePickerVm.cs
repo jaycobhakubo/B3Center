@@ -10,6 +10,7 @@ using GameTech.Elite.Client.Modules.B3Center.Helper;
 using Microsoft.Practices.Composite.Presentation;
 using Microsoft.Practices.Composite;
 using Microsoft.Practices.Composite.Presentation.Commands;
+using System.Collections.ObjectModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 {
@@ -65,7 +66,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private void PopulateItemList()
         {
             var currentDateTime = DateTime.Now;
-            MonthList = m_months.ToList();
+            MonthList = new ObservableCollection<string>(m_months);
             var cMonthint = DateTime.Now.Month;
             var cMonthName = m_months[cMonthint - 1];
             SelectedMonth = cMonthName;
@@ -224,8 +225,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region LIST (properties and member var)
 
-        private List<string> m_monthList;
-        public List<string> MonthList
+        private ObservableCollection<string> m_monthList;
+        public ObservableCollection<string> MonthList
         {
             get { return m_monthList; }
             set

@@ -30,7 +30,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private DatePickerVm m_datePickerVm;
 
   
-        private ObservableCollection<Session> AllSessionList;
+        private List<Session> AllSessionList;
         private List<string> m_paramList;
         private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
@@ -41,7 +41,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private string m_endingCard;
 
         private Visibility m_visibility;
-        private List<string> m_months;
+        private ObservableCollection<string> m_months;
 
         #endregion
 
@@ -87,6 +87,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             HideAllparameter();
             HideEnableParamControls(paramlist);
 
+            EventItemChanged();
+        }
+
+        #endregion
+
+        private void EventItemChanged()
+        {
             SelectedSessioncmd = new DelegateCommand<Session>(obj =>
             {
                 //SelectedSession = obj;
@@ -96,9 +103,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 //}
             });
         }
-
-        #endregion
-
 
 
         private bool IsShowTime()
@@ -133,7 +137,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void GetSessionListofAllSession() //This is bad we should nt get all session available in B3 db. Message should be modify
         {
             var t = ReportsViewModel.Instance;
-            AllSessionList =  t.SessionList;
+            AllSessionList =  t.SessionList.ToList();
         }
 
 
@@ -495,7 +499,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public List<string> Months
+        public ObservableCollection<string> Months
         {
             get
             {
