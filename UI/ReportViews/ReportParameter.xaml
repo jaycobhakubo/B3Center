@@ -3,15 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
-                     xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+             xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+             xmlns:EventCommand="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+             xmlns:ValueToBoolConverter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" 
            >
-    <Grid>
+    <UserControl.Resources>
+        <ValueToBoolConverter:BallCallBySessionEnable    x:Key="ByGame"/>
+    </UserControl.Resources>
+            <Grid>
         <Border  Name="SelectDateBorder">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
 
-                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}"  />
+                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}" />
                 <ComboBox  
                         Grid.Row="0"
                               
@@ -22,12 +26,23 @@
                                Margin="0,0,0,5" 
                      Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
                     />
-                <TextBlock Text="Start Date" Name="StartDateTimepar" Visibility="{Binding StartEndDateWTime}" />
-                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" />
-                <TextBlock Text="End Date" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
-                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" />
+                <!--<TextBlock Text="Start Date" Name="StartDateTimepar" Visibility="{Binding ElementName=BallCallDefCombobox, Path=Text, Converter={StaticResource ByGame}}"/>-->
 
-                <TextBlock Name="DatePar" Text="Date" Visibility="{Binding DateInput}"/>
+                <TextBlock  Name="StartDateTimepar">
+                    <TextBlock.Visibility>
+                        <MultiBinding  Converter="{StaticResource ByGame}">
+                            <Binding Path="IsBallCallRpt"/>
+                            <Binding Path="IsBallCallByGame"/>
+                        </MultiBinding>
+                    </TextBlock.Visibility>
+                </TextBlock>
+                           <!--Visibility="{Binding ElementName=BallCallDefCombobox, Path=Text, Converter={StaticResource ByGame}}"-->
+
+                <TextBlock Text="End Date" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
+                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
+
+                <!--<TextBlock Name="DatePar" Text="Date"  Visibility="{Binding ElementName=BallCallDefCombobox, Path=Text, Converter={StaticResource ByGame}}"/>-->
+                <TextBlock Name="DatePar" Text="Date" />
                 <shared:DatePickerUserView   HorizontalAlignment="Right"  Visibility="{Binding ElementName=DatePar, Path=Visibility }" DataContext="{Binding DatePickerVm}"/>
 
                 <WrapPanel Margin="0 0 5 0">
@@ -54,12 +69,13 @@
                 <shared:DatePickerUserView   Grid.Row="1"  HorizontalAlignment="Right"   Margin="0,0,0,5" Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
                 <TextBlock x:Name="txtblkEndDate" Text="End Date"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
                 <shared:DatePickerUserView  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"  HorizontalAlignment="Right"  Margin="0,0,0,0" />
-                <TextBlock Text="Session" Name="Sessionpar" Visibility="{Binding SessionInput}" />
+                <!--<TextBlock Text="Session" Name="Sessionpar"  Visibility="{Binding ElementName=BallCallDefCombobox, Path=Text, Converter={StaticResource ByGame}}" />-->
+                <TextBlock Text="Session" Name="Sessionpar"  />
                 <ComboBox 
                                Width="280"
                                ItemsSource="{Binding SessionList, Mode=TwoWay}"
                                SelectedItem="{Binding SelectedSession}"
-                                CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedSessionEvent}"
+                                EventCommand:SelectedItemChangedcmd.Command="{Binding SelectedSessionEvent}"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"

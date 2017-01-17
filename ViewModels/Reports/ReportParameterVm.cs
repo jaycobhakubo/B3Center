@@ -13,6 +13,7 @@ using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using System.Windows.Input;
 using Microsoft.Practices.Composite.Presentation.Commands;
+using System.Windows.Data;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -188,6 +189,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case "Date":
                         {
                             DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);///Do we want to pass any value? not for now.
+                            if (IsBallCallRpt == false)
+                            {
+
+                            }
                             DateInput = Visibility.Visible;
                             break;
                         }
@@ -277,6 +282,41 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
 
         #region PROPERTIES
+
+        private bool SetBallCallRpt()
+        {
+            bool result = false;
+            if (RptParameterDataHandler.rptid == ReportId.B3BallCallByGame)
+            {
+                IsBallCallRpt = true;
+                IsBallCallByGame = true;
+                result = true;
+            }
+            else
+                if (RptParameterDataHandler.rptid == ReportId.B3BallCallBySession)
+                {
+                    IsBallCallRpt = true;
+                    IsBallCallByGame = false;
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+            return result;
+        }
+
+        public bool IsBallCallRpt
+        {
+            get;
+            set;
+        }
+
+        public bool IsBallCallByGame
+        {
+            get;
+            set;
+        }
 
 
         public DateTime SelectedDateTime
@@ -536,6 +576,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
     }
+
 }
 
 #region REF(old script)

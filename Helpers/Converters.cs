@@ -32,5 +32,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helper
         }
     }
 
+
+
+    public class BallCallDefToBoolean : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool tempResult = false;
+            switch (value.ToString().ToLower())
+            {
+                case "By Game":
+                    {
+                        return false;
+                    }
+                case "By Session":
+                    return true;
+            }
+            return tempResult;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+
+        }
+    }
+
    
 }
