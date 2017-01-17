@@ -185,7 +185,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ReportTemplateModel result = new ReportTemplateModel();
             List<string> par = new List<string>();
             ReportParameterModel temprptparmodel = new ReportParameterModel();
-            temprptparmodel.DatePickerModel = new Model.Shared.DatePickerM();
+            temprptparmodel.b3DateData = new Model.Shared.DatePickerM();
             
 
             switch (b3rpt)
@@ -222,7 +222,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3BallCallByGame:
                     {
                        
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Ball Call";
                         par.Add("Category");
@@ -284,7 +284,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3Jackpot:
                     {
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Jackpot";
                         par.Add("Date");
@@ -310,7 +310,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3Session:
                     {
 
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session";
                         par.Add("Date");
@@ -324,7 +324,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3SessionSummary:
                     {
 
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session Summary";
                         par.Add("Date");
@@ -338,7 +338,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3SessionTransaction:
                     {
 
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session Transaction";
                         par.Add("Date");
@@ -364,7 +364,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3WinnerCards:
                     {
 
-                        temprptparmodel.SessionList = SessionList;
+                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Winners Card";
                         par.Add("Date");

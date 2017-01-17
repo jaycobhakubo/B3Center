@@ -11,6 +11,7 @@ using Microsoft.Practices.Composite.Presentation;
 using Microsoft.Practices.Composite;
 using Microsoft.Practices.Composite.Presentation.Commands;
 using System.Collections.ObjectModel;
+using GameTech.Elite.Reports;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 {
@@ -50,6 +51,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         public DatePickerVm(DatePickerM datePickerModel, bool showTime )
         {
+         
             ShowTime = false;
             DatepickerModel = datePickerModel;              
             PopulateItemList();
@@ -160,8 +162,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region SELECTEDITEM (properties and private member)
 
-
-       
 
         private string m_selectedMonth;
         public string SelectedMonth
@@ -314,9 +314,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private void updateItemDateSelected()
         {
             var x = ReportParameterViewModel.Instance;
-            var i = GetSelectedDate();
-            x.ClearSessionList();// = new ObservableCollection<Business.Session>();
-             x.UpdateSessionList(i);
+            
+            switch (x.RptParameterDataHandler.rptid)
+            {
+                case ReportId.B3AccountHistory:
+                    {
+                        var i = GetSelectedDate();
+                        x.UpdateSessionList(i);
+                        break;
+                    }
+                case ReportId.B3BallCallByGame:
+                    {
+                        var i = GetSelectedDate();
+                        x.UpdateSessionList(i);
+                        break;
+                    }
+            }
+            
+            if (x.RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+            {
+               
+                //x.UpdateAccountList(); 
+            }
+         
         
         }
 

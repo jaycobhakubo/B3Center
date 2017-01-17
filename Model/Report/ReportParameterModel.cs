@@ -17,23 +17,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
     {
 
         //private DatePickerM m_datePickerModel;
-        public DatePickerM DatePickerModel
-        {
-            get;set;
-            //get { return m_datePickerModel; }
-            //set { m_datePickerModel = value;
-            //    RaisePropertyChanged("DatePickerModel");
-            //}
-        }
+        public DatePickerM b3DateData {get;set;}
 
         private DateTime m_date;
         public DateTime Date_ { get; set; }
 
-        private IEnumerable<string> m_dateMonth;
-        public IEnumerable<string> dateMonth { get; set; }
+        private string m_dateMonth;
+        public string dateMonth { get; set; }
 
-        private int m_dateDay;
-        public int dateDay { get; set; }
+        //private int m_dateDay;
+        //public int dateDay { get; set; }
+
+
+        //private string m_timeHrMin;
+        //public string timeHrMin { get; set; }
+
+        //private string m_AMPM;
+        //public string AMPM { get; set; }
+
 
         private int m_dateYear;
         public int dateYear { get; set; }
@@ -53,33 +54,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         private string m_b3EndingCard;
         public string b3EndingCard { get; set; }
 
-        private string m_timeHrMin;
-        public string timeHrMin { get; set; }
-
-        private string m_AMPM;
-        public string AMPM { get; set; }
-
         public ReportId rptid { get; set; }
 
-        private ObservableCollection<Session> m_sessionList = new ObservableCollection<Session>();
-        public ObservableCollection<Session> SessionList 
-        { 
-            get {return m_sessionList;}
-            set
-            {
-                m_sessionList = value;
-            }
-        }
+        //private ObservableCollection<Session> m_sessionList = new ObservableCollection<Session>();
+        //public ObservableCollection<Session> SessionList 
+        //{ 
+        //    get {return m_sessionList;}
+        //    set
+        //    {
+        //        m_sessionList = value;
+        //    }
+        //}
 
-        private ObservableCollection<string> m_accountList = new ObservableCollection<string>();
-        public ObservableCollection<string> AccountList
-        {
-            get { return m_accountList; }
-            set
-            {
-                m_accountList = value;
-            }
-        }
+        //private ObservableCollection<string> m_accountList = new ObservableCollection<string>();
+        //public ObservableCollection<string> AccountList
+        //{
+        //    get { return m_accountList; }
+        //    set
+        //    {
+        //        m_accountList = value;
+        //    }
+        //}
 
     }
 }

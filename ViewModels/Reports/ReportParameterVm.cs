@@ -24,10 +24,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #region MEMBER VARIABLE
 
-        private ReportParameterModel m_reportParameterModel;
+        //private ReportParameterModel m_rptParameter;
 
         private DatePickerM m_datepickerModel;
-        private DatePickerVm m_datePickerVm;
+        //private DatePickerVm m_datePickerVm;
 
   
         private ObservableCollection<Session> AllSessionList;
@@ -75,83 +75,63 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public ReportParameterViewModel()
         {
-    
+            m_accountList = new ObservableCollection<string>();
+            m_sessionList = new ObservableCollection<Session>();
         }
 
 
-        internal void Initialize(List<string> paramlist, ReportParameterModel reportparM)
+        internal void Initialize(List<string> paramlist, ReportParameterModel rptParameter)
         {
-            m_paramList = paramlist;          
-            reportParameterModel = reportparM;//new ReportParameterModel();          
-            //EventItemChanged();
+            m_paramList = paramlist;
+            RptParameterDataHandler = rptParameter;  
             HideAllparameter();
             HideEnableParamControls(paramlist);
-
-            EventItemChanged();
+            EventCommand();
         }
 
         #endregion
 
-        private void EventItemChanged()
+        #region EVENT (using Microsoft.Practices..dll)
+
+        public ICommand SelectedSessionEvent { get; private set; }
+        public ICommand DateSelectedChanged { get; private set; }
+
+        private void EventCommand()
         {
-            SelectedSessioncmd = new DelegateCommand<Session>(obj =>
+            SelectedSessionEvent = new DelegateCommand<Session>(obj =>
             {
-         
-            if (obj != null)
-            {
-                UpdateAccountList();
+
+                if (obj != null)
+                {
+                    if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+                    {
+                        UpdateAccountList();
+                    }
                 }
             });
         }
 
+        #endregion
+
+        #region METHOD
 
         private bool IsShowTime()
         {
             bool result = false;
-            if (reportParameterModel.rptid == ReportId.B3Detail || reportParameterModel.rptid == ReportId.B3Void)
+            if (RptParameterDataHandler.rptid == ReportId.B3Detail || RptParameterDataHandler.rptid == ReportId.B3Void)
             {
                 result = true;
             }
             return result;
         }
 
-        private void HideDateTimePar()
-        {
-            if (reportParameterModel.rptid == ReportId.B3Detail || reportParameterModel.rptid == ReportId.B3Void)
-            {
-
-            }
-        }
-
-
-        #region EVENT (selectionchangedmvvm)
-
-        public ICommand SelectedSessioncmd { get; private set; }
-        public ICommand DateSelectedChanged { get; private set; }
-
-      
-        #endregion
-
-        #region METHOD
-
-        public void GetSessionListofAllSession() //This is bad we should nt get all session available in B3 db. Message should be modify
-        {
-            var t = ReportsViewModel.Instance;
-            AllSessionList =  t.SessionList;
-        }
-
-        public void ClearSessionList()
-        {
-            m_sessionList = new ObservableCollection<Session>();
-        }
 
         public void UpdateSessionList(DateTime selectedDateTime)
         {
-            //ObservableCollection<Session> result = new ObservableCollection<Session>();
-            //m_sessionList.Clear();
-            AccountList.Clear();
 
-            foreach (var session in AllSessionList)
+            m_sessionList.Clear();
+
+            foreach (var session in ReportsViewModel.Instance.SessionList)
             {
                 var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
                 var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
@@ -167,31 +147,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     m_sessionList.Add(session);
                 }
-
             }
+
+            SessionList = m_sessionList;
 
             if (m_sessionList.Count != 0)
-            {
-                SessionList = m_sessionList;
-                SelectedSession = m_sessionList.LastOrDefault();     
+            {              
+                SelectedSession = m_sessionList.LastOrDefault();               
             }
-           
-
-           
+          
         }
 
 
-
-        private void UpdateAccountList()
+        public void UpdateAccountList()
         {
-
-            if (m_reportParameterModel.rptid == ReportId.B3AccountHistory)
+            m_accountList.Clear();
+            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
             {         
                 Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
                 msg.Send();
-                var AccountListtemp = msg.AccountNumberList;
-                m_accountList = AccountListtemp;
-                
+                m_accountList = msg.AccountNumberList;             
+            }          
+
+            AccountList = m_accountList;
+            if (m_accountList.Count != 0)
+            {
+                AccountSelected = m_accountList.FirstOrDefault();
             }
         }
 
@@ -206,13 +187,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
-                            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);///Do we want to pass any value? not for now.
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);///Do we want to pass any value? not for now.
                             DateInput = Visibility.Visible;
                             break;
                         }
                     case "MonthYear":
                         {
-                            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
                             Months = DatePickerVm.MonthList;
                             MonthSelected = m_months.FirstOrDefault();
                             Years = DatePickerVm.YearList;
@@ -222,7 +203,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDate":
                         {
-                            //DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);
+                            //DatePickerVm = new DatePickerVm(RptParameterDataHandler.DatePickerModel, false);
                             //Months = DatePickerVm.MonthList;
                             //MonthSelected = m_months.FirstOrDefault();
                             //Years = DatePickerVm.YearList;
@@ -231,26 +212,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             break;
                         }
                     case "Session":
-                        {
-                            //m_sessionList = new ObservableCollection<Session>();
-                            GetSessionListofAllSession();
-                            m_sessionList = reportParameterModel.SessionList;
-                            UpdateSessionList(DateTime.Now);
-
-                            if (reportParameterModel.rptid == ReportId.B3AccountHistory)
-                            {
-                               
-                            }
-
+                        {         
+                            m_sessionList = new ObservableCollection<Session>();
+                            UpdateSessionList(DateTime.Now);                          
                             SessionInput = Visibility.Visible;
                             break;
                         }
                     case "AccountNumber":
-                        { m_accountList = new ObservableCollection<string>();
-                         
+                        {
+                            m_accountList = new ObservableCollection<string>();                        
                             UpdateAccountList();
-                            AccountList = m_accountList;
-                            AccountSelected = AccountList.FirstOrDefault();
                             AccountNumberInput = Visibility.Visible;
                             break;
                         }
@@ -271,7 +242,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDatewTime":
                         {
-                            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, true);
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, true);
                             StartEndDateWTime = Visibility.Visible;
                             break;
                         }
@@ -297,7 +268,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public DateTime GetDate()
         {
             DateTime tempResult;// = new DateTime();
-            DateTime.TryParse(reportParameterModel.DatePickerModel.DateFullwTime, out tempResult);
+            DateTime.TryParse(RptParameterDataHandler.b3DateData.DateFullwTime, out tempResult);
             return tempResult;
         }
 
@@ -311,26 +282,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public DateTime SelectedDateTime
         {
             get { return GetDate(); }
-        }     
+        }
 
-        public ReportParameterModel reportParameterModel
+        public ReportParameterModel RptParameterDataHandler
         {
+            get;
+            set;
             //get;set;
-            get { return m_reportParameterModel; }
-            set
-            {
-                m_reportParameterModel = value;
-                RaisePropertyChanged("reportParameterModel");
-            }
+            //get { return RptParameterDataHandler; }
+            //set
+            //{
+            //    RptParameterDataHandler = value;
+            //    RaisePropertyChanged("RptParameterDataHandler");
+            //}
         }
 
 
         public DatePickerM datePickermModel
         {
-            get { return reportParameterModel.DatePickerModel; }
+            get { return RptParameterDataHandler.b3DateData; }
             set
             {
-                reportParameterModel.DatePickerModel = value;
+                RptParameterDataHandler.b3DateData = value;
                 RaisePropertyChanged("datePickermModel");
             }
 
@@ -338,37 +311,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public DatePickerVm DatePickerVm
         {
-            get { return m_datePickerVm; }
-            set
-            {
-                m_datePickerVm = value;
-                RaisePropertyChanged("DatePickerVm");
-            }
+            get;
+            set;
+            //get { return m_datePickerVm; }
+            //set
+            //{
+            //    m_datePickerVm = value;
+            //    RaisePropertyChanged("DatePickerVm");
+            //}
         }
 
-
-        public ObservableCollection<Session>  SessionList
+        public ObservableCollection<Session> SessionList 
         {
-            get
-            {
-                return reportParameterModel.SessionList ;
-            }
+            get { return m_sessionList; }
             set 
             {
-                reportParameterModel.SessionList = value;
+                m_sessionList = value;
                 RaisePropertyChanged("SessionList");
-            }
+            } 
         }
+
 
  
         public Session SelectedSession
         {
             get
             {
-                return reportParameterModel.b3Session;
+                return RptParameterDataHandler.b3Session;
             }
             set{
-                reportParameterModel.b3Session = value;
+                RptParameterDataHandler.b3Session = value;
                 RaisePropertyChanged("SelectedSession");
             }  
         }
@@ -376,10 +348,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     
         public string StartingCard
         {
-            get { return m_reportParameterModel.b3StartingCard; }
+            get { return RptParameterDataHandler.b3StartingCard; }
             set
             {
-                m_reportParameterModel.b3StartingCard = value;
+                RptParameterDataHandler.b3StartingCard = value;
                 RaisePropertyChanged("StartingCard");
             }
         }
@@ -387,37 +359,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
    
         public string EndingCard
         {
-            get { return m_reportParameterModel.b3EndingCard; }
+            get { return RptParameterDataHandler.b3EndingCard; }
             set
             {
-                m_reportParameterModel.b3EndingCard = value;
+                RptParameterDataHandler.b3EndingCard = value;
                 RaisePropertyChanged("EndingCard");
             }
         }
 
-        public ObservableCollection<string> AccountList
-        {
-            get
+        public ObservableCollection<string> AccountList 
+        {        
+            get { return m_accountList; }
+            set 
             {
-                return m_reportParameterModel.AccountList;
-            }
-            set
-            {
-                m_reportParameterModel.AccountList = value;
-                //RaisePropertyChanged("AccountList");
-            }
+                m_accountList = value; RaisePropertyChanged("AccountList"); 
+            }      
         }
+       
 
 
         public string AccountSelected
         {
             get
             {
-                return reportParameterModel.b3AccountNumber;
+                return RptParameterDataHandler.b3AccountNumber;
             }
             set
             {
-                reportParameterModel.b3AccountNumber = value;
+                RptParameterDataHandler.b3AccountNumber = value;
                 RaisePropertyChanged("AccountSelected");
             }
         }
@@ -563,7 +532,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public Elite.Reports.ReportId reportid { get; set; }
+    
 
         #endregion
     }

@@ -57,11 +57,11 @@
                 <TextBlock Text="Session" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
                                Width="280"
-                               ItemsSource="{Binding SessionList}"
+                               ItemsSource="{Binding SessionList, Mode=TwoWay}"
                                SelectedItem="{Binding SelectedSession}"
-                    CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedSessioncmd}"
+                                CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedSessionEvent}"
                                DisplayMemberPath="DisplayName"
-                               x:Name="SessionCombobox"
+                               x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"
                         />
                 <TextBlock Text="Account Number" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
