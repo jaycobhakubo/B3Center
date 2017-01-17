@@ -2240,19 +2240,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
         }
-
-
         public ICommand ViewReportCommand { get; set; }
 
-
-
-
         public void ViewReportRel(ReportId reportID)
-        {
-  
-
-
-            
+        {            
             //ViewPrintButtonVisibility = Visibility.Collapsed;
 
             //Task.Factory.StartNew(() =>

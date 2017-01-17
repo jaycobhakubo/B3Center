@@ -29,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<Session> m_sessionList;
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
-        private ObservableCollection<string> m_accountList;
+        //private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
 
         private Session m_SelectedSession;
@@ -82,18 +82,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterModel = reportparM;//new ReportParameterModel();
             m_sessionList = reportParameterModel.SessionList;
             AccountList = reportParameterModel.AccountList;
-            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, false);///Do we want to pass any value? not for now.
+            DatePickerVm = new DatePickerVm(reportParameterModel.DatePickerModel, IsShowTime());///Do we want to pass any value? not for now.
             EventItemChanged();
             GetSessionListofAllSession();
             UpdateSessionList(DateTime.Now);
             UpdateAccountList();
             HideAllparameter();
             HideEnableParamControls(paramlist);
-           
+     
+
         }
 
         #endregion
-
+        private bool IsShowTime()
+        {
+            bool result = false;
+            if (reportParameterModel.rptid == ReportId.B3Detail || reportParameterModel.rptid == ReportId.B3Void)
+            {
+                result = true;
+            }
+            return result;
+        }
 
         private void HideDateTimePar()
         {
@@ -186,15 +195,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private ObservableCollection<string> getAccountListPerSession(int SessionNumber)
-        {
-            m_accountList = new ObservableCollection<string>();
-            if (m_paramList.Contains("AccountNumber"))
-            {
+        //private ObservableCollection<string> getAccountListPerSession(int SessionNumber)
+        //{
+            //m_accountList = new ObservableCollection<string>();
+            //if (m_paramList.Contains("AccountNumber"))
+            //{
 
-            }
-            return m_accountList;
-        }
+            //}
+            //return m_accountList;
+        //}
 
         private void HideEnableParamControls(List<string> paramlist)
         {
@@ -319,7 +328,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public ObservableCollection<Session>  SessionList
         {
-            get { return reportParameterModel.SessionList ; }
+            get
+            {
+                return reportParameterModel.SessionList ;
+            }
             set 
             {
                 reportParameterModel.SessionList = value;
@@ -330,7 +342,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
  
         public Session SelectedSession
         {
-            get{return reportParameterModel.b3Session;}
+            get
+            {
+                return reportParameterModel.b3Session;
+            }
             set{
                 reportParameterModel.b3Session = value;
                 RaisePropertyChanged("SelectedSession");
@@ -361,7 +376,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public ObservableCollection<string> AccountList
         {
-            get { return m_reportParameterModel.AccountList; }
+            get
+            {
+                return m_reportParameterModel.AccountList;
+            }
             set
             {
                 m_reportParameterModel.AccountList = value;
@@ -372,7 +390,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public string AccountSelected
         {
-            get { return reportParameterModel.b3AccountNumber; }
+            get
+            {
+                return reportParameterModel.b3AccountNumber;
+            }
             set
             {
                 reportParameterModel.b3AccountNumber = value;

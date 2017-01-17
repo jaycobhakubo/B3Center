@@ -25,8 +25,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
     {
         public DatePickerUserView()
         {
-            DataContext = this;
+         
             InitializeComponent();
+            DataContext = this;
         }
     }
 }

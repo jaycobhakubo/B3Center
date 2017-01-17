@@ -26,7 +26,8 @@
 
 
         <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}" x:Key="showtime">
-                <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="CommandSelectionChanged:SelectedItemChangedcmd.Command" Value="{Binding DateSelectedChanged}"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding ShowTime}" Value="True">
                         <Setter Property="Visibility" Value="Visible"/>

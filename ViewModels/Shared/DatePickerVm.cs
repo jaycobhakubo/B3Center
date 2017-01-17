@@ -49,7 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         public DatePickerVm(DatePickerM datePickerModel, bool showTime )
         {
-            ShowTime = true;
+            ShowTime = showTime;
             DatepickerModel = datePickerModel;   
             EventItemChanged();
             PopulateItemList();
@@ -87,9 +87,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             var cDayint = DateTime.Now.Day;
             var cDaystring = m_dayOfMonthList[cDayint - 1];
             SelectedDay = cDaystring;
-
-            if (m_showTime == true)
-            {
+      
                 TimeList_ = m_hours.ToList();
                 var hour = DateTime.Now.Hour % 12;
                 var hourString = m_timeList[hour];
@@ -99,8 +97,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
                 var AMPMindex = DateTime.Now.Hour > 11 ? 1 : 0;
                 var AMPMstring = m_ampmList[AMPMindex];
                 SelectedAmpm = AMPMstring;
-
-            }
 
         }
 
