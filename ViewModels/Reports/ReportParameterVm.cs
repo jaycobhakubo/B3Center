@@ -81,10 +81,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(List<string> paramlist, ReportParameterModel rptParameter)
         {
             m_paramList = paramlist;
-            RptParameterDataHandler = rptParameter;  
+            RptParameterDataHandler = rptParameter;
             HideAllparameter();
             HideEnableParamControls(paramlist);
-            EventCommand();
+            if (rptParameter.rptid == ReportId.B3AccountHistory)
+            {
+                EventCommand();
+            }
         }
 
         #endregion
@@ -98,7 +101,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             SelectedSessionEvent = new DelegateCommand<Session>(obj =>
             {
-
                 if (obj != null)
                 {
                     if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
@@ -206,7 +208,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             break;
                         }
                     case "Session":
-                        {         
+                        {
                             m_sessionList = new ObservableCollection<Session>();
                             UpdateSessionList(DateTime.Now);                          
                             SessionInput = Visibility.Visible;
@@ -492,6 +494,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_monthSelected = value;
                 RaisePropertyChanged("MonthSelected");
             }
+        }
+
+        public void GetMonthSelectedInt()
+        {
+
         }
 
         private List<string> m_years;

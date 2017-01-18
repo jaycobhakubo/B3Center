@@ -48,18 +48,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     }
                 case ReportId.B3Accounts:
                     {
-                        string tempyear = "2017";
-                        Report.CrystalReportDocument.SetParameterValue("@nMonth", /*bcvm.parVm.RptParameterDataHandler.dateMonth*/1);
-                        Report.CrystalReportDocument.SetParameterValue("@nYear", tempyear.ToString()); /*bcvm.parVm.RptParameterDataHandler.dateYear*/ 
+                    
+                        Report.CrystalReportDocument.SetParameterValue("@nMonth", bcvm.parVm.MonthSelected);
+                        Report.CrystalReportDocument.SetParameterValue("@nYear", bcvm.parVm.YearSelected.ToString(CultureInfo.InvariantCulture)); 
                         break;
                     }
                 case ReportId.B3BallCallByGame://OK
                     {
                        
                       Report.CrystalReportDocument.SetParameterValue("@session", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
-                       Report.CrystalReportDocument.SetParameterValue("@DateParameter", tempdate.Date.ToString(CultureInfo.InvariantCulture));
-                        
-                       
+                       Report.CrystalReportDocument.SetParameterValue("@DateParameter", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+
+
                         break;
                     
                     }
@@ -80,13 +80,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                         Report.CrystalReportDocument.SetParameterValue("@SessionNum", null);
                         Report.CrystalReportDocument.SetParameterValue("@UserId", 0);
                         Report.CrystalReportDocument.SetParameterValue("@Station", 0);
-                        Report.CrystalReportDocument.SetParameterValue("@DateTime", /*bcvm.parVm.reportParameterModel*/tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@DateTime", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Detail:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", tempdate.Date.ToString(CultureInfo.InvariantCulture));
-                       Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", endtempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", bcvm.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", endtempdate.Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Drawer://No data: Issue on clientmac
