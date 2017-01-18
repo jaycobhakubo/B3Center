@@ -46,6 +46,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             }
         }
 
+        public int MonthIntValue
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region CONSTRUCTOR
@@ -315,29 +321,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         private void updateItemDateSelected()
         {
             var x = ReportParameterViewModel.Instance;
-            
-            switch (x.RptParameterDataHandler.rptid)
+            if
+                (
+                x.RptParameterDataHandler.rptid == ReportId.B3AccountHistory
+                || x.RptParameterDataHandler.rptid == ReportId.B3BallCallByGame
+                || x.RptParameterDataHandler.rptid == ReportId.B3Jackpot
+                || x.RptParameterDataHandler.rptid == ReportId.B3Session
+                        || x.RptParameterDataHandler.rptid == ReportId.B3SessionSummary
+                        || x.RptParameterDataHandler.rptid == ReportId.B3SessionTransaction
+                        || x.RptParameterDataHandler.rptid == ReportId.B3WinnerCards
+                )
             {
-                case ReportId.B3AccountHistory:
-                    {
-                        var i = GetSelectedDate();
-                        x.UpdateSessionList(i);
-                        break;
-                    }
-                case ReportId.B3BallCallByGame:
-                    {
-                        var i = GetSelectedDate();
-                        x.UpdateSessionList(i);
-                        break;
-                    }
+                var i = GetSelectedDate();
+                x.UpdateSessionList(i);
             }
-            
-            if (x.RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
-            {
-               
-                //x.UpdateAccountList(); 
-            }
-         
         
         }
 

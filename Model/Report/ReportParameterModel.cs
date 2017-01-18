@@ -19,6 +19,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         //private DatePickerM m_datePickerModel;
         public DatePickerM b3DateData {get;set;}
 
+        public DatePickerM StartDate { get; set; }
+        public DatePickerM EndDate { get; set; }
+
         private DateTime m_date;
         public DateTime Date_ { get; set; }
 

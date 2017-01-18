@@ -26,9 +26,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
         }
 
 
+        private int GetMonthEquivValue(string monthName)
+        {
+            string monthname = "Jan";
+           string[] m_months =
+            {
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
+                "Nov", "Dec"
+            };
+           return  Array.IndexOf(m_months, monthname) + 1;
+           
+        }
 
         public ReportDocument LoadReportDocument(B3Report Report/*, int UserId, int StationId*/)
         {
+       
+
             DateTime tempdate = new DateTime();
             //tempdate = DateTime.Parse("1/13/2017 00:00:00");
 
@@ -48,12 +61,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     }
                 case ReportId.B3Accounts:
                     {
-                    
-                        Report.CrystalReportDocument.SetParameterValue("@nMonth", bcvm.parVm.MonthSelected);
+                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(bcvm.parVm.MonthSelected) + 1);
                         Report.CrystalReportDocument.SetParameterValue("@nYear", bcvm.parVm.YearSelected.ToString(CultureInfo.InvariantCulture)); 
                         break;
                     }
-                case ReportId.B3BallCallByGame://OK
+                case ReportId.B3BallCallByGame:
                     {
                        
                       Report.CrystalReportDocument.SetParameterValue("@session", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
@@ -63,7 +75,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                         break;
                     
                     }
-                case ReportId.B3BallCallBySession://OK
+                case ReportId.B3BallCallBySession:
                     {
                         Report.CrystalReportDocument.SetParameterValue("@StartDate", tempdate.Date.ToString(CultureInfo.InvariantCulture));
                         Report.CrystalReportDocument.SetParameterValue("@EndDate", endtempdate.Date.ToString(CultureInfo.InvariantCulture));
@@ -78,22 +90,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                 case ReportId.B3Daily:
                     {
                         Report.CrystalReportDocument.SetParameterValue("@SessionNum", null);
-                        Report.CrystalReportDocument.SetParameterValue("@UserId", 0);
-                        Report.CrystalReportDocument.SetParameterValue("@Station", 0);
+                        Report.CrystalReportDocument.SetParameterValue("@UserId", 0);//Will be hndle on the setting module
+                        Report.CrystalReportDocument.SetParameterValue("@Station", 0);//Will be hndle on the setting module
                         Report.CrystalReportDocument.SetParameterValue("@DateTime", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Detail:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", bcvm.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", endtempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        var startdate = bcvm.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = bcvm.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
+                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
                         break;
                     }
                 case ReportId.B3Drawer://No data: Issue on clientmac
                     {
                      Report.CrystalReportDocument.SetParameterValue("@MachineID", 15);
                         Report.CrystalReportDocument.SetParameterValue("@Station", 15);
-                       Report.CrystalReportDocument.SetParameterValue("@nDate", tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@nDate", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         Report.CrystalReportDocument.SetParameterValue("@UserId", 2);
                         break;
                     }
@@ -102,7 +116,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                      Report.CrystalReportDocument.SetParameterValue("@nSessNum", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
                      Report.CrystalReportDocument.SetParameterValue("@UserId", 2);
                     Report.CrystalReportDocument.SetParameterValue("@Station", 0);
-                   Report.CrystalReportDocument.SetParameterValue("@nDate", tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                    Report.CrystalReportDocument.SetParameterValue("@nDate", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Monthly:
@@ -116,9 +130,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     }
                 case ReportId.B3Session:
                     {
-                        
+
                         Report.CrystalReportDocument.SetParameterValue("@SessionID", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateN", tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@DateN", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                 Report.CrystalReportDocument.SetParameterValue("@UserID", 2);
                  Report.CrystalReportDocument.SetParameterValue("@Station", 0);//15
 
@@ -130,7 +144,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     {
 
                        Report.CrystalReportDocument.SetParameterValue("@SessionN", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
-                       Report.CrystalReportDocument.SetParameterValue("@DateTime", tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                       Report.CrystalReportDocument.SetParameterValue("@DateTime", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                        Report.CrystalReportDocument.SetParameterValue("@UserID", 2);
                    Report.CrystalReportDocument.SetParameterValue("@Station", 0);
 
@@ -141,23 +155,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     {
 
                        Report.CrystalReportDocument.SetParameterValue("@SessionNumber", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateTime", tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                       Report.CrystalReportDocument.SetParameterValue("@DateTime", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
 
 
                         break;
                     }
                 case ReportId.B3Void:
                     {
-
-                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", tempdate.Date.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", endtempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        var startdate = bcvm.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = bcvm.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime",startdate);
+                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
                         break;
                     }
                 case ReportId.B3WinnerCards:
                     {
 
                         Report.CrystalReportDocument.SetParameterValue("@SessionNum", bcvm.parVm.RptParameterDataHandler.b3Session.Number);
-                       Report.CrystalReportDocument.SetParameterValue("@DateRun", tempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@DateRun", bcvm.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
 
                         break;
                     }

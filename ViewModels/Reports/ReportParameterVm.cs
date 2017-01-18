@@ -20,8 +20,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     public class ReportParameterViewModel : ViewModelBase
     {
 
-
-
         #region MEMBER VARIABLE
 
         //private ReportParameterModel m_rptParameter;
@@ -152,8 +150,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionList = m_sessionList;
 
             if (m_sessionList.Count != 0)
-            {              
-                SelectedSession = m_sessionList.LastOrDefault();               
+            {
+                SelectedSession = m_sessionList.LastOrDefault();
+            }
+            else
+            {
+                if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+                {
+                    m_accountList.Clear();
+                }
             }
           
         }
@@ -187,7 +192,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
-                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);///Do we want to pass any value? not for now.
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
                             DateInput = Visibility.Visible;
                             break;
                         }
@@ -203,7 +208,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDate":
                         {
-                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
+                            StartDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
+                            EndDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
                             StartEndDate = Visibility.Visible;
                             break;
                         }
@@ -238,8 +244,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDatewTime":
                         {
-                            StartDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, true);
-                            EndDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, true);
+                            StartDatePickerVm = new DatePickerVm(RptParameterDataHandler.StartDate, true);
+                            EndDatePickerVm = new DatePickerVm(RptParameterDataHandler.EndDate, true);
                             StartEndDateWTime = Visibility.Visible;
                             break;
                         }

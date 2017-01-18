@@ -262,6 +262,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
+                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
+                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
                         result.ReportTitle = "Detail";
                         par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
@@ -353,6 +355,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
+                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
+                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
                         result.ReportTitle = "Void";
                         par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
@@ -507,20 +511,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
                 m_reportList = m_reportList.OrderBy(l => l.DisplayName).ToList();
             }
-            //m_reportList.Add("Accounts");
-            //m_reportList.Add("Account History");
-            //m_reportList.Add("Ball Call");
-            //m_reportList.Add("Bingo Card");
-            //m_reportList.Add("Daily");
-            //m_reportList.Add("Detail");
-            //m_reportList.Add("Drawer");
-            //m_reportList.Add("Jackpot");
-            //m_reportList.Add("Monthly");
-            //m_reportList.Add("Session");
-            //m_reportList.Add("Session Summary");
-            //m_reportList.Add("Session Transaction");
-            //m_reportList.Add("Void");
-            //m_reportList.Add("Winner Cards");
+
             ReportSelected = m_reportList.FirstOrDefault();
         }
 
