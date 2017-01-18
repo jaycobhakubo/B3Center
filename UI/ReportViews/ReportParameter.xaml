@@ -23,9 +23,9 @@
                      Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
                     />
                 <TextBlock Text="Start Date" Name="StartDateTimepar" Visibility="{Binding StartEndDateWTime}" />
-                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" />
+                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" DataContext="{Binding StartDatePickerVm}" />
                 <TextBlock Text="End Date" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
-                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" />
+                <shared:DatePickerUserView  HorizontalAlignment="Right" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" DataContext="{Binding EndDatePickerVm}"/>
 
                 <TextBlock Name="DatePar" Text="Date" Visibility="{Binding DateInput}"/>
                 <shared:DatePickerUserView   HorizontalAlignment="Right"  Visibility="{Binding ElementName=DatePar, Path=Visibility }" DataContext="{Binding DatePickerVm}"/>

@@ -27,9 +27,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //private ReportParameterModel m_rptParameter;
 
         private DatePickerM m_datepickerModel;
-        //private DatePickerVm m_datePickerVm;
-
-  
+        //private DatePickerVm m_datePickerVm; 
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
         private ObservableCollection<string> m_accountList;
@@ -203,11 +201,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDate":
                         {
-                            //DatePickerVm = new DatePickerVm(RptParameterDataHandler.DatePickerModel, false);
-                            //Months = DatePickerVm.MonthList;
-                            //MonthSelected = m_months.FirstOrDefault();
-                            //Years = DatePickerVm.YearList;
-                            //YearSelected = m_years.FirstOrDefault();
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
                             StartEndDate = Visibility.Visible;
                             break;
                         }
@@ -228,7 +222,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case "Category":
                         {
                             m_categoryList = new List<string>();
-                           m_categoryList.Add("By Game");
+                            m_categoryList.Add("By Game");
                             m_categoryList.Add("By Session");
                             CategorySelected = m_categoryList.FirstOrDefault();
                             CategoryList = m_categoryList; 
@@ -242,7 +236,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDatewTime":
                         {
-                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, true);
+                            StartDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, true);
+                            EndDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, true);
                             StartEndDateWTime = Visibility.Visible;
                             break;
                         }
@@ -288,13 +283,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get;
             set;
-            //get;set;
-            //get { return RptParameterDataHandler; }
-            //set
-            //{
-            //    RptParameterDataHandler = value;
-            //    RaisePropertyChanged("RptParameterDataHandler");
-            //}
         }
 
 
@@ -313,12 +301,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get;
             set;
-            //get { return m_datePickerVm; }
-            //set
-            //{
-            //    m_datePickerVm = value;
-            //    RaisePropertyChanged("DatePickerVm");
-            //}
+        }
+
+        public DatePickerVm EndDatePickerVm
+        {
+            get;
+            set;
+        }
+
+        public DatePickerVm StartDatePickerVm
+        {
+            get;
+            set;
         }
 
         public ObservableCollection<Session> SessionList 

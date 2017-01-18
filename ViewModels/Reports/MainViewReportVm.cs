@@ -1378,7 +1378,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             drawerReport.CrystalReportDocument.SetParameterValue("@MachineID", MachineID);
             drawerReport.CrystalReportDocument.SetParameterValue("@Station", MachineID);
             drawerReport.CrystalReportDocument.SetParameterValue("@nDate", dateTime.Date.ToString(CultureInfo.InvariantCulture));
-
             drawerReport.CrystalReportDocument.SetParameterValue("@UserId", StaffId);
           
             return drawerReport.CrystalReportDocument;

@@ -30,6 +30,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             set
             {
                 m_showTime = value;
+                RaisePropertyChanged("ShowTime");
             }
         }
 
@@ -52,7 +53,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         public DatePickerVm(DatePickerM datePickerModel, bool showTime )
         {
          
-            ShowTime = false;
+            ShowTime = showTime;
             DatepickerModel = datePickerModel;              
             PopulateItemList();
             EventItemChanged();

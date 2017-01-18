@@ -27,13 +27,19 @@
 
         <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}" x:Key="showtime">
             <!--<Setter Property="CommandSelectionChanged:SelectedItemChangedcmd.Command" Value="{Binding DateSelectedChanged}"/>-->
-            <Setter Property="Visibility" Value="Collapsed"/>
+            <!--<Setter Property="Visibility" Value="Collapsed"/>-->
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding ShowTime}" Value="True">
+                    <DataTrigger Binding="{Binding ShowTime}" Value="true">
                         <Setter Property="Visibility" Value="Visible"/>
                     </DataTrigger>
-                </Style.Triggers>
+                <DataTrigger Binding="{Binding ShowTime}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
             </Style>
+
+
+      
 
 
     </UserControl.Resources>
@@ -68,7 +74,7 @@
                 <!--<ComboBox Style="{StaticResource showtime}" Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}">-->
 
                 </ComboBox>
-            <ComboBox Visibility="{Binding ElementName=cmbxName, Path=Visibility}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}"></ComboBox>
+            <ComboBox Style="{StaticResource showtime}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}"></ComboBox>
             <!--<ComboBox Visibility="{Binding ElementName=cmbxName, Path=Visibility}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}"></ComboBox>-->
 
             <!--Visibility="{Binding ElementName=cmbxName, Path=Visibility}"-->
