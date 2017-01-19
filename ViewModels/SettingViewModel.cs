@@ -126,29 +126,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get;
             set;
-            //get{return m_serverSettingVm;}
-            //set
-            //{
-            //    m_serverSettingVm = value;
-            //    RaisePropertyChanged("ServerSetting_Vm");
-            //}
-
         }
 
-
+        
   
         private void SetCommand()
         {
-            SaveSettingcmd = new RelayCommand(parameter => SaveSetting());
+            SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
         }
 
+
+        //WAIT TILL THE COMMAND IS COMPLETED
         private void RunSavedCommand()
         {
             Task save = Task.Factory.StartNew(() => SaveSetting());
-            save.Wait();
-    
+            save.Wait();   
         }
+
+
 
         public ICommand SaveSettingcmd { get; set; }
         public ICommand CancelSettingcmd { get; set; }
