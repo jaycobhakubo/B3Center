@@ -648,7 +648,9 @@
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\GameSettingView.xaml.cs.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Trash%28SaveForReference%29\ServerSetting.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\OperatorView.xaml.txt" />
   </ItemGroup>

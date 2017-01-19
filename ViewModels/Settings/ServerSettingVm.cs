@@ -10,13 +10,44 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
    public class ServerSettingVm : ViewModelBase
     {
+
+ 
+       private string m_minPlayer;
+       private string m_gameStart;
+       private string m_consolationPrize;
+       private string m_gameRecallPassword;
+       private string m_waitCountDown;
        
+       //INIT
        public ServerSettingVm(ServerSetting serversetting)
         {
-            ServerSetting = serversetting;
+             ServerSetting = serversetting;
+             SaveDefaultSetting(serversetting);
         }
 
+       //SAVED ORIGINAL SETTING
+       private void SaveDefaultSetting(ServerSetting serversetting)
+       {
+           m_minPlayer = serversetting.MinPlayer;
+           m_gameStart = serversetting.GameStartDelay;
+           m_consolationPrize = serversetting.Consolation;
+           m_gameRecallPassword = serversetting.GameRecallPassw;
+           m_waitCountDown = serversetting.WaitCountDown;
+       }
 
+       //GET SAVED ORIGINAL SETTING
+       public ServerSetting GetOriginalValue()
+       {
+           var x = new ServerSetting();
+           x.MinPlayer = m_minPlayer;
+           x.GameStartDelay = m_gameStart;
+           x.Consolation = m_consolationPrize;
+           x.GameRecallPassw = m_gameRecallPassword;
+           x.WaitCountDown = m_waitCountDown;
+           return x;
+       }
+
+       //NEW SETTING
         private ServerSetting m_serverSetting;
         public ServerSetting ServerSetting
         {
@@ -29,59 +60,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 m_serverSetting = value;
                 RaisePropertyChanged("ServerSetting");
             }
-        }
-
-        public string MinPlayer
-        {
-            get { return m_serverSetting.MinPlayer; }
-            set
-            {
-                m_serverSetting.MinPlayer = value;
-                RaisePropertyChanged("MinPlayer");
-            }
-        }
-
-     
-
-        //public string GameStartDelay
-        //{
-        //    get;
-        //    set
-        //    {
-        //        m_serverSetting.GameStartDelay = value;
-        //        RaisePropertyChanged("ServerSetting");
-        //    }
-        //}
-
-        //public string Consolation
-        //{
-        //    get;
-        //    set
-        //    {
-        //        m_serverSetting.Consolation = value;
-        //        RaisePropertyChanged("ServerSetting");
-        //    }
-        //}
-
-        //public string GameRecallPassword
-        //{
-        //    get;
-        //    set
-        //    {
-        //        m_serverSetting.GameRecallPassw = value;
-        //        RaisePropertyChanged("ServerSetting");
-        //    }
-        //}
-
-
-        //public string WaitCountDown
-        //{
-        //    get;
-        //    set
-        //    {
-        //        m_serverSetting.WaitCountDown = value;
-        //        RaisePropertyChanged("ServerSetting");
-        //    }
-        //}
+        }     
     }
 }

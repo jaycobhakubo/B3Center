@@ -88,6 +88,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
+        public string B3SettingdefaultValue
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 

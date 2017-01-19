@@ -36,7 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private string m_gameRecallPassword;
         private int m_waitCountDown;
         private SaveCancelCrtl m_saveCancelCtrl;
-                    private Button m_btnSave;
+        private Button m_btnSave;
         private Button m_btnCancel;
         private List<SettingMember> m_lB3Settings;//Save setting id that needs to be updated.
         private bool m_isValidationOk;

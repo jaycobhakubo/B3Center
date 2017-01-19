@@ -41,11 +41,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         private  ServerSetting m_serverSetting;
-        public ServerSetting ServerSettingNew
-        {
-            get;
-            set;
-        }
+        //public ServerSetting ServerSettingNew
+        //{
+        //    get;
+        //    set;
+        //}
 
         private SettingViewModel()
         {
@@ -53,17 +53,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        private ServerSetting TranslateThisSettingToServerSettingModel(List<B3SettingGlobal> m_B3Settings)
-        {
-            m_serverSetting = new ServerSetting();
-            m_serverSetting.MinPlayer = Convert.ToInt32(m_B3Settings[0].B3SettingValue).ToString();
-            m_serverSetting.GameStartDelay= Convert.ToInt32(m_B3Settings[1].B3SettingValue).ToString();
-            m_serverSetting.Consolation = Convert.ToDecimal(m_B3Settings[2].B3SettingValue).ToString();
-            m_serverSetting.GameRecallPassw = m_B3Settings[3].B3SettingValue.ToString();
-            m_serverSetting.WaitCountDown= Convert.ToInt32(m_B3Settings[4].B3SettingValue).ToString();
-        
-            return m_serverSetting;
-        }
+     
 
         public static SettingViewModel Instance
         {
@@ -82,6 +72,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        public ObservableCollection<B3SettingGlobal> B3ServerSetting
+        {
+            get;
+            set;
+        }
+
+     
+
         public void Initialize(B3Controller controller)
         {
             if (controller == null)
@@ -89,7 +87,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             m_controller = controller;
 
-    
+            var b3ServerSetting = m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5);
+            B3ServerSetting = new ObservableCollection<B3SettingGlobal>(b3ServerSetting);
+
 
             B3Setting b3GameSetting = new B3Setting();
             b3GameSetting.B3GameSetting_ = Settings.B3GameSetting_;//Game enabled 
@@ -104,8 +104,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             
             
-            ServerSettingNew = TranslateThisSettingToServerSettingModel(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
-            m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(ServerSettingNew));
+            m_serverSetting = TranslateThisSettingToServerSettingModel(B3ServerSetting);
+            m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(m_serverSetting));
 
 
 
@@ -124,15 +124,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         private ServerSettingVm m_serverSettingVm;
-        public ServerSettingVm ServerSetting_Vm 
-        { 
-            get{return m_serverSettingVm;}
-            set
-            {
-                m_serverSettingVm = value;
-                RaisePropertyChanged("ServerSetting_Vm");
-            }
-        
+        public ServerSettingVm ServerSetting_Vm
+        {
+            get;
+            set;
+            //get{return m_serverSettingVm;}
+            //set
+            //{
+            //    m_serverSettingVm = value;
+            //    RaisePropertyChanged("ServerSetting_Vm");
+            //}
+
         }
 
      
@@ -150,10 +152,58 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //m_serverSettingVm.ServerSetting;
         }
 
+        public void ListOfSettingIDToBeUpdated()
+        {
+            
+        
+        }
+
+        private ServerSetting TranslateThisSettingToServerSettingModel(ObservableCollection<B3SettingGlobal> m_B3Settings)
+        {
+            m_serverSetting = new ServerSetting();
+            m_serverSetting.MinPlayer = Convert.ToInt32(m_B3Settings[0].B3SettingValue).ToString();
+            m_serverSetting.GameStartDelay = Convert.ToInt32(m_B3Settings[1].B3SettingValue).ToString();
+            m_serverSetting.Consolation = Convert.ToDecimal(m_B3Settings[2].B3SettingValue).ToString();
+            m_serverSetting.GameRecallPassw = m_B3Settings[3].B3SettingValue.ToString();
+            m_serverSetting.WaitCountDown = Convert.ToInt32(m_B3Settings[4].B3SettingValue).ToString();
+
+            return m_serverSetting;
+        }
+
+
+        private void SavedSettingServerNewValue(ServerSetting New, ServerSetting _default)
+        {
+            B3ServerSetting[0].B3SettingValue = New.MinPlayer;
+            B3ServerSetting[0].B3SettingdefaultValue = _default.MinPlayer;
+
+            B3ServerSetting[1].B3SettingValue = New.GameStartDelay;
+            B3ServerSetting[1].B3SettingdefaultValue = _default.GameStartDelay;
+
+            B3ServerSetting[2].B3SettingValue = New.Consolation;
+            B3ServerSetting[2].B3SettingdefaultValue = _default.Consolation;
+
+            B3ServerSetting[3].B3SettingValue = New.GameRecallPassw;
+            B3ServerSetting[3].B3SettingdefaultValue = _default.GameRecallPassw;
+
+            B3ServerSetting[4].B3SettingValue = New.WaitCountDown;
+            B3ServerSetting[4].B3SettingdefaultValue = _default.WaitCountDown;
+        }
+
         public void SaveSetting()
         {
 
-            var eeeee = m_serverSettingVm;
+            //var NewSetting = ServerSetting_Vm.ServerSetting;
+
+            SavedSettingServerNewValue(ServerSetting_Vm.ServerSetting, ServerSetting_Vm.GetOriginalValue());
+            //List<SettingMember> lSettingMember = new List<SettingMember>();
+            //foreach (B3SettingGlobal x in B3ServerSetting)
+            //{
+            //    SettingMember temp = new SettingMember();
+            //    temp.m_gameID = x.B3GameID;
+            //    temp.m_settingID = x.B3SettingID;
+            //    temp.m_value = x.B3SettingValue;
+            //    temp._
+            //}
 
             //if (ValidateUserInput() == false)
             //{
@@ -161,12 +211,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //}
 
             //List<SettingMember> lSettingMember = new List<SettingMember>();
-            // lSettingMember    = ListOfSettingIDToBeUpdated();
+
+            
+
+            //lSettingMember    = ListOfSettingIDToBeUpdated();
 
             // if (lSettingMember.Count != 0)
             // {
             //     Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            //     SetB3SettingsMessage msg = new SetB3SettingsMessage(lSettingMember);
+            //SetB3SettingsMessage msg = new SetB3SettingsMessage(lSettingMember);
             //     msg.Send();
             //     Mouse.OverrideCursor = null;
 
