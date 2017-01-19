@@ -672,9 +672,6 @@
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\SettingViewModel.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\SettingViews\Ref.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

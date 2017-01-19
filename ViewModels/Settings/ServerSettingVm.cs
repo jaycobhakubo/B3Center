@@ -18,7 +18,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        private string m_gameRecallPassword;
        private string m_waitCountDown;
        
-       //INIT
+       //INITIALIZE this
        public ServerSettingVm(ServerSetting serversetting)
         {
              ServerSetting = serversetting;
@@ -35,7 +35,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            m_waitCountDown = serversetting.WaitCountDown;
        }
 
-       //GET SAVED ORIGINAL SETTING
+       //GET SAVED ORIGINAL SETTING FOR CANCEL COMMAND
        public ServerSetting GetOriginalValue()
        {
            var x = new ServerSetting();
@@ -47,7 +47,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            return x;
        }
 
-       //NEW SETTING
+       //NEW SETTING yah just keep raising.
         private ServerSetting m_serverSetting;
         public ServerSetting ServerSetting
         {
