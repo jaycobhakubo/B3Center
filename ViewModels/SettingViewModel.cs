@@ -20,6 +20,7 @@ using GameTech.Elite.Client.Modules.B3Center.UI.SettingViews;
 using System.Windows.Controls;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
+using GameTech.Elite.Client.Modules.B3Center.Messages;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -39,11 +40,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //private  OperatorView m_operatorView;
 
 
-        private SettingViewModel()
+        private  ServerSetting m_serverSetting;
+        public ServerSetting ServerSettingNew
         {
-            
+            get;
+            set;
         }
 
+        private SettingViewModel()
+        {
+          //  m_serverSetting = serverSetting;
+        }
+
+
+        private ServerSetting TranslateThisSettingToServerSettingModel(List<B3SettingGlobal> m_B3Settings)
+        {
+            m_serverSetting = new ServerSetting();
+            m_serverSetting.MinPlayer = Convert.ToInt32(m_B3Settings[0].B3SettingValue).ToString();
+            m_serverSetting.GameStartDelay= Convert.ToInt32(m_B3Settings[1].B3SettingValue).ToString();
+            m_serverSetting.Consolation = Convert.ToDecimal(m_B3Settings[2].B3SettingValue).ToString();
+            m_serverSetting.GameRecallPassw = m_B3Settings[3].B3SettingValue.ToString();
+            m_serverSetting.WaitCountDown= Convert.ToInt32(m_B3Settings[4].B3SettingValue).ToString();
+        
+            return m_serverSetting;
+        }
 
         public static SettingViewModel Instance
         {
@@ -68,6 +88,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 throw new ArgumentNullException();
 
             m_controller = controller;
+
+    
+
             B3Setting b3GameSetting = new B3Setting();
             b3GameSetting.B3GameSetting_ = Settings.B3GameSetting_;//Game enabled 
             b3GameSetting.B3SettingGlobal_ = Settings.B3SettingGlobal_;//All settings
@@ -78,7 +101,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
             m_sessionSettingView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
             //m_operatorView = new OperatorView();
-            m_serverGameSettingView = new ServerGameSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+
+            
+            
+            ServerSettingNew = TranslateThisSettingToServerSettingModel(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList());
+            m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(ServerSettingNew));
+
+
+
           //  m_serverGameSettingView = new ServerGameSettingView(GetServerSetting( b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5).ToList()));
             if (IsClassIIB3GameEnable == true)
             {
@@ -93,40 +123,61 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SetCommand();
         }
 
-        private ServerM GetServerSetting(List<B3SettingGlobal> B3Settings)
-        {
-            ServerM tempR = new ServerM();
-            foreach(B3SettingGlobal s in B3Settings)
+        private ServerSettingVm m_serverSettingVm;
+        public ServerSettingVm ServerSetting_Vm 
+        { 
+            get{return m_serverSettingVm;}
+            set
             {
-               switch (s.B3SettingID)
-                {
-                    case 34:
-                        {
-
-                            break;
-                        }
-                }
+                m_serverSettingVm = value;
+                RaisePropertyChanged("ServerSetting_Vm");
             }
-
-
-            return tempR;
+        
         }
 
+     
         private void SetCommand()
         {
             SaveSettingcmd = new RelayCommand(parameter => SaveSetting());
+            CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
         }
 
-
         public ICommand SaveSettingcmd { get; set; }
+        public ICommand CancelSettingcmd { get; set; }
 
-
-
+        public void CancelSetting()
+        {
+            //m_serverSettingVm.ServerSetting;
+        }
 
         public void SaveSetting()
         {
-            
 
+            var eeeee = m_serverSettingVm;
+
+            //if (ValidateUserInput() == false)
+            //{
+            //    return;
+            //}
+
+            //List<SettingMember> lSettingMember = new List<SettingMember>();
+            // lSettingMember    = ListOfSettingIDToBeUpdated();
+
+            // if (lSettingMember.Count != 0)
+            // {
+            //     Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            //     SetB3SettingsMessage msg = new SetB3SettingsMessage(lSettingMember);
+            //     msg.Send();
+            //     Mouse.OverrideCursor = null;
+
+
+            //     if (msg.ReturnCode != ServerReturnCode.Success)
+            //         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+
+            //     RepopulateNewSaveData(lSettingMember);
+            //     //lblSavedNotification.Visibility = Visibility.Visible;
+             
+            //  }
         }
 
 

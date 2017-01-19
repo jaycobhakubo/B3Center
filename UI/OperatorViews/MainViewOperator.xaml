@@ -61,6 +61,7 @@
 
                             </Style>
                         </Border.Resources>
+               
                         <local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
                 
                     </Border>

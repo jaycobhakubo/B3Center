@@ -10,6 +10,7 @@
              >
     <UserControl.Resources>
        
+        
     
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
@@ -42,7 +43,7 @@
 
 
 
-                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0"  >
                         <Border.Resources>
                             <Style
                              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
@@ -82,7 +83,7 @@
                                 HorizontalAlignment="Right" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                             
+                             Command="{Binding SaveSettingcmd}"
                                 Tag="1"/>
                                     <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="1"
