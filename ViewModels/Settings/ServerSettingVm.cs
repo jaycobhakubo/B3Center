@@ -11,7 +11,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
    public class ServerSettingVm : ViewModelBase
     {
 
- 
+
        private string m_minPlayer;
        private string m_gameStart;
        private string m_consolationPrize;
@@ -21,35 +21,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        //INITIALIZE this
        public ServerSettingVm(ServerSetting serversetting)
         {
-             ServerSetting = serversetting;
-             SaveDefaultSetting(serversetting);
+             ServerSettingx = serversetting;
+             //SaveDefaultSetting(serversetting);
         }
 
        //SAVED ORIGINAL SETTING
-       private void SaveDefaultSetting(ServerSetting serversetting)
-       {
-           m_minPlayer = serversetting.MinPlayer;
-           m_gameStart = serversetting.GameStartDelay;
-           m_consolationPrize = serversetting.Consolation;
-           m_gameRecallPassword = serversetting.GameRecallPassw;
-           m_waitCountDown = serversetting.WaitCountDown;
-       }
+       //private void SaveDefaultSetting(ServerSetting serversetting)
+       //{
+       //    m_minPlayer = serversetting.MinPlayer;
+       //    m_gameStart = serversetting.GameStartDelay;
+       //    m_consolationPrize = serversetting.Consolation;
+       //    m_gameRecallPassword = serversetting.GameRecallPassw;
+       //    m_waitCountDown = serversetting.WaitCountDown;
+       //}
 
        //GET SAVED ORIGINAL SETTING FOR CANCEL COMMAND
-       public ServerSetting GetOriginalValue()
-       {
-           var x = new ServerSetting();
-           x.MinPlayer = m_minPlayer;
-           x.GameStartDelay = m_gameStart;
-           x.Consolation = m_consolationPrize;
-           x.GameRecallPassw = m_gameRecallPassword;
-           x.WaitCountDown = m_waitCountDown;
-           return x;
-       }
+       //public ServerSetting GetOriginalValue()
+       //{
+       //    var x = new ServerSetting();
+       //    x.MinPlayer = m_minPlayer;
+       //    x.GameStartDelay = m_gameStart;
+       //    x.Consolation = m_consolationPrize;
+       //    x.GameRecallPassw = m_gameRecallPassword;
+       //    x.WaitCountDown = m_waitCountDown;
+       //    return x;
+       //}
 
        //NEW SETTING yah just keep raising.
         private ServerSetting m_serverSetting;
-        public ServerSetting ServerSetting
+        public ServerSetting ServerSettingx
         {
             get
             {
@@ -58,7 +58,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set
             {
                 m_serverSetting = value;
-                RaisePropertyChanged("ServerSetting");
+                RaisePropertyChanged("ServerSettingx");
             }
         }     
     }

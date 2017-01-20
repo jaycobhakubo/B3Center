@@ -92,6 +92,7 @@
                                 HorizontalAlignment="Left"
                                 Name="btnCancel" 
                                 VerticalAlignment="Top"
+                                            Command="{Binding CancelSettingcmd}"
                             />
                                     <!--Click="btnCancel_Click"-->
 
