@@ -30,7 +30,7 @@
                 <Label x:Name="lblCallSpeedMin_Copy"  Content="Min Player" />
                 <TextBox Text="{Binding ServerSettingx.MinPlayer}"   Tag="34"  MaxLength="9" />
                 <Label x:Name="lblCallSpeedMin_Copy1" Content="Game Start Delay(sec)"  />
-                <TextBox Text="{Binding ServerSettingx.GameStartDelay}"  Name="txtbxGameStartDelay"   Tag="35" MaxLength="9"   />
+                <TextBox Text="{Binding ServerSettingx.GameStartDelay}"     Tag="35" MaxLength="9"   />
                 <Label x:Name="lblCallSpeedMin_Copy2" Content="Consolation Prize"     />
                 <TextBox Text="{Binding ServerSettingx.Consolation}" Name="txtbxConsolationPrize"  Tag="36"  MaxLength="9"  />
                 <Label x:Name="lblCallSpeedMin_Copy3" Content="Game Recall Password" />

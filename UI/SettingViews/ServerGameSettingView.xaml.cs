@@ -56,6 +56,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         #endregion
 
         TextBox txtbxMinPlayers = new TextBox();
+        TextBox txtbxGameStartDelay = new TextBox();
 
         #region CONSTRUCTOR
 

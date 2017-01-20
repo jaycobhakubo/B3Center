@@ -71,8 +71,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             m_controller = controller;
 
-            m_B3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5));
-            //B3ServerSetting = new ObservableCollection<B3SettingGlobal>(b3ServerSetting);
+            m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5));
+            //m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(b3ServerSetting);
             //B3ServerSettingDefault = b3ServerSetting.ToList();
 
 
@@ -89,8 +89,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
 
-           TranslateThisSettingToServerSettingModel();
-            m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(ServerSettingM));
+           m_serverSetting =  TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
+            m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(m_serverSetting));
 
 
 
@@ -110,21 +110,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
 
-        private ObservableCollection<B3SettingGlobal> m_B3ServerSetting;
-        public ObservableCollection<B3SettingGlobal> B3ServerSetting
-        {
-            get { return m_B3ServerSetting; }
-            set { m_B3ServerSetting = value; }
-        }
+        private ObservableCollection<B3SettingGlobal> m_b3ServerSetting;
+        //public ObservableCollection<B3SettingGlobal> m_b3ServerSetting
+        //{
+        //    get { return m_b3ServerSetting; }
+        //    set { m_b3ServerSetting = value; }
+        //}
 
 
         private ServerSetting m_serverSetting;
-        public ServerSetting ServerSettingM
-        {
-
-            get { return m_serverSetting; }
-            set { m_serverSetting = value; }
-        }
+       
 
         public ServerSettingVm ServerSetting_Vm
         {
@@ -157,9 +152,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void CancelSetting()
         {
-            //m_B3ServerSetting = new ObservableCollection<B3SettingGlobal>(B3ServerSetting.Reverse());
-            //TranslateThisSettingToServerSettingModel();
-            //ServerSetting_Vm.ServerSettingx = ServerSettingM;
+            m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_b3ServerSetting.Reverse());
+            m_serverSetting = TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
+            ServerSetting_Vm.ServerSettingx = m_serverSetting;
         }
 
 
@@ -172,26 +167,53 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             WaiCountDown = 38
         }
 
-        private void TranslateThisSettingToServerSettingModel()
+        private ServerSetting TranslateThisSettingToServerSettingModel(ObservableCollection<B3SettingGlobal> m_B3ServerSetting)
         {
-            m_serverSetting = new ServerSetting();
-            m_serverSetting.MinPlayer = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.MinPlayer).B3SettingValue.ToString(); //(m_B3ServerSetting[0].B3SettingValue).ToString();
-            m_serverSetting.GameStartDelay = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.GameStartDelay).B3SettingValue.ToString();
-            m_serverSetting.Consolation = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.ConsolotionPrize).B3SettingValue.ToString();
-            m_serverSetting.GameRecallPassw = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.GameRecallPass).B3SettingValue.ToString();
-            m_serverSetting.WaitCountDown = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.WaiCountDown).B3SettingValue.ToString();
+
+         var _m_serverSetting = new ServerSetting();
+            _m_serverSetting.MinPlayer = (m_B3ServerSetting[0].B3SettingValue).ToString();
+            _m_serverSetting.GameStartDelay = (m_B3ServerSetting[1].B3SettingValue).ToString();
+            _m_serverSetting.Consolation =(m_B3ServerSetting[2].B3SettingValue).ToString();
+            _m_serverSetting.GameRecallPassw = m_B3ServerSetting[3].B3SettingValue.ToString();
+            _m_serverSetting.WaitCountDown = (m_B3ServerSetting[4].B3SettingValue).ToString();
+            //    m_serverSetting.MinPlayer = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.MinPlayer).B3SettingValue.ToString(); //(m_B3ServerSetting[0].B3SettingValue).ToString();
+            //    m_serverSetting.GameStartDelay = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.GameStartDelay).B3SettingValue.ToString();
+            //    m_serverSetting.Consolation = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.ConsolotionPrize).B3SettingValue.ToString();
+            //    m_serverSetting.GameRecallPassw = m_B3ServerSettigng.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.GameRecallPass).B3SettingValue.ToString();
+            //    m_serverSetting.WaitCountDown = m_B3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == (int)B3SettingId.WaiCountDown).B3SettingValue.ToString();
+
+            return _m_serverSetting;
         }
 
 
-    
+        private void SetNewValue(ServerSetting New)
+        {
+            m_b3ServerSetting[0].B3SettingValue = New.MinPlayer;
+            //m_b3ServerSetting[0].B3SettingdefaultValue = _default.MinPlayer;
+
+            m_b3ServerSetting[1].B3SettingValue = New.GameStartDelay;
+            //m_b3ServerSetting[1].B3SettingdefaultValue = _default.GameStartDelay;
+
+            m_b3ServerSetting[2].B3SettingValue = New.Consolation;
+            //m_b3ServerSetting[2].B3SettingdefaultValue = _default.Consolation;
+
+            m_b3ServerSetting[3].B3SettingValue = New.GameRecallPassw;
+            //m_b3ServerSetting[3].B3SettingdefaultValue = _default.GameRecallPassw;
+
+            m_b3ServerSetting[4].B3SettingValue = New.WaitCountDown;
+            //m_b3ServerSetting[4].B3SettingdefaultValue = _default.WaitCountDown;
+        }
 
         public void SaveSetting()
         {
             try
             {
-                SetB3SettingsMessage msg = new SetB3SettingsMessage(m_B3ServerSetting);
+                SetNewValue(ServerSetting_Vm.ServerSettingx);
+
+                SetB3SettingsMessage msg = new SetB3SettingsMessage(m_b3ServerSetting);
                 try
                 {
+                   
                     msg.Send();    
                 }
                 catch

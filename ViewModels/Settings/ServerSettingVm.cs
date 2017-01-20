@@ -48,6 +48,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        //}
 
        //NEW SETTING yah just keep raising.
+
+    
+     //public void RaiseStandAlone()
+     //   {
+     //       RaisePropertyChanged("ServerSettingx");
+     //   }
+
+
         private ServerSetting m_serverSetting;
         public ServerSetting ServerSettingx
         {
