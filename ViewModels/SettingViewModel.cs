@@ -77,15 +77,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             B3ServerSetting = new ObservableCollection<B3SettingGlobal>(b3ServerSetting);
 
 
-            B3Setting b3GameSetting = new B3Setting();
-            b3GameSetting.B3GameSetting_ = Settings.B3GameSetting_;//Game enabled 
-            b3GameSetting.B3SettingGlobal_ = Settings.B3SettingGlobal_;//All settings
-            b3GameSetting.ListB3mathGamePlay_ = Settings.B3GameMathPlay_;
+            //B3Setting b3GameSetting = new B3Setting();
+            //b3GameSetting.B3GameSetting_ = Settings.B3GameSetting_;//Game enabled 
+            //b3GameSetting.B3SettingGlobal_ = Settings.B3SettingGlobal_;//All settings
+            //b3GameSetting.ListB3mathGamePlay_ = Settings.B3GameMathPlay_;
             m_gameSettingView = new GameSettingView();// m_gameSettingView = new GameSettingView(b3GameSetting);
-            m_systemSettingView = new SystemSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 7).ToList());
-            m_playerSettingView = new PlayerSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 3).ToList());
-            m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
-            m_sessionSettingView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
+            //m_systemSettingView = new SystemSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 7).ToList());
+            //m_playerSettingView = new PlayerSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 3).ToList());
+            //m_salesSettingView = new SalesSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 4).ToList());
+            //m_sessionSettingView = new SessionSettingView(b3GameSetting.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 6).ToList());
             //m_operatorView = new OperatorView();
 
 
@@ -140,8 +140,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //WAIT TILL THE COMMAND IS COMPLETED
         private void RunSavedCommand()
         {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             Task save = Task.Factory.StartNew(() => SaveSetting());
-            save.Wait();   
+            save.Wait();
+            Mouse.OverrideCursor = null;
         }
 
 
@@ -201,27 +203,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SavedSettingServerNewValue(ServerSetting_Vm.ServerSetting, ServerSetting_Vm.GetOriginalValue());
 
-                //if (ValidateUserInput() == false)
-                //{
-                //    return;
-                //}
-
-                //List<SettingMember> lSettingMember = new List<SettingMember>();
-
-
-
-                //lSettingMember    = ListOfSettingIDToBeUpdated();
-
-                // if (lSettingMember.Count != 0)
-                // {
-                //     Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+  
                 var NewSetting = B3ServerSetting;
                 SetB3SettingsMessage msg = new SetB3SettingsMessage(NewSetting);
                 try
                 {
 
                     msg.Send();
-                    //     Mouse.OverrideCursor = null;
+                    //     
                 }
                 catch
                 {

@@ -9,6 +9,7 @@ using System.Globalization;
 using GameTech.Elite.Base;
 using GameTech.Elite.UI;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
@@ -142,7 +143,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         public bool IsClassIIB3Enable { get; set; }
         public string PrinterName { get; private set; }
         public List<B3GameSetting> B3GameSetting_ = new List<B3GameSetting>();
-        public List<B3SettingGlobal> B3SettingGlobal_ = new List<B3SettingGlobal>();
+        public ObservableCollection<B3SettingGlobal> B3SettingGlobal_; //= new List<B3SettingGlobal>();
         public List<B3IconColor> B3IconColor_ = new List<B3IconColor>();
         public List<B3MathGamePay> B3GameMathPlay_ = new List<B3MathGamePay>();
 
