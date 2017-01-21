@@ -215,9 +215,6 @@
     <Compile Include="UI\ReportViews\SessionTransactionReportView.xaml.cs">
       <DependentUpon>SessionTransactionReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\ReportViews\VoidReportView.xaml.cs">
       <DependentUpon>VoidReportView.xaml</DependentUpon>
     </Compile>
@@ -424,10 +421,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ReportViews\SessionTransactionReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -671,6 +664,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\SettingViewModel.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Trash%28SaveForReference%29\MainViewSetting.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Trash%28SaveForReference%29\Report_Detail.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Trash%28SaveForReference%29\DataPickerUserView.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

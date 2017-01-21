@@ -6,39 +6,30 @@
              xmlns:vm ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
              mc:Ignorable="d" 
              >
-        <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-
- 
-    </UserControl.Resources>
-  
     <Border>
-        <Grid Name="gridServerMessage" GotFocus="gridServerMessage_GotFocus" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
+        <Grid  Name="gridServerMessage"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-
             <StackPanel Name="stkpnlServerGame"  Grid.Column="1" Grid.Row="0">
-                <Label x:Name="lblCallSpeedMin_Copy"  Content="Min Player" />
+                <Label  Content="Min Player" />
                 <TextBox Text="{Binding ServerSettingx.MinPlayer}"   Tag="34"  MaxLength="9" />
-                <Label x:Name="lblCallSpeedMin_Copy1" Content="Game Start Delay(sec)"  />
+                <Label  Content="Game Start Delay(sec)"  />
                 <TextBox Text="{Binding ServerSettingx.GameStartDelay}"     Tag="35" MaxLength="9"   />
-                <Label x:Name="lblCallSpeedMin_Copy2" Content="Consolation Prize"     />
-                <TextBox Text="{Binding ServerSettingx.Consolation}" Name="txtbxConsolationPrize"  Tag="36"  MaxLength="9"  />
-                <Label x:Name="lblCallSpeedMin_Copy3" Content="Game Recall Password" />
-                <TextBox Text="{Binding ServerSettingx.GameRecallPassw}" Name="txtbxGameRecallPassword"   Tag="37"  MaxLength="25"   />
-                <Label x:Name="lblCallSpeedMin_Copy4"  Content="Wait Count Down(sec)" />
-                <TextBox Text="{Binding ServerSettingx.WaitCountDown}" Name="txtbxWaitCountDown"   Tag="38"   MaxLength="9"  />
+                <Label  Content="Consolation Prize"     />
+                <TextBox Text="{Binding ServerSettingx.Consolation}"   Tag="36"  MaxLength="9"  />
+                <Label Content="Game Recall Password" />
+                <TextBox Text="{Binding ServerSettingx.GameRecallPassw}"  Tag="37"  MaxLength="25"/>
+                <Label   Content="Wait Count Down(sec)" />
+                <TextBox Text="{Binding ServerSettingx.WaitCountDown}"    Tag="38"   MaxLength="9"  />
             </StackPanel>
-
         </Grid>
     </Border>
 </UserControl>
