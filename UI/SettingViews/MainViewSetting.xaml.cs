@@ -178,7 +178,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         }
                 case "SessionSettingToggleButton":
                         {
-                            m_sessionView.ReloadDataIntoControls();
+                            //m_sessionView.ReloadDataIntoControls();
                             view = m_sessionView;
                             break;
                         }

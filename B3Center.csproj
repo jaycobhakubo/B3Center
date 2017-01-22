@@ -342,6 +342,7 @@
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\Settings\ServerSettingVm.cs" />
+    <Compile Include="ViewModels\Settings\SessionSettingVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
   </ItemGroup>
@@ -677,6 +678,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Trash%28SaveForReference%29\DataPickerUserView.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Trash%28SaveForReference%29\SessionSetting.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
