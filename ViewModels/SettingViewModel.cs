@@ -95,7 +95,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private void SetDefaultValue()
         {
             //m_isFocus = false;
-            m_IsEditSave = "Edit"; 
+            //m_IsEditSave = "Edit"; 
         }
 
  
@@ -108,16 +108,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region EVENT(selectionchanged)
 
 
-        private string m_IsEditSave;
-        public string IsEditOrSave
-        {
-            get { return m_IsEditSave; }
-            set 
-            {
-                m_IsEditSave = value;
-                RaisePropertyChanged("IsEditOrSave");
-            }
-        }
+        //private string m_IsEditSave;
+        //public string IsEditOrSave
+        //{
+        //    get { return m_IsEditSave; }
+        //    set 
+        //    {
+        //        m_IsEditSave = value;
+        //        RaisePropertyChanged("IsEditOrSave");
+        //    }
+        //}
 
         public bool IsSelectedSetting
         {
@@ -218,9 +218,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void CancelSetting()
         {
-            //m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_b3ServerSetting.Reverse());
-            //m_serverSetting = TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
-            //ServerSetting_Vm.ServerSettingx = m_serverSetting;
+            m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_b3ServerSetting.Reverse());
+            m_serverSetting = TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
+            ServerSetting_Vm.ServerSettingx = m_serverSetting;
         }
 
 

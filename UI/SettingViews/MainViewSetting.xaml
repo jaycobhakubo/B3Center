@@ -80,13 +80,12 @@
                                     
                                 <Button  
                                     Grid.Column="0"
-                                    Margin="15,15" Height="40" Width="140"                         
+                                    Margin="15,15" Height="40" Width="140"     
+                                    Content="Save"
                                     HorizontalAlignment="Right" 
                                     x:Name="btnSave"
                                     VerticalAlignment="Top"
-                                    Command="{Binding SaveSettingcmd}"
-                                    Content="Save"
-                                    Focusable="False"
+                                    Command="{Binding SaveSettingcmd}"                                 
                                     Tag="1">                    
                                 </Button>
                                     <!--Content="{Binding IsEditOrSave}"-->
@@ -100,7 +99,7 @@
                                     Name="btnCancel" 
                                     VerticalAlignment="Top"
                                     Command="{Binding CancelSettingcmd}"  
-                                        Focusable="False"
+                                    Focusable="False"
                                  />
                                     
 
