@@ -15,5 +15,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public bool Disclaimer { get; set; }
         public List<string> MainVolList { get; set; }
         public string MainVolSelected { get; set; }
+
+
     }
 }
