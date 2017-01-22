@@ -20,15 +20,15 @@
 
             <StackPanel  Grid.Column="1" Grid.Row="0">
                 <Label  Content="Min Player"/>
-                <TextBox Text="{Binding ServerSettingx.MinPlayer}"  MaxLength="9" />
+                <TextBox Text="{Binding ServerSetting_.MinPlayer}"  MaxLength="9" />
                 <Label  Content="Game Start Delay(sec)"/>
-                <TextBox Text="{Binding ServerSettingx.GameStartDelay}"     MaxLength="9"   />
+                <TextBox Text="{Binding ServerSetting_.GameStartDelay}"     MaxLength="9"   />
                 <Label  Content="Consolation Prize"/>
-                <TextBox Text="{Binding ServerSettingx.Consolation}"    MaxLength="9"  />
+                <TextBox Text="{Binding ServerSetting_.Consolation}"    MaxLength="9"  />
                 <Label Content="Game Recall Password"/>
-                <TextBox Text="{Binding ServerSettingx.GameRecallPassw}"   MaxLength="25"/>
+                <TextBox Text="{Binding ServerSetting_.GameRecallPassw}"   MaxLength="25"/>
                 <Label   Content="Wait Count Down(sec)"/>
-                <TextBox Text="{Binding ServerSettingx.WaitCountDown}"  MaxLength="25"/>
+                <TextBox Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25"/>
             </StackPanel>
         </Grid>
     </Border>

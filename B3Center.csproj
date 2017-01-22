@@ -168,9 +168,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
-    <Compile Include="Trash%28SaveForReference%29\GameView.xaml.cs">
-      <DependentUpon>GameView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\ReportViews\AccountHistoryReportView.xaml.cs">
       <DependentUpon>AccountHistoryReportView.xaml</DependentUpon>
     </Compile>
@@ -354,10 +351,6 @@
     <Page Include="Resources\OriginalStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Trash%28SaveForReference%29\GameView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\MainWindow.xaml">
       <SubType>Designer</SubType>
@@ -615,72 +608,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\MainWindow.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\MainWindow.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\MainViewModel.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\ReportsView.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\ReportsView.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\ReportsViewModel.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\AccountHistoryReportView.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\AccountHistoryReportView.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\GameSettingView.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\GameSettingView.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\ServerSetting.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\OperatorView.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\OperatorView.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\CharityView.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\CharityView.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\MainViewSession.xaml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\MainViewSession.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\SettingViewModel.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\MainViewSetting.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\Report_Detail.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\DataPickerUserView.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trash%28SaveForReference%29\SessionSetting.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

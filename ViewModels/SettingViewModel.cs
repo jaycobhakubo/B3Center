@@ -72,12 +72,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 throw new ArgumentNullException();
 
             m_controller = controller;
-
-
-
-
             m_gameSettingView = new GameSettingView();
-
 
             if (IsClassIIB3GameEnable == true)
             {
@@ -185,7 +180,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case "Server Game":
                     {
-                        m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5));
+                        m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == 5));                  
                         m_serverSetting = TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
                         m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(m_serverSetting));
                         view = m_serverGameSettingView;
@@ -201,6 +196,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //WAIT TILL THE COMMAND IS COMPLETED
         private void RunSavedCommand()
         {
+
             //if (IsEditOrSave == "Edit")
             //{
             //    IsEditOrSave = "Save";
@@ -266,12 +262,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             try
             {
-                SetNewValue(ServerSetting_Vm.ServerSetting_);
-                //var textr = ServerSetting_Vm.m_testx;
+                SetNewValue(ServerSetting_Vm.ServerSetting_);        
                 SetB3SettingsMessage msg = new SetB3SettingsMessage(m_b3ServerSetting);
                 try
-                {
-                   
+                {                   
                     msg.Send();    
                 }
                 catch
@@ -339,8 +333,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         private UserControl m_selectedSettingView = new UserControl();
-
-
         public UserControl SelectedSettingView
         {
             get
@@ -353,12 +345,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_selectedSettingView = value;
                 RaisePropertyChanged("SelectedSettingView");
             }
-        }
-
-        public void SelectionChanged(string SettingName)
-        {
-
-          
         }
 
         public B3CenterSettings Settings

@@ -10,8 +10,7 @@
              >
     <UserControl.Resources>
        
-        
-    
+          
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>
@@ -51,7 +50,7 @@
                                 <Setter Property="Margin" Value="0,15,0,2"/>
                             </Style>
                         </Border.Resources>
-                        <ContentPresenter  Name="SettingTransitionControl" Content="{Binding SelectedSettingView}" />
+                        <ContentPresenter Content="{Binding SelectedSettingView}" />
                         <!--<local:GameSettingView ></local:GameSettingView>-->
                     </Border>
 
