@@ -12,49 +12,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
 
 
-       private string m_minPlayer;
-       private string m_gameStart;
-       private string m_consolationPrize;
-       private string m_gameRecallPassword;
-       private string m_waitCountDown;
+       //private string m_minPlayer;
+       //private string m_gameStart;
+       //private string m_consolationPrize;
+       //private string m_gameRecallPassword;
+       //private string m_waitCountDown;
        
        //INITIALIZE this
        public ServerSettingVm(ServerSetting serversetting)
         {
              ServerSettingx = serversetting;
+            //Testx = ServerSettingx.WaitCountDown;
              //SaveDefaultSetting(serversetting);
         }
 
-       //SAVED ORIGINAL SETTING
-       //private void SaveDefaultSetting(ServerSetting serversetting)
-       //{
-       //    m_minPlayer = serversetting.MinPlayer;
-       //    m_gameStart = serversetting.GameStartDelay;
-       //    m_consolationPrize = serversetting.Consolation;
-       //    m_gameRecallPassword = serversetting.GameRecallPassw;
-       //    m_waitCountDown = serversetting.WaitCountDown;
-       //}
-
-       //GET SAVED ORIGINAL SETTING FOR CANCEL COMMAND
-       //public ServerSetting GetOriginalValue()
-       //{
-       //    var x = new ServerSetting();
-       //    x.MinPlayer = m_minPlayer;
-       //    x.GameStartDelay = m_gameStart;
-       //    x.Consolation = m_consolationPrize;
-       //    x.GameRecallPassw = m_gameRecallPassword;
-       //    x.WaitCountDown = m_waitCountDown;
-       //    return x;
-       //}
-
-       //NEW SETTING yah just keep raising.
-
-    
-     //public void RaiseStandAlone()
-     //   {
-     //       RaisePropertyChanged("ServerSettingx");
-     //   }
-
+        //public string m_testx;
+        //public string Testx
+        //{
+        //    get
+        //    {
+        //        return m_serverSetting.WaitCountDown;
+        //    }
+        //    set
+        //    {
+        //        m_serverSetting.WaitCountDown = value;
+        //        RaisePropertyChanged("Testx");
+        //    }
+        //}
 
         private ServerSetting m_serverSetting;
         public ServerSetting ServerSettingx

@@ -85,10 +85,11 @@
                                     x:Name="btnSave"
                                     VerticalAlignment="Top"
                                     Command="{Binding SaveSettingcmd}"
-                                    Content="{Binding IsEditOrSave}"
+                                    Content="Save"
                                     Focusable="False"
                                     Tag="1">                    
                                 </Button>
+                                    <!--Content="{Binding IsEditOrSave}"-->
                                     <!--Focusable="{Binding IsFocus,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
 
                                     <Button 

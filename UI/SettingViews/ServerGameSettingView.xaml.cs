@@ -31,5 +31,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             InitializeComponent();
             DataContext = ServerSettingViewModel;
         }
+
+        //TEST
+        //private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    var x = (TextBox)sender;
+        //    var y = x.Text;
+        //}
     }
 }

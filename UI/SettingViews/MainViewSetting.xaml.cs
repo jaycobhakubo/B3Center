@@ -30,12 +30,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private Button m_btnBackOperatorSettingFromGameSetting;
         private ToggleButton m_toggleButton;
 
-        //public Button btnSave
-        //{
-        //    get { return m_btnSave; }
-        //    set { m_btnSave = value; }
-        //}
-
         public Button btnbtnBackOperatorSetting
         {
             get { return m_btnBackOperatorSetting; }
@@ -53,9 +47,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             get { return m_B3Setting; }
             set { m_B3Setting = value; }
         }
-
-
-
 
         public SettingView()
         {
@@ -116,7 +107,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             }
         }
 
-
         #region EVENTS
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -145,8 +135,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void MenuToggleButton_Changed(object sender, RoutedEventArgs e)
         {
-
-
             var toggleButton = sender as ToggleButton;
             m_toggleButton = toggleButton;
 
@@ -222,7 +210,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                     {
                         menuItem.IsChecked = false;
                     }
-
                 }
 
                 //SettingTransitionControl.Content = view;
@@ -240,7 +227,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         }
 
         #endregion
-
        
     }
 
@@ -253,7 +239,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             get { return m_b3GameSetting; }
             set { m_b3GameSetting = value; }
         }
-
 
         private List<B3SettingGlobal> m_b3SettingGlobal;
         public List<B3SettingGlobal> B3SettingGlobal_
@@ -268,8 +253,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             get { return m_listB3mathGamePlay; }
             set { m_listB3mathGamePlay = value; }
         }
-
-
     }
 
     public class ConvertToString
@@ -289,8 +272,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             {
                 outputvalue = result.ToString();
             }
-
-
             return outputvalue;
         }
     }

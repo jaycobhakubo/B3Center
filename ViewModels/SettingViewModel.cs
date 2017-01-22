@@ -41,13 +41,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private PlayerSettingView m_playerSettingView;// = new PlayerSettingView();
         private SessionSettingView m_sessionSettingView;// = new SessionSettingView();
 
-
         private ObservableCollection<B3SettingGlobal> m_b3ServerSetting;
         private ServerSetting m_serverSetting;
-
-
-       
-
 
         #region CONSTRUCTOR
         private SettingViewModel()
@@ -90,7 +85,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
            
             }
-            SetDefaultValue();
+            //SetDefaultValue();
             LoadSetting();
             SetCommand();
         }
@@ -137,7 +132,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ICommand CancelSettingcmd { get; set; }
         private void SetCommand()
         {
-
             SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
             SelectedItemChanged = new DelegateCommand<string>(obj =>
@@ -203,20 +197,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private void RunSavedCommand()
         {
 
-            if (IsEditOrSave == "Edit")
-            {
-                IsEditOrSave = "Save";
-                return;
-            }
-            else
-            {
+            //if (IsEditOrSave == "Edit")
+            //{
+            //    IsEditOrSave = "Save";
+            //    return;
+            //}
+            //else
+            //{
 
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                 Task save = Task.Factory.StartNew(() => SaveSetting());
                 save.Wait();
                 Mouse.OverrideCursor = null;
-                IsEditOrSave = "Edit";
-            }
+                //IsEditOrSave = "Edit";
+            //}
         }
 
 
@@ -224,9 +218,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void CancelSetting()
         {
-            m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_b3ServerSetting.Reverse());
-            m_serverSetting = TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
-            ServerSetting_Vm.ServerSettingx = m_serverSetting;
+            //m_b3ServerSetting = new ObservableCollection<B3SettingGlobal>(m_b3ServerSetting.Reverse());
+            //m_serverSetting = TranslateThisSettingToServerSettingModel(m_b3ServerSetting);
+            //ServerSetting_Vm.ServerSettingx = m_serverSetting;
         }
 
 
@@ -269,7 +263,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             try
             {
                 SetNewValue(ServerSetting_Vm.ServerSettingx);
-
+                //var textr = ServerSetting_Vm.m_testx;
                 SetB3SettingsMessage msg = new SetB3SettingsMessage(m_b3ServerSetting);
                 try
                 {

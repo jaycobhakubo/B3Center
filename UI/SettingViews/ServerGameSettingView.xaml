@@ -28,8 +28,11 @@
                 <Label Content="Game Recall Password" />
                 <TextBox Text="{Binding ServerSettingx.GameRecallPassw}"  Tag="37"  MaxLength="25"/>
                 <Label   Content="Wait Count Down(sec)" />
-                <TextBox Text="{Binding ServerSettingx.WaitCountDown}"    Tag="38"   MaxLength="9"  />
+                <TextBox Text="{Binding ServerSettingx.WaitCountDown}"  Tag="38"  MaxLength="25"/>
             </StackPanel>
         </Grid>
     </Border>
 </UserControl>
+
+
+<!--Tag="38"--> 
