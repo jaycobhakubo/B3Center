@@ -118,7 +118,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         }
                 case "SalesSettingToggleButton":
                         {
-                            m_salesSettingView.ReloadDataIntoControls();
+                            //m_salesSettingView.ReloadDataIntoControls();
                             view = m_salesSettingView;
                             break;
                         }

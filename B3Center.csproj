@@ -153,9 +153,9 @@
     <Compile Include="Model\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\Operator\OperatorModel.cs" />
-    <Compile Include="Model\Setting\Report\ReportParameterModel.cs" />
-    <Compile Include="Model\Setting\Report\Reports.cs" />
-    <Compile Include="Model\Setting\Report\ReportTemplateModel.cs" />
+    <Compile Include="Model\Report\ReportParameterModel.cs" />
+    <Compile Include="Model\Report\Reports.cs" />
+    <Compile Include="Model\Report\ReportTemplateModel.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
     <Compile Include="Model\Setting\PlayerSetting.cs" />
     <Compile Include="Model\Setting\ServerSetting.cs" />

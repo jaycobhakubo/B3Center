@@ -9,28 +9,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
     public class SalesSettingVm : ViewModelBase
     {
-        private SalesSetting m_serverSetting;
+        private SalesSettings m_salesSetting;
 
-        public SalesSettingVm(ServerSetting _serversetting)
+        public SalesSettingVm(SalesSettings m_salesSetting)
         {
-            ServerSetting_ = _serversetting;
+            SalesSetting_ = m_salesSetting;
         }
 
-        public ServerSetting ServerSetting_
+        public SalesSettings SalesSetting_
         {
             get
             {
-                return m_serverSetting;
+                return m_salesSetting;
             }
             set
             {
-                m_serverSetting = value;
-                RaisePropertyChanged("ServerSetting_");
+                m_salesSetting = value;
+                RaisePropertyChanged("SalesSetting_");
             }
         }
     }
 }
 
-    {
-    }
-}
