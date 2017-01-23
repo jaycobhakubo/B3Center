@@ -27,6 +27,8 @@
                 <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"/>               
                 <Label x:Name="lblCallSpeedMin" Content="Main Vol" />
                 <ComboBox 
+                    ItemsSource="{Binding VolumeList}"
+                    SelectedItem="{Binding SalesSetting_.VolumeSales}"
             	x:Name="cmbxMainVolume" 
             	Tag="33">
                 </ComboBox>

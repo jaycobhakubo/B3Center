@@ -13,7 +13,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         public SalesSettingVm(SalesSettings m_salesSetting)
         {
-            SalesSetting_ = m_salesSetting;
+            VolumeList = Volume();
+            SalesSetting_ = m_salesSetting;    
+         
+           
+        }
+
+
+        //public string SelectedVolume
+        //{
+        //    get { return m_salesSetting.VolumeSales; }
+        //    set 
+        //    {
+        //        m_salesSetting.VolumeSales = value;
+        //        RaisePropertyChanged("SelectedVolume");
+        //    }
+        //}
+
+
+        public List<string> VolumeList
+        {
+            get;
+            set;
         }
 
         public SalesSettings SalesSetting_
@@ -47,46 +68,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
       
-        private string GetVolumeEquivValue(int Volume)
-        {
-
-            string tempValue = "";
-            if (Volume <= 100 && Volume >= 91) { tempValue = "10"; }
-            else if (Volume < 91 && Volume >= 81) { tempValue = "9"; }
-            else if (Volume < 81 && Volume >= 71) { tempValue = "8"; }
-            else if (Volume < 71 && Volume >= 61) { tempValue = "7"; }
-            else if (Volume < 61 && Volume >= 51) { tempValue = "6"; }
-            else if (Volume < 51 && Volume >= 41) { tempValue = "5"; }
-            else if (Volume < 41 && Volume >= 31) { tempValue = "4"; }
-            else if (Volume < 31 && Volume >= 21) { tempValue = "3"; }
-            else if (Volume < 21 && Volume >= 11) { tempValue = "2"; }
-            else if (Volume < 11 && Volume >= 1) { tempValue = "1"; }
-            else if (Volume == 0) { tempValue = "0"; }
-            return tempValue;
-        }
+     
 
 
-        private string GetVolumeEquivToDB(int VolumeLevel)
-        {
-            string result = "";
-            switch (VolumeLevel)
-            {
-                case 0: { result = "0"; break; }
-                case 1: { result = "10"; break; }
-                case 2: { result = "20"; break; }
-                case 3: { result = "30"; break; }
-                case 4: { result = "40"; break; }
-                case 5: { result = "50"; break; }
-                case 6: { result = "60"; break; }
-                case 7: { result = "70"; break; }
-                case 8: { result = "80"; break; }
-                case 9: { result = "90"; break; }
-                case 10: { result = "100"; break; }
-
-
-            }
-            return result;
-        }
+        
     }
 }
 
