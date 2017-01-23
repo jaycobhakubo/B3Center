@@ -56,7 +56,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             WaiCountDown = 38,
             PayoutLimit = 39,
             JackpotLimit = 40,
-            EnforceMix = 41
+            EnforceMix = 41,
+            HandPayTrigger = 42,
+            MinimumPlayers = 43,
+            VIPPointMultiplier = 44,
+            MagCardSentinelStart = 45,
+            MagCardSentinelEnd = 46,
+            Currency = 47,
+            RNGBallCallTime = 48,
+            PlayerPINLength = 49,
+            EnableUK = 50,
+            DualAccount = 51,
+            MultiOperator = 52,
+            CommonRNGBallCall = 53,
+            NorthDakotaMode = 54,
+            AutoSessionEnd = 55,
+            SiteName = 56,
+            SystemMainVolume = 57,
         }
 
         private Dictionary<string, int> m_B3SettingCategory;//Matches the primary key of B3Settingcategory
@@ -78,6 +94,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SessionSetting m_sessionSetting;
         private SalesSettings m_salesSetting;
         private PlayerSettings m_playerSetting;
+        private SystemSetting m_systemSetting;
 
         private int m_selectedSettingEquivToId;
 
@@ -147,19 +164,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case 3:
                     {
                         m_playerSetting = new PlayerSettings();
-                        var tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerCalibrateTouch)).B3SettingValue.ToString()); m_playerSetting.PlayerCalibrateTouch = (tempBool == "F") ? false : true;
+                        var tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerCalibrateTouch)).B3SettingValue.ToString());
                         m_playerSetting.PlayerCalibrateTouch = (tempBool == "F") ? false : true;
-                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PresstoCollect)).B3SettingValue.ToString()); m_playerSetting.PresstoCollect = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PresstoCollect)).B3SettingValue.ToString());
                         m_playerSetting.PresstoCollect = (tempBool == "F") ? false : true;
-                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AnnounceCall)).B3SettingValue.ToString()); m_playerSetting.AnnounceCall = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AnnounceCall)).B3SettingValue.ToString());
                         m_playerSetting.AnnounceCall = (tempBool == "F") ? false : true;               
-                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerScreenCursor)).B3SettingValue.ToString()); m_playerSetting.PlayerScreenCursor = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerScreenCursor)).B3SettingValue.ToString());
                         m_playerSetting.PlayerScreenCursor = (tempBool == "F") ? false : true;                   
                         m_playerSetting.TimeToCollect = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.TimeToCollect)).B3SettingValue.ToString());                   
-                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Disclaimer)).B3SettingValue.ToString()); m_playerSetting.Disclaimer = (tempBool == "F") ? false : true;
-                        m_playerSetting.Disclaimer = (tempBool == "F") ? false : true;                    
-                        //tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.DisclaimerTextID)).B3SettingValue.ToString()); m_playerSetting.DisclaimerTextID = (tempBool == "F") ? false : true;
-                        //m_playerSetting.DisclaimerTextID = (tempBool == "F") ? false : true;                     
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Disclaimer)).B3SettingValue.ToString());
+                        m_playerSetting.Disclaimer = (tempBool == "F") ? false : true;                                                      
                         var volumeSales = Convert.ToInt32((m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerMainVolume)).B3SettingValue.ToString()));
                         m_playerSetting.PlayerMainVolume = GetVolumeEquivValue(volumeSales);
                         break;
@@ -205,6 +220,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_sessionSetting.JackpotLimit = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.JackpotLimit)).B3SettingValue.ToString());
                         var tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.EnforceMix)).B3SettingValue.ToString());
                         m_sessionSetting.EnforceMix = (tempBool == "F") ? false : true;
+                        break;
+                    }
+                case 7:
+                    {
+                        m_systemSetting = new SystemSetting();
+                        var tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.EnableUK)).B3SettingValue.ToString()); m_systemSetting.EnableUK = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.DualAccount)).B3SettingValue.ToString()); m_systemSetting.DualAccount = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MultiOperator)).B3SettingValue.ToString()); m_systemSetting.MultiOperator = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CommonRNGBallCall)).B3SettingValue.ToString()); m_systemSetting.CommonRNGBallCall = (tempBool == "F") ? false : true;
+                        tempBool = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.NorthDakotaMode)).B3SettingValue.ToString()); m_systemSetting.NorthDakotaMode = (tempBool == "F") ? false : true;
+                        m_systemSetting.HandPayTrigger = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.HandPayTrigger)).B3SettingValue.ToString());
+                        m_systemSetting.MinimumPlayers = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MinimumPlayers)).B3SettingValue.ToString());
+                        m_systemSetting.VIPPointMultiplier = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.VIPPointMultiplier)).B3SettingValue.ToString());
+                        m_systemSetting.MagCardSentinelStart = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MagCardSentinelStart)).B3SettingValue.ToString());
+                        m_systemSetting.MagCardSentinelEnd = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MagCardSentinelEnd)).B3SettingValue.ToString());
+                        m_systemSetting.Currency = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Currency)).B3SettingValue.ToString());
+                        m_systemSetting.RNGBallCallTime = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.RNGBallCallTime)).B3SettingValue.ToString());
+                        m_systemSetting.PlayerPINLength = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerPINLength)).B3SettingValue.ToString());
+                        m_systemSetting.AutoSessionEnd = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoSessionEnd)).B3SettingValue.ToString());
+                        m_systemSetting.SiteName = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SiteName)).B3SettingValue.ToString());
+                        m_systemSetting.SystemMainVolume = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SystemMainVolume)).B3SettingValue.ToString());
                         break;
                     }
 
@@ -263,6 +299,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.JackpotLimit)).B3SettingValue = _SessionSettingNewValue.JackpotLimit;
                         m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.EnforceMix)).B3SettingValue = ((_SessionSettingNewValue.EnforceMix == true) ? "T" : "F");
                         break;
+                    }
+                case 7:
+                    {
+                        SystemSetting _SystemSettingNewValue = SystemSetting_Vm.SystemSetting_;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.EnableUK)).B3SettingValue = ((_SystemSettingNewValue.EnableUK == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.DualAccount)).B3SettingValue = ((_SystemSettingNewValue.DualAccount == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MultiOperator)).B3SettingValue = ((_SystemSettingNewValue.MultiOperator == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CommonRNGBallCall)).B3SettingValue = ((_SystemSettingNewValue.CommonRNGBallCall == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.NorthDakotaMode)).B3SettingValue = ((_SystemSettingNewValue.NorthDakotaMode == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.HandPayTrigger)).B3SettingValue = _SystemSettingNewValue.HandPayTrigger;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MinimumPlayers)).B3SettingValue = _SystemSettingNewValue.MinimumPlayers;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.VIPPointMultiplier)).B3SettingValue = _SystemSettingNewValue.VIPPointMultiplier;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MagCardSentinelStart)).B3SettingValue = _SystemSettingNewValue.MagCardSentinelStart;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MagCardSentinelEnd)).B3SettingValue = _SystemSettingNewValue.MagCardSentinelEnd;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Currency)).B3SettingValue = _SystemSettingNewValue.Currency;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.RNGBallCallTime)).B3SettingValue = _SystemSettingNewValue.RNGBallCallTime;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerPINLength)).B3SettingValue = _SystemSettingNewValue.PlayerPINLength;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoSessionEnd)).B3SettingValue = _SystemSettingNewValue.AutoSessionEnd;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SiteName)).B3SettingValue = _SystemSettingNewValue.SiteName;
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SystemMainVolume)).B3SettingValue = GetVolumeEquivToDB(Convert.ToInt32(_SystemSettingNewValue.SystemMainVolume));
+                        break;
+
                     }
             }
         }
@@ -391,11 +449,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_gameSettingView;
                         break;
                     }
-                case 7:
-                    {
-                        view = m_systemSettingView;
-                        break;
-                    }
+            
                 case 3:
                     {
                         m_playerSettingView = new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting));
@@ -408,16 +462,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_salesSettingView;
                         break;
                     }
+
+                case 5:
+                    {
+                        m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(m_serverSetting));
+                        view = m_serverGameSettingView;
+                        break;
+                    }
                 case 6:
                     {
                         m_sessionSettingView = new SessionSettingView(SessionSetting_Vm = new SessionSettingVm(m_sessionSetting));
                         view = m_sessionSettingView;
                         break;
                     }
-                case 5:
+                case 7:
                     {
-                        m_serverGameSettingView = new ServerGameSettingView(ServerSetting_Vm = new ServerSettingVm(m_serverSetting));
-                        view = m_serverGameSettingView;
+                        m_systemSettingView = new SystemSettingView(SystemSetting_Vm = new SystemSettingVm(m_systemSetting));
+                        view = m_systemSettingView;
                         break;
                     }
             }
@@ -637,6 +698,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         public PlayerSettingVm PlayerSetting_Vm
+        {
+            get;
+            set;
+        }
+
+        public SystemSettingVm SystemSetting_Vm
         {
             get;
             set;

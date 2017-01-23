@@ -11,7 +11,7 @@
     </UserControl.Resources>
     <Grid>
         <Border    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" >
-        <Grid  Name="gridSystemSettings" GotFocus="Grid_GotFocus">
+        <Grid  Name="gridSystemSettings" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -25,29 +25,28 @@
 
             <StackPanel  Grid.Column="1" >
                 <Label Content="Site Name"  />
-                <TextBox Name="txtbxSiteName" Tag="56"  MaxLength="50" />
+                    <TextBox Name="txtbxSiteName" Tag="56"  MaxLength="50" Text="{Binding SystemSetting_.SiteName}"/>
 
                 <Label Content="Hand Pay Trigger"/>
-                <TextBox Name="txtbxHandPayoutTrigger" Tag="42" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="14" />
+                    <TextBox Name="txtbxHandPayoutTrigger" Tag="42" Text="{Binding SystemSetting_.HandPayTrigger}"	 MaxLength="14" />
 
                 <Label x:Name="lblMaxCards_Copy"  Content="VIP Point Multiplier" />
-                <TextBox x:Name="txtbxVipPointPlayer"  Tag="44" TabIndex="3" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="15" />
+                    <TextBox x:Name="txtbxVipPointPlayer"  Tag="44" TabIndex="3" Text="{Binding SystemSetting_.VIPPointMultiplier}" MaxLength="15" />
    
                 <Label x:Name="lblMaxCards_Copy1" Content="Mag Card Sentinel Start" />
-                <TextBox x:Name="txtbxMagCardStart" Grid.Column="1"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" TabIndex="4" Tag="45" MaxLength="1"  />
+                    <TextBox Text="{Binding SystemSetting_.MagCardSentinelStart}" x:Name="txtbxMagCardStart" Grid.Column="1"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom"  TabIndex="4" Tag="45" MaxLength="1"  />
        
                 <Label x:Name="lblMaxCards_Copy2" Content="Mag Card Sentinel End"  />
-                <TextBox x:Name="txtbxMagCardEnd"  Tag="46" MaxLength="1"  />
+                    <TextBox x:Name="txtbxMagCardEnd"  Tag="46" MaxLength="1" Text="{Binding SystemSetting_.MagCardSentinelEnd}" />
                 
                 <Label  Content="Player PIN Length"/>
-                <TextBox x:Name="txtbxPlayerpinLength" Tag="49" PreviewKeyDown="txtbx_PreviewKeyDown" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" MaxLength="8"  />
+                    <TextBox x:Name="txtbxPlayerpinLength" Tag="49" Text="{Binding SystemSetting_.PlayerPINLength}" MaxLength="8"  />
 
                 <Label  Content="RNG Ball Call Time (milliseconds)"/>
                 <TextBox 
                 x:Name="txtbxRNGBallCallTime" 
-                PreviewKeyDown="txtbx_PreviewKeyDown" 
-                PreviewTextInput="txtbxNumericOnly_PreviewTextInput" 
-                MaxLength="8" LostFocus="txtbxRNGBallCallTime_LostFocus"/>
+             Text="{Binding SystemSetting_.RNGBallCallTime}"	
+                MaxLength="8"/>
             </StackPanel >
             
             <StackPanel Grid.Column="3" >
@@ -56,33 +55,42 @@
             	x:Name="txtbxMinimumPlayers"             	
             	Tag="43" 
             	TabIndex="7" 
-            	PreviewKeyDown="txtbx_PreviewKeyDown" 
-            	PreviewTextInput="txtbxNumericOnly_PreviewTextInput" 
+            	Text="{Binding SystemSetting_.MinimumPlayers}"	
             	MaxLength="8"   />
 
                 <Label  Content="Main Vol"/>
-                <ComboBox x:Name="cmbxMainVol" Tag="57"/>
+                <ComboBox x:Name="cmbxMainVol" Tag="57"
+                          SelectedItem="{Binding SystemSetting_.SystemMainVolume}"
+                          ItemsSource="{Binding VolumeList}"
+                          />
                 
                 <Label x:Name="lblMaxCards_Copy4"  Content="Currency" />
-                <ComboBox x:Name="cmbxCurrency" Tag="47" />
+                <ComboBox x:Name="cmbxCurrency" Tag="47" 
+                          SelectedItem="{Binding SystemSetting_.Currency}"	
+                          ItemsSource="{Binding CurrencyList}"
+                          />
          
                 <Label x:Name="lblMaxCards_Copy3" Content="Auto Session End" />
-                <ComboBox 
+                <ComboBox
+                    SelectedItem="{Binding SystemSetting_.AutoSessionEnd}"	
+                    ItemsSource="{Binding AutoSessionEndList}"
             	x:Name="cmbxAutoSessionEnd" 
             	 Tag="55" />
                 
                 <DockPanel>
-                    <CheckBox DockPanel.Dock="Left" Name="chkbxNorthDakotaMode" Content="North Dakota Mode"   Tag="54" />
-                    <CheckBox  DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="Auto" Name="chkbxEnableUK" Content="Enable UK     "  Tag="50" />
-                </DockPanel>
+                        <CheckBox IsChecked="{Binding SystemSetting_.NorthDakotaMode}" DockPanel.Dock="Left" Name="chkbxNorthDakotaMode" Content="North Dakota Mode"   Tag="54" />
+                        <CheckBox  DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="Auto" Name="chkbxEnableUK" Content="Enable UK" Tag="50" IsChecked="{Binding SystemSetting_.EnableUK}"/>
+                    </DockPanel>
                 
                 <DockPanel>
-                    <CheckBox Name="chkbxMultiOperator" Content="Multi Operator" Tag="52"/>
-                    <CheckBox DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="Auto" Name="chkbxDualAccount" Content="Dual Account" Tag="51" />
-                </DockPanel>
+                        <CheckBox Name="chkbxMultiOperator" Content="Multi Operator" Tag="52" IsChecked="{Binding SystemSetting_.MultiOperator}"/>
+                        <CheckBox DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="Auto" Name="chkbxDualAccount" Content="Dual Account" Tag="51" 
+IsChecked="{Binding SystemSetting_.DualAccount}"/>
+                    </DockPanel>
 
-                <CheckBox  Name="chkbxCommonRNGBallCall" Content="Common RNG Ball Call" TabIndex="14" />
-            </StackPanel>
+                    <CheckBox  Name="chkbxCommonRNGBallCall" Content="Common RNG Ball Call" TabIndex="14"
+IsChecked="{Binding SystemSetting_.CommonRNGBallCall}"/>
+                </StackPanel>
 
         </Grid>
     </Border>

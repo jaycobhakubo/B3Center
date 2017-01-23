@@ -104,9 +104,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
                 case "SystemSettingToggleButton":
                         {
-                            m_systemSettingView.ReloadDataIntoControls();
-                            m_btnSave = m_systemSettingView.btnSave;
-                            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
                             view = m_systemSettingView; 
                             break;
                         }
