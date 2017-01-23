@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
@@ -26,23 +27,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     {
         #region MEMBER VARIABLEs
 
-        private List<B3SettingGlobal> m_B3Settings = new List<B3SettingGlobal>();
-        private decimal m_payoutLimit;
-        private decimal m_jackpotLimit;
-        private bool m_enforceMix;
-        private readonly SaveCancelCrtl m_saveCancelCtrl;
-        private List<SettingMember> m_lB3Settings;
-        private Button m_btnSave;
-        private Button m_btnCancel;
-        private bool m_isValidationOk;
+        //private List<B3SettingGlobal> m_B3Settings = new List<B3SettingGlobal>();
+        //private decimal m_payoutLimit;
+        //private decimal m_jackpotLimit;
+        //private bool m_enforceMix;
+        //private readonly SaveCancelCrtl m_saveCancelCtrl;
+        //private List<SettingMember> m_lB3Settings;
+        //private Button m_btnSave;
+        //private Button m_btnCancel;
+        //private bool m_isValidationOk;
 
         #endregion
 
         #region CONSTRUCTORs
 
-        public SessionSettingView(List<B3SettingGlobal> B3Settings)
+        public SessionSettingView(SessionSettingVm SessionSettingVm)
         {
             InitializeComponent();
+            DataContext = SessionSettingVm;
             //m_B3Settings = B3Settings;
             //PopulateDataIntoVar();
             //PopulateDataIntoControls();
