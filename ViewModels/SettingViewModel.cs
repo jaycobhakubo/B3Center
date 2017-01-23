@@ -28,74 +28,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class SettingViewModel : ViewModelBase
     {
-        #region ENUM
-        enum B3SettingId
-        {
-            PlayerCalibrateTouch = 16,
-            PresstoCollect = 17,
-            AnnounceCall = 18,
-            PlayerScreenCursor = 19,
-            TimeToCollect = 20,
-            Disclaimer = 21,
-            DisclaimerTextID = 22,
-            PlayerMainVolume = 23,
-            ScreenCursor = 24,
-            CalibrateTouch = 25,
-            AutoPrintSessionReport = 26,
-            PagePrinter = 27,
-            QuickSales = 28,
-            PrintLogo = 29,
-            AlowinSessionBall = 30,
-            LoggingEnable = 31,
-            LogRecycleDays = 32,
-            VolumeSales = 33,
-            MinPlayer = 34,
-            GameStartDelay = 35,
-            ConsolotionPrize = 36,
-            GameRecallPass = 37,
-            WaiCountDown = 38,
-            PayoutLimit = 39,
-            JackpotLimit = 40,
-            EnforceMix = 41,
-            HandPayTrigger = 42,
-            MinimumPlayers = 43,
-            VIPPointMultiplier = 44,
-            MagCardSentinelStart = 45,
-            MagCardSentinelEnd = 46,
-            Currency = 47,
-            RNGBallCallTime = 48,
-            PlayerPINLength = 49,
-            EnableUK = 50,
-            DualAccount = 51,
-            MultiOperator = 52,
-            CommonRNGBallCall = 53,
-            NorthDakotaMode = 54,
-            AutoSessionEnd = 55,
-            SiteName = 56,
-            SystemMainVolume = 57,
-        }
-
-        private Dictionary<string, int> m_B3SettingCategory;//Matches the primary key of B3Settingcategory
-
-
-        #endregion
+     
         #region VAR
-
+        //Mastermind I have everything you need.
         private B3Controller m_controller;
-        private GameSettingView m_gameSettingView;// = new GameSettingView();
-        private SystemSettingView m_systemSettingView;// = new SystemSettingView();
-        private ServerGameSettingView m_serverGameSettingView;// = new ServerGameSettingView();
-        private SalesSettingView m_salesSettingView;// = new SalesSettingView();
-        private PlayerSettingView m_playerSettingView;// = new PlayerSettingView();
-        private SessionSettingView m_sessionSettingView;// = new SessionSettingView();
+        //Views
+        private GameSettingView m_gameSettingView;
+        private SystemSettingView m_systemSettingView;
+        private ServerGameSettingView m_serverGameSettingView;
+        private SalesSettingView m_salesSettingView;
+        private PlayerSettingView m_playerSettingView;
+        private SessionSettingView m_sessionSettingView;
         private ObservableCollection<B3SettingGlobal> m_b3Setting { get; set; }
-
+        //Model
         private ServerSetting m_serverSetting;
         private SessionSetting m_sessionSetting;
         private SalesSettings m_salesSetting;
         private PlayerSettings m_playerSetting;
         private SystemSetting m_systemSetting;
-
+        //Other
         private int m_selectedSettingEquivToId;
 
         #endregion
@@ -144,21 +95,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
         #region METHOD
-        private void SetDefaultValue()
-        {
-            m_B3SettingCategory = new Dictionary<string, int>();
-            m_B3SettingCategory.Add("Games", 1);
-            m_B3SettingCategory.Add("Operator", 2);
-            m_B3SettingCategory.Add("Player", 3);
-            m_B3SettingCategory.Add("Sales", 4);
-            m_B3SettingCategory.Add("Server Game", 5);
-            m_B3SettingCategory.Add("Session", 6);
-            m_B3SettingCategory.Add("System", 7);
-        }
-
+     
         private void ConvertSettingToModel()
         {
-
             switch (m_selectedSettingEquivToId)
             {
                 case 3:
@@ -243,7 +182,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_systemSetting.SystemMainVolume = (m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SystemMainVolume)).B3SettingValue.ToString());
                         break;
                     }
-
             }
         }
 
@@ -323,83 +261,99 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     }
             }
-        }
-
-
-        public string GetVolumeEquivToDB(int VolumeLevel)
-        {
-            string result = "";
-            switch (VolumeLevel)
-            {
-                case 0: { result = "0"; break; }
-                case 1: { result = "10"; break; }
-                case 2: { result = "20"; break; }
-                case 3: { result = "30"; break; }
-                case 4: { result = "40"; break; }
-                case 5: { result = "50"; break; }
-                case 6: { result = "60"; break; }
-                case 7: { result = "70"; break; }
-                case 8: { result = "80"; break; }
-                case 9: { result = "90"; break; }
-                case 10: { result = "100"; break; }
-
-
-            }
-            return result;
-        }
-
-           private string GetVolumeEquivValue(int Volume)
-        {
-
-            string tempValue = "";
-            if (Volume <= 100 && Volume >= 91) { tempValue = "10"; }
-            else if (Volume < 91 && Volume >= 81) { tempValue = "9"; }
-            else if (Volume < 81 && Volume >= 71) { tempValue = "8"; }
-            else if (Volume < 71 && Volume >= 61) { tempValue = "7"; }
-            else if (Volume < 61 && Volume >= 51) { tempValue = "6"; }
-            else if (Volume < 51 && Volume >= 41) { tempValue = "5"; }
-            else if (Volume < 41 && Volume >= 31) { tempValue = "4"; }
-            else if (Volume < 31 && Volume >= 21) { tempValue = "3"; }
-            else if (Volume < 21 && Volume >= 11) { tempValue = "2"; }
-            else if (Volume < 11 && Volume >= 1) { tempValue = "1"; }
-            else if (Volume == 0) { tempValue = "0"; }
-            return tempValue;
-        }
-
-   
-
-        private List<string> Volume()
-        {
-            List<string> result = new List<string>();
-            result.Add("0");
-            result.Add("1");
-            result.Add("2");
-            result.Add("3");
-            result.Add("4");
-            result.Add("5");
-            result.Add("6");
-            result.Add("7");
-            result.Add("8");
-            result.Add("9");
-            result.Add("10");
-            return result;
-        }
-
-      
+        }    
 
        private void LoadSetting()
         {
             m_settingList.Clear();
             foreach (var B3Category in m_B3SettingCategory)
             {
-                m_settingList.Add(B3Category.Key);
+                if (B3Category.Value != 2)
+                {
+                    m_settingList.Add(B3Category.Key);
+                }
             }
                 SettingSelected = m_settingList.FirstOrDefault();
         }
+
+       #region (setDefault, hardcoded value, ID may reference ID on db table)
+
+       //dbo.B3SettingCategory(Id)
+       private void SetDefaultValue()
+       {
+           m_B3SettingCategory = new Dictionary<string, int>();
+           m_B3SettingCategory.Add("Games", 1);
+           m_B3SettingCategory.Add("Operator", 2);
+           m_B3SettingCategory.Add("Player", 3);
+           m_B3SettingCategory.Add("Sales", 4);
+           m_B3SettingCategory.Add("Server Game", 5);
+           m_B3SettingCategory.Add("Session", 6);
+           m_B3SettingCategory.Add("System", 7);
+       }
+
+        //No reference to db
+       public string GetVolumeEquivToDB(int VolumeLevel)
+       {
+           string result = "";
+           switch (VolumeLevel)
+           {
+               case 0: { result = "0"; break; }
+               case 1: { result = "10"; break; }
+               case 2: { result = "20"; break; }
+               case 3: { result = "30"; break; }
+               case 4: { result = "40"; break; }
+               case 5: { result = "50"; break; }
+               case 6: { result = "60"; break; }
+               case 7: { result = "70"; break; }
+               case 8: { result = "80"; break; }
+               case 9: { result = "90"; break; }
+               case 10: { result = "100"; break; }
+           }
+           return result;
+       }
+
+        //No ref to db.
+       private string GetVolumeEquivValue(int Volume)
+       {
+           string tempValue = "";
+           if (Volume <= 100 && Volume >= 91) { tempValue = "10"; }
+           else if (Volume < 91 && Volume >= 81) { tempValue = "9"; }
+           else if (Volume < 81 && Volume >= 71) { tempValue = "8"; }
+           else if (Volume < 71 && Volume >= 61) { tempValue = "7"; }
+           else if (Volume < 61 && Volume >= 51) { tempValue = "6"; }
+           else if (Volume < 51 && Volume >= 41) { tempValue = "5"; }
+           else if (Volume < 41 && Volume >= 31) { tempValue = "4"; }
+           else if (Volume < 31 && Volume >= 21) { tempValue = "3"; }
+           else if (Volume < 21 && Volume >= 11) { tempValue = "2"; }
+           else if (Volume < 11 && Volume >= 1) { tempValue = "1"; }
+           else if (Volume == 0) { tempValue = "0"; }
+           return tempValue;
+       }
+
+        //No ref to db
+       private List<string> Volume()
+       {
+           List<string> result = new List<string>();
+           result.Add("0");
+           result.Add("1");
+           result.Add("2");
+           result.Add("3");
+           result.Add("4");
+           result.Add("5");
+           result.Add("6");
+           result.Add("7");
+           result.Add("8");
+           result.Add("9");
+           result.Add("10");
+           return result;
+       }
+
+       #endregion
+
         #endregion
         #region COMMAND ()
 
-        public ICommand SelectedItemChanged { get; private set; }
+       public ICommand SelectedItemChanged { get; private set; }
         public ICommand SaveSettingcmd { get; set; }
         public ICommand CancelSettingcmd { get; set; }
 
@@ -711,5 +665,69 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
         #endregion
+        #region ENUM/DIC
+        enum B3SettingId
+        {
+            PlayerCalibrateTouch = 16,
+            PresstoCollect = 17,
+            AnnounceCall = 18,
+            PlayerScreenCursor = 19,
+            TimeToCollect = 20,
+            Disclaimer = 21,
+            DisclaimerTextID = 22,
+            PlayerMainVolume = 23,
+            ScreenCursor = 24,
+            CalibrateTouch = 25,
+            AutoPrintSessionReport = 26,
+            PagePrinter = 27,
+            QuickSales = 28,
+            PrintLogo = 29,
+            AlowinSessionBall = 30,
+            LoggingEnable = 31,
+            LogRecycleDays = 32,
+            VolumeSales = 33,
+            MinPlayer = 34,
+            GameStartDelay = 35,
+            ConsolotionPrize = 36,
+            GameRecallPass = 37,
+            WaiCountDown = 38,
+            PayoutLimit = 39,
+            JackpotLimit = 40,
+            EnforceMix = 41,
+            HandPayTrigger = 42,
+            MinimumPlayers = 43,
+            VIPPointMultiplier = 44,
+            MagCardSentinelStart = 45,
+            MagCardSentinelEnd = 46,
+            Currency = 47,
+            RNGBallCallTime = 48,
+            PlayerPINLength = 49,
+            EnableUK = 50,
+            DualAccount = 51,
+            MultiOperator = 52,
+            CommonRNGBallCall = 53,
+            NorthDakotaMode = 54,
+            AutoSessionEnd = 55,
+            SiteName = 56,
+            SystemMainVolume = 57,
+        }
+
+        enum B3SettingCategory
+        {
+            Games = 1,
+            Operator = 2,
+            Player = 3,
+            Sales = 4,
+            ServerGame = 5,
+            Session = 6,
+            System = 7,
+        }
+
+        private Dictionary<string, int> m_B3SettingCategory;//Matches the primary key of B3Settingcategory
+
+
+        #endregion
+     
+
     }
 }
