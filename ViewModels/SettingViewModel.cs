@@ -55,8 +55,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private PlayerSettingView m_playerSettingView;// = new PlayerSettingView();
         private SessionSettingView m_sessionSettingView;// = new SessionSettingView();
         private ObservableCollection<B3SettingGlobal> m_b3ServerSetting { get; set; }
+
         private ServerSetting m_serverSetting;
         private SessionSetting m_sessionSetting;
+        private SalesSettings m_salesSetting;
 
         private int m_selectedSettingEquivToId;
 
@@ -123,8 +125,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             switch ((int)m_B3SettingCategory[SettingSelected])
             {
-                case 1:
-                    { break; }
+                case 4:
+                    {
+                        m_salesSetting = new SalesSettings();
+                        break; }
                 case 5:
                     {
                         m_serverSetting = new ServerSetting();
