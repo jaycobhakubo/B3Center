@@ -185,6 +185,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             switch (m_selectedSettingEquivToId)
             {
+                case 4:
+                    {
+                        SalesSettings _SalesSettingNewValue = SalesSetting_Vm.SalesSetting_;
+
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.ScreenCursor)).B3SettingValue = ((_SalesSettingNewValue.ScreenCursor == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CalibrateTouch)).B3SettingValue = ((_SalesSettingNewValue.CalibrateTouch == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoPrintSessionReport)).B3SettingValue = ((_SalesSettingNewValue.AutoPrintSessionReport == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PagePrinter)).B3SettingValue = ((_SalesSettingNewValue.PagePrinter == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.QuickSales)).B3SettingValue = ((_SalesSettingNewValue.QuickSales == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PrintLogo)).B3SettingValue = ((_SalesSettingNewValue.PrintLogo == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AlowinSessionBall)).B3SettingValue = ((_SalesSettingNewValue.AlowinSessionBall == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.LoggingEnable)).B3SettingValue = ((_SalesSettingNewValue.LoggingEnable == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.LogRecycleDays)).B3SettingValue = _SalesSettingNewValue.LogRecycleDays;
+                       // m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MainVolList)).B3SettingValue = _SalesSettingNewValue.MainVolList;
+
+
+                        break;
+                    }
                 case 5:
                     {
                         ServerSetting _ServerSettingNewValue = ServerSetting_Vm.ServerSetting_;
@@ -328,8 +346,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             switch ((int)m_B3SettingCategory[SettingSelected])
             {
-                case 1:
+                case 4:
                     {
+                        SalesSetting_Vm.SalesSetting_ = m_salesSetting;
                         break;
                     }
                 case 5:
