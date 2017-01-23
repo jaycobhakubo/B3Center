@@ -1,7 +1,9 @@
 ﻿using GameTech.Elite.Base;
+using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -9,24 +11,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
     public class SessionSettingVm : ViewModelBase
     {
-        private SessionSetting m_sessionSetting;
+  
 
-        public SessionSettingVm(SessionSetting _sessionSetting)
+        public SessionSettingVm(ObservableCollection<B3SettingGlobal> b3ServerSetting)
         {
-            SessionSetting_ = _sessionSetting;
+            m_b3ServerSetting = b3ServerSetting;
+            PayoutLimit = (m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PayoutLimit)));
+            JackpotLimit = (m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.JackpotLimit)));
+            var tempBool = (m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.EnforceMix)));
         }
 
-        public SessionSetting SessionSetting_
+        public ObservableCollection<B3SettingGlobal> m_b3ServerSetting
+        { get; set; }
+
+
+        public B3SettingGlobal PayoutLimit
         {
-            get
-            {
-                return m_sessionSetting;
-            }
-            set
-            {
-                m_sessionSetting = value;
-                RaisePropertyChanged("SessionSetting_");
-            }
+            get; set;
         }
+
+
+
+        public B3SettingGlobal JackpotLimit
+        {
+            get; set;
+        }
+
+
+
+        public B3SettingGlobal EnforceMix
+        {
+            get; set;
+        }
+
     }
 }

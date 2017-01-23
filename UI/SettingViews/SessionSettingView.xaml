@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" 
            >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
+        <!--<BooleanToVisibilityConverter x:Key="VisibilityConverter" />-->
     </UserControl.Resources>
     <Border>
         <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" Name="gridSessionSettings"  >
@@ -23,10 +25,10 @@
 
             <StackPanel Name="stkpnlSessionSetting" Grid.Column="1" Grid.Row="1">
                 <Label x:Name="lblCallSpeedMin_Copy"   Content="Payout Limit" />
-                <TextBox Text="{Binding SessionSetting_.PayoutLimit}"  TabIndex="1" Tag="39" MaxLength="9" />
+                <TextBox Text="{Binding PayoutLimit.B3SettingValue}"  TabIndex="1" Tag="39" MaxLength="9" />
                 <Label x:Name="lblCallSpeedMin_Copy1"  Content="Jackpot Limit" />
-                <TextBox Text="{Binding SessionSetting_.JackpotLimit}"  TabIndex="2" Tag="40"   MaxLength="9"  />
-                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Tag="41" IsChecked="{Binding SessionSetting_.EnforceMix}"/>
+                <TextBox Text="{Binding JackpotLimit.B3SettingValue}"  TabIndex="2" Tag="40"   MaxLength="9"  />
+                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Tag="41" IsChecked="{Binding EnforceMix.B3SettingValue, Converter={StaticResource ValuetoBool}}"/>
             </StackPanel>
     </Grid>
     </Border>

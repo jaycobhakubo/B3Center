@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
+         
              mc:Ignorable="d" 
              >
     <Border>
@@ -20,15 +21,15 @@
 
             <StackPanel  Grid.Column="1" Grid.Row="0">
                 <Label  Content="Min Player"/>
-                <TextBox Text="{Binding ServerSetting_.MinPlayer}"  MaxLength="9" />
+                <TextBox Text="{Binding MinPlayer.B3SettingValue}"  MaxLength="9" />
                 <Label  Content="Game Start Delay(sec)"/>
-                <TextBox Text="{Binding ServerSetting_.GameStartDelay}"     MaxLength="9"   />
+                <TextBox Text="{Binding GameStartDelay.B3SettingValue}"     MaxLength="9"   />
                 <Label  Content="Consolation Prize"/>
-                <TextBox Text="{Binding ServerSetting_.Consolation}"    MaxLength="9"  />
+                <TextBox Text="{Binding Consolation.B3SettingValue}"    MaxLength="9"  />
                 <Label Content="Game Recall Password"/>
-                <TextBox Text="{Binding ServerSetting_.GameRecallPassw}"   MaxLength="25"/>
+                <TextBox Text="{Binding GameRecallPassword.B3SettingValue}"   MaxLength="25"/>
                 <Label   Content="Wait Count Down(sec)"/>
-                <TextBox Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25"/>
+                <TextBox Text="{Binding WaitCountDown.B3SettingValue}"  MaxLength="25"/>
             </StackPanel>
         </Grid>
     </Border>

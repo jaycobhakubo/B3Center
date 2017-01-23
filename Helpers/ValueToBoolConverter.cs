@@ -11,27 +11,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         #region Constructors
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            switch (value.ToString().ToLower())
+            bool tempresult = true;
+            switch (value.ToString())
             {
-                case "Games":
-                    return 0;
-                default:
-                    return 2;
+                case "T":
+                    {
+                        tempresult = true;
+                        break;
+                    }
+
+                case "F":
+                    {
+                        tempresult = false;
+                        break;
+                    }
             }
+            return tempresult;
      
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is int)
-            {
-                if ((int)value == 0)
-                    return "Games";
-                else
-                    return "";
-            }
-            return "";
-
+            return null;
         }
         #endregion
     }
