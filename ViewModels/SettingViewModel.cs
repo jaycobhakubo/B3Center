@@ -166,9 +166,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case 6:
                     {
                         SessionSetting  _SessionSettingNewValue = SessionSetting_Vm.SessionSetting_;
-                        m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MinPlayer)).B3SettingValue = _SessionSettingNewValue.PayoutLimit;
-                        m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.GameStartDelay)).B3SettingValue = _SessionSettingNewValue.JackpotLimit;
-                        m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.ConsolotionPrize)).B3SettingValue = ((_SessionSettingNewValue.EnforceMix == true) ? "T" : "F");
+                        m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PayoutLimit)).B3SettingValue = _SessionSettingNewValue.PayoutLimit;
+                        m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.JackpotLimit)).B3SettingValue = _SessionSettingNewValue.JackpotLimit;
+                        m_b3ServerSetting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.EnforceMix)).B3SettingValue = ((_SessionSettingNewValue.EnforceMix == true) ? "T" : "F");
                         break;
                     }
             }
