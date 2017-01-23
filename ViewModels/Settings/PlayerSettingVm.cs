@@ -5,20 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
+
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
-    public class SalesSettingVm : ViewModelBase
+    public class PlayerSettingVm : ViewModelBase
     {
-        private SalesSettings m_salesSetting;
+        private PlayerSettings m_playerSetting;
 
-        public SalesSettingVm(SalesSettings m_salesSetting)
+        public PlayerSettingVm(PlayerSettings _playerSetting)
         {
             VolumeList = Volume();
-            SalesSetting_ = m_salesSetting;    
+            PlayerSetting_ = _playerSetting;    
          
            
         }
-
 
         public List<string> VolumeList
         {
@@ -26,16 +27,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set;
         }
 
-        public SalesSettings SalesSetting_
+        public PlayerSettings PlayerSetting_
         {
             get
             {
-                return m_salesSetting;
+                return m_playerSetting;
             }
             set
             {
-                m_salesSetting = value;
-                RaisePropertyChanged("SalesSetting_");
+                m_playerSetting = value;
+                RaisePropertyChanged("PlayerSetting_");
             }
         }
 

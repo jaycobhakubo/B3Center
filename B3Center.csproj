@@ -338,6 +338,7 @@
     <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
+    <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SalesSettingVm.cs" />
     <Compile Include="ViewModels\Settings\ServerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SessionSettingVm.cs" />

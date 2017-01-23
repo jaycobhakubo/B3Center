@@ -112,25 +112,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                         }
                 case "PlayerSettingToggleButton":
                         {
-                            m_playerSettingView.ReloadDataIntoControls();
+                      
                             view = m_playerSettingView;
                             break;
                         }
                 case "SalesSettingToggleButton":
                         {
-                            //m_salesSettingView.ReloadDataIntoControls();
+                       
                             view = m_salesSettingView;
                             break;
                         }
                 case "SessionSettingToggleButton":
                         {
-                            //m_sessionView.ReloadDataIntoControls();
+                        
                             view = m_sessionView;
                             break;
                         }
                 case "ServerGameSettingToggleButton":
                         {
-                            //m_serverGameView.ReloadDataIntoControls();
+  
                             view = m_serverGameView;
                             break;
                         }
