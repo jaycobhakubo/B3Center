@@ -59,7 +59,7 @@
                
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingCrazyBoutView DataContext="{Binding GameSettingCrazyBoutVm}"/>
+                        <local:GameSettingCrazyBoutView DataContext="{Binding GameCrzyBout}"/>
                     </Border>
                 </TabItem>
 
