@@ -28,6 +28,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 
 
 
+
+
+
     //public List<string> GamePayTable { get; set; }
     //public List<string> MaxBetLevel { get; set; }
     //public List<string> MaxCards { get; set; }

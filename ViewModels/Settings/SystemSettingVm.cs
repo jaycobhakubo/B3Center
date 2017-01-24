@@ -57,7 +57,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        private List<string> Volume()
+        public static List<string> Volume()
         {
             List<string> result = new List<string>();
             result.Add("0");
@@ -74,6 +74,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             return result;
         }
 
+        public static List<string> BetLevel()
+        {
+            List<string> result = new List<string>();
+            result.Add("1");
+            result.Add("2");
+            result.Add("3");
+            result.Add("4");
+            result.Add("5");
+            result.Add("6");
+            result.Add("7");
+            result.Add("8");
+            result.Add("9");
+            result.Add("10");
+            return result;
+        }
+
+        public static List<string> MaxCard()
+        {
+            var result = new List<string>();
+            result.Add("4");
+            result.Add("6");
+            return result;
+        }
+
+
+      
         private List<string> GetCurrencyList()
         {
             List<string> CurrencyItems = new List<string>();
@@ -93,14 +119,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             AutoSessionEndItems.Add("OFF");
             return AutoSessionEndItems;
         }
-    
 
 
-      
-     
-
-
-        
+        private string GetCallSpeedEquivToDB(int callspeedvalue)
+        {
+            string result = "";
+            switch (callspeedvalue)
+            {
+                case 1: { result = "5000"; break; }
+                case 2: { result = "4020"; break; }
+                case 3: { result = "3530"; break; }
+                case 4: { result = "3040"; break; }
+                case 5: { result = "2550"; break; }
+                case 6: { result = "2060"; break; }
+                case 7: { result = "1570"; break; }
+                case 8: { result = "1080"; break; }
+                case 9: { result = "590"; break; }
+                case 10: { result = "100"; break; }
+            }
+            return result;
+        }
     }
+
+
 }
 

@@ -26,86 +26,7 @@ using Microsoft.Practices.Composite.Presentation.Commands;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
-    #region ENUM/DIC
-
-    enum B3SettingCategory
-    {
-        Games = 1,
-        Operator = 2,
-        Player = 3,
-        Sales = 4,
-        ServerGame = 5,
-        Session = 6,
-        System = 7,
-    }
-
-
-    enum B3SettingId
-    {
-        Denom1 = 1,
-        Denom5 = 2,
-        Denom10 = 3,
-        Denom25 = 4,
-        Denom50 = 5,
-        Denom100 = 6,
-        Denom200 = 7,
-        Denom500 = 8,
-        MaxBetLevel = 9,
-        MaxCards = 10,
-        CallSpeed = 11,
-        AutoCall = 12,
-        AutoPlay = 13,
-        HideSerialNumber = 14,
-        SingleOfferBonus = 15,
-        PlayerCalibrateTouch = 16,
-        PresstoCollect = 17,
-        AnnounceCall = 18,
-        PlayerScreenCursor = 19,
-        TimeToCollect = 20,
-        Disclaimer = 21,
-        DisclaimerTextID = 22,
-        PlayerMainVolume = 23,
-        ScreenCursor = 24,
-        CalibrateTouch = 25,
-        AutoPrintSessionReport = 26,
-        PagePrinter = 27,
-        QuickSales = 28,
-        PrintLogo = 29,
-        AlowinSessionBall = 30,
-        LoggingEnable = 31,
-        LogRecycleDays = 32,
-        VolumeSales = 33,
-        MinPlayer = 34,
-        GameStartDelay = 35,
-        ConsolotionPrize = 36,
-        GameRecallPass = 37,
-        WaiCountDown = 38,
-        PayoutLimit = 39,
-        JackpotLimit = 40,
-        EnforceMix = 41,
-        HandPayTrigger = 42,
-        MinimumPlayers = 43,
-        VIPPointMultiplier = 44,
-        MagCardSentinelStart = 45,
-        MagCardSentinelEnd = 46,
-        Currency = 47,
-        RNGBallCallTime = 48,
-        PlayerPINLength = 49,
-        EnableUK = 50,
-        DualAccount = 51,
-        MultiOperator = 52,
-        CommonRNGBallCall = 53,
-        NorthDakotaMode = 54,
-        AutoSessionEnd = 55,
-        SiteName = 56,
-        SystemMainVolume = 57,
-        MathPayTableSetting = 58,
-        CallSpeedMin = 59,
-        CallSpeedBonus = 60,
-    }
-
-
-#endregion
+    
 
 
     class SettingViewModel : ViewModelBase
@@ -771,4 +692,84 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
     }
+    #region ENUM/DIC
+
+    enum B3SettingCategory
+    {
+        Games = 1,
+        Operator = 2,
+        Player = 3,
+        Sales = 4,
+        ServerGame = 5,
+        Session = 6,
+        System = 7,
+    }
+
+
+    enum B3SettingId
+    {
+        Denom1 = 1,
+        Denom5 = 2,
+        Denom10 = 3,
+        Denom25 = 4,
+        Denom50 = 5,
+        Denom100 = 6,
+        Denom200 = 7,
+        Denom500 = 8,
+        MaxBetLevel = 9,
+        MaxCards = 10,
+        CallSpeed = 11,
+        AutoCall = 12,
+        AutoPlay = 13,
+        HideSerialNumber = 14,
+        SingleOfferBonus = 15,
+        PlayerCalibrateTouch = 16,
+        PresstoCollect = 17,
+        AnnounceCall = 18,
+        PlayerScreenCursor = 19,
+        TimeToCollect = 20,
+        Disclaimer = 21,
+        DisclaimerTextID = 22,
+        PlayerMainVolume = 23,
+        ScreenCursor = 24,
+        CalibrateTouch = 25,
+        AutoPrintSessionReport = 26,
+        PagePrinter = 27,
+        QuickSales = 28,
+        PrintLogo = 29,
+        AlowinSessionBall = 30,
+        LoggingEnable = 31,
+        LogRecycleDays = 32,
+        VolumeSales = 33,
+        MinPlayer = 34,
+        GameStartDelay = 35,
+        ConsolotionPrize = 36,
+        GameRecallPass = 37,
+        WaiCountDown = 38,
+        PayoutLimit = 39,
+        JackpotLimit = 40,
+        EnforceMix = 41,
+        HandPayTrigger = 42,
+        MinimumPlayers = 43,
+        VIPPointMultiplier = 44,
+        MagCardSentinelStart = 45,
+        MagCardSentinelEnd = 46,
+        Currency = 47,
+        RNGBallCallTime = 48,
+        PlayerPINLength = 49,
+        EnableUK = 50,
+        DualAccount = 51,
+        MultiOperator = 52,
+        CommonRNGBallCall = 53,
+        NorthDakotaMode = 54,
+        AutoSessionEnd = 55,
+        SiteName = 56,
+        SystemMainVolume = 57,
+        MathPayTableSetting = 58,
+        CallSpeedMin = 59,
+        CallSpeedBonus = 60,
+    }
+
+
+    #endregion
 }
