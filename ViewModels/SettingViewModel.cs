@@ -30,7 +30,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     {
      
         #region VAR
-        //Mastermind I have everything you need.
+        //Parent
         private B3Controller m_controller;
         //Views
         private GameSettingView m_gameSettingView;
