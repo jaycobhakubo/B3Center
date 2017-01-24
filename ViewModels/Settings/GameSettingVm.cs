@@ -31,57 +31,71 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting)
         {
             m_b3GameStting = _b3GameSetting;
-            GameCrzyBout = new GameSettingCrazyBoutVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.CRAZYBOUT)))));
+            GameCrzyBout = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.CRAZYBOUT)))));
+
+            GameJailBreak = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.JAILBREAK)))));
+
+            GameMayaMoney = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.MAYAMONEY)))));
+
+            GameSpirit76 = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.SPIRIT76)))));
+
+            GameTimeBomb = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.TIMEBOMB)))));
+
+            GameUkickEm = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.UKICKEM)))));
+
+            GameWildBall = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDBALL)))));
+
+            GameWildfire = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDFIRE)))));    
         }
 
-        public GameSettingCrazyBoutVm GameCrzyBout
+        public GameSettingVmAllGame GameCrzyBout
         {
             get;
             set;        
         }
 
-        public GameSettingJailBreakVm GameJailBreak
+        public GameSettingVmAllGame GameJailBreak
         {
             get;
             set;
         }
 
 
-        public GameSettingMayaMoneyVm GameMayaMoney
+        public GameSettingVmAllGame GameMayaMoney
         {
             get;
             set;
         }
 
 
-        public GameSettingSpirit76Vm GameSpirit76
+        public GameSettingVmAllGame GameSpirit76
         {
             get;
             set;
         }
 
 
-        public GameSettingTimeBombVm GameTimeBomb
+        public GameSettingVmAllGame GameTimeBomb
         {
             get;
             set;
         }
 
 
-        public GameSettingGameUkickEmVm GameUkickEm
+        public GameSettingVmAllGame GameUkickEm
         {
             get;
             set;
         }
 
 
-        public GameSettingGameWildBallVm GameWildBall
+        public GameSettingVmAllGame GameWildBall
         {
             get;
             set;
         }
 
-        public GameSettingGameWildfireVm GameWildfire
+        public GameSettingVmAllGame GameWildfire
         {
             get;
             set;

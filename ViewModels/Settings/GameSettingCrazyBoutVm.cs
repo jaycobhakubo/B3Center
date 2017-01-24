@@ -6,36 +6,22 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
-    public class GameSettingCrazyBoutVm : GameSettingTemplateVm
+    public class GameSettingVmAllGame : GameSettingTemplateVm
     {
-        public GameSettingCrazyBoutVm(GameSetting _gameSettingCrazyBout)
+        public GameSettingVmAllGame(GameSetting _gameSetting)
         {
-            GamesettingCrzyBt_ = _gameSettingCrazyBout;
+            Gamesetting_ = _gameSetting;
         }
 
-        private GameSetting m_gameSettingCrzyBt;
-        public GameSetting GamesettingCrzyBt_
+        private GameSetting m_gameSetting_;
+        public GameSetting Gamesetting_
         {
-            get { return m_gameSettingCrzyBt; }
+            get { return m_gameSetting_; }
             set
             {
-                m_gameSettingCrzyBt = value;
-                RaisePropertyChanged("GamesettingCrzyBt_");
+                m_gameSetting_ = value;
+                RaisePropertyChanged("Gamesetting_");
             }
         }
-
-        string tt;
-        public string textbxtest
-        {
-            get { return tt; }
-            set
-            {
-                tt = value;
-                RaisePropertyChanged("textbxtest");
-            }
-        }
-
-
-
     }
 }

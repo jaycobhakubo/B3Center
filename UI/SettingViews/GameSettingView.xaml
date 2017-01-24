@@ -65,43 +65,43 @@
 
                 <TabItem Header="JailBreak">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingJailBreak/>
+                        <local:GameSettingJailBreak DataContext="{Binding GameJailBreak}"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="Maya Money">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingMayaMoney />
+                        <local:GameSettingMayaMoney DataContext="{Binding  GameMayaMoney}"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="76 Bingo">
                     <Border>
-                        <local:GameSetting76Bingo HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                        <local:GameSetting76Bingo HorizontalAlignment="Center" Margin="0,15,0,0" DataContext="{Binding GameSpirit76}"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="Time Bomb">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingTimeBomb />
+                        <local:GameSettingTimeBomb DataContext="{Binding GameTimeBomb}"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="U kick Em" >
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingUkickEm />
+                        <local:GameSettingUkickEm DataContext="{Binding GameUkickEm}"/>
                     </Border>
                 </TabItem>
 
                 <TabItem Header="WildFire w/Bonus" >
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingWildFire />
+                        <local:GameSettingWildFire DataContext="{Binding GameWildBall}"/> 
                     </Border>
                 </TabItem>
 
                 <TabItem Header="WildFire">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingWildBall />
+                        <local:GameSettingWildBall DataContext="{Binding GameWildfire}"/>
                     </Border>
                 </TabItem>
                
