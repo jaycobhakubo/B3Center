@@ -25,16 +25,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private GameSettingCrazyBoutVm m_gameCrzyBout;
         public GameSettingCrazyBoutVm GameCrzyBout
-        {
-            get
-            {
-                return m_gameCrzyBout;
-            }
-            set
-            {
-                m_gameCrzyBout = value;
-                RaisePropertyChanged("GameCrzyBout");
-            }
+        {get;set;
+            //get
+            //{
+            //    return m_gameCrzyBout;
+            //}
+            //set
+            //{
+            //    m_gameCrzyBout = value;
+            //    RaisePropertyChanged("GameCrzyBout");
+            //}
         }
 
 

@@ -482,7 +482,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 case 1:
                     {
-                        GameSetting_Vm = new GameSettingVm(m_b3Setting);
+                     
+                           GameSetting_Vm = new GameSettingVm(m_b3Setting);
+                        m_gameSettingView = new GameSettingView(GameSetting_Vm);
                          view = m_gameSettingView;
                         break;
                     }
