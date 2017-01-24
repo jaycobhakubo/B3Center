@@ -154,9 +154,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             else
             {
             }
+            SetCommand();
             SetDefaultValue();
             LoadSetting();
-            SetCommand();
+            if (SettingSelected == "Games")
+            {
+                SelectedItemEvent("Games");
+            }
         }
         #endregion
         #region OTHER ACCESSOR (static)
@@ -348,7 +352,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }    
 
-       private void LoadSetting()
+        private void LoadSetting()
         {
             m_settingList.Clear();
             foreach (var B3Category in m_B3SettingCategory)
@@ -583,7 +587,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-      
         #endregion
         #region PROPERTIES 
         #region (with private member)
