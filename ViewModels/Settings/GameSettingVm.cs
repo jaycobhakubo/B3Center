@@ -9,6 +9,18 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
+    enum B3Game
+    {
+        CRAZYBOUT = 1,
+        JAILBREAK = 2,
+        MAYAMONEY = 3,
+        SPIRIT76 = 4,
+        TIMEBOMB = 5,
+        UKICKEM = 6,
+        WILDBALL = 7,
+        WILDFIRE = 8,
+    }
+
    public  class GameSettingVm : GameSettingTemplateVm
     {
 
@@ -19,15 +31,62 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting)
         {
             m_b3GameStting = _b3GameSetting;
-            GameCrzyBout = new GameSettingCrazyBoutVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == 1)))));
+            GameCrzyBout = new GameSettingCrazyBoutVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.CRAZYBOUT)))));
         }
 
-
-        private GameSettingCrazyBoutVm m_gameCrzyBout;
         public GameSettingCrazyBoutVm GameCrzyBout
         {
-            get;set;          
+            get;
+            set;        
         }
+
+        public GameSettingJailBreakVm GameJailBreak
+        {
+            get;
+            set;
+        }
+
+
+        public GameSettingMayaMoneyVm GameMayaMoney
+        {
+            get;
+            set;
+        }
+
+
+        public GameSettingSpirit76Vm GameSpirit76
+        {
+            get;
+            set;
+        }
+
+
+        public GameSettingTimeBombVm GameTimeBomb
+        {
+            get;
+            set;
+        }
+
+
+        public GameSettingGameUkickEmVm GameUkickEm
+        {
+            get;
+            set;
+        }
+
+
+        public GameSettingGameWildBallVm GameWildBall
+        {
+            get;
+            set;
+        }
+
+        public GameSettingGameWildfireVm GameWildfire
+        {
+            get;
+            set;
+        }
+
 
 
         private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> _b3Setting)
