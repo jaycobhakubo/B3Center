@@ -620,9 +620,6 @@
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

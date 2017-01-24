@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+            xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
          >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
@@ -23,23 +24,31 @@
 
             <StackPanel Grid.Column="1">
                 <Label  Content="Game Pay Table"  />
-                <ComboBox Name="cmbxGamePayTable" Tag="58"/>
+                <ComboBox Name="cmbxGamePayTable" Tag="58"
+                           ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
+                              DisplayMemberPath="PackageDesc"
+                              SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"/>
 
                 <Label Content="Max Bet Level" />
                 <ComboBox 
+                     ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
+                        SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
                 Name="cmbxMaxBetLevel" 
                Tag="9"             
                 >
                 </ComboBox>
 
                 <Label x:Name="lblMaxCards"  Content="Max Cards"/>
-                <ComboBox 
+                <ComboBox  ItemsSource="{Binding Gamesetting_.LMaxCards}" 
+                    SelectedItem="{Binding Gamesetting_.MaxCards}"
                 x:Name="cmbxMaxcards" 
                  Tag="10">
                 </ComboBox>
 
                 <Label x:Name="lblCallSpeedMin"  Content="Call Speed"    />
                 <ComboBox 
+                     ItemsSource="{Binding Gamesetting_.LCallSpeed}" 
+                        SelectedItem="{Binding Gamesetting_.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	x:Name="cmbxCallSpeedMin" 
             	 Tag="59"/>
 

@@ -31,21 +31,23 @@
                     <ComboBox Name="cmbxGamePayTable" Tag="58"
                               ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
                               DisplayMemberPath="PackageDesc"
-                          SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"
+                              SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"
                               />
 
                     <Label Content="Max Bet Level" />
                     <ComboBox 
                     
-                Name="cmbxMaxBetLevel" ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
-                            SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
+                Name="cmbxMaxBetLevel" 
+                        ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
+                        SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
                Tag="9"             
                 >
                     </ComboBox>
 
                     <Label x:Name="lblMaxCards"  Content="Max Cards"/>
-                <ComboBox ItemsSource="{Binding Gamesetting_.LMaxCards}" 
-                          SelectedItem="{Binding Gamesetting_.MaxCards}"
+                <ComboBox 
+                    ItemsSource="{Binding Gamesetting_.LMaxCards}" 
+                    SelectedItem="{Binding Gamesetting_.MaxCards}"
                 x:Name="cmbxMaxcards"                       
                  Tag="10">
                     </ComboBox>

@@ -8,7 +8,8 @@
                      xmlns:Converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
             >
     <UserControl.Resources>
-    
+        <ResourceDictionary>
+            
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
         <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
@@ -52,6 +53,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
     </UserControl.Resources>
 
 
