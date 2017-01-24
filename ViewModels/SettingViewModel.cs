@@ -146,7 +146,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 throw new ArgumentNullException();
 
             m_controller = controller;
-            m_gameSettingView = new GameSettingView();
+            //m_gameSettingView = new GameSettingView();
 
             if (IsClassIIB3GameEnable == true)
             {
@@ -466,7 +466,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             m_selectedSettingEquivToId = (int)m_B3SettingCategory[SettingSelected];
             m_b3Setting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == m_selectedSettingEquivToId));
-            ConvertSettingToModel();
+
+
+            if (m_selectedSettingEquivToId != 1)
+            {
+                ConvertSettingToModel();
+            }
 
             UserControl view = null;
             if (SettingName == "Games")
@@ -481,9 +486,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             switch (m_selectedSettingEquivToId)
             {
                 case 1:
-                    {
-                     
-                           GameSetting_Vm = new GameSettingVm(m_b3Setting);
+                    {                     
+                        GameSetting_Vm = new GameSettingVm(m_b3Setting);
                         m_gameSettingView = new GameSettingView(GameSetting_Vm);
                          view = m_gameSettingView;
                         break;

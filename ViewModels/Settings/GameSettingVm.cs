@@ -15,140 +15,131 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private GameSetting m_gameSettingModel;
         ObservableCollection<B3SettingGlobal> m_b3GameStting;
-
+        GameSetting gs = new GameSetting();
         public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting)
         {
             m_b3GameStting = _b3GameSetting;
-            GameCrzyBout = new GameSettingCrazyBoutVm(ConvertToModel (m_b3GameStting.Where(l => l.B3GameID == 1)));
+            GameCrzyBout = new GameSettingCrazyBoutVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == 1)))));
         }
 
 
         private GameSettingCrazyBoutVm m_gameCrzyBout;
         public GameSettingCrazyBoutVm GameCrzyBout
-        {get;set;
-            //get
-            //{
-            //    return m_gameCrzyBout;
-            //}
-            //set
-            //{
-            //    m_gameCrzyBout = value;
-            //    RaisePropertyChanged("GameCrzyBout");
-            //}
+        {
+            get;set;          
         }
 
 
-        private GameSetting ConvertToModel(IEnumerable<B3SettingGlobal> _b3Setting)
+        private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> _b3Setting)
         {
-
-            GameSetting gs = new GameSetting();
-
             foreach (B3SettingGlobal b3SettingGlobal_ in _b3Setting)
             {
-                switch (b3SettingGlobal_.B3GameID)
+
+
+                if ((int)B3SettingId.Denom1 == b3SettingGlobal_.B3SettingID)
                 {
-                    case ((int)B3SettingId.Denom1):
-                        {
-                            gs.Denom1 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom5):
-                        {
-                            gs.Denom5 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom10):
-                        {
-                            gs.Denom10 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom25):
-                        {
-                            gs.Denom25 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom50):
-                        {
-                            gs.Denom50 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom100):
-                        {
-                            gs.Denom100 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom200):
-                        {
-                            gs.Denom200 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.Denom500):
-                        {
-                            gs.Denom500 = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.MaxBetLevel):
-                        {
-                            gs.MaxBetLevel = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.MaxCards):
-                        {
-                            gs.MaxCards = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.CallSpeed):
-                        {
-                            gs.CallSpeed = b3SettingGlobal_.B3SettingValue;
-                            break;
-                        }
-                    case ((int)B3SettingId.AutoCall):
-                        {
-                            gs.AutoCall = (b3SettingGlobal_.B3SettingValue == "T")? true : false;
-                            break;
-                        }
-                    case ((int)B3SettingId.AutoPlay):
-                        {
-                            gs.AutoPlay = (b3SettingGlobal_.B3SettingValue == "T")? true :false;
-                            break;
-                        }
-                    case ((int)B3SettingId.HideSerialNumber):
-                        {
-                            gs.HideSerialNumber = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
-                            break;
+                    gs.Denom1 = b3SettingGlobal_.B3SettingValue;
+                }
+                if
+                ((int)B3SettingId.Denom5 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom5 = b3SettingGlobal_.B3SettingValue;
 
-                        }
-                    case ((int)B3SettingId.SingleOfferBonus):
-                        {
-                            gs.SingleOfferBonus = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
-                            break;
+                }
+                else
+                if
+                 ((int)B3SettingId.Denom10 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom10 = b3SettingGlobal_.B3SettingValue;
 
-                        }
-                    case ((int)B3SettingId.MathPayTableSetting):
-                        {
-                            gs.MathPayTableSetting = b3SettingGlobal_.B3SettingValue;
-                            break;
+                }
+                else
+                if
+                 ((int)B3SettingId.Denom25 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom25 = b3SettingGlobal_.B3SettingValue;
 
-                        }
-                    case ((int)B3SettingId.CallSpeedMin):
-                        {
-                            gs.CallSpeedMin = b3SettingGlobal_.B3SettingValue;
-                            break;
+                }
+                else if
+                   ((int)B3SettingId.Denom50 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom50 = b3SettingGlobal_.B3SettingValue;
 
-                        }
-                    case ((int)B3SettingId.CallSpeedBonus):
-                        {
-                            gs.CallSpeedBonus = b3SettingGlobal_.B3SettingValue;
-                            break;
+                }
+                else if ((int)B3SettingId.Denom100 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom100 = b3SettingGlobal_.B3SettingValue;
 
-                        }
+                }
+                else if ((int)B3SettingId.Denom200 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom200 = b3SettingGlobal_.B3SettingValue;
+
+                }
+                else if ((int)B3SettingId.Denom500 == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.Denom500 = b3SettingGlobal_.B3SettingValue;
+
+                }
+                else if ((int)B3SettingId.MaxBetLevel == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.MaxBetLevel = b3SettingGlobal_.B3SettingValue;
+
+                }
+                else if ((int)B3SettingId.MaxCards == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.MaxCards = b3SettingGlobal_.B3SettingValue;
+
+                }
+                else if ((int)B3SettingId.CallSpeed == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.CallSpeed = b3SettingGlobal_.B3SettingValue;
+
+                }
+                else if ((int)B3SettingId.AutoCall == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.AutoCall = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
+
+                }
+                else if ((int)B3SettingId.AutoPlay == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.AutoPlay = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
+
+                }
+                else if ((int)B3SettingId.HideSerialNumber == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.HideSerialNumber = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
+
+
+                }
+                else if ((int)B3SettingId.SingleOfferBonus == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.SingleOfferBonus = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
+
+
+                }
+                else if ((int)B3SettingId.MathPayTableSetting == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.MathPayTableSetting = b3SettingGlobal_.B3SettingValue;
+
+
+                }
+                else if ((int)B3SettingId.CallSpeedMin == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.CallSpeedMin = b3SettingGlobal_.B3SettingValue;
+
+
+                }
+                else if ((int)B3SettingId.CallSpeedBonus == b3SettingGlobal_.B3SettingID)
+                {
+                    gs.CallSpeedBonus = b3SettingGlobal_.B3SettingValue;
+
                 }
 
-
             }
-
             return gs;
         }
+
 
       
 

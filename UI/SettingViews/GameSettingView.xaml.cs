@@ -18,8 +18,7 @@ using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using GameTech.Elite.Client.Modules.B3Center.Properties;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
-
-
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
@@ -72,9 +71,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         #region Constructor
 
-        public GameSettingView()
+        public GameSettingView(GameSettingVm _gamesetting)
         {
-            InitializeComponent();  
+            InitializeComponent();
+            DataContext = _gamesetting;
         }
 
         //public GameSettingView(B3Setting b3setting)
