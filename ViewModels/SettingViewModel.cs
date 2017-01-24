@@ -286,6 +286,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 SettingSelected = m_settingList.FirstOrDefault();
         }
 
+        public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(int GameId)
+        {
+            ObservableCollection<B3MathGamePay> tempResult;
+            tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3GameMathPlay_.Where(l => l.GameID == GameId));
+
+            return tempResult;
+        }
+
        #region (setDefault, hardcoded value, ID may reference ID on db table)
 
        //dbo.B3SettingCategory(Id)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 {
@@ -27,17 +28,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public string CallSpeedBonus { get; set; }
 
 
+        public List<B3MathGamePay> LGamePayTable { get; set; }
+        public List<string> LMaxBetLevel { get; set; }
+        public List<string> LMaxCards { get; set; }
+        public List<string> LCallSpeedMin { get; set; }
+        public List<string> LCallSpeedMax { get; set; }
+        public List<string> LCallSpeed { get; set; }
+        public List<string> LCallSpeedBonus { get; set; }
 
-
-
-
-    //public List<string> GamePayTable { get; set; }
-    //public List<string> MaxBetLevel { get; set; }
-    //public List<string> MaxCards { get; set; }
-    //public List<string> CallSpeedMin { get; set; }
-    //public List<string> CallSpeedMax { get; set; }
-    //public List<string> CallSpeed { get; set; }
-    //public List<string> CallSpeedBonus { get; set; }
     //public string GamePlayTableSelected { get; set; }
     //public string MaxBetLevelSelected { get; set; }
     //public string MaxCardsSelected { get; set; }

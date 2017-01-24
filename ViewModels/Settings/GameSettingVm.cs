@@ -28,27 +28,37 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         private GameSetting m_gameSettingModel;
         ObservableCollection<B3SettingGlobal> m_b3GameStting;
         GameSetting gs = new GameSetting();
+        private int m_currentGameId;
+
+
         public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting)
         {
             m_b3GameStting = _b3GameSetting;
-            GameCrzyBout = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.CRAZYBOUT)))));
+     
+            GameCrzyBout = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.CRAZYBOUT)))), SetCurrentGameId((int)B3Game.CRAZYBOUT));
 
-            GameJailBreak = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.JAILBREAK)))));
+            GameJailBreak = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.JAILBREAK)))), SetCurrentGameId((int)B3Game.JAILBREAK));
 
-            GameMayaMoney = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.MAYAMONEY)))));
+            GameMayaMoney = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.MAYAMONEY)))), SetCurrentGameId((int)B3Game.MAYAMONEY));
 
-            GameSpirit76 = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.SPIRIT76)))));
+            GameSpirit76 = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.SPIRIT76)))), SetCurrentGameId((int)B3Game.SPIRIT76));
 
-            GameTimeBomb = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.TIMEBOMB)))));
+            GameTimeBomb = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.TIMEBOMB)))), SetCurrentGameId((int)B3Game.TIMEBOMB));
 
-            GameUkickEm = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.UKICKEM)))));
+            GameUkickEm = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.UKICKEM)))), SetCurrentGameId((int)B3Game.UKICKEM));
 
-            GameWildBall = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDBALL)))));
+            GameWildBall = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDBALL)))), SetCurrentGameId((int)B3Game.WILDBALL));
 
-            GameWildfire = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDFIRE)))));    
+            GameWildfire = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDFIRE)))), SetCurrentGameId((int)B3Game.WILDFIRE));    
         }
 
-        public GameSettingVmAllGame GameCrzyBout
+        public int SetCurrentGameId(int GameId)
+        {
+            m_currentGameId = GameId;
+            return m_currentGameId;
+        }
+
+        public GameSettingVmAllGame GameCrzyBout 
         {
             get;
             set;        
@@ -157,17 +167,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if ((int)B3SettingId.MaxBetLevel == b3SettingGlobal_.B3SettingID)
                 {
                     gs.MaxBetLevel = b3SettingGlobal_.B3SettingValue;
-
+                   
                 }
                 else if ((int)B3SettingId.MaxCards == b3SettingGlobal_.B3SettingID)
                 {
                     gs.MaxCards = b3SettingGlobal_.B3SettingValue;
-
+                    
                 }
                 else if ((int)B3SettingId.CallSpeed == b3SettingGlobal_.B3SettingID)
                 {
                     gs.CallSpeed = b3SettingGlobal_.B3SettingValue;
-
+                  
                 }
                 else if ((int)B3SettingId.AutoCall == b3SettingGlobal_.B3SettingID)
                 {
@@ -200,8 +210,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if ((int)B3SettingId.CallSpeedMin == b3SettingGlobal_.B3SettingID)
                 {
                     gs.CallSpeedMin = b3SettingGlobal_.B3SettingValue;
-
-
+                 
                 }
                 else if ((int)B3SettingId.CallSpeedBonus == b3SettingGlobal_.B3SettingID)
                 {
@@ -210,6 +219,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
 
             }
+
+            if (m_currentGameId == (int)B3Game.CRAZYBOUT)
+            {
+                gs.LCallSpeedMin = SystemSettingVm.Volume();
+                gs.LCallSpeed = SystemSettingVm.Volume();
+                gs.LMaxCards = SystemSettingVm.MaxCard();
+                gs.LMaxBetLevel = SystemSettingVm.BetLevel();
+            }
+
+            gs.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(m_currentGameId).ToList();
+
             return gs;
         }
 

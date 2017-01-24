@@ -29,20 +29,22 @@
                 <StackPanel Grid.Column="1">
                     <Label  Content="Game Pay Table"  />
                     <ComboBox Name="cmbxGamePayTable" Tag="58"
-                              
+                              ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
+                              DisplayMemberPath="PackageDesc"
+                          SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"
                               />
 
                     <Label Content="Max Bet Level" />
                     <ComboBox 
                     
-                Name="cmbxMaxBetLevel" ItemsSource="{Binding GameMaxBetLevel}" 
+                Name="cmbxMaxBetLevel" ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
                             SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
                Tag="9"             
                 >
                     </ComboBox>
 
                     <Label x:Name="lblMaxCards"  Content="Max Cards"/>
-                <ComboBox ItemsSource="{Binding GameMaxCard}" 
+                <ComboBox ItemsSource="{Binding Gamesetting_.LMaxCards}" 
                           SelectedItem="{Binding Gamesetting_.MaxCards}"
                 x:Name="cmbxMaxcards"                       
                  Tag="10">
@@ -51,12 +53,12 @@
                     <Label x:Name="lblCallSpeedMin"  Content="Call Speed Min"    />
                     <ComboBox 
             	x:Name="cmbxCallSpeedMin" 
-                        ItemsSource="{Binding GameCallSpeedMin}" 
+                        ItemsSource="{Binding Gamesetting_.LCallSpeed}" 
                         SelectedItem="{Binding Gamesetting_.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="59"/>
 
                     <Label x:Name="lblCallSpeedOrMax"  Content="Call Speed Max"    />
-                <ComboBox  ItemsSource="{Binding GameCallSpeedMax}" 
+                <ComboBox  ItemsSource="{Binding Gamesetting_.LCallSpeedMin}" 
             	x:Name="cmbxCallSpeedOrMax" SelectedItem="{Binding Gamesetting_.CallSpeedMin, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="11">
                     </ComboBox>
