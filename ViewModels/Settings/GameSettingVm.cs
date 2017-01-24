@@ -167,12 +167,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if ((int)B3SettingId.MaxBetLevel == b3SettingGlobal_.B3SettingID)
                 {
                     gs.MaxBetLevel = b3SettingGlobal_.B3SettingValue;
-                   
+                    gs.LMaxCards = SystemSettingVm.MaxCard();
                 }
                 else if ((int)B3SettingId.MaxCards == b3SettingGlobal_.B3SettingID)
                 {
                     gs.MaxCards = b3SettingGlobal_.B3SettingValue;
-                    
+                    gs.LMaxBetLevel = SystemSettingVm.BetLevel();
                 }
                 else if ((int)B3SettingId.CallSpeed == b3SettingGlobal_.B3SettingID)
                 {
@@ -220,13 +220,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
             }
 
-            if (m_currentGameId == (int)B3Game.CRAZYBOUT)
+
+            //CallSpeed var is being shuffle in db  thats why I have to do this
+            if (m_currentGameId == (int)B3Game.CRAZYBOUT
+                || m_currentGameId == (int)B3Game.MAYAMONEY)
             {
                 gs.LCallSpeedMin = SystemSettingVm.Volume();
                 gs.LCallSpeed = SystemSettingVm.Volume();
-                gs.LMaxCards = SystemSettingVm.MaxCard();
-                gs.LMaxBetLevel = SystemSettingVm.BetLevel();
+          
+              
             }
+            else if (m_currentGameId == (int)B3Game.JAILBREAK
+                || m_currentGameId == (int)B3Game.UKICKEM
+                || m_currentGameId == (int)B3Game.TIMEBOMB
+                || m_currentGameId == (int)B3Game.WILDFIRE
+                || m_currentGameId == (int)B3Game.WILDBALL)
+            {
+               gs.LCallSpeed = SystemSettingVm.Volume();          
+            }        
+            else if (m_currentGameId == (int)B3Game.SPIRIT76)
+            {
+                gs.LCallSpeed = SystemSettingVm.Volume();
+                gs.LCallSpeedBonus = SystemSettingVm.Volume();
+            }
+
 
             gs.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(m_currentGameId).ToList();
 
