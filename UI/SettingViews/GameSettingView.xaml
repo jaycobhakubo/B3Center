@@ -85,8 +85,8 @@
                 </TabItem>
 
                 <TabItem Header="76 Bingo">
-                    <Border>
-                        <local:GameSetting76Bingo HorizontalAlignment="Center" Margin="0,15,0,0" DataContext="{Binding GameSpirit76}"/>
+                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
+                        <local:GameSetting76Bingo  DataContext="{Binding GameSpirit76}"/>
                     </Border>
                 </TabItem>
 

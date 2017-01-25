@@ -697,8 +697,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
         #endregion
-
-
     }
     #region ENUM/DIC
 

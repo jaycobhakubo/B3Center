@@ -33,22 +33,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting)
         {
-            m_b3GameStting = _b3GameSetting;
-     
+            m_b3GameStting = _b3GameSetting;    
             GameCrzyBout = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.CRAZYBOUT)))), SetCurrentGameId((int)B3Game.CRAZYBOUT));
-
             GameJailBreak = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.JAILBREAK)))), SetCurrentGameId((int)B3Game.JAILBREAK));
-
             GameMayaMoney = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.MAYAMONEY)))), SetCurrentGameId((int)B3Game.MAYAMONEY));
-
             GameSpirit76 = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.SPIRIT76)))), SetCurrentGameId((int)B3Game.SPIRIT76));
-
             GameTimeBomb = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.TIMEBOMB)))), SetCurrentGameId((int)B3Game.TIMEBOMB));
-
             GameUkickEm = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.UKICKEM)))), SetCurrentGameId((int)B3Game.UKICKEM));
-
             GameWildBall = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDBALL)))), SetCurrentGameId((int)B3Game.WILDBALL));
-
             GameWildfire = new GameSettingVmAllGame((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == (int)B3Game.WILDFIRE)))), SetCurrentGameId((int)B3Game.WILDFIRE));    
         }
 
@@ -226,9 +218,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 || m_currentGameId == (int)B3Game.MAYAMONEY)
             {
                 gs.LCallSpeedMin = SystemSettingVm.Volume();
-                gs.LCallSpeed = SystemSettingVm.Volume();
-          
-              
+                gs.LCallSpeed = SystemSettingVm.Volume();                    
             }
             else if (m_currentGameId == (int)B3Game.JAILBREAK
                 || m_currentGameId == (int)B3Game.UKICKEM

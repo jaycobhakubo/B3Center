@@ -226,6 +226,7 @@
     <Compile Include="UI\OperatorViews\CharityView.xaml.cs">
       <DependentUpon>CharityView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\Class1.cs" />
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
       <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
     </Compile>
