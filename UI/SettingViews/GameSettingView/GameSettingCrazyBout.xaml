@@ -8,7 +8,6 @@
     <UserControl.Resources>
             <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
-        
     </UserControl.Resources>
     <Border>
         <Grid Name="gridCrazyBout">
@@ -33,7 +32,8 @@
 
                 <Label Content="Max Bet Level" />
                 <ComboBox 
-                Name="cmbxMaxBetLevel"  ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
+                Name="cmbxMaxBetLevel"  
+                    ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
                         SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
                Tag="9"             
                 >
@@ -54,7 +54,8 @@
             	 Tag="59"/>
 
                 <Label x:Name="lblCallSpeedOrMax"  Content="Call Speed Max"    />
-                <ComboBox  ItemsSource="{Binding Gamesetting_.LCallSpeedMin}" 
+                <ComboBox  
+                ItemsSource="{Binding Gamesetting_.LCallSpeedMin}" 
             	x:Name="cmbxCallSpeedOrMax" SelectedItem="{Binding Gamesetting_.CallSpeedMin, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="11">
                 </ComboBox>
