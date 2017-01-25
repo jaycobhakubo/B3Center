@@ -199,6 +199,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             switch (m_selectedSettingEquivToId)
             {
+                case 1:
+                    {
+                        //How do we know which game is being selected?
+                        break;
+                    }
                 case 3:
                     {
                         PlayerSettings _PlayerSettingNewValue = PlayerSetting_Vm.PlayerSetting_;
@@ -420,8 +425,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 case 1:
                     {                     
-                        GameSetting_Vm = new GameSettingVm(m_b3Setting);
-                        m_gameSettingView = new GameSettingView(GameSetting_Vm);
+               
+                        m_gameSettingView = new GameSettingView(GameSetting_Vm = new GameSettingVm(m_b3Setting));
                          view = m_gameSettingView;
                         break;
                     }

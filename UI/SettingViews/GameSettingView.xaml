@@ -6,7 +6,8 @@
              mc:Ignorable="d" 
               xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
                      xmlns:Converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
-            >
+             xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+             >
     <UserControl.Resources>
         <ResourceDictionary>
             
@@ -58,13 +59,113 @@
                 <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+        
+           
+
         </ResourceDictionary>
     </UserControl.Resources>
 
 
     <Border x:Name="m_layoutRoot" >
         <Grid Name="gridServerMessage" >
-            <TabControl Focusable="False"  Background="Transparent" >
+
+
+            <!--<TabControlDataContext="{Binding Source={StaticResource SharedSettingsViewModel}}" ItemsSource="{Binding SharedSettingsViewModelsTabList}">
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding Content}"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Header" Value="{Binding Header}"/>
+                    </Style>
+                </TabControl.ItemContainerStyle>
+                </TabControl>-->
+            <TabControl x:Name="MyTabControl"
+            ItemsSource="{Binding Binding TabItemList}"
+            SelectedItem="{Binding SelectedTabViewModel}">
+                <TabControl.ItemTemplate >
+                    
+                    
+                </TabControl.ItemTemplate>
+
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Header" Value="{Binding Header}" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
+
+            </TabControl>
+
+
+
+            <!--<TabControl x:Name="MyTabControl"
+            ItemsSource="{Binding Binding TabItemList}"
+            SelectedItem="{Binding SelectedTabViewModel}">
+                <TabControl.Resources>
+                    <DataTemplate x:Key="f">
+                        <local:GameSettingCrazyBoutView DataContext="{Binding GameCrzyBout}"/>
+                    </DataTemplate>
+                    <DataTemplate >
+                        <local:GameSettingJailBreak DataContext="{Binding GameJailBreak}"/>
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:GameSettingMayaMoney DataContext="{Binding  GameMayaMoney}"/>
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:GameSetting76Bingo  DataContext="{Binding GameSpirit76}"/>
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:GameSettingTimeBomb DataContext="{Binding GameTimeBomb}"/>
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:GameSettingUkickEm DataContext="{Binding GameUkickEm}"/>
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:GameSettingWildFire DataContext="{Binding GameWildBall}"/>
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:GameSettingWildBall DataContext="{Binding GameWildfire}"/>
+                    </DataTemplate>
+                </TabControl.Resources>
+
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Header" Value="{Binding Header}" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
+
+            </TabControl>-->
+
+
+
+            <!--<TabControl
+        ItemsSource="{Binding TabItemList}">
+                <TabControl.ItemTemplate>
+                    --><!-- this is the header template--><!--
+                    <DataTemplate>
+                        <TextBlock
+                    Text="{Binding Header}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding GameVm}"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>-->
+
+
+
+
+
+
+
+
+
+
+            <!--<TabControl Focusable="False"  Background="Transparent"  CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}">
                
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
@@ -77,7 +178,7 @@
                         <local:GameSettingJailBreak DataContext="{Binding GameJailBreak}"/>
                     </Border>
                 </TabItem>
-
+      
                 <TabItem Header="Maya Money">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
                         <local:GameSettingMayaMoney DataContext="{Binding  GameMayaMoney}"/>
@@ -96,6 +197,9 @@
                     </Border>
                 </TabItem>
 
+          
+            
+            
                 <TabItem Header="U kick Em" >
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
                         <local:GameSettingUkickEm DataContext="{Binding GameUkickEm}"/>
@@ -104,7 +208,7 @@
 
                 <TabItem Header="WildFire w/Bonus" >
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingWildFire DataContext="{Binding GameWildBall}"/> 
+                       
                     </Border>
                 </TabItem>
 
@@ -113,9 +217,11 @@
                         <local:GameSettingWildBall DataContext="{Binding GameWildfire}"/>
                     </Border>
                 </TabItem>
-               
-             
-            </TabControl>
+      
+
+            
+            
+            </TabControl>-->
         </Grid>
     </Border>
 
