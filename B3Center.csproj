@@ -126,6 +126,7 @@
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
     <Compile Include="Business\B3Controller.cs" />
+    <Compile Include="Helpers\AdvancedObservCollection.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\SelectedItemChangedcmd.cs" />

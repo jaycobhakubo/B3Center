@@ -12,19 +12,56 @@ using GameTech.Elite.UI;
 using Microsoft.Practices.Composite.Presentation.Commands;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Globalization;
+using GameTech.Elite.Client.Modules.B3Center.Helpers;
+using System.Collections.Specialized;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class OperatorViewModel : GameTech.Elite.Base.ViewModelBase
     {
+
+       private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
+        private Operator m_OperatorOrginalSettingSelected = new Operator();
+
         public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
             B3IconColor = b3Iconcolor;
+            SaveListSettingOriginalValue(operators_.ToList());
             Operators = operators_;
             SelectedOperator = Operators.FirstOrDefault();
+            m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
             SetCommand();
         }
 
+        #region Saved Original State
+        private void SaveListSettingOriginalValue(List<Operator> operators_)
+        {
+            foreach(Operator c  in operators_ )
+            {
+               m_lofOperatorOrginalSetting.Add(SaveSettingOriginalValue(c));
+            }
+        }
+
+        private Operator SaveSettingOriginalValue(Operator c)
+        {          
+                var g = new Operator();
+                g.Address = c.Address;
+                g.City = c.City;
+                g.ContactName = c.ContactName;
+                g.FaxNumber = c.FaxNumber;
+                g.IconColor = c.IconColor;
+                g.IconColorValue = c.IconColorValue;
+                g.OperatorId = c.OperatorId;
+                g.OperatorName = c.OperatorName;
+                g.OperatorNameDescription = c.OperatorNameDescription;
+                g.PhoneNumber = c.PhoneNumber;
+                g.State = c.State;
+                g.ZipCode = c.ZipCode;
+            return g;
+            
+        }
+
+        #endregion
 
         #region COMMAND ()
 
@@ -55,7 +92,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SelectedItemEvent()
         {
-         
+            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
             //System.Windows.MessageBox.Show("Hi there");
         }
 
@@ -82,8 +119,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void CancelSetting()
         {
-            var cv = MainViewModel.OperatorVm.m_selectedOperator;
-            //System.Windows.MessageBox.Show("Hi there");
+            SelectedOperator = m_OperatorOrginalSettingSelected;
+            m_OperatorOrginalSettingSelected= SaveSettingOriginalValue(SelectedOperator);
         }
 
         #endregion
@@ -124,6 +161,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("OperatorColorList");
             }
         }
+
+    
 
         public ObservableCollection<Operator> Operators
         {

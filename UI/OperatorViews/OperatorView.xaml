@@ -65,26 +65,26 @@
 
                             <StackPanel Grid.Column="1" Grid.Row="1">
                                 <Label Content="Operator Name" />
-                                <TextBox Height="22.22" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.OperatorName}" MaxLength="18"/>
+                                <TextBox Height="22.22" Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
 
                                 <Label Content="Description"  />
-                                <TextBox   Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
+                                <TextBox   Text="{Binding  SelectedOperator.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
 
                                 <Label Content="Address"    />
-                                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.Address}"/>
+                                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  SelectedOperator.Address}"/>
 
                                 <Label Content="City"  />
-                                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.City}"/>
+                                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  SelectedOperator.City}"/>
 
                                 <Label  Content="State"   />
-                                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.State}"/>
+                                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
 
                                 <Label  Content="Zip Code" />
                                 <!--<TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"/>-->
-                                <TextBox  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"></TextBox>
+                                <TextBox  MaxLength="5" Text="{Binding  SelectedOperator.ZipCode}"></TextBox>
                                 
                                 <Label Content="Contact Name" />
-                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ContactName}"/>
+                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
                           
 
                             </StackPanel>
@@ -93,14 +93,14 @@
 
 
                                 <Label Content="Icon Color" />
-                                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding B3IconColor}" DisplayMemberPath="ColorValue" SelectedItem="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.IconColorValue}"/>
+                                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding B3IconColor}" DisplayMemberPath="ColorValue" SelectedItem="{Binding  SelectedOperator.IconColorValue}"/>
 
                                 <Label Content="Phone Number" />
-                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.PhoneNumber}"
+                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"
  />
 
                                 <Label Content="Fax Number"  />
-                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.FaxNumber}"
+                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"
  />
 
                             </StackPanel>
