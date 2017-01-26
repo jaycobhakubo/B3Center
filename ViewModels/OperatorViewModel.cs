@@ -19,10 +19,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class OperatorViewModel : GameTech.Elite.Base.ViewModelBase
     {
-
-       private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
+        #region MEMBERS
+        #region (private only)
+        private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
         private Operator m_OperatorOrginalSettingSelected = new Operator();
-
+        #endregion
+        #endregion
+        #region CONSTRUCTOR
         public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
             B3IconColor = b3Iconcolor;
@@ -32,7 +35,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
             SetCommand();
         }
-
+        #endregion
+        #region METHOD
         #region Saved Original State
         private void SaveListSettingOriginalValue(List<Operator> operators_)
         {
@@ -60,9 +64,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return g;
             
         }
-
         #endregion
-
+        #endregion
         #region COMMAND ()
 
         public ICommand SelectedItemChanged { get; private set; }
@@ -81,7 +84,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             });
         }
 
-        //WAIT TILL THE COMMAND IS COMPLETED
+        //Wait until 
         private void RunSavedCommand()
         {
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
@@ -92,8 +95,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SelectedItemEvent()
         {
+            //Saved current state
             m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
-            //System.Windows.MessageBox.Show("Hi there");
+        
         }
 
         public void SaveSetting()
@@ -124,7 +128,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         #endregion
-
+        #region PROPERTIES 
+        #region(w members assoc w properties)
         private List<B3IconColor> m_B3IconColor;
         public List<B3IconColor> B3IconColor
         {
@@ -136,10 +141,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
-      
-
-        private B3IconColor m_selectedColor;
         public B3IconColor SelectedColor
         {
             get
@@ -162,13 +163,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-    
-
-        public ObservableCollection<Operator> Operators
-        {
-            get;set;
-        }
-
         private Operator m_selectedOperator;
         public Operator SelectedOperator
         {
@@ -179,7 +173,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_selectedOperator.IconColorValue = m_B3IconColor.Single(l => l.ColorID == value.IconColor);
                 RaisePropertyChanged("selectedOperator");
             }
-        }   
+        }
+
+        public ObservableCollection<Operator> Operators
+        {
+            get; set;
+        }
+        #endregion
+        #endregion
     }
 }
 
