@@ -55,6 +55,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SelectedItemEvent()
         {
+         
             //System.Windows.MessageBox.Show("Hi there");
         }
 
@@ -81,8 +82,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void CancelSetting()
         {
-         
-        
+            var cv = MainViewModel.OperatorVm.m_selectedOperator;
+            //System.Windows.MessageBox.Show("Hi there");
         }
 
         #endregion
@@ -113,7 +114,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_selectedOperator.IconColorValue = value;
                 RaisePropertyChanged("SelectedColor");
             }
-
         }
 
         private List<B3IconColor> m_operatorcolorList;

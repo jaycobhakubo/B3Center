@@ -163,7 +163,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        /// </summary>
         public SettingViewModel SettingVm { get; private set; }
 
-        public OperatorViewModel OperatorVm { get; private set; }
+        public static OperatorViewModel OperatorVm { get; private set; }
 
 
         #endregion
