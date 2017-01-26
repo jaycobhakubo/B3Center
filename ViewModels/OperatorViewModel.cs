@@ -23,8 +23,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region (private only)
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
         private Operator m_OperatorOrginalSettingSelected = new Operator();
+        
         #endregion
-        #endregion.;l,mi
+        #endregion
         #region CONSTRUCTOR
         public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
@@ -39,7 +40,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
 
-       
+        private bool m_isNew;
+        public bool IsNew 
+        {
+            get { return m_isNew; }
+            set 
+            { m_isNew = value;
+            RaisePropertyChanged("IsNew");
+            }
+
+        }
+
+        private int m_colorSelectedIndex;
+        public int ColorSelectedIndex
+        {
+            get { return m_colorSelectedIndex; }
+            set
+            {
+                m_colorSelectedIndex = value;
+                RaisePropertyChanged("ColorSelectedIndex");
+            }
+
+        }
 
         #region METHOD
         #region Saved Original State
@@ -59,7 +81,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 g.ContactName = c.ContactName;
                 g.FaxNumber = c.FaxNumber;
                 g.IconColor = c.IconColor;
-                g.IconColorValue = c.IconColorValue;
+                //g.IconColorValue = c.IconColorValue;
                 g.OperatorId = c.OperatorId;
                 g.OperatorName = c.OperatorName;
                 g.OperatorNameDescription = c.OperatorNameDescription;
@@ -108,14 +130,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ICommand NewOperatorCmd{get;set;}
         private void NewOperatorCommand()
         {
-            //var g = new Operator();
-            SelectedOperator.OperatorId = 0;
+        
+            m_selectedOperator = new Operator();
             SelectedOperator.Address = System.String.Empty;
             SelectedOperator.City = System.String.Empty;
             SelectedOperator.ContactName = System.String.Empty;
             SelectedOperator.FaxNumber = System.String.Empty;
-            SelectedOperator.IconColor = -1;
-            SelectedOperator.IconColorValue = new Business.B3IconColor();
+            SelectedOperator.IconColor = m_B3IconColor.FirstOrDefault().ColorID;
+            //SelectedOperator.IconColorValue = new Business.B3IconColor();
             SelectedOperator.OperatorId = 0;
             SelectedOperator.OperatorName = System.String.Empty;
             SelectedOperator.OperatorNameDescription = System.String.Empty;
@@ -123,7 +145,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedOperator.State = System.String.Empty;
             SelectedOperator.ZipCode = System.String.Empty;
             RaisePropertyChanged("SelectedOperator");
-            
+            RaisePropertyChanged("SelectedColor");
+            //IsNew = true;           
         }
 
 
@@ -143,7 +166,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             try
             {
-                SelectedOperator.IconColor = SelectedOperator.IconColorValue.ColorID;
+                //SelectedOperator.IconColor = SelectedOperator.IconColorValue.ColorID;
                 SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 1);
                 try
                 {
@@ -184,6 +207,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ICommand SelectedItemChanged { get; private set; }
         private void SelectedItemEvent()
         {
+            if (IsNew == true)
+            {
+                IsNew = false;
+                ColorSelectedIndex = B3IconColor.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
+            }
             //Saved current state
             m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
 
@@ -206,7 +234,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             bool success = true;
             try
             {
-                SelectedOperator.IconColor = SelectedOperator.IconColorValue.ColorID;
+                //SelectedOperator.IconColor = SelectedOperator.IconColorValue.ColorID;
                 SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 0);
                 try
                 {
@@ -232,12 +260,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
             }
         }
-
-  
-
-    
-
-      
 
         #endregion
         #region (undo)
@@ -278,7 +300,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                  if (value != null)
                  {
                      m_selectedOperator = value;
-                     m_selectedOperator.IconColorValue = m_B3IconColor.Single(l => l.ColorID == value.IconColor);
+                     SelectedColor = convertToB3Color(value.IconColor);
+                  
                  }
                  RaisePropertyChanged("SelectedOperator");
              }
@@ -299,15 +322,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_selectedOperator.IconColorValue;
+                return convertToB3Color(m_selectedOperator.IconColor);
             }
             set
             {
-                m_selectedOperator.IconColorValue = value;
+                m_selectedOperator.IconColor = value.ColorID;
                 RaisePropertyChanged("SelectedColor");
             }
         }
 
+
+        private B3IconColor convertToB3Color(int IconColor)
+        {
+            var colorValue = B3IconColor.Single(l => l.ColorID == IconColor);
+            return colorValue;
+        }
+
+        
         private List<B3IconColor> m_operatorcolorList;
         public List<B3IconColor>OperatorColorList
         {

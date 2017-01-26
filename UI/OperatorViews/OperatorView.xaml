@@ -17,6 +17,21 @@
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
         </Style>
+
+        <Style  x:Key="ClearItemSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="SelectedItem" Value="{Binding SelectedOperator.IconColorValue}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsNew}"  Value="True">
+                    <Setter Property="SelectedIndex" Value="-1" ></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsNew}"  Value="False">
+                    <Setter Property="SelectedIndex" Value="{Binding ColorSelectedIndex}" ></Setter>
+
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
         </Style>
@@ -91,9 +106,16 @@
 
                             <StackPanel Grid.Row="1" Grid.Column="3">
 
-
+                                <!--SelectedItem="{Binding  SelectedOperator.IconColorValue}"-->
                                 <Label Content="Icon Color" />
-                                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding B3IconColor}" DisplayMemberPath="ColorValue" SelectedItem="{Binding  SelectedOperator.IconColorValue}"/>
+                                <!--<ComboBox Style="{StaticResource ClearItemSelection}" Name="cmbxIconColor" 
+                                          ItemsSource="{Binding B3IconColor}" 
+                                          DisplayMemberPath="ColorValue"/>-->
+
+                                <ComboBox  Name="cmbxIconColor" 
+                                          ItemsSource="{Binding B3IconColor}" 
+                                          DisplayMemberPath="ColorValue"
+                                           SelectedItem="{Binding SelectedColor}"/>
 
                                 <Label Content="Phone Number" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"
