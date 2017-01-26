@@ -137,8 +137,8 @@
                                 HorizontalAlignment="Center" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                             Command="{Binding SaveDeleteOperatorcmd}" 
-                                            CommandParameter="0"
+                             Command="{Binding SaveOperatorcmd}" 
+                                          
                                 Tag="1"/>
                                     <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="2"
@@ -156,8 +156,8 @@
                                 HorizontalAlignment="Right"
                                 Name="btnDelete" 
                                 VerticalAlignment="Top" BorderBrush="Red"
-                                Command="{Binding SaveDeleteOperatorcmd}"  
-                                      CommandParameter="1"       
+                                Command="{Binding DeleteOperatorcmd}"  
+                                   
                             />
 
                                 </Grid>
@@ -184,7 +184,14 @@
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}"  CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}" >
+                        <ListBox 
+                            Name="lstbx_OperatorList" 
+                            Margin="15"   
+                            ItemsSource="{Binding Operators}" 
+                            SelectedItem="{Binding SelectedOperator}"  
+                            CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}"
+                            IsSynchronizedWithCurrentItem="True"
+                            >
                         </ListBox>
                     </ScrollViewer>
                     <Button Grid.Row="1"
