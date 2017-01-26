@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d" 
+               xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
    >
     <UserControl.Resources>
 
@@ -79,10 +80,11 @@
                                 <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.State}"/>
 
                                 <Label  Content="Zip Code" />
-                                <TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"/>
-
+                                <!--<TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"/>-->
+                                <TextBox  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"></TextBox>
+                                
                                 <Label Content="Contact Name" />
-                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.PhoneNumber}"/>
+                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ContactName}"/>
                           
 
                             </StackPanel>
@@ -91,7 +93,7 @@
 
 
                                 <Label Content="Icon Color" />
-                                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding B3IconColor}" DisplayMemberPath="ColorValue" SelectedItem="{Binding SelectedColor}"/>
+                                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding B3IconColor}" DisplayMemberPath="ColorValue" SelectedItem="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.IconColorValue}"/>
 
                                 <Label Content="Phone Number" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.PhoneNumber}"
@@ -134,7 +136,7 @@
                                 HorizontalAlignment="Right" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                             
+                             Command="{Binding SaveSettingcmd}" 
                                 Tag="1"/>
                                     <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="1"
@@ -170,7 +172,7 @@
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}">
+                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}"  CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}" >
                         </ListBox>
                     </ScrollViewer>
                     <Button Grid.Row="1"

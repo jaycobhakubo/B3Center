@@ -221,9 +221,6 @@
     <Compile Include="UI\ReportViews\WinnerCardsReportView.xaml.cs">
       <DependentUpon>WinnerCardsReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\OperatorViews\CharityView.xaml.cs">
-      <DependentUpon>CharityView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
       <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
     </Compile>
@@ -441,10 +438,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\OperatorViews\CharityView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -617,9 +610,7 @@
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Operator\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

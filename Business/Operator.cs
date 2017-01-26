@@ -25,6 +25,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             PhoneNumber = phonenumber;
             FaxNumber = faxnumber;
             IconColor = iconcolor;
+            //IconColorValue = //B3IconColor.Single(l => l.ColorID == value.IconColor);
         }
 
         //Session Stsart
