@@ -127,19 +127,21 @@
                                 <Grid Grid.Column="1" Grid.Row="14">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition/>
-                             
+
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0"
+                                    <Button Grid.Column="1"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Save"
-                                HorizontalAlignment="Right" 
+                                HorizontalAlignment="Center" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                             Command="{Binding SaveSettingcmd}" 
+                             Command="{Binding SaveDeleteOperatorcmd}" 
+                                            CommandParameter="0"
                                 Tag="1"/>
                                     <!--Click="btnSave_Click"-->
-                                    <Button Grid.Column="1"
+                                    <Button Grid.Column="2"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Cancel"
                                 HorizontalAlignment="Left"
@@ -148,10 +150,19 @@
                                 Command="{Binding CancelSettingcmd}"  
                             />
                                     <!--Click="btnCancel_Click"-->
+                                    <Button Grid.Column="0"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Delete"
+                                HorizontalAlignment="Right"
+                                Name="btnDelete" 
+                                VerticalAlignment="Top" BorderBrush="Red"
+                                Command="{Binding SaveDeleteOperatorcmd}"  
+                                      CommandParameter="1"       
+                            />
 
                                 </Grid>
                             </Border>
-                            <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                            <Border  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
                                 <Label  HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
                             </Border>
 

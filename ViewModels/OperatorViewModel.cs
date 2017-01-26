@@ -24,13 +24,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
         private Operator m_OperatorOrginalSettingSelected = new Operator();
         #endregion
-        #endregion
+        #endregion.;l,mi
         #region CONSTRUCTOR
         public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
-            B3IconColor = b3Iconcolor;
+            B3IconColor = b3Iconcolor;        
             SaveListSettingOriginalValue(operators_.ToList());
-            Operators = operators_;
+            //Do i really have to convert u from a different type just to put u in order.
+            var Orderby = operators_.OrderBy(l => l.OperatorName);
+            Operators = new ObservableCollection<Operator>(Orderby);
+
             SelectedOperator = Operators.FirstOrDefault();
             m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
             SetCommand();
@@ -69,12 +72,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region COMMAND ()
 
         public ICommand SelectedItemChanged { get; private set; }
-        public ICommand SaveSettingcmd { get; set; }
+        public ICommand SaveDeleteOperatorcmd { get; set; }
         public ICommand CancelSettingcmd { get; set; }
 
         private void SetCommand()
         {
-            SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
+            SaveDeleteOperatorcmd = new RelayCommand(parameter =>
+            {
+                RunSaveDeleteCommand(Convert.ToInt32(parameter));
+            });
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
             SelectedItemChanged = new DelegateCommand<Operator>(obj =>
             {
@@ -85,10 +91,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         //Wait until 
-        private void RunSavedCommand()
+        private void RunSaveDeleteCommand(int SaveOrDelete)
         {
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            Task save = Task.Factory.StartNew(() => SaveSetting());
+            Task save = Task.Factory.StartNew(() => SaveDeleteOperator(SaveOrDelete));
             save.Wait();
             Mouse.OverrideCursor = null;
         }
@@ -100,12 +106,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         
         }
 
-        public void SaveSetting()
+        public void SaveDeleteOperator(int SaveOrDelete)
         {
             try
             {
                 SelectedOperator.IconColor = SelectedOperator.IconColorValue.ColorID;
-                SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 0);
+                SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, SaveOrDelete);
                 try
                 {
                     msg.Send();
@@ -115,6 +121,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     if (msg.ReturnCode != ServerReturnCode.Success)
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
+
+                //Remove the operator;
+                if (SaveOrDelete == 1)
+                {
+
+                  var currentIndexOperator =  m_operators.IndexOf(SelectedOperator);
+                    m_operators.RemoveAt(currentIndexOperator);
+                    Operators = m_operators;
+                }
+
+               // var testccc = Operators;
                 //lblSavedNotification.Visibility = Visibility.Visible;
             }
             catch
@@ -175,12 +192,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private ObservableCollection<Operator> m_operators;
         public ObservableCollection<Operator> Operators
         {
-            get; set;
+            get
+            {
+                return m_operators;
+            }
+            set
+            {
+                m_operators = value;
+                RaisePropertyChanged("Operators");
+
+            }
         }
         #endregion
         #endregion
+
+
     }
 }
 

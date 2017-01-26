@@ -25,44 +25,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
     /// </summary>
     public partial class OperatorView : UserControl
     {
-
-        #region MEMBER VARIABLEs
-
-        //private ObservableCollection<GameTech.Elite.Client.Modules.B3Center.Business.Operator> m_operators;
-        //private readonly List<ToggleButton> m_menuItems = new List<ToggleButton>();
-        //private readonly CharityView m_charity = new CharityView();
-        ////private CharityView m_newOperator;
-        //private Button m_btnSave;
-        //private Button m_btnDelete = new Button();
-        //private int m_currentOperatorSelected;
-        //private Button btnBackOperatorSettings;
-        //private Button btnNewOperator;
-        ////private Button m_btnDelete;
-        //private Panel stkpnlOperatorList = new StackPanel();
-        //private Label lblSavedNotification;
-        //private ContentPresenter CharityTransitionControl = new ContentPresenter();
-        //UserControl view = new UserControl();
-
-        #endregion
-
-        #region CONSTRUCTORs
-
         public OperatorView()      
         {
             InitializeComponent();
-            DataContext = this;
-            //m_operators  = SettingViewModel.Instance.Operators;     
-            //m_charity = new CharityView();
-            //m_btnSave = m_charity.BtnSave;
-            ////m_btnDelete = m_charity.btnDelete;
-            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
-            //m_btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
-            //m_currentOperatorSelected = 0;
-            //FillOperatorList();
+            DataContext = this;      
         }
-
-        #endregion
-
+  
         #region METHODs
 
         /// <summary>
