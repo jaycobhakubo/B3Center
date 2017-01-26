@@ -102,6 +102,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
     {
         #region Constructors
 
+        public B3IconColor()
+        {
+        }
+
         public B3IconColor(int colorID, string colorValue)
         {
             ColorID = colorID;
