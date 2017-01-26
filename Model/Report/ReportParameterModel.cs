@@ -39,22 +39,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         //public string AMPM { get; set; }
 
 
-        private int m_dateYear;
+        //private int m_dateYear;
         public int dateYear { get; set; }
 
-        private Session m_b3_Session;
+        //private Session m_b3_Session;
         public Session b3Session { get; set; }
 
-        private string m_b3_AccountNumber;
+        //private string m_b3_AccountNumber;
         public string b3AccountNumber { get; set; }
 
-        private string m_b3_Category;
+        //private string m_b3_Category;
         public string b3Category { get; set; }
 
-        private string m_b3StartingCard;
+        //private string m_b3StartingCard;
         public string b3StartingCard { get; set; }
 
-        private string m_b3EndingCard;
+        //private string m_b3EndingCard;
         public string b3EndingCard { get; set; }
 
         public ReportId rptid { get; set; }

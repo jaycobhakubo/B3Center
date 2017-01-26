@@ -120,6 +120,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             get;
             set;
         }
+
+        public B3IconColor IconColorValue
+        {
+            get;
+            set;
+        }
+
         #endregion
 
 

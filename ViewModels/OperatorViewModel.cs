@@ -12,84 +12,103 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class OperatorViewModel : GameTech.Elite.Base.ViewModelBase
     {
-
-
         public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
-            operators = operators_;
-            m_charityVm = new CharityViewModel(b3Iconcolor);
-            selectedOperator = operators.FirstOrDefault();
-
+            OperatorColorList = b3Iconcolor;
+            Operators = operators_;
+            SelectedOperator = Operators.FirstOrDefault();
+           
         }
 
-        //This is where get the operator message happen.
 
-        private ObservableCollection<Operator> m_operators;
+        //private B3IconColor getIconColor(int colorId)
+        //{
+        //    B3IconColor operatorColor;
 
-        public ObservableCollection<Operator> operators
+        //        return;
+        //}
+
+        private List<B3IconColor> m_B3IconColor;
+        public List<B3IconColor> B3IconColor
         {
-            get { return m_operators; }
-
+            get { return m_B3IconColor; }
             set
             {
-                m_operators = value;
-                RaisePropertyChanged("operators");
+                m_B3IconColor = value;
+                RaisePropertyChanged("B3IconColor");
             }
         }
 
 
+
+
+        private B3IconColor m_selectedColor;
+        public B3IconColor SelectedColor
+        {
+            get { return m_selectedColor; }
+            set
+            {
+                m_selectedColor = value;
+                RaisePropertyChanged("SelectedColor");
+            }
+
+        }
+
+        private List<B3IconColor> m_operatorcolorList;
+        public List<B3IconColor>OperatorColorList
+        {
+            get { return m_operatorcolorList; }
+            set { m_operatorcolorList = value;
+                RaisePropertyChanged("OperatorColorList");
+            }
+        }
+
+        //private ObservableCollection<Operator> m_operators;
+        public ObservableCollection<Operator> Operators
+        {
+            get;set;
+            //get { return m_operators; }
+            //set
+            //{
+            //    m_operators = value;
+            //    RaisePropertyChanged("operators");
+            //}
+        }
+
+
         private Operator m_selectedOperator;
-        private CharityViewModel m_charityVm;
-        public Operator selectedOperator
+        public Operator SelectedOperator
         {
             get { return m_selectedOperator; }
             set
             {
                 m_selectedOperator = value;
-                charityVm.Operatorc = value;
                 RaisePropertyChanged("selectedOperator");
             }
-        }
-
-
-        public CharityViewModel charityVm
-        {
-            get { return m_charityVm; }
-            set { m_charityVm = value;
-            RaisePropertyChanged("charityVm");
-            }
-        }
-
-        public string curOperatorName
-        {
-            get {return selectedOperator.OperatorName; }
-            set {
-                selectedOperator.OperatorName = value;
-                RaisePropertyChanged("curOperatorName");
-            }
-        }
-
-        ObservableCollection<OperatorModel> m_operatorso;
-        public ObservableCollection<OperatorModel> operatorso
-        {
-            get { return m_operatorso; }
-            set { m_operatorso = value; }
-        }
-
-
-        //public string OperatorName
-        //{
-        //    //get {return Operators. };
-        //    //set;
-        //}
-        public string Description { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
-        public string ContactName { get; set; }
-        public string IconColor { get; set; }
-        public string PhoneNumber { get; set; }
-        public string FaxNumber { get; set; }
+        }   
     }
 }
+
+
+//public Operator Operatorc
+//{
+//    get { return m_operator; }
+//    set
+//    {
+//        m_operator = value;
+//        SelectedColor = m_B3IconColor.Single(l => l.ColorID == value.IconColor);
+//        RaisePropertyChanged("Operatorc");
+
+//    }
+//}
+
+//private B3IconColor m_selectedColor;
+//public B3IconColor SelectedColor
+//{
+//    get { return m_selectedColor; }
+//    set
+//    {
+//        m_selectedColor = value;
+//        RaisePropertyChanged("SelectedColor");
+//    }
+//}

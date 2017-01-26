@@ -6,11 +6,7 @@
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d" 
    >
-
     <UserControl.Resources>
-        
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-     
 
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
@@ -25,16 +21,6 @@
         </Style>
 
     </UserControl.Resources>
-
-    <!--<Border Grid.Column="1" >
-        <ContentPresenter 
-                            KeyboardNavigation.TabNavigation="Local"
-                            Name="CharityTransitionControl"                          
-                          >
-
-        </ContentPresenter>
-    </Border>-->
-
     <Border >
         <Grid >
             <Grid.ColumnDefinitions>
@@ -62,8 +48,62 @@
                             </Style>
                         </Border.Resources>
                
-                        <local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
-                
+                        <!--<local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>-->
+                        <Grid  Name="gridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="279"/>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="279"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <Label Content="Operator Name" />
+                                <TextBox Height="22.22" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.OperatorName}" MaxLength="18"/>
+
+                                <Label Content="Description"  />
+                                <TextBox   Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
+
+                                <Label Content="Address"    />
+                                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.Address}"/>
+
+                                <Label Content="City"  />
+                                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.City}"/>
+
+                                <Label  Content="State"   />
+                                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.State}"/>
+
+                                <Label  Content="Zip Code" />
+                                <TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"/>
+
+                                <Label Content="Contact Name" />
+                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.PhoneNumber}"/>
+                          
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="3">
+
+
+                                <Label Content="Icon Color" />
+                                <ComboBox Name="cmbxIconColor" ItemsSource="{Binding OperatorColorList}" DisplayMemberPath="ColorValue" SelectedItem="{Binding SelectedOpertor.IconColor}"/>
+
+                                <Label Content="Phone Number" />
+                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.PhoneNumber}"
+ />
+
+                                <Label Content="Fax Number"  />
+                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.FaxNumber}"
+ />
+
+                            </StackPanel>
+
+                        </Grid>
                     </Border>
 
                     <Border Grid.Row="1"  Margin="8">
@@ -130,7 +170,7 @@
                     </Grid.RowDefinitions>
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding operators}" SelectedItem="{Binding selectedOperator}">
+                        <ListBox Name="lstbx_OperatorList" Margin="15"   ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}">
                         </ListBox>
                     </ScrollViewer>
                     <Button Grid.Row="1"
@@ -140,7 +180,6 @@
                             Content="New Operator"></Button>
                 </Grid>
             </Border>
-            <!--SelectedItem="{Binding OperatorSelected}"  >-->
         </Grid>
     </Border>
 </UserControl>
