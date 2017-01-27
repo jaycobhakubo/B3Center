@@ -121,7 +121,7 @@
                                           DisplayMemberPath="ColorValue"/>-->
 
                                 <ComboBox  Name="cmbxIconColor" 
-                                          ItemsSource="{Binding B3IconColor}" 
+                                          ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
                                            SelectedItem="{Binding SelectedColor}"/>
 

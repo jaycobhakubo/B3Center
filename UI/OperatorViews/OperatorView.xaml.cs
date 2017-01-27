@@ -23,21 +23,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
     /// </summary>
     public partial class OperatorView : UserControl
     {
-
-        //OperatorViewModel myvm;
-
         public OperatorView()      
         {
             InitializeComponent();
             DataContext = this;
-            var ttt = DataContext;
         }
 
+        /// <summary>
+        /// For every change of operator in the list. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstbx_OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox x = (ListBox)sender;
             var tt = x.SelectedItem;
-            
+            var VmAccess = OperatorViewModel.Instance;
+            VmAccess.SelectedItemChangevm();            
         }
     }
 }
