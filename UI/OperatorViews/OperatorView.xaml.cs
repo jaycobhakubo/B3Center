@@ -40,11 +40,37 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             var z = x.SelectedItem;
             OperatorViewModel y = (OperatorViewModel)x.DataContext;
 
-            var g = y.SelectedOperator;
+            Operator i = new Operator();
 
-            var tt = x.SelectedItem;
+            i = y.SelectedOperator;
+            //m_selectedOperator = SaveSettingOriginalValue(i);
+
+            //var tt = x.SelectedItem;
             var VmAccess = OperatorViewModel.Instance;
-            VmAccess.SelectedItemChangevm(g);            
+            VmAccess.SelectedItemChangevm(i);//This i still bind to the collection     
+            
         }
+
+        private Operator m_selectedOperator; 
+      //  //Unbind the collection
+      //  private Operator SaveSettingOriginalValue(Operator c)
+      //  {
+      //      var g = new Operator();
+      //      g.Address = c.Address;
+      //      g.City = c.City;
+      //      g.ContactName = c.ContactName;
+      //      g.FaxNumber = c.FaxNumber;
+      //      g.IconColor = c.IconColor;
+      //      //g.IconColorValue = c.IconColorValue;
+      //      g.OperatorId = c.OperatorId;
+      //      g.OperatorName = c.OperatorName;
+      //      g.OperatorNameDescription = c.OperatorNameDescription;
+      //      g.PhoneNumber = c.PhoneNumber;
+      //      g.State = c.State;
+      //      g.ZipCode = c.ZipCode;
+      //      return g;
+      //  }
+
+       
     }
 }

@@ -33,11 +33,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
          public void Initialize(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
             OperatorColorList = b3Iconcolor;
-            SaveListSettingOriginalValue(operators_.ToList());
+            //SaveListSettingOriginalValue(operators_.ToList());
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             Operators = new ObservableCollection<Operator>(Orderby);
             SelectedOperator = Operators.FirstOrDefault();
-            m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
+            m_OperatorOrginalSettingSelected = (SaveOperatorOriginalValue(SelectedOperator));
             SetCommand();
         }
         //This will access anything that is public on this View Model.
@@ -72,14 +72,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #region METHOD
         #region Saved Original State
-        private void SaveListSettingOriginalValue(List<Operator> operators_)
-        {
-            foreach(Operator c  in operators_ )
-            {
-               m_lofOperatorOrginalSetting.Add(SaveSettingOriginalValue(c));
-            }
-        }
-        private Operator SaveSettingOriginalValue(Operator c)
+        //private void SaveListSettingOriginalValue(List<Operator> operators_)
+        //{
+        //    foreach(Operator c  in operators_ )
+        //    {
+        //       m_lofOperatorOrginalSetting.Add(SaveSettingOriginalValue(c));
+        //    }
+        //}
+        private Operator SaveOperatorOriginalValue(Operator c)
         {          
                 var g = new Operator();
                 g.Address = c.Address;
@@ -127,8 +127,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             NewOperatorCmd = new RelayCommand(parameter => 
                 {
                     NewOperatorCommand();
-                });
-          
+                });          
         }
 
 
@@ -202,27 +201,57 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
+        
+
+        //If equal = true
+        //not equal = false
+        private bool CompareOperator(Operator c, Operator g)//a = previous, b = current
+        {
+            bool result = true;
+            if 
+                (             
+                        g.Address != c.Address ||
+                        g.City != c.City ||
+                        g.ContactName != c.ContactName ||
+                        g.FaxNumber != c.FaxNumber ||
+                        g.IconColor != c.IconColor||    
+                        g.OperatorId != c.OperatorId||
+                        g.OperatorName != c.OperatorName||
+                        g.OperatorNameDescription != c.OperatorNameDescription||
+                        g.PhoneNumber != c.PhoneNumber||
+                        g.State != c.State||
+                        g.ZipCode != c.ZipCode
+                )
+            {
+                result = false;
+            }
+
+
+            return result;
+        }
+        
         public void SelectedItemChangevm(Operator cSelectedOperator)
         {
-            
-
-            if (cSelectedOperator != m_prevOperatorSelected || m_prevOperatorSelected != null)
-            {
-                Operator prevSelectedOperator = m_operators.Single(l => l.OperatorId == m_prevOperatorSelected.OperatorId);
-                prevSelectedOperator = m_prevOperatorSelected;
-                m_prevOperatorSelected = new Operator();
-                m_prevOperatorSelected = cSelectedOperator;
-
+           //Get the previous operator selected;
+            if (m_prevOperatorSelected.OperatorId != 0)
+            {          
+                    var x = m_operators.Single(l => l.OperatorId == m_prevOperatorSelected.OperatorId);//I believe this linq unbind it to the collection
+                    if (CompareOperator(m_prevOperatorSelected, x))
+                    {
+                        //System.Windows.MessageBox.Show("No change");
+                        m_prevOperatorSelected = SaveOperatorOriginalValue(cSelectedOperator);                    
+                    }
+                    else//Not equal
+                    {
+                        x = m_prevOperatorSelected;//not saving back to the collection?
+                        m_prevOperatorSelected = SaveOperatorOriginalValue(cSelectedOperator);
+                    }
+                
             }
-            
-
-            //if (IsNew == true)
-            //{
-            //    IsNew = false;
-            //    ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
-            //}
-            ////Saved current state
-            //m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+            else
+            {
+                m_prevOperatorSelected = SaveOperatorOriginalValue(cSelectedOperator);
+            }
         }
         #endregion
         #region (save)
@@ -273,7 +302,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             if (success)
             {
-                m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+                m_OperatorOrginalSettingSelected = SaveOperatorOriginalValue(SelectedOperator);
             }
         }
 
@@ -310,7 +339,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             if (success)
             {
-                m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+                m_OperatorOrginalSettingSelected = SaveOperatorOriginalValue(SelectedOperator);
             }
         }
 
@@ -318,10 +347,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region (undo)
          public ICommand UndoChangesCmd { get; set; }
          public void UndoChanges()
-        {
-            SelectedOperator = m_OperatorOrginalSettingSelected;
-            m_OperatorOrginalSettingSelected= SaveSettingOriginalValue(SelectedOperator);
-        }
+         {
+             SelectedOperator = m_OperatorOrginalSettingSelected;//Undo changes
+             m_OperatorOrginalSettingSelected = SaveOperatorOriginalValue(SelectedOperator);
+         }
         #endregion
 
         #endregion
