@@ -96,17 +96,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return g;         
         }
         #endregion
-        public void SelectedItemChangevm()
-        {
-            //if (IsNew == true)
-            //{
-            //    IsNew = false;
-            //    ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
-            //}
-            ////Saved current state
-            //m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
-        }
-
         #endregion
         #region COMMAND/EVENT
 
@@ -114,7 +103,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             SaveOperatorcmd = new RelayCommand(parameter =>
             {
-                RunSaveCommand();
+                    RunSaveCommand();
             });
 
             DeleteOperatorcmd = new RelayCommand(parameter =>
@@ -212,19 +201,72 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
-       
+        public void SelectedItemChangevm()
+        {
+            //if (IsNew == true)
+            //{
+            //    IsNew = false;
+            //    ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
+            //}
+            ////Saved current state
+            //m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+        }
         #endregion
         #region (save)
         public ICommand SaveOperatorcmd { get; set; }
         private void RunSaveCommand()
         {
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            Task save = Task.Factory.StartNew(() => SaveOperator());
-            save.Wait();
+            if (SelectedOperator != null || SelectedOperator.OperatorId != 0)//Update Save
+            {
+                Task save = Task.Factory.StartNew(() => UpdateSelectedOperator());
+                save.Wait();
+            }
+            else//New Save
+            {
+                Task save = Task.Factory.StartNew(() => SaveNewOperator());
+                save.Wait();
+            }          
             Mouse.OverrideCursor = null;
         }
 
-        public void SaveOperator()//Update or create
+        
+        public void UpdateSelectedOperator()//Update
+        {
+            bool success = true;
+            try
+            {
+                SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 0);
+                try
+                {
+                    msg.Send();
+                }
+                catch
+                {
+                    success = false;
+                    if (msg.ReturnCode != ServerReturnCode.Success)
+                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+                }
+
+                var Operators_ = m_operators.ToList();
+                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
+                var indexofcurrentoperator = m_operators.IndexOf(SelectedOperator);
+                OperatorSelectedIndex = indexofcurrentoperator;
+            }
+            catch
+            {
+                success = false;
+            }
+
+            if (success)
+            {
+                m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+            }
+        }
+
+
+
+        public void SaveNewOperator()//new
         {
             bool success = true;
             try
@@ -246,37 +288,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 Operators_.Add(m_selectedOperator);                  
                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
                 var indexofcurrentoperator = m_operators.IndexOf(SelectedOperator);
-                OperatorSelectedIndex = indexofcurrentoperator;
-
-                //if (IsNew)
-                //{
-
-                //}
-                //else
-                //{
-                   
-                //}
-
-                ////Auto select operator
-                //if (indexOperator == 0 || m_operators.Count != 0)
-                //{
-                //    SelectedOperator = m_operators.FirstOrDefault();
-                //}
-                //else if (m_operators.Count > 0)
-                //{
-                //    SelectedOperator = m_operators[indexOperator - 1];
-                //}
-                //else
-                //{
-
-                //}
-
-                //lblSavedNotification.Visibility = Visibility.Visible;
+                OperatorSelectedIndex = indexofcurrentoperator;            
             }
             catch
             { 
                 success = false;
-                //Not sure if this catch will return(exit)
             }
 
             if (success)
