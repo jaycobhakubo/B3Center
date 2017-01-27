@@ -26,13 +26,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
     public partial class OperatorView : UserControl
     {
 
-        OperatorViewModel myvm;
+        //OperatorViewModel myvm;
 
         public OperatorView()      
         {
             InitializeComponent();
             DataContext = this;
-            myvm  = (OperatorViewModel)DataContext;   
+            //myvm  = (OperatorViewModel)DataContext;   
         }
   
         #region METHODs

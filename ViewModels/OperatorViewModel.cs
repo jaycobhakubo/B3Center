@@ -29,48 +29,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region CONSTRUCTOR
         public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
-            B3IconColor = b3Iconcolor;        
+            OperatorColorList = b3Iconcolor;        
             SaveListSettingOriginalValue(operators_.ToList());
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             Operators = new ObservableCollection<Operator>(Orderby);
             SelectedOperator = Operators.FirstOrDefault();
             m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
-            SetCommand();
-            OSelectedIndex = -1;
+            SetCommand();      
         }
         #endregion
-        private int xyz;
-        public int OSelectedIndex
+        private int m_operatorSelectedIndex;
+        public int OperatorSelectedIndex
         {
-            get { return xyz; }
-            set { xyz = value;
+            get { return m_operatorSelectedIndex; }
+            set {
+                m_operatorSelectedIndex = value;
                 RaisePropertyChanged("OSelectedIndex");
             }
         }
 
-        private bool m_isNew;
-        public bool IsNew 
-        {
-            get { return m_isNew; }
-            set 
-            { m_isNew = value;
-            RaisePropertyChanged("IsNew");
-            }
-
-        }
-
-        private int m_colorSelectedIndex;
-        public int ColorSelectedIndex
-        {
-            get { return m_colorSelectedIndex; }
-            set
-            {
-                m_colorSelectedIndex = value;
-                RaisePropertyChanged("ColorSelectedIndex");
-            }
-
-        }
-
+    
         #region METHOD
         #region Saved Original State
         private void SaveListSettingOriginalValue(List<Operator> operators_)
@@ -119,12 +97,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     UndoChanges();
                 });
            
-            SelectedItemChanged = new DelegateCommand<Operator>(obj =>
-            {
+            //SelectedItemChanged = new DelegateCommand<Operator>(obj =>
+            //{
                 //IsSelectedSetting = (obj.ToString() != SettingSelected) ? true : false;
                 //SelectedItemEvent(SettingSelected);
-                SelectedItemEvent();
-            });
+            //    SelectedItemEvent();
+            //});
 
             NewOperatorCmd = new RelayCommand(parameter => 
                 {
@@ -143,7 +121,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedOperator.City = System.String.Empty;
             SelectedOperator.ContactName = System.String.Empty;
             SelectedOperator.FaxNumber = System.String.Empty;
-            SelectedOperator.IconColor = m_B3IconColor.FirstOrDefault().ColorID;       
+            SelectedOperator.IconColor = m_operatorcolorList.FirstOrDefault().ColorID;       
             SelectedOperator.OperatorId = 0;
             SelectedOperator.OperatorName = System.String.Empty;
             SelectedOperator.OperatorNameDescription = System.String.Empty;
@@ -209,7 +187,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (IsNew == true)
             {
                 IsNew = false;
-                ColorSelectedIndex = B3IconColor.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
+                ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
             }
             //Saved current state
             m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
@@ -243,21 +221,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
 
-                var Operators_ = m_operators.ToList();
-                if (IsNew)
-                {                  
-                    Operators_.Add(m_selectedOperator);                  
-                }
+                var Operators_ = m_operators.ToList();            
+                Operators_.Add(m_selectedOperator);                  
                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
+                var indexofcurrentoperator = m_operators.IndexOf(SelectedOperator);
+                OperatorSelectedIndex = indexofcurrentoperator;
 
-                if (IsNew)
-                {
+                //if (IsNew)
+                //{
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
                    
-                }
+                //}
 
                 ////Auto select operator
                 //if (indexOperator == 0 || m_operators.Count != 0)
@@ -281,10 +258,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 //Not sure if this catch will return(exit)
             }
 
-            //if (success)
-            //{
-            //    m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
-            //}
+            if (success)
+            {
+                m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+            }
         }
 
         #endregion
@@ -316,30 +293,65 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
              }
          }
 
-         private Operator m_selectedOperator;
-         public Operator SelectedOperator
-         {
-             get { return m_selectedOperator; }
-             set
-             {
-                 if (value != null)
-                 {
-                     m_selectedOperator = value;
-                     SelectedColor = convertToB3Color(value.IconColor);                
-                 }
-                 RaisePropertyChanged("SelectedOperator");
-             }
-         }
-
-        private List<B3IconColor> m_B3IconColor;
-        public List<B3IconColor> B3IconColor
+        private List<B3IconColor> m_operatorcolorList;
+        public List<B3IconColor> OperatorColorList
         {
-            get { return m_B3IconColor; }
+            get { return m_operatorcolorList; }
             set
             {
-                m_B3IconColor = value;
-                RaisePropertyChanged("B3IconColor");
+                m_operatorcolorList = value;
+                RaisePropertyChanged("OperatorColorList");
             }
+        }
+
+        //private List<B3IconColor> m_B3IconColor;
+        //public List<B3IconColor> B3IconColor
+        //{
+        //    get { return m_B3IconColor; }
+        //    set
+        //    {
+        //        m_B3IconColor = value;
+        //        RaisePropertyChanged("B3IconColor");
+        //    }
+        //}
+
+        private Operator m_selectedOperator;
+        public Operator SelectedOperator
+        {
+            get { return m_selectedOperator; }
+            set
+            {
+                if (value != null)
+                {
+                    m_selectedOperator = value;
+                    SelectedColor = convertToB3Color(value.IconColor);
+                }
+                RaisePropertyChanged("SelectedOperator");
+            }
+        }
+
+        private bool m_isNew;
+        public bool IsNew
+        {
+            get { return m_isNew; }
+            set
+            {
+                m_isNew = value;
+                RaisePropertyChanged("IsNew");
+            }
+
+        }
+
+        private int m_colorSelectedIndex;
+        public int ColorSelectedIndex
+        {
+            get { return m_colorSelectedIndex; }
+            set
+            {
+                m_colorSelectedIndex = value;
+                RaisePropertyChanged("ColorSelectedIndex");
+            }
+
         }
 
         public B3IconColor SelectedColor
@@ -357,18 +369,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private B3IconColor convertToB3Color(int IconColor)
         {
-            var colorValue = B3IconColor.Single(l => l.ColorID == IconColor);
+            var colorValue = OperatorColorList.Single(l => l.ColorID == IconColor);
             return colorValue;
         }
      
-        private List<B3IconColor> m_operatorcolorList;
-        public List<B3IconColor>OperatorColorList
-        {
-            get { return m_operatorcolorList; }
-            set { m_operatorcolorList = value;
-                RaisePropertyChanged("OperatorColorList");
-            }
-        }
+     
         
         #endregion
         #endregion
