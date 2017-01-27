@@ -31,14 +31,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             B3IconColor = b3Iconcolor;        
             SaveListSettingOriginalValue(operators_.ToList());
-            //Do i really have to convert u from a different type just to put u in order.
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             Operators = new ObservableCollection<Operator>(Orderby);
             SelectedOperator = Operators.FirstOrDefault();
             m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
             SetCommand();
+            OSelectedIndex = -1;
         }
         #endregion
+        private int xyz;
+        public int OSelectedIndex
+        {
+            get { return xyz; }
+            set { xyz = value;
+                RaisePropertyChanged("OSelectedIndex");
+            }
+        }
 
         private bool m_isNew;
         public bool IsNew 
@@ -126,18 +134,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-            
+        #region(new)
         public ICommand NewOperatorCmd{get;set;}
         private void NewOperatorCommand()
-        {
-        
+        {        
             m_selectedOperator = new Operator();
             SelectedOperator.Address = System.String.Empty;
             SelectedOperator.City = System.String.Empty;
             SelectedOperator.ContactName = System.String.Empty;
             SelectedOperator.FaxNumber = System.String.Empty;
-            SelectedOperator.IconColor = m_B3IconColor.FirstOrDefault().ColorID;
-            //SelectedOperator.IconColorValue = new Business.B3IconColor();
+            SelectedOperator.IconColor = m_B3IconColor.FirstOrDefault().ColorID;       
             SelectedOperator.OperatorId = 0;
             SelectedOperator.OperatorName = System.String.Empty;
             SelectedOperator.OperatorNameDescription = System.String.Empty;
@@ -148,8 +154,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             RaisePropertyChanged("SelectedColor");
             //IsNew = true;           
         }
-
-
+        #endregion
         #region(delete)
         public ICommand DeleteOperatorcmd { get; set; }
         private void RunDeleteCommand()
@@ -166,27 +171,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             try
             {
-                //SelectedOperator.IconColor = SelectedOperator.IconColorValue.ColorID;
                 SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 1);
-                try
-                {
-                    msg.Send();
-                }
+                try{msg.Send();}
                 catch
                 {
                     if (msg.ReturnCode != ServerReturnCode.Success)
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
-
-                //remove item to the collection
-                 int indexOperator = m_operators.IndexOf(m_selectedOperator);
+          
+                 int indexOperator = m_operators.IndexOf(m_selectedOperator); //removed item inside the collection
                  var Operators_ = m_operators.ToList();
-                 Operators_.Remove(m_selectedOperator);
-                //update UI
-                 Operators = new ObservableCollection<Operator>(Operators_);
+                 Operators_.Remove(m_selectedOperator);                               
+                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
 
                 //Auto select operator
-                 if (indexOperator == 0 ||  m_operators.Count != 0)
+                if (indexOperator == 0 ||  m_operators.Count != 0)
                  {
                      SelectedOperator = m_operators.FirstOrDefault();
                  }
@@ -214,7 +213,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             //Saved current state
             m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
-
         }
         #endregion
         #region (save)
@@ -227,9 +225,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             Mouse.OverrideCursor = null;
         }
 
-
-
-        public void SaveOperator()
+        public void SaveOperator()//Update or create
         {
             bool success = true;
             try
@@ -246,7 +242,37 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     if (msg.ReturnCode != ServerReturnCode.Success)
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
-            
+
+                var Operators_ = m_operators.ToList();
+                if (IsNew)
+                {                  
+                    Operators_.Add(m_selectedOperator);                  
+                }
+                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
+
+                if (IsNew)
+                {
+
+                }
+                else
+                {
+                   
+                }
+
+                ////Auto select operator
+                //if (indexOperator == 0 || m_operators.Count != 0)
+                //{
+                //    SelectedOperator = m_operators.FirstOrDefault();
+                //}
+                //else if (m_operators.Count > 0)
+                //{
+                //    SelectedOperator = m_operators[indexOperator - 1];
+                //}
+                //else
+                //{
+
+                //}
+
                 //lblSavedNotification.Visibility = Visibility.Visible;
             }
             catch
@@ -255,10 +281,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 //Not sure if this catch will return(exit)
             }
 
-            if (success)
-            {
-                m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
-            }
+            //if (success)
+            //{
+            //    m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+            //}
         }
 
         #endregion
@@ -287,7 +313,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
              {
                  m_operators = value;
                  RaisePropertyChanged("Operators");
-
              }
          }
 
@@ -300,8 +325,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                  if (value != null)
                  {
                      m_selectedOperator = value;
-                     SelectedColor = convertToB3Color(value.IconColor);
-                  
+                     SelectedColor = convertToB3Color(value.IconColor);                
                  }
                  RaisePropertyChanged("SelectedOperator");
              }
@@ -331,14 +355,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
         private B3IconColor convertToB3Color(int IconColor)
         {
             var colorValue = B3IconColor.Single(l => l.ColorID == IconColor);
             return colorValue;
         }
-
-        
+     
         private List<B3IconColor> m_operatorcolorList;
         public List<B3IconColor>OperatorColorList
         {
@@ -347,15 +369,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("OperatorColorList");
             }
         }
-
-      
-
         
         #endregion
         #endregion
-
-
-
     }
 }
 

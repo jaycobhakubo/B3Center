@@ -238,9 +238,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             //CharityTransitionControl.Content = null;
         }
 
-          #endregion
 
-      
 
+        #endregion
+
+        private void lstbx_OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxItem test = (ListBoxItem)sender;
+            
+        }
     }
 }
