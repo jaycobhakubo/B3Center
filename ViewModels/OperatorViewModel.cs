@@ -123,17 +123,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //    SelectedItemEvent();
             //});
 
-            NewOperatorCmd = new RelayCommand(parameter => 
-                {
-                    NewOperatorCommand();
-                });
-          
+           NewOperatorCmd = new RelayCommand(parameter =>
+               {
+                   NewOperatorCommand();
+               });        
         }
 
 
         #region(new)
         public ICommand NewOperatorCmd{get;set;}
-        private void NewOperatorCommand()
+        private void NothingIsSelected()
         {        
             m_selectedOperator = new Operator();
             SelectedOperator.Address = System.String.Empty;
@@ -149,56 +148,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedOperator.ZipCode = System.String.Empty;
             RaisePropertyChanged("SelectedOperator");
             RaisePropertyChanged("SelectedColor");
+
+            OperatorSelectedIndex = -1;
+            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
             //IsNew = true;           
         }
         #endregion
-        #region(delete)
-        public ICommand DeleteOperatorcmd { get; set; }
-        private void RunDeleteCommand()
-        {
-            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            Task save = Task.Factory.StartNew(() => 
-                DeleteOperator()
-                );
-            save.Wait();
-            Mouse.OverrideCursor = null;
-        }
-
-        public void DeleteOperator()
-        {
-            try
-            {
-                SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 1);
-                try{msg.Send();}
-                catch
-                {
-                    if (msg.ReturnCode != ServerReturnCode.Success)
-                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
-                }
-          
-                 int indexOperator = m_operators.IndexOf(m_selectedOperator); //removed item inside the collection
-                 var Operators_ = m_operators.ToList();
-                 Operators_.Remove(m_selectedOperator);                               
-                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
-
-                //Auto select operator
-                if (indexOperator == 0 ||  m_operators.Count != 0)
-                 {
-                     SelectedOperator = m_operators.FirstOrDefault();
-                 }
-                 else if (m_operators.Count > 0)
-                 {
-                     SelectedOperator = m_operators[indexOperator - 1];
-                 }
-                 else
-                 {
-
-                 }
-            }
-            catch
-            { }
-        }
-        #endregion
+        
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
         public void SelectedItemChangevm()
@@ -217,7 +173,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private void RunSaveCommand()
         {
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            if (SelectedOperator != null || SelectedOperator.OperatorId != 0)//Update Save
+            if (SelectedOperator.OperatorId != 0)//Update Save
             {
                 Task save = Task.Factory.StartNew(() => UpdateSelectedOperator());
                 save.Wait();
@@ -284,6 +240,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
 
+                if (SelectedOperator.OperatorId == 0)
+                {
+                    m_selectedOperator.OperatorId = msg.OperatorID;
+                }
+
                 var Operators_ = m_operators.ToList();            
                 Operators_.Add(m_selectedOperator);                  
                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
@@ -302,6 +263,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         #endregion
+
+        #region(delete)
+        public ICommand DeleteOperatorcmd { get; set; }
+        private void RunDeleteCommand()
+        {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            Task save = Task.Factory.StartNew(() =>
+                DeleteOperator()
+                );
+            save.Wait();
+            Mouse.OverrideCursor = null;
+        }
+
+        public void DeleteOperator()
+        {
+            try
+            {
+                SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 1);
+                try { msg.Send(); }
+                catch
+                {
+                    if (msg.ReturnCode != ServerReturnCode.Success)
+                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+                }
+
+                int indexOperator = m_operators.IndexOf(m_selectedOperator); //removed item inside the collection
+                var Operators_ = m_operators.ToList();
+                Operators_.Remove(m_selectedOperator);
+                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
+
+                OperatorSelectedIndex = -1;
+                m_selectedOperator = new Operator();
+            }
+            catch
+            { }
+        }
+        #endregion
+
+
         #region (undo)
          public ICommand UndoChangesCmd { get; set; }
          public void UndoChanges()
