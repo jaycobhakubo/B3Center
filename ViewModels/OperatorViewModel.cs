@@ -66,7 +66,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return m_operatorSelectedIndex; }
             set {
                 m_operatorSelectedIndex = value;
-                RaisePropertyChanged("OSelectedIndex");
+                RaisePropertyChanged("OperatorSelectedIndex");
             }
         }
         #region METHOD

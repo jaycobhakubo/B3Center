@@ -217,10 +217,11 @@
                             Margin="15"                   
                             ItemsSource="{Binding Operators}" 
                             SelectedItem="{Binding SelectedOperator}"                          
-                            IsSynchronizedWithCurrentItem="True"
+                           
                             SelectedIndex="{Binding OperatorSelectedIndex}" 
                             SelectionChanged="lstbx_OperatorList_SelectionChanged"
                             >
+                            <!--IsSynchronizedWithCurrentItem="True"-->
                             <!--CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}"-->
                         </ListBox>
                     </ScrollViewer>
