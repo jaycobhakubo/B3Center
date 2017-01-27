@@ -22,7 +22,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region MEMBERS
         #region (private only)
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
-        private Operator m_OperatorOrginalSettingSelected = new Operator();  
+        private Operator m_OperatorOrginalSettingSelected = new Operator();
+        private Operator m_prevOperatorSelected = new Operator();
         #endregion
         #endregion
         #region CONSTRUCTOR
@@ -201,8 +202,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
-        public void SelectedItemChangevm()
+        public void SelectedItemChangevm(Operator cSelectedOperator)
         {
+            
+
+            if (cSelectedOperator != m_prevOperatorSelected || m_prevOperatorSelected != null)
+            {
+                Operator prevSelectedOperator = m_operators.Single(l => l.OperatorId == m_prevOperatorSelected.OperatorId);
+                prevSelectedOperator = m_prevOperatorSelected;
+                m_prevOperatorSelected = new Operator();
+                m_prevOperatorSelected = cSelectedOperator;
+
+            }
+            
+
             //if (IsNew == true)
             //{
             //    IsNew = false;
