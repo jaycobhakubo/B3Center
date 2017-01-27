@@ -23,21 +23,55 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region (private only)
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
         private Operator m_OperatorOrginalSettingSelected = new Operator();
-        
+        //private B3Controller m_controller;
+       
+   
         #endregion
         #endregion
         #region CONSTRUCTOR
-        public OperatorViewModel(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
+        public OperatorViewModel(/**/)
         {
-            OperatorColorList = b3Iconcolor;        
+
+          
+        }
+
+         public void Initialize(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
+        {
+            //if (controller == null)
+            //    throw new ArgumentNullException();
+
+            //m_controller = controller;
+            //m_gameSettingView = new GameSettingView();
+            OperatorColorList = b3Iconcolor;
             SaveListSettingOriginalValue(operators_.ToList());
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             Operators = new ObservableCollection<Operator>(Orderby);
             SelectedOperator = Operators.FirstOrDefault();
             m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(SelectedOperator));
-            SetCommand();      
+            SetCommand();
+        }
+
+        //This will access anything that is public on this View Model.
+        private static volatile OperatorViewModel m_instance;
+        private static readonly object m_syncRoot = new Object();
+        public static OperatorViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                {
+                    lock (m_syncRoot)
+                    {
+                        if (m_instance == null)
+                            m_instance = new OperatorViewModel();
+                    }
+                }
+                return m_instance;
+            }
         }
         #endregion
+
+
         private int m_operatorSelectedIndex;
         public int OperatorSelectedIndex
         {
@@ -47,8 +81,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("OSelectedIndex");
             }
         }
-
-    
         #region METHOD
         #region Saved Original State
         private void SaveListSettingOriginalValue(List<Operator> operators_)
@@ -182,15 +214,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
-        private void SelectedItemEvent()
+        public static void SelectedItemChange()
         {
-            if (IsNew == true)
-            {
-                IsNew = false;
-                ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
-            }
-            //Saved current state
-            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+            //if (IsNew == true)
+            //{
+            //    IsNew = false;
+            //    ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
+            //}
+            ////Saved current state
+            //m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
         }
         #endregion
         #region (save)
