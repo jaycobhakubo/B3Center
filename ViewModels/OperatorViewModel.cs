@@ -14,6 +14,7 @@ using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Globalization;
 using GameTech.Elite.Client.Modules.B3Center.Helpers;
 using System.Collections.Specialized;
+using System.Windows;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -22,14 +23,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region MEMBERS
         #region (private only)
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
-        private Operator m_OperatorOrginalSettingSelected = new Operator();  
+        private Operator m_OperatorOrginalSettingSelected = new Operator();
         #endregion
         #endregion
         #region CONSTRUCTOR
+  
+
         public OperatorViewModel(/**/)
-        {         
+        {     
+ 
+            ShowOper = false;
+            ShowDefault = true;
+
         }
-         public void Initialize(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
+
+        public bool ShowOper
+        {
+            get;
+            set;
+        }
+
+     
+
+        public bool ShowDefault
+        {
+            get;
+            set;
+        }
+
+     
+        public void Initialize(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             m_operators = new ObservableCollection<Operator>(Orderby);
@@ -420,8 +443,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var colorValue = OperatorColorList.Single(l => l.ColorID == IconColor);
             return colorValue;
         }
+
      
-     
+
         
         #endregion
         #endregion

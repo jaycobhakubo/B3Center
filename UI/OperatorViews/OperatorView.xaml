@@ -7,21 +7,21 @@
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d" 
                xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+                xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
    >
     <UserControl.Resources>
+        <Converter:BoolToVisibilityConv x:Key="ConvertBooltoVis" ></Converter:BoolToVisibilityConv>
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>
             
         </Style>
 
-
         <!--<Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="Padding" Value="0,0,0,5"/>-->
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
-            
         </Style>
 
         <!--<Style  x:Key="ClearItemSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
@@ -51,29 +51,49 @@
 
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
-          
         </Style>
 
-       
+        <Style TargetType="ColumnDefinition" x:Key="showOper">
+            <Setter Property="Width" Value="Auto"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ShowOper}"  Value="true">
+                    <Setter Property="Width" Value="*"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ColumnDefinition" x:Key="showDefault">
+            <Setter Property="Width" Value="Auto"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ShowDefault}"  Value="true">
+                    <Setter Property="Width" Value="*"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+   
 
     </UserControl.Resources>
     <Border >
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Name="ColumnSettings" Width="200"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Style="{StaticResource showOper}" />
+                <ColumnDefinition Style="{StaticResource showDefault}" />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
+            <Border Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowDefault, Converter={StaticResource ConvertBooltoVis}}">
+                <Grid>
+                <Label Content="Please select a operator to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border  Visibility="{Binding ShowOper, Converter={StaticResource ConvertBooltoVis}}" Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
                 <Grid>
                     <Grid.RowDefinitions>
-
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-
-                    
-                    
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
                         <Border.Resources>
                             <Style

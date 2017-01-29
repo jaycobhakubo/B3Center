@@ -2,13 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Data;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 {
+
+    public class BoolToVisibilityConv : IValueConverter
+    {
+    
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            Visibility showControl = new Visibility();
+            showControl = Visibility.Collapsed;
+
+            if (value is bool)
+            {
+                if ((bool)value == true)
+                {
+                    showControl = Visibility.Visible;
+                }
+            }
+            return showControl;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+  
+      
+    }
+
     public class ValueToBoolConverter : IValueConverter
     {
-        #region Constructors
+  
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool tempresult = true;
@@ -44,14 +72,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             return null;
         }
-        #endregion
+   
 
     }
 
 
     public class ValueDBToValueAppCallSpeed : IValueConverter
     {
-        #region Constructors
+
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             int callSpeedValue;
@@ -83,7 +111,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             return null;
         }
-        #endregion
+ 
 
     }
 }

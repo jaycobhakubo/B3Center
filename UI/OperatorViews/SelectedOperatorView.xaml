@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews.SelectedOperatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
+             mc:Ignorable="d" 
+           >
+    <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
+        <Grid>
+            <Grid.RowDefinitions>
+
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+
+            <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
+                <Border.Resources>
+                    <Style
+                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0,15,0,2"/>
+
+                    </Style>
+                </Border.Resources>
+
+                <!--<local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>-->
+                <Grid  Name="gridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="279"/>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="279"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <Label Content="Operator Name" />
+                        <TextBox Height="22.22" Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
+
+                        <Label Content="Description"  />
+                        <TextBox   Text="{Binding  SelectedOperator.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
+
+                        <Label Content="Address"    />
+                        <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  SelectedOperator.Address}"/>
+
+                        <Label Content="City"  />
+                        <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  SelectedOperator.City}"/>
+
+                        <Label  Content="State"   />
+                        <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
+
+                        <Label  Content="Zip Code" />
+                        <!--<TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"/>-->
+                        <TextBox  MaxLength="5" Text="{Binding  SelectedOperator.ZipCode}"></TextBox>
+
+                        <Label Content="Contact Name" />
+                        <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
+
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="3">
+
+                        <!--SelectedItem="{Binding  SelectedOperator.IconColorValue}"-->
+                        <Label Content="Icon Color" />
+                        <!--<ComboBox Style="{StaticResource ClearItemSelection}" Name="cmbxIconColor" 
+                                          ItemsSource="{Binding B3IconColor}" 
+                                          DisplayMemberPath="ColorValue"/>-->
+
+                        <ComboBox  Name="cmbxIconColor" 
+                                          ItemsSource="{Binding OperatorColorList}" 
+                                          DisplayMemberPath="ColorValue"
+                                          SelectedItem="{Binding SelectedColor}"      
+                                              Style="{StaticResource ClearColorSelection}"
+                                          />
+
+
+                        <!--SelectedIndex="{Binding ColorSelectedIndex}"-->
+                        <Label Content="Phone Number" />
+                        <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"
+ />
+
+                        <Label Content="Fax Number"  />
+                        <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"
+ />
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1"  Margin="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                            <Label x:Name="txtblckErr" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
+                        <Grid Grid.Column="1" Grid.Row="14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Save"
+                                HorizontalAlignment="Center" 
+                                x:Name="btnSave"
+                                VerticalAlignment="Top"
+                             Command="{Binding SaveOperatorcmd}" 
+                                          
+                                Tag="1"/>
+                            <!--Click="btnSave_Click"-->
+                            <Button Grid.Column="2"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Cancel"
+                                HorizontalAlignment="Left"
+                                Name="btnCancel" 
+                                VerticalAlignment="Top"
+                                Command="{Binding UndoChangesCmd}"  
+                            />
+                            <!--Click="btnCancel_Click"-->
+                            <Button Grid.Column="0"
+                                            Foreground="Red"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Delete"
+                                HorizontalAlignment="Right"
+                                Name="btnDelete" 
+                                VerticalAlignment="Top"                         
+                                Command="{Binding DeleteOperatorcmd}"                                    
+                            />
+
+                        </Grid>
+                    </Border>
+                    <Border  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                        <Label  HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                    </Border>
+
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
