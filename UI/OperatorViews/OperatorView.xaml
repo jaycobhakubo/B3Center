@@ -24,18 +24,7 @@
             <Setter Property="Height" Value="22"/>
         </Style>
 
-        <!--<Style  x:Key="ClearItemSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="SelectedItem" Value="{Binding SelectedOperator.IconColorValue}"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsNew}"  Value="True">
-                    <Setter Property="SelectedIndex" Value="-1" ></Setter>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding IsNew}"  Value="False">
-                    <Setter Property="SelectedIndex" Value="{Binding ColorSelectedIndex}" ></Setter>
-                </DataTrigger>
-            </Style.Triggers>
 
-        </Style>-->
 
         <Style  x:Key="ClearColorSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Style.Triggers>
@@ -155,12 +144,13 @@
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                          SelectedItem="{Binding SelectedColor}"      
+                                        
                                               Style="{StaticResource ClearColorSelection}"
+                                             SelectedIndex="{Binding ColorSelectedIndex}"
                                           />
 
-
-                                <!--SelectedIndex="{Binding ColorSelectedIndex}"-->
+                                <!--SelectedItem="{Binding SelectedColor}"-->
+                              
                                 <Label Content="Phone Number" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"
  />

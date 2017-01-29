@@ -27,53 +27,53 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #endregion
         #region CONSTRUCTOR
-  
-
         public OperatorViewModel(/**/)
         {     
- 
-            ShowOper = false;
-            ShowDefault = true;
-
         }
 
-        public bool ShowOper
-        {
-            get;
-            set;
-        }
-
-     
-
-        public bool ShowDefault
-        {
-            get;
-            set;
-        }
-
-     
+         
         public void Initialize(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             m_operators = new ObservableCollection<Operator>(Orderby);
-
-            m_operatorcolorList = b3Iconcolor;
-
-            //SaveListSettingOriginalValue(operators_.ToList());
-
-            //SelectedOperator = Operators.FirstOrDefault();
-            //m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(m_selectedOperator));
+            m_selectedOperator = new Operator();
+            m_operatorcolorList = b3Iconcolor;         
             OperatorSelectedIndex = -1;
-        
-            //SetCommand();
-
+            SetDefaultView();
         }
 
-        public int SelectedColorIndex
+        private void SetDefaultView()
         {
-            get;set;
+            if (m_selectedOperator != null)
+            {
+                if (m_selectedOperator.OperatorId != 0)
+                {
+                    if (ShowOper == false)
+                    {
+                        ShowOper = true;
+                        ShowDefault = false;
+
+                        RaisePropertyChanged("ShowOper");
+                        RaisePropertyChanged("ShowDefault");
+                    }
+                }
+                else
+                {
+                    if (ShowDefault == false)
+                    {
+                        ShowOper = false;
+                        ShowDefault = true;
+
+                        RaisePropertyChanged("ShowOper");
+                        RaisePropertyChanged("ShowDefault");
+                    }
+                }
+            }
+
+
         }
 
+        
 
         //This will access anything that is public on this View Model.
         private static volatile OperatorViewModel m_instance;
@@ -96,15 +96,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
 
 
-        private int m_operatorSelectedIndex;
-        public int OperatorSelectedIndex
-        {
-            get { return m_operatorSelectedIndex; }
-            set {
-                m_operatorSelectedIndex = value;
-                RaisePropertyChanged("OperatorSelectedIndex");
-            }
-        }
         #region METHOD
         #region Saved Original State
         private void SaveListSettingOriginalValue(List<Operator> operators_)
@@ -194,14 +185,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
         public void SelectedItemChangevm()
-        {
-            //if (IsNew == true)
-            //{
-            //    IsNew = false;
-            //    ColorSelectedIndex = OperatorColorList.FindIndex(l => l.ColorID == SelectedOperator.IconColor);
-            //}
-            ////Saved current state
-            //m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+        { 
+                SetDefaultView();
         }
         #endregion
         #region (save)
@@ -347,9 +332,40 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
 
         #region PROPERTIES
+
+        
+        public bool ShowOper
+        {
+            get;
+            set;
+        }
+
+        public bool ShowDefault
+        {
+            get;
+            set;
+        }
+
+        public int SelectedColorIndex
+        {
+            get; set;
+        }
+
+
+        private int m_operatorSelectedIndex;
+        public int OperatorSelectedIndex
+        {
+            get { return m_operatorSelectedIndex; }
+            set
+            {
+                m_operatorSelectedIndex = value;
+                RaisePropertyChanged("OperatorSelectedIndex");
+            }
+        }
+
         #region(w members assoc w properties)
 
-         private ObservableCollection<Operator> m_operators;
+        private ObservableCollection<Operator> m_operators;
          public ObservableCollection<Operator> Operators
          {
              get
