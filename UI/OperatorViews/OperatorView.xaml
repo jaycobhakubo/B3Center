@@ -24,7 +24,7 @@
             
         </Style>
 
-        <Style  x:Key="ClearItemSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <!--<Style  x:Key="ClearItemSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="SelectedItem" Value="{Binding SelectedOperator.IconColorValue}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsNew}"  Value="True">
@@ -33,6 +33,18 @@
                 <DataTrigger Binding="{Binding IsNew}"  Value="False">
                     <Setter Property="SelectedIndex" Value="{Binding ColorSelectedIndex}" ></Setter>
                 </DataTrigger>
+            </Style.Triggers>
+
+        </Style>-->
+
+        <Style  x:Key="ClearColorSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=lstbx_OperatorList, Path=SelectedIndex}"  Value="-1">
+                    <Setter Property="SelectedIndex" Value="-1" ></Setter>
+                </DataTrigger>
+                <!--<DataTrigger Binding="{Binding IsNew}"  Value="False">
+                    <Setter Property="SelectedIndex" Value="{Binding ColorSelectedIndex}" ></Setter>
+                </DataTrigger>-->
             </Style.Triggers>
 
         </Style>
@@ -123,8 +135,12 @@
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                           SelectedItem="{Binding SelectedColor}"/>
+                                          SelectedItem="{Binding SelectedColor}"      
+                                              Style="{StaticResource ClearColorSelection}"
+                                          />
 
+
+                                <!--SelectedIndex="{Binding ColorSelectedIndex}"-->
                                 <Label Content="Phone Number" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"
  />
@@ -220,7 +236,10 @@
                            
                             SelectedIndex="{Binding OperatorSelectedIndex}" 
                             SelectionChanged="lstbx_OperatorList_SelectionChanged"
+                         
                             >
+                        
+                         
                             <!--IsSynchronizedWithCurrentItem="True"-->
                             <!--CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}"-->
                         </ListBox>
