@@ -197,7 +197,7 @@
                                 HorizontalAlignment="Left"
                                 Name="btnCancel" 
                                 VerticalAlignment="Top"
-                                Command="{Binding UndoChangesCmd}"  
+                                Command="{Binding CancelCmd}"  
                             />
                                     <!--Click="btnCancel_Click"-->
                                     <Button Grid.Column="0"

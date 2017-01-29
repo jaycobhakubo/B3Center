@@ -20,6 +20,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class OperatorViewModel : GameTech.Elite.Base.ViewModelBase
     {
+
+        public enum CurrentOperation
+        {         
+            SelectedItem = 1,
+            Cancel = 2,
+            None = 3,
+        }
+
+
         #region MEMBERS
         #region (private only)
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
@@ -39,7 +48,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_selectedOperator = new Operator();
             m_operatorcolorList = b3Iconcolor;         
             OperatorSelectedIndex = -1;
-            SetDefaultView();
+            cOperation = CurrentOperation.None;
+            ShowOper = false;
+            SetCommand();
         }         
 
         //This will access anything that is public on this View Model.
@@ -67,24 +78,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetDefaultView()
         {
-            if (m_selectedOperator != null)
+            if (m_selectedOperator != null)//New and current item selected
             {
-                if (m_selectedOperator.OperatorId != 0)
-                {
-                    if (ShowOper == false)
+                //if (m_selectedOperator.OperatorId != 0)//Selected Item ok
+                //{
+                    if (ShowOper != true)
                     {
-                        ShowOper = true;         
-                     
-                
-                    }
-                    else
-                    {
-                        ShowOper = false;
+                        ShowOper = true;
 
-                    }
-                    RaisePropertyChanged("ShowOper");
-                }             
+                    }   
+                                                                        
+                //}
+                //else//New
+                //{
+
+
+                //}             
             }
+            else//Cancel
+            {
+                ShowOper = false;
+
+            }
+
         }
 
 
@@ -128,20 +144,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 RunDeleteCommand();
             });
-                 
-           UndoChangesCmd = new RelayCommand(parameter => 
-                {
-                    UndoChanges();
-                });
-           
+
+            CancelCmd = new RelayCommand(parameter =>
+            {
+                CancelCommand();
+            });
+
+            //UndoChangesCmd = new RelayCommand(parameter => 
+            //     {
+            //         UndoChanges();
+            //     });
+
             //SelectedItemChanged = new DelegateCommand<Operator>(obj =>
             //{
-                //IsSelectedSetting = (obj.ToString() != SettingSelected) ? true : false;
-                //SelectedItemEvent(SettingSelected);
+            //IsSelectedSetting = (obj.ToString() != SettingSelected) ? true : false;
+            //SelectedItemEvent(SettingSelected);
             //    SelectedItemEvent();
             //});
 
-           NewOperatorCmd = new RelayCommand(parameter =>
+            NewOperatorCmd = new RelayCommand(parameter =>
                {
                    NewOperatorCommand();
                });        
@@ -166,19 +187,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedOperator.ZipCode = System.String.Empty;
             RaisePropertyChanged("SelectedOperator");
             RaisePropertyChanged("SelectedColor");
-
             OperatorSelectedIndex = -1;
             m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
             //IsNew = true;           
         }
-        #endregion
-        
+        #endregion        
         #region (itemselectionchanged)
         public ICommand SelectedItemChanged { get; private set; }
         public void SelectedItemChangevm()
-        { 
-                SetDefaultView();
-        }
+        {
+           
+                if (m_selectedOperator != null)
+                {
+                    if (m_selectedOperator.OperatorId != -1)
+                    {
+                        if (m_showOper != true)
+                        {
+                            cOperation = CurrentOperation.SelectedItem;
+                            ShowOper = true;
+                        }
+                    }
+                    else
+                    {
+                        ShowOper = false;
+                    }
+                }
+                else
+                {
+                    ShowOper = false;
+                }
+         }
+                
+        
         #endregion
         #region (save)
         public ICommand SaveOperatorcmd { get; set; }
@@ -312,23 +352,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
         #region (undo)
-         public ICommand UndoChangesCmd { get; set; }
-         public void UndoChanges()
-        {
-            SelectedOperator = m_OperatorOrginalSettingSelected;
-            m_OperatorOrginalSettingSelected= SaveSettingOriginalValue(SelectedOperator);
-        }
+        // public ICommand UndoChangesCmd { get; set; }
+        // public void UndoChanges()
+        //{
+        //    SelectedOperator = m_OperatorOrginalSettingSelected;
+        //    m_OperatorOrginalSettingSelected= SaveSettingOriginalValue(SelectedOperator);
+        //}
         #endregion
+
+        public CurrentOperation cOperation { get; set; }
+
+        public ICommand CancelCmd { get; set; }
+        public void CancelCommand()
+        {
+            cOperation = CurrentOperation.Cancel;
+            if (OperatorSelectedIndex != -1)
+            {
+                OperatorSelectedIndex = -1;
+                ShowOper = false;
+                //ShowOper = false;
+            }
+            cOperation = CurrentOperation.None;
+       
+            //    SelectedOperator = m_OperatorOrginalSettingSelected;
+            //    m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+        }
 
         #endregion
 
         #region PROPERTIES
 
-        
+        private bool m_showOper;
         public bool ShowOper
         {
-            get;
-            set;
+            get { return m_showOper; }
+            set
+            {
+                m_showOper = value;
+                RaisePropertyChanged("ShowOper");
+            }
         }
 
         public bool ShowDefault
