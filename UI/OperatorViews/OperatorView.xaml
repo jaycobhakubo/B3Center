@@ -11,6 +11,9 @@
    >
     <UserControl.Resources>
         <Converter:BoolToVisibilityConv x:Key="ConvertBooltoVis" ></Converter:BoolToVisibilityConv>
+        <Converter:ShowDefaultColumnDef x:Key="DefaultVal"></Converter:ShowDefaultColumnDef>
+   
+        
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>
@@ -51,33 +54,24 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="ColumnDefinition" x:Key="showDefault">
-            <Setter Property="Width" Value="Auto"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ShowDefault}"  Value="true">
-                    <Setter Property="Width" Value="*"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-   
 
     </UserControl.Resources>
     <Border >
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Name="ColumnSettings" Width="200"/>
-                <ColumnDefinition Style="{StaticResource showOper}" />
-                <ColumnDefinition Style="{StaticResource showDefault}" />
+                <ColumnDefinition Style="{StaticResource showOper}" Name="clmnDefShowOper"/>
+                <ColumnDefinition Width="{Binding ElementName=clmnDefShowOper, Path=Width, Converter={StaticResource DefaultVal}}"></ColumnDefinition>
+              
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowDefault, Converter={StaticResource ConvertBooltoVis}}">
+            <Border  Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowOper, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}">
                 <Grid>
                 <Label Content="Please select a operator to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </Border>
 
-            <Border  Visibility="{Binding ShowOper, Converter={StaticResource ConvertBooltoVis}}" Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
+            <Border  Visibility="{Binding ShowOper, Converter={StaticResource ConvertBooltoVis},ConverterParameter=false}" Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />

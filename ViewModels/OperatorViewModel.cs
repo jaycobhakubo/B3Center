@@ -40,40 +40,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_operatorcolorList = b3Iconcolor;         
             OperatorSelectedIndex = -1;
             SetDefaultView();
-        }
-
-        private void SetDefaultView()
-        {
-            if (m_selectedOperator != null)
-            {
-                if (m_selectedOperator.OperatorId != 0)
-                {
-                    if (ShowOper == false)
-                    {
-                        ShowOper = true;
-                        ShowDefault = false;
-
-                        RaisePropertyChanged("ShowOper");
-                        RaisePropertyChanged("ShowDefault");
-                    }
-                }
-                else
-                {
-                    if (ShowDefault == false)
-                    {
-                        ShowOper = false;
-                        ShowDefault = true;
-
-                        RaisePropertyChanged("ShowOper");
-                        RaisePropertyChanged("ShowDefault");
-                    }
-                }
-            }
-
-
-        }
-
-        
+        }         
 
         //This will access anything that is public on this View Model.
         private static volatile OperatorViewModel m_instance;
@@ -97,6 +64,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         #region METHOD
+
+        private void SetDefaultView()
+        {
+            if (m_selectedOperator != null)
+            {
+                if (m_selectedOperator.OperatorId != 0)
+                {
+                    if (ShowOper == false)
+                    {
+                        ShowOper = true;         
+                     
+                
+                    }
+                    else
+                    {
+                        ShowOper = false;
+
+                    }
+                    RaisePropertyChanged("ShowOper");
+                }             
+            }
+        }
+
+
         #region Saved Original State
         private void SaveListSettingOriginalValue(List<Operator> operators_)
         {
