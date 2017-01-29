@@ -26,7 +26,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         public OperatorView()      
         {
             InitializeComponent();
-            DataContext = this;
+            //DataContext = this;
         }
 
         /// <summary>

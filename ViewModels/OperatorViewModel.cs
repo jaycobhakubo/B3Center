@@ -33,17 +33,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             var Orderby = operators_.OrderBy(l => l.OperatorName);
             m_operators = new ObservableCollection<Operator>(Orderby);
-
             m_operatorcolorList = b3Iconcolor;
-
-            //SaveListSettingOriginalValue(operators_.ToList());
-
-            //SelectedOperator = Operators.FirstOrDefault();
-            //m_OperatorOrginalSettingSelected = (SaveSettingOriginalValue(m_selectedOperator));
             OperatorSelectedIndex = -1;
-        
-            //SetCommand();
-
         }
 
         public int SelectedColorIndex
