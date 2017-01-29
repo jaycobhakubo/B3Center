@@ -20,7 +20,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// </summary>
     public partial class ReportParameter : UserControl
     {
-
         private int m_endingCard;
         private int m_startingCard;
         private TextBlock ErrorTextBlock = new TextBlock();
@@ -30,7 +29,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             InitializeComponent();
             DataContext = this;
         }
-
 
         private void txtbxStartingCard_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
@@ -88,14 +86,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                         }
                     }
             }
-
             e.Handled = result;
         }
 
         private void txtbxEndingCard_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox txtbx = (TextBox)sender;
-
 
             if (txtbx.Name == "txtbxEndingCard")
             {

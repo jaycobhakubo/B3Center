@@ -25,6 +25,12 @@
         <Setter Property="Padding" Value="0,0,0,5"/>-->
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
 
@@ -40,9 +46,16 @@
             </Style.Triggers>
 
         </Style>
-
+ 
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="ColumnDefinition" x:Key="showOper">
@@ -138,23 +151,19 @@
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                        
                                               Style="{StaticResource ClearColorSelection}"
                                              SelectedIndex="{Binding ColorSelectedIndex}"
+                                           IsEnabled="False"
                                           />
 
                                 <!--SelectedItem="{Binding SelectedColor}"-->
-                              
+
                                 <Label Content="Phone Number" />
-                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"
- />
+                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
 
                                 <Label Content="Fax Number"  />
-                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"
- />
-
+                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
                             </StackPanel>
-
                         </Grid>
                     </Border>
 
@@ -181,6 +190,31 @@
                                         <ColumnDefinition/>
 
                                     </Grid.ColumnDefinitions>
+                                    
+                                    
+                                    <Button Grid.Column="1"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Edit"
+                                HorizontalAlignment="Center" 
+                                x:Name="btnEdit"
+                                         
+                                VerticalAlignment="Top"
+                             Command="{Binding SaveOperatorcmd}" 
+                                        
+                                Tag="1">
+                                        <!--<Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <Trigger Property="Click" Value="True">
+                                                        
+                                                    </Trigger>
+                                                           
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>-->
+                                    </Button>
+                                    <!--<DataTrigger Binding="{Binding Content, RelativeSource={RelativeSource Self}}" Value="Edit">-->
+
                                     <Button Grid.Column="1"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Save"
@@ -188,8 +222,10 @@
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
                              Command="{Binding SaveOperatorcmd}" 
-                                          
-                                Tag="1"/>
+                                                Visibility="Hidden" 
+                                Tag="1">
+                                    </Button>
+
                                     <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="2"
                                 Margin="15,15" Height="40" Width="140" 
