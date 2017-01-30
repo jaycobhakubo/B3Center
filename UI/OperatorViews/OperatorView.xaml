@@ -261,7 +261,8 @@
                             ItemsSource="{Binding Operators}" 
                             SelectedItem="{Binding SelectedOperator}"     
                             SelectedIndex="{Binding OperatorSelectedIndex}" 
-                           SelectionChanged="lstbx_OperatorList_SelectionChanged"                      
+                           SelectionChanged="lstbx_OperatorList_SelectionChanged"    
+                            IsSynchronizedWithCurrentItem="{x:Null}"
                             >
                                               
                         </ListBox>

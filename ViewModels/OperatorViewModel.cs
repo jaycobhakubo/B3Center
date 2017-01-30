@@ -266,6 +266,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 IsEdit = false;
                 return;
             }
+
+            //if (m_isEdit == false)
+            //{
+            //    IsEdit = true;
+            //    OperatorSelectedIndex = -1;
+            //    ShowOper = false;
+            //    return;
+            //}
+
             else
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             if (SelectedOperator.OperatorId != 0)//Update Save
@@ -279,7 +288,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 save.Wait();
             }
             Mouse.OverrideCursor = null;
-            IsEdit = false;
+            IsEdit = true;
+            OperatorSelectedIndex = -1;
+            ShowOper = false;
         }
     
 
@@ -303,8 +314,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                 var Operators_ = m_operators.ToList();
                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
-                var indexofcurrentoperator = m_operators.IndexOf(SelectedOperator);
-                OperatorSelectedIndex = indexofcurrentoperator;
+                //IsEdit = true;
+                //OperatorSelectedIndex = -1;
+                //ShowOper = false;
             }
             catch
             {
@@ -313,7 +325,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             if (success)
             {
-                m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+              //  m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
             }
         }
 
