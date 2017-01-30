@@ -165,6 +165,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return result;
         }
 
+
+
         #endregion
             #endregion
             #region COMMAND/EVENT
