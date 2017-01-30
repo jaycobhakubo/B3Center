@@ -359,8 +359,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 if (value != null)
                 {
-                    m_selectedOperator = value;
-                    SelectedColor = convertToB3Color(value.IconColor);
+                    m_selectedOperator = value;                  
                 }
                 RaisePropertyChanged("SelectedOperator");
             }
@@ -377,6 +376,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private bool m_saveBtnIsEnabled;
+        public bool SaveBtnIsEnabled
+        {
+            get { return m_saveBtnIsEnabled; }
+            set
+            {
+                m_saveBtnIsEnabled = value;
+                RaisePropertyChanged("DelBtnIsEnabled");
+            }
+        }
+
         private int m_colorSelectedIndex;
         public int ColorSelectedIndex
         {
@@ -388,29 +398,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public B3IconColor SelectedColor
-        {
-            get
-            {
-                if (m_selectedOperator != null)
-                {
-                    return convertToB3Color(m_selectedOperator.IconColor);
-                }
-                return null;
-            }
-        
-            set
-            {
-                m_selectedOperator.IconColor = value.ColorID;
-                RaisePropertyChanged("SelectedColor");
-            }
-        }
-
-        private B3IconColor convertToB3Color(int IconColor)
-        {
-            var colorValue = OperatorColorList.Single(l => l.ColorID == IconColor);
-            return colorValue;
-        }    
         #endregion     
     }
 }

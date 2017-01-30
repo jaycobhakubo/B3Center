@@ -8,6 +8,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows;
+using System.Linq;
 //Hello there
 namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 {
@@ -176,8 +177,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             {
                 return new GridLength(1, GridUnitType.Star);
             }
-
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -188,20 +187,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     }
 
-    //public class RevertBoolValueConverter : IValueConverter
-    //{
+    public class ValueToBoolForEmptyString : IValueConverter
+    {
 
-    //    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        var tesyy = !(bool)value;
-    //        return tesyy;
-    //    }
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool result = true;
+            if (value is string)
+            {
+                var tempResult = value.ToString();
+                if (tempResult.Count() == 0)
+                {
+                    result = false;
+                }
+            }
 
-    //    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        return null;
-    //    }
+            return result;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
 
 
-    //}
+    }
 }
