@@ -294,43 +294,54 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             cOperation = OnProcess.Save;
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            if (SelectedOperator.OperatorId != 0)//Update Save
-            {
-                Task save = Task.Factory.StartNew(() => UpdateSelectedOperator());
-                save.Wait();
-            }
-            else//New Save
-            {
+            //if (SelectedOperator.OperatorId != 0)//Update Save
+            //{
+                //Task save = Task.Factory.StartNew(() => UpdateSelectedOperator());
+                //save.Wait();
+            //}
+            //else//New Save
+            //{
                 Task save = Task.Factory.StartNew(() => SaveNewOperator());
                 save.Wait();
-            }
+            //}
             Mouse.OverrideCursor = null;
+
+            //var Operators_ = m_operators.ToList();
+            //Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection                                                                                                         //SaveListSettingOriginalValue(Operators.ToList());
+            //SaveListSettingOriginalValuecol(Operators);
+
+            var Operators_ = m_operators.ToList();
+            if (SelectedOperator.OperatorId == 0)
+            {
+                SelectedOperator.OperatorId = newOperatorId;
+                Operators_.Add(m_selectedOperator);
+            }
+                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection                                                                                                        //SaveListSettingOriginalValue(Operators.ToList());
+            SaveListSettingOriginalValuecol(Operators);
+
             IsEdit = true;          
             ShowOper = false;
             OperatorSelectedIndex = -1;
             cOperation = OnProcess.None;
         }
        
-        public void UpdateSelectedOperator()//Update
-        {
-            bool success = true;
-            try
-            {
-                SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 0);
-                try { msg.Send(); }
-                catch
-                {
-                    success = false;
-                    if (msg.ReturnCode != ServerReturnCode.Success)
-                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
-                }
-                var Operators_ = m_operators.ToList();
-                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection  
-                //SaveListSettingOriginalValue(Operators.ToList());
-                SaveListSettingOriginalValuecol(Operators);
-            }
-            catch { success = false; }
-        }
+        //public void UpdateSelectedOperator()//Update
+        //{
+        //    bool success = true;
+        //    try
+        //    {
+        //        SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 0);
+        //        try { msg.Send(); }
+        //        catch
+        //        {
+        //            success = false;
+        //            if (msg.ReturnCode != ServerReturnCode.Success)
+        //                throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+        //        }
+            
+        //    }
+        //    catch { success = false; }
+        //}
 
         public void SaveNewOperator()//new
         {
@@ -352,20 +363,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                 if (SelectedOperator.OperatorId == 0)
                 {
-                    m_selectedOperator.OperatorId = msg.OperatorID;
+                    newOperatorId = msg.OperatorID;
+                    //m_selectedOperator.OperatorId = msg.OperatorID;
                 }
-                var Operators_ = m_operators.ToList();
-                Operators_.Add(m_selectedOperator);
-                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
-                //SaveListSettingOriginalValue(Operators.ToList());
-                    SaveListSettingOriginalValuecol(Operators);
-
             }
+
+
+
             catch
             {
                 success = false;
             }
         }
+
+        int newOperatorId;
 
         #endregion
         #region(delete)
