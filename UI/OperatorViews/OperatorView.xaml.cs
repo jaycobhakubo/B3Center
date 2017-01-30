@@ -29,11 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             DataContext = this;
         }
 
-        /// <summary>
-        /// For every change of operator in the list. 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void lstbx_OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OperatorViewModel ii = (OperatorViewModel)DataContext;
@@ -41,9 +37,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             if (yy == false
                 ) 
             {
-                var currentOperator = ii.OperatorSelectedIndex;
+                var currentOperatorIndex = ii.OperatorSelectedIndex;
                 var VmAccess = OperatorViewModel.Instance;
-                VmAccess.SelectedItemChangevm(currentOperator);
+                VmAccess.SelectedItemChangevm(currentOperatorIndex);
             }       
         }
     }
