@@ -32,17 +32,17 @@
 
 
 
-        <Style  x:Key="ClearColorSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <!--<Style  x:Key="ClearColorSelection" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=lstbx_OperatorList, Path=SelectedIndex}"  Value="-1">
                     <Setter Property="SelectedIndex" Value="-1" ></Setter>
                 </DataTrigger>
-                <!--<DataTrigger Binding="{Binding IsNew}"  Value="False">
+                --><!--<DataTrigger Binding="{Binding IsNew}"  Value="False">
                     <Setter Property="SelectedIndex" Value="{Binding ColorSelectedIndex}" ></Setter>
-                </DataTrigger>-->
+                </DataTrigger>--><!--
             </Style.Triggers>
 
-        </Style>
+        </Style>-->
  
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
@@ -115,26 +115,26 @@
 
 
                             <StackPanel Grid.Column="1" Grid.Row="1">
-                                <Label Content="Operator Name" />
+                                <Label Content="* Operator Name:" />
                                 <TextBox Height="22.22" Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
 
-                                <Label Content="Description"  />
+                                <Label Content="Description:"  />
                                 <TextBox   Text="{Binding  SelectedOperator.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
 
-                                <Label Content="Address"    />
+                                <Label Content="Address:"    />
                                 <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  SelectedOperator.Address}"/>
 
-                                <Label Content="City"  />
+                                <Label Content="City:"  />
                                 <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  SelectedOperator.City}"/>
 
-                                <Label  Content="State"   />
+                                <Label  Content="State:"   />
                                 <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
 
-                                <Label  Content="Zip Code" />
+                                <Label  Content="Zip Code:" />
                                 <!--<TextBox x:Name="txtbxZipCode"  MaxLength="5" Text="{Binding  ElementName=lstbx_OperatorList,  Path=SelectedItem.ZipCode}"/>-->
                                 <TextBox  MaxLength="5" Text="{Binding  SelectedOperator.ZipCode}"></TextBox>
                                 
-                                <Label Content="Contact Name" />
+                                <Label Content="Contact Name:" />
                                 <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
                           
 
@@ -142,23 +142,19 @@
 
                             <StackPanel Grid.Row="1" Grid.Column="3">
 
-                                <!--SelectedItem="{Binding  SelectedOperator.IconColorValue}"-->
-                                <Label Content="Icon Color" />
-                                <!--<ComboBox Style="{StaticResource ClearItemSelection}" Name="cmbxIconColor" 
-                                          ItemsSource="{Binding B3IconColor}" 
-                                          DisplayMemberPath="ColorValue"/>-->
-
+                                <Label Content="Icon Color:" />
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                             Style="{StaticResource ClearColorSelection}"
-                                            SelectedIndex="{Binding ColorSelectedIndex}"
-                                          />
+                                          SelectedValuePath="{Binding SelectedOperator.IconColor}"                                                         
+                                          ></ComboBox>
+                                <!--Style="{StaticResource ClearColorSelection}"-->
+                                <!--SelectedItem="{Binding  SelectedOperator.IconColorValue, Converter={StaticResource ConvertColorIdToColor}}"-->
 
-                                <Label Content="Phone Number" />
+                                <Label Content="Phone Number:" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
 
-                                <Label Content="Fax Number"  />
+                                <Label Content="Fax Number:"  />
                                 <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
                             </StackPanel>
                         </Grid>
