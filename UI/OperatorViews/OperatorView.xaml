@@ -220,16 +220,17 @@
                                 Name="btnCancel" 
                                 VerticalAlignment="Top"
                                 Command="{Binding CancelCmd}"/>
-
-                                <!--DELETE"-->
+                                    <!--Foreground="Red"-->
+                                    <!--DELETE"-->
                                 <Button Grid.Column="0"
-                                Foreground="Red"     
+                              
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Delete"
                                 HorizontalAlignment="Right"
                                 Name="btnDelete" 
                                 VerticalAlignment="Top"                         
-                                Command="{Binding DeleteOperatorcmd}"                                    
+                                Command="{Binding DeleteOperatorcmd}" 
+                                IsEnabled="{Binding DelBtnIsEnabled}"                            
                             />
 
                                 </Grid>

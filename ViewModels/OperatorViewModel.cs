@@ -20,36 +20,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class OperatorViewModel : GameTech.Elite.Base.ViewModelBase
     {
-
-        //public enum OnProcess
-        //{         
-        //    SelectedItem = 1,
-        //    Cancel = 2,
-        //    None = 3,
-        //    Save = 4,
-        //    Delete = 5,
-        //    Undo = 6,
-        //    New = 7,
-        //}
-
-            public bool WorkInProgress
-        {
-            get;set;
-        }
-
-        #region MEMBERS
-        #region (private only)
-        //private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
-        private Operator m_OperatorOrginalSettingSelected = new Operator();
-
+        #region MEMBERS       
         private ObservableCollection<Operator> m_lofOperatorOrginalSettingcol = new ObservableCollection<Operator>();
-        #endregion
+        private int m_newOperatorId;
         #endregion
         #region CONSTRUCTOR
         public OperatorViewModel(/**/)
         {     
         }
-
          
         public void Initialize(ObservableCollection<Operator> operators_, List<B3IconColor> b3Iconcolor)
         {
@@ -58,10 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_selectedOperator = new Operator();
             m_operatorcolorList = b3Iconcolor;         
             OperatorSelectedIndex = -1;
-            //cOperation = OnProcess.None;
             SaveListSettingOriginalValuecol(operators_);
-            //SaveListSettingOriginalValue(operators_.ToList());
-
             ShowOper = false;
             IsEdit = true;
             SetCommand();
@@ -87,73 +62,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
 
-        private bool m_isEdit;
-        public bool IsEdit
-        {
-            get { return m_isEdit; }
-            set
-            {
-                m_isEdit = value;
-                RaisePropertyChanged("IsEdit");
-            }
-        }
-
         #region METHOD
-
-        private void SetDefaultView()
-        {
-            if (m_selectedOperator != null)//New and current item selected
-            {
-                //if (m_selectedOperator.OperatorId != 0)//Selected Item ok
-                //{
-                if (ShowOper != true)
-                {
-                    ShowOper = true;
-
-                }
-
-                if (ShowOper != true)
-                {
-                    ShowOper = true;
-                }
-                //}
-                //else//New
-                //{
-
-
-                //}             
-            }
-            else//Cancel
-            {
-                ShowOper = false;
-            }
-
-
-        }
-
-
-        #region Saved Original State
+        //Save a back up of the current operator.
+        //Will be used in undoing changes made from the active Operator observable collection
         private void SaveListSettingOriginalValuecol(ObservableCollection<Operator> operators_)
         {
-            var Orderby = operators_.OrderBy(l => l.OperatorName);
-            var temp = new ObservableCollection<Operator>(Orderby);
-
+            var OperatorListInOrder = operators_.OrderBy(l => l.OperatorName);
+            var tempResult = new ObservableCollection<Operator>(OperatorListInOrder);
             m_lofOperatorOrginalSettingcol = new ObservableCollection<Operator>();
-            foreach (Operator c in temp)
+
+            foreach (Operator c in tempResult)
             {
                 m_lofOperatorOrginalSettingcol.Add(SaveSettingOriginalValue(c));
             }
         }
-
-
-        //private void SaveListSettingOriginalValue(List<Operator> operators_)
-        //{
-        //    m_lofOperatorOrginalSetting = new List<Operator>();
-        //    foreach(Operator c  in operators_ )
-        //    {
-        //       m_lofOperatorOrginalSetting.Add(SaveSettingOriginalValue(c));
-        //    }
-        //}
+        
+        //This will break the binding from the active observable collection.
         private Operator SaveSettingOriginalValue(Operator c)
         {          
                 var g = new Operator();
@@ -162,7 +86,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 g.ContactName = c.ContactName;
                 g.FaxNumber = c.FaxNumber;
                 g.IconColor = c.IconColor;
-                //g.IconColorValue = c.IconColorValue;
                 g.OperatorId = c.OperatorId;
                 g.OperatorName = c.OperatorName;
                 g.OperatorNameDescription = c.OperatorNameDescription;
@@ -171,34 +94,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 g.ZipCode = c.ZipCode;
             return g;         
         }
-
-        //True yes changes were made false no changes were made.
-        private bool IsChanges(Operator currentState, Operator prevState)
-        {
-            bool result = false;
-            if (currentState.Address != prevState.Address
-            || currentState.City != prevState.City
-            || currentState.ContactName != prevState.ContactName
-            || currentState.FaxNumber != prevState.FaxNumber
-            || currentState.IconColor != prevState.IconColor
-            || currentState.OperatorName != prevState.OperatorName
-            || currentState.OperatorNameDescription != prevState.OperatorNameDescription
-            || currentState.PhoneNumber != prevState.PhoneNumber
-            || currentState.State != prevState.State
-            || currentState.ZipCode != prevState.ZipCode)
-            {
-                result = true;
-            }
-
-            return result;
-        }
-
-
-
         #endregion
-            #endregion
         #region COMMAND/EVENT
-
+        #region (add all command)
         private void SetCommand()
         {
             SaveOperatorcmd = new RelayCommand(parameter =>
@@ -221,13 +119,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                    NewOperatorCommand();
                });        
         }
-
-
+        #endregion
         #region(new)
         public ICommand NewOperatorCmd{get;set;}
         private void NewOperatorCommand()
         {
             WorkInProgress = true;
+            DelBtnIsEnabled = false;
             m_selectedOperator = new Operator();
             SelectedOperator.Address = System.String.Empty;
             SelectedOperator.City = System.String.Empty;
@@ -243,22 +141,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             RaisePropertyChanged("SelectedOperator");
             RaisePropertyChanged("SelectedColor");
             OperatorSelectedIndex = -1;
-
-
             ShowOper = true;
             IsEdit = false;
             WorkInProgress = false;
-
         }
         #endregion
         #region (itemselectionchanged)
-
-        public void SelectedItemChangevm(int r)
+        public void SelectedItemChangevm(int currentOpertorIndex)
         {
             WorkInProgress = true;
-            Operators = m_lofOperatorOrginalSettingcol;
-            OperatorSelectedIndex = r;
+                Operators = m_lofOperatorOrginalSettingcol;
+                OperatorSelectedIndex = currentOpertorIndex;
             WorkInProgress = false;
+
             SaveListSettingOriginalValuecol(m_operators);
             if (m_selectedOperator != null)
                 {
@@ -266,13 +161,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         if (m_showOper != true)
                         {
-                        //cOperation = OnProcess.SelectedItem;
-                        ShowOper = true;
-                        //IsEdit = true;
+                        ShowOper = true;            
                         }
-                        else
-                        {
-                        }
+                    DelBtnIsEnabled = true;                      
                     IsEdit = true;
                     }
                     else
@@ -284,9 +175,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     ShowOper = false;
                 }
-         }
-                
-        
+         }       
         #endregion
         #region (save)
         public ICommand SaveOperatorcmd { get; set; }
@@ -307,7 +196,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var Operators_ = m_operators.ToList();
             if (SelectedOperator.OperatorId == 0)
             {
-                SelectedOperator.OperatorId = newOperatorId;
+                SelectedOperator.OperatorId = m_newOperatorId;
                 Operators_.Add(m_selectedOperator);
             }
                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection                                                                                                        //SaveListSettingOriginalValue(Operators.ToList());
@@ -316,13 +205,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             IsEdit = true;          
             ShowOper = false;
             OperatorSelectedIndex = -1;
+            DelBtnIsEnabled = false;
             WorkInProgress = false;
+
         }
        
      
         public void SaveNewOperator()//new
-        {
-                  
+        {                  
                 SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 0);
                 try
                 {
@@ -336,14 +226,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                 if (SelectedOperator.OperatorId == 0)
                 {
-                    newOperatorId = msg.OperatorID;               
+                    m_newOperatorId = msg.OperatorID;               
                 }
             }
-           
-        
-
-        int newOperatorId;
-
         #endregion
         #region(delete)
         public ICommand DeleteOperatorcmd { get; set; }
@@ -364,13 +249,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             IsEdit = true;
             OperatorSelectedIndex = -1;
             ShowOper = false;
+            DelBtnIsEnabled = false;
             WorkInProgress = false;
         }
 
         public void DeleteOperator()
-        {
-
-          
+        {        
             try
             {
                 SetB3OperatorMessage msg = new SetB3OperatorMessage(SelectedOperator, 1);
@@ -379,44 +263,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     if (msg.ReturnCode != ServerReturnCode.Success)
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
-                }
-
-               
+                }            
             }
-            catch
-            { }
+            catch{ }
         
         }
         #endregion
-        #region (undo)
-        public ICommand UndoChangesCmd { get; set; }
-        public void UndoChanges()
-        {
-            SelectedOperator = m_OperatorOrginalSettingSelected;
-            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
-        }
-        #endregion
-
-        //public OnProcess cOperation { get; set; }
-
+        #region (cancel)
         public ICommand CancelCmd { get; set; }
         public void CancelCommand()
         {
             WorkInProgress = true;
-            //cOperation = OnProcess.Cancel;
             Operators = m_lofOperatorOrginalSettingcol;
             SaveListSettingOriginalValuecol(Operators);
-                IsEdit = true;
-                OperatorSelectedIndex = -1;
-                ShowOper = false;
-            //}
-            //cOperation = OnProcess.None;     
+            IsEdit = true;
+            OperatorSelectedIndex = -1;
+            ShowOper = false;
+            DelBtnIsEnabled = false;
             WorkInProgress = false;     
         }
-
         #endregion
-
+        #endregion
         #region PROPERTIES
+
+        public int SelectedColorIndex { get; set; }
+        public bool WorkInProgress { get; set; }
 
         private bool m_showOper;
         public bool ShowOper
@@ -429,17 +300,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public bool ShowDefault
+        private bool m_isEdit;
+        public bool IsEdit
         {
-            get;
-            set;
+            get { return m_isEdit; }
+            set
+            {
+                m_isEdit = value;
+                RaisePropertyChanged("IsEdit");
+            }
         }
-
-        public int SelectedColorIndex
-        {
-            get; set;
-        }
-
 
         private int m_operatorSelectedIndex;
         public int OperatorSelectedIndex
@@ -452,15 +322,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        #region(w members assoc w properties)
-
         private ObservableCollection<Operator> m_operators;
          public ObservableCollection<Operator> Operators
          {
-             get
-             {
-                 return m_operators;
-             }
+             get { return m_operators; }
              set
              {
                  m_operators = value;
@@ -501,16 +366,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private bool m_isNew;
-        public bool IsNew
+        private bool m_delBtnEnabled;
+        public bool DelBtnIsEnabled
         {
-            get { return m_isNew; }
+            get { return m_delBtnEnabled; }
             set
             {
-                m_isNew = value;
-                RaisePropertyChanged("IsNew");
+                m_delBtnEnabled = value;
+                RaisePropertyChanged("DelBtnIsEnabled");
             }
-
         }
 
         private int m_colorSelectedIndex;
@@ -522,7 +386,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_colorSelectedIndex = value;
                 RaisePropertyChanged("ColorSelectedIndex");
             }
-
         }
 
         public B3IconColor SelectedColor
@@ -547,13 +410,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             var colorValue = OperatorColorList.Single(l => l.ColorID == IconColor);
             return colorValue;
-        }
-
-     
-
-        
-        #endregion
-        #endregion
+        }    
+        #endregion     
     }
 }
 
