@@ -37,10 +37,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         private void lstbx_OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OperatorViewModel ii = (OperatorViewModel)DataContext;
-            var yy = ii.cOperation;
-            if (yy == OperatorViewModel.OnProcess.None
-                || yy == OperatorViewModel.OnProcess.SelectedItem
-                )
+            var yy = ii.WorkInProgress;
+            if (yy == false
+                ) 
             {
                 var currentOperator = ii.OperatorSelectedIndex;
                 var VmAccess = OperatorViewModel.Instance;
