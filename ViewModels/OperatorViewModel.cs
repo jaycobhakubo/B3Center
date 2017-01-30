@@ -171,7 +171,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
             #endregion
-            #region COMMAND/EVENT
+        #region COMMAND/EVENT
 
         private void SetCommand()
         {
@@ -241,9 +241,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         else
                         {
                         }
-                        var jjj = new  ObservableCollection<Operator>(m_lofOperatorOrginalSetting.OrderBy(l => l.OperatorName));
-                    m_operators= jjj;
-                    SaveListSettingOriginalValue(Operators.ToList());
+                    //var jjj = new  ObservableCollection<Operator>(m_lofOperatorOrginalSetting.OrderBy(l => l.OperatorName));
+                    //m_operators= jjj;
+                    //SaveListSettingOriginalValue(Operators.ToList());
                     IsEdit = true;
                     }
                     else
@@ -361,6 +361,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 );
             save.Wait();
             Mouse.OverrideCursor = null;
+            IsEdit = true;
+            OperatorSelectedIndex = -1;
+            ShowOper = false;
+            //var Operators_ = m_operators.ToList();
+            //Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection  
+            //SaveListSettingOriginalValue(Operators.ToList());
         }
 
         public void DeleteOperator()
@@ -379,9 +385,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 var Operators_ = m_operators.ToList();
                 Operators_.Remove(m_selectedOperator);
                 Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
-
-                OperatorSelectedIndex = -1;
-                m_selectedOperator = new Operator();
+                SaveListSettingOriginalValue(Operators.ToList());
+                //OperatorSelectedIndex = -1;
+                //m_selectedOperator = new Operator();
             }
             catch
             { }
