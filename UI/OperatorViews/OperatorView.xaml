@@ -146,8 +146,9 @@
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                          SelectedValuePath="{Binding SelectedOperator.IconColor}"                                                         
-                                          ></ComboBox>
+                                          SelectedValuePath="ColorID"   
+                                           SelectedValue="{Binding SelectedOperator.IconColor}"
+                                    ></ComboBox>
                                 <!--Style="{StaticResource ClearColorSelection}"-->
                                 <!--SelectedItem="{Binding  SelectedOperator.IconColorValue, Converter={StaticResource ConvertColorIdToColor}}"-->
 
