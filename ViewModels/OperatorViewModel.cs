@@ -48,6 +48,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_operatorcolorList = b3Iconcolor;         
             OperatorSelectedIndex = -1;
             cOperation = CurrentOperation.None;
+            SaveListSettingOriginalValue(operators_.ToList());
             ShowOper = false;
             IsEdit = true;
             SetCommand();
@@ -121,6 +122,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region Saved Original State
         private void SaveListSettingOriginalValue(List<Operator> operators_)
         {
+            m_lofOperatorOrginalSetting = new List<Operator>();
             foreach(Operator c  in operators_ )
             {
                m_lofOperatorOrginalSetting.Add(SaveSettingOriginalValue(c));
@@ -427,13 +429,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             cOperation = CurrentOperation.Cancel;
             if (OperatorSelectedIndex != -1)
             {
+                //OperatorSelectedIndex = -1;
+                //ShowOper = false;
+                Operators = new ObservableCollection<Operator>(m_lofOperatorOrginalSetting);
+                SaveListSettingOriginalValue(Operators.ToList()); 
+                IsEdit = true;
                 OperatorSelectedIndex = -1;
                 ShowOper = false;
             }
             cOperation = CurrentOperation.None;
 
-            SelectedOperator = m_OperatorOrginalSettingSelected;
-            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+            
+
+            //SelectedOperator = m_OperatorOrginalSettingSelected;
+            //m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
         }
 
         #endregion
