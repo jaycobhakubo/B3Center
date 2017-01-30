@@ -28,7 +28,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             None = 3,
         }
 
-
         #region MEMBERS
         #region (private only)
         private  List<Operator> m_lofOperatorOrginalSetting = new List<Operator>();//I dont think we need to save all old operator.
@@ -50,6 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             OperatorSelectedIndex = -1;
             cOperation = CurrentOperation.None;
             ShowOper = false;
+            IsEdit = true;
             SetCommand();
         }         
 
@@ -73,6 +73,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
 
+        private bool m_isEdit;
+        public bool IsEdit
+        {
+            get { return m_isEdit; }
+            set
+            {
+                m_isEdit = value;
+                RaisePropertyChanged("IsEdit");
+            }
+        }
 
         #region METHOD
 
@@ -82,12 +92,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 //if (m_selectedOperator.OperatorId != 0)//Selected Item ok
                 //{
-                    if (ShowOper != true)
-                    {
-                        ShowOper = true;
+                if (ShowOper != true)
+                {
+                    ShowOper = true;
 
-                    }   
-                                                                        
+                }
+
+                if (ShowOper != true)
+                {
+                    ShowOper = true;
+                }
                 //}
                 //else//New
                 //{
@@ -98,8 +112,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             else//Cancel
             {
                 ShowOper = false;
-
             }
+
 
         }
 
@@ -129,9 +143,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 g.ZipCode = c.ZipCode;
             return g;         
         }
+
+        //True yes changes were made false no changes were made.
+        private bool IsChanges(Operator currentState, Operator prevState)
+        {
+            bool result = false;
+            if (currentState.Address != prevState.Address
+            || currentState.City != prevState.City
+            || currentState.ContactName != prevState.ContactName
+            || currentState.FaxNumber != prevState.FaxNumber
+            || currentState.IconColor != prevState.IconColor
+            || currentState.OperatorName != prevState.OperatorName
+            || currentState.OperatorNameDescription != prevState.OperatorNameDescription
+            || currentState.PhoneNumber != prevState.PhoneNumber
+            || currentState.State != prevState.State
+            || currentState.ZipCode != prevState.ZipCode)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
         #endregion
-        #endregion
-        #region COMMAND/EVENT
+            #endregion
+            #region COMMAND/EVENT
 
         private void SetCommand()
         {
@@ -203,7 +239,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         if (m_showOper != true)
                         {
-                            cOperation = CurrentOperation.SelectedItem;
+                        m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+                        cOperation = CurrentOperation.SelectedItem;
                             ShowOper = true;
                         }
                     }
@@ -224,7 +261,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ICommand SaveOperatorcmd { get; set; }
         private void RunSaveCommand()
         {
-            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            if (m_isEdit == true)
+            {
+                IsEdit = false;
+                return;
+            }
+            else
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             if (SelectedOperator.OperatorId != 0)//Update Save
             {
                 Task save = Task.Factory.StartNew(() => UpdateSelectedOperator());
@@ -234,9 +277,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 Task save = Task.Factory.StartNew(() => SaveNewOperator());
                 save.Wait();
-            }          
+            }
             Mouse.OverrideCursor = null;
+            IsEdit = false;
         }
+    
 
         
         public void UpdateSelectedOperator()//Update
@@ -352,12 +397,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
         #region (undo)
-        // public ICommand UndoChangesCmd { get; set; }
-        // public void UndoChanges()
-        //{
-        //    SelectedOperator = m_OperatorOrginalSettingSelected;
-        //    m_OperatorOrginalSettingSelected= SaveSettingOriginalValue(SelectedOperator);
-        //}
+        public ICommand UndoChangesCmd { get; set; }
+        public void UndoChanges()
+        {
+            SelectedOperator = m_OperatorOrginalSettingSelected;
+            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+        }
         #endregion
 
         public CurrentOperation cOperation { get; set; }
@@ -370,12 +415,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 OperatorSelectedIndex = -1;
                 ShowOper = false;
-                //ShowOper = false;
             }
             cOperation = CurrentOperation.None;
-       
-            //    SelectedOperator = m_OperatorOrginalSettingSelected;
-            //    m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
+
+            SelectedOperator = m_OperatorOrginalSettingSelected;
+            m_OperatorOrginalSettingSelected = SaveSettingOriginalValue(SelectedOperator);
         }
 
         #endregion

@@ -25,6 +25,7 @@
         <Setter Property="Padding" Value="0,0,0,5"/>-->
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
+            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
             <Style.Triggers>
                 <Trigger Property="IsReadOnly" Value="True">
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -49,7 +50,7 @@
  
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
-            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
             <Style.Triggers>
                 <Trigger Property="IsReadOnly" Value="True">
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -151,12 +152,9 @@
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                              Style="{StaticResource ClearColorSelection}"
-                                             SelectedIndex="{Binding ColorSelectedIndex}"
-                                           IsEnabled="False"
+                                             Style="{StaticResource ClearColorSelection}"
+                                            SelectedIndex="{Binding ColorSelectedIndex}"
                                           />
-
-                                <!--SelectedItem="{Binding SelectedColor}"-->
 
                                 <Label Content="Phone Number" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
@@ -190,54 +188,43 @@
                                         <ColumnDefinition/>
 
                                     </Grid.ColumnDefinitions>
-                                    
-                                    
+
+
+                                    <!--EDIT-->
                                     <Button Grid.Column="1"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Edit"
                                 HorizontalAlignment="Center" 
-                                x:Name="btnEdit"
-                                         
+                                x:Name="btnEdit"                                      
                                 VerticalAlignment="Top"
-                             Command="{Binding SaveOperatorcmd}" 
-                                        
+                                Command="{Binding SaveOperatorcmd}"   
+                                Visibility="{Binding IsEdit, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=false}"
                                 Tag="1">
-                                        <!--<Button.Style>
-                                            <Style TargetType="Button">
-                                                <Style.Triggers>
-                                                    <Trigger Property="Click" Value="True">
-                                                        
-                                                    </Trigger>
-                                                           
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>-->
-                                    </Button>
-                                    <!--<DataTrigger Binding="{Binding Content, RelativeSource={RelativeSource Self}}" Value="Edit">-->
+                                </Button>
 
-                                    <Button Grid.Column="1"
+                                <!--SAVE-->
+                                <Button Grid.Column="1"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Save"
                                 HorizontalAlignment="Center" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                             Command="{Binding SaveOperatorcmd}" 
-                                                Visibility="Hidden" 
-                                Tag="1">
-                                    </Button>
+                                 Command="{Binding SaveOperatorcmd}" 
+                                Visibility="{Binding IsEdit, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}"
+                                Tag="1"></Button>
 
-                                    <!--Click="btnSave_Click"-->
-                                    <Button Grid.Column="2"
+                                <!--CANCEL-->
+                                <Button Grid.Column="2"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Cancel"
                                 HorizontalAlignment="Left"
                                 Name="btnCancel" 
                                 VerticalAlignment="Top"
-                                Command="{Binding CancelCmd}"  
-                            />
-                                    <!--Click="btnCancel_Click"-->
-                                    <Button Grid.Column="0"
-                                            Foreground="Red"
+                                Command="{Binding CancelCmd}"/>
+
+                                <!--DELETE"-->
+                                <Button Grid.Column="0"
+                                Foreground="Red"     
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Delete"
                                 HorizontalAlignment="Right"
@@ -272,16 +259,11 @@
                             Name="lstbx_OperatorList" 
                             Margin="15"                   
                             ItemsSource="{Binding Operators}" 
-                            SelectedItem="{Binding SelectedOperator}"                          
-                           
+                            SelectedItem="{Binding SelectedOperator}"     
                             SelectedIndex="{Binding OperatorSelectedIndex}" 
-                            SelectionChanged="lstbx_OperatorList_SelectionChanged"
-                         
+                           SelectionChanged="lstbx_OperatorList_SelectionChanged"                      
                             >
-                        
-                         
-                            <!--IsSynchronizedWithCurrentItem="True"-->
-                            <!--CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedItemChanged}"-->
+                                              
                         </ListBox>
                     </ScrollViewer>
                     <Button Grid.Row="1"
