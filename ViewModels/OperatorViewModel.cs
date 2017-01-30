@@ -26,6 +26,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedItem = 1,
             Cancel = 2,
             None = 3,
+            Save = 4,
         }
 
         #region MEMBERS
@@ -241,7 +242,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         else
                         {
                         }
-                        var jjj = new  ObservableCollection<Operator>(m_lofOperatorOrginalSetting.OrderBy(l => l.OperatorName));
+                    ObservableCollection<Operator> jjj = new  ObservableCollection<Operator>(m_lofOperatorOrginalSetting.OrderBy(l => l.OperatorName));
                     m_operators= jjj;
                     SaveListSettingOriginalValue(Operators.ToList());
                     IsEdit = true;
@@ -268,7 +269,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 IsEdit = false;
                 return;
             }
-           
+
+           cOperation=  CurrentOperation.Save;
 
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             if (SelectedOperator.OperatorId != 0)//Update Save
@@ -282,12 +284,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 save.Wait();
             }
             Mouse.OverrideCursor = null;
+   
+           
             IsEdit = true;
             OperatorSelectedIndex = -1;
             ShowOper = false;
-            var Operators_ = m_operators.ToList();
-            Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection  
-            SaveListSettingOriginalValue(Operators.ToList());
+
+            cOperation = CurrentOperation.None;
         }
        
         public void UpdateSelectedOperator()//Update
@@ -306,8 +309,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     if (msg.ReturnCode != ServerReturnCode.Success)
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
+                var Operators_ = m_operators.ToList();
+                Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection  
+                SaveListSettingOriginalValue(Operators.ToList());
 
-          
 
             }
             catch
@@ -404,12 +409,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             cOperation = CurrentOperation.Cancel;
             if (OperatorSelectedIndex != -1)
             {
-         //Revert whatever changes made
+                //Revert whatever changes made
                 Operators = new ObservableCollection<Operator>(m_lofOperatorOrginalSetting.OrderBy(l => l.OperatorName));
-                SaveListSettingOriginalValue(Operators.ToList()); 
+                SaveListSettingOriginalValue(Operators.ToList());
                 IsEdit = true;
                 OperatorSelectedIndex = -1;
                 ShowOper = false;
+
+                //var jjj = new ObservableCollection<Operator>(m_lofOperatorOrginalSetting.OrderBy(l => l.OperatorName));
+                //m_operators = jjj;
+                //SaveListSettingOriginalValue(Operators.ToList());
+                //IsEdit = true;
+                //OperatorSelectedIndex = -1;
+                //ShowOper = false;
             }
             cOperation = CurrentOperation.None;          
         }
