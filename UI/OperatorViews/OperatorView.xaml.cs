@@ -36,18 +36,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         /// <param name="e"></param>
         private void lstbx_OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ii = (OperatorViewModel)DataContext;
+            OperatorViewModel ii = (OperatorViewModel)DataContext;
             var yy = ii.cOperation;
-            if (yy == OperatorViewModel.CurrentOperation.None
-                || yy == OperatorViewModel.CurrentOperation.SelectedItem
+            if (yy == OperatorViewModel.OnProcess.None
+                || yy == OperatorViewModel.OnProcess.SelectedItem
                 )
             {
+                var currentOperator = ii.OperatorSelectedIndex;
                 var VmAccess = OperatorViewModel.Instance;
-                VmAccess.SelectedItemChangevm();
-            }
-            //ListBox x = (ListBox)sender;
-            //var tt = x.SelectedItem;        
-        
+                VmAccess.SelectedItemChangevm(currentOperator);
+            }       
         }
     }
 }
