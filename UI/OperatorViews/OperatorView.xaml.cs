@@ -38,7 +38,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
         {
             var ii = (OperatorViewModel)DataContext;
             var yy = ii.cOperation;
-            if (yy != OperatorViewModel.CurrentOperation.Cancel)
+            if (yy == OperatorViewModel.CurrentOperation.None
+                || yy == OperatorViewModel.CurrentOperation.SelectedItem
+                )
             {
                 var VmAccess = OperatorViewModel.Instance;
                 VmAccess.SelectedItemChangevm();

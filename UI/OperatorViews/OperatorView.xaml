@@ -17,12 +17,8 @@
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>
-            
         </Style>
 
-        <!--<Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="Padding" Value="0,0,0,5"/>-->
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
@@ -65,6 +61,9 @@
                 <DataTrigger Binding="{Binding ShowOper}"  Value="true">
                     <Setter Property="Width" Value="*"/>
                 </DataTrigger>
+                <!--<DataTrigger Binding="{Binding ShowOper}"  Value="false">
+                    <Setter Property="Width" Value="Auto"/>
+                </DataTrigger>-->
             </Style.Triggers>
         </Style>
 
