@@ -54,7 +54,7 @@
                 <TextBlock x:Name="txtblkEndDate" Text="End Date"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
                 <shared:DatePickerUserView  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"  HorizontalAlignment="Right"  Margin="0,0,0,0" />
                 <TextBlock Text="Session" Name="Sessionpar" Visibility="{Binding SessionInput}" />
-                <ComboBox 
+                <ComboBox                
                                Width="280"
                                ItemsSource="{Binding SessionList, Mode=TwoWay}"
                                SelectedItem="{Binding SelectedSession}"
