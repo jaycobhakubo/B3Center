@@ -148,6 +148,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.CRAZYBOUT;
                         GameCrzyBout = new GameSettingCrazyBoutVm_((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameCrzyBout;
                         RaisePropertyChanged("GameCrzyBout");
                         break;
                     }
@@ -155,6 +156,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.JAILBREAK;
                         GameJailBreak = new GameSettingJailBreakVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameJailBreak;
                         RaisePropertyChanged("GameJailBreak");
                         break;
                     }
@@ -162,6 +164,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.MAYAMONEY;
                         GameMayaMoney = new GameSettingMayaMoneyVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameMayaMoney;
                         RaisePropertyChanged("GameMayaMoney");
                         break;
                     }
@@ -169,6 +172,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.SPIRIT76;
                         GameSpirit76 = new GameSettingSpirit76Vm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameSpirit76;
                         RaisePropertyChanged("GameSpirit76");
                         break;
                     }
@@ -176,6 +180,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.SPIRIT76;
                         GameTimeBomb = new GameSettingTimeBombVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameTimeBomb;
                         RaisePropertyChanged("GameTimeBomb");
                         break;
                     }
@@ -183,6 +188,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.UKICKEM;
                         GameUkickEm = new GameSettingGameUkickEmVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameUkickEm;
                         RaisePropertyChanged("GameUkickEm");
                         break;
                     }
@@ -190,6 +196,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.WILDBALL;
                         GameWildBall = new GameSettingGameWildBallVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameWildBall;
                         RaisePropertyChanged("GameWildBall");
                         break;
                     }
@@ -197,6 +204,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     {
                         m_currentGameId = (int)B3Game.WILDFIRE;
                         GameWildfire = new GameSettingGameWildfireVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        SelectedGameVm = GameWildfire;
                         RaisePropertyChanged("GameWildfire");
                         break;
                     }
