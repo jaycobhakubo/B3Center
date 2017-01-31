@@ -80,14 +80,14 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox Name="chkbxDenom01" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0"   TabIndex="6" Tag="1" />
-                        <CheckBox Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" />
-                        <CheckBox Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  />
-                        <CheckBox Name="chkbxDenom25"  Content="0.25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TabIndex="9" Tag="4"  />
-                        <CheckBox Name="chkbxDenom50"  Content="0.50" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TabIndex="10" Tag="5" />
-                        <CheckBox Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" />
-                        <CheckBox Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" />
-                        <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" />
+                        <CheckBox Name="chkbxDenom01" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0"   TabIndex="6" Tag="1" IsChecked="{Binding Gamesetting_.Denom1, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" IsChecked="{Binding Gamesetting_.Denom5, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  IsChecked="{Binding Gamesetting_.Denom10, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom25"  Content="0.25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TabIndex="9" Tag="4"  IsChecked="{Binding Gamesetting_.Denom25, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom50"  Content="0.50" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TabIndex="10" Tag="5" IsChecked="{Binding Gamesetting_.Denom50, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" IsChecked="{Binding Gamesetting_.Denom100, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" IsChecked="{Binding Gamesetting_.Denom200, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" IsChecked="{Binding Gamesetting_.Denom500, Converter={StaticResource ValuetoBool}}"/>
                     </Grid>
                 </GroupBox>
 

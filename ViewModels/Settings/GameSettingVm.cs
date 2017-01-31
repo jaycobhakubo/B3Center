@@ -135,10 +135,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         public void SelectedItemEvent()
         {
-
+            SelectedGameVm = GetSelectedVm();
         }
 
-        public GameSettingVmAllGame selectedGameVm
+        private GameSettingVmAllGame GetSelectedVm()
+        {
+            return GameTabItem[m_tabSelectedindex].ViewModel;
+        }
+
+        public GameSettingVmAllGame SelectedGameVm
         {
             get;
             set;

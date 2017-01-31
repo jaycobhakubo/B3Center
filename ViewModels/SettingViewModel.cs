@@ -193,10 +193,119 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private ObservableCollection<B3SettingGlobal> SettingTobeSaved;
+
         private void SetNewValue()
         {
+            IEnumerable<B3SettingGlobal> TempB3Setting;
             switch (m_selectedSettingEquivToId)
             {
+                case 1:
+                    {
+                        GameSetting _GameSettingNewValue = GameSetting_Vm.SelectedGameVm.Gamesetting_;
+                      TempB3Setting  = m_b3Setting.Where(l => l.B3GameID == _GameSettingNewValue.GameId);
+                    
+
+                        foreach (B3SettingGlobal sg in TempB3Setting)
+                        {
+                            switch (sg.B3SettingID)
+                            {
+                                case 1:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom1;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom5;
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom10;
+                                        break;
+                                    }
+                                case 4:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom25;
+                                        break;
+                                    }
+                                case 5:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom50;
+                                        break;
+                                    }
+                                case 6:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom100;
+                                        break;
+                                    }
+                                case 7:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom200;
+                                        break;
+                                    }
+                                case 8:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.Denom500;
+                                        break;
+                                    }
+                                case 9:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.MaxBetLevel;
+                                        break;
+                                    }
+                                case 10:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.MaxCards;
+                                        break;
+                                    }
+                                case 11:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.CallSpeed;
+                                        break;
+                                    }
+                                case 12:
+                                    {
+                                        sg.B3SettingValue = ((_GameSettingNewValue.AutoCall == true) ? "T" : "F");
+                                        break;
+                                    }
+                                case 13:
+                                    {
+                                        sg.B3SettingValue = ((_GameSettingNewValue.AutoPlay == true) ? "T" : "F");
+                                        break;
+                                    }
+                                case 14:
+                                    {
+                                        sg.B3SettingValue = ((_GameSettingNewValue.HideSerialNumber == true) ? "T" : "F");
+                                        break;
+                                    }
+                                case 15:
+                                    {
+                                        sg.B3SettingValue = ((_GameSettingNewValue.SingleOfferBonus == true) ? "T" : "F");
+                                        break;
+                                    }
+                                case 58:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.MathPayTableSetting;
+                                        break;
+                                    }
+                                case 59:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.CallSpeedMin;
+                                        break;
+                                    }
+                                case 60:
+                                    {
+                                        sg.B3SettingValue = _GameSettingNewValue.CallSpeedBonus;
+                                        break;
+                                    }
+                            }
+
+                        }
+                        SettingTobeSaved = new ObservableCollection<B3SettingGlobal>(TempB3Setting);
+                        break;
+                    }
                 case 3:
                     {
                         PlayerSettings _PlayerSettingNewValue = PlayerSetting_Vm.PlayerSetting_;
@@ -266,6 +375,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     }
             }
+
+           
         }    
 
         private void LoadSetting()
@@ -518,7 +629,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             try
             {
                 SetNewValue();
-                SetB3SettingsMessage msg = new SetB3SettingsMessage(m_b3Setting);
+                //SetB3SettingsMessage msg = new SetB3SettingsMessage(m_b3Setting);
+                SetB3SettingsMessage msg = new SetB3SettingsMessage(SettingTobeSaved);
+                
                 try
                 {
                     msg.Send();
@@ -831,3 +944,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     #endregion
 }
+#region SRCATCH PAPER
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom1) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom1;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom5) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom5;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom10) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom10;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom25) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom25;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom50) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom50;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom100) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom100;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom200) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom200;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom500) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom500;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MaxBetLevel) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.MaxBetLevel;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MaxCards) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.MaxCards;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CallSpeed) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.CallSpeed;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoCall) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.AutoCall == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoPlay) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.AutoPlay == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.HideSerialNumber) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.HideSerialNumber == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SingleOfferBonus) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.SingleOfferBonus == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MathPayTableSetting) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.MathPayTableSetting;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CallSpeedMin) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.CallSpeedMin;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CallSpeedBonus) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.CallSpeedBonus;
+//break;
+#endregion

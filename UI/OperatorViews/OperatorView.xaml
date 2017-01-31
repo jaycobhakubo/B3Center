@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d" 
-               xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+               
                 xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
    >
     <UserControl.Resources>
