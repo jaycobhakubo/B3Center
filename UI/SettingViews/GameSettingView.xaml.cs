@@ -34,8 +34,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var x = (TabControl)sender;
+            int tabindex = x.SelectedIndex;
             GameSettingVm ii = (GameSettingVm)DataContext;
-            ii.SelectedItemEvent();
+            if (tabindex != ii.myprevindex)
+            { ii.SelectedItemEvent(); }
         }
     }
   
