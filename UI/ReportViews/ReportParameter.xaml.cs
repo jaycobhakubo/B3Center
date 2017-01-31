@@ -128,6 +128,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         }
 
+        private void SessionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         
     }
 }

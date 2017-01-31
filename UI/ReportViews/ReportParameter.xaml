@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                 xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
-                     xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" 
            >
     <Grid>
@@ -59,7 +58,7 @@
                                Width="280"
                                ItemsSource="{Binding SessionList, Mode=TwoWay}"
                                SelectedItem="{Binding SelectedSession}"
-                                CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding SelectedSessionEvent}"
+                                SelectionChanged="SessionCombobox_SelectionChanged"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"

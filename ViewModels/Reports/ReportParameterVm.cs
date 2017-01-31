@@ -12,7 +12,6 @@ using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using System.Windows.Input;
-using Microsoft.Practices.Composite.Presentation.Commands;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -84,7 +83,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             HideEnableParamControls(paramlist);
             if (rptParameter.rptid == ReportId.B3AccountHistory)
             {
-                EventCommand();
+                //EventCommand();
             }
         }
 
@@ -95,19 +94,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ICommand SelectedSessionEvent { get; private set; }
         public ICommand DateSelectedChanged { get; private set; }
 
-        private void EventCommand()
-        {
-            SelectedSessionEvent = new DelegateCommand<Session>(obj =>
-            {
-                if (obj != null)
-                {
-                    if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
-                    {
-                        UpdateAccountList();
-                    }
-                }
-            });
-        }
+        //private void EventCommand()
+        //{
+        //    SelectedSessionEvent = new DelegateCommand<Session>(obj =>
+        //    {
+        //        if (obj != null)
+        //        {
+        //            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+        //            {
+        //                UpdateAccountList();
+        //            }
+        //        }
+        //    });
+        //}
 
         #endregion
 
