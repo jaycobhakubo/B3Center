@@ -216,171 +216,137 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Accounts Outstanding";              
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3AccountHistory:
                     {
-
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Account History";
-                     
+                        result.ReportTitle = "Account History";                     
                         par.Add("Date");
                         par.Add("Session");
-                        par.Add("AccountNumber");
-                
+                        par.Add("AccountNumber");              
                         result.ReportParameter = par;
-                        
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3BallCallByGame:
                     {
-                       
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Ball Call";
                         par.Add("Category");
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3BingoCardReport:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Bingo Card";
                         par.Add("StartEndCard");     
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Daily:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Daily";
                         par.Add("Date");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Detail:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         temprptparmodel.StartDate = new Model.Shared.DatePickerM();
                         temprptparmodel.EndDate = new Model.Shared.DatePickerM();
                         result.ReportTitle = "Detail";
                         par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Drawer:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Drawer";
-                        //par.Add("StartEndCard");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Jackpot:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Jackpot";
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Monthly:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Monthly";
                         par.Add("MonthYear");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Session:
                     {
-
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session";
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3SessionSummary:
                     {
-
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session Summary";
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3SessionTransaction:
                     {
-
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Session Transaction";
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
                     }
                 case ReportId.B3Void:
                     {
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         temprptparmodel.StartDate = new Model.Shared.DatePickerM();
                         temprptparmodel.EndDate = new Model.Shared.DatePickerM();
                         result.ReportTitle = "Void";
                         par.Add("StartEndDatewTime");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
@@ -388,13 +354,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3WinnerCards:
                     {
 
-                        //temprptparmodel.SessionList = SessionList;
                         temprptparmodel.rptid = b3rpt;
                         result.ReportTitle = "Winners Card";
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;
-                        //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
                         break;
@@ -414,12 +378,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("RptBaseVm");
             }
         }
-
-    
-
-        
-
-        
 
         private void LoadReportList()
         {
@@ -526,31 +484,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         private List<B3Report> m_reportList = new List<B3Report>();
-
         public List<B3Report> ReportList
         {
             get { return m_reportList; }
         }
-        
-        private UserControl m_selectedReportView = new UserControl();
 
 
         public UserControl SelectedReportView
         {
-            get {
-                return m_selectedReportView;
-            }
-            set
-            {
-
-                m_selectedReportView = value;
-                    RaisePropertyChanged("SelectedReportView");
-            }
+            get;
+            set;
         }
 
         public void SelectionChanged(string ReportName)
         {
-            //Reinitialize every selection changed rather than storing.
+     
             UserControl view = null;
 
             switch (ReportName)
@@ -640,13 +588,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
                         view = m_winnerCardsReportView;
                         break;
-                    }
-              
-                
-           
+                    }        
             }
-
-
             SelectedReportView = view;
         }
 
