@@ -38,7 +38,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             int tabindex = x.SelectedIndex;
             GameSettingVm ii = (GameSettingVm)DataContext;
             if (tabindex != ii.myprevindex)
-            { ii.SelectedItemEvent(); }
+            {
+                ii.SelectedItemEvent();
+            }
         }
     }
   

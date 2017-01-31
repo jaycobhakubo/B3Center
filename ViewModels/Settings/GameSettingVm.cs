@@ -29,6 +29,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public GameSettingVmAllGame ViewModel { get; set; }
     }
 
+
+
     #endregion
 
     public class GameSettingVm : ViewModelBase
@@ -107,7 +109,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #endregion
         #region PROPERTIES
 
-
+        public GameSettingVmAllGame SelectedGameVm
+        {
+            get;
+            set;
+        }
 
         public GameSettingCrazyBoutVm_ GameCrzyBout { get; set; }
         public GameSettingJailBreakVm GameJailBreak { get; set; }
@@ -135,57 +141,68 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public void ReloadSelectedItemForAnyChangesNotSaved()
         {
             int tabSelectedIndex = m_tabSelectedindex;
+            //GameSettingVmAllGame x;
             switch (tabSelectedIndex)
             {
                 case 0:
                     {
                         m_currentGameId = (int)B3Game.CRAZYBOUT;
                         GameCrzyBout = new GameSettingCrazyBoutVm_((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameCrzyBout");
                         break;
                     }
                 case 1:
                     {
                         m_currentGameId = (int)B3Game.JAILBREAK;
                         GameJailBreak = new GameSettingJailBreakVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameJailBreak");
                         break;
                     }
                 case 2:
                     {
                         m_currentGameId = (int)B3Game.MAYAMONEY;
                         GameMayaMoney = new GameSettingMayaMoneyVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameMayaMoney");
                         break;
                     }
                 case 3:
                     {
                         m_currentGameId = (int)B3Game.SPIRIT76;
                         GameSpirit76 = new GameSettingSpirit76Vm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameSpirit76");
                         break;
                     }
                 case 4:
                     {
                         m_currentGameId = (int)B3Game.SPIRIT76;
                         GameTimeBomb = new GameSettingTimeBombVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameTimeBomb");
                         break;
                     }
                 case 5:
                     {
                         m_currentGameId = (int)B3Game.UKICKEM;
                         GameUkickEm = new GameSettingGameUkickEmVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameUkickEm");
                         break;
                     }
                 case 6:
                     {
                         m_currentGameId = (int)B3Game.WILDBALL;
                         GameWildBall = new GameSettingGameWildBallVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameWildBall");
                         break;
                     }
                 case 7:
                     {
                         m_currentGameId = (int)B3Game.WILDFIRE;
                         GameWildfire = new GameSettingGameWildfireVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
+                        RaisePropertyChanged("GameWildfire");
                         break;
                     }
             }
+            //var found = GameTabItem.FirstOrDefault(x => x.GameIndex == tabSelectedIndex);
+            //found.ViewModel = x;
         }
 
         public int myprevindex = -1;  
@@ -203,11 +220,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             return GameTabItem[m_tabSelectedindex].ViewModel;
         }
 
-        public GameSettingVmAllGame SelectedGameVm
-        {
-            get;
-            set;
-        }
+      
 
         private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> _b3Setting)
         {
