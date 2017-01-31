@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using GameTech.Elite.UI;
-using Microsoft.Practices.Composite.Presentation.Commands;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Globalization;
 using GameTech.Elite.Client.Modules.B3Center.Helpers;

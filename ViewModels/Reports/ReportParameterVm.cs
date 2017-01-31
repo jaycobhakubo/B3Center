@@ -47,7 +47,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public static ReportParameterViewModel Instance
         {
-       get
+            get
             {
                 if (m_instance == null)
                 {
@@ -61,7 +61,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 return m_instance;
             }
 
-          
+
         }
 
         #endregion
@@ -102,11 +102,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //        {
         //            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
         //            {
-        //                UpdateAccountList();
+         //            UpdateAccountList();
         //            }
         //        }
         //    });
         //}
+
+        public void EventCommand()
+        {
+            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+            {
+                if (SelectedSession != null)
+                {
+                    UpdateAccountList();
+                }
+            }
+        }
 
         #endregion
 
@@ -122,12 +133,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return result;
         }
 
+        public bool WorkInProgress { get; set; }
 
         public void UpdateSessionList(DateTime selectedDateTime)
         {
-
+            WorkInProgress = true;
             m_sessionList.Clear();
-
+      
             foreach (var session in ReportsViewModel.Instance.SessionList)
             {
                 var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
@@ -142,14 +154,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 sessionStartDateTime.Month == selectedDateTime.Month &&
                 (sessionStartDateTime.Day <= selectedDateTime.Day && sessionEndDateTime.Day >= selectedDateTime.Day))
                 {
+           
                     m_sessionList.Add(session);
+                
                 }
+
+            
             }
 
-            SessionList = m_sessionList;
-
+            WorkInProgress = false;
             if (m_sessionList.Count != 0)
             {
+
+                SessionList = m_sessionList;
                 SelectedSession = m_sessionList.LastOrDefault();
             }
             else
@@ -159,7 +176,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     m_accountList.Clear();
                 }
             }
-          
+
         }
 
 
@@ -167,20 +184,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             m_accountList.Clear();
             if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
-            {         
+            {
                 Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
                 msg.Send();
-                m_accountList = msg.AccountNumberList;             
-            }          
-
-            AccountList = m_accountList;
-            if (m_accountList.Count != 0)
-            {
-                AccountSelected = m_accountList.FirstOrDefault();
-            }
+                if (msg.AccountNumberList.Count != 0)
+                {
+                    AccountList = msg.AccountNumberList;
+                    AccountSelected = m_accountList.FirstOrDefault();            
+                }               
+            }    
         }
 
-     
+
 
         private void HideEnableParamControls(List<string> paramlist)
         {
@@ -215,13 +230,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case "Session":
                         {
                             m_sessionList = new ObservableCollection<Session>();
-                            UpdateSessionList(DateTime.Now);                          
+                            UpdateSessionList(DateTime.Now);
                             SessionInput = Visibility.Visible;
                             break;
                         }
                     case "AccountNumber":
                         {
-                            m_accountList = new ObservableCollection<string>();                        
+                            m_accountList = new ObservableCollection<string>();
                             UpdateAccountList();
                             AccountNumberInput = Visibility.Visible;
                             break;
@@ -232,7 +247,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             m_categoryList.Add("By Game");
                             m_categoryList.Add("By Session");
                             CategorySelected = m_categoryList.FirstOrDefault();
-                            CategoryList = m_categoryList; 
+                            CategoryList = m_categoryList;
                             CategoryInput = Visibility.Visible;
                             break;
                         }
@@ -265,7 +280,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             StartEndDateWTime = Visibility.Collapsed;
         }
 
-     
+
 
         public DateTime GetDate()
         {
@@ -274,7 +289,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return tempResult;
         }
 
-        
+
 
         #endregion
 
@@ -322,31 +337,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set;
         }
 
-        public ObservableCollection<Session> SessionList 
+        public ObservableCollection<Session> SessionList
         {
             get { return m_sessionList; }
-            set 
+            set
             {
                 m_sessionList = value;
                 RaisePropertyChanged("SessionList");
-            } 
+            }
         }
 
 
- 
+
         public Session SelectedSession
         {
             get
             {
                 return RptParameterDataHandler.b3Session;
             }
-            set{
+            set
+            {
                 RptParameterDataHandler.b3Session = value;
                 RaisePropertyChanged("SelectedSession");
-            }  
+            }
         }
 
-    
+
         public string StartingCard
         {
             get { return RptParameterDataHandler.b3StartingCard; }
@@ -357,7 +373,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-   
+
         public string EndingCard
         {
             get { return RptParameterDataHandler.b3EndingCard; }
@@ -368,15 +384,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public ObservableCollection<string> AccountList 
-        {        
+        public ObservableCollection<string> AccountList
+        {
             get { return m_accountList; }
-            set 
+            set
             {
-                m_accountList = value; RaisePropertyChanged("AccountList"); 
-            }      
+                m_accountList = value; RaisePropertyChanged("AccountList");
+            }
         }
-       
+
 
 
         public string AccountSelected
@@ -538,7 +554,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-    
+
 
         #endregion
     }

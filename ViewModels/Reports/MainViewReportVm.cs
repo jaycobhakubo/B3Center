@@ -109,6 +109,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region Constructors
 
         /// <summary>
+        /// Gets the singleton instance of ReportsViewModel.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static ReportsViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                {
+                    lock (m_syncRoot)
+                    {
+                        if (m_instance == null)
+                            m_instance = new ReportsViewModel();
+                    }
+                }
+
+                return m_instance;
+            }
+        }
+
+
+        /// <summary>
         /// Represents the view model for managing reports
         /// </summary>
         public ReportsViewModel()
@@ -153,9 +177,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
      
         }
 
-       
-
-       
+           
         /// <summary>
         /// Initializes the ViewModel with the specified controller.
         /// </summary>
@@ -174,9 +196,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
       
             LoadReportList();
-            SetCommand();
-         
-            
+            SetCommand();           
         }
 
 
@@ -397,29 +417,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     
 
-        /// <summary>
-        /// Gets the singleton instance of ReportsViewModel.
-        /// </summary>
-        /// <value>
-        /// The instance.
-        /// </value>
-        public static ReportsViewModel Instance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    lock (m_syncRoot)
-                    {
-                        if (m_instance == null)
-                            m_instance = new ReportsViewModel();
-                    }
-                }
-
-                return m_instance;
-            }
-        }
-
+        
 
         
 

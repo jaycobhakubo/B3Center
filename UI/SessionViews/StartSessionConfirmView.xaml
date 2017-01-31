@@ -7,9 +7,9 @@
              d:DesignHeight="500" d:DesignWidth="500">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        
+
     </UserControl.Resources>
-    
+
     <Border>
         <Grid>
             <Grid.RowDefinitions>
@@ -21,17 +21,17 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Name="BackButton" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="PreviousButton_Click" Style="{StaticResource BackButtonStyle2}" />
+            <Button Grid.Row="0" Grid.Column="0" Name="BackButton" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="PreviousButton_Click"/>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <TextBlock Name="CharityTextBlock" Margin="20" TextAlignment="Center" FontSize="20"/>
-                <Button Content="Start" Name="StartButton" Command="{Binding SessionStartCommand}" Click="StartButton_Click" Style="{StaticResource FlatWhiteMediumButtonStyle}"/>
+                <Button Content="Start" Name="StartButton" Command="{Binding SessionStartCommand}" Click="StartButton_Click"/>
             </StackPanel>
 
 
-            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="White" Visibility="{Binding StartSessionDisabledVisibility, Converter={StaticResource VisibilityConverter}}">
+            <!--<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="White" Visibility="{Binding StartSessionDisabledVisibility, Converter={StaticResource VisibilityConverter}}">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding SessionStartStatusMessage}"/>
-            </Border>
+            </Border>-->
         </Grid>
     </Border>
 </UserControl>

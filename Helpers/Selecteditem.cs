@@ -7,26 +7,20 @@
 //using System.Windows.Input;
 //using Microsoft.Practices.Composite.Presentation.Commands;
 //using System.Windows.Controls;
-
-
-///// <summary>
-///// WORKING but not good.
-///// </summary>
-
 //namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 //{
-//    public static class SelectedItemChangedcmd
+//    class Selecteditem
 //    {
-//            private static readonly DependencyProperty SelectedCommandBehaviorProperty = DependencyProperty.RegisterAttached(
+//        private static readonly DependencyProperty SelectedCommandBehaviorProperty = DependencyProperty.RegisterAttached(
 //           "SelectedCommandBehavior",
 //           typeof(SelectorSelectedCommandBehavior),
-//           typeof(SelectedItemChangedcmd),
+//           typeof(Selecteditem),
 //           null);
 
 //        public static readonly DependencyProperty CommandProperty = DependencyProperty.RegisterAttached(
 //            "Command",
 //            typeof(ICommand),
-//            typeof(SelectedItemChangedcmd),
+//            typeof(Selecteditem),
 //            new PropertyMetadata(OnSetCommandCallback));
 
 //        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Only works for selector")]

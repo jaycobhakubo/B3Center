@@ -58,7 +58,7 @@
                                Width="280"
                                ItemsSource="{Binding SessionList, Mode=TwoWay}"
                                SelectedItem="{Binding SelectedSession}"
-                                SelectionChanged="SessionCombobox_SelectionChanged"
+                               SelectionChanged="SessionCombobox_SelectionChanged"
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"

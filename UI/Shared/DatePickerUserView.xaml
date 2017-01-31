@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared"
-             xmlns:CommandSelectionChanged="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              mc:Ignorable="d" >
     <UserControl.Resources>
         <Style  TargetType="{x:Type TextBlock}">        
@@ -36,18 +35,18 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}"  CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding YearMonthSelectedChanged}"/>
-            <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}" />
-            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding YearMonthSelectedChanged}"></ComboBox>
+            <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}" SelectionChanged="YearMonthList_SelectionChanged"/>
+            <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}"  SelectionChanged="DateList_SelectionChanged"/>
+            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}" SelectionChanged="YearMonthList_SelectionChanged"></ComboBox>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Style="{StaticResource showtime}" Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}">
+            <ComboBox Style="{StaticResource showtime}" Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}"  SelectionChanged="DateList_SelectionChanged">
                 </ComboBox>
-            <ComboBox Style="{StaticResource showtime}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}" CommandSelectionChanged:SelectedItemChangedcmd.Command="{Binding DateSelectedChanged}"></ComboBox>     
+            <ComboBox Style="{StaticResource showtime}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}"  SelectionChanged="DateList_SelectionChanged"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -22,7 +22,6 @@ using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Threading.Tasks;
-using Microsoft.Practices.Composite.Presentation.Commands;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {

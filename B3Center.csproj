@@ -69,7 +69,7 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>B3CenterKey.snk</AssemblyOriginatorKeyFile>
@@ -122,6 +122,7 @@
     <Compile Include="Business\B3Controller.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\Selecteditem.cs" />
     <Compile Include="Helpers\SelectedItemChangedcmd.cs" />
     <Compile Include="Helpers\SqlConnectionToByPassGtiServerApp.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
@@ -147,12 +148,12 @@
     <Compile Include="Model\Report\ReportParameterModel.cs" />
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
-    <Compile Include="Model\Setting\SystemSetting.cs" />
-    <Compile Include="Model\Setting\PlayerSetting.cs" />
-    <Compile Include="Model\Setting\ServerSetting.cs" />
-    <Compile Include="Model\Setting\SalesSettings.cs" />
-    <Compile Include="Model\Setting\SessionSetting.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
+    <Compile Include="Model\Setting\PlayerSetting.cs" />
+    <Compile Include="Model\Setting\SalesSettings.cs" />
+    <Compile Include="Model\Setting\ServerSetting.cs" />
+    <Compile Include="Model\Setting\SessionSetting.cs" />
+    <Compile Include="Model\Setting\SystemSetting.cs" />
     <Compile Include="Model\Shared\DatePickerM.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -160,6 +161,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
+    <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
+      <DependentUpon>OperatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ReportViews\AccountHistoryReportView.xaml.cs">
       <DependentUpon>AccountHistoryReportView.xaml</DependentUpon>
     </Compile>
@@ -214,28 +218,29 @@
     <Compile Include="UI\ReportViews\WinnerCardsReportView.xaml.cs">
       <DependentUpon>WinnerCardsReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
-      <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\GameSettingTimeBomb.xaml.cs">
-      <DependentUpon>GameSettingTimeBomb.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\SettingViews\GameSettingView\GameSetting76Bingo.xaml.cs">
       <DependentUpon>GameSetting76Bingo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\GameSettingMayaMoney.xaml.cs">
-      <DependentUpon>GameSettingMayaMoney.xaml</DependentUpon>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingCrazyBout.xaml.cs">
+      <DependentUpon>GameSettingCrazyBout.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingJailBreak.xaml.cs">
       <DependentUpon>GameSettingJailBreak.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingMayaMoney.xaml.cs">
+      <DependentUpon>GameSettingMayaMoney.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingTimeBomb.xaml.cs">
+      <DependentUpon>GameSettingTimeBomb.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingUkickEm.xaml.cs">
       <DependentUpon>GameSettingUkickEm.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildBall.xaml.cs">
       <DependentUpon>GameSettingWildBall.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
+      <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
@@ -267,23 +272,8 @@
     <Compile Include="UI\SessionViews\VoidAccountsView.xaml.cs">
       <DependentUpon>VoidAccountsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\GameSettingCrazyBout.xaml.cs">
-      <DependentUpon>GameSettingCrazyBout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\Old\GameSettingJailBreakView.xaml.cs">
-      <DependentUpon>GameSettingJailBreakView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\Old\GameSettingUkickEmView.xaml.cs">
-      <DependentUpon>GameSettingUkickEmView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\SettingViews\GameSettingView.xaml.cs">
       <DependentUpon>GameSettingView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\SettingViews\GameSettingView\Old\GameSettingWildBallProgView.xaml.cs">
-      <DependentUpon>GameSettingWildBallProgView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
-      <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\PlayerSettingView.xaml.cs">
       <DependentUpon>PlayerSettingView.xaml</DependentUpon>
@@ -309,7 +299,6 @@
     <Compile Include="UI\Shared\FullScreenUserControl.xaml.cs">
       <DependentUpon>FullScreenUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Business\IGTIModule.cs" />
     <Compile Include="Design\DesignController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -321,26 +310,26 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\OperatorViewModel.cs" />
+    <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
     <Compile Include="ViewModels\Reports\ReportBaseVm.cs" />
     <Compile Include="ViewModels\Reports\ReportParameterVm.cs" />
-    <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\Settings\GameSettingCrazyBoutVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingGameWildfireVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingGameWildBallVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingGameUkickEmVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingTimeBombVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingSpirit76Vm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingMayaMoneyVm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingGameWildBallVm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingGameWildfireVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingJailBreakVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingVmAllGame.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingMayaMoneyVm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingSpirit76Vm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingTimeBombVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVm.cs" />
-    <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingVmAllGame.cs" />
     <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SalesSettingVm.cs" />
     <Compile Include="ViewModels\Settings\ServerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SessionSettingVm.cs" />
+    <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
   </ItemGroup>
@@ -356,6 +345,10 @@
     <Page Include="UI\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\OperatorViews\OperatorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -376,8 +369,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ReportViews\BingoCardView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\ReportViews\DailyReportView.xaml">
       <SubType>Designer</SubType>
@@ -431,15 +424,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\SettingViews\GameSettingView\GameSettingTimeBomb.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UI\SettingViews\GameSettingView\GameSetting76Bingo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingCrazyBout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingJailBreak.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -447,17 +440,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingView\GameSettingJailBreak.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingTimeBomb.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\SettingViews\GameSettingView\GameSettingUkickEm.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\SettingViews\GameSettingView\GameSettingWildBall.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\SettingViews\PayTableSettingView.xaml">
       <SubType>Designer</SubType>
@@ -499,27 +496,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\GameSettingView\GameSettingCrazyBout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\SettingViews\GameSettingView\Old\GameSettingJailBreakView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\SettingViews\GameSettingView\Old\GameSettingUkickEmView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\SettingViews\GameSettingView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\SettingViews\GameSettingView\Old\GameSettingWildBallProgView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\OperatorViews\OperatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -604,13 +581,12 @@
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\SettingViews\GameSettingView.xaml.cs.txt" />
+    <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\SettingViews\MainViewSetting.xaml.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\MainWindow.xaml.cs.txt" />
+    <Folder Include="B3ReportCenter\Model\" />
+    <Folder Include="B3ReportCenter\UI\" />
+    <Folder Include="B3ReportCenter\ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

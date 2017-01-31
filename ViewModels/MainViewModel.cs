@@ -135,14 +135,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             private set;
         }
 
-        /// <summary>
-        /// Gets or set the sub view model: game view model.
-        /// </summary>
-        public GameViewModel GameVm
-        {
-            get;
-            private set;
-        }
 
         /// <summary>
         /// Gets or set the sub view model: session view model.

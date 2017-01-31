@@ -29,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
             DataContext = this;
         }
 
-
+        //This selectionchanged is really not cool so much trigger on this event.
         private void lstbx_OperatorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OperatorViewModel ii = (OperatorViewModel)DataContext;

@@ -173,19 +173,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
 
 
                 case "SessionToggleButton":
-                    {
-                        m_sessionView.ClearSelected();
+                    {      
                         view = m_sessionView;
-
                         break;
                     }
                 case "ReportsToggleButton":
                     {
-                        //m_reportsView.ClearSelected();
-                        //view = m_reportsView;
-
-                        //MenuColumn.Width = GridLength.Auto;
-                        //brdrMenuColumn.Visibility = Visibility.Collapsed;
+                  
 
                         break;
                     }

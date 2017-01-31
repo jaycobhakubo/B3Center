@@ -7,9 +7,6 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GameTech.Elite.Client.Modules.B3Center.Helper;
-using Microsoft.Practices.Composite.Presentation;
-using Microsoft.Practices.Composite;
-using Microsoft.Practices.Composite.Presentation.Commands;
 using System.Collections.ObjectModel;
 using GameTech.Elite.Reports;
 
@@ -62,7 +59,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             ShowTime = showTime;
             DatepickerModel = datePickerModel;              
             PopulateItemList();
-            EventItemChanged();
+
         }
 
         #endregion
@@ -282,23 +279,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region EVENT (selectionchangedmvvm)
 
-        public ICommand YearMonthSelectedChanged { get; private set; }
-        public ICommand DateSelectedChanged { get; private set; }
+        //public ICommand YearMonthSelectedChanged { get; private set; }
+        //public ICommand DateSelectedChanged { get; private set; }
 
-        private void EventItemChanged()
+        //private void EventItemChanged()
+        //{
+        //    YearMonthSelectedChanged = new DelegateCommand<string>(obj =>
+        //    {      
+        //        DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+        //        updateItemDateSelected();
+        //    });
+
+        //    DateSelectedChanged = new DelegateCommand<string>(obj =>
+        //    {
+        //        updateItemDateSelected();
+        //    });
+        //}
+
+        public void YearMonthSelectedChanged()
         {
-            YearMonthSelectedChanged = new DelegateCommand<string>(obj =>
-            {      
-                DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
-                updateItemDateSelected();
-            });
-
-            DateSelectedChanged = new DelegateCommand<string>(obj =>
-            {
-                updateItemDateSelected();
-            });
+            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            updateItemDateSelected();
         }
 
+
+        public void DateSelectedChanged()
+        {
+            updateItemDateSelected();
+        }
 
         private DateTime GetSelectedDate()
         {
