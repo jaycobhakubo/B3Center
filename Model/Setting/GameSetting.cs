@@ -8,6 +8,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 {
     public class GameSetting
     {
+        public int GameId { get; set; }
         public string Denom1 { get; set; }
         public string Denom5 { get; set; }
         public string Denom10 { get; set; }

@@ -77,11 +77,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             SetCommand();
             SetDefaultValue();
-            LoadSetting();
-            if (SettingSelected == "Games")
-            {
-                SelectedItemEvent("Games");
-            }
+            LoadSetting();     
+          
+          
         }
         #endregion
         #region OTHER ACCESSOR (static)
@@ -207,13 +205,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AnnounceCall	)).B3SettingValue = ((_PlayerSettingNewValue.AnnounceCall	 == true) ? "T" : "F");
                         m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerScreenCursor	)).B3SettingValue = ((_PlayerSettingNewValue.PlayerScreenCursor	 == true) ? "T" : "F");
                         m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.TimeToCollect)).B3SettingValue = _PlayerSettingNewValue.TimeToCollect;
-                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Disclaimer	)).B3SettingValue = ((_PlayerSettingNewValue.Disclaimer	 == true) ? "T" : "F");
-                        //m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.DisclaimerTextID	)).B3SettingValue = ((_PlayerSettingNewValue.DisclaimerTextID	 == true) ? "T" : "F");
+                        m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Disclaimer	)).B3SettingValue = ((_PlayerSettingNewValue.Disclaimer	 == true) ? "T" : "F");                    
                         m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerMainVolume)).B3SettingValue = GetVolumeEquivToDB(Convert.ToInt32(_PlayerSettingNewValue.PlayerMainVolume));
-
                         break;
                     }
-
                 case 4:
                     {
                         SalesSettings _SalesSettingNewValue = SalesSetting_Vm.SalesSetting_;
@@ -283,7 +278,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     m_settingList.Add(B3Category.Key);
                 }
             }
-                SettingSelected = m_settingList.FirstOrDefault();
+            SettingSelected = m_settingList.FirstOrDefault();
         }
 
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(int GameId)
@@ -296,7 +291,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
        #region (setDefault, hardcoded value, ID may reference ID on db table)
 
-       //dbo.B3SettingCategory(Id)
        private void SetDefaultValue()
        {
            m_B3SettingCategory = new Dictionary<string, int>();
@@ -330,8 +324,89 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
            return result;
        }
 
+        public static List<string> Volume()
+        {
+            List<string> result = new List<string>();
+            result.Add("0");
+            result.Add("1");
+            result.Add("2");
+            result.Add("3");
+            result.Add("4");
+            result.Add("5");
+            result.Add("6");
+            result.Add("7");
+            result.Add("8");
+            result.Add("9");
+            result.Add("10");
+            return result;
+        }
+
+        public static List<string> BetLevel()
+        {
+            List<string> result = new List<string>();
+            result.Add("1");
+            result.Add("2");
+            result.Add("3");
+            result.Add("4");
+            result.Add("5");
+            result.Add("6");
+            result.Add("7");
+            result.Add("8");
+            result.Add("9");
+            result.Add("10");
+            return result;
+        }
+      
+
+        public static List<string> MaxCard()
+        {
+            var result = new List<string>();
+            result.Add("4");
+            result.Add("6");
+            return result;
+        }
+
+        private List<string> GetCurrencyList()
+        {
+            List<string> CurrencyItems = new List<string>();
+            CurrencyItems.Add("CREDIT");
+            CurrencyItems.Add("DOLLAR");
+            CurrencyItems.Add("PESO");
+            CurrencyItems.Add("POUND");
+            return CurrencyItems;
+        }
+
+        private List<string> GetAutoSessionEndItemList()
+        {
+            List<string> AutoSessionEndItems = new List<string>();
+            AutoSessionEndItems.Add("JACKPOT");
+            AutoSessionEndItems.Add("PAYOUT");
+            AutoSessionEndItems.Add("OFF");
+            return AutoSessionEndItems;
+        }
+
+
+        private string GetCallSpeedEquivToDB(int callspeedvalue)
+        {
+            string result = "";
+            switch (callspeedvalue)
+            {
+                case 1: { result = "5000"; break; }
+                case 2: { result = "4020"; break; }
+                case 3: { result = "3530"; break; }
+                case 4: { result = "3040"; break; }
+                case 5: { result = "2550"; break; }
+                case 6: { result = "2060"; break; }
+                case 7: { result = "1570"; break; }
+                case 8: { result = "1080"; break; }
+                case 9: { result = "590"; break; }
+                case 10: { result = "100"; break; }
+            }
+            return result;
+        }
+
         //No ref to db.
-       private string GetVolumeEquivValue(int Volume)
+        private string GetVolumeEquivValue(int Volume)
        {
            string tempValue = "";
            if (Volume <= 100 && Volume >= 91) { tempValue = "10"; }
@@ -348,30 +423,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
            return tempValue;
        }
 
-        //No ref to db
-       private List<string> Volume()
-       {
-           List<string> result = new List<string>();
-           result.Add("0");
-           result.Add("1");
-           result.Add("2");
-           result.Add("3");
-           result.Add("4");
-           result.Add("5");
-           result.Add("6");
-           result.Add("7");
-           result.Add("8");
-           result.Add("9");
-           result.Add("10");
-           return result;
-       }
-
        #endregion
 
         #endregion
         #region COMMAND ()
 
-        public ICommand SelectedItemChanged { get; private set; }
         public ICommand SaveSettingcmd { get; set; }
         public ICommand CancelSettingcmd { get; set; }
 
@@ -379,11 +435,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
-            SelectedItemChanged = new DelegateCommand<string>(obj =>
-            {
-                IsSelectedSetting = (obj.ToString() != SettingSelected) ? true : false;
-                SelectedItemEvent(SettingSelected);
-            });
         }
 
         //WAIT TILL THE COMMAND IS COMPLETED
@@ -395,8 +446,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 Mouse.OverrideCursor = null;
         }
 
-        private void SelectedItemEvent(string SettingName)
+        public void SelectedItemEvent()
         {
+            string SettingName = m_settingSelected;
             m_selectedSettingEquivToId = (int)m_B3SettingCategory[SettingSelected];
             m_b3Setting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == m_selectedSettingEquivToId));
 

@@ -6,24 +6,13 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
-    public class GameSettingGameWildBallVm : GameSettingTemplateVm
+    public class GameSettingGameWildBallVm : GameSettingVmAllGame
     {
-        public GameSettingGameWildBallVm(GameSetting _gameSetting)
+        public GameSettingGameWildBallVm(GameSetting _gameSetting, int GameId) :
+            base(_gameSetting, GameId)
         {
-            Gamesetting_ = _gameSetting;
+            GameViewModel = this;
         }
-
-        private GameSetting m_gameSetting_;
-        public GameSetting Gamesetting_
-        {
-            get { return m_gameSetting_; }
-            set
-            {
-                m_gameSetting_ = value;
-                RaisePropertyChanged("Gamesetting_");
-            }
-        }
-
-
+        public GameSettingVmAllGame GameViewModel { get; set; }
     }
 }

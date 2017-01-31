@@ -113,7 +113,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return null;
+            string tempresult = "";
+            var tempResult = (bool)value;
+            switch (tempResult)
+            {
+                case true:
+                    {
+                        tempresult = "T";
+                        break;
+                    }
+                case false:
+                    {
+                        tempresult = "F";
+                        break;
+                    }
+            }
+            return tempresult;
         }
 
 
@@ -129,6 +144,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
             if (System.Int32.TryParse(value.ToString(), out callSpeedValue))
             {
+
                 string tempCallSpeed = "";
                 if (callSpeedValue == 100) { tempCallSpeed = "10"; }
                 else if (callSpeedValue > 100 && callSpeedValue <= 590) { tempCallSpeed = "9"; }
@@ -152,11 +168,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return null;
+            int callspeedValue;
+            var x = System.Int32.TryParse(value.ToString(), out callspeedValue);
+
+
+            string result = "";
+            switch (callspeedValue)
+            {
+                case 1: { result = "5000"; break; }
+                case 2: { result = "4020"; break; }
+                case 3: { result = "3530"; break; }
+                case 4: { result = "3040"; break; }
+                case 5: { result = "2550"; break; }
+                case 6: { result = "2060"; break; }
+                case 7: { result = "1570"; break; }
+                case 8: { result = "1080"; break; }
+                case 9: { result = "590"; break; }
+                case 10: { result = "100"; break; }
+            }
+            return result;
         }
-
-
     }
+
+
+    
 
     
   public class ShowDefaultColumnDef : IValueConverter

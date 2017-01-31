@@ -38,8 +38,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews
                 ) 
             {
                 var currentOperatorIndex = ii.OperatorSelectedIndex;
-                var VmAccess = OperatorViewModel.Instance;
-                VmAccess.SelectedItemChangevm(currentOperatorIndex);
+                ii.SelectedItemChangevm(currentOperatorIndex);
+                //var VmAccess = OperatorViewModel.Instance;
+                //VmAccess.SelectedItemChangevm(currentOperatorIndex);
             }       
         }
     }

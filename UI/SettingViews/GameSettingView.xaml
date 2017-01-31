@@ -6,10 +6,10 @@
              mc:Ignorable="d" 
               xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
                      xmlns:Converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+              xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
             >
     <UserControl.Resources>
         <ResourceDictionary>
-            
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
         <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
@@ -64,7 +64,8 @@
 
     <Border x:Name="m_layoutRoot" >
         <Grid Name="gridServerMessage" >
-            <TabControl Focusable="False"  Background="Transparent" >
+            
+            <TabControl Focusable="False"  Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
                
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">

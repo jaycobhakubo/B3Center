@@ -333,6 +333,7 @@
     <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingCrazyBoutVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingGameWildfireVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingGameWildBallVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingGameUkickEmVm.cs" />
@@ -340,8 +341,7 @@
     <Compile Include="ViewModels\Settings\GameSettingSpirit76Vm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingMayaMoneyVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingJailBreakVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingCrazyBoutVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingTemplateVm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingVmAllGame.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
     <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />
@@ -609,6 +609,15 @@
   <ItemGroup>
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\SettingViews\GameSettingView.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\SettingViews\MainViewSetting.xaml.cs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\MainWindow.xaml.cs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
