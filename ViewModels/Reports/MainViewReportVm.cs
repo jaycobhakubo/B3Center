@@ -2187,49 +2187,59 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetCommand()
         {
-            
-            ViewReportCommand = new RelayCommand(parameter => 
-                {
-                    Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-                    Task save = Task.Factory.StartNew(() => ViewReportRel(ReportSelected.Id));
-                    save.Wait();
-                    Mouse.OverrideCursor = null;
-                }
-                );
+
+            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
+             
+                    //ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
+                    //Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                    //Task save = Task.Factory.StartNew(() => ViewReportRel(ReportSelected.Id));
+                    //save.Wait();
+                    //Mouse.OverrideCursor = null;
+             
         }
         public ICommand ViewReportCommand { get; set; }
 
         public void ViewReportRel(ReportId reportID)
-        {            
-            try
+        {
+            Task.Factory.StartNew(() =>
             {
-                var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
-                if (Rpt == null){return;}
-                LoadCrystalReport(Rpt);
-                var report = m_rptBaseVm.LoadReportDocument(Rpt);
+                try
+                {
+                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+                    if (Rpt == null) { return; }
+                    LoadCrystalReport(Rpt);
+                    var report = m_rptBaseVm.LoadReportDocument(Rpt);
 
-                if (report == null)
+                    if (report == null)
+                    {
+                        IsLoading = false;
+                        return;
+                    }
+
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        tempcr.ViewerCore.ReportSource = report;
+                        tempcr.Focusable = true;
+                        tempcr.Focus();
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+               {
+                   MessageWindow.Show(
+                       string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
+                           ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
+               }));
+                }
+                finally
                 {
                     IsLoading = false;
-                    return;
                 }
-                tempcr.ViewerCore.ReportSource = report;
-                tempcr.Focusable = true;
-                tempcr.Focus();
-            }
-            catch (Exception ex)
-            {             
-                MessageWindow.Show(
-                    string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
-                        ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-            DefaultViewMode = Visibility.Collapsed;
-            CRViewMode = Visibility.Visible;
-            m_rptBaseVm.vReportViewer = tempcr;
+                DefaultViewMode = Visibility.Collapsed;
+                CRViewMode = Visibility.Visible;
+                m_rptBaseVm.vReportViewer = tempcr;
+            });
         }
 
         #endregion
