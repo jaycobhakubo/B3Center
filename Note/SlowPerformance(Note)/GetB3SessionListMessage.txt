@@ -1,1 +1,0 @@
-﻿This message gets all Session on db.
