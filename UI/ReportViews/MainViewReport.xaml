@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
              mc:Ignorable="d" 
             >
     <UserControl.Resources>
@@ -68,7 +69,9 @@
                                 <Setter Property="Margin" Value="0,15,0,2"/>
                             </Style>
                         </Border.Resources>
-                            <ContentPresenter  Name="ReportsTransitionControl"  Content="{Binding SelectedReportView}" ></ContentPresenter>
+                        <!--<viewer:CrystalReportsViewer Name="ReportViewer" Margin="5,0"/>-->
+                        <!--<ContentPresenter  Name="ReportsTransitionControl"  Content="{Binding SelectedReportView}" ></ContentPresenter>-->
+                        <local:ReportTemplate DataContext="{Binding RpttVm}"></local:ReportTemplate>
                     </Border>
 
                     <Border Visibility="{Binding DefaultViewMode}" Grid.Row="1" Margin="8" Name="brdrViewPrint">

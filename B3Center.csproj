@@ -148,6 +148,7 @@
     <Compile Include="Model\Report\ReportParameterModel.cs" />
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
+    <Compile Include="Model\Report\ReportTemplateModel2.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
     <Compile Include="Model\Setting\PlayerSetting.cs" />
     <Compile Include="Model\Setting\SalesSettings.cs" />
@@ -313,6 +314,7 @@
     <Compile Include="ViewModels\Reports\MainViewReportVm.cs" />
     <Compile Include="ViewModels\Reports\ReportBaseVm.cs" />
     <Compile Include="ViewModels\Reports\ReportParameterVm.cs" />
+    <Compile Include="ViewModels\Reports\ReportTemplateVm2.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\Settings\GameSettingCrazyBoutVm.cs" />
@@ -587,6 +589,9 @@
     <Folder Include="B3ReportCenter\Model\" />
     <Folder Include="B3ReportCenter\UI\" />
     <Folder Include="B3ReportCenter\ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ViewModels\Reports\MainViewReportVm.cs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

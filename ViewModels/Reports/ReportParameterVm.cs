@@ -73,8 +73,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_accountList = new ObservableCollection<string>();
             m_sessionList = new ObservableCollection<Session>();
         }
-
-
+        //List<string> paramlist, ReportParameterModel rptParameter
+        //public ReportParameterModel rptParameter { get; set; }
+        //public List<string> paramlist { get; set; }
         internal void Initialize(List<string> paramlist, ReportParameterModel rptParameter)
         {
             m_paramList = paramlist;

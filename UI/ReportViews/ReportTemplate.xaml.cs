@@ -32,5 +32,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             //ReportViewerBorder.Visibility = Visibility.Hidden;
             //SelectDateBorder.Visibility = Visibility.Visible;
         }
+
+       
     }
 }

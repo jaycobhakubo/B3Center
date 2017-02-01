@@ -153,12 +153,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnFullScreenEvent(object sender, EventArgs eventArgs)
         {
-            ReportMenuColumn.Width = m_collapsedMenuColumnWidth;
-            var handler = FullScreenEvent;
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
+            //ReportMenuColumn.Width = m_collapsedMenuColumnWidth;
+            //var handler = FullScreenEvent;
+            //if (handler != null)
+            //{
+            //    handler(sender, EventArgs.Empty);
+            //}
         }
 
         /// <summary>
@@ -168,12 +168,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnExitScreenEvent(object sender, EventArgs eventArgs)
         {
-            //ReportMenuColumn.Width = m_originalMenuColumnWidth;
-            var handler = ExitScreenEvent;
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
+            //    //ReportMenuColumn.Width = m_originalMenuColumnWidth;
+            //    var handler = ExitScreenEvent;
+            //    if (handler != null)
+            //    {
+            //        handler(sender, EventArgs.Empty);
+            //    }
         }
 
 
@@ -187,15 +187,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         /// </summary>
         public void ClearSelected()
         {
-            //We have to uncheck any previously checked buttons
-            foreach (var menuItem in m_menuItems)
-            {
-                if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
-                {
-                    menuItem.IsChecked = false;
-                    ReportsTransitionControl.Content = null;
-                }
-            }
+            ////We have to uncheck any previously checked buttons
+            //foreach (var menuItem in m_menuItems)
+            //{
+            //    if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
+            //    {
+            //        menuItem.IsChecked = false;
+            //        //ReportsTransitionControl.Content = null;
+            //    }
+            //}
         }
 
         #endregion

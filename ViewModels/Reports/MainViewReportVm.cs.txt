@@ -219,9 +219,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
-
-                        
-
                         break;
                     }
                 case ReportId.B3AccountHistory:
@@ -240,11 +237,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         //result.CrystalReportViewer = new SAPBusinessObjects.WPF.Viewer.CrystalReportsViewer();
                         result.ReportViewerm = Visibility.Hidden;
                         result.DefaultViewerm = Visibility.Visible;
-                        Xx = new ReportTemplateModel2();
-                        Xx.ReportTitle = "Account History";
-                        Xx.ReportParameter = par;
-
-
                         break;
                     }
                 case ReportId.B3BallCallByGame:
@@ -408,29 +400,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break;
                     }
             }
-         
-           
-
-            Xx.rptParModel = temprptparmodel;
-            RpttVm = new ReportTemplateViewModel2(Xx);
-            //RpttVm.ReportTemplateModel2 = Xx;
-
             result.rptParModel = temprptparmodel;
             return result;
-        }
-
-        //private ReportTemplateModel2 m_xx;
-
-        private ReportTemplateModel2 Xx;
-        public ReportTemplateViewModel2 RpttVm
-        {
-            get;set;
-            //get { return Xx; }
-            //set
-            //{
-            //    Xx = value;
-            //    RaisePropertyChanged("RpttVm");
-            //}
         }
 
         private ReportBaseVm m_rptBaseVm;
@@ -2258,7 +2229,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
         }
         public ICommand ViewReportCommand { get; set; }
-        public CrystalReportsViewer ReportViewer { get; private set; }
 
         public void ViewReportRel(ReportId reportID)
         {            
@@ -2316,10 +2286,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CRViewMode = Visibility.Visible;
             //m_bingocardvm.ReportViewerVisibility = Visibility.Visible;
             //m_bingocardvm.ReportParameterVisible = Visibility.Collapsed;
-            //m_rptBaseVm.vReportViewer = tempcr;
-            ////eportViewerx = tempcr;
-            RpttVm.vReportViewer = tempcr;
-
+            m_rptBaseVm.vReportViewer = tempcr;
 
 
         }

@@ -28,6 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterList = ReportTemplate_Model.ReportParameter;
             parVm = ReportParameterViewModel.Instance;
             parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);    
+            //parVm.Initialize();
             CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }
         public ICommand CloseViewReportCommand { get; set; }
