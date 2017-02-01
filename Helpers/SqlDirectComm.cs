@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace GameTech.Elite.Client.Modules.B3Center.Helper
 {
     /// <summary>
-    /// Use to bypass gtiserver.
+    /// Use only if message is not inplement on  gtiserver app. 
     /// </summary>
     public class SqlConnectionToByPassGtiServerApp
     {

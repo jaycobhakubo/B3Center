@@ -19,7 +19,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             IsAllowed = isAllowed;
         }
         #endregion
-
         #region Properties 
         
         public int GameId
@@ -61,7 +60,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         #endregion
-
         #region Properties
 
         public int B3SettingID
@@ -113,7 +111,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         #endregion
-
         #region Properties
 
         public int ColorID

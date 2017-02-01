@@ -123,8 +123,7 @@
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\Selecteditem.cs" />
-    <Compile Include="Helpers\SelectedItemChangedcmd.cs" />
-    <Compile Include="Helpers\SqlConnectionToByPassGtiServerApp.cs" />
+    <Compile Include="Helpers\SqlDirectComm.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
     <Compile Include="Messages\GetB3ColorIcon.cs" />
     <Compile Include="Messages\GetB3MathGamePlay.cs" />

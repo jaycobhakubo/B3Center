@@ -104,7 +104,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ReportsViewModel()
         {
             SessionList = new ObservableCollection<Session>();       
-
             IsLoading = false;
             IsPrinting = false;
             //LoadBallCallReportDefList();
@@ -132,184 +131,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SetCommand();           
         }
 
-
-        private ReportTemplateModel getrtm(ReportId b3rpt)
-        {
-           var result = new ReportTemplateModel();
-           var temprptparmodel = new ReportParameterModel();
-           var par = new List<string>();
-            
-            temprptparmodel.b3DateData = new Model.Shared.DatePickerM();
-            
-            switch (b3rpt)
-            {
-                case ReportId.B3Accounts:
-                    {
-                        par.Add("MonthYear");
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Accounts Outstanding";              
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3AccountHistory:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Account History";                     
-                        par.Add("Date");
-                        par.Add("Session");
-                        par.Add("AccountNumber");                
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3BallCallByGame:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Ball Call";
-                        par.Add("Category");
-                        par.Add("Date");
-                        par.Add("Session");
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3BingoCardReport:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Bingo Card";
-                        par.Add("StartEndCard");     
-                        result.ReportParameter = par;                     
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Daily:
-                    {                      
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Daily";
-                        par.Add("Date");
-                        result.ReportParameter = par;                      
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Detail:
-                    {                        
-                        temprptparmodel.rptid = b3rpt;
-                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
-                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
-                        result.ReportTitle = "Detail";
-                        par.Add("StartEndDatewTime");
-                        result.ReportParameter = par;                      
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Drawer:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Drawer";                  
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Jackpot:
-                    {                    
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Jackpot";
-                        par.Add("Date");
-                        par.Add("Session");
-                        result.ReportParameter = par;                       
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Monthly:
-                    {                     
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Monthly";
-                        par.Add("MonthYear");
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Session:
-                    {                    
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Session";
-                        par.Add("Date");
-                        par.Add("Session");
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3SessionSummary:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Session Summary";
-                        par.Add("Date");
-                        par.Add("Session");
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3SessionTransaction:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Session Transaction";
-                        par.Add("Date");
-                        par.Add("Session");
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3Void:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
-                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
-                        result.ReportTitle = "Void";
-                        par.Add("StartEndDatewTime");
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-                case ReportId.B3WinnerCards:
-                    {
-                        temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Winners Card";
-                        par.Add("Date");
-                        par.Add("Session");
-                        result.ReportParameter = par;
-                        result.ReportViewerm = Visibility.Hidden;
-                        result.DefaultViewerm = Visibility.Visible;
-                        break;
-                    }
-            }
-            result.rptParModel = temprptparmodel;
-            return result;
-        }
-
-        private ReportBaseVm m_rptBaseVm;
-        public ReportBaseVm RptBaseVm
-        {
-            get { return m_rptBaseVm; }
-            set
-            {
-                m_rptBaseVm = value;
-                RaisePropertyChanged("RptBaseVm");
-            }
-        }
-
+        //Run once and never again.
         private void LoadReportList()
         {
             m_reportList.Clear();
@@ -400,6 +222,162 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
 
             ReportSelected = m_reportList.FirstOrDefault();
+        }
+
+        //Set our data to be popualted to ReportTemplateViewModel then to the viewer.
+        //This will be replaced by a observable collection if I got more time. Dont know which is faster.
+        private ReportTemplateModel getrtm(ReportId b3rpt)
+        {
+           var result = new ReportTemplateModel();
+           var temprptparmodel = new ReportParameterModel();
+           var par = new List<string>();
+            
+            temprptparmodel.b3DateData = new Model.Shared.DatePickerM();
+            result.CurrentUser = m_controller.Parent.StaffId;
+            result.CurrentMachine = m_controller.Parent.MachineId;
+
+            switch (b3rpt)
+            {
+                case ReportId.B3Accounts:
+                    {
+                        par.Add("MonthYear");
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Accounts Outstanding";              
+                        result.ReportParameter = par;                   
+                        break;
+                    }
+                case ReportId.B3AccountHistory:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Account History";                     
+                        par.Add("Date");
+                        par.Add("Session");
+                        par.Add("AccountNumber");                
+                        result.ReportParameter = par;                  
+                        break;
+                    }
+                case ReportId.B3BallCallByGame:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Ball Call";
+                        par.Add("Category");
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;                      
+                        break;
+                    }
+                case ReportId.B3BingoCardReport:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Bingo Card";
+                        par.Add("StartEndCard");     
+                        result.ReportParameter = par;                                        
+                        break;
+                    }
+                case ReportId.B3Daily:
+                    {                      
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Daily";
+                        par.Add("Date");
+                        result.ReportParameter = par;                      
+                        break;
+                    }
+                case ReportId.B3Detail:
+                    {                        
+                        temprptparmodel.rptid = b3rpt;
+                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
+                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
+                        result.ReportTitle = "Detail";
+                        par.Add("StartEndDatewTime");
+                        result.ReportParameter = par;                      
+                        break;
+                    }
+                case ReportId.B3Drawer:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Drawer";                  
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case ReportId.B3Jackpot:
+                    {                    
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Jackpot";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;                       
+                        break;
+                    }
+                case ReportId.B3Monthly:
+                    {                     
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Monthly";
+                        par.Add("MonthYear");
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case ReportId.B3Session:
+                    {                    
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Session";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case ReportId.B3SessionSummary:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Session Summary";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case ReportId.B3SessionTransaction:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Session Transaction";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case ReportId.B3Void:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
+                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
+                        result.ReportTitle = "Void";
+                        par.Add("StartEndDatewTime");
+                        result.ReportParameter = par;
+                        break;
+                    }
+                case ReportId.B3WinnerCards:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Winners Card";
+                        par.Add("Date");
+                        par.Add("Session");
+                        result.ReportParameter = par;
+                        break;
+                    }
+            }
+            result.ReportViewerm = Visibility.Hidden;
+            result.DefaultViewerm = Visibility.Visible;
+            result.rptParModel = temprptparmodel;
+            return result;
+        }
+
+        private ReportBaseVm m_rptBaseVm;
+        public ReportBaseVm RptBaseVm
+        {
+            get { return m_rptBaseVm; }
+            set
+            {
+                m_rptBaseVm = value;
+                RaisePropertyChanged("RptBaseVm");
+            }
         }
 
         private B3Report m_reportSelected; 

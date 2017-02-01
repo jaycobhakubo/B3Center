@@ -15,75 +15,43 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
 
     public class ReportParameterModel : ViewModelBase
     {
-
-        //private DatePickerM m_datePickerModel;
         public DatePickerM b3DateData {get;set;}
-
         public DatePickerM StartDate { get; set; }
         public DatePickerM EndDate { get; set; }
-
-        private DateTime m_date;
         public DateTime Date_ { get; set; }
-
-        private string m_dateMonth;
         public string dateMonth { get; set; }
-
-        //private int m_dateDay;
-        //public int dateDay { get; set; }
-
-
-        //private string m_timeHrMin;
-        //public string timeHrMin { get; set; }
-
-        //private string m_AMPM;
-        //public string AMPM { get; set; }
-
-
-        //private int m_dateYear;
         public int dateYear { get; set; }
-
-        //private Session m_b3_Session;
         public Session b3Session { get; set; }
-
-        //private string m_b3_AccountNumber;
         public string b3AccountNumber { get; set; }
-
-        //private string m_b3_Category;
         public string b3Category { get; set; }
-
-        //private string m_b3StartingCard;
         public string b3StartingCard { get; set; }
-
-        //private string m_b3EndingCard;
         public string b3EndingCard { get; set; }
-
         public ReportId rptid { get; set; }
-
-        //private ObservableCollection<Session> m_sessionList = new ObservableCollection<Session>();
-        //public ObservableCollection<Session> SessionList 
-        //{ 
-        //    get {return m_sessionList;}
-        //    set
-        //    {
-        //        m_sessionList = value;
-        //    }
-        //}
-
-        //private ObservableCollection<string> m_accountList = new ObservableCollection<string>();
-        //public ObservableCollection<string> AccountList
-        //{
-        //    get { return m_accountList; }
-        //    set
-        //    {
-        //        m_accountList = value;
-        //    }
-        //}
-
     }
 }
 
 
+#region SCRATCH 
 
+//private ObservableCollection<Session> m_sessionList = new ObservableCollection<Session>();
+//public ObservableCollection<Session> SessionList 
+//{ 
+//    get {return m_sessionList;}
+//    set
+//    {
+//        m_sessionList = value;
+//    }
+//}
+
+//private ObservableCollection<string> m_accountList = new ObservableCollection<string>();
+//public ObservableCollection<string> AccountList
+//{
+//    get { return m_accountList; }
+//    set
+//    {
+//        m_accountList = value;
+//    }
+//}
 
 //    class ReportParameterModel : ViewModelBase
 //    {
@@ -120,3 +88,5 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
 
 //    }
 //}
+
+#endregion

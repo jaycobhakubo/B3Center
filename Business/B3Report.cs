@@ -77,7 +77,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         {
             CrystalReportDocument = new ReportDocument();
             CrystalReportDocument.Load(FileName);
-
             SetConnection(CrystalReportDocument, server, dbName, user, password);
         }
 

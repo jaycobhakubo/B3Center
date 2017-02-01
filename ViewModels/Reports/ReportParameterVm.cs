@@ -104,9 +104,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-
-
         #region METHOD
 
         private bool IsShowTime()
@@ -144,9 +141,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     WorkInProgress = true;
                     m_sessionList.Add(session);
                     WorkInProgress = false;
-                }
-
-            
+                }          
             }
 
             
@@ -162,7 +157,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     m_accountList.Clear();
                 }
             }
-
         }
 
 
