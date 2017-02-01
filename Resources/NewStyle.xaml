@@ -1,5 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers">
+
+    <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
+    <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
 
     <Style x:Key="TextBlockFontStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Segoe UI"/>
@@ -9,5 +13,9 @@
         <Setter Property="Margin" Value="0,10,5,0"/>
         <Setter Property="FontSize" Value="15"/>
     </Style>
+
+
+   
+
 
 </ResourceDictionary>

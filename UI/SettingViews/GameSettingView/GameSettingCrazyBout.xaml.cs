@@ -58,6 +58,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         public GameSettingCrazyBoutView () 
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         //public GameSettingCrazyBoutView(List<B3SettingGlobal> B3SettingCrazyBout, List<B3MathGamePay> ListB3MathGamePlay)

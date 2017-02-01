@@ -31,7 +31,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
         private readonly MainViewSession m_sessionView;
         private readonly ReportsView m_reportsView;
         private readonly SettingView m_settingsView;
-        private B3Setting B3Setting;
         private  Button m_btnSave;
         private ToggleButton m_tglbtnOperator;
         private ToggleButton m_tglbtnGameSettings;
@@ -112,8 +111,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                         break;
                 }
             }
-      
-            B3Setting = new B3Setting();
+       
         }
 
          
@@ -175,19 +173,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
 
 
                 case "SessionToggleButton":
-                    {
-                        m_sessionView.ClearSelected();
+                    {      
                         view = m_sessionView;
-
                         break;
                     }
                 case "ReportsToggleButton":
                     {
-                        //m_reportsView.ClearSelected();
-                        //view = m_reportsView;
-
-                        //MenuColumn.Width = GridLength.Auto;
-                        //brdrMenuColumn.Visibility = Visibility.Collapsed;
+                  
 
                         break;
                     }
@@ -236,44 +228,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
             e.Cancel = !ParentController.Exit();
         }
 
-        /// <summary>
-        /// Handles the Click event of the CloseButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+       
+     
+       
 
-        void m_btnSave_Click(object sender, RoutedEventArgs e)
-        {           
-            ParentController.Settings.B3GameSetting_ = m_settingsView.B3_Setting.B3GameSetting_;
-        }
+      
 
 
-        void m_btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            //MenuColumn.Width = new GridLength(200, GridUnitType.Pixel);
-            //brdrMenuColumn.Visibility = Visibility.Visible;
-
-            //foreach (var menuItem in m_menuItems)
-            //{                  
-            //        menuItem.IsChecked = false;             
-            //}
-
-            //MainWindowTransitionControl.Content = null;
-        }
-
-
-        private void m_tglbtnOperator_Checked(object sender, RoutedEventArgs e)
-        {   
-            //MenuColumn.Width = GridLength.Auto;
-            //brdrMenuColumn.Visibility = Visibility.Collapsed;
-        }
-
-
-        #endregion
 
     }
 }
+#endregion

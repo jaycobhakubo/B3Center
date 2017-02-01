@@ -6,11 +6,10 @@
              mc:Ignorable="d" 
                >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />  
     </UserControl.Resources>
     
     <Border>
-        <Grid Name="gridSalesSettings" GotFocus="Grid_GotFocus" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
+        <Grid Name="gridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -19,90 +18,33 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <StackPanel Name="stkpnlSalesSetting1" Grid.Row="1" Grid.Column="1">
               
                 <Label x:Name="lblCallSpeedMin_Copy"  Content="Log Recycle Days"     />
-                <TextBox PreviewTextInput="txtbxNumericOnly_PreviewTextInput" Name="txtbxLogRecycleDays"  Tag="32" MaxLength="9" PreviewKeyDown="txtbxLogRecycleDays_PreviewKeyDown" />               
+                <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"/>               
                 <Label x:Name="lblCallSpeedMin" Content="Main Vol" />
                 <ComboBox 
+                    ItemsSource="{Binding VolumeList}"
+                    SelectedItem="{Binding SalesSetting_.VolumeSales}"
             	x:Name="cmbxMainVolume" 
             	Tag="33">
                 </ComboBox>
-                <CheckBox Name="chkbxScreenCursor" Content="Screen Cursor"    Tag="24" />
-                <CheckBox Name="chkbxAutoPrintSession" Content="Auto Print Session Report"    Tag="26" />
-                <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in Session Ball" Tag="30" />
-                <CheckBox Name="chkbxPrintLogo" Content="Print Logo"   Tag="29" />
-                <CheckBox Name="chkbxAutoPagePrinter" Content="Page Printer"  Tag="27" />
-                <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate Touch"      Tag="25" />
-               
-             
+                <CheckBox IsChecked="{Binding SalesSetting_.ScreenCursor}" Name="chkbxScreenCursor" Content="Screen Cursor"    Tag="24" />
+                <CheckBox Name="chkbxAutoPrintSession" Content="Auto Print Session Report"    Tag="26" IsChecked="{Binding SalesSetting_.AutoPrintSessionReport}"/>
+                <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in Session Ball" Tag="30" IsChecked="{Binding SalesSetting_.AlowinSessionBall}"/>
+                <CheckBox Name="chkbxPrintLogo" Content="Print Logo"   Tag="29" IsChecked="{Binding SalesSetting_.PrintLogo}"/>
+                <CheckBox Name="chkbxAutoPagePrinter" Content="Page Printer"  Tag="27" IsChecked="{Binding SalesSetting_.PagePrinter}"/>
+                <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate Touch"      Tag="25" IsChecked="{Binding SalesSetting_.CalibrateTouch}"/>
+                           
             </StackPanel>
-            
+
             <StackPanel Name="stkpnlSalesSetting2" Grid.Column="3" Grid.Row="1">
-                <CheckBox Name="chkbxQuickSales" Content="Quick Sales"   TabIndex="3" Tag="28" />
-                <CheckBox Name="chkbxLoggingEnable" Content="Logging Enable"    TabIndex="8" Tag="31"  />
+                <CheckBox Name="chkbxQuickSales" Content="Quick Sales"   TabIndex="3" Tag="28" IsChecked="{Binding SalesSetting_.QuickSales}"/>
+                <CheckBox Name="chkbxLoggingEnable" Content="Logging Enable"    TabIndex="8" Tag="31"  IsChecked="{Binding SalesSetting_.LoggingEnable}"/>
             </StackPanel>
-          
-            <!--<Grid Grid.Row="18" Grid.ColumnSpan="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="5"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Border
-                        Grid.Row="0"
-                    	Height="43" 
-                    	Width="360"
-                    	HorizontalAlignment ="Right"
-                        VerticalAlignment="Bottom"
-                        >
-                    <ContentPresenter 
-                    		x:Name="SaveCancelTransition" 
-                    		Height="43" 
-                    		VerticalAlignment="Bottom" 
-                    		HorizontalAlignment="Left" Visibility="Hidden"/>
-                </Border>-->
-
-            <!--</Grid>-->
-
-            <!--<Grid Grid.Column="3" Grid.ColumnSpan="3">
-                <Label x:Name="lblSavedNotification"
-                            Background="#44658D"
-                               Foreground="White"
-                               FontStyle="Italic"
-                               FontWeight="ExtraLight"
-                                Grid.Column="5"
-                                Content="Saved Successfully"
-                                Padding="5,2,5,3"
-                                VerticalContentAlignment="Center"
-                                VerticalAlignment="Top" 
-                                HorizontalAlignment="Right"
-                               Style="{x:Null}"
-                               >
-
-                </Label>
-            </Grid>-->
-            <!--<Label 
-                x:Name="lblNewOperator" 
-                Content="Sales" 
-                Grid.Column="1"
-                HorizontalAlignment="Left"  
-                Grid.Row="0" 
-                VerticalAlignment="Center"
-                FontSize="26" 
-                Height="Auto" 
-                Width="163" 
-                Margin="0,7.5"/>-->
-
-
         </Grid>
     </Border>
 </UserControl>

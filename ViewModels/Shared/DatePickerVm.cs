@@ -7,9 +7,6 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GameTech.Elite.Client.Modules.B3Center.Helper;
-using Microsoft.Practices.Composite.Presentation;
-using Microsoft.Practices.Composite;
-using Microsoft.Practices.Composite.Presentation.Commands;
 using System.Collections.ObjectModel;
 using GameTech.Elite.Reports;
 
@@ -62,12 +59,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             ShowTime = showTime;
             DatepickerModel = datePickerModel;              
             PopulateItemList();
-            EventItemChanged();
+
         }
 
         #endregion
-
-        //public Visibility 
 
         #region MEMBER METHOD
 
@@ -79,9 +74,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             var cMonthint = DateTime.Now.Month;
             var cMonthName = m_months[cMonthint - 1];
             SelectedMonth = cMonthName;
-
-            //MonthCombobox.SelectedIndex = DateTime.Now.Month - 1;
-
             var years = new List<int>();
             for (var i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
             {
@@ -116,11 +108,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             switch (SelectedMonth)
             {
                 case "Feb":
-
-                    //leap year logic:
-                    //The year is evenly divisible by 4;
-                    //If the year can be evenly divided by 100, it is NOT a leap year, unless;
-                    //The year is also evenly divisible by 400. Then it is a leap year.
                     int year;
                     if (int.TryParse(SelectedYear, out year))
                     {
@@ -292,23 +279,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region EVENT (selectionchangedmvvm)
 
-        public ICommand YearMonthSelectedChanged { get; private set; }
-        public ICommand DateSelectedChanged { get; private set; }
+        //public ICommand YearMonthSelectedChanged { get; private set; }
+        //public ICommand DateSelectedChanged { get; private set; }
 
-        private void EventItemChanged()
+        //private void EventItemChanged()
+        //{
+        //    YearMonthSelectedChanged = new DelegateCommand<string>(obj =>
+        //    {      
+        //        DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+        //        updateItemDateSelected();
+        //    });
+
+        //    DateSelectedChanged = new DelegateCommand<string>(obj =>
+        //    {
+        //        updateItemDateSelected();
+        //    });
+        //}
+
+        public void YearMonthSelectedChanged()
         {
-            YearMonthSelectedChanged = new DelegateCommand<string>(obj =>
-            {      
-                DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
-                updateItemDateSelected();
-            });
-
-            DateSelectedChanged = new DelegateCommand<string>(obj =>
-            {
-                updateItemDateSelected();
-            });
+            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            updateItemDateSelected();
         }
 
+
+        public void DateSelectedChanged()
+        {
+            updateItemDateSelected();
+        }
 
         private DateTime GetSelectedDate()
         {

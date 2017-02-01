@@ -6,12 +6,10 @@
              xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
                  xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
              mc:Ignorable="d" 
-      
              >
     <UserControl.Resources>
        
-        
-    
+          
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>
@@ -49,10 +47,9 @@
                              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Margin" Value="0,15,0,2"/>
-
                             </Style>
                         </Border.Resources>
-                        <ContentPresenter  Name="SettingTransitionControl" Content="{Binding SelectedSettingView}"/>
+                        <ContentPresenter Content="{Binding SelectedSettingView}" />
                         <!--<local:GameSettingView ></local:GameSettingView>-->
                     </Border>
 
@@ -77,24 +74,32 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0"
-                                Margin="15,15" Height="40" Width="140" 
-                                Content="Save"
-                                HorizontalAlignment="Right" 
-                                x:Name="btnSave"
-                                VerticalAlignment="Top"
-                             Command="{Binding SaveSettingcmd}"
-                                Tag="1"/>
-                                    <!--Click="btnSave_Click"-->
-                                    <Button Grid.Column="1"
-                                Margin="15,15" Height="40" Width="140" 
-                                Content="Cancel"
-                                HorizontalAlignment="Left"
-                                Name="btnCancel" 
-                                VerticalAlignment="Top"
-                                            Command="{Binding CancelSettingcmd}"
-                            />
-                                    <!--Click="btnCancel_Click"-->
+                                    
+                                    
+                                <Button  
+                                    Grid.Column="0"
+                                    Margin="15,15" Height="40" Width="140"     
+                                    Content="Save"
+                                    HorizontalAlignment="Right" 
+                                    x:Name="btnSave"
+                                    VerticalAlignment="Top"
+                                    Command="{Binding SaveSettingcmd}"                                 
+                                    Tag="1">                    
+                                </Button>
+                                    <!--Content="{Binding IsEditOrSave}"-->
+                                    <!--Focusable="{Binding IsFocus,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
+
+                                    <Button 
+                                    Grid.Column="1"
+                                    Margin="15,15" Height="40" Width="140" 
+                                    Content="Cancel"
+                                    HorizontalAlignment="Left"
+                                    Name="btnCancel" 
+                                    VerticalAlignment="Top"
+                                    Command="{Binding CancelSettingcmd}"  
+                                    Focusable="False"
+                                 />
+                                    
 
                                 </Grid>
                             </Border>
@@ -117,11 +122,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-
+                
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >
-                        
-                        </ListBox>
+                        <ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
+                          </ListBox>
                     </ScrollViewer>
                 </Grid>
             </Border>
@@ -129,12 +133,4 @@
     </Border>
 </UserControl>
 
-
-<!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/OriginalStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-            <Converters:ValueToBoolConverter x:Key="ConvertValueToBool" />
-        </ResourceDictionary>-->
-<!--<BooleanToVisibilityConverter x:Key="VisibilityConverter" />-->
+<!--<ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >-->

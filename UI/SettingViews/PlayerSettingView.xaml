@@ -6,11 +6,11 @@
              mc:Ignorable="d" 
           >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
     </UserControl.Resources>
 
     <Border>
-        <Grid Name="gridPlayerSetting" GotFocus="Grid_GotFocus" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
+        <Grid Name="gridPlayerSetting"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -25,19 +25,23 @@
 
             <StackPanel Name="stkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
                 <Label x:Name="lblCallSpeedMin_Copy2"  Content="Time To Collect (milliseconds)"  />
-                <TextBox PreviewTextInput="txtbxNumericOnly_PreviewTextInput" Name="txtbxTimeToCollect"  Tag="20" MaxLength="9" PreviewKeyDown="txtbx_PreviewKeyDown" />
+                <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting_.TimeToCollect}"/>
                 
                 <Label x:Name="lblCallSpeedMin"  Content="Main Vol" />
                 <ComboBox 
             	x:Name="cmbxMainVol" 
-                  Tag="23">
+                  Tag="23"
+                        ItemsSource="{Binding VolumeList}"
+                    SelectedItem="{Binding PlayerSetting_.PlayerMainVolume}"
+                    >
+                    
                 </ComboBox>
 
-                <CheckBox Name="chkbxScreenCursor"  Content="Screen Cursor"   Tag="19" />
-                <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate Touch"   Tag="16"  />
-                <CheckBox Name="chkbxAnnounceCall" Content="Announce Call"  Tag="18" />
-                <CheckBox Name="chkbxPressToCollect"  Content="Press To Collect"   Tag="17"  />
-                <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21"/>
+                <CheckBox Name="chkbxScreenCursor"  Content="Screen Cursor"   Tag="19" IsChecked="{Binding PlayerSetting_.PlayerScreenCursor}"/>
+                <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate Touch"   Tag="16" IsChecked="{Binding PlayerSetting_.PlayerCalibrateTouch}"/>
+                <CheckBox Name="chkbxAnnounceCall" Content="Announce Call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
+                <CheckBox Name="chkbxPressToCollect"  Content="Press To Collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
+                <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting_.Disclaimer}"/>
             </StackPanel>
         </Grid>
 

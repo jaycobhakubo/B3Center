@@ -9,8 +9,7 @@
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
     <Border>
-        <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" Name="gridSessionSettings" GotFocus="Grid_GotFocus" >
-
+        <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" Name="gridSessionSettings"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -22,22 +21,13 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-
             <StackPanel Name="stkpnlSessionSetting" Grid.Column="1" Grid.Row="1">
-                <Label x:Name="lblCallSpeedMin_Copy"  Grid.Column="3" Content="Payout Limit" />
-                <TextBox Name="txtbxPayoutLimit"   TabIndex="1" Tag="39" PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9" />
-                <!--<Label x:Name="lblCallSpeedMin_Copy1" Grid.Row="7" Grid.Column="3" Content="Jackpot Limit" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="130"  Height="Auto"/>-->
+                <Label x:Name="lblCallSpeedMin_Copy"   Content="Payout Limit" />
+                <TextBox Text="{Binding SessionSetting_.PayoutLimit}"  TabIndex="1" Tag="39" MaxLength="9" />
                 <Label x:Name="lblCallSpeedMin_Copy1"  Content="Jackpot Limit" />
-                <TextBox Name="txtbxJackpotLimit"   TabIndex="2" Tag="40"  PreviewTextInput="txtbxPrice_PreviewTextInput2" PreviewKeyDown="txtbx_PreviewKeyDown" MaxLength="9"  />
-                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Tag="41" />
+                <TextBox Text="{Binding SessionSetting_.JackpotLimit}"  TabIndex="2" Tag="40"   MaxLength="9"  />
+                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Tag="41" IsChecked="{Binding SessionSetting_.EnforceMix}"/>
             </StackPanel>
-            
-           
-          
-
-          
-           
-
-        </Grid>
+    </Grid>
     </Border>
 </UserControl>

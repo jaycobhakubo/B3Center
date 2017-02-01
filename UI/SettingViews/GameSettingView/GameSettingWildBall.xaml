@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-            >
+             xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"        >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
+        <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
     </UserControl.Resources>
     <Border>
         <Grid Name="gridCrazyBout">
@@ -23,11 +24,17 @@
 
             <StackPanel Grid.Column="1">
                 <Label  Content="Game Pay Table"  />
-                <ComboBox Name="cmbxGamePayTable" Tag="58"/>
+                <ComboBox Name="cmbxGamePayTable" Tag="58"
+                           ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
+                              DisplayMemberPath="PackageDesc"
+                              SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"
+                          />
 
                 <Label Content="Max Bet Level" />
                 <ComboBox 
-                Name="cmbxMaxBetLevel" 
+                Name="cmbxMaxBetLevel"  
+                    ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
+                        SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
                Tag="9"             
                 >
                 </ComboBox>
@@ -35,17 +42,21 @@
                 <Label x:Name="lblMaxCards"  Content="Max Cards"/>
                 <ComboBox 
                 x:Name="cmbxMaxcards" 
-                 Tag="10">
+                 Tag="10"   ItemsSource="{Binding Gamesetting_.LMaxCards}" 
+                    SelectedItem="{Binding Gamesetting_.MaxCards}">
                 </ComboBox>
 
-                <Label x:Name="lblCallSpeedMin"  Content="Call Speed"    />
+                <Label x:Name="lblCallSpeedMin"  Content="Call Speed"   />
                 <ComboBox 
             	x:Name="cmbxCallSpeedMin" 
+                        ItemsSource="{Binding Gamesetting_.LCallSpeed}" 
+                        SelectedItem="{Binding Gamesetting_.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="59"/>
+              
             </StackPanel>
             <StackPanel Grid.Column="3">
-                <CheckBox Name="chkbxAutoPlay"   Content="Auto Play" />
-                <CheckBox Name="chkbxHideSerialNumber" Content="Hide Serial Number"  />
+                <CheckBox Name="chkbxAutoPlay"   Content="Auto Play"  IsChecked="{Binding Gamesetting_.AutoPlay, Converter={StaticResource ValuetoBool}}"/>
+                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber, Converter={StaticResource ValuetoBool}}" Name="chkbxHideSerialNumber" Content="Hide Serial Number"/>
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
             </StackPanel>
         </Grid>

@@ -1,0 +1,251 @@
+﻿<!--Combobox item font cut off-->
+<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews.OperatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
+             mc:Ignorable="d" 
+               
+                xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+   >
+    <UserControl.Resources>
+        <Converter:BoolToVisibilityConv x:Key="ConvertBooltoVis" ></Converter:BoolToVisibilityConv>
+        <Converter:ShowDefaultColumnDef x:Key="DefaultVal"></Converter:ShowDefaultColumnDef>
+        <Converter:ValueToBoolForEmptyString x:Key="ConvertStringToBool"></Converter:ValueToBoolForEmptyString>
+   
+        
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="0,30,0,0"></Setter>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="IsHitTestVisible" Value="True"/>
+            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                    <Setter Property="IsHitTestVisible" Value="False"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="22.22"></Setter>
+            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ColumnDefinition" x:Key="showOper">
+            <Setter Property="Width" Value="Auto"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ShowOper}"  Value="true">
+                    <Setter Property="Width" Value="*"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+    </UserControl.Resources>
+    <Border >
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="ColumnSettings" Width="200"/>
+                <ColumnDefinition Style="{StaticResource showOper}" Name="clmnDefShowOper"/>
+                <ColumnDefinition Width="{Binding ElementName=clmnDefShowOper, Path=Width, Converter={StaticResource DefaultVal}}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border  Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowOper, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}">
+                <Grid>
+                <Label Content="Please select a operator to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border  Visibility="{Binding ShowOper, Converter={StaticResource ConvertBooltoVis},ConverterParameter=false}" Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
+                        <Border.Resources>
+                            <Style
+                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,15,0,2"/>
+
+                            </Style>
+                        </Border.Resources>
+               
+                        <Grid  Name="gridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="279"/>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="279"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <Label Content="* Operator Name:" />
+                                <TextBox Name="txtbxOperatorName" Height="22.22" Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
+
+                                <Label Content="Description:"  />
+                                <TextBox   Text="{Binding  SelectedOperator.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
+
+                                <Label Content="Address:"    />
+                                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  SelectedOperator.Address}"/>
+
+                                <Label Content="City:"  />
+                                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  SelectedOperator.City}"/>
+
+                                <Label  Content="State:"   />
+                                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
+
+                                <Label  Content="Zip Code:" />
+                                <TextBox  MaxLength="5" Text="{Binding  SelectedOperator.ZipCode}"></TextBox>
+                                
+                                <Label Content="Contact Name:" />
+                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="3">
+
+                                <Label Content="Icon Color:" />
+                                <ComboBox  Name="cmbxIconColor" 
+                                          ItemsSource="{Binding OperatorColorList}" 
+                                          DisplayMemberPath="ColorValue"
+                                          SelectedValuePath="ColorID"   
+                                           SelectedValue="{Binding SelectedOperator.IconColor}"
+                                    ></ComboBox>
+                    
+                                <Label Content="Phone Number:" />
+                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
+
+                                <Label Content="Fax Number:"  />
+                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="1"  Margin="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
+                                <Grid Grid.Column="1" Grid.Row="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--EDIT-->
+                                    <Button Grid.Column="1"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Edit"
+                                HorizontalAlignment="Center" 
+                                x:Name="btnEdit"                                      
+                                VerticalAlignment="Top"
+                                Command="{Binding SaveOperatorcmd}"   
+                                Visibility="{Binding IsEdit, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=false}"
+                                Tag="1">
+                                    </Button>
+                                    <!--SAVE-->
+                                    <Button Grid.Column="1"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Save"
+                                HorizontalAlignment="Center" 
+                                x:Name="btnSave"
+                                VerticalAlignment="Top"
+                                 Command="{Binding SaveOperatorcmd}" 
+                                Visibility="{Binding IsEdit, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}"
+                                IsEnabled="{Binding ElementName=txtbxOperatorName, Path=Text, Converter={StaticResource ConvertStringToBool}}"  
+                                            Tag="1"></Button>
+                                    <!--CANCEL-->
+                                <Button Grid.Column="2"
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Cancel"
+                                HorizontalAlignment="Left"
+                                Name="btnCancel" 
+                                VerticalAlignment="Top"
+                                Command="{Binding CancelCmd}"/>
+                                    <!--Foreground="Red"-->
+                                    <!--DELETE"-->
+                                    <Button Grid.Column="0"                              
+                                Margin="15,15" Height="40" Width="140" 
+                                Content="Delete"
+                                HorizontalAlignment="Right"
+                                Name="btnDelete" 
+                                VerticalAlignment="Top"                         
+                                Command="{Binding DeleteOperatorcmd}" 
+                                IsEnabled="{Binding DelBtnIsEnabled}"                            
+                            />
+                                </Grid>
+                            </Border>
+                            <Border  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                                <Label  HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+
+
+            <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
+                        <ListBox 
+                            Name="lstbx_OperatorList" 
+                            Margin="15"                   
+                            ItemsSource="{Binding Operators}" 
+                            SelectedItem="{Binding SelectedOperator}"     
+                            SelectedIndex="{Binding OperatorSelectedIndex}" 
+                           SelectionChanged="lstbx_OperatorList_SelectionChanged"    
+                            IsSynchronizedWithCurrentItem="{x:Null}"
+                            >
+                                              
+                        </ListBox>
+                    </ScrollViewer>
+                    <Button Grid.Row="1"
+                            Height="40"
+                            Margin="15,0,15,15"
+                            Command="{Binding NewOperatorCmd}"
+                            Content="New Operator"></Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
+
+
+<!--<local:CharityView DataContext="{Binding charityVm}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>-->

@@ -9,57 +9,50 @@
 
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
-        <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonDarkBlueStyle}"/>
     </UserControl.Resources>
-    
-    <Border >
+
+    <Border Style="{DynamicResource LightBlueBorder}" Margin="5">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Style="{DynamicResource DarkBlueBorder}" Margin="10" CornerRadius="5">
 
-            <Border Grid.Column="1" CornerRadius="0,5,5,0">
-
-                <ContentPresenter Name="SessionTransitionControl" />
             </Border>
 
-            <Border Grid.Column="0" Background="#FF44658D">
+            <DataGrid Name="SessionDataGrid" Grid.Row="1" Margin="10,0" ItemsSource="{Binding SessionList}" AutoGenerateColumns="False" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Session" Binding="{Binding Number}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding DisplayName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Operator" Binding="{Binding OperatorName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Start Time" Binding="{Binding SessionStartTime}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="End Time" Binding="{Binding SessionEndTime}" IsReadOnly="True" />
+                    <DataGridTextColumn Width="*"/>
+                    <DataGridTextColumn Header="Active" Binding="{Binding Active}" IsReadOnly="True" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Border Grid.Row="2" Margin="10,5" Style="{DynamicResource SemiTransparentBorder}">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition ></RowDefinition>
-                        <!--<RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>-->
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                    <Button x:Name="btnBackSessions" Grid.Row="0"  Grid.Column="0"   
-                               Content="Session"
-                               Style="{StaticResource FlatDarkBlueButtonStyle4}"  />
-                    <!--<TextBlock Grid.Row="0" Text="Session" Style="{StaticResource HeaderStyle2}" />-->
-                    <StackPanel Grid.Row="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <ToggleButton  Grid.Row="0"  Height="50" Name="StartSessionToggleButton" Content="Start" Click="MenuToggleButton_Changed" Visibility="{Binding StartSessionIsVisible}"/>
-                            <ToggleButton  Height="50" Grid.Row="1" Name="StopSessionToggleButton" Content="Stop" Click="MenuToggleButton_Changed" Visibility="{Binding EndSessionIsVisible}" />
-                            <!--<ToggleButton  Height="50" Grid.Row="2" Name="SetBallsToggleButton" Content="Set Balls" Click="MenuToggleButton_Changed"  Visibility="{Binding SetBallsMenuVisibility, Converter={StaticResource VisibilityConverter}}"/>-->
-                            <ToggleButton  Height="50" Grid.Row="2" Name="SetBallsToggleButton" Content="Set Balls" Click="MenuToggleButton_Changed"  Visibility="{Binding SetBallIsVisible}"/>
-                            <ToggleButton  Height="50" Grid.Row="3" Name="VoidAccountsToggleButton" Content="Void Accounts" Click="MenuToggleButton_Changed"  Visibility="{Binding EndSessionDisabledVisibility, Converter={StaticResource VisibilityConverter}}"/>
-                           
-                        </Grid>
-                     
-
-                    </StackPanel>
-                       
+                    <Button  Height="40" Width="140" Grid.Column="0"  Name="StartSessionButton" Content="Start new session" Click="StartSessionButtonClick" Visibility="{Binding StartSessionButtonVisibility, Converter={StaticResource VisibilityConverter}}"/>
+                    <Button  Height="40" Width="140" Grid.Column="0"  Name="StopSessionButton" Content="End active session" Click="EndSessionButtonClick" Visibility="{Binding EndSessionButtonVisibility, Converter={StaticResource VisibilityConverter}}"/>
+                    <Button  Height="40" Width="140" Grid.Column="1" Name="SetBallsButton" Content="Set Balls" Click="SetBallsButtonClick"  IsEnabled="{Binding SetBallsIsEnabled}" Visibility="{Binding SetBallsButtonVisibility, Converter={StaticResource VisibilityConverter}}"/>
+                    <Button  Height="40" Width="140" Grid.Column="2" Name="VoidAccountsButton" Content="Void Accounts" Click="VoidAccountsButtonClick"  IsEnabled="{Binding VoidAccountButtonIsEnabled}" />
                 </Grid>
+
+            </Border>
+
+            <Border Grid.Row="3" Margin="10,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Height="28">
+                <Label  HorizontalAlignment="Left" Content="{Binding SessionStatusMessage}" Foreground="Black"/>
             </Border>
         </Grid>
     </Border>

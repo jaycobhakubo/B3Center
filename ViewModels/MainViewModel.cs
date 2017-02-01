@@ -32,19 +32,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (controller == null)
                 throw new ArgumentNullException("controller");
-
             Controller = controller;
             ModuleFeatureList = controller.ModuleFeatureList;
-            //ObservableCollection<GameModel> games = new ObservableCollection<GameModel>
-            //{
-            //    new CrazyBoutGameModel()
-            //};
 
-            //GameVm = new GameViewModel(games);
             SessionVm = SessionViewModel.Instance;
             SessionVm.Initialize(controller.B3Controller); 
-
             HideAllBtnViewModel();
+
             //No need to initialize if staff dont have permission.
             foreach (int moduleFeatureID in controller.ModuleFeatureList)
             {
@@ -62,19 +56,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         IsSettingVisible = Visibility.Visible;
                      break;
                 }
-
             }
-
-            var testxx = controller.B3Controller.Settings.B3IconColor_;
-
-            OperatorVm = new OperatorViewModel(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_); 
-
-            //OperatorVm = new OperatorViewModel();
-
-
-
-            FileExitCommand = new RelayCommand(parameter => Exit());            // Create the commands.
-            PropertyChangedEventManager.AddListener(Controller, this, string.Empty);            // Listen for changes to the parent and children.
+            //OperatorVm = new OperatorViewModel(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_); 
+            OperatorVm = OperatorViewModel.Instance;
+            OperatorVm.Initialize(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_);
+            FileExitCommand = new RelayCommand(parameter => Exit());     
+            PropertyChangedEventManager.AddListener(Controller, this, string.Empty);    
         }
 
         //private ObservableCollection<OperatorModel> m_operator;
@@ -148,14 +135,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             private set;
         }
 
-        /// <summary>
-        /// Gets or set the sub view model: game view model.
-        /// </summary>
-        public GameViewModel GameVm
-        {
-            get;
-            private set;
-        }
 
         /// <summary>
         /// Gets or set the sub view model: session view model.
@@ -176,7 +155,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        /// </summary>
         public SettingViewModel SettingVm { get; private set; }
 
-        public OperatorViewModel OperatorVm { get; private set; }
+        public static OperatorViewModel OperatorVm { get; private set; }
 
 
         #endregion

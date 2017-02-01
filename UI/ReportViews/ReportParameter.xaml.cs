@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
@@ -20,7 +21,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// </summary>
     public partial class ReportParameter : UserControl
     {
-
         private int m_endingCard;
         private int m_startingCard;
         private TextBlock ErrorTextBlock = new TextBlock();
@@ -30,7 +30,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             InitializeComponent();
             DataContext = this;
         }
-
 
         private void txtbxStartingCard_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
@@ -88,14 +87,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                         }
                     }
             }
-
             e.Handled = result;
         }
 
         private void txtbxEndingCard_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox txtbx = (TextBox)sender;
-
 
             if (txtbx.Name == "txtbxEndingCard")
             {
@@ -120,16 +117,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
                     m_startingCard = 0;
                 }
             }
+        }
 
-            //var viewModel = ReportsViewModel.Instance;
-            //if (viewModel.ValidateUserInputForBingoCardReport(m_startingCard, m_endingCard) == false)
-            //{
-            //    if (!string.IsNullOrEmpty(txtbxStartingCard.Text) && !string.IsNullOrEmpty(txtbxEndingCard.Text))
-            //    {
-            //        ErrorTextBlock.Text = Properties.Resources.ErrorEndingCardOccuresBeforeStartingCard;
-            //    }
-            //}
-
+        //This event will fire on clear, add
+        private void SessionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ReportParameterVmHereInCodeBehind = (ReportParameterViewModel)DataContext;
+            if (ReportParameterVmHereInCodeBehind.WorkInProgress == false)//Skip unecessary event
+            {
+                ReportParameterVmHereInCodeBehind.EventCommand();//Only fire on actual selection 
+            }
         }
 
         
