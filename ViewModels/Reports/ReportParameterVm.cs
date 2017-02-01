@@ -83,13 +83,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             HideEnableParamControls(paramlist);
             if (rptParameter.rptid == ReportId.B3AccountHistory)
             {
-                //EventCommand();
+                EventCommand();
             }
         }
 
         #endregion
 
-        #region EVENT (using Microsoft.Practices..dll)
+
 
         public ICommand SelectedSessionEvent { get; private set; }
         public ICommand DateSelectedChanged { get; private set; }
@@ -105,7 +105,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        #endregion
+
 
         #region METHOD
 

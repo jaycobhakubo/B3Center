@@ -40,81 +40,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             //m_menuItems = new List<ToggleButton>();
             m_staffId = SettingViewModel.Instance.StaffId;
             m_machineId = SettingViewModel.Instance.MachineId;
-
-            //m_accountsReportView = new AccountsReportView();
-            //m_accountsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_accountsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_dailyReportView = new DailyReportView();
-            //m_dailyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_dailyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_detailReportView = new DetailReportView();
-            //m_detailReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_detailReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_drawerReportView = new DrawerReportView();
-            //m_drawerReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_drawerReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_jackpotReportView = new JackpotReportView();
-            //m_jackpotReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_jackpotReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_monthlyReportView = new MonthlyReportView();
-            //m_monthlyReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_monthlyReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_sessionReportView = new SessionReportView();
-            //m_sessionReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_sessionReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_voidReportView = new VoidReportView();
-            //m_voidReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_voidReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_sessionsummaryReportView = new SessionSummaryView();
-            //m_sessionsummaryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_sessionsummaryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_accountHistoryReportView = new AccountHistoryReportView();
-            //m_accountHistoryReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent;
-            //m_accountHistoryReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_winnerCardsReportView = new WinnerCardsReportView();
-            //m_winnerCardsReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_winnerCardsReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_ballCallReportView = new BallCallReportView();
-            //m_ballCallReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_ballCallReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_sessionTranReportView = new SessionTransactionReportView();
-            //m_sessionTranReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_sessionTranReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_bingoCardReportView = new BingoCardReportView();
-            //m_bingoCardReportView.FullScreenButton.FullScreenEvent += OnFullScreenEvent; ;
-            //m_bingoCardReportView.FullScreenButton.ExitScreenEvent += OnExitScreenEvent;
-
-            //m_menuItems = new List<ToggleButton>
-            //{
-            //AccountsToggleButton,
-            //DailyToggleButton,
-            //DetailsToggleButton,
-            //DrawerToggleButton,
-            //JackpotToggleButton,
-            //MonthlyToggleButton,
-            //SessionToggleButton,
-            //VoidToggleButton,
-            //AccountHistoryTransToggleButton,
-            //BallCallToggleButton,
-            //SessioSummaryToggleButton,
-            //SessionTransToggleButton,
-            //WinnerCardsTransToggleButton,
-            //BingoCardToggleButton,
-            //};
-            //LoadBallCallReportDefList();
+           
         }
 
         #endregion
@@ -132,16 +58,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         public event EventHandler<EventArgs> ExitScreenEvent;
 
 
-        //private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{           
-        //    var viewModel = ReportsViewModel.Instance;
-        //    B3Report b3rpt = (B3Report)sender;
-      
-
-        //    viewModel.SelectionChanged(b3rpt.DisplayName);
-
-        //}
-
+       
         #endregion
 
         #region Private Methods
@@ -180,25 +97,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         #endregion
 
-        #region Public Methods
-
-        /// <summary>
-        /// Clears the selected Report content.
-        /// </summary>
-        public void ClearSelected()
-        {
-            //We have to uncheck any previously checked buttons
-            foreach (var menuItem in m_menuItems)
-            {
-                if (menuItem.IsChecked != null && (bool)menuItem.IsChecked)
-                {
-                    menuItem.IsChecked = false;
-                    ReportsTransitionControl.Content = null;
-                }
-            }
-        }
-
-        #endregion
 
      
 

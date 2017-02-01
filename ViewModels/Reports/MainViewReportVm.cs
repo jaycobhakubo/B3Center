@@ -192,7 +192,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //set session list
             foreach (var session in controller.Sessions)
             {
-                SessionList.Add(session);//knc
+                SessionList.Add(session);
             }
       
             LoadReportList();
@@ -415,12 +415,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-    
-
-        
-
-        
-
         private void LoadReportList()
         {
             m_reportList.Clear();
@@ -533,8 +527,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         
         private UserControl m_selectedReportView = new UserControl();
-
-
         public UserControl SelectedReportView
         {
             get {
@@ -542,7 +534,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             set
             {
-
                 m_selectedReportView = value;
                     RaisePropertyChanged("SelectedReportView");
             }
@@ -640,13 +631,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
                         view = m_winnerCardsReportView;
                         break;
-                    }
-              
-                
-           
+                    }                               
             }
-
-
             SelectedReportView = view;
         }
 
@@ -2016,8 +2002,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         }
 
-
-
         /// <summary>
         /// Prints the report.
         /// </summary>
@@ -2102,10 +2086,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             return returnValue;
         }
-
-
-
-        
+    
         /// <summary>
         /// Called when [full screen event].
         /// </summary>
@@ -2136,8 +2117,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
-
         /// <summary>
         /// Occurs when [full screen event].
         /// </summary>
@@ -2148,15 +2127,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         public event EventHandler<EventArgs> ExitScreenEvent;
         
-
-
-
-
-      
-
-       
-
-        /// <summary>
+    /// <summary>
         /// Called when [list information done].
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -2165,12 +2136,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                //update session list
                 if (m_controller.Sessions.Count != SessionList.Count)
                 {
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        //clear and redefine list
                         SessionList.Clear();
                         foreach (var session in m_controller.Sessions)
                         {
@@ -2183,14 +2152,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-        
-        #endregion
-
-
-
-
       
+        #endregion
+     
        public Visibility CRViewMode
         {
             get
@@ -2219,78 +2183,54 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         }
 
-
         #region Command
-
-
 
         private void SetCommand()
         {
-            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
+            
+            ViewReportCommand = new RelayCommand(parameter => 
+                {
+                    Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                    Task save = Task.Factory.StartNew(() => ViewReportRel(ReportSelected.Id));
+                    save.Wait();
+                    Mouse.OverrideCursor = null;
+                }
+                );
         }
         public ICommand ViewReportCommand { get; set; }
 
         public void ViewReportRel(ReportId reportID)
         {            
-            //ViewPrintButtonVisibility = Visibility.Collapsed;
-
-            //Task.Factory.StartNew(() =>
-            //{
-            //    IsLoading = true;
-            //reportID = ReportId.B3BallCallBySession;
             try
             {
-                var bingoCardReport = m_reports.FirstOrDefault(r => r.Id == /*ReportId.B3BingoCardReport*/ reportID);
-
-
-                if (bingoCardReport == null)
-                {
-                    return;
-                }
-                LoadCrystalReport(bingoCardReport);
-
-                //var report = LoadBingoCardReportDocument(1, 1);
-                var report = m_rptBaseVm.LoadReportDocument(bingoCardReport);
-
+                var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+                if (Rpt == null){return;}
+                LoadCrystalReport(Rpt);
+                var report = m_rptBaseVm.LoadReportDocument(Rpt);
 
                 if (report == null)
                 {
                     IsLoading = false;
                     return;
                 }
-
-                //Dispatcher.Invoke(new Action(() =>
-                //{
                 tempcr.ViewerCore.ReportSource = report;
                 tempcr.Focusable = true;
                 tempcr.Focus();
-                //}));
             }
             catch (Exception ex)
-            {
-                //display message box on UI thread
-                //Dispatcher.Invoke(new Action(() =>
-                //{
-                //error
+            {             
                 MessageWindow.Show(
                     string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
                         ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
-                //}));
             }
             finally
             {
                 IsLoading = false;
             }
-            //});
             DefaultViewMode = Visibility.Collapsed;
             CRViewMode = Visibility.Visible;
-            //m_bingocardvm.ReportViewerVisibility = Visibility.Visible;
-            //m_bingocardvm.ReportParameterVisible = Visibility.Collapsed;
             m_rptBaseVm.vReportViewer = tempcr;
-
-
         }
-
 
         #endregion
 

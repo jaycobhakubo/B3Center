@@ -42,8 +42,5 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         public Visibility DefaultViewerm
         { get; set; }
 
-        //public Visibility HideCRReportViewer
-        //{ get; set; }
-
     }
 }
