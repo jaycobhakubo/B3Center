@@ -182,17 +182,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public void UpdateAccountList()
         {
-            m_accountList.Clear();
-            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+            if (SelectedSession != null)
             {
-                Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
-                msg.Send();
-                if (msg.AccountNumberList.Count != 0)
+                m_accountList.Clear();
+                if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
                 {
-                    AccountList = msg.AccountNumberList;
-                    AccountSelected = m_accountList.FirstOrDefault();            
-                }               
-            }    
+                    Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
+                    msg.Send();
+                    if (msg.AccountNumberList.Count != 0)
+                    {
+                        AccountList = msg.AccountNumberList;
+                        AccountSelected = m_accountList.FirstOrDefault();
+                    }
+                }
+            }
         }
 
 

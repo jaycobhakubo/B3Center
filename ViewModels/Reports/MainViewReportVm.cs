@@ -465,9 +465,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     m_reportList.Add(temp);
                 }
-                m_reportList = m_reportList.OrderBy(l => l.DisplayName).ToList();
+               
             }
-
+            m_reportList = m_reportList.OrderBy(l => l.DisplayName).ToList();
             ReportSelected = m_reportList.FirstOrDefault();
         }
 
