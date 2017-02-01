@@ -48,29 +48,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private bool m_isPrinting;
         private B3Controller m_controller;
         private ObservableCollection<Session> m_sessionList;
-
+        private List<B3Report> m_reports;
+        private CrystalReportsViewer tempcr = new CrystalReportsViewer();
         private static volatile ReportsViewModel m_instance;
         private static readonly object m_syncRoot = new Object();
         private int m_accountNumberSelected;
 
         //Reports
+        private AccountHistoryReportView m_accountHistoryReportView; 
         private AccountsReportView m_accountsReportView;// = new AccountsReportView();// = new AccountsReportView;
+        private BallCallReportView m_ballCallReportView;
+        private BallCallBySessionView m_ballCallBySession;
+        private BingoCardView m_bingoCardReportView;
         private DailyReportView m_dailyReportView;//= new DailyReportView();
         private DetailReportView m_detailReportView;//= new DetailReportView();
         private DrawerReportView m_drawerReportView;//= new DrawerReportView();
         private JackpotReportView m_jackpotReportView;// = new JackpotReportView();
         private MonthlyReportView m_monthlyReportView;//= new MonthlyReportView();
         private SessionReportView m_sessionReportView;//= new SessionReportView();
-        private VoidReportView m_voidReportView;// = new VoidReportView();
         private SessionSummaryView m_sessionsummaryReportView;// = new SessionSummaryView();
-        private AccountHistoryReportView m_accountHistoryReportView;
-        private WinnerCardsReportView m_winnerCardsReportView;// = new WinnerCardsReportView();
-        private BallCallReportView m_ballCallReportView;
         private SessionTransactionReportView m_sessionTranReportView;// = new SessionTransactionReportView();
-        private BingoCardView m_bingoCardReportView;
-
-        private List<B3Report> m_reports;    
-        CrystalReportsViewer tempcr = new CrystalReportsViewer();
+        private VoidReportView m_voidReportView;// = new VoidReportView();        
+        private WinnerCardsReportView m_winnerCardsReportView;// = new WinnerCardsReportView();   
+           
         #endregion
 
         #region Constructors
@@ -152,9 +152,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             temp.DisplayName = "Accounts";
                             break;
                         }
+                
                     case ReportId.B3BallCallByGame:
                         {
-                            temp.DisplayName = "Ball Call";
+                            temp.DisplayName = "Ball Call(by game)";
+                            break;
+                        }
+                    case ReportId.B3BallCallBySession:
+                        {
+                            temp.DisplayName = "Ball Call(by session)";
                             break;
                         }
                     case ReportId.B3BingoCardReport:
@@ -260,11 +266,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3BallCallByGame:
                     {
                         temprptparmodel.rptid = b3rpt;
-                        result.ReportTitle = "Ball Call";
-                        par.Add("Category");
+                        result.ReportTitle = "Ball Call(by game)";
                         par.Add("Date");
                         par.Add("Session");
                         result.ReportParameter = par;                      
+                        break;
+                    }
+                case ReportId.B3BallCallBySession:
+                    {
+                        temprptparmodel.rptid = b3rpt;
+                        result.ReportTitle = "Ball Call(by session)";
+                        temprptparmodel.StartDate = new Model.Shared.DatePickerM();
+                        temprptparmodel.EndDate = new Model.Shared.DatePickerM();
+                        par.Add("StartEndDate");
+                        result.ReportParameter = par;
                         break;
                     }
                 case ReportId.B3BingoCardReport:
@@ -430,10 +445,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_accountHistoryReportView;
                         break;
                     }
-                case "Ball Call":
+                case "Ball Call(by game)":
                     {
                         m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallByGame)));
                         view = m_ballCallReportView;
+                        break;
+                    }
+                case "Ball Call(by session)":
+                    {
+                        m_ballCallBySession = new BallCallBySessionView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallBySession)));
+                        view = m_ballCallBySession;
                         break;
                     }
                 case "Bingo Card":

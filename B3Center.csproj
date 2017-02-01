@@ -169,6 +169,9 @@
     <Compile Include="UI\ReportViews\AccountsReportView.xaml.cs">
       <DependentUpon>AccountsReportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ReportViews\BallCallBySessionView.xaml.cs">
+      <DependentUpon>BallCallBySessionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ReportViews\BallCallReportView.xaml.cs">
       <DependentUpon>BallCallReportView.xaml</DependentUpon>
     </Compile>
@@ -353,6 +356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ReportViews\AccountsReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReportViews\BallCallBySessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

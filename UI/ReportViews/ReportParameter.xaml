@@ -57,9 +57,9 @@
                                 Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
                 </DockPanel>
                 <TextBlock x:Name="txtblkStartDate" Text="Start Date:"  Visibility="{Binding StartEndDate}"/>
-                <shared:DatePickerUserView   Grid.Row="1"  HorizontalAlignment="Right"   Margin="0,0,0,5" Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
+                <shared:DatePickerUserView   Grid.Row="1"  HorizontalAlignment="Right"   Margin="0,0,0,5" Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}"  DataContext="{Binding StartDatePickerVm}" />
                 <TextBlock x:Name="txtblkEndDate" Text="End Date:"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
-                <shared:DatePickerUserView  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"  HorizontalAlignment="Right"  Margin="0,0,0,0" />
+                <shared:DatePickerUserView  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"  HorizontalAlignment="Right"  Margin="0,0,0,5"  DataContext="{Binding EndDatePickerVm}"/>
                 <TextBlock Text="Session:" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
                                Width="280"

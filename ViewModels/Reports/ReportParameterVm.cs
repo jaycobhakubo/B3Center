@@ -205,8 +205,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case "StartEndDate":
                         {
-                            StartDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
-                            EndDatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
+                            StartDatePickerVm = new DatePickerVm(RptParameterDataHandler.StartDate, false);
+                            EndDatePickerVm = new DatePickerVm(RptParameterDataHandler.EndDate, false);
                             StartEndDate = Visibility.Visible;
                             break;
                         }

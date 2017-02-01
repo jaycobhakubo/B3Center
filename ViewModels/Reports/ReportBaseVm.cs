@@ -70,9 +70,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                 case ReportId.B3BallCallBySession:
                     {
                         var startdate = bcvm.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        var enddate = bcvm.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        Report.CrystalReportDocument.SetParameterValue("@StartDate", tempdate.Date.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@EndDate", endtempdate.Date.ToString(CultureInfo.InvariantCulture));
+                        var enddate =   bcvm.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        Report.CrystalReportDocument.SetParameterValue("@StartDate", startdate);
+                        Report.CrystalReportDocument.SetParameterValue("@EndDate", enddate);
                         break;
                     }
                 case ReportId.B3BingoCardReport:
