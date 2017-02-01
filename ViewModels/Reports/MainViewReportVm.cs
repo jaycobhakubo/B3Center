@@ -68,6 +68,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private BallCallReportView m_ballCallReportView;
         private SessionTransactionReportView m_sessionTranReportView;// = new SessionTransactionReportView();
         private BingoCardView m_bingoCardReportView;
+
         private List<B3Report> m_reports;    
         CrystalReportsViewer tempcr = new CrystalReportsViewer();
         #endregion
