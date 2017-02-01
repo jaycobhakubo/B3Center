@@ -173,9 +173,6 @@
     <Compile Include="UI\ReportViews\BallCallReportView.xaml.cs">
       <DependentUpon>BallCallReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\BingoCardReportView.xaml.cs">
-      <DependentUpon>BingoCardReportView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\ReportViews\BingoCardView.xaml.cs">
       <DependentUpon>BingoCardView.xaml</DependentUpon>
     </Compile>
@@ -361,10 +358,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ReportViews\BallCallReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\BingoCardReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
