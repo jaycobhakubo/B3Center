@@ -6,11 +6,18 @@
                 xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
            >
+    <UserControl.Resources>
+        <Style
+            TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,15,0,2"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Border  Name="SelectDateBorder">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
 
-                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}"  />
+                <TextBlock Name="lblBallCallCategory" Text="Category" Visibility="{Binding CategoryInput}"  Margin="0,0,0,2"/>
                 <ComboBox  
                         Grid.Row="0"
                               
