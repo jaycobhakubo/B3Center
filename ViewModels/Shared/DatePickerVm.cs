@@ -279,29 +279,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region EVENT (selectionchangedmvvm)
 
-        //public ICommand YearMonthSelectedChanged { get; private set; }
-        //public ICommand DateSelectedChanged { get; private set; }
-
-        //private void EventItemChanged()
-        //{
-        //    YearMonthSelectedChanged = new DelegateCommand<string>(obj =>
-        //    {      
-        //        DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
-        //        updateItemDateSelected();
-        //    });
-
-        //    DateSelectedChanged = new DelegateCommand<string>(obj =>
-        //    {
-        //        updateItemDateSelected();
-        //    });
-        //}
-
         public void YearMonthSelectedChanged()
         {
             DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
             updateItemDateSelected();
         }
-
 
         public void DateSelectedChanged()
         {
@@ -313,7 +295,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             DateTime tempResult;// = new DateTime();
             DateTime.TryParse(DatepickerModel.DateFullwTime, out tempResult);
             return tempResult;
-            //DateTime 
         }
 
         private void updateItemDateSelected()
@@ -333,7 +314,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
                 var i = GetSelectedDate();
                 x.UpdateSessionList(i);
             }
-        
+            x.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
         }
 
        

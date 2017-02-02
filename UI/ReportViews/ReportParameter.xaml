@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+             xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
              mc:Ignorable="d" 
            >
     <UserControl.Resources>
@@ -80,12 +80,26 @@
                               />
 
                 <TextBlock Text="Starting Card:"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
-                <TextBox MaxLength="6" Name="txtbxStartingCard" 
-                           Text="{Binding StartingCard}"  Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"
+                <TextBox
+                    MaxLength="6" 
+                    Name="txtbxStartingCard" 
+                    Text="{Binding StartingCard}"  
+                    Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"    
+                    PreviewTextInput="ValidateCard"
+                    Tag="true"
                               ></TextBox>
 
                 <TextBlock Text="Ending Card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
-                <TextBox  MaxLength="6" Name="txtbxEndingCard" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" Text="{Binding EndingCard}"/>
+                <TextBox  
+                    MaxLength="6" 
+                    Name="txtbxEndingCard" 
+                    Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" 
+                    Text="{Binding EndingCard}"
+                    PreviewTextInput="ValidateCard"
+                    Tag="false"
+                          >
+                                         
+                </TextBox>
              
             </StackPanel>
         </Border>

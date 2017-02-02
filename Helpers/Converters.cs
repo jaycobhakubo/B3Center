@@ -35,12 +35,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     public class BoolToVisibilityConv : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)//parameter true = revert valuek false do not revert
-        {
-            
-       
-
+        {           
             Visibility showControl = new Visibility();
             showControl = Visibility.Collapsed;
 
@@ -51,7 +47,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                     showControl = Visibility.Visible;
                 }
               
-
                 var isReverse = parameter.ToString();
                 if (isReverse == "true")
                 {

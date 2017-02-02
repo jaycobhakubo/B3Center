@@ -98,7 +98,8 @@
                                 HorizontalAlignment="Right" 
                                 x:Name="btnSave"
                                 VerticalAlignment="Top"
-                                            Command="{Binding ViewReportCommand}"
+                                Command="{Binding ViewReportCommand}"
+                                IsEnabled="{Binding ViewReportVisibility}"
                                 Tag="1"/>
                                     <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="1"
@@ -107,6 +108,7 @@
                                 HorizontalAlignment="Left"
                                 Name="btnCancel" 
                                 VerticalAlignment="Top"
+                                IsEnabled="{Binding ElementName=btnSave, Path=IsEnabled}"
                             />
                                     <!--Click="btnCancel_Click"-->
 

@@ -31,95 +31,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             DataContext = this;
         }
 
-        private void txtbxStartingCard_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(ErrorTextBlock.Text))
-            {
-                ErrorTextBlock.Text = string.Empty;
-            }
 
-            bool notAllow = false;
-
-            if (e.Key == Key.Space)
-            {
-                notAllow = true;
-            }
-            else
-                if (e.Key == Key.Back)
-                {
-                    notAllow = false;
-                }
-            e.Handled = notAllow;
-        }
-
-
-        private void txtbxNumericOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            bool result = false; //false = ok; true = !ok
-            Regex regex = new Regex("[^0-9]+");
-            result = regex.IsMatch(e.Text);
-            int CardNumber = 0;
-
-            if (result != false)
-            {
-                //if its not numeric skip the next statement.
-            }
-            else
-            {
-                TextBox Items = (TextBox)sender;
-                if (Items.Text.Count() == 0)
-                {
-                    CardNumber = Convert.ToInt32(e.Text);
-                    if (CardNumber == 0)
-                    {
-                        result = true;
-                    }
-                }
-                else
-                    if (Items.Text.Count() == 5)
-                    {
-                        string sCardNumber = Items.Text;
-                        sCardNumber = sCardNumber.Insert(Items.SelectionStart, e.Text);
-                        CardNumber = Convert.ToInt32(sCardNumber);
-                        if (CardNumber > 250000) // No more than 250000
-                        {
-                            result = true;
-                        }
-                    }
-            }
-            e.Handled = result;
-        }
-
-        private void txtbxEndingCard_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox txtbx = (TextBox)sender;
-
-            if (txtbx.Name == "txtbxEndingCard")
-            {
-                if (txtbx.Text != string.Empty)
-                {
-                    m_endingCard = Convert.ToInt32(txtbx.Text);
-                }
-                else
-                {
-                    m_endingCard = 0;
-                }
-
-            }
-            else
-            {
-                if (txtbx.Text != string.Empty)
-                {
-                    m_startingCard = Convert.ToInt32(txtbx.Text);
-                }
-                else
-                {
-                    m_startingCard = 0;
-                }
-            }
-        }
-
-        //This event will fire on clear, add
         private void SessionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var ReportParameterVmHereInCodeBehind = (ReportParameterViewModel)DataContext;
@@ -129,6 +41,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             }
         }
 
-        
+        private void ValidateCard(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Items = (TextBox)sender;
+            string sCardNumber = Items.Text;
+            sCardNumber = sCardNumber.Insert(Items.SelectionStart, e.Text);
+            var ii = (ReportParameterViewModel)DataContext;
+            ii.ValidateCard(sCardNumber, bool.Parse(Items.Tag.ToString()));
+        }     
     }
 }

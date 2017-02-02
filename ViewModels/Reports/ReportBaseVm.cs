@@ -38,8 +38,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
             //Station is the machine Description of the machine. 
             //E.g machine ID 22 Description POS SALES
             //Since I cant find it. Ill just send the ID and just use subreport to get the machine description on Crystal report.
-            var tempdate = new DateTime();
-            var endtempdate = new DateTime();
+            //var tempdate = new DateTime();
+            //var endtempdate = new DateTime();
             var userId = bcvm.ReportTemplate_Model.CurrentUser;
             var machineId = bcvm.ReportTemplate_Model.CurrentMachine; 
     

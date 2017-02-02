@@ -219,7 +219,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             temp.DisplayName = "Winner Cards";
                             break;
                         }
-
                 }
                 if (!string.IsNullOrEmpty(temp.DisplayName))
                 {
@@ -384,6 +383,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             result.rptParModel = temprptparmodel;
             return result;
         }
+
+        private bool m_viewReportVisibility;
+        public bool ViewReportVisibility
+        {
+            get { return m_viewReportVisibility; }
+            set
+            {
+                m_viewReportVisibility = value;
+                RaisePropertyChanged("ViewReportVisibility");
+            }
+        }
+
+        //private void SetViewReportVisibility()
+        //{
+        //    m_rptBaseVm.parVm.AccountSelected
+        //}
+
 
         private ReportBaseVm m_rptBaseVm;
         public ReportBaseVm RptBaseVm
@@ -662,29 +678,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
   
 
-        internal bool ValidateUserInputForBingoCardReport(int startingCardN, int EndingCardN)
-        {
-            bool IsValid = false;
-            if (startingCardN != 0 && EndingCardN  != 0)
-            {
-                if (startingCardN > EndingCardN)
-                {
-
-                }
-                else
-                {
-                    IsValid = true;
-                }
-            }
-            else
-            {
-               // IsValid = false;
-            }
-
-           // EnableBingoCardReportButtons = IsValid;
-            return IsValid;
-
-        }
+       
 
         /// <summary>
         /// Prints the report.

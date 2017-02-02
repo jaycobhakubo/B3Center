@@ -12,6 +12,7 @@ using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using System.Windows.Input;
+using System.Text.RegularExpressions;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -20,11 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     {
 
         #region MEMBER VARIABLE
-
-        //private ReportParameterModel m_rptParameter;
-
         private DatePickerM m_datepickerModel;
-        //private DatePickerVm m_datePickerVm; 
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
         private ObservableCollection<string> m_accountList;
@@ -32,19 +29,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<Session> m_sessionList;
         private Session m_SelectedSession;
         private string m_AccountSelected;
-        private string m_startingCard;
         private string m_endingCard;
-
         private Visibility m_visibility;
         private ObservableCollection<string> m_months;
-
         #endregion
-
         #region STATIC (properties and variable)
-
         private static readonly object m_syncRoot = new Object();
         private static volatile ReportParameterViewModel m_instance;
-
         public static ReportParameterViewModel Instance
         {
             get
@@ -57,23 +48,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_instance = new ReportParameterViewModel();
                     }
                 }
-
                 return m_instance;
             }
-
-
         }
-
         #endregion
-
         #region CONSTRUCTORS
-
         public ReportParameterViewModel()
         {
             m_accountList = new ObservableCollection<string>();
             m_sessionList = new ObservableCollection<Session>();
         }
-
 
         internal void Initialize(List<string> paramlist, ReportParameterModel rptParameter)
         {
@@ -84,13 +68,134 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (rptParameter.rptid == ReportId.B3AccountHistory)
             {
                 EventCommand();
-            }
+            }           
         }
-
         #endregion
 
+        //Another validation from code behind
+        public void ValidateCard(string CardNumber, bool isStartingCard)
+        {    
+            bool ViewReportVisibility = false;
+            string startingCardNow = "";
+            string endingCardNow = "";
 
+            if (isStartingCard == true)
+            {
+                startingCardNow = CardNumber;
+                endingCardNow = RptParameterDataHandler.b3EndingCard;
+            }
+            else
+            {
+                startingCardNow = RptParameterDataHandler.b3StartingCard;
+                endingCardNow = CardNumber;
+            }
+     
+            int tempStartingCard;
+            int tempEndingCard;
 
+            var tempResultsc = int.TryParse(startingCardNow, out tempStartingCard); //Right now user can enter any character on the textbox 
+            var tempResultec = int.TryParse(endingCardNow, out tempEndingCard);
+
+            //Disable the print and view button if starting card and ending card is not int.
+            if (tempResultec == true && tempResultsc == true)
+            {
+                if (tempStartingCard > tempEndingCard)
+                {
+                    ViewReportVisibility = false;
+                }
+                else
+                {
+                    if (tempEndingCard == 0)
+                    {
+                        ViewReportVisibility = false;
+                    }
+                    else
+                    {
+                        ViewReportVisibility = true;
+                    }
+                }
+            }
+            else
+            {
+                ViewReportVisibility = false;
+            }
+
+            var ii = ReportsViewModel.Instance;
+            ii.ViewReportVisibility = ViewReportVisibility;
+        }
+
+        //User validation (Enable or disable View and print button in the B3Report)
+        public void CheckUserValidation()
+        {
+            bool ViewReportVisibility = false; 
+
+            switch (RptParameterDataHandler.rptid)
+            {
+                case ReportId.B3AccountHistory://For account
+                    {
+                        if (AccountSelected != null)
+                        {
+                            ViewReportVisibility = true;
+                        }
+                        else
+                        {
+                            ViewReportVisibility = false;
+                        }
+                        break;
+                    }
+                case ReportId.B3BallCallByGame://For Session
+                case ReportId.B3Jackpot:
+                case ReportId.B3Session:
+                case ReportId.B3SessionSummary:
+                case ReportId.B3SessionTransaction:
+                case ReportId.B3WinnerCards:
+                    {
+                        if (SelectedSession != null)
+                        {
+                            ViewReportVisibility = true;
+                        }
+                        else
+                        {
+                            ViewReportVisibility = false; 
+                        }
+                        break;
+                    }
+                case ReportId.B3BingoCardReport:
+                    {
+                       
+                        break;
+                    }
+                case ReportId.B3Detail:
+                case ReportId.B3BallCallBySession:
+                case ReportId.B3Void:
+                    {
+                        DateTime TempStartDate = DateTime.Parse(StartDatePickerVm.DatepickerModel.DateFullwTime);//No need to check if its a date. It will always be a date
+                        DateTime TempEndDate = DateTime.Parse(EndDatePickerVm.DatepickerModel.DateFullwTime);
+                        //Loop 28 x the time i hit the report. not good.
+                        if (TempStartDate > TempEndDate)
+                        {
+                            ViewReportVisibility = false;
+                        }
+                        else
+                        {
+                            ViewReportVisibility = true;
+                        }
+
+                        break;
+                    }
+                case ReportId.B3Drawer:
+                    {
+                        ViewReportVisibility = true;
+                        break;
+                    }
+                        
+            }
+
+            var ii = ReportsViewModel.Instance;
+            ii.ViewReportVisibility = ViewReportVisibility;
+        }
+
+       
         public ICommand SelectedSessionEvent { get; private set; }
         public ICommand DateSelectedChanged { get; private set; }
 
@@ -104,6 +209,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
+
         #region METHOD
 
         private bool IsShowTime()
@@ -157,6 +263,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     m_accountList.Clear();
                 }
             }
+            CheckUserValidation();
         }
 
 
@@ -174,6 +281,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         AccountList = msg.AccountNumberList;
                         AccountSelected = m_accountList.FirstOrDefault();
                     }
+                    CheckUserValidation();
                 }
             }
         }
@@ -246,7 +354,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             StartEndDateWTime = Visibility.Visible;
                             break;
                         }
-
                 }
             }
         }
@@ -263,21 +370,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             StartEndDateWTime = Visibility.Collapsed;
         }
 
-
-
         public DateTime GetDate()
         {
-            DateTime tempResult;// = new DateTime();
+            DateTime tempResult;
             DateTime.TryParse(RptParameterDataHandler.b3DateData.DateFullwTime, out tempResult);
             return tempResult;
         }
-
-
-
         #endregion
 
         #region PROPERTIES
-
 
         public DateTime SelectedDateTime
         {
@@ -290,7 +391,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set;
         }
 
-
         public DatePickerM datePickermModel
         {
             get { return RptParameterDataHandler.b3DateData; }
@@ -299,7 +399,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RptParameterDataHandler.b3DateData = value;
                 RaisePropertyChanged("datePickermModel");
             }
-
         }
 
         public DatePickerVm DatePickerVm
@@ -330,8 +429,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
-
         public Session SelectedSession
         {
             get
@@ -345,25 +442,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
         public string StartingCard
         {
             get { return RptParameterDataHandler.b3StartingCard; }
             set
             {
-                RptParameterDataHandler.b3StartingCard = value;
+                RptParameterDataHandler.b3StartingCard = value;      
                 RaisePropertyChanged("StartingCard");
+                CheckUserValidation();
             }
         }
-
 
         public string EndingCard
         {
             get { return RptParameterDataHandler.b3EndingCard; }
             set
             {
-                RptParameterDataHandler.b3EndingCard = value;
+                RptParameterDataHandler.b3EndingCard = value;    
                 RaisePropertyChanged("EndingCard");
+                CheckUserValidation();
             }
         }
 
@@ -375,8 +472,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_accountList = value; RaisePropertyChanged("AccountList");
             }
         }
-
-
 
         public string AccountSelected
         {
@@ -411,7 +506,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("CategorySelected");
             }
         }
-
 
         public Visibility StartEndDateWTime
         {
