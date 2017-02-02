@@ -71,13 +71,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }           
         }
         #endregion
+        #region METHOD
 
-
-
-       
-        public ICommand SelectedSessionEvent { get; private set; }
-        public ICommand DateSelectedChanged { get; private set; }
-
+        //This also trigger from codebehind ReportParameter.xaml.cs
         public void EventCommand()
         {
             if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
@@ -88,8 +84,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-        #region METHOD
 
         //Another validation from code behind.
         //Enable or disable view and print button.
@@ -144,7 +138,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        //User validation (Enable or disable View and print button in the B3Report)
+        //For all user validation (Enable or disable View and print button in the B3Report)
         public void CheckUserValidation()
         {
             bool ViewReportVisibility = false;
@@ -187,7 +181,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         DateTime TempStartDate = DateTime.Parse(StartDatePickerVm.DatepickerModel.DateFullwTime);//No need to check if its a date. It will always be a date
                         DateTime TempEndDate = DateTime.Parse(EndDatePickerVm.DatepickerModel.DateFullwTime);
-                        //Loop 28 x the time i hit the report. not good.
+                        //Loop 28x
                         if (TempStartDate > TempEndDate)
                         {
                             ViewReportVisibility = false;
@@ -270,7 +264,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CheckUserValidation();
         }
 
-
         public void UpdateAccountList()
         {
             if (SelectedSession != null)
@@ -289,8 +282,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-
 
         private void HideEnableParamControls(List<string> paramlist)
         {
@@ -381,19 +372,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return tempResult;
         }
         #endregion
-
         #region PROPERTIES
+
+      
+        public ReportParameterModel RptParameterDataHandler {get;set;}
+        public DatePickerVm DatePickerVm {get;set;}
+        public DatePickerVm EndDatePickerVm {get;set;}       
+        public DatePickerVm StartDatePickerVm {get;set;}
+        public Visibility StartEndDateWTime { get; set; }
+        public Visibility StartEndCardInput { get; set; }
+        public Visibility CategoryInput { get; set; }
+        public Visibility AccountNumberInput { get; set; }
+        public Visibility SessionInput { get; set; }
+        public Visibility StartEndDate { get; set; }
+        public Visibility MonthYearInput { get; set; }
+        public Visibility DateInput { get; set; }
 
         public DateTime SelectedDateTime
         {
             get { return GetDate(); }
         }
 
-        public ReportParameterModel RptParameterDataHandler
-        {
-            get;
-            set;
-        }
 
         public DatePickerM datePickermModel
         {
@@ -405,24 +404,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public DatePickerVm DatePickerVm
+        public Visibility setVisibility
         {
-            get;
-            set;
+            get { return m_visibility; }
+            set
+            {
+                m_visibility = value;
+                RaisePropertyChanged("setVisibility");
+            }
         }
 
-        public DatePickerVm EndDatePickerVm
+        public ObservableCollection<string> Months
         {
-            get;
-            set;
+            get
+            {
+                return m_months;
+            }
+            set
+            {
+                m_months = value;
+                RaisePropertyChanged("Months");
+            }
         }
 
-        public DatePickerVm StartDatePickerVm
-        {
-            get;
-            set;
-        }
-
+     
         public ObservableCollection<Session> SessionList
         {
             get { return m_sessionList; }
@@ -452,8 +457,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set
             {
                 RptParameterDataHandler.b3StartingCard = value;      
-                RaisePropertyChanged("StartingCard");
-                CheckUserValidation();
+                RaisePropertyChanged("StartingCard");             
             }
         }
 
@@ -463,8 +467,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set
             {
                 RptParameterDataHandler.b3EndingCard = value;    
-                RaisePropertyChanged("EndingCard");
-                CheckUserValidation();
+                RaisePropertyChanged("EndingCard");            
             }
         }
 
@@ -510,80 +513,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("CategorySelected");
             }
         }
-
-        public Visibility StartEndDateWTime
-        {
-            get;
-            set;
-        }
-
-        public Visibility StartEndCardInput
-        {
-            get;
-            set;
-        }
-
-        public Visibility CategoryInput
-        {
-            get;
-            set;
-        }
-
-
-        public Visibility AccountNumberInput
-        {
-            get;
-            set;
-        }
-
-
-        public Visibility SessionInput
-        {
-            get;
-            set;
-        }
-
-        public Visibility StartEndDate
-        {
-            get;
-            set;
-        }
-
-        public Visibility MonthYearInput
-        {
-            get;
-            set;
-        }
-
-        public Visibility DateInput
-        {
-            get;
-            set;
-        }
-
-        public Visibility setVisibility
-        {
-            get { return m_visibility; }
-            set
-            {
-                m_visibility = value;
-                RaisePropertyChanged("setVisibility");
-            }
-        }
-
-        public ObservableCollection<string> Months
-        {
-            get
-            {
-                return m_months;
-            }
-            set
-            {
-                m_months = value;
-                RaisePropertyChanged("Months");
-            }
-        }
-
+     
         private string m_monthSelected;
         public string MonthSelected
         {
@@ -596,11 +526,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_monthSelected = value;
                 RaisePropertyChanged("MonthSelected");
             }
-        }
-
-        public void GetMonthSelectedInt()
-        {
-
         }
 
         private List<string> m_years;
@@ -634,8 +559,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-
 
         #endregion
     }

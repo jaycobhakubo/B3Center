@@ -41,8 +41,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     public class ReportsViewModel : ViewModelBase
     {
-        #region Local variables
-
+        #region MEMBERS
     
         private bool m_isLoading;
         private bool m_isPrinting;
@@ -56,48 +55,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         //Reports
         private AccountHistoryReportView m_accountHistoryReportView; 
-        private AccountsReportView m_accountsReportView;// = new AccountsReportView();// = new AccountsReportView;
+        private AccountsReportView m_accountsReportView;
         private BallCallReportView m_ballCallReportView;
         private BallCallBySessionView m_ballCallBySession;
         private BingoCardView m_bingoCardReportView;
-        private DailyReportView m_dailyReportView;//= new DailyReportView();
-        private DetailReportView m_detailReportView;//= new DetailReportView();
-        private DrawerReportView m_drawerReportView;//= new DrawerReportView();
-        private JackpotReportView m_jackpotReportView;// = new JackpotReportView();
-        private MonthlyReportView m_monthlyReportView;//= new MonthlyReportView();
-        private SessionReportView m_sessionReportView;//= new SessionReportView();
-        private SessionSummaryView m_sessionsummaryReportView;// = new SessionSummaryView();
-        private SessionTransactionReportView m_sessionTranReportView;// = new SessionTransactionReportView();
-        private VoidReportView m_voidReportView;// = new VoidReportView();        
-        private WinnerCardsReportView m_winnerCardsReportView;// = new WinnerCardsReportView();   
+        private DailyReportView m_dailyReportView;
+        private DetailReportView m_detailReportView;
+        private DrawerReportView m_drawerReportView;
+        private JackpotReportView m_jackpotReportView;
+        private MonthlyReportView m_monthlyReportView;
+        private SessionReportView m_sessionReportView;
+        private SessionSummaryView m_sessionsummaryReportView;
+        private SessionTransactionReportView m_sessionTranReportView;
+        private VoidReportView m_voidReportView;
+        private WinnerCardsReportView m_winnerCardsReportView;
            
         #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Gets the singleton instance of ReportsViewModel.
-        /// </summary>
-        /// <value>
-        /// The instance.
-        /// </value>
-        public static ReportsViewModel Instance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    lock (m_syncRoot)
-                    {
-                        if (m_instance == null)
-                            m_instance = new ReportsViewModel();
-                    }
-                }
-
-                return m_instance;
-            }
-        }
-
+        #region CONSTRUCTORS
 
         /// <summary>
         /// Represents the view model for managing reports
@@ -107,10 +81,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionList = new ObservableCollection<Session>();       
             IsLoading = false;
             IsPrinting = false;
-            //LoadBallCallReportDefList();
         }
-
-           
+          
         /// <summary>
         /// Initializes the ViewModel with the specified controller.
         /// </summary>
@@ -229,6 +201,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             ReportSelected = m_reportList.FirstOrDefault();
         }
+
+        #endregion
+        #region ACCESSOR (static)
+        /// <summary>
+        /// Gets the singleton instance of ReportsViewModel.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static ReportsViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                {
+                    lock (m_syncRoot)
+                    {
+                        if (m_instance == null)
+                            m_instance = new ReportsViewModel();
+                    }
+                }
+
+                return m_instance;
+            }
+        }
+
+        #endregion
+        #region METHOD
 
         //Set our data to be popualted to ReportTemplateViewModel then to the viewer.
         //This will be replaced by a observable collection if I got more time. Dont know which is faster.
@@ -384,65 +384,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return result;
         }
 
-        private bool m_viewReportVisibility;
-        public bool ViewReportVisibility
-        {
-            get { return m_viewReportVisibility; }
-            set
-            {
-                m_viewReportVisibility = value;
-                RaisePropertyChanged("ViewReportVisibility");
-            }
-        }
-
-        //private void SetViewReportVisibility()
-        //{
-        //    m_rptBaseVm.parVm.AccountSelected
-        //}
-
-
-        private ReportBaseVm m_rptBaseVm;
-        public ReportBaseVm RptBaseVm
-        {
-            get { return m_rptBaseVm; }
-            set
-            {
-                m_rptBaseVm = value;
-                RaisePropertyChanged("RptBaseVm");
-            }
-        }
-
-        private B3Report m_reportSelected; 
-        public B3Report ReportSelected
-        {
-            get { return m_reportSelected; }
-            set 
-            { 
-                m_reportSelected = value;
-                SelectionChanged(value.DisplayName);
-                RaisePropertyChanged("ReportSelected");
-            }
-        }
-
-        private List<B3Report> m_reportList = new List<B3Report>();
-        public List<B3Report> ReportList
-        {
-            get { return m_reportList; }
-        }
-        
-        private UserControl m_selectedReportView = new UserControl();
-        public UserControl SelectedReportView
-        {
-            get {
-                return m_selectedReportView;
-            }
-            set
-            {
-                m_selectedReportView = value;
-                    RaisePropertyChanged("SelectedReportView");
-            }
-        }
-
         public void SelectionChanged(string ReportName)
         {
             //Reinitialize every selection changed rather than storing.
@@ -534,25 +475,111 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         view = m_voidReportView;
                         break;
                     }
-              
+
                 case "Winner Cards":
                     {
                         m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
                         view = m_winnerCardsReportView;
                         break;
-                    }                               
+                    }
             }
             SelectedReportView = view;
         }
 
-      
-         
+        private void LoadCrystalReport(B3Report report)
+        {
+            var server = "b3-server";//m_controller.Settings.DatabaseServer;
+            var name = m_controller.Settings.DatabaseName;
+            var user = m_controller.Settings.DatabaseUser;
+            var password = "cobalt$45";//m_controller.Settings.DatabasePassword;
+            report.LoadCrystalReport(server, name, user, password);
+        }
+
+
         #endregion
+        #region PROPERTIES
 
-        #region Properties
+        private bool m_viewReportVisibility;
+        public bool ViewReportVisibility
+        {
+            get { return m_viewReportVisibility; }
+            set
+            {
+                m_viewReportVisibility = value;
+                RaisePropertyChanged("ViewReportVisibility");
+            }
+        }
+   
+        private ReportBaseVm m_rptBaseVm;
+        public ReportBaseVm RptBaseVm
+        {
+            get { return m_rptBaseVm; }
+            set
+            {
+                m_rptBaseVm = value;
+                RaisePropertyChanged("RptBaseVm");
+            }
+        }
 
-      
+        private B3Report m_reportSelected; 
+        public B3Report ReportSelected
+        {
+            get { return m_reportSelected; }
+            set 
+            { 
+                m_reportSelected = value;
+                SelectionChanged(value.DisplayName);
+                RaisePropertyChanged("ReportSelected");
+            }
+        }
+
+        private List<B3Report> m_reportList = new List<B3Report>();
+        public List<B3Report> ReportList
+        {
+            get { return m_reportList; }
+        }
         
+        private UserControl m_selectedReportView = new UserControl();
+        public UserControl SelectedReportView
+        {
+            get {
+                return m_selectedReportView;
+            }
+            set
+            {
+                m_selectedReportView = value;
+                    RaisePropertyChanged("SelectedReportView");
+            }
+        }
+
+
+        public Visibility CRViewMode
+        {
+            get
+            {
+                return m_rptBaseVm.ReportViewerVisibility;
+            }
+            set
+            {
+                m_rptBaseVm.ReportViewerVisibility = value;
+                RaisePropertyChanged("CRViewMode");
+            }
+
+        }
+
+        public Visibility DefaultViewMode
+        {
+            get
+            {
+                return m_rptBaseVm.ReportParameterVisible;
+            }
+            set
+            {
+                m_rptBaseVm.ReportParameterVisible = value;
+                RaisePropertyChanged("DefaultViewMode");
+            }
+
+        }
 
         /// <summary>
         /// Gets or sets the session list.
@@ -573,8 +600,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-     
-  
+
+
         /// <summary>
         /// Gets or sets a value indicating whether a report is loading.
         /// </summary>
@@ -613,79 +640,159 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-
-
-
-
         internal B3CenterSettings Settings
         {
             get { return m_controller.Settings; }
         }
 
         #endregion
-
-        #region Member Methods
-
-      
-     
+        #region EVENTS
+        /// <summary>
+        /// Occurs when [full screen event].
+        /// </summary>
+        public event EventHandler<EventArgs> FullScreenEvent;
 
         /// <summary>
-        /// Loads the ball call report document.
+        /// Occurs when [exit screen event].
         /// </summary>
-        /// <returns></returns>
-        //internal ReportDocument LoadBallCallReportDocument(DateTime startDate, DateTime endDate, int ballCalldefID)
-        //{
-        //    var BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallByGame);
+        public event EventHandler<EventArgs> ExitScreenEvent;
+        
 
-        //    if (ballCalldefID == 1)
-        //    {
-        //        if (BallCallReport == null)
-        //        {
-        //            return null;
-        //        }
-
-        //        LoadCrystalReport(BallCallReport);
-
-        //        if (BallCallReportSessionSelected == null)
-        //        {
-        //            return null;
-        //        }
-
-        //        var sessionId = BallCallReportSessionSelected.Number;
-
-        //        BallCallReport.CrystalReportDocument.SetParameterValue("@session", sessionId);
-        //        BallCallReport.CrystalReportDocument.SetParameterValue("@DateParameter", startDate.Date.ToString(CultureInfo.InvariantCulture));
-
-
-        //    }
-        //    else
-        //    {
-        //        BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallBySession);
-
-        //        if (BallCallReport == null)
-        //        {
-        //            return null;
-        //        }
-
-        //        LoadCrystalReport(BallCallReport);
-        //        BallCallReport.CrystalReportDocument.SetParameterValue("@StartDate", startDate.Date.ToString(CultureInfo.InvariantCulture));
-        //        BallCallReport.CrystalReportDocument.SetParameterValue("@EndDate",  endDate.Date.ToString(CultureInfo.InvariantCulture));
-
-        //    }
-
-        //    return BallCallReport.CrystalReportDocument;
-        //}
-
+        /// <summary>
+        /// Called when [full screen event].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnFullScreenEvent(object sender, EventArgs eventArgs)
+        {
   
-
-       
+            var handler = FullScreenEvent;
+            if (handler != null)
+            {
+                handler(sender, EventArgs.Empty);
+            }
+        }
 
         /// <summary>
-        /// Prints the report.
+        /// Called when [exit screen event].
         /// </summary>
-        /// <param name="reportId">The report identifier.</param>
-        /// <param name="report">The report.</param>
-        /// <returns></returns>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnExitScreenEvent(object sender, EventArgs eventArgs)
+        {
+
+            var handler = ExitScreenEvent;
+            if (handler != null)
+            {
+                handler(sender, EventArgs.Empty);
+            }
+        }
+
+    
+    /// <summary>
+        /// Called when [list information done].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="AsyncCompletedEventArgs"/> instance containing the event data.</param>
+        private void OnListInfoDone(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                if (m_controller.Sessions.Count != SessionList.Count)
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        SessionList.Clear();
+                        foreach (var session in m_controller.Sessions)
+                        {
+                            SessionList.Add(session);
+                        }
+
+                        //SessionReportSessionSelected = SessionList.LastOrDefault();
+                        //JackpotReportSessionSelected = SessionList.LastOrDefault();
+                    }));
+                }
+            }
+        }
+        #endregion
+        #region COMMAND
+
+        public ICommand ViewReportCommand { get; set; }
+        public ICommand PrintReportCommand { get; set; }
+
+        private void SetCommand()
+        {
+            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
+            PrintReportCommand = new RelayCommand(parameter => StartPrintReport(ReportSelected.Id)); 
+        }
+   
+
+        public void ViewReportRel(ReportId reportID)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+                    if (Rpt == null) { return; }
+                    LoadCrystalReport(Rpt);
+                    var report = m_rptBaseVm.LoadReportDocument(Rpt);
+
+                    if (report == null)
+                    {
+                        IsLoading = false;
+                        return;
+                    }
+
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        tempcr.ViewerCore.ReportSource = report;
+                        tempcr.Focusable = true;
+                        tempcr.Focus();
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                     {
+                         MessageWindow.Show(
+                             string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
+                                 ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
+                     }));
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            });
+
+            DefaultViewMode = Visibility.Collapsed;
+            CRViewMode = Visibility.Visible;
+            m_rptBaseVm.vReportViewer = tempcr;          
+        }
+
+
+        public void StartPrintReport(ReportId reportID)
+        {
+            var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+            if (Rpt == null) { return; }
+            LoadCrystalReport(Rpt);
+            var report = m_rptBaseVm.LoadReportDocument(Rpt);
+
+            if (!PrintReport(reportID, report))//Try printing the report
+            {
+                {
+                    PrintDialog printDialog = new PrintDialog();
+
+                    if (printDialog.ShowDialog() == true)
+                    {
+                        report.PrintOptions.PrinterName = printDialog.PrintQueue.Name;
+                        report.PrintToPrinter(1, true, 0, 0);
+                    }
+                }
+            }
+        }
+
         internal bool PrintReport(ReportId reportId, ReportDocument report)
         {
             var returnValue = false;
@@ -721,11 +828,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return returnValue;
         }
 
-        /// <summary>
-        /// Tries the print receipt printer.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <returns></returns>
         private bool TryPrintReceiptPrinter(ReportDocument report)
         {
             var returnValue = true;
@@ -743,11 +845,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return returnValue;
         }
 
-        /// <summary>
-        /// Tries the print global printer.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <returns></returns>
         private bool TryPrintGlobalPrinter(ReportDocument report)
         {
             var returnValue = true;
@@ -765,163 +862,64 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return returnValue;
         }
     
-        /// <summary>
-        /// Called when [full screen event].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnFullScreenEvent(object sender, EventArgs eventArgs)
-        {
-  
-            var handler = FullScreenEvent;
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
-        }
 
-        /// <summary>
-        /// Called when [exit screen event].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnExitScreenEvent(object sender, EventArgs eventArgs)
-        {
 
-            var handler = ExitScreenEvent;
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
-        }
 
-        /// <summary>
-        /// Occurs when [full screen event].
-        /// </summary>
-        public event EventHandler<EventArgs> FullScreenEvent;
-
-        /// <summary>
-        /// Occurs when [exit screen event].
-        /// </summary>
-        public event EventHandler<EventArgs> ExitScreenEvent;
-        
-    /// <summary>
-        /// Called when [list information done].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="AsyncCompletedEventArgs"/> instance containing the event data.</param>
-        private void OnListInfoDone(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Error == null)
-            {
-                if (m_controller.Sessions.Count != SessionList.Count)
-                {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        SessionList.Clear();
-                        foreach (var session in m_controller.Sessions)
-                        {
-                            SessionList.Add(session);
-                        }
-
-                        //SessionReportSessionSelected = SessionList.LastOrDefault();
-                        //JackpotReportSessionSelected = SessionList.LastOrDefault();
-                    }));
-                }
-            }
-        }
-      
-        #endregion
-     
-       public Visibility CRViewMode
-        {
-            get
-            {
-                return m_rptBaseVm.ReportViewerVisibility;
-            }
-            set
-            {
-                m_rptBaseVm.ReportViewerVisibility = value;
-                RaisePropertyChanged("CRViewMode");
-            }
-
-        }
-
-        public Visibility DefaultViewMode
-        {
-            get
-            {
-                return m_rptBaseVm.ReportParameterVisible;
-            }
-            set
-            {
-                m_rptBaseVm.ReportParameterVisible = value;
-                RaisePropertyChanged("DefaultViewMode");
-            }
-
-        }
-
-        private void LoadCrystalReport(B3Report report)
-        {
-            var server = "b3-server";//m_controller.Settings.DatabaseServer;
-            var name = m_controller.Settings.DatabaseName;
-            var user = m_controller.Settings.DatabaseUser;
-            var password = "cobalt$45";//m_controller.Settings.DatabasePassword;
-            report.LoadCrystalReport(server, name, user, password);
-        }
-
-        #region Command
-
-        private void SetCommand()
-        {
-            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));             
-        }
-        public ICommand ViewReportCommand { get; set; }
-
-        public void ViewReportRel(ReportId reportID)
-        {
-            Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
-                    if (Rpt == null) { return; }
-                    LoadCrystalReport(Rpt);
-                    var report = m_rptBaseVm.LoadReportDocument(Rpt);
-
-                    if (report == null)
-                    {
-                        IsLoading = false;
-                        return;
-                    }
-
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        tempcr.ViewerCore.ReportSource = report;
-                        tempcr.Focusable = true;
-                        tempcr.Focus();
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-               {
-                   MessageWindow.Show(
-                       string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
-                           ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
-               }));
-                }
-                finally
-                {
-                    IsLoading = false;
-                }
-                DefaultViewMode = Visibility.Collapsed;
-                CRViewMode = Visibility.Visible;
-                m_rptBaseVm.vReportViewer = tempcr;
-            });
-        }
 
         #endregion
-
     }
 }
+
+
+#region SCRATCH
+
+/// <summary>
+/// Loads the ball call report document.
+/// </summary>
+/// <returns></returns>
+//internal ReportDocument LoadBallCallReportDocument(DateTime startDate, DateTime endDate, int ballCalldefID)
+//{
+//    var BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallByGame);
+
+//    if (ballCalldefID == 1)
+//    {
+//        if (BallCallReport == null)
+//        {
+//            return null;
+//        }
+
+//        LoadCrystalReport(BallCallReport);
+
+//        if (BallCallReportSessionSelected == null)
+//        {
+//            return null;
+//        }
+
+//        var sessionId = BallCallReportSessionSelected.Number;
+
+//        BallCallReport.CrystalReportDocument.SetParameterValue("@session", sessionId);
+//        BallCallReport.CrystalReportDocument.SetParameterValue("@DateParameter", startDate.Date.ToString(CultureInfo.InvariantCulture));
+
+
+//    }
+//    else
+//    {
+//        BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallBySession);
+
+//        if (BallCallReport == null)
+//        {
+//            return null;
+//        }
+
+//        LoadCrystalReport(BallCallReport);
+//        BallCallReport.CrystalReportDocument.SetParameterValue("@StartDate", startDate.Date.ToString(CultureInfo.InvariantCulture));
+//        BallCallReport.CrystalReportDocument.SetParameterValue("@EndDate",  endDate.Date.ToString(CultureInfo.InvariantCulture));
+
+//    }
+
+//    return BallCallReport.CrystalReportDocument;
+//}
+
+
+
+#endregion

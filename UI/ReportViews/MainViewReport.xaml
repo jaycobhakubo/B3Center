@@ -108,6 +108,7 @@
                                 HorizontalAlignment="Left"
                                 Name="btnCancel" 
                                 VerticalAlignment="Top"
+                                            Command="{Binding PrintReportCommand}"
                                 IsEnabled="{Binding ElementName=btnSave, Path=IsEnabled}"
                             />
                                     <!--Click="btnCancel_Click"-->

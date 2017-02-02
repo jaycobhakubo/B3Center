@@ -21,16 +21,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// </summary>
     public partial class ReportParameter : UserControl
     {
-        private int m_endingCard;
-        private int m_startingCard;
-        private TextBlock ErrorTextBlock = new TextBlock();
 
         public ReportParameter()
         {
             InitializeComponent();
             DataContext = this;
         }
-
 
         private void SessionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
