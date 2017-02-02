@@ -72,9 +72,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
 
-        //Another validation from code behind
+
+
+       
+        public ICommand SelectedSessionEvent { get; private set; }
+        public ICommand DateSelectedChanged { get; private set; }
+
+        public void EventCommand()
+        {
+            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+            {
+                if (SelectedSession != null)
+                {
+                    UpdateAccountList();
+                }
+            }
+        }
+
+        #region METHOD
+
+        //Another validation from code behind.
+        //Enable or disable view and print button.
         public void ValidateCard(string CardNumber, bool isStartingCard)
-        {    
+        {
             bool ViewReportVisibility = false;
             string startingCardNow = "";
             string endingCardNow = "";
@@ -89,14 +109,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 startingCardNow = RptParameterDataHandler.b3StartingCard;
                 endingCardNow = CardNumber;
             }
-     
+
             int tempStartingCard;
             int tempEndingCard;
 
             var tempResultsc = int.TryParse(startingCardNow, out tempStartingCard); //Right now user can enter any character on the textbox 
             var tempResultec = int.TryParse(endingCardNow, out tempEndingCard);
 
-            //Disable the print and view button if starting card and ending card is not int.
             if (tempResultec == true && tempResultsc == true)
             {
                 if (tempStartingCard > tempEndingCard)
@@ -124,10 +143,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ii.ViewReportVisibility = ViewReportVisibility;
         }
 
+
         //User validation (Enable or disable View and print button in the B3Report)
         public void CheckUserValidation()
         {
-            bool ViewReportVisibility = false; 
+            bool ViewReportVisibility = false;
 
             switch (RptParameterDataHandler.rptid)
             {
@@ -156,15 +176,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                         else
                         {
-                            ViewReportVisibility = false; 
+                            ViewReportVisibility = false;
                         }
                         break;
                     }
-                case ReportId.B3BingoCardReport:
-                    {
-                       
-                        break;
-                    }
+             
                 case ReportId.B3Detail:
                 case ReportId.B3BallCallBySession:
                 case ReportId.B3Void:
@@ -183,34 +199,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                         break;
                     }
+                case ReportId.B3Monthly:
                 case ReportId.B3Drawer:
+                case ReportId.B3Daily:
+                case ReportId.B3Accounts:
                     {
                         ViewReportVisibility = true;
                         break;
                     }
-                        
             }
 
-            var ii = ReportsViewModel.Instance;
-            ii.ViewReportVisibility = ViewReportVisibility;
+               if ( ReportId.B3BingoCardReport != RptParameterDataHandler.rptid)
+                    {
+                        var ii = ReportsViewModel.Instance;
+                        ii.ViewReportVisibility = ViewReportVisibility;
+                    }          
         }
-
-       
-        public ICommand SelectedSessionEvent { get; private set; }
-        public ICommand DateSelectedChanged { get; private set; }
-
-        public void EventCommand()
-        {
-            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
-            {
-                if (SelectedSession != null)
-                {
-                    UpdateAccountList();
-                }
-            }
-        }
-
-        #region METHOD
 
         private bool IsShowTime()
         {
