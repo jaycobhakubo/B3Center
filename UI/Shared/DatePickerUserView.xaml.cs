@@ -31,13 +31,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
         private void DateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var thisvm = (DatePickerVm)DataContext;
-            thisvm.YearMonthSelectedChanged();
+            thisvm.DateSelectedChanged();
         }
 
         private void YearMonthList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var thisvm = (DatePickerVm)DataContext;
-            thisvm.DateSelectedChanged();
+            thisvm.YearMonthSelectedChanged();
         }
     }
 }
