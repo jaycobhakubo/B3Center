@@ -843,12 +843,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var returnValue = true;
             try
             {
+             
+                
                 PageMargins margins;
                 margins = report.PrintOptions.PageMargins;
                 margins.bottomMargin = 0;
                 margins.leftMargin = 0;
                 margins.rightMargin = 0;
                 margins.topMargin = 0;
+                report.PrintOptions.PaperSource = PaperSource.Auto;
                 report.PrintOptions.ApplyPageMargins(margins);
                 report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = false;
                 report.PrintOptions.PrinterName = Settings.ReceiptPrinterName;
