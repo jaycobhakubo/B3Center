@@ -24,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
         #region METHOD
         private int GetMonthEquivValue(string monthName)
         {
-            string monthname = "Jan";
+            string monthname = monthName;
            string[] m_months =
             {
                 "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
@@ -54,7 +54,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     }
                 case ReportId.B3Accounts:
                     {
-                        
+
+                        var testr = GetMonthEquivValue(bcvm.parVm.MonthSelected) + 1;
                         Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(bcvm.parVm.MonthSelected) + 1);
                         Report.CrystalReportDocument.SetParameterValue("@nYear", bcvm.parVm.YearSelected.ToString(CultureInfo.InvariantCulture)); 
                         break;
