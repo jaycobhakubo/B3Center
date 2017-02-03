@@ -300,9 +300,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         {
                             DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
                             Months = DatePickerVm.MonthList;
-                            MonthSelected = m_months.FirstOrDefault();
+                            MonthSelected = DatePickerVm.SelectedMonth;//m_months.FirstOrDefault();
                             Years = DatePickerVm.YearList;
-                            YearSelected = m_years.FirstOrDefault();
+                            YearSelected = DatePickerVm.SelectedYear;
                             MonthYearInput = Visibility.Visible;
                             break;
                         }

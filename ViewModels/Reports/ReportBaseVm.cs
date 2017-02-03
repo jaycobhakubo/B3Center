@@ -99,11 +99,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     }
                 case ReportId.B3Drawer://No data: Issue on clientmac(This report need fix)
                     {
-                     Report.CrystalReportDocument.SetParameterValue("@MachineID", machineId);
-                     Report.CrystalReportDocument.SetParameterValue("@Station", machineId); 
-                        Report.CrystalReportDocument.SetParameterValue("@nDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@UserId", bcvm.ReportTemplate_Model.CurrentUser);
-                        break;
+                         Report.CrystalReportDocument.SetParameterValue("@MachineID", machineId);
+                         Report.CrystalReportDocument.SetParameterValue("@Station", machineId); 
+                         Report.CrystalReportDocument.SetParameterValue("@nDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                         Report.CrystalReportDocument.SetParameterValue("@UserId", bcvm.ReportTemplate_Model.CurrentUser);
+                         break;
                     }
                 case ReportId.B3Jackpot:
                     {
@@ -115,7 +115,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     }
                 case ReportId.B3Monthly:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(bcvm.parVm.MonthSelected) + 1);//bcvm.parVm.RptParameterDataHandler.dateMonth);
+                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(bcvm.parVm.MonthSelected));//bcvm.parVm.RptParameterDataHandler.dateMonth);
                         Report.CrystalReportDocument.SetParameterValue("@nYear", bcvm.parVm.YearSelected.ToString(CultureInfo.InvariantCulture)); //bcvm.parVm.RptParameterDataHandler.dateYear);                      
                         break;                       
                     }
