@@ -31,9 +31,9 @@
         
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}" SelectionChanged="YearMonthList_SelectionChanged"/>
             <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}"  SelectionChanged="DateList_SelectionChanged"/>
@@ -41,8 +41,8 @@
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ComboBox Style="{StaticResource showtime}" Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}"  SelectionChanged="DateList_SelectionChanged">
                 </ComboBox>

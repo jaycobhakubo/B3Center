@@ -57,17 +57,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                      break;
                 }
             }
-            //OperatorVm = new OperatorViewModel(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_); 
+
             OperatorVm = OperatorViewModel.Instance;
             OperatorVm.Initialize(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_);
             FileExitCommand = new RelayCommand(parameter => Exit());     
             PropertyChangedEventManager.AddListener(Controller, this, string.Empty);    
         }
 
-        //private ObservableCollection<OperatorModel> m_operator;
-
         #endregion
-
         #region Member Methods
 
         /// <summary>
@@ -97,7 +94,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     PropertyChangedEventManager.RemoveListener(Controller, this, string.Empty);
                 }
-
                 base.Dispose(disposing);
             }
         }

@@ -8,6 +8,9 @@
          >
     <UserControl.Resources>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="ContentStringFormat" Value="* {0}:"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Border    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" >
@@ -34,7 +37,14 @@
                     <TextBox x:Name="txtbxVipPointPlayer"  Tag="44" TabIndex="3" Text="{Binding SystemSetting_.VIPPointMultiplier}" MaxLength="15" />
    
                 <Label x:Name="lblMaxCards_Copy1" Content="Mag Card Sentinel Start" />
-                    <TextBox Text="{Binding SystemSetting_.MagCardSentinelStart}" x:Name="txtbxMagCardStart" Grid.Column="1"   Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Bottom"  TabIndex="4" Tag="45" MaxLength="1"  />
+                    <TextBox Text="{Binding SystemSetting_.MagCardSentinelStart}" 
+                             x:Name="txtbxMagCardStart" 
+                             Grid.Column="1"   Grid.Row="7" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Bottom"  
+                             TabIndex="4" 
+                             Tag="45" 
+                             MaxLength="1"  />
        
                 <Label x:Name="lblMaxCards_Copy2" Content="Mag Card Sentinel End"  />
                     <TextBox x:Name="txtbxMagCardEnd"  Tag="46" MaxLength="1" Text="{Binding SystemSetting_.MagCardSentinelEnd}" />
@@ -79,7 +89,7 @@
                 
                 <DockPanel>
                         <CheckBox IsChecked="{Binding SystemSetting_.NorthDakotaMode}" DockPanel.Dock="Left" Name="chkbxNorthDakotaMode" Content="North Dakota Mode"   Tag="54" />
-                        <CheckBox  DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="Auto" Name="chkbxEnableUK" Content="Enable UK" Tag="50" IsChecked="{Binding SystemSetting_.EnableUK}"/>
+                        <CheckBox  DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Padding="3,0,18,0" Name="chkbxEnableUK" Content="Enable UK" Tag="50" IsChecked="{Binding SystemSetting_.EnableUK}"/>
                     </DockPanel>
                 
                 <DockPanel>

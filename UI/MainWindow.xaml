@@ -19,26 +19,26 @@
     <DockPanel x:Name="m_layoutRoot">
     
         <TabControl Focusable="False">
-            <TabItem Header="Session">
+            <TabItem Header="Sessions">
                 <Border>
                     <localSessions:MainViewSession DataContext="{Binding SessionVm}"/>
                 </Border>
             </TabItem>
       
-                <TabItem Header="Report">
+                <TabItem Header="Reports">
                 <Border>
 
                     <localReports:ReportsView DataContext="{Binding ReportsVm}" />
                 </Border>
             </TabItem>
             
-            <TabItem Header="Setting" >
+            <TabItem Header="Settings" >
                 <Border>
                     <localSettings:SettingView DataContext="{Binding SettingVm}" />
                 </Border>
             </TabItem>
             
-            <TabItem Header="Operator">
+            <TabItem Header="Operators">
                 <Border>
                     <localOperators:OperatorView DataContext="{Binding OperatorVm}"/>
                 </Border>
