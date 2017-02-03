@@ -36,6 +36,7 @@ using System.Threading.Tasks;
 using SAPBusinessObjects.WPF.Viewer;
 using GameTech.Elite.UI;
 using System.Windows.Threading;
+using CrystalDecisions.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -810,6 +811,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3BallCallByGame:
                 case ReportId.B3BallCallBySession:
                 case ReportId.B3WinnerCards:
+                case ReportId.B3SessionTransaction:
                     {
                         //try to print to report printer
                         returnValue = TryPrintGlobalPrinter(report);
@@ -821,13 +823,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3Jackpot:
                 case ReportId.B3Session:
                 case ReportId.B3SessionSummary:
-                case ReportId.B3SessionTransaction:
+ 
                     {
-                        //try to print to receipt printer
-                        returnValue = TryPrintReceiptPrinter(report);
-
-                        //if unsuccessful then try to print to report printer
-                        if (!returnValue)
+                        returnValue = TryPrintReceiptPrinter(report); //try to print to receipt printer
+                        if (!returnValue)  //if unsuccessful then try to print to report printer
                         {
                             returnValue = TryPrintReceiptPrinter(report);
                         }
@@ -844,31 +843,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var returnValue = true;
             try
             {
-                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = true;
+                PageMargins margins;
+                margins = report.PrintOptions.PageMargins;
+                margins.bottomMargin = 0;
+                margins.leftMargin = 0;
+                margins.rightMargin = 0;
+                margins.topMargin = 0;
+                report.PrintOptions.ApplyPageMargins(margins);
+                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = false;
                 report.PrintOptions.PrinterName = Settings.ReceiptPrinterName;
                 report.PrintToPrinter(1, true, 0, 0);
             }
             catch (Exception)
             {
-                //if throw exception then set flag to false
                 returnValue = false;
             }
 
             return returnValue;
         }
 
-        //Laser
         private bool TryPrintGlobalPrinter(ReportDocument report)
         {
             var returnValue = true;
             try
             {
+                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = true;
                 report.PrintOptions.PrinterName = Settings.PrinterName;
                 report.PrintToPrinter(1, true, 0, 0);
             }
             catch (Exception)
             {
-                //if throw exception then set flag to false
                 returnValue = false;
             }
 
