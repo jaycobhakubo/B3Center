@@ -378,7 +378,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break;
                     }
             }
-            result.ReportViewerm = Visibility.Hidden;
+            result.ReportViewerm = Visibility.Collapsed;
             result.DefaultViewerm = Visibility.Visible;
             result.rptParModel = temprptparmodel;
             return result;
