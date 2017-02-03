@@ -17,7 +17,7 @@
         <Border  Name="SelectDateBorder">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
 
-                <TextBlock Name="lblBallCallCategory" Text="Category:" Visibility="{Binding CategoryInput}"  Margin="0,0,0,2"/>
+                <TextBlock Name="lblBallCallCategory" Text="Category:" Visibility="{Binding CategoryInput}" />
                 <ComboBox  
                         Grid.Row="0"
                               
