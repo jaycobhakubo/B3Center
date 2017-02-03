@@ -58,7 +58,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionEndCommand = new RelayCommand(parameter => EndSession());
             VoidAccountCommand = new RelayCommand(parameter => VoidAccounts());
             VoidAccountYesCommand = new RelayCommand(parameter => VoidAccountsYes());
-            m_sessionList = new ObservableCollection<Session>();
+            SessionList = new ObservableCollection<Session>();
         }
 
         #endregion
@@ -343,8 +343,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             DisableB3Features();
             EnableB3Features(controller.ModuleFeatureList);
 
-            UpdateSesionListUi();
-            UpdateSessionButtons();
             if (m_controller.Session != null && m_controller.Session.Active)
             {
                 SessionStatusMessage = Resources.SessionStarted;
@@ -441,8 +439,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 IsSuccess = true;
                 SessionStatusMessage = Resources.SessionStartSuccess;
-                UpdateSesionListUi();
-                UpdateSessionButtons();
             }
             else
             {
@@ -457,8 +453,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 IsSuccess = true;
                 SessionStatusMessage = Resources.SessionEndSuccess;
-                UpdateSesionListUi();
-                UpdateSessionButtons();
             }
             else
             {
@@ -473,6 +467,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 IsSuccess = true;
                 StatusMessage = Resources.SessionInfoSuccess;
+                UpdateSesionListUi();
+                UpdateSessionButtons();
             }
             else
             {
@@ -528,10 +524,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                m_sessionList.Clear();
+                SessionList.Clear();
                 foreach (var session in m_controller.Sessions.OrderByDescending(s => s.Number))
                 {
-                    m_sessionList.Add(session);
+                    SessionList.Add(session);
                 }
             }));
         }

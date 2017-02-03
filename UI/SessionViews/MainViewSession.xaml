@@ -23,7 +23,7 @@
 
             </Border>
 
-            <DataGrid Name="SessionDataGrid" Grid.Row="1" Margin="10,0" ItemsSource="{Binding SessionList}" AutoGenerateColumns="False" SelectionMode="Single">
+            <DataGrid Name="SessionDataGrid" Grid.Row="1" Margin="10,0" ItemsSource="{Binding SessionList, Mode=TwoWay}" AutoGenerateColumns="False" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Session" Binding="{Binding Number}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding DisplayName}" IsReadOnly="True"/>
