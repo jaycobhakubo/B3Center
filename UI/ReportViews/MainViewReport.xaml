@@ -68,7 +68,7 @@
                                 <Setter Property="Margin" Value="0,15,0,2"/>
                             </Style>
                         </Border.Resources>
-                            <ContentPresenter  Name="ReportsTransitionControl"  Content="{Binding SelectedReportView}" ></ContentPresenter>
+                            <ContentPresenter   Content="{Binding SelectedReportView}" ></ContentPresenter>
                     </Border>
 
                     <Border Visibility="{Binding DefaultViewMode}" Grid.Row="1" Margin="8" Name="brdrViewPrint">

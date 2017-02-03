@@ -36,7 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         public ReportsView()
         {
             InitializeComponent();
-            m_originalMenuColumnWidth = ReportMenuColumn.Width;
+            //m_originalMenuColumnWidth = ReportMenuColumn.Width;
             //m_menuItems = new List<ToggleButton>();
             m_staffId = SettingViewModel.Instance.StaffId;
             m_machineId = SettingViewModel.Instance.MachineId;
@@ -70,7 +70,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnFullScreenEvent(object sender, EventArgs eventArgs)
         {
-            ReportMenuColumn.Width = m_collapsedMenuColumnWidth;
+            //ReportMenuColumn.Width = m_collapsedMenuColumnWidth;
             var handler = FullScreenEvent;
             if (handler != null)
             {
