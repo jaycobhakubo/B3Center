@@ -8,8 +8,6 @@
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
-       
-          
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>

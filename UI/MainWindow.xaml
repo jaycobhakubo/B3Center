@@ -11,12 +11,16 @@
      xmlns:localOperators="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
      xmlns:localSessions="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SessionViews"  
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
-     Style="{DynamicResource EliteWindow}"
      WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
     <ui:EliteWindowBase.Resources>
-        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
+        <!--<Style x:Key="EliteWindowedBaseStyle" BasedOn="{x:Null}">
+            <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
+            <Setter Property="Control.FontSize" Value="12" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>-->
+        <!--<Style TargetType="Label" BasedOn="{}">
+            <Setter Property="FontWeight" Value="{x:Null}"/>
+        </Style>-->
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
         <TabControl Focusable="False">
