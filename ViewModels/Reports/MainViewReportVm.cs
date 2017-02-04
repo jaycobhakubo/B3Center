@@ -418,6 +418,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case "Bingo Card":
                     {
                         m_bingoCardReportView = new BingoCardView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BingoCardReport)));
+                        ViewReportVisibility = false;
                         view = m_bingoCardReportView;
                         break;
                     }
@@ -813,7 +814,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3WinnerCards:
                 case ReportId.B3SessionTransaction:
                     {
-                        //try to print to report printer
                         returnValue = TryPrintGlobalPrinter(report);
                     }
                     break;
@@ -842,9 +842,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             var returnValue = true;
             try
-            {
-             
-                
+            {                
                 PageMargins margins;
                 margins = report.PrintOptions.PageMargins;
                 margins.bottomMargin = 0;

@@ -39,8 +39,8 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Name="MonthPar" Padding="0,0,2,0"   Text="Month:"   Visibility="{Binding MonthYearInput}"/>
-                    <TextBlock Grid.Column="1" Name="YearPar"  Padding="2,0,0,0"  Text="Year:"   Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
+                    <TextBlock Margin="0,15,2,2" Grid.Column="0" Name="MonthPar"    Text="Month:"   Visibility="{Binding MonthYearInput}"/>
+                    <TextBlock Margin="2,15,0,2" Grid.Column="1" Name="YearPar"  Padding="2,0,0,0"  Text="Year:"   Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
                 </Grid>
                        
                 <Grid>
@@ -67,7 +67,7 @@
                 <shared:DatePickerUserView   Grid.Row="1"    Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}"  DataContext="{Binding StartDatePickerVm}" />
                 <TextBlock x:Name="txtblkEndDate" Text="End Date:"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
                 <shared:DatePickerUserView  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"      DataContext="{Binding EndDatePickerVm}"/>
-                <TextBlock Text="Session:" Name="Sessionpar" Visibility="{Binding SessionInput}" />
+                <TextBlock Text="* Session:" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
                               
                                ItemsSource="{Binding SessionList, Mode=TwoWay}"
@@ -77,7 +77,7 @@
                                x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"
                         />
-                <TextBlock Text="Account Number:" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
+                <TextBlock Text="* Account Number:" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
                 <ComboBox 
                                                         
                                x:Name="AccountNumberCombobox"
@@ -86,7 +86,7 @@
                      Visibility="{Binding ElementName=AcctPar, Path=Visibility}"
                               />
 
-                <TextBlock Text="Starting Card:"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
+                <TextBlock Text="* Starting Card:"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
                 <TextBox
                     MaxLength="6" 
                     Name="txtbxStartingCard" 
@@ -96,7 +96,7 @@
                     Tag="true"
                               ></TextBox>
 
-                <TextBlock Text="Ending Card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
+                <TextBlock Text="* Ending Card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
                 <TextBox  
                     MaxLength="6" 
                     Name="txtbxEndingCard" 
