@@ -45,6 +45,7 @@
                              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Margin" Value="0,15,0,2"/>
+                                <!--<Setter Property="FontWeight" Value="Regular"/>-->
                             </Style>
                         </Border.Resources>
                         <ContentPresenter Content="{Binding SelectedSettingView}" />
@@ -72,9 +73,9 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    
-                                    
-                                <Button  
+
+
+                                    <Button  
                                     Grid.Column="0"
                                     Margin="15,15" Height="40" Width="140"     
                                     Content="Save"
@@ -82,8 +83,8 @@
                                     x:Name="btnSave"
                                     VerticalAlignment="Top"
                                     Command="{Binding SaveSettingcmd}"                                 
-                                    Tag="1">                    
-                                </Button>
+                                    Tag="1">
+                                    </Button>
                                     <!--Content="{Binding IsEditOrSave}"-->
                                     <!--Focusable="{Binding IsFocus,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
 
@@ -97,19 +98,13 @@
                                     Command="{Binding CancelSettingcmd}"  
                                     Focusable="False"
                                  />
-                                    
-
                                 </Grid>
                             </Border>
                             <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
                                 <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
                             </Border>
-
-
                         </Grid>
                     </Border>
-
-
                 </Grid>
             </Border>
 
@@ -120,9 +115,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                
+                    <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
+                        <ListBox                        
+                            Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
                           </ListBox>
                     </ScrollViewer>
                 </Grid>

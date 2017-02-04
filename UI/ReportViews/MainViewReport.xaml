@@ -5,21 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
             >
-    <UserControl.Style>
-        <Style>
-            <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
-            <Setter Property="Control.FontSize" Value="12" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-            <!--<Style x:Key="EliteWindowedBaseStyle" BasedOn="{x:Null}">
-            <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
-            <Setter Property="Control.FontSize" Value="12" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>-->
-            <!--<Style TargetType="Label" BasedOn="{}">
-            <Setter Property="FontWeight" Value="{x:Null}"/>
-        </Style>-->
-        </Style>
-    </UserControl.Style>
     <UserControl.Resources>
 
         <Style TargetType="{x:Type StackPanel}">
@@ -141,10 +126,9 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-
+                    <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
-                        <ListBox 
-                            FontWeight="Regular"
+                        <ListBox                      
                             Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}" DisplayMemberPath="DisplayName"  >
                         </ListBox>
                     </ScrollViewer>

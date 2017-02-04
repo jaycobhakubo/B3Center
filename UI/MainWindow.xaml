@@ -12,15 +12,15 @@
      xmlns:localSessions="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SessionViews"  
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
      WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
-    <ui:EliteWindowBase.Resources>
-        <!--<Style x:Key="EliteWindowedBaseStyle" BasedOn="{x:Null}">
+    <ui:EliteWindowBase.Style>
+        <!--Everything is bold-->
+        <Style>
             <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
             <Setter Property="Control.FontSize" Value="12" />
             <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>-->
-        <!--<Style TargetType="Label" BasedOn="{}">
-            <Setter Property="FontWeight" Value="{x:Null}"/>
-        </Style>-->
+        </Style>
+    </ui:EliteWindowBase.Style>
+    <ui:EliteWindowBase.Resources>
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
         <TabControl Focusable="False">
@@ -50,3 +50,13 @@
         </TabControl>
     </DockPanel>
 </ui:EliteWindowBase>
+
+
+<!--<Style x:Key="EliteWindowedBaseStyle" BasedOn="{x:Null}">
+            <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
+            <Setter Property="Control.FontSize" Value="12" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>-->
+<!--<Style TargetType="Label" BasedOn="{}">
+            <Setter Property="FontWeight" Value="{x:Null}"/>
+        </Style>-->
