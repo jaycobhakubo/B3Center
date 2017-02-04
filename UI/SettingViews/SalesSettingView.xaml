@@ -24,8 +24,8 @@
             <StackPanel Name="stkpnlSalesSetting1" Grid.Row="1" Grid.Column="1">
               
                 <Label x:Name="lblCallSpeedMin_Copy"  Content="Log Recycle Days"     />
-                <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"/>               
-                <Label x:Name="lblCallSpeedMin" Content="Main Vol" />
+                <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"/>
+                <Label x:Name="lblCallSpeedMin" Content="Main Vol" ContentStringFormat="{x:Null}"/>
                 <ComboBox 
                     ItemsSource="{Binding VolumeList}"
                     SelectedItem="{Binding SalesSetting_.VolumeSales}"

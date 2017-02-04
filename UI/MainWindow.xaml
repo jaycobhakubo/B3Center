@@ -20,7 +20,22 @@
             <Setter Property="Control.FontWeight" Value="Bold" />
         </Style>
     </ui:EliteWindowBase.Style>
+    
     <ui:EliteWindowBase.Resources>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="22.22"></Setter>
+            <Setter Property="Padding" Value="0,0,0,0"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style
+             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,15,0,2"/>
+            <Setter Property="ContentStringFormat" Value="* {0}:"/>
+        </Style>
+
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
         <TabControl Focusable="False">

@@ -8,11 +8,7 @@
          >
     <UserControl.Resources>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-            <Setter Property="ContentStringFormat" Value="* {0}:"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,15,0,2"/>
-        </Style>
+       
     </UserControl.Resources>
     <Grid>
         <Border    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" >
@@ -68,22 +64,24 @@
             	Tag="43" 
             	TabIndex="7" 
             	Text="{Binding SystemSetting_.MinimumPlayers}"	
-            	MaxLength="8"   />
+            	MaxLength="8"  
+                    />
 
-                <Label  Content="Main Vol"/>
+                    <Label  Content="Main Vol"   ContentStringFormat="{x:Null}"/>
                 <ComboBox x:Name="cmbxMainVol" Tag="57"
                           SelectedItem="{Binding SystemSetting_.SystemMainVolume}"
                           ItemsSource="{Binding VolumeList}"
+                        
                           />
-                
-                <Label x:Name="lblMaxCards_Copy4"  Content="Currency" />
-                <ComboBox x:Name="cmbxCurrency" Tag="47" 
+
+                    <Label x:Name="lblMaxCards_Copy4"  Content="Currency" ContentStringFormat="{x:Null}"/>
+                    <ComboBox x:Name="cmbxCurrency" Tag="47" 
                           SelectedItem="{Binding SystemSetting_.Currency}"	
                           ItemsSource="{Binding CurrencyList}"
                           />
-         
-                <Label x:Name="lblMaxCards_Copy3" Content="Auto Session End" />
-                <ComboBox
+
+                    <Label x:Name="lblMaxCards_Copy3" Content="Auto Session End" ContentStringFormat="{x:Null}"/>
+                    <ComboBox
                     SelectedItem="{Binding SystemSetting_.AutoSessionEnd}"	
                     ItemsSource="{Binding AutoSessionEndList}"
             	x:Name="cmbxAutoSessionEnd" 

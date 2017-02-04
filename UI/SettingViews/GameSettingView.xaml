@@ -12,7 +12,14 @@
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
-        <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
+            <Style
+             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="ContentStringFormat" Value="{x:Null}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0,15,0,2"/>
+            </Style>
+           
+            <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
             <Setter Property="BorderBrush" Value="#FF0050AA"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
@@ -57,7 +64,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
+        
         </ResourceDictionary>
     </UserControl.Resources>
 

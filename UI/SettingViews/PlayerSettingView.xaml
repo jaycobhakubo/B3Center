@@ -26,8 +26,8 @@
             <StackPanel Name="stkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
                 <Label x:Name="lblCallSpeedMin_Copy2"  Content="Time To Collect (milliseconds)"  />
                 <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting_.TimeToCollect}"/>
-                
-                <Label x:Name="lblCallSpeedMin"  Content="Main Vol" />
+
+                <Label x:Name="lblCallSpeedMin"  Content="Main Vol" ContentStringFormat="{x:Null}"/>
                 <ComboBox 
             	x:Name="cmbxMainVol" 
                   Tag="23"
