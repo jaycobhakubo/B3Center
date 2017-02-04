@@ -27,7 +27,6 @@
         <Setter Property="Padding" Value="0,-1,0,0"/>
         </Style>
 
-
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
         </Style>
@@ -44,7 +43,6 @@
             <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
                 <Grid>
                     <Grid.RowDefinitions>
-
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
@@ -118,12 +116,8 @@
                             <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
                                 <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
                             </Border>
-
-
                         </Grid>
                     </Border>
-
-
                 </Grid>
             </Border>
 
@@ -135,7 +129,6 @@
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportList}" SelectedItem="{Binding ReportSelected}" DisplayMemberPath="DisplayName"  >
-                           
                         </ListBox>
                     </ScrollViewer>
                 </Grid>

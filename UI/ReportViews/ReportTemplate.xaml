@@ -10,44 +10,27 @@
              mc:Ignorable="d" 
            >
     <UserControl.Resources>
-
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="28"/>
             </Grid.ColumnDefinitions>
-
             <TextBlock Text="{Binding Path=ReportTitle}" Grid.Column="0"   />
-            <!--<Button Grid.Column="0"
-                                Margin="15,15" Height="40" Width="140" 
-                                Content="View Report"
-                                HorizontalAlignment="Right" 
-                                x:Name="btnSave"
-                                VerticalAlignment="Top"
-                                            Command="{Binding ViewReportcmd}"
-                                Tag="1"/>-->
-            <!--<Button Height="40" Width="140" Grid.Column="1" Content="New Report" Name="NewReportButton" HorizontalAlignment="Right" Visibility="Visible"/>-->
-            <!--<shared:FullScreenUserControl Grid.Column="2" x:Name="FullScreenButton" />-->
             <Button Content="X" Grid.Column="2" Command="{Binding CloseViewReportCommand}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
-            <!--<Button x:Name="button" Content="Button" Grid.Column="1" HorizontalAlignment="Right"/>-->
         </Grid>
         <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}" >
             <ContentPresenter Content="{Binding vReportViewer}" ></ContentPresenter>
             <!--<viewer:CrystalReportsViewer x:Name="ReportViewer" Margin="5,0" ShowToolbar="True"/>-->
         </Border>
         <Grid Grid.Row="1">
-            <!--<Border  Visibility="{Binding ReportParameterVisible, UpdateSourceTrigger=PropertyChanged}">-->
-            <!--<Border  Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type vm:ReportsViewModel}}, Path=DefaultViewMode}">-->
             <Border  Visibility="{Binding ReportParameterVisible}">
-
                 <local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>
             </Border>
         </Grid>
