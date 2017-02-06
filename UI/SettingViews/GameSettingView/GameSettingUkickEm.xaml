@@ -77,7 +77,9 @@
                 </GroupBox>
             </StackPanel>
             <StackPanel Grid.Column="3">
-                <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay, Converter={StaticResource ValuetoBool}}"/>
+                <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
+                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
+                <!--<CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>-->
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
             </StackPanel>
         </Grid>
