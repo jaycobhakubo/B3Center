@@ -41,7 +41,13 @@
             <Setter Property="Height" Value="22"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
         </Style>
+
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="22"/>
+        </Style>
+
 
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">

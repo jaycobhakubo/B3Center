@@ -22,11 +22,11 @@
             </Grid.RowDefinitions>
 
             <StackPanel Name="stkpnlSessionSetting" Grid.Column="1" Grid.Row="1">
-                <Label x:Name="lblCallSpeedMin_Copy"   Content="Payout Limit" />
+                <Label x:Name="lblCallSpeedMin_Copy"   Content="Payout limit" />
                 <TextBox Text="{Binding SessionSetting_.PayoutLimit}"  TabIndex="1" Tag="39" MaxLength="9" />
-                <Label x:Name="lblCallSpeedMin_Copy1"  Content="Jackpot Limit" />
+                <Label x:Name="lblCallSpeedMin_Copy1"  Content="Jackpot limit" />
                 <TextBox Text="{Binding SessionSetting_.JackpotLimit}"  TabIndex="2" Tag="40"   MaxLength="9"  />
-                <CheckBox Name="chkbxEnforeMix" Content="Enforce Mix" Tag="41" IsChecked="{Binding SessionSetting_.EnforceMix}"/>
+                <CheckBox Name="chkbxEnforeMix" Content="Enforce mix" Tag="41" IsChecked="{Binding SessionSetting_.EnforceMix}"/>
             </StackPanel>
     </Grid>
     </Border>

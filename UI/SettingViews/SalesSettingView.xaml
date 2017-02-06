@@ -23,27 +23,27 @@
 
             <StackPanel Name="stkpnlSalesSetting1" Grid.Row="1" Grid.Column="1">
               
-                <Label x:Name="lblCallSpeedMin_Copy"  Content="Log Recycle Days"     />
+                <Label x:Name="lblCallSpeedMin_Copy"  Content="Log recycle days"     />
                 <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"/>
-                <Label x:Name="lblCallSpeedMin" Content="Main Vol" ContentStringFormat="{x:Null}"/>
+                <Label x:Name="lblCallSpeedMin" Content="Sale main Volume:" ContentStringFormat="{x:Null}"/>
                 <ComboBox 
                     ItemsSource="{Binding VolumeList}"
                     SelectedItem="{Binding SalesSetting_.VolumeSales}"
             	x:Name="cmbxMainVolume" 
             	Tag="33">
                 </ComboBox>
-                <CheckBox IsChecked="{Binding SalesSetting_.ScreenCursor}" Name="chkbxScreenCursor" Content="Screen Cursor"    Tag="24" />
+                <CheckBox IsChecked="{Binding SalesSetting_.ScreenCursor}" Name="chkbxScreenCursor" Content="Screen cursor"    Tag="24" />
                 <CheckBox Name="chkbxAutoPrintSession" Content="Auto Print Session Report"    Tag="26" IsChecked="{Binding SalesSetting_.AutoPrintSessionReport}"/>
-                <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in Session Ball" Tag="30" IsChecked="{Binding SalesSetting_.AlowinSessionBall}"/>
-                <CheckBox Name="chkbxPrintLogo" Content="Print Logo"   Tag="29" IsChecked="{Binding SalesSetting_.PrintLogo}"/>
-                <CheckBox Name="chkbxAutoPagePrinter" Content="Page Printer"  Tag="27" IsChecked="{Binding SalesSetting_.PagePrinter}"/>
-                <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate Touch"      Tag="25" IsChecked="{Binding SalesSetting_.CalibrateTouch}"/>
+                <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in session ball" Tag="30" IsChecked="{Binding SalesSetting_.AlowinSessionBall}"/>
+                <CheckBox Name="chkbxPrintLogo" Content="Print logo"   Tag="29" IsChecked="{Binding SalesSetting_.PrintLogo}"/>
+                <CheckBox Name="chkbxAutoPagePrinter" Content="Page printer"  Tag="27" IsChecked="{Binding SalesSetting_.PagePrinter}"/>
+                <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate touch"      Tag="25" IsChecked="{Binding SalesSetting_.CalibrateTouch}"/>
                            
             </StackPanel>
 
             <StackPanel Name="stkpnlSalesSetting2" Grid.Column="3" Grid.Row="1">
-                <CheckBox Name="chkbxQuickSales" Content="Quick Sales"   TabIndex="3" Tag="28" IsChecked="{Binding SalesSetting_.QuickSales}"/>
-                <CheckBox Name="chkbxLoggingEnable" Content="Logging Enable"    TabIndex="8" Tag="31"  IsChecked="{Binding SalesSetting_.LoggingEnable}"/>
+                <CheckBox Name="chkbxQuickSales" Content="Quick sales"   TabIndex="3" Tag="28" IsChecked="{Binding SalesSetting_.QuickSales}"/>
+                <CheckBox Name="chkbxLoggingEnable" Content="Logging enable"    TabIndex="8" Tag="31"  IsChecked="{Binding SalesSetting_.LoggingEnable}"/>
             </StackPanel>
         </Grid>
     </Border>
