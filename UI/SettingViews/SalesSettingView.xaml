@@ -25,7 +25,7 @@
               
                 <Label x:Name="lblCallSpeedMin_Copy"  Content="Log recycle days"     />
                 <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"/>
-                <Label x:Name="lblCallSpeedMin" Content="Sale main Volume:" ContentStringFormat="{x:Null}"/>
+                <Label x:Name="lblCallSpeedMin" Content="Sale main volume:" ContentStringFormat="{x:Null}"/>
                 <ComboBox 
                     ItemsSource="{Binding VolumeList}"
                     SelectedItem="{Binding SalesSetting_.VolumeSales}"
@@ -33,7 +33,7 @@
             	Tag="33">
                 </ComboBox>
                 <CheckBox IsChecked="{Binding SalesSetting_.ScreenCursor}" Name="chkbxScreenCursor" Content="Screen cursor"    Tag="24" />
-                <CheckBox Name="chkbxAutoPrintSession" Content="Auto Print Session Report"    Tag="26" IsChecked="{Binding SalesSetting_.AutoPrintSessionReport}"/>
+                <CheckBox Name="chkbxAutoPrintSession" Content="Auto print session report"    Tag="26" IsChecked="{Binding SalesSetting_.AutoPrintSessionReport}"/>
                 <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in session ball" Tag="30" IsChecked="{Binding SalesSetting_.AlowinSessionBall}"/>
                 <CheckBox Name="chkbxPrintLogo" Content="Print logo"   Tag="29" IsChecked="{Binding SalesSetting_.PrintLogo}"/>
                 <CheckBox Name="chkbxAutoPagePrinter" Content="Page printer"  Tag="27" IsChecked="{Binding SalesSetting_.PagePrinter}"/>

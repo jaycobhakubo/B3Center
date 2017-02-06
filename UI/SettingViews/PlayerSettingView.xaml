@@ -24,26 +24,25 @@
 
 
             <StackPanel Name="stkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
-                <Label x:Name="lblCallSpeedMin_Copy2"  Content="Time To Collect (milliseconds)"  />
+                <Label x:Name="lblCallSpeedMin_Copy2"  Content="Time to collect (milliseconds)"  />
                 <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting_.TimeToCollect}"/>
 
-                <Label x:Name="lblCallSpeedMin"  Content="Main Vol" ContentStringFormat="{x:Null}"/>
+                <Label x:Name="lblCallSpeedMin"  Content="Player main volume:" ContentStringFormat="{x:Null}"/>
                 <ComboBox 
             	x:Name="cmbxMainVol" 
                   Tag="23"
                         ItemsSource="{Binding VolumeList}"
                     SelectedItem="{Binding PlayerSetting_.PlayerMainVolume}"
                     >
-                    
+
                 </ComboBox>
 
-                <CheckBox Name="chkbxScreenCursor"  Content="Screen Cursor"   Tag="19" IsChecked="{Binding PlayerSetting_.PlayerScreenCursor}"/>
-                <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate Touch"   Tag="16" IsChecked="{Binding PlayerSetting_.PlayerCalibrateTouch}"/>
-                <CheckBox Name="chkbxAnnounceCall" Content="Announce Call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
-                <CheckBox Name="chkbxPressToCollect"  Content="Press To Collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
+                <CheckBox Name="chkbxScreenCursor"  Content="Screen cursor"   Tag="19" IsChecked="{Binding PlayerSetting_.PlayerScreenCursor}"/>
+                <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate touch"   Tag="16" IsChecked="{Binding PlayerSetting_.PlayerCalibrateTouch}"/>
+                <CheckBox Name="chkbxAnnounceCall" Content="Announce call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
+                <CheckBox Name="chkbxPressToCollect"  Content="Press to collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
                 <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting_.Disclaimer}"/>
             </StackPanel>
         </Grid>
-
     </Border>
 </UserControl>
