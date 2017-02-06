@@ -65,8 +65,8 @@
 
                     <Label  Content="System main volume:"   ContentStringFormat="{x:Null}"/>
                     <ComboBox x:Name="cmbxMainVol" Tag="57"
-                          SelectedItem="{Binding SystemSetting_.SystemMainVolume}"
-                          ItemsSource="{Binding VolumeList}"                        
+                               ItemsSource="{Binding VolumeList}"  
+                          SelectedItem="{Binding SystemSetting_.SystemMainVolume}"                                              
                           />
 
                     <Label x:Name="lblMaxCards_Copy4"  Content="Currency:" ContentStringFormat="{x:Null}"/>

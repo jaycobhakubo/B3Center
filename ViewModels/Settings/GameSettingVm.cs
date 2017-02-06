@@ -209,8 +209,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         break;
                     }
             }
-            //var found = GameTabItem.FirstOrDefault(x => x.GameIndex == tabSelectedIndex);
-            //found.ViewModel = x;
         }
 
         public int myprevindex = -1;  
@@ -228,8 +226,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             return GameTabItem[m_tabSelectedindex].ViewModel;
         }
 
-      
-
         private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> _b3Setting)
         {
             gs = new GameSetting();
@@ -237,8 +233,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
             foreach (B3SettingGlobal b3SettingGlobal_ in _b3Setting)
             {
-
-
                 if ((int)B3SettingId.Denom1 == b3SettingGlobal_.B3SettingID)
                 {
                     gs.Denom1 = b3SettingGlobal_.B3SettingValue;

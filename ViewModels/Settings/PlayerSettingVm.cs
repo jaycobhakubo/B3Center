@@ -16,9 +16,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public PlayerSettingVm(PlayerSettings _playerSetting)
         {
             VolumeList = Volume();
-            PlayerSetting_ = _playerSetting;    
-         
-           
+            PlayerSetting_ = _playerSetting;             
         }
 
         public List<string> VolumeList
@@ -55,13 +53,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             result.Add("9");
             result.Add("10");
             return result;
-        }
-
-      
-     
-
-
-        
+        }        
     }
 }
 

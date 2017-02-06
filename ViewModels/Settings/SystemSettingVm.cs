@@ -57,7 +57,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        public static List<string> Volume()
+        private List<string> Volume()
         {
             List<string> result = new List<string>();
             result.Add("0");

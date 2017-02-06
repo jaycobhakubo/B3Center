@@ -14,9 +14,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public SalesSettingVm(SalesSettings m_salesSetting)
         {
             VolumeList = Volume();
-            SalesSetting_ = m_salesSetting;    
-         
-           
+            SalesSetting_ = m_salesSetting;              
         }
 
 
@@ -54,13 +52,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             result.Add("9");
             result.Add("10");
             return result;
-        }
-
-      
-     
-
-
-        
+        }       
     }
 }
 

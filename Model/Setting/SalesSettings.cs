@@ -16,7 +16,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public bool CalibrateTouch { get; set; }
         public bool QuickSales { get; set; }
         public bool LoggingEnable { get; set; }
-
         public string VolumeSales { get; set; }
 
         public List<string> MainVolList { get; set; }
