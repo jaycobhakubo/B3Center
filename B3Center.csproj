@@ -262,12 +262,6 @@
     <Compile Include="UI\SessionViews\SetOperatorView.xaml.cs">
       <DependentUpon>SetOperatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SessionViews\StartSessionConfirmView.xaml.cs">
-      <DependentUpon>StartSessionConfirmView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\SessionViews\EndSessionView.xaml.cs">
-      <DependentUpon>EndSessionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\SessionViews\VoidAccountsView.xaml.cs">
       <DependentUpon>VoidAccountsView.xaml</DependentUpon>
     </Compile>
@@ -480,14 +474,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\SessionViews\SetOperatorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\SessionViews\StartSessionConfirmView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\SessionViews\EndSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

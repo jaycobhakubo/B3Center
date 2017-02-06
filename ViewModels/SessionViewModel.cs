@@ -17,6 +17,7 @@ using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Properties;
 using System.Collections;
 using System.Linq;
+using System.Timers;
 
 //US4296: B3 Start Session
 //US4298: B3 End Session
@@ -29,6 +30,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     {
         #region Local Variables
 
+        private bool m_isSuccess;
+        private bool m_hasError;
         private string m_statusMessage;
         private string m_sessionStatusMessage;
         private string m_sessionSetBallStatusMessage;
@@ -46,6 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3Controller m_controller;
         private static volatile SessionViewModel m_instance;
         private static readonly object m_syncRoot = new Object();
+        private readonly Timer m_statusMessageTimer;
         #endregion
 
         #region Constructors
@@ -54,6 +58,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         private SessionViewModel()
         {
+            //status message timer
+            m_statusMessageTimer = new Timer(5000);
+            m_statusMessageTimer.Elapsed += StatusTimerElapsedHandler;
+            m_statusMessageTimer.Stop();
+            m_statusMessageTimer.AutoReset = false;
+            
             SessionStartCommand = new RelayCommand(parameter => StartSession());
             SessionEndCommand = new RelayCommand(parameter => EndSession());
             VoidAccountCommand = new RelayCommand(parameter => VoidAccounts());
@@ -98,8 +108,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public bool IsSuccess
         {
-            get;
-            private set;
+            get
+            {
+                return m_isSuccess;
+            }
+            set
+            {
+                m_isSuccess = value;
+                RaisePropertyChanged("IsSuccess");
+            }
+        }
+
+        public bool HasError
+        {
+            get
+            {
+                return m_hasError;
+            }
+            set
+            {
+                m_hasError = value;
+                RaisePropertyChanged("HasError");
+            }
         }
 
         public bool StartSessionButtonVisibility
@@ -301,6 +331,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 return m_controller.Session;
             }
         }
+        
         #endregion
 
         #region Member Command Properties
@@ -437,12 +468,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                IsSuccess = true;
+                SetIconStatus(true);
                 SessionStatusMessage = Resources.SessionStartSuccess;
             }
             else
             {
-                IsSuccess = false;
+                SetIconStatus(false);
+                SessionStatusMessage = Resources.SessionStartFailed;
                 DisplayMessageBox(string.Format(Resources.SessionStartFailed, e.Error));
             }
         }
@@ -451,12 +483,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                IsSuccess = true;
+                SetIconStatus(true);
                 SessionStatusMessage = Resources.SessionEndSuccess;
             }
             else
             {
-                IsSuccess = false;
+                SetIconStatus(false);
+                SessionStatusMessage = Resources.SessionEndFailed;
                 DisplayMessageBox(string.Format(Resources.SessionEndFailed, e.Error));
             }
         }
@@ -465,14 +498,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                IsSuccess = true;
+                SetIconStatus(true);
                 StatusMessage = Resources.SessionInfoSuccess;
                 UpdateSesionListUi();
                 UpdateSessionButtons();
             }
             else
             {
-                IsSuccess = false;
+                SetIconStatus(false);
+                SessionStatusMessage = Resources.SessionInfoFailed;
                 DisplayMessageBox(string.Format(Resources.SessionInfoFailed, e.Error));
             }
         }
@@ -481,12 +515,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                IsSuccess = true;
                 StatusMessage = Resources.SessionOperatorListSuccess;
             }
             else
             {
-                IsSuccess = false;
+                SetIconStatus(false);
+                SessionStatusMessage = Resources.SessionOperatorListFailed;
                 DisplayMessageBox(Resources.SessionOperatorListFailed);
             }
         }
@@ -592,6 +626,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller.SessionOperatorList();
         }
 
+        private void SetIconStatus(bool success)
+        {
+            IsSuccess = success;
+            HasError = !success;
+            m_statusMessageTimer.Stop();
+            m_statusMessageTimer.Start();
+        }
+
+        private void StatusTimerElapsedHandler(object sender, EventArgs args)
+        {
+            //clear status
+            SessionStatusMessage = string.Empty;
+            HasError = false;
+            IsSuccess = false;
+            m_statusMessageTimer.Stop();
+        }
         #endregion
     }
 }

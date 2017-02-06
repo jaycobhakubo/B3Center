@@ -8,6 +8,9 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="GameBallBackground" Color="#FF44658D" />
         <SolidColorBrush x:Key="BonusBallBackGround" Color="#FFC44646" />
+        <Style TargetType="TextBlock" >
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
     </UserControl.Resources>
     <Border BorderBrush="LightGray" BorderThickness="1" Margin="2" Name="GameBallButtonBorder" Background="White" MouseLeftButtonDown="GameBallButtonBorder_MouseLeftButtonDown">
 

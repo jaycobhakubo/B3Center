@@ -8,6 +8,15 @@
              Height="400"
              ResizeMode="NoResize" ShowInTaskbar="False" Topmost="False" WindowStartupLocation="CenterScreen" Title="Start Session">
     <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="TextBlock" >
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="ComboBoxItem" >
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
     </Window.Resources>
     <Border  Style="{DynamicResource LightBlueBorder}" Margin="5">
         <Grid>
@@ -17,8 +26,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <TextBlock  Margin="5"  Text="Operators" FontSize="14" />
-                <ComboBox  Margin="5" Width="290" ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}" FontSize="14" />
+                <TextBlock  Margin="5"  Text="Operators" FontSize="12" />
+                <ComboBox  Margin="5" Width="290" ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}" FontSize="12" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
