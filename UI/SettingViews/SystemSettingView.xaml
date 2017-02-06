@@ -6,8 +6,8 @@
              mc:Ignorable="d"              
          >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-    </UserControl.Resources>
+      
+     </UserControl.Resources>
     <Grid>
         <Border    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" >
         <Grid  Name="gridSystemSettings" >
@@ -85,7 +85,7 @@
             	 Tag="55" />
 
                     <DockPanel>
-                        <CheckBox IsChecked="{Binding SystemSetting_.NorthDakotaMode}" DockPanel.Dock="Left" Name="chkbxNorthDakotaMode" Content="North dakota mode"   Tag="54" />
+                        <CheckBox  IsChecked="{Binding SystemSetting_.NorthDakotaMode}" DockPanel.Dock="Left" Name="chkbxNorthDakotaMode" Content="North dakota mode"   Tag="54" />
                         <CheckBox  DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Padding="3,0,17,0" Name="chkbxEnableUK" Content="Enable UK" Tag="50" IsChecked="{Binding SystemSetting_.EnableUK}"/>
                     </DockPanel>
 
@@ -97,6 +97,7 @@ IsChecked="{Binding SystemSetting_.DualAccount}"/>
 
                     <CheckBox  Name="chkbxCommonRNGBallCall" Content="Common RNG ball call" TabIndex="14"
 IsChecked="{Binding SystemSetting_.CommonRNGBallCall}"/>
+                  
                 </StackPanel>
             </Grid>
     </Border>

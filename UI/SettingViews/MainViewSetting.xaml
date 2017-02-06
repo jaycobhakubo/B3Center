@@ -8,20 +8,10 @@
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
-        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Margin" Value="0,30,0,0"></Setter>
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="Padding" Value="0,2,0,0"/>
-
-        </Style>
-
+       
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
         </Style>
-
-        <!--<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Height" Value="22.22"></Setter>
-        </Style>-->
 
     </UserControl.Resources>
     <Border >
@@ -40,17 +30,7 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0"  >
                         <Border.Resources>
-                            <!--<Style
-                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="0,15,0,2"/>
-                                <Setter Property="ContentStringFormat" Value="* {0}:"/>
-                            </Style>-->
-                            <!--<Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                                <Setter Property="ContentStringFormat" Value="* {0}:"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="0,15,0,2"/>
-                            </Style>-->
+                          
                         </Border.Resources>
                         <ContentPresenter Content="{Binding SelectedSettingView}" />
                         <!--<local:GameSettingView ></local:GameSettingView>-->
@@ -77,8 +57,6 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-
-
                                     <Button  
                                     Grid.Column="0"
                                     Margin="15,15" Height="40" Width="140"     

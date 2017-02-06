@@ -10,7 +10,7 @@
             >
     <UserControl.Resources>
         <ResourceDictionary>
-            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+            
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
             <Style
              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
