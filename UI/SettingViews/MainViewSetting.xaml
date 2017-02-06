@@ -24,7 +24,6 @@
             <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
                 <Grid>
                     <Grid.RowDefinitions>
-
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>

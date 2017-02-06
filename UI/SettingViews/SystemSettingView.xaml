@@ -6,8 +6,7 @@
              mc:Ignorable="d"              
          >
     <UserControl.Resources>
-      
-     </UserControl.Resources>
+    </UserControl.Resources>
     <Grid>
         <Border    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" >
         <Grid  Name="gridSystemSettings" >
@@ -25,8 +24,7 @@
             <StackPanel  Grid.Column="1" >
                 <Label Content="Site name"  />
                     <TextBox Name="txtbxSiteName" Tag="56"  MaxLength="50" Text="{Binding SystemSetting_.SiteName}"/>
-
-                <Label Content="Hand pay trigger"/>
+                    <Label Content="Hand pay trigger"/>
                     <TextBox Name="txtbxHandPayoutTrigger" Tag="42" Text="{Binding SystemSetting_.HandPayTrigger}"	 MaxLength="14" />
 
                 <Label x:Name="lblMaxCards_Copy"  Content="VIP point multiplier" />

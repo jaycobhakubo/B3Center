@@ -30,6 +30,9 @@
 
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
+            <Setter Property="Padding" Value="0,0,0,0"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
             <Style.Triggers>
                 <Trigger Property="IsReadOnly" Value="True">
@@ -71,12 +74,12 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
                         <Border.Resources>
-                            <Style
+                            <!--<Style
                              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Margin" Value="0,15,0,2"/>
 
-                            </Style>
+                            </Style>-->
                         </Border.Resources>
                
                         <Grid  Name="gridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
@@ -94,7 +97,7 @@
                             
                             <StackPanel Grid.Column="1" Grid.Row="1">
                                 <Label Content="* Operator name:" />
-                                <TextBox Name="txtbxOperatorName" Height="22.22" Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
+                                <TextBox Name="txtbxOperatorName"  Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
 
                                 <Label Content="Description:"  />
                                 <TextBox   Text="{Binding  SelectedOperator.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
