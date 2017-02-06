@@ -15,16 +15,11 @@
             <Setter Property="Margin" Value="0,15,0,0"/>
 
         </Style>
+      
 
-        <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Padding" Value="0,-1,0,0"/>         
-        </Style>-->
-
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <!--<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="22.22"></Setter>
-        </Style>
+        </Style>-->
     </UserControl.Resources>
     <DockPanel>
 
@@ -109,7 +104,10 @@
                                 </Grid>
                             </Border>
                             <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
-                                <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                                <Label Style="{x:Null}" 
+                                    Content="* Indicates a required field" Foreground="Red" 
+                                      
+                                       />
                             </Border>
                         </Grid>
                     </Border>

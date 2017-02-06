@@ -82,7 +82,9 @@
                                 </Grid>
                             </Border>
                             <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
-                                <Label HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                                <Label
+                                    Style="{x:Null}"
+                                    HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
                             </Border>
                         </Grid>
                     </Border>

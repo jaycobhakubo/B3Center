@@ -13,8 +13,14 @@
         <Converter:BoolToVisibilityConv x:Key="ConvertBooltoVis" ></Converter:BoolToVisibilityConv>
         <Converter:ShowDefaultColumnDef x:Key="DefaultVal"></Converter:ShowDefaultColumnDef>
         <Converter:ValueToBoolForEmptyString x:Key="ConvertStringToBool"></Converter:ValueToBoolForEmptyString>
-   
-        
+
+        <Style
+             TargetType="{x:Type Label}" BasedOn="{x:Null}">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,15,0,2"/>
+            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+        </Style>
+
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="IsHitTestVisible" Value="True"/>
@@ -74,12 +80,12 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0">
                         <Border.Resources>
-                            <!--<Style
-                             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                            <Style
+                             TargetType="{x:Type Label}" BasedOn="{x:Null}">
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Margin" Value="0,15,0,2"/>
 
-                            </Style>-->
+                            </Style>
                         </Border.Resources>
                
                         <Grid  Name="gridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
@@ -206,7 +212,9 @@
                                 </Grid>
                             </Border>
                             <Border  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
-                                <Label  HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                                <Label Style="{x:Null}"
+                                    
+                                    Content="* Indicates a required field" Foreground="Red"/>
                             </Border>
                         </Grid>
                     </Border>

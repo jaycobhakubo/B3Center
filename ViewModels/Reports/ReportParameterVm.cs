@@ -21,6 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     {
 
         #region MEMBER VARIABLE
+
         private DatePickerM m_datepickerModel;
         private ObservableCollection<Session> AllSessionList;
         private List<string> m_paramList;
@@ -32,8 +33,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private string m_endingCard;
         private Visibility m_visibility;
         private ObservableCollection<string> m_months;
+
         #endregion
         #region STATIC (properties and variable)
+
         private static readonly object m_syncRoot = new Object();
         private static volatile ReportParameterViewModel m_instance;
         public static ReportParameterViewModel Instance
@@ -51,8 +54,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 return m_instance;
             }
         }
+
         #endregion
         #region CONSTRUCTORS
+
         public ReportParameterViewModel()
         {
             m_accountList = new ObservableCollection<string>();
@@ -70,6 +75,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 EventCommand();
             }           
         }
+
         #endregion
         #region METHOD
 

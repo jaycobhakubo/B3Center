@@ -49,7 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3Controller m_controller;
         private ObservableCollection<Session> m_sessionList;
         private List<B3Report> m_reports;
-        private CrystalReportsViewer tempcr = new CrystalReportsViewer();
+        private CrystalReportsViewer tempcr;
         private static volatile ReportsViewModel m_instance;
         private static readonly object m_syncRoot = new Object();
         private int m_accountNumberSelected;
@@ -92,7 +92,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             m_controller = controller;
             m_reports = controller.Reports;
-            tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
+          
             m_controller.SessionInfoCompleted += OnListInfoDone;
 
             //set session list
@@ -735,6 +735,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 try
                 {
+                    tempcr = new CrystalReportsViewer();
+                    tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
                     var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
                     if (Rpt == null) { return; }
                     LoadCrystalReport(Rpt);
