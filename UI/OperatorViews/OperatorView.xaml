@@ -98,7 +98,7 @@
 
                             
                             <StackPanel Grid.Column="1" Grid.Row="1">
-                                <Label Content="* Operator Name:" />
+                                <Label Content="* Operator name:" />
                                 <TextBox Name="txtbxOperatorName" Height="22.22" Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
 
                                 <Label Content="Description:"  />
@@ -113,16 +113,16 @@
                                 <Label  Content="State:"   />
                                 <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
 
-                                <Label  Content="Zip Code:" />
+                                <Label  Content="Zip code:" />
                                 <TextBox  MaxLength="5" Text="{Binding  SelectedOperator.ZipCode}"></TextBox>
                                 
-                                <Label Content="Contact Name:" />
+                                <Label Content="Contact name:" />
                                 <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1" Grid.Column="3">
 
-                                <Label Content="Icon Color:" />
+                                <Label Content="Icon color:" />
                                 <ComboBox  Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
@@ -130,10 +130,10 @@
                                            SelectedValue="{Binding SelectedOperator.IconColor}"
                                     ></ComboBox>
                     
-                                <Label Content="Phone Number:" />
+                                <Label Content="Phone number:" />
                                 <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
 
-                                <Label Content="Fax Number:"  />
+                                <Label Content="Fax number:"  />
                                 <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
                             </StackPanel>
                         </Grid>
