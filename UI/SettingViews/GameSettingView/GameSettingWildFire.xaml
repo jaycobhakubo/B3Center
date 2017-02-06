@@ -59,6 +59,8 @@
                             <Style TargetType="CheckBox" >
                                 <Setter Property="Margin" Value="0,0,0,0"></Setter>
                                 <Setter Property="Height" Value="18"/>
+                                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                <Setter Property="VerticalContentAlignment" Value="Bottom"/>
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
