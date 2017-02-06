@@ -200,8 +200,9 @@
                                 Name="btnDelete" 
                                 VerticalAlignment="Top"                         
                                 Command="{Binding DeleteOperatorcmd}" 
-                                IsEnabled="{Binding DelBtnIsEnabled}"                            
+                                  IsEnabled="{Binding IsEdit}"                          
                             />
+                                    <!--IsEnabled="{Binding DelBtnIsEnabled}"-->
                                 </Grid>
                             </Border>
                             <Border  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">

@@ -60,7 +60,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
         #endregion
-
         #region METHOD
         //Save a back up of the current operator.
         //Will be used in undoing changes made from the active Operator observable collection
@@ -239,8 +238,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 DeleteOperator()
                 );
             save.Wait();
-            Mouse.OverrideCursor = null;
-          //  int indexOperator = m_operators.IndexOf(m_selectedOperator); //removed item inside the collection
+            Mouse.OverrideCursor = null;        
             var Operators_ = m_operators.ToList();
             Operators_.Remove(m_selectedOperator);
             Operators = new ObservableCollection<Operator>(Operators_.OrderBy(l => l.OperatorName));//Update UI and collection
