@@ -166,10 +166,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
 
         #region PROPERTIES
 
+        private ReportTemplateViewModel m_bcvm;
         public ReportTemplateViewModel bcvm
         {
-            get;
-            set;
+            get {return m_bcvm;}
+            set
+            {
+                m_bcvm = value;
+                RaisePropertyChanged("bcvm");
+            }
         }
 
         #endregion

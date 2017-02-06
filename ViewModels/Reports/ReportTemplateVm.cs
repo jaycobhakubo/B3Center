@@ -24,15 +24,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private List<string> reportParameterList;
        
 
+        //public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
+        //{
+        //    ReportTemplate_Model  = reportTemplateModel;       
+        //    reportParameterList = ReportTemplate_Model.ReportParameter;
+        //    parVm = ReportParameterViewModel.Instance;
+        //    parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);    
+        //    CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
+        //}
+
+
         public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
         {
-            ReportTemplate_Model  = reportTemplateModel;       
+            ReportTemplate_Model = reportTemplateModel;
             reportParameterList = ReportTemplate_Model.ReportParameter;
             parVm = ReportParameterViewModel.Instance;
-            parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);    
+            parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);
             CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }
-
             
         public ReportTemplateModel ReportTemplate_Model
         {

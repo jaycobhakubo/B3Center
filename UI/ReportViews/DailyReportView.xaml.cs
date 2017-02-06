@@ -41,6 +41,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         }
 
+        public DailyReportView()
+        {
+            InitializeComponent();
+
+            //ReportViewer.ViewerCore.Zoom(85);
+            //ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
+
+            //NewReportButton.Visibility = Visibility.Hidden;
+            //ReportViewerBorder.Visibility = Visibility.Hidden;
+            //SelectDateBorder.Visibility = Visibility.Visible;
+
+        }
+
         /// <summary>
         /// Handles the Loaded event of the UserControl control.
         /// </summary>

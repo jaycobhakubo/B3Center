@@ -24,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         public ReportTemplate(/*ReportTemplateViewModel reportvm*/)
         {
             InitializeComponent();
-            DataContext = this;
+            //DataContext = this;
             //ReportViewer.ViewerCore.Zoom(85);
             //ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
 

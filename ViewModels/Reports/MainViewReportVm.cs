@@ -106,7 +106,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_selectedReportColl = new ReportMain();
             m_reportCollection = new ObservableCollection<ReportMain>()
             {
-                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Accounts))},
+                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Accounts)), rptView = new ReportTemplate()},
                  new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Daily))},
                   new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Detail))},
             };
@@ -130,7 +130,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 m_selectedReportColl = value;
                 rptBaseVm = value.ReportBasevm;
+                SelectedReportViewCol = value.rptView; ;
+              
                 //RaisePropertyChanged("rptBaseVm");
+            }
+        }
+
+        public ReportTemplate SelectedReportViewCol
+        {
+            get { return m_selectedReportColl.rptView; }
+            set
+            {
+                m_selectedReportColl.rptView = value;
+                RaisePropertyChanged("SelectedReportViewCol");
             }
         }
 
@@ -428,6 +440,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void SelectionChanged(string ReportName)
         {
             //Reinitialize every selection changed rather than storing.
+            ReportName = "";
             UserControl view = null;
             switch (ReportName)
             {
@@ -525,7 +538,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break;
                     }
             }
-            SelectedReportView = view;
+            //SelectedReportView = view;
         }
 
         private void LoadCrystalReport(B3Report report)
@@ -613,7 +626,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_rptBaseVm.ReportParameterVisible;
+                return Visibility.Visible; //m_rptBaseVm.ReportParameterVisible;
             }
             set
             {

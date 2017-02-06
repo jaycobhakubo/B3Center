@@ -44,6 +44,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             //SelectDateBorder.Visibility = Visibility.Visible;
         }
 
+        public DetailReportView()
+        {
+            InitializeComponent();
+        }
+
         /// <summary>
         /// Handles the Loaded event of the UserControl control.
         /// </summary>

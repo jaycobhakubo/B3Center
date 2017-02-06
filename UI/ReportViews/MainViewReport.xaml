@@ -58,8 +58,10 @@
                                 <Setter Property="Margin" Value="0,15,0,2"/>
                             </Style>
                         </Border.Resources>
-                            <ContentPresenter  ContentTemplate="{StaticResource }"  DataContext="{Binding rptBaseVm}"></ContentPresenter>
+                        <!--<ContentControl Content="{StaticResource rptTemPlate}" ContentTemplate="{Binding rptBaseVm}"></ContentControl>-->
+                        <!--<ContentPresenter DataContext="{Binding rptBaseVm}"  Content="{Binding SelectedReportViewCol}"></ContentPresenter>-->
                         <!--<localReports:ReportTemplate DataContext="{Binding rptBaseVm}"/>-->
+                        <ContentPresenter  Content="{Binding SelectedReportViewCol}"></ContentPresenter>
                     </Border>
 
                     <Border Visibility="{Binding DefaultViewMode}" Grid.Row="1" Margin="8" Name="brdrViewPrint">
