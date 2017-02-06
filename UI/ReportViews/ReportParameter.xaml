@@ -27,9 +27,9 @@
                                Margin="0,0,0,5" 
                      Visibility="{Binding ElementName=lblBallCallCategory, Path=Visibility}"
                     />
-                <TextBlock Text="Start Date:" Name="StartDateTimepar" Visibility="{Binding StartEndDateWTime}" />
+                <TextBlock Text="Start date:" Name="StartDateTimepar" Visibility="{Binding StartEndDateWTime}" />
                 <shared:DatePickerUserView   Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" DataContext="{Binding StartDatePickerVm}" />
-                <TextBlock Text="End Date:" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
+                <TextBlock Text="End date:" Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}"  />
                 <shared:DatePickerUserView   Visibility="{Binding ElementName=StartDateTimepar, Path=Visibility}" DataContext="{Binding EndDatePickerVm}"/>
 
                 <TextBlock Name="DatePar" Text="Date:" Visibility="{Binding DateInput}"/>
@@ -64,9 +64,9 @@
                         Name="YearCombobox" 
                         Visibility="{Binding ElementName=MonthPar, Path=Visibility}"/>
                 </Grid>
-                <TextBlock x:Name="txtblkStartDate" Text="Start Date:"  Visibility="{Binding StartEndDate}"/>
+                <TextBlock x:Name="txtblkStartDate" Text="Start date:"  Visibility="{Binding StartEndDate}"/>
                 <shared:DatePickerUserView   Grid.Row="1"    Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}"  DataContext="{Binding StartDatePickerVm}" />
-                <TextBlock x:Name="txtblkEndDate" Text="End Date:"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
+                <TextBlock x:Name="txtblkEndDate" Text="End date:"  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" />
                 <shared:DatePickerUserView  Visibility="{Binding ElementName=txtblkStartDate, Path=Visibility}" Grid.Row="1"      DataContext="{Binding EndDatePickerVm}"/>
                 <TextBlock Text="* Session:" Name="Sessionpar" Visibility="{Binding SessionInput}" />
                 <ComboBox 
@@ -78,7 +78,7 @@
                                x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"
                         />
-                <TextBlock Text="* Account Number:" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
+                <TextBlock Text="* Account number:" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
                 <ComboBox 
                                                         
                                x:Name="AccountNumberCombobox"
@@ -87,7 +87,7 @@
                      Visibility="{Binding ElementName=AcctPar, Path=Visibility}"
                               />
 
-                <TextBlock Text="* Starting Card:"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
+                <TextBlock Text="* Starting card:"  Name="StartCardpar" Visibility="{Binding StartEndCardInput}" />
                 <TextBox
                     MaxLength="6" 
                     Name="txtbxStartingCard" 
@@ -97,7 +97,7 @@
                     Tag="true"
                               ></TextBox>
 
-                <TextBlock Text="* Ending Card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
+                <TextBlock Text="* Ending card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
                 <TextBox  
                     MaxLength="6" 
                     Name="txtbxEndingCard" 
