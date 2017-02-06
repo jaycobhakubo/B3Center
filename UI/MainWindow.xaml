@@ -14,10 +14,47 @@
    
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
      WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
+    <ui:EliteWindowBase.Style>
+        <!--Everything is bold-->
+        <Style>
+            <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
+            <Setter Property="Control.FontSize" Value="12" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>
+    </ui:EliteWindowBase.Style>
     <ui:EliteWindowBase.Resources>
         <Style TargetType="TabItem">
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
+
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="22.22"></Setter>
+            <Setter Property="Padding" Value="0,0,0,0"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style
+             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,15,0,2"/>
+            <Setter Property="ContentStringFormat" Value="* {0}:"/>
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="0,30,0,0"></Setter>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+        </Style>
+
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <!--<Setter Property="Padding" Value="0,0,0,0"/>-->
+
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
     
