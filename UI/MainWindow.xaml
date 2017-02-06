@@ -47,8 +47,8 @@
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Padding" Value="0,-1,0,0"/>
         </Style>
+        <!--<Setter Property="Padding" Value="0,0,0,0"/>-->
 
 
     </ui:EliteWindowBase.Resources>

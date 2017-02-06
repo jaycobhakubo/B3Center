@@ -14,7 +14,7 @@
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
             <Style
              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-                <Setter Property="ContentStringFormat" Value="{x:Null}"/>
+                <Setter Property="ContentStringFormat" Value="{}{0}:"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="0,15,0,2"/>
             </Style>
