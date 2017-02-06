@@ -23,14 +23,14 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1">
-                <Label  Content="Game Pay Table"  />
+                <Label  Content="Game pay table"  />
                 <ComboBox Name="cmbxGamePayTable" Tag="58"
                            ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
                               DisplayMemberPath="PackageDesc"
                               SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"
                           />
 
-                <Label Content="Max Bet Level" />
+                <Label Content="Max bet level" />
                 <ComboBox 
                 Name="cmbxMaxBetLevel"  
                     ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
@@ -39,20 +39,20 @@
                 >
                 </ComboBox>
 
-                <Label x:Name="lblMaxCards"  Content="Max Cards"/>
+                <Label x:Name="lblMaxCards"  Content="Max cards"/>
                 <ComboBox 
                 x:Name="cmbxMaxcards" 
                  Tag="10"   ItemsSource="{Binding Gamesetting_.LMaxCards}" 
                     SelectedItem="{Binding Gamesetting_.MaxCards}">
                 </ComboBox>
 
-                <Label x:Name="lblCallSpeedMin"  Content="Call Speed"   />
+                <Label x:Name="lblCallSpeedMin"  Content="Call speed"   />
                 <ComboBox 
             	x:Name="cmbxCallSpeedMin" 
                         ItemsSource="{Binding Gamesetting_.LCallSpeed}" 
                         SelectedItem="{Binding Gamesetting_.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="59"/>
-                <Label   Content="Game Denominations" />
+                <Label   Content="Game denominations" />
                 <GroupBox  Background="White"   BorderThickness="2"  Margin="-1,0,-1,0" Padding="15,0,0,3" Style="{DynamicResource GroupBoxStyle1}" >
                  <Grid >
                         <Grid.Resources>
@@ -87,8 +87,8 @@
             </StackPanel>
 
             <StackPanel Grid.Column="3">
-                <CheckBox Name="chkbxAutoPlay"   Content="Auto Play"  IsChecked="{Binding Gamesetting_.AutoPlay, Converter={StaticResource ValuetoBool}}"/>
-                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber, Converter={StaticResource ValuetoBool}}" Name="chkbxHideSerialNumber" Content="Hide Serial Number"/>
+                <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay, Converter={StaticResource ValuetoBool}}"/>
+                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber, Converter={StaticResource ValuetoBool}}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
                 <CheckBox Name="chkbxSingleOfferBonus" Content="Single Offer Bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus, Converter={StaticResource ValuetoBool}}"/>
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
 

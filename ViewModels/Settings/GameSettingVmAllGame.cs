@@ -17,7 +17,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             m_gameSetting_ = _gameSetting;       
         }
 
-
         private GameSetting m_gameSetting_ = new GameSetting();
         public GameSetting Gamesetting_
         {
