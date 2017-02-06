@@ -37,6 +37,7 @@ using SAPBusinessObjects.WPF.Viewer;
 using GameTech.Elite.UI;
 using System.Windows.Threading;
 using CrystalDecisions.Shared;
+using GameTech.Elite.Client.Modules.B3Center.Model.Report;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -102,7 +103,46 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
       
             LoadReportList();
+            m_selectedReportColl = new ReportMain();
+            m_reportCollection = new ObservableCollection<ReportMain>()
+            {
+                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Accounts))},
+                 new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Daily))},
+                  new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Detail))},
+            };
+            m_selectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
+        }
+
+        private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
+
+        public ObservableCollection<ReportMain> ReportListCol
+        {
+            get {return m_reportCollection;}
+            set { m_reportCollection = value; }
+        }
+
+        private ReportMain m_selectedReportColl;
+        public ReportMain SelectedReportColl
+        {
+            get {return m_selectedReportColl;}
+            set
+            {
+                m_selectedReportColl = value;
+                rptBaseVm = value.ReportBasevm;
+                //RaisePropertyChanged("rptBaseVm");
+            }
+        }
+
+
+        public ReportBaseVm rptBaseVm
+        {
+            get { return m_selectedReportColl.ReportBasevm; }
+            set
+            {
+                m_selectedReportColl.ReportBasevm = value;
+                RaisePropertyChanged("rptBaseVm");
+            }
         }
 
         //Run once and never again.
