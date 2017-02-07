@@ -367,6 +367,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.DualAccount)).B3SettingValue = ((_SystemSettingNewValue.DualAccount == true) ? "T" : "F");
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MultiOperator)).B3SettingValue = ((_SystemSettingNewValue.MultiOperator == true) ? "T" : "F");
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CommonRNGBallCall)).B3SettingValue = ((_SystemSettingNewValue.CommonRNGBallCall == true) ? "T" : "F");
+
+                        m_isRngBallCall = _SystemSettingNewValue.CommonRNGBallCall;
+
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.NorthDakotaMode)).B3SettingValue = ((_SystemSettingNewValue.NorthDakotaMode == true) ? "T" : "F");
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.HandPayTrigger)).B3SettingValue = _SystemSettingNewValue.HandPayTrigger;
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MinimumPlayers)).B3SettingValue = _SystemSettingNewValue.MinimumPlayers;
@@ -383,7 +386,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break;
                     }
             }         
-        }    
+        }
+
+        private bool m_isRngBallCall;
 
         private void LoadSetting()
         {
@@ -563,6 +568,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 Mouse.OverrideCursor = null;
         }
 
+        public void SaveSetting()
+        {
+            try
+            {
+                SetNewValue();
+                SetB3SettingsMessage msg = new SetB3SettingsMessage(SettingTobeSaved);
+                try
+                {
+                    msg.Send();
+                }
+                catch
+                {
+                    if (msg.ReturnCode != ServerReturnCode.Success)
+                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+                }
+
+                if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)
+                {
+                    var ii = ReportsViewModel.Instance;
+                    ii.UpdateReportListCollection(m_isRngBallCall);
+                }
+                //lblSavedNotification.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         public void SelectedItemEvent()
         {
             string SettingName = m_settingSelected;
@@ -628,30 +662,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
             }
             SelectedSettingView = view;
-        }
-
-        public void SaveSetting()
-        {
-            try
-            {
-                SetNewValue();
-                SetB3SettingsMessage msg = new SetB3SettingsMessage(SettingTobeSaved);
-                
-                try
-                {
-                    msg.Send();
-                }
-                catch
-                {
-                    if (msg.ReturnCode != ServerReturnCode.Success)
-                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
-                }
-                //lblSavedNotification.Visibility = Visibility.Visible;
-            }
-            catch (Exception ex)
-            {
-                
-            }
         }
 
         public void CancelSetting()

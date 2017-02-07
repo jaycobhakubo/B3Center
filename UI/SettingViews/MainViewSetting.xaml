@@ -8,10 +8,6 @@
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
-       
-        <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-        </Style>-->
 
     </UserControl.Resources>
     <Border >

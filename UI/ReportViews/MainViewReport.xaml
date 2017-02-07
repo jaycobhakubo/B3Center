@@ -129,6 +129,15 @@
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                      
                             Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportListCol}" SelectedItem="{Binding SelectedReportColl}" DisplayMemberPath="ReportDisplayName" SelectionChanged="lstbx_ReportList_SelectionChanged"  >
+                            <!--<ListBox.Style>
+                                <Style TargetType="ListBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsRngBallCall}" Value="true">
+                                            <Setter Property="ItemsSource" Value="{UpdateItemSource}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.Style>-->
                         </ListBox>
                     </ScrollViewer>
                 </Grid>

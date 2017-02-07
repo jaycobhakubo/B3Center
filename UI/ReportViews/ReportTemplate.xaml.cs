@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 {
@@ -25,12 +26,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         {
             InitializeComponent();
             DataContext = reportvm;
-            //ReportViewer.ViewerCore.Zoom(85);
-            //ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
+            
+        }
 
-            //NewReportButton.Visibility = Visibility.Hidden;
-            //ReportViewerBorder.Visibility = Visibility.Hidden;
-            //SelectDateBorder.Visibility = Visibility.Visible;
+        public void ViewReport(ReportDocument rptDoc)
+        {
+            
+            
+
+            ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
+            ReportViewer_.ViewerCore.ReportSource = rptDoc;
+            ReportViewer_.Focusable = true;
+            ReportViewer_.Focus();
         }
     }
 }
+//ReportViewer.ViewerCore.Zoom(85);
+//ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
+
+//NewReportButton.Visibility = Visibility.Hidden;
+//ReportViewerBorder.Visibility = Visibility.Hidden;
+//SelectDateBorder.Visibility = Visibility.Visible;

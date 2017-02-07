@@ -326,7 +326,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
              set
              {
                  m_operators = value;
-                 RaisePropertyChanged("Operators");
+                 RaisePropertyChanged("Operators");//Using this event UI not changing
              }
          }
 
