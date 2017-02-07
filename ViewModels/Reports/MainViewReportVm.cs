@@ -81,8 +81,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ReportsViewModel()
         {
             m_selectedReportColl = new ReportMain();
-            SessionList = new ObservableCollection<Session>();
-            tempcr = new CrystalReportsViewer();
+            SessionList = new ObservableCollection<Session>();         
             IsLoading = false;
             IsPrinting = false;
         }
@@ -113,6 +112,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             b3DailyVm = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
             b3DetailVm = new ReportTemplateViewModel(getrtm(ReportId.B3Detail));
             b3AccountHistVm = new ReportTemplateViewModel(getrtm(ReportId.B3AccountHistory));
+            b3CardVm = new ReportTemplateViewModel(getrtm(ReportId.B3BingoCardReport));
 
             m_reportCollection = new ObservableCollection<ReportMain>()
             {
@@ -120,6 +120,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", rpttemplatevm = b3DailyVm ,rptView = new ReportTemplate(b3DailyVm)},
                 new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail",rpttemplatevm = b3DetailVm ,rptView = new ReportTemplate(b3DetailVm)},
                  new ReportMain(){B3Reports = m_reports[13], ReportDisplayName = "Account History", rpttemplatevm= b3AccountHistVm ,rptView = new ReportTemplate(b3AccountHistVm)},
+                 new ReportMain(){B3Reports = m_reports[14], ReportDisplayName = "Bingo Card", rpttemplatevm= b3AccountHistVm ,rptView = new ReportTemplate(b3CardVm)},
             };
             m_selectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
@@ -159,6 +160,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ReportTemplateViewModel b3DailyVm { get; set; }
         public ReportTemplateViewModel b3DetailVm { get; set; }
         public ReportTemplateViewModel b3AccountHistVm { get; set; }
+        public ReportTemplateViewModel b3CardVm { get; set; }
 
         private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
 

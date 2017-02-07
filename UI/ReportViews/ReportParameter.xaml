@@ -94,7 +94,13 @@
                     Text="{Binding StartingCard}"  
                     Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"    
                     PreviewTextInput="ValidateCard"
-                    Tag="true"
+                    PreviewKeyDown="keyInput"
+                     TextChanged="revalidate"
+                    Tag="true" 
+                    MouseLeftButtonDown="txtbxStartingCard_MouseLeftButtonDown" 
+                    PreviewMouseLeftButtonDown="txtbxStartingCard_PreviewMouseLeftButtonDown" 
+                    PreviewMouseLeftButtonUp="txtbxStartingCard_PreviewMouseLeftButtonDown" 
+                   
                               ></TextBox>
 
                 <TextBlock Text="* Ending card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
@@ -104,6 +110,8 @@
                     Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" 
                     Text="{Binding EndingCard}"
                     PreviewTextInput="ValidateCard"
+                    PreviewKeyDown="keyInput"
+                    TextChanged="revalidate"
                     Tag="false"
                           >
                                          
