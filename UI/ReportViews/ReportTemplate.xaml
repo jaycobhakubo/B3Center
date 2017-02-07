@@ -9,6 +9,9 @@
                    xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels"
              mc:Ignorable="d" 
            >
+    <!--<UserControl.DataContext>
+        <vm:ReportTemplateViewModel parVm=""></vm:ReportTemplateViewModelreportvm>
+    </UserControl.DataContext>-->
     <UserControl.Resources>
     </UserControl.Resources>
     <Grid>

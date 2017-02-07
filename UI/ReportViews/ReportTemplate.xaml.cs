@@ -21,10 +21,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
     /// </summary>
     public partial class ReportTemplate : UserControl
     {
-        public ReportTemplate(/*ReportTemplateViewModel reportvm*/)
+        public ReportTemplate(ReportTemplateViewModel reportvm)
         {
             InitializeComponent();
-            //DataContext = this;
+            DataContext = reportvm;
             //ReportViewer.ViewerCore.Zoom(85);
             //ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
 

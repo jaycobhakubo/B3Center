@@ -9,17 +9,58 @@ using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using GameTech.Elite.Reports;
 using SAPBusinessObjects.WPF.Viewer;
+using GameTech.Elite.Base;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
 {
-    public class ReportBaseVm : ReportTemplateViewModel
+    public class ReportBaseVm : ViewModelBase// : ReportTemplateViewModel
     {
         #region CONSTRUCTOR
-        public ReportBaseVm(ReportTemplateModel reportTemplateModel)
-            : base(reportTemplateModel)
+        //public ReportBaseVm(ReportTemplateModel reportTemplateModel)
+        //    : base(reportTemplateModel)
+        //{
+        //    bcvm = this;
+        //}
+
+        private ReportTemplateModel m_rptTemplateModel = new ReportTemplateModel();
+      
+
+        public ReportBaseVm()
         {
-            bcvm = this;
+          
+            //bcvm = this;
         }
+
+        internal void Initialize(ReportTemplateModel m_rptTemplateModel_)
+        {
+            m_rptTemplateModel = m_rptTemplateModel_;
+             bcvm = ReportTemplateViewModel.Instance;
+            bcvm.Initialize(m_rptTemplateModel);
+        }
+
+
+        private static volatile ReportBaseVm m_instance;
+        private static readonly object m_syncRoot = new Object();
+
+        public static ReportBaseVm Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                {
+                    lock (m_syncRoot)
+                    {
+                        if (m_instance == null)
+                            m_instance = new ReportBaseVm();
+                    }
+                }
+
+                return m_instance;
+            }
+        }
+
+
+
         #endregion
         #region METHOD
         private int GetMonthEquivValue(string monthName)
@@ -161,20 +202,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
         }
 
         #endregion
-
-
-
         #region PROPERTIES
 
         private ReportTemplateViewModel m_bcvm;
         public ReportTemplateViewModel bcvm
-        {
-            get {return m_bcvm;}
-            set
-            {
-                m_bcvm = value;
-                RaisePropertyChanged("bcvm");
-            }
+        {get;set;
+            //get {return m_bcvm;}
+            //set
+            //{
+            //    m_bcvm = value;
+            //    RaisePropertyChanged("bcvm");
+            //}
         }
 
         #endregion

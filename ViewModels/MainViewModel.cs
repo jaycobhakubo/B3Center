@@ -99,7 +99,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         #endregion
-
         #region Member Properties
         /// <summary>
         /// Gets or set the view model's parent.
@@ -155,7 +154,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         #endregion
-
         #region Member Command Properties
 
         /// <summary>

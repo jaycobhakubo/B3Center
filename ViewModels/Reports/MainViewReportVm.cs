@@ -80,11 +80,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         public ReportsViewModel()
         {
-            SessionList = new ObservableCollection<Session>();       
+            m_selectedReportColl = new ReportMain();
+            SessionList = new ObservableCollection<Session>();
+            tempcr = new CrystalReportsViewer();
             IsLoading = false;
             IsPrinting = false;
         }
-          
+              
+
         /// <summary>
         /// Initializes the ViewModel with the specified controller.
         /// </summary>
@@ -103,16 +106,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
       
             LoadReportList();
-            m_selectedReportColl = new ReportMain();
+            B3Accounts = ReportBaseVm.Instance;
+            B3Accounts.Initialize(getrtm(ReportId.B3Accounts));
+
+            rptTemplateVm = ReportTemplateViewModel.Instance;
+            rptTemplateVm.Initialize(getrtm(ReportId.B3Accounts));
+
+
+            rptTemplateVm2 = ReportTemplateViewModel.Instance;
+            rptTemplateVm2.Initialize(getrtm(ReportId.B3Daily));
+
             m_reportCollection = new ObservableCollection<ReportMain>()
             {
-                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Accounts)), rptView = new ReportTemplate()},
-                 new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Daily))},
-                  new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Detail))},
+                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts", rpttemplatevm = rptTemplateVm, rptView = new ReportTemplate(rptTemplateVm)},
+                new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", rpttemplatevm = rptTemplateVm2, rptView = new ReportTemplate(rptTemplateVm2)},
+                //new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Detail)), rptView = new ReportTemplate()},
             };
             m_selectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
         }
+
+        public ReportBaseVm B3Accounts { get; set; }
+
+
+        public ReportTemplateViewModel rptTemplateVm { get; set; }
+        public ReportTemplateViewModel rptTemplateVm2 { get; set; }
 
         private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
 
@@ -129,10 +147,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set
             {
                 m_selectedReportColl = value;
-                rptBaseVm = value.ReportBasevm;
+                //rptBaseVm = value.ReportBasevm;
                 SelectedReportViewCol = value.rptView; ;
-              
-                //RaisePropertyChanged("rptBaseVm");
+
+                RaisePropertyChanged("SelectedReportColl");
             }
         }
 
@@ -149,12 +167,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public ReportBaseVm rptBaseVm
         {
-            get { return m_selectedReportColl.ReportBasevm; }
-            set
-            {
-                m_selectedReportColl.ReportBasevm = value;
-                RaisePropertyChanged("rptBaseVm");
-            }
+            get;set;
+            //get { return m_selectedReportColl.ReportBasevm; }
+            //set
+            //{
+            //    m_selectedReportColl.ReportBasevm = value;
+            //    RaisePropertyChanged("rptBaseVm");
+            //}
         }
 
         //Run once and never again.
@@ -446,94 +465,94 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 case "Accounts":
                     {
-                        m_accountsReportView = new AccountsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Accounts)));
-                        view = m_accountsReportView;
+                        //m_accountsReportView = new AccountsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Accounts)));
+                        //view = m_accountsReportView;
                         break;
                     }
                 case "Account History":
                     {
-                        m_accountHistoryReportView = new AccountHistoryReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3AccountHistory)));
+                        //m_accountHistoryReportView = new AccountHistoryReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3AccountHistory)));
                         view = m_accountHistoryReportView;
                         break;
                     }
                 case "Ball Call(by game)":
                     {
-                        m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallByGame)));
+                        //m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallByGame)));
                         view = m_ballCallReportView;
                         break;
                     }
                 case "Ball Call(by session)":
                     {
-                        m_ballCallBySession = new BallCallBySessionView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallBySession)));
+                        //m_ballCallBySession = new BallCallBySessionView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallBySession)));
                         view = m_ballCallBySession;
                         break;
                     }
                 case "Bingo Card":
                     {
-                        m_bingoCardReportView = new BingoCardView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BingoCardReport)));
+                        //m_bingoCardReportView = new BingoCardView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BingoCardReport)));
                         ViewReportVisibility = false;
                         view = m_bingoCardReportView;
                         break;
                     }
                 case "Daily":
                     {
-                        m_dailyReportView = new DailyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Daily)));
+                        //m_dailyReportView = new DailyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Daily)));
                         view = m_dailyReportView;
                         break;
                     }
                 case "Detail":
                     {
-                        m_detailReportView = new DetailReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Detail)));
+                        //m_detailReportView = new DetailReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Detail)));
                         view = m_detailReportView;
                         break;
                     }
                 case "Drawer":
                     {
-                        m_drawerReportView = new DrawerReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Drawer)));
+                        //m_drawerReportView = new DrawerReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Drawer)));
                         view = m_drawerReportView;
                         break;
                     }
                 case "Jackpot":
                     {
-                        m_jackpotReportView = new JackpotReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Jackpot)));
+                        //m_jackpotReportView = new JackpotReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Jackpot)));
                         view = m_jackpotReportView;
                         break;
                     }
                 case "Monthly":
                     {
-                        m_monthlyReportView = new MonthlyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Monthly)));
+                        //m_monthlyReportView = new MonthlyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Monthly)));
                         view = m_monthlyReportView;
                         break;
                     }
                 case "Session":
                     {
-                        m_sessionReportView = new SessionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Session)));
+                        //m_sessionReportView = new SessionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Session)));
                         view = m_sessionReportView;
                         break;
                     }
                 case "Session Summary":
                     {
-                        m_sessionsummaryReportView = new SessionSummaryView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionSummary)));
+                        //m_sessionsummaryReportView = new SessionSummaryView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionSummary)));
                         view = m_sessionsummaryReportView;
                         break;
                     }
                 case "Session Transaction":
                     {
-                        m_sessionTranReportView = new SessionTransactionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionTransaction)));
+                        //m_sessionTranReportView = new SessionTransactionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionTransaction)));
                         view = m_sessionTranReportView;
                         break;
                     }
 
                 case "Void":
                     {
-                        m_voidReportView = new VoidReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Void)));
+                        //m_voidReportView = new VoidReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Void)));
                         view = m_voidReportView;
                         break;
                     }
 
                 case "Winner Cards":
                     {
-                        m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
+                        //m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
                         view = m_winnerCardsReportView;
                         break;
                     }
@@ -612,11 +631,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_rptBaseVm.ReportViewerVisibility;
+                return m_rptBaseVm.bcvm.ReportViewerVisibility;
             }
             set
             {
-                m_rptBaseVm.ReportViewerVisibility = value;
+                m_rptBaseVm.bcvm.ReportViewerVisibility = value;
                 RaisePropertyChanged("CRViewMode");
             }
 
@@ -630,7 +649,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             set
             {
-                m_rptBaseVm.ReportParameterVisible = value;
+                m_rptBaseVm.bcvm.ReportParameterVisible = value;
                 RaisePropertyChanged("DefaultViewMode");
             }
 
@@ -825,7 +844,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             DefaultViewMode = Visibility.Collapsed;
             CRViewMode = Visibility.Visible;
-            m_rptBaseVm.vReportViewer = tempcr;          
+            m_rptBaseVm.bcvm.vReportViewer = tempcr;          
         }
 
         //NOTE: in order for the report to print in a particular printer name in your network,

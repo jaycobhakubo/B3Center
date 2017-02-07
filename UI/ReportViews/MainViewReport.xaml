@@ -7,7 +7,7 @@
               xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
             >
     <UserControl.Resources>
-        <localReports:ReportTemplate x:Key="rptTemPlate"></localReports:ReportTemplate>
+        <!--<localReports:ReportTemplate x:Key="rptTemPlate"></localReports:ReportTemplate>-->
 
         <Style TargetType="{x:Type StackPanel}">
             <Setter Property="Width" Value="279"/>
@@ -60,7 +60,8 @@
                         </Border.Resources>
                         <!--<ContentControl Content="{StaticResource rptTemPlate}" ContentTemplate="{Binding rptBaseVm}"></ContentControl>-->
                         <!--<ContentPresenter DataContext="{Binding rptBaseVm}"  Content="{Binding SelectedReportViewCol}"></ContentPresenter>-->
-                        <!--<localReports:ReportTemplate DataContext="{Binding rptBaseVm}"/>-->
+
+                        <!--<localReports:ReportTemplate DataContext="{Binding SelectedReportColl.rpttemplatevm}"/>-->
                         <ContentPresenter  Content="{Binding SelectedReportViewCol}"></ContentPresenter>
                     </Border>
 
