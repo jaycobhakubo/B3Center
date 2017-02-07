@@ -22,53 +22,53 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ReportTemplateModel m_reportTemplateModel;
         public ICommand CloseViewReportCommand { get; set; }
         private List<string> reportParameterList;
-       
-
-        //public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
-        //{
-        //    ReportTemplate_Model  = reportTemplateModel;       
-        //    reportParameterList = ReportTemplate_Model.ReportParameter;
-        //    parVm = ReportParameterViewModel.Instance;
-        //    parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);    
-        //    CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
-        //}
 
 
-        public ReportTemplateViewModel()
-        {
-          
-        }
-
-        internal void Initialize(ReportTemplateModel reportTemplateModel)
+        public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
         {
             ReportTemplate_Model = reportTemplateModel;
             reportParameterList = ReportTemplate_Model.ReportParameter;
-            parVm = ReportParameterViewModel.Instance;
-            parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);
+            parVm = new ReportParameterViewModel(reportParameterList, reportTemplateModel.rptParModel);//.Instance;
+            //parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);
             CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }
 
 
+        //public ReportTemplateViewModel()
+        //{
 
-         private static volatile ReportTemplateViewModel m_instance;
-        private static readonly object m_syncRoot = new Object();
+        //}
 
-        public static ReportTemplateViewModel Instance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    lock (m_syncRoot)
-                    {
-                        if (m_instance == null)
-                            m_instance = new ReportTemplateViewModel();
-                    }
-                }
+        //internal void Initialize(ReportTemplateModel reportTemplateModel)
+        //{
+        //    ReportTemplate_Model = reportTemplateModel;
+        //    reportParameterList = ReportTemplate_Model.ReportParameter;
+        //    parVm = ReportParameterViewModel.Instance;
+        //    parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);
+        //    CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
+        //}
 
-                return m_instance;
-            }
-        }
+
+
+        //private static volatile ReportTemplateViewModel m_instance;
+        //private static readonly object m_syncRoot = new Object();
+
+        //public static ReportTemplateViewModel Instance
+        //{
+        //    get
+        //    {
+        //        if (m_instance == null)
+        //        {
+        //            lock (m_syncRoot)
+        //            {
+        //                if (m_instance == null)
+        //                    m_instance = new ReportTemplateViewModel();
+        //            }
+        //        }
+
+        //        return m_instance;
+        //    }
+        //}
 
         public ReportTemplateModel ReportTemplate_Model
         {

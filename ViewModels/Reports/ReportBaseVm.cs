@@ -34,8 +34,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
         internal void Initialize(ReportTemplateModel m_rptTemplateModel_)
         {
             m_rptTemplateModel = m_rptTemplateModel_;
-             bcvm = ReportTemplateViewModel.Instance;
-            bcvm.Initialize(m_rptTemplateModel);
+             //bcvm = ReportTemplateViewModel.Instance;
+            //bcvm.Initialize(m_rptTemplateModel);
         }
 
 

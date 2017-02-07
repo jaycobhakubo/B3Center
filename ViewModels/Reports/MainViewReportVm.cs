@@ -109,12 +109,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             B3Accounts = ReportBaseVm.Instance;
             B3Accounts.Initialize(getrtm(ReportId.B3Accounts));
 
-            rptTemplateVm = ReportTemplateViewModel.Instance;
-            rptTemplateVm.Initialize(getrtm(ReportId.B3Accounts));
-
-
-            rptTemplateVm2 = ReportTemplateViewModel.Instance;
-            rptTemplateVm2.Initialize(getrtm(ReportId.B3Daily));
+            rptTemplateVm = new ReportTemplateViewModel(getrtm(ReportId.B3Accounts));
+            rptTemplateVm2 = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
+          
 
             m_reportCollection = new ObservableCollection<ReportMain>()
             {

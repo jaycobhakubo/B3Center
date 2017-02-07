@@ -299,22 +299,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         private void updateItemDateSelected()
         {
-            var x = ReportParameterViewModel.Instance;
-            if
-                (
-                x.RptParameterDataHandler.rptid == ReportId.B3AccountHistory
-                || x.RptParameterDataHandler.rptid == ReportId.B3BallCallByGame
-                || x.RptParameterDataHandler.rptid == ReportId.B3Jackpot
-                || x.RptParameterDataHandler.rptid == ReportId.B3Session
-                        || x.RptParameterDataHandler.rptid == ReportId.B3SessionSummary
-                        || x.RptParameterDataHandler.rptid == ReportId.B3SessionTransaction
-                        || x.RptParameterDataHandler.rptid == ReportId.B3WinnerCards
-                )
-            {
-                var i = GetSelectedDate();
-                x.UpdateSessionList(i);
-            }
-            x.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
+            //var x = ReportParameterViewModel.Instance;
+            //if
+            //    (
+            //    x.RptParameterDataHandler.rptid == ReportId.B3AccountHistory
+            //    || x.RptParameterDataHandler.rptid == ReportId.B3BallCallByGame
+            //    || x.RptParameterDataHandler.rptid == ReportId.B3Jackpot
+            //    || x.RptParameterDataHandler.rptid == ReportId.B3Session
+            //            || x.RptParameterDataHandler.rptid == ReportId.B3SessionSummary
+            //            || x.RptParameterDataHandler.rptid == ReportId.B3SessionTransaction
+            //            || x.RptParameterDataHandler.rptid == ReportId.B3WinnerCards
+            //    )
+            //{
+            //    var i = GetSelectedDate();
+            //    x.UpdateSessionList(i);
+            //}
+            //x.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
         }
 
        
