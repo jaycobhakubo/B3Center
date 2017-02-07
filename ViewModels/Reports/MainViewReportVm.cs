@@ -50,7 +50,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3Controller m_controller;
         private ObservableCollection<Session> m_sessionList;
         private List<B3Report> m_reports;
-        private CrystalReportsViewer tempcr;
+        private CrystalReportsViewer tempcr = new CrystalReportsViewer();
        
 
         #endregion
@@ -65,6 +65,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionList = new ObservableCollection<Session>();         
             IsLoading = false;
             IsPrinting = false;
+             tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
         }
               
 
@@ -96,7 +97,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", rpttemplatevm = b3DailyVm ,rptView = new ReportTemplate(b3DailyVm)},
                 new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail",rpttemplatevm = b3DetailVm ,rptView = new ReportTemplate(b3DetailVm)},
                  new ReportMain(){B3Reports = m_reports[13], ReportDisplayName = "Account History", rpttemplatevm= b3AccountHistVm ,rptView = new ReportTemplate(b3AccountHistVm)},
-                 new ReportMain(){B3Reports = m_reports[14], ReportDisplayName = "Bingo Card", rpttemplatevm= b3AccountHistVm ,rptView = new ReportTemplate(b3CardVm)},
+                 new ReportMain(){B3Reports = m_reports[14], ReportDisplayName = "Bingo Card", rpttemplatevm= b3CardVm ,rptView = new ReportTemplate(b3CardVm)},
             };
             m_selectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
@@ -133,6 +134,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region METHOD
 
+        #region (private)
+
         //Set our data to be popualted to ReportTemplateViewModel then to the viewer.
         //This will be replaced by a observable collection if I got more time. Dont know which is faster.
         private ReportTemplateModel getrtm(ReportId b3rpt)
@@ -144,7 +147,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             temprptparmodel.b3DateData = new Model.Shared.DatePickerM();
             result.CurrentUser = m_controller.Parent.StaffId;
             result.CurrentMachine = m_controller.Parent.MachineId;
-
+            
             switch (b3rpt)
             {
                 case ReportId.B3Accounts:
@@ -298,6 +301,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return Array.IndexOf(m_months, monthname) + 1;
         }
 
+        #endregion
         #region (on event)
 
         //Date change
@@ -375,8 +379,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case ReportId.B3BingoCardReport:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@startId", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3StartingCard);
-                        Report.CrystalReportDocument.SetParameterValue("@endId", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3EndingCard);
+                        Report.CrystalReportDocument.SetParameterValue("@startId", m_selectedReportTemplateViewModel.parVm.StartingCard);
+                        Report.CrystalReportDocument.SetParameterValue("@endId", m_selectedReportTemplateViewModel.parVm.EndingCard);
                         break;
                     }
                 case ReportId.B3Daily:
@@ -467,6 +471,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             report.LoadCrystalReport(server, name, user, password);
         }
 
+        //view
         public void ViewReportRel(ReportId reportID)
         {
             Task.Factory.StartNew(() =>
@@ -485,9 +490,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
 
                     Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                       
-                        tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
+                    {                                           
                         tempcr.ViewerCore.ReportSource = report;
                         tempcr.Focusable = true;
                         tempcr.Focus();
@@ -509,11 +512,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             });
 
-            DefaultViewMode = Visibility.Collapsed;
-            CRViewMode = Visibility.Visible;
+                DefaultViewMode = Visibility.Collapsed;
+                CRViewMode = Visibility.Visible;
             m_selectedReportTemplateViewModel.vReportViewer = tempcr;
         }
 
+
+        #region print
         //NOTE: in order for the report to print in a particular printer name in your network,
         //you should manually set the page setup -> Printer Options -> No printer name  false(uncheck) .
         //(It dont matter what printer name you pick as long as it is uncheck).
@@ -620,6 +625,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             return returnValue;
         }
+        #endregion
         #endregion
 
         #endregion
