@@ -26,6 +26,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         {
             InitializeComponent();
             DataContext = this;
+            txtbxStartingCard.GotFocus += delegate { txtbxStartingCard.Select(0, 0); };
         }
 
         private void SessionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,6 +96,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         private void txtbxStartingCard_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void txtbxStartingCard_SelectionChanged(object sender, RoutedEventArgs e)
+        { bool result = false;
+            if (txtbxStartingCard.SelectedText.Length > 0)
+            
+                { result = true; }
+                e.Handled = result;
         }
     }
 }

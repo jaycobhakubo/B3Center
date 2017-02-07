@@ -96,10 +96,9 @@
                     PreviewTextInput="ValidateCard"
                     PreviewKeyDown="keyInput"
                      TextChanged="revalidate"
-                    Tag="true" 
-                    MouseLeftButtonDown="txtbxStartingCard_MouseLeftButtonDown" 
-                    PreviewMouseLeftButtonDown="txtbxStartingCard_PreviewMouseLeftButtonDown" 
-                    PreviewMouseLeftButtonUp="txtbxStartingCard_PreviewMouseLeftButtonDown" 
+                    Tag="true" SelectionChanged="txtbxStartingCard_SelectionChanged" 
+                   
+                 
                    
                               ></TextBox>
 
