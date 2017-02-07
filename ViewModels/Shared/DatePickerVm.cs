@@ -277,20 +277,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #endregion
 
-        #region EVENT (selectionchangedmvvm)
+        #region EVENT ()
 
         public void YearMonthSelectedChanged()
         {
-            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
+            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();         
             updateItemDateSelected();
         }
+
+     
 
         public void DateSelectedChanged()
         {
+            
             updateItemDateSelected();
         }
 
-        private DateTime GetSelectedDate()
+        public DateTime GetSelectedDate()
         {
             DateTime tempResult;// = new DateTime();
             DateTime.TryParse(DatepickerModel.DateFullwTime, out tempResult);
@@ -311,7 +314,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             //            || x.RptParameterDataHandler.rptid == ReportId.B3WinnerCards
             //    )
             //{
-            //    var i = GetSelectedDate();
+                //var i = GetSelectedDate();
             //    x.UpdateSessionList(i);
             //}
             //x.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      

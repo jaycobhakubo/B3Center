@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 {
@@ -32,12 +33,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
         {
             var thisvm = (DatePickerVm)DataContext;
             thisvm.DateSelectedChanged();
+
+
+            var reportMainVm = ReportsViewModel.Instance;
+            reportMainVm.updateItemDateSelected(thisvm.GetSelectedDate());
         }
 
         private void YearMonthList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var thisvm = (DatePickerVm)DataContext;
             thisvm.YearMonthSelectedChanged();
+
+            var reportMainVm = ReportsViewModel.Instance;
+            reportMainVm.updateItemDateSelected(thisvm.GetSelectedDate());
         }
     }
 }

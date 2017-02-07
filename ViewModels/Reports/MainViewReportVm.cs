@@ -109,25 +109,56 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             B3Accounts = ReportBaseVm.Instance;
             B3Accounts.Initialize(getrtm(ReportId.B3Accounts));
 
-            rptTemplateVm = new ReportTemplateViewModel(getrtm(ReportId.B3Accounts));
-            rptTemplateVm2 = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
-          
+            b3AccountVm = new ReportTemplateViewModel(getrtm(ReportId.B3Accounts));
+            b3DailyVm = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
+            b3DetailVm = new ReportTemplateViewModel(getrtm(ReportId.B3Detail));
+            b3AccountHistVm = new ReportTemplateViewModel(getrtm(ReportId.B3AccountHistory));
 
             m_reportCollection = new ObservableCollection<ReportMain>()
             {
-                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts", rpttemplatevm = rptTemplateVm, rptView = new ReportTemplate(rptTemplateVm)},
-                new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", rpttemplatevm = rptTemplateVm2, rptView = new ReportTemplate(rptTemplateVm2)},
-                //new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail", ReportBasevm = new ReportBaseVm(getrtm(ReportId.B3Detail)), rptView = new ReportTemplate()},
+                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts",rpttemplatevm = b3AccountVm  , rptView = new ReportTemplate(b3AccountVm)},
+                new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", rpttemplatevm = b3DailyVm ,rptView = new ReportTemplate(b3DailyVm)},
+                new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail",rpttemplatevm = b3DetailVm ,rptView = new ReportTemplate(b3DetailVm)},
+                 new ReportMain(){B3Reports = m_reports[13], ReportDisplayName = "Account History", rpttemplatevm= b3AccountHistVm ,rptView = new ReportTemplate(b3AccountHistVm)},
             };
             m_selectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
         }
 
+
+        public void updateItemDateSelected(DateTime i)
+        {
+            //var x = ReportParameterViewModel.Instance;
+            var y = SelectedReportColl.B3Reports.Id;
+            if
+                (
+                y == ReportId.B3AccountHistory
+                || y == ReportId.B3BallCallByGame
+                || y == ReportId.B3Jackpot
+                || y == ReportId.B3Session
+                        || y == ReportId.B3SessionSummary
+                        || y == ReportId.B3SessionTransaction
+                        || y == ReportId.B3WinnerCards
+                )
+            {
+                SelectedReportColl.rpttemplatevm.parVm.UpdateSessionList(i);
+                
+            }
+            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
+        }
+
+        public void SelectionChange()
+        {
+            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
+        }
+
         public ReportBaseVm B3Accounts { get; set; }
 
 
-        public ReportTemplateViewModel rptTemplateVm { get; set; }
-        public ReportTemplateViewModel rptTemplateVm2 { get; set; }
+        public ReportTemplateViewModel b3AccountVm { get; set; }
+        public ReportTemplateViewModel b3DailyVm { get; set; }
+        public ReportTemplateViewModel b3DetailVm { get; set; }
+        public ReportTemplateViewModel b3AccountHistVm { get; set; }
 
         private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
 

@@ -35,27 +35,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<string> m_months;
 
         #endregion
-        #region STATIC (properties and variable)
-
-        //private static readonly object m_syncRoot = new Object();
-        //private static volatile ReportParameterViewModel m_instance;
-        //public static ReportParameterViewModel Instance
-        //{
-        //    get
-        //    {
-        //        if (m_instance == null)
-        //        {
-        //            lock (m_syncRoot)
-        //            {
-        //                if (m_instance == null) { }
-        //                m_instance = new ReportParameterViewModel();
-        //            }
-        //        }
-        //        return m_instance;
-        //    }
-        //}
-
-        #endregion
+       
         #region CONSTRUCTORS
 
         public ReportParameterViewModel(List<string> paramlist, ReportParameterModel rptParameter)
@@ -70,20 +50,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 EventCommand();
             }
+            CheckUserValidation();
         }
-
-
-        //internal void Initialize(List<string> paramlist, ReportParameterModel rptParameter)
-        //{
-        //    m_paramList = paramlist;
-        //    RptParameterDataHandler = rptParameter;
-        //    HideAllparameter();
-        //    HideEnableParamControls(paramlist);
-        //    if (rptParameter.rptid == ReportId.B3AccountHistory)
-        //    {
-        //        EventCommand();
-        //    }           
-        //}
 
         #endregion
         #region METHOD
@@ -408,6 +376,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return GetDate(); }
         }
 
+       
 
         public DatePickerM datePickermModel
         {

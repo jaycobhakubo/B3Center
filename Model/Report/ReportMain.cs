@@ -12,9 +12,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Report
 {
     public class ReportMain
     {
-        public B3Report B3Reports { get; set; }
+       public B3Report B3Reports { get; set; }
         public string ReportDisplayName { get; set; }
-        public ReportTemplateViewModel rpttemplatevm{ get; set; }
+        public ReportTemplateViewModel rpttemplatevm { get; set; }
         public ReportTemplate rptView { get; set; }
     }
 }
