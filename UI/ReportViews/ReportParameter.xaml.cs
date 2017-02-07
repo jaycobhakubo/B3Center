@@ -34,76 +34,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
             var ReportParameterVmHereInCodeBehind = (ReportParameterViewModel)DataContext;
             if (ReportParameterVmHereInCodeBehind.WorkInProgress == false)//Skip unecessary event
             {
-                ReportParameterVmHereInCodeBehind.EventCommand();//Only fire on actual selection 
+                ReportParameterVmHereInCodeBehind.SelectedSessionChange();//Only fire on actual selection 
             }
         }
 
-        private void keyInput(object sender, System.Windows.Input.KeyEventArgs e)
+        private void txtbxStartingCard_TextChanged(object sender, TextChangedEventArgs e)
         {
-           //true = no ; false = ok
-            bool allow = !true;
-
-            if (e.Key == Key.Space)
-            {
-                allow = true;
-            }
-            else
-                if (e.Key == Key.Back)
-            {
-                allow = !true;
-            }
-            e.Handled = allow;
-        }
-
-
-        private void ValidateCard(object sender, TextCompositionEventArgs e)
-        {
-            TextBox Items = (TextBox)sender;
-            string sCardNumber = Items.Text;
-            sCardNumber = sCardNumber.Insert(Items.SelectionStart, e.Text);
+            var start = txtbxStartingCard.Text;
+            var end = txtbxEndingCard.Text;
             var ii = (ReportParameterViewModel)DataContext;
-            ii.ValidateCard(sCardNumber, bool.Parse(Items.Tag.ToString()));
+            ii.ValidateCard(start, end);
         }
-
-        private void revalidate(object sender, TextChangedEventArgs e)
-        {
-            //var iie = ReportsViewModel.Instance;
-
-            //bool ViewReportVisibility = false;
-            //var ii = (ReportParameterViewModel)DataContext;
-            //int tempStartingCard;
-            //int tempEndingCard;
-            //var x = int.TryParse(ii.StartingCard, out tempStartingCard);
-            //var y = int.TryParse(ii.EndingCard, out tempEndingCard);
-            //if (x == true && y == true)
-            //{
-            //    if (tempEndingCard != 0)
-            //    {
-            //        if (tempStartingCard <= tempEndingCard)
-            //        {
-            //            ViewReportVisibility = true;
-            //        }
-            //    }
-            //}
-            //iie.ViewReportVisibility = ViewReportVisibility;
-        }
-
-        private void txtbxStartingCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void txtbxStartingCard_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void txtbxStartingCard_SelectionChanged(object sender, RoutedEventArgs e)
-        { bool result = false;
-            if (txtbxStartingCard.SelectedText.Length > 0)
-            
-                { result = true; }
-                e.Handled = result;
-        }
+    
     }
 }

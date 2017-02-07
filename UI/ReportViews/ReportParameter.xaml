@@ -92,11 +92,9 @@
                     MaxLength="6" 
                     Name="txtbxStartingCard" 
                     Text="{Binding StartingCard}"  
-                    Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"    
-                    PreviewTextInput="ValidateCard"
-                    PreviewKeyDown="keyInput"
-                     TextChanged="revalidate"
-                    Tag="true" SelectionChanged="txtbxStartingCard_SelectionChanged" 
+                    Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"                     
+                    Tag="true"                   
+                    TextChanged="txtbxStartingCard_TextChanged"
                    
                  
                    
@@ -107,11 +105,8 @@
                     MaxLength="6" 
                     Name="txtbxEndingCard" 
                     Visibility="{Binding ElementName=StartCardpar, Path=Visibility}" 
-                    Text="{Binding EndingCard}"
-                    PreviewTextInput="ValidateCard"
-                    PreviewKeyDown="keyInput"
-                    TextChanged="revalidate"
-                    Tag="false"
+                    Text="{Binding EndingCard}"  
+                    Tag="false" TextChanged="txtbxStartingCard_TextChanged"
                           >
                                          
                 </TextBox>

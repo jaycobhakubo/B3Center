@@ -19,7 +19,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     public class ReportParameterViewModel : ViewModelBase
     {
-
         #region MEMBER VARIABLE
 
         private DatePickerM m_datepickerModel;
@@ -34,8 +33,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private Visibility m_visibility;
         private ObservableCollection<string> m_months;
 
-        #endregion
-       
+        #endregion      
         #region CONSTRUCTORS
 
         public ReportParameterViewModel(List<string> paramlist, ReportParameterModel rptParameter)
@@ -48,7 +46,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             HideEnableParamControls(paramlist);
             if (rptParameter.rptid == ReportId.B3AccountHistory)
             {
-                EventCommand();
+                SelectedSessionChange();
             }
             CheckUserValidation();
         }
@@ -57,7 +55,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region METHOD
 
         //This also trigger from codebehind ReportParameter.xaml.cs
-        public void EventCommand()
+        public void SelectedSessionChange()
         {
             if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
             {
@@ -70,28 +68,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         //Another validation from code behind.
         //Enable or disable view and print button.
-        public void ValidateCard(string CardNumber, bool isStartingCard)
+        public void ValidateCard(string startingCard, string endingCard)
         {
             bool ViewReportVisibility = false;
-            string startingCardNow = "";
-            string endingCardNow = "";
-
-            if (isStartingCard == true)
-            {
-                startingCardNow = CardNumber;
-                endingCardNow = RptParameterDataHandler.b3EndingCard;
-            }
-            else
-            {
-                startingCardNow = RptParameterDataHandler.b3StartingCard;
-                endingCardNow = CardNumber;
-            }
+ 
 
             int tempStartingCard;
             int tempEndingCard;
 
-            var tempResultsc = int.TryParse(startingCardNow, out tempStartingCard); //Right now user can enter any character on the textbox 
-            var tempResultec = int.TryParse(endingCardNow, out tempEndingCard);
+            var tempResultsc = int.TryParse(startingCard, out tempStartingCard); //Right now user can enter any character on the textbox 
+            var tempResultec = int.TryParse(endingCard, out tempEndingCard);
 
             if (tempResultec == true && tempResultsc == true)
             {
