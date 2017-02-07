@@ -95,11 +95,8 @@
                     Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"                     
                     Tag="true"                   
                     TextChanged="txtbxStartingCard_TextChanged"
-                   
-                 
-                   
-                              ></TextBox>
-
+                   ></TextBox>
+                
                 <TextBlock Text="* Ending card:" Visibility="{Binding ElementName=StartCardpar, Path=Visibility}"/>
                 <TextBox  
                     MaxLength="6" 

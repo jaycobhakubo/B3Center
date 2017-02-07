@@ -77,7 +77,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller = controller;
             m_reports = controller.Reports;         
             m_controller.SessionInfoCompleted += OnListInfoDone;
-
+            tempcr = new CrystalReportsViewer();
             //set session list
             foreach (var session in controller.Sessions)
             {
@@ -486,7 +486,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                         tempcr = new CrystalReportsViewer();
+                       
                         tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
                         tempcr.ViewerCore.ReportSource = report;
                         tempcr.Focusable = true;
