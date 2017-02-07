@@ -78,28 +78,53 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller = controller;
             m_reports = controller.Reports;         
             m_controller.SessionInfoCompleted += OnListInfoDone;
-            tempcr = new CrystalReportsViewer();
+
             //set session list
             foreach (var session in controller.Sessions)
             {
                 SessionList.Add(session);
             }
 
-            b3AccountVm = new ReportTemplateViewModel(getrtm(ReportId.B3Accounts));
-            b3DailyVm = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
-            b3DetailVm = new ReportTemplateViewModel(getrtm(ReportId.B3Detail));
-            b3AccountHistVm = new ReportTemplateViewModel(getrtm(ReportId.B3AccountHistory));
-            b3CardVm = new ReportTemplateViewModel(getrtm(ReportId.B3BingoCardReport));
+            var B3Accounts = new ReportTemplateViewModel(getrtm(ReportId.B3Accounts));
+            var B3Daily = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
+            var B3Detail = new ReportTemplateViewModel(getrtm(ReportId.B3Detail));
+            var B3Monthly = new ReportTemplateViewModel(getrtm(ReportId.B3Monthly));
+            var B3Void = new ReportTemplateViewModel(getrtm(ReportId.B3Void));
+            var B3Drawer = new ReportTemplateViewModel(getrtm(ReportId.B3Drawer));
+            var B3Jackpot = new ReportTemplateViewModel(getrtm(ReportId.B3Jackpot));
+            var B3Session = new ReportTemplateViewModel(getrtm(ReportId.B3Session));
+            var B3BallCallBySession = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallBySession));
+            var B3BallCallByGame = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallByGame));
+            var B3SessionTransaction = new ReportTemplateViewModel(getrtm(ReportId.B3SessionTransaction));
+            var B3SessionSummary = new ReportTemplateViewModel(getrtm(ReportId.B3SessionSummary));
+            var B3WinnerCards = new ReportTemplateViewModel(getrtm(ReportId.B3WinnerCards));
+            var B3AccountHistory = new ReportTemplateViewModel(getrtm(ReportId.B3AccountHistory));
+            var B3BingoCardReport = new ReportTemplateViewModel(getrtm(ReportId.B3BingoCardReport));
+
+          
+
 
             m_reportCollection = new ObservableCollection<ReportMain>()
             {
-                new ReportMain(){B3Reports = m_reports[0], ReportDisplayName = "Accounts",rpttemplatevm = b3AccountVm  , rptView = new ReportTemplate(b3AccountVm)},
-                new ReportMain(){B3Reports = m_reports[1], ReportDisplayName = "Daily", rpttemplatevm = b3DailyVm ,rptView = new ReportTemplate(b3DailyVm)},
-                new ReportMain(){B3Reports = m_reports[2], ReportDisplayName = "Detail",rpttemplatevm = b3DetailVm ,rptView = new ReportTemplate(b3DetailVm)},
-                 new ReportMain(){B3Reports = m_reports[13], ReportDisplayName = "Account History", rpttemplatevm= b3AccountHistVm ,rptView = new ReportTemplate(b3AccountHistVm)},
-                 new ReportMain(){B3Reports = m_reports[14], ReportDisplayName = "Bingo Card", rpttemplatevm= b3CardVm ,rptView = new ReportTemplate(b3CardVm)},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Accounts), ReportDisplayName = "Accounts",rpttemplatevm =   B3Accounts  , rptView = new ReportTemplate(B3Accounts)},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Daily ), ReportDisplayName = "Daily",rpttemplatevm =   B3Daily   , rptView = new ReportTemplate(  B3Daily )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Detail ), ReportDisplayName = "Detail",rpttemplatevm =   B3Detail   , rptView = new ReportTemplate(  B3Detail )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Monthly), ReportDisplayName = "Monthly",rpttemplatevm =   B3Monthly  , rptView = new ReportTemplate(  B3Monthly)},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Void ), ReportDisplayName = "Void",rpttemplatevm =   B3Void   , rptView = new ReportTemplate(  B3Void )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Drawer ), ReportDisplayName = "Drawer",rpttemplatevm =   B3Drawer   , rptView = new ReportTemplate(  B3Drawer )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Jackpot ), ReportDisplayName ="Jackpot ",rpttemplatevm =   B3Jackpot   , rptView = new ReportTemplate(  B3Jackpot )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3Session ), ReportDisplayName ="Session ",rpttemplatevm =   B3Session   , rptView = new ReportTemplate(  B3Session )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3BallCallBySession), ReportDisplayName = "BallCall by session",rpttemplatevm =   B3BallCallBySession  , rptView = new ReportTemplate(  B3BallCallBySession)},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3BallCallByGame ), ReportDisplayName = "BallCall by game",rpttemplatevm =   B3BallCallByGame   , rptView = new ReportTemplate(  B3BallCallByGame )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3SessionTransaction ), ReportDisplayName = "Session Transaction",rpttemplatevm =   B3SessionTransaction   , rptView = new ReportTemplate(  B3SessionTransaction )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3SessionSummary ), ReportDisplayName = "Session Summary",rpttemplatevm =   B3SessionSummary   , rptView = new ReportTemplate(  B3SessionSummary )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3WinnerCards ), ReportDisplayName = "Winner Cards",rpttemplatevm =   B3WinnerCards   , rptView = new ReportTemplate(  B3WinnerCards )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3AccountHistory ), ReportDisplayName = "Account History",rpttemplatevm =   B3AccountHistory   , rptView = new ReportTemplate(  B3AccountHistory )},
+  new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3BingoCardReport ), ReportDisplayName = "Bingo Card",rpttemplatevm =   B3BingoCardReport   , rptView = new ReportTemplate(  B3BingoCardReport )}, 
             };
-            m_selectedReportColl = m_reportCollection.FirstOrDefault();
+
+            m_reportCollection = new ObservableCollection<ReportMain>(m_reportCollection.OrderBy(l => l.ReportDisplayName));
+           SelectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
         }
 
@@ -304,7 +329,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region (on event)
 
-        //Date change
+        //Dates change event
         public void updateItemDateSelected(DateTime i)
         {
             var y = SelectedReportColl.B3Reports.Id;
@@ -326,10 +351,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-        //Report change
+        //Report change event
         public void SelectionChange()
         {
-            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
+            if (m_reportSelected.Id == ReportId.B3BingoCardReport)
+            {
+                ViewReportVisibility = false;
+            }
+            else
+            {
+                SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
+            }
         }
 
         #endregion
@@ -631,21 +663,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region PROPERTIES
 
-        public ReportTemplateViewModel b3AccountVm { get; set; }
-        public ReportTemplateViewModel b3DailyVm { get; set; }
-        public ReportTemplateViewModel b3DetailVm { get; set; }
-        public ReportTemplateViewModel b3AccountHistVm { get; set; }
-        public ReportTemplateViewModel b3CardVm { get; set; }
-        public ReportTemplateViewModel b3BallCallbyGameVm { get; set; }
-        public ReportTemplateViewModel b3BallCallbySessionVm { get; set; }
-        public ReportTemplateViewModel b3DrawerVm { get; set; }
-        public ReportTemplateViewModel b3JackpotVm { get; set; }
-        public ReportTemplateViewModel b3MonthlyVm { get; set; }
-        public ReportTemplateViewModel b3SessionVm { get; set; }
-        public ReportTemplateViewModel b3SessionSummaryVm { get; set; }
-        public ReportTemplateViewModel b3SessionTransactionVm { get; set; }
-        public ReportTemplateViewModel b3VoidVm { get; set; }
-        public ReportTemplateViewModel b3WinnersCardVm { get; set; }
+       
 
         private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
         public ObservableCollection<ReportMain> ReportListCol
@@ -720,7 +738,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return Visibility.Visible; //m_rptBaseVm.ReportParameterVisible;
+                return m_selectedReportTemplateViewModel.ReportParameterVisible;
             }
             set
             {
