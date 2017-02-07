@@ -29,46 +29,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             ReportTemplate_Model = reportTemplateModel;
             reportParameterList = ReportTemplate_Model.ReportParameter;
             parVm = new ReportParameterViewModel(reportParameterList, reportTemplateModel.rptParModel);//.Instance;
-            //parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);
             CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
         }
-
-
-        //public ReportTemplateViewModel()
-        //{
-
-        //}
-
-        //internal void Initialize(ReportTemplateModel reportTemplateModel)
-        //{
-        //    ReportTemplate_Model = reportTemplateModel;
-        //    reportParameterList = ReportTemplate_Model.ReportParameter;
-        //    parVm = ReportParameterViewModel.Instance;
-        //    parVm.Initialize(reportParameterList, reportTemplateModel.rptParModel);
-        //    CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
-        //}
-
-
-
-        //private static volatile ReportTemplateViewModel m_instance;
-        //private static readonly object m_syncRoot = new Object();
-
-        //public static ReportTemplateViewModel Instance
-        //{
-        //    get
-        //    {
-        //        if (m_instance == null)
-        //        {
-        //            lock (m_syncRoot)
-        //            {
-        //                if (m_instance == null)
-        //                    m_instance = new ReportTemplateViewModel();
-        //            }
-        //        }
-
-        //        return m_instance;
-        //    }
-        //}
 
         public ReportTemplateModel ReportTemplate_Model
         {

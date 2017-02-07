@@ -51,27 +51,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<Session> m_sessionList;
         private List<B3Report> m_reports;
         private CrystalReportsViewer tempcr;
-        private static volatile ReportsViewModel m_instance;
-        private static readonly object m_syncRoot = new Object();
-        private int m_accountNumberSelected;
+       
 
-        //Reports
-        private AccountHistoryReportView m_accountHistoryReportView; 
-        private AccountsReportView m_accountsReportView;
-        private BallCallReportView m_ballCallReportView;
-        private BallCallBySessionView m_ballCallBySession;
-        private BingoCardView m_bingoCardReportView;
-        private DailyReportView m_dailyReportView;
-        private DetailReportView m_detailReportView;
-        private DrawerReportView m_drawerReportView;
-        private JackpotReportView m_jackpotReportView;
-        private MonthlyReportView m_monthlyReportView;
-        private SessionReportView m_sessionReportView;
-        private SessionSummaryView m_sessionsummaryReportView;
-        private SessionTransactionReportView m_sessionTranReportView;
-        private VoidReportView m_voidReportView;
-        private WinnerCardsReportView m_winnerCardsReportView;
-           
         #endregion
         #region CONSTRUCTORS
 
@@ -94,8 +75,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(B3Controller controller)
         {
             m_controller = controller;
-            m_reports = controller.Reports;
-          
+            m_reports = controller.Reports;         
             m_controller.SessionInfoCompleted += OnListInfoDone;
 
             //set session list
@@ -103,10 +83,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SessionList.Add(session);
             }
-      
-            LoadReportList();
-            B3Accounts = ReportBaseVm.Instance;
-            B3Accounts.Initialize(getrtm(ReportId.B3Accounts));
 
             b3AccountVm = new ReportTemplateViewModel(getrtm(ReportId.B3Accounts));
             b3DailyVm = new ReportTemplateViewModel(getrtm(ReportId.B3Daily));
@@ -126,186 +102,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SetCommand();           
         }
 
-
-        public void updateItemDateSelected(DateTime i)
-        {
-            //var x = ReportParameterViewModel.Instance;
-            var y = SelectedReportColl.B3Reports.Id;
-            if
-                (
-                y == ReportId.B3AccountHistory
-                || y == ReportId.B3BallCallByGame
-                || y == ReportId.B3Jackpot
-                || y == ReportId.B3Session
-                        || y == ReportId.B3SessionSummary
-                        || y == ReportId.B3SessionTransaction
-                        || y == ReportId.B3WinnerCards
-                )
-            {
-                SelectedReportColl.rpttemplatevm.parVm.UpdateSessionList(i);
-                
-            }
-            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
-        }
-
-        public void SelectionChange()
-        {
-            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
-        }
-
-        public ReportBaseVm B3Accounts { get; set; }
-
-
-        public ReportTemplateViewModel b3AccountVm { get; set; }
-        public ReportTemplateViewModel b3DailyVm { get; set; }
-        public ReportTemplateViewModel b3DetailVm { get; set; }
-        public ReportTemplateViewModel b3AccountHistVm { get; set; }
-        public ReportTemplateViewModel b3CardVm { get; set; }
-
-        private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
-
-        public ObservableCollection<ReportMain> ReportListCol
-        {
-            get {return m_reportCollection;}
-            set { m_reportCollection = value; }
-        }
-
-        private ReportMain m_selectedReportColl;
-        public ReportMain SelectedReportColl
-        {
-            get {return m_selectedReportColl;}
-            set
-            {
-                m_selectedReportColl = value;
-                //rptBaseVm = value.ReportBasevm;
-                SelectedReportViewCol = value.rptView; ;
-
-                RaisePropertyChanged("SelectedReportColl");
-            }
-        }
-
-        public ReportTemplate SelectedReportViewCol
-        {
-            get { return m_selectedReportColl.rptView; }
-            set
-            {
-                m_selectedReportColl.rptView = value;
-                RaisePropertyChanged("SelectedReportViewCol");
-            }
-        }
-
-
-        public ReportBaseVm rptBaseVm
-        {
-            get;set;
-            //get { return m_selectedReportColl.ReportBasevm; }
-            //set
-            //{
-            //    m_selectedReportColl.ReportBasevm = value;
-            //    RaisePropertyChanged("rptBaseVm");
-            //}
-        }
-
-        //Run once and never again.
-        private void LoadReportList()
-        {
-            m_reportList.Clear();
-            foreach (B3Report b3rpt in m_reports)
-            {
-                B3Report temp = new B3Report();
-                temp = b3rpt;
-                switch (b3rpt.Id)
-                {
-                    case ReportId.B3AccountHistory:
-                        {
-                            temp.DisplayName = "Account History";
-                            break;
-                        }
-                    case ReportId.B3Accounts:
-                        {
-                            temp.DisplayName = "Accounts";
-                            break;
-                        }
-                
-                    case ReportId.B3BallCallByGame:
-                        {
-                            temp.DisplayName = "Ball Call(by game)";
-                            break;
-                        }
-                    case ReportId.B3BallCallBySession:
-                        {
-                            temp.DisplayName = "Ball Call(by session)";
-                            break;
-                        }
-                    case ReportId.B3BingoCardReport:
-                        {
-                            temp.DisplayName = "Bingo Card";
-                            break;
-                        }
-                    case ReportId.B3Daily:
-                        {
-                            temp.DisplayName = "Daily";
-                            break;
-                        }
-                    case ReportId.B3Detail:
-                        {
-                            temp.DisplayName = "Detail";
-                            break;
-                        }
-                    case ReportId.B3Drawer:
-                        {
-                            temp.DisplayName = "Drawer";
-                            break;
-                        }
-                    case ReportId.B3Jackpot:
-                        {
-                            temp.DisplayName = "Jackpot";
-                            break;
-                        }
-                    case ReportId.B3Monthly:
-                        {
-                            temp.DisplayName = "Monthly";
-                            break;
-                        }
-                    case ReportId.B3Session:
-                        {
-                            temp.DisplayName = "Session";
-                            break;
-                        }
-
-                    case ReportId.B3SessionSummary:
-                        {
-                            temp.DisplayName = "Session Summary";
-                            break;
-                        }
-                    case ReportId.B3SessionTransaction:
-                        {
-                            temp.DisplayName = "Session Transaction";
-                            break;
-                        }
-                    case ReportId.B3Void:
-                        {
-                            temp.DisplayName = "Void";
-                            break;
-                        }
-                    case ReportId.B3WinnerCards:
-                        {
-                            temp.DisplayName = "Winner Cards";
-                            break;
-                        }
-                }
-                if (!string.IsNullOrEmpty(temp.DisplayName))
-                {
-                    m_reportList.Add(temp);
-                }
-                m_reportList = m_reportList.OrderBy(l => l.DisplayName).ToList();
-            }
-
-            ReportSelected = m_reportList.FirstOrDefault();
-        }
-
         #endregion
         #region ACCESSOR (static)
+
+        private static volatile ReportsViewModel m_instance;
+        private static readonly object m_syncRoot = new Object();
         /// <summary>
         /// Gets the singleton instance of ReportsViewModel.
         /// </summary>
@@ -486,108 +287,175 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return result;
         }
 
-        public void SelectionChanged(string ReportName)
+        private int GetMonthEquivValue(string monthName)
         {
-            //Reinitialize every selection changed rather than storing.
-            ReportName = "";
-            UserControl view = null;
-            switch (ReportName)
+            string monthname = monthName;
+            string[] m_months =
+             {
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
+                "Nov", "Dec"
+            };
+            return Array.IndexOf(m_months, monthname) + 1;
+        }
+
+        #region (on event)
+
+        //Date change
+        public void updateItemDateSelected(DateTime i)
+        {
+            var y = SelectedReportColl.B3Reports.Id;
+            if
+                (
+                y == ReportId.B3AccountHistory
+                || y == ReportId.B3BallCallByGame
+                || y == ReportId.B3Jackpot
+                || y == ReportId.B3Session
+                        || y == ReportId.B3SessionSummary
+                        || y == ReportId.B3SessionTransaction
+                        || y == ReportId.B3WinnerCards
+                )
             {
-                case "Accounts":
+                SelectedReportColl.rpttemplatevm.parVm.UpdateSessionList(i);
+
+            }
+            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
+        }
+
+
+        //Report change
+        public void SelectionChange()
+        {
+            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
+        }
+
+        #endregion
+        #region (view and print report)
+
+        public ReportDocument LoadReportDocument(B3Report Report)
+        {
+            //Station is the machine Description of the machine. 
+            //E.g machine ID 22 Description POS SALES
+            //Since I cant find it. Ill just send the ID and just use subreport to get the machine description on Crystal report.
+
+            var userId = m_selectedReportTemplateViewModel.ReportTemplate_Model.CurrentUser;
+            var machineId = m_selectedReportTemplateViewModel.ReportTemplate_Model.CurrentMachine;
+
+            switch (Report.Id)
+            {
+                case ReportId.B3AccountHistory:
                     {
-                        //m_accountsReportView = new AccountsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Accounts)));
-                        //view = m_accountsReportView;
+
+                        Report.CrystalReportDocument.SetParameterValue("@P_Date_", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture)); //tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.RptParameterDataHandler.Date_*/
+                        Report.CrystalReportDocument.SetParameterValue("@SessionID_", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@AccountNumber", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3AccountNumber);
                         break;
                     }
-                case "Account History":
+                case ReportId.B3Accounts:
                     {
-                        //m_accountHistoryReportView = new AccountHistoryReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3AccountHistory)));
-                        view = m_accountHistoryReportView;
+
+                        var testr = GetMonthEquivValue(m_selectedReportTemplateViewModel.parVm.MonthSelected) + 1;
+                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(m_selectedReportTemplateViewModel.parVm.MonthSelected) + 1);
+                        Report.CrystalReportDocument.SetParameterValue("@nYear", m_selectedReportTemplateViewModel.parVm.YearSelected.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
-                case "Ball Call(by game)":
+                case ReportId.B3BallCallByGame:
                     {
-                        //m_ballCallReportView = new BallCallReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallByGame)));
-                        view = m_ballCallReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@session", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@DateParameter", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        break;
+
+                    }
+                case ReportId.B3BallCallBySession:
+                    {
+                        var startdate = m_selectedReportTemplateViewModel.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = m_selectedReportTemplateViewModel.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        Report.CrystalReportDocument.SetParameterValue("@StartDate", startdate);
+                        Report.CrystalReportDocument.SetParameterValue("@EndDate", enddate);
                         break;
                     }
-                case "Ball Call(by session)":
+                case ReportId.B3BingoCardReport:
                     {
-                        //m_ballCallBySession = new BallCallBySessionView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BallCallBySession)));
-                        view = m_ballCallBySession;
+                        Report.CrystalReportDocument.SetParameterValue("@startId", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3StartingCard);
+                        Report.CrystalReportDocument.SetParameterValue("@endId", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3EndingCard);
                         break;
                     }
-                case "Bingo Card":
+                case ReportId.B3Daily:
                     {
-                        //m_bingoCardReportView = new BingoCardView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3BingoCardReport)));
-                        ViewReportVisibility = false;
-                        view = m_bingoCardReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@SessionNum", null);
+                        Report.CrystalReportDocument.SetParameterValue("@UserId", m_selectedReportTemplateViewModel.ReportTemplate_Model.CurrentUser);
+                        Report.CrystalReportDocument.SetParameterValue("@Station", m_selectedReportTemplateViewModel.ReportTemplate_Model.CurrentMachine);
+                        Report.CrystalReportDocument.SetParameterValue("@DateTime", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
-                case "Daily":
+                case ReportId.B3Detail:
                     {
-                        //m_dailyReportView = new DailyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Daily)));
-                        view = m_dailyReportView;
+                        var startdate = m_selectedReportTemplateViewModel.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = m_selectedReportTemplateViewModel.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
+                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
                         break;
                     }
-                case "Detail":
+                case ReportId.B3Drawer://No data: Issue on clientmac(This report need fix)
                     {
-                        //m_detailReportView = new DetailReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Detail)));
-                        view = m_detailReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@MachineID", machineId);
+                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
+                        Report.CrystalReportDocument.SetParameterValue("@nDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@UserId", m_selectedReportTemplateViewModel.ReportTemplate_Model.CurrentUser);
                         break;
                     }
-                case "Drawer":
+                case ReportId.B3Jackpot:
                     {
-                        //m_drawerReportView = new DrawerReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Drawer)));
-                        view = m_drawerReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@nSessNum", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@UserId", userId);
+                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
+                        Report.CrystalReportDocument.SetParameterValue("@nDate", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
-                case "Jackpot":
+                case ReportId.B3Monthly:
                     {
-                        //m_jackpotReportView = new JackpotReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Jackpot)));
-                        view = m_jackpotReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(m_selectedReportTemplateViewModel.parVm.MonthSelected));//bcvm.parVm.RptParameterDataHandler.dateMonth);
+                        Report.CrystalReportDocument.SetParameterValue("@nYear", m_selectedReportTemplateViewModel.parVm.YearSelected.ToString(CultureInfo.InvariantCulture)); //bcvm.parVm.RptParameterDataHandler.dateYear);                      
                         break;
                     }
-                case "Monthly":
+                case ReportId.B3Session:
                     {
-                        //m_monthlyReportView = new MonthlyReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Monthly)));
-                        view = m_monthlyReportView;
-                        break;
-                    }
-                case "Session":
-                    {
-                        //m_sessionReportView = new SessionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Session)));
-                        view = m_sessionReportView;
-                        break;
-                    }
-                case "Session Summary":
-                    {
-                        //m_sessionsummaryReportView = new SessionSummaryView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionSummary)));
-                        view = m_sessionsummaryReportView;
-                        break;
-                    }
-                case "Session Transaction":
-                    {
-                        //m_sessionTranReportView = new SessionTransactionReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3SessionTransaction)));
-                        view = m_sessionTranReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@SessionID", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@DateN", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@UserID", userId);
+                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
                         break;
                     }
 
-                case "Void":
+                case ReportId.B3SessionSummary:
                     {
-                        //m_voidReportView = new VoidReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3Void)));
-                        view = m_voidReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@SessionN", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@DateTime", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        Report.CrystalReportDocument.SetParameterValue("@UserID", userId);
+                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
                         break;
                     }
-
-                case "Winner Cards":
+                case ReportId.B3SessionTransaction:
                     {
-                        //m_winnerCardsReportView = new WinnerCardsReportView(m_rptBaseVm = new ReportBaseVm(getrtm(ReportId.B3WinnerCards)));
-                        view = m_winnerCardsReportView;
+                        Report.CrystalReportDocument.SetParameterValue("@SessionNumber", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@DateTime", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        break;
+                    }
+                case ReportId.B3Void:
+                    {
+                        var startdate = m_selectedReportTemplateViewModel.parVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = m_selectedReportTemplateViewModel.parVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
+                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
+                        break;
+                    }
+                case ReportId.B3WinnerCards:
+                    {
+                        Report.CrystalReportDocument.SetParameterValue("@SessionNum", m_selectedReportTemplateViewModel.parVm.RptParameterDataHandler.b3Session.Number);
+                        Report.CrystalReportDocument.SetParameterValue("@DateRun", m_selectedReportTemplateViewModel.parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
             }
-            //SelectedReportView = view;
+            return Report.CrystalReportDocument;
         }
 
         private void LoadCrystalReport(B3Report report)
@@ -599,9 +467,223 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             report.LoadCrystalReport(server, name, user, password);
         }
 
+        public void ViewReportRel(ReportId reportID)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {            
+                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+                    if (Rpt == null) { return; }
+                    LoadCrystalReport(Rpt);
+                    var report = LoadReportDocument(Rpt);
+
+                    if (report == null)
+                    {
+                        IsLoading = false;
+                        return;
+                    }
+
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                         tempcr = new CrystalReportsViewer();
+                        tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
+                        tempcr.ViewerCore.ReportSource = report;
+                        tempcr.Focusable = true;
+                        tempcr.Focus();
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        MessageWindow.Show(
+                            string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
+                                ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
+                    }));
+                }
+                finally
+                {
+                    IsLoading = false;
+               
+                }
+            });
+
+            DefaultViewMode = Visibility.Collapsed;
+            CRViewMode = Visibility.Visible;
+            m_selectedReportTemplateViewModel.vReportViewer = tempcr;
+        }
+
+        //NOTE: in order for the report to print in a particular printer name in your network,
+        //you should manually set the page setup -> Printer Options -> No printer name  false(uncheck) .
+        //(It dont matter what printer name you pick as long as it is uncheck).
+        //Also check the : Diassociate Formatting Page Size and Adjust Automatically to true(check).
+        public void StartPrintReport(ReportId reportID)
+        {
+            var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+            if (Rpt == null) { return; }
+            LoadCrystalReport(Rpt);
+            var report = LoadReportDocument(Rpt);
+
+            if (!PrintReport(reportID, report))//Try printing the report
+            {
+                {
+                    PrintDialog printDialog = new PrintDialog();
+
+                    if (printDialog.ShowDialog() == true)
+                    {
+                        report.PrintOptions.PrinterName = printDialog.PrintQueue.Name;
+                        report.PrintToPrinter(1, true, 0, 0);
+                    }
+                }
+            }
+        }
+
+        internal bool PrintReport(ReportId reportId, ReportDocument report)
+        {
+            var returnValue = false;
+            switch (reportId)
+            {
+                case ReportId.B3AccountHistory:
+                case ReportId.B3Accounts:
+                case ReportId.B3Detail:
+                case ReportId.B3Monthly:
+                case ReportId.B3Void:
+                case ReportId.B3BingoCardReport:
+                case ReportId.B3BallCallByGame:
+                case ReportId.B3BallCallBySession:
+                case ReportId.B3WinnerCards:
+                case ReportId.B3SessionTransaction:
+                    {
+                        returnValue = TryPrintGlobalPrinter(report);
+                    }
+                    break;
+
+                case ReportId.B3Daily:
+                case ReportId.B3Drawer:
+                case ReportId.B3Jackpot:
+                case ReportId.B3Session:
+                case ReportId.B3SessionSummary:
+
+                    {
+                        returnValue = TryPrintReceiptPrinter(report); //try to print to receipt printer
+                        if (!returnValue)  //if unsuccessful then try to print to report printer
+                        {
+                            returnValue = TryPrintReceiptPrinter(report);
+                        }
+                    }
+                    break;
+            }
+
+            return returnValue;
+        }
+
+        //Epson
+        private bool TryPrintReceiptPrinter(ReportDocument report)
+        {
+            var returnValue = true;
+            try
+            {
+                PageMargins margins;
+                margins = report.PrintOptions.PageMargins;
+                margins.bottomMargin = 0;
+                margins.leftMargin = 0;
+                margins.rightMargin = 0;
+                margins.topMargin = 0;
+                report.PrintOptions.PaperSource = PaperSource.Auto;
+                report.PrintOptions.ApplyPageMargins(margins);
+                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = false;
+                report.PrintOptions.PrinterName = Settings.ReceiptPrinterName;
+                report.PrintToPrinter(1, true, 0, 0);
+            }
+            catch (Exception)
+            {
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+
+        private bool TryPrintGlobalPrinter(ReportDocument report)
+        {
+            var returnValue = true;
+            try
+            {
+                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = true;
+                report.PrintOptions.PrinterName = Settings.PrinterName;
+                report.PrintToPrinter(1, true, 0, 0);
+            }
+            catch (Exception)
+            {
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+        #endregion
 
         #endregion
         #region PROPERTIES
+
+        public ReportTemplateViewModel b3AccountVm { get; set; }
+        public ReportTemplateViewModel b3DailyVm { get; set; }
+        public ReportTemplateViewModel b3DetailVm { get; set; }
+        public ReportTemplateViewModel b3AccountHistVm { get; set; }
+        public ReportTemplateViewModel b3CardVm { get; set; }
+        public ReportTemplateViewModel b3BallCallbyGameVm { get; set; }
+        public ReportTemplateViewModel b3BallCallbySessionVm { get; set; }
+        public ReportTemplateViewModel b3DrawerVm { get; set; }
+        public ReportTemplateViewModel b3JackpotVm { get; set; }
+        public ReportTemplateViewModel b3MonthlyVm { get; set; }
+        public ReportTemplateViewModel b3SessionVm { get; set; }
+        public ReportTemplateViewModel b3SessionSummaryVm { get; set; }
+        public ReportTemplateViewModel b3SessionTransactionVm { get; set; }
+        public ReportTemplateViewModel b3VoidVm { get; set; }
+        public ReportTemplateViewModel b3WinnersCardVm { get; set; }
+
+        private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
+        public ObservableCollection<ReportMain> ReportListCol
+        {
+            get { return m_reportCollection; }
+            set { m_reportCollection = value; }
+        }
+
+        private ReportMain m_selectedReportColl;
+        public ReportMain SelectedReportColl
+        {
+            get { return m_selectedReportColl; }
+            set
+            {
+                m_selectedReportColl = value;
+                SelectedReportViewCol = value.rptView;
+                m_selectedReportTemplateViewModel = value.rpttemplatevm;
+                m_reportSelected = value.B3Reports;
+                RaisePropertyChanged("SelectedReportColl");
+            }
+        }
+
+        private ReportTemplateViewModel m_selectedReportTemplateViewModel { get; set; }
+
+        public ReportTemplate SelectedReportViewCol
+        {
+            get { return m_selectedReportColl.rptView; }
+            set
+            {
+                m_selectedReportColl.rptView = value;
+                RaisePropertyChanged("SelectedReportViewCol");
+            }
+        }
+
+        private B3Report m_reportSelected;
+        public B3Report ReportSelected
+        {
+            get { return m_reportSelected; }
+            set
+            {
+                m_reportSelected = value;
+                RaisePropertyChanged("ReportSelected");
+            }
+        }
 
         private bool m_viewReportVisibility;
         public bool ViewReportVisibility
@@ -614,61 +696,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
    
-        private ReportBaseVm m_rptBaseVm;
-        public ReportBaseVm RptBaseVm
-        {
-            get { return m_rptBaseVm; }
-            set
-            {
-                m_rptBaseVm = value;
-                RaisePropertyChanged("RptBaseVm");
-            }
-        }
-
-        private B3Report m_reportSelected; 
-        public B3Report ReportSelected
-        {
-            get { return m_reportSelected; }
-            set 
-            { 
-                m_reportSelected = value;
-                SelectionChanged(value.DisplayName);
-                RaisePropertyChanged("ReportSelected");
-            }
-        }
-
-        private List<B3Report> m_reportList = new List<B3Report>();
-        public List<B3Report> ReportList
-        {
-            get { return m_reportList; }
-        }
         
-        private UserControl m_selectedReportView = new UserControl();
-        public UserControl SelectedReportView
-        {
-            get {
-                return m_selectedReportView;
-            }
-            set
-            {
-                m_selectedReportView = value;
-                    RaisePropertyChanged("SelectedReportView");
-            }
-        }
-
-
         public Visibility CRViewMode
         {
             get
             {
-                return m_rptBaseVm.bcvm.ReportViewerVisibility;
+                return m_selectedReportTemplateViewModel.ReportViewerVisibility;
             }
             set
             {
-                m_rptBaseVm.bcvm.ReportViewerVisibility = value;
+                m_selectedReportTemplateViewModel.ReportViewerVisibility = value;
                 RaisePropertyChanged("CRViewMode");
             }
-
         }
 
         public Visibility DefaultViewMode
@@ -679,7 +718,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             set
             {
-                m_rptBaseVm.bcvm.ReportParameterVisible = value;
+                m_selectedReportTemplateViewModel.ReportParameterVisible = value;
                 RaisePropertyChanged("DefaultViewMode");
             }
 
@@ -826,163 +865,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetCommand()
         {
-            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(ReportSelected.Id));
-            PrintReportCommand = new RelayCommand(parameter => StartPrintReport(ReportSelected.Id)); 
-        }
-   
-
-        public void ViewReportRel(ReportId reportID)
-        {
-            Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    tempcr = new CrystalReportsViewer();
-                    tempcr.ToggleSidePanel = Constants.SidePanelKind.None;
-                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
-                    if (Rpt == null) { return; }
-                    LoadCrystalReport(Rpt);
-                    var report = m_rptBaseVm.LoadReportDocument(Rpt);
-
-                    if (report == null)
-                    {
-                        IsLoading = false;
-                        return;
-                    }
-
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        tempcr.ViewerCore.ReportSource = report;
-                        tempcr.Focusable = true;
-                        tempcr.Focus();
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                     {
-                         MessageWindow.Show(
-                             string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
-                                 ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
-                     }));
-                }
-                finally
-                {
-                    IsLoading = false;
-                }
-            });
-
-            DefaultViewMode = Visibility.Collapsed;
-            CRViewMode = Visibility.Visible;
-            m_rptBaseVm.bcvm.vReportViewer = tempcr;          
+            ViewReportCommand = new RelayCommand(parameter => ViewReportRel(m_reportSelected.Id));
+            PrintReportCommand = new RelayCommand(parameter => StartPrintReport(m_reportSelected.Id)); 
         }
 
-        //NOTE: in order for the report to print in a particular printer name in your network,
-        //you should manually set the page setup -> Printer Options -> No printer name  false(uncheck) .
-        //(It dont matter what printer name you pick as long as it is uncheck).
-        //Also check the : Diassociate Formatting Page Size and Adjust Automatically to true(check).
-        public void StartPrintReport(ReportId reportID)
-        {
-            var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
-            if (Rpt == null) { return; }
-            LoadCrystalReport(Rpt);
-            var report = m_rptBaseVm.LoadReportDocument(Rpt);
-
-            if (!PrintReport(reportID, report))//Try printing the report
-            {
-                {
-                    PrintDialog printDialog = new PrintDialog();
-
-                    if (printDialog.ShowDialog() == true)
-                    {
-                        report.PrintOptions.PrinterName = printDialog.PrintQueue.Name;
-                        report.PrintToPrinter(1, true, 0, 0);
-                    }
-                }
-            }
-        }
-
-        internal bool PrintReport(ReportId reportId, ReportDocument report)
-        {
-            var returnValue = false;
-            switch (reportId)
-            {
-                case ReportId.B3AccountHistory:
-                case ReportId.B3Accounts:
-                case ReportId.B3Detail:
-                case ReportId.B3Monthly:
-                case ReportId.B3Void:
-                case ReportId.B3BingoCardReport:
-                case ReportId.B3BallCallByGame:
-                case ReportId.B3BallCallBySession:
-                case ReportId.B3WinnerCards:
-                case ReportId.B3SessionTransaction:
-                    {
-                        returnValue = TryPrintGlobalPrinter(report);
-                    }
-                    break;
-
-                case ReportId.B3Daily:
-                case ReportId.B3Drawer:
-                case ReportId.B3Jackpot:
-                case ReportId.B3Session:
-                case ReportId.B3SessionSummary:
- 
-                    {
-                        returnValue = TryPrintReceiptPrinter(report); //try to print to receipt printer
-                        if (!returnValue)  //if unsuccessful then try to print to report printer
-                        {
-                            returnValue = TryPrintReceiptPrinter(report);
-                        }
-                    }
-                    break;
-            }
-
-            return returnValue;
-        }
-
-        //Epson
-        private bool TryPrintReceiptPrinter(ReportDocument report)
-        {
-            var returnValue = true;
-            try
-            {                
-                PageMargins margins;
-                margins = report.PrintOptions.PageMargins;
-                margins.bottomMargin = 0;
-                margins.leftMargin = 0;
-                margins.rightMargin = 0;
-                margins.topMargin = 0;
-                report.PrintOptions.PaperSource = PaperSource.Auto;
-                report.PrintOptions.ApplyPageMargins(margins);
-                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = false;
-                report.PrintOptions.PrinterName = Settings.ReceiptPrinterName;
-                report.PrintToPrinter(1, true, 0, 0);
-            }
-            catch (Exception)
-            {
-                returnValue = false;
-            }
-
-            return returnValue;
-        }
-
-        private bool TryPrintGlobalPrinter(ReportDocument report)
-        {
-            var returnValue = true;
-            try
-            {
-                report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = true;
-                report.PrintOptions.PrinterName = Settings.PrinterName;
-                report.PrintToPrinter(1, true, 0, 0);
-            }
-            catch (Exception)
-            {
-                returnValue = false;
-            }
-
-            return returnValue;
-        }
+    
         #endregion
     }
 }
