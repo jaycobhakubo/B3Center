@@ -703,6 +703,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region PROPERTIES 
         #region (with private member)
 
+        private bool m_viewReportVisibility;
+        public bool ViewReportVisibility
+        {
+            get { return m_viewReportVisibility; }
+            set 
+            {
+                m_viewReportVisibility = value;
+                RaisePropertyChanged("ViewReportVisibility");
+            }
+        }
+
         private int m_borderValue;
         public int SetBorderValue
         {

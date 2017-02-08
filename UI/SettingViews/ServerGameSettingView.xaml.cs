@@ -31,5 +31,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             InitializeComponent();
             DataContext = ServerSettingViewModel;
         }
+
+         private void ValidateUserInput(object sender, TextChangedEventArgs e)
+         {
+
+             TextBox currentTextBox = (TextBox)sender;
+
+
+             if (string.IsNullOrEmpty(currentTextBox.Text))
+             {
+                 var ii = SettingViewModel.Instance;
+                 ii.ViewReportVisibility = false;
+             }
+             else
+             {
+                 var SettingId = (int)currentTextBox.Tag;
+                 var tempResult = false;
+                 int tempResultText;
+                 tempResult = int.TryParse(currentTextBox.Text.ToString(), out tempResultText);
+
+
+              
+
+                              //var ServerSettingVm_ = (ServerSettingVm)DataContext;
+                 var ii = SettingViewModel.Instance;
+                 ii.ViewReportVisibility = tempResult;
+             }
+  
+         }     
     }
 }

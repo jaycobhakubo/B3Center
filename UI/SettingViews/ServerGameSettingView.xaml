@@ -6,6 +6,9 @@
              xmlns:vm ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
              mc:Ignorable="d" 
              >
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <Border>
         <Grid    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
@@ -20,15 +23,15 @@
 
             <StackPanel  Grid.Column="1" Grid.Row="0">
                 <Label  Content="Min player"/>
-                <TextBox Text="{Binding ServerSetting_.MinPlayer}"  MaxLength="9" />
+                <TextBox Name="txtMinPlayer" Text="{Binding ServerSetting_.MinPlayer}"  MaxLength="9"  TextChanged="ValidateUserInput" Tag="34"/>
                 <Label  Content="Game start delay (sec)"/>
-                <TextBox Text="{Binding ServerSetting_.GameStartDelay}"     MaxLength="9"   />
+                <TextBox Name="txtGameStartDelay" Text="{Binding ServerSetting_.GameStartDelay}"     MaxLength="9" Tag="35" TextChanged="ValidateUserInput" />
                 <Label  Content="Consolation prize"/>
-                <TextBox Text="{Binding ServerSetting_.Consolation}"    MaxLength="9"  />
-                <Label Content="Game recall password"/>
-                <TextBox Text="{Binding ServerSetting_.GameRecallPassw}"   MaxLength="25"/>
-                <Label   Content="Wait count down (sec)"/>
-                <TextBox Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25"/>
+                <TextBox Name="txtConsolationPrize" Text="{Binding ServerSetting_.Consolation}"    MaxLength="9" Tag="36" TextChanged="ValidateUserInput" />
+                <Label Name="txtConsolationprize" Content="Game recall password"/>
+                <TextBox Text="{Binding ServerSetting_.GameRecallPassw}"   MaxLength="25" Tag="37" TextChanged="ValidateUserInput"/>
+                <Label   Name="txtWaitCountDown" Content="Wait count down (sec)"/>
+                <TextBox Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25" Tag="38" TextChanged="ValidateUserInput"/>
             </StackPanel>
         </Grid>
     </Border>

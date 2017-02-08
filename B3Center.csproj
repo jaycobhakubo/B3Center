@@ -569,11 +569,7 @@
   <ItemGroup>
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="B3ReportCenter\Model\" />
-    <Folder Include="B3ReportCenter\UI\" />
-    <Folder Include="B3ReportCenter\ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
