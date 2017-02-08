@@ -587,7 +587,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)
                 {
                     var ii = ReportsViewModel.Instance;
-                    ii.UpdateReportListCollection(m_isRngBallCall);
+                    ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
                 }
                 //lblSavedNotification.Visibility = Visibility.Visible;
             }

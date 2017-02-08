@@ -29,8 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
 
         public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
-        {
-           
+        {         
             ReportTemplate_Model = reportTemplateModel;
             reportParameterList = ReportTemplate_Model.ReportParameter;
             parVm = new ReportParameterViewModel(reportParameterList, ReportTemplate_Model.rptParModel);//.Instance;
@@ -61,17 +60,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set;
         }
 
-        //private CrystalReportsViewer m_vreportViewer = new CrystalReportsViewer();
-        //public CrystalReportsViewer vReportViewer
-        //{
-        //    get { return m_vreportViewer; }
-        //    set
-        //    {
-        //        m_vreportViewer = value;
-        //        RaisePropertyChanged("vReportViewer");
-        //    }
-        //}
-
         public Visibility ReportParameterVisible
         {
             get { return ReportTemplate_Model.DefaultViewerm; }//knc
@@ -94,7 +82,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-           public void CloseViewReport()//knc
+           public void CloseViewReport()
            {
                var x = ReportsViewModel.Instance;
                x.DefaultViewMode = Visibility.Visible;
