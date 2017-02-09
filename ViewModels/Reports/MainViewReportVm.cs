@@ -373,22 +373,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //Dates change event
         public void updateItemDateSelected(DateTime i)
         {
-            var y = SelectedReportColl.B3Reports.Id;
-            if
-                (
-                y == ReportId.B3AccountHistory
-                || y == ReportId.B3BallCallByGame
-                || y == ReportId.B3Jackpot
-                || y == ReportId.B3Session
-                        || y == ReportId.B3SessionSummary
-                        || y == ReportId.B3SessionTransaction
-                        || y == ReportId.B3WinnerCards
-                )
+            if (m_selectedReportColl.B3Reports != null)
             {
-                SelectedReportColl.rpttemplatevm.parVm.UpdateSessionList(i);
+                var y = SelectedReportColl.B3Reports.Id;
+                if
+                    (
+                    y == ReportId.B3AccountHistory
+                    || y == ReportId.B3BallCallByGame
+                    || y == ReportId.B3Jackpot
+                    || y == ReportId.B3Session
+                            || y == ReportId.B3SessionSummary
+                            || y == ReportId.B3SessionTransaction
+                            || y == ReportId.B3WinnerCards
+                    )
+                {
+                    SelectedReportColl.rpttemplatevm.parVm.UpdateSessionList(i);
 
+                }
+                SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
             }
-            SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
         }
 
 
