@@ -415,7 +415,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void LoadCrystalReport(B3Report report)
         {
-            var server = "b3-server";//m_controller.Settings.DatabaseServer;
+            var server = m_controller.Settings.DatabaseServer;
             var name = m_controller.Settings.DatabaseName;
             var user = m_controller.Settings.DatabaseUser;
             var password = "cobalt$45";//m_controller.Settings.DatabasePassword;
