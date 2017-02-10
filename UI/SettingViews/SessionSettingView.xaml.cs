@@ -31,5 +31,62 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             DataContext = SessionSettingVm;
         }
 
+        private void ValidateUserInput(object sender, TextChangedEventArgs e)
+        {
+            TextBox currentTextBox = (TextBox)sender;
+
+            if (string.IsNullOrEmpty(currentTextBox.Text))
+            {
+                var ii = SettingViewModel.Instance;
+                ii.ViewReportVisibility = false;
+            }
+            else//If its not empty then lets validate all values.
+            {
+                var tempResult = false;
+                int tempResultInt;
+      
+                if (int.TryParse(txtbxPayoutLimit.Text.ToString(), out tempResultInt))
+                {
+                    if (int.TryParse( txtbxJackpotlimit.Text.ToString(), out tempResultInt))
+                    {                        
+                        tempResult = true;
+                        var ii = SettingViewModel.Instance;
+                        ii.ViewReportVisibility = true;                                                  
+                    }
+                }
+
+                if (tempResult == false)
+                {
+                    var ii = SettingViewModel.Instance;
+                    ii.ViewReportVisibility = false;
+                }
+            }
+        }
+
+        private void DontAllowThisKeyboardinput(object sender, KeyEventArgs e)
+        {
+            bool notAllow = false;
+
+            if (e.Key == Key.Space)
+            {
+                notAllow = true;
+            }
+            else
+                if (e.Key == Key.Back)
+                {
+                    notAllow = false;
+                }
+            e.Handled = notAllow;
+        }
+
+
+
+        private void _PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+
     }
 }

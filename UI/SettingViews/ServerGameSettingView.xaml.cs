@@ -31,10 +31,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             InitializeComponent();
             DataContext = ServerSettingViewModel;
         }
-
-
-
-
          private void ValidateUserInput(object sender, TextChangedEventArgs e)
          {
              TextBox currentTextBox = (TextBox)sender;
@@ -98,89 +94,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
              e.Handled = notAllow;
          }
 
-   
-
+  
          private void _PreviewTextInput(object sender, TextCompositionEventArgs e)
          {
              Regex regex = new Regex("[^0-9]+");
              e.Handled = regex.IsMatch(e.Text);
-         }
-
-       
-
-         
+         }       
     }
 }
-
-#region OLD (ref)
-
-//private void txtbxNumericOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        //{
-        //    Regex regex = new Regex("[^0-9]+");
-        //    e.Handled = regex.IsMatch(e.Text);
-        //}
-
-        //private void txtbx_PreviewKeyDown(object sender, KeyEventArgs e)
-        //{
-        //    bool notAllow = false;
-
-        //    if (e.Key == Key.Space)
-        //    {
-        //        notAllow = true;
-        //    }
-        //    else
-        //        if (e.Key == Key.Back)
-        //        {
-        //            notAllow = false;
-        //        }
-        //    e.Handled = notAllow;
-        //}
-
-        //private void txtbxPrice_PreviewTextInput2(object sender, TextCompositionEventArgs e)
-        //{
-        //    bool NotAllow = false;
-
-        //    //Get all the text in the textbox including keypreview.
-        //    TextBox y = (TextBox)sender;
-        //    string x = y.Text;
-        //    x = x.Insert(y.SelectionStart, e.Text);
-
-        //    int count = x.Split('.').Length - 1;//Count how many decimal places on the text input
-
-        //    if (count > 1)//One decimal point only.
-        //    {
-        //        NotAllow = true;
-        //    }
-        //    else if ((Convert.ToChar(e.Text)) == '.')
-        //    {
-        //        NotAllow = false;
-        //    }
-        //    else if (Char.IsNumber(Convert.ToChar(e.Text)))
-        //    {
-        //        NotAllow = false;
-
-        //        if (Regex.IsMatch(x, @"\.\d\d\d"))//Only allow .## 
-        //        {
-        //            NotAllow = true;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        NotAllow = true;
-        //    }
-
-        //    e.Handled = NotAllow;
-        //}
-
-        //private void txtbxMinPlayers_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    TextBox txtbx = (TextBox)sender;
-        //    int tempMinPlayer;
-        //    tempMinPlayer = Convert.ToInt32(txtbx.Text);
-        //    if (tempMinPlayer < 2)
-        //    {
-        //        txtbxMinPlayers.Text = "2";
-        //    }
-        //}
-
-#endregion

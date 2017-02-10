@@ -49,7 +49,7 @@
                          />
                 <Label   Content="Wait count down (sec)"/>
                 <TextBox Name="txtGameWaitCountDown" Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25" Tag="38" 
-                          TextChanged="ValidateUserInput"                                          
+                         TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
                          PreviewTextInput="_PreviewTextInput"          
                          />
