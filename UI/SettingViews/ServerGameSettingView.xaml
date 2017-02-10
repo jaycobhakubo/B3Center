@@ -48,7 +48,7 @@
                          PreviewKeyDown="DontAllowThisKeyboardinput"                       
                          />
                 <Label   Content="Wait count down (sec)"/>
-                <TextBox Name="txtGameWaitCountDown" Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25" Tag="38" 
+                <TextBox Name="txtGameWaitCountDown" Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="10" Tag="38" 
                          TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
                          PreviewTextInput="_PreviewTextInput"          

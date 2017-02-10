@@ -31,6 +31,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             InitializeComponent();
             DataContext = ServerSettingViewModel;
         }
+
          private void ValidateUserInput(object sender, TextChangedEventArgs e)
          {
              TextBox currentTextBox = (TextBox)sender;
@@ -44,6 +45,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
              { 
                 var tempResult = false;
                  int tempResultInt;
+                 Int64 tempResultInt64;
                  string tempResultString;
 
                  //Do not allow whitespace on password
@@ -54,13 +56,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                      return;
                  }
 
-                if (int.TryParse(txtMinPlayer.Text.ToString(), out tempResultInt))
+                if (Int32.TryParse(txtMinPlayer.Text.ToString(), out tempResultInt))
                  {
-                     if (int.TryParse(txtGameStartDelay.Text.ToString(), out tempResultInt))
+                     if (Int32.TryParse(txtGameStartDelay.Text.ToString(), out tempResultInt))
                      {
-                         if (int.TryParse(txtConsolationPrize.Text.ToString(), out tempResultInt))
+                         if (Int32.TryParse(txtConsolationPrize.Text.ToString(), out tempResultInt))
                          {
-                            if (int.TryParse(txtGameWaitCountDown.Text.ToString(), out tempResultInt))
+                             if (Int64.TryParse(txtGameWaitCountDown.Text.ToString(), out tempResultInt64))
                             {
                                 tempResult = true;
                                 var ii = SettingViewModel.Instance;

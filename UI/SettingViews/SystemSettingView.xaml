@@ -23,14 +23,37 @@
 
             <StackPanel  Grid.Column="1" >
                 <Label Content="Site name"  />
-                    <TextBox Name="txtbxSiteName" Tag="56"  MaxLength="50" Text="{Binding SystemSetting_.SiteName}"/>
+                    <TextBox 
+                        Name="txtbxSiteName" 
+                        Tag="56"  
+                        MaxLength="50" Text="{Binding SystemSetting_.SiteName}"
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput"  
+                        />
                     <Label Content="Hand pay trigger"/>
-                    <TextBox Name="txtbxHandPayoutTrigger" Tag="42" Text="{Binding SystemSetting_.HandPayTrigger}"	 MaxLength="14" />
+                    <TextBox 
+                        Name="txtbxHandPayoutTrigger" 
+                        Tag="42" 
+                        Text="{Binding SystemSetting_.HandPayTrigger}"	 
+                        MaxLength="10" 
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"      
+                        />
 
                 <Label x:Name="lblMaxCards_Copy"  Content="VIP point multiplier" />
-                    <TextBox x:Name="txtbxVipPointPlayer"  Tag="44" TabIndex="3" Text="{Binding SystemSetting_.VIPPointMultiplier}" MaxLength="15" />
-   
-                <Label x:Name="lblMaxCards_Copy1" Content="Mag card sentinel start" />
+                    <TextBox 
+                        x:Name="txtbxVipPointPlayer"  
+                        Tag="44" TabIndex="3"
+                        Text="{Binding SystemSetting_.VIPPointMultiplier}"                  
+                        MaxLength="10" 
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"      
+                        />
+                    <!--MaxLength="15"-->
+
+                    <Label x:Name="lblMaxCards_Copy1" Content="Mag card sentinel start" />
                     <TextBox Text="{Binding SystemSetting_.MagCardSentinelStart}" 
                              x:Name="txtbxMagCardStart" 
                              Grid.Column="1"   Grid.Row="7" 
@@ -38,19 +61,40 @@
                              VerticalAlignment="Bottom"  
                              TabIndex="4" 
                              Tag="45" 
-                             MaxLength="1"  />
+                             MaxLength="1"  
+                             TextChanged="ValidateUserInput"                                          
+                             PreviewKeyDown="DontAllowThisKeyboardinput"  
+                             />
        
                 <Label x:Name="lblMaxCards_Copy2" Content="Mag card sentinel end"  />
-                    <TextBox x:Name="txtbxMagCardEnd"  Tag="46" MaxLength="1" Text="{Binding SystemSetting_.MagCardSentinelEnd}" />
+                    <TextBox 
+                        x:Name="txtbxMagCardEnd"  
+                        Tag="46" 
+                        MaxLength="1" 
+                        Text="{Binding SystemSetting_.MagCardSentinelEnd}" 
+                        TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput"  
+                        />
                 
                 <Label  Content="Player PIN length"/>
-                    <TextBox x:Name="txtbxPlayerpinLength" Tag="49" Text="{Binding SystemSetting_.PlayerPINLength}" MaxLength="8"  />
+                    <TextBox x:Name="txtbxPlayerpinLength" 
+                             Tag="49" 
+                             Text="{Binding SystemSetting_.PlayerPINLength}" 
+                             MaxLength="8"  
+                             TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"      
+                             />
 
                 <Label  Content="RNG ball call time (milliseconds)"/>
                 <TextBox 
                 x:Name="txtbxRNGBallCallTime" 
-             Text="{Binding SystemSetting_.RNGBallCallTime}"	
-                MaxLength="8"/>
+                Text="{Binding SystemSetting_.RNGBallCallTime}"	
+                MaxLength="8"
+                TextChanged="ValidateUserInput"                                          
+                PreviewKeyDown="DontAllowThisKeyboardinput" 
+                PreviewTextInput="_PreviewTextInput"      />
+            
             </StackPanel >
 
                 <StackPanel Grid.Column="3" >
@@ -60,6 +104,9 @@
             	Tag="43" 
             	TabIndex="7" 
             	Text="{Binding SystemSetting_.MinimumPlayers}"	
+                TextChanged="ValidateUserInput"                                          
+                PreviewKeyDown="DontAllowThisKeyboardinput" 
+                PreviewTextInput="_PreviewTextInput"      
             	MaxLength="8"  
                     />
 
