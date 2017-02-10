@@ -603,7 +603,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_selectedSettingEquivToId = (int)m_B3SettingCategory[SettingSelected];
             m_b3Setting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == m_selectedSettingEquivToId));
 
-
             if (m_selectedSettingEquivToId != 1)
             {
                 ConvertSettingToModel();

@@ -23,15 +23,36 @@
 
             <StackPanel  Grid.Column="1" Grid.Row="0">
                 <Label  Content="Min player"/>
-                <TextBox Name="txtMinPlayer" Text="{Binding ServerSetting_.MinPlayer}"  MaxLength="9"  TextChanged="ValidateUserInput" Tag="34"/>
+                <TextBox Name="txtMinPlayer" Text="{Binding ServerSetting_.MinPlayer}"  
+                         MaxLength="9"  
+                         Tag="34"    
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"                   
+                         />
                 <Label  Content="Game start delay (sec)"/>
-                <TextBox Name="txtGameStartDelay" Text="{Binding ServerSetting_.GameStartDelay}"     MaxLength="9" Tag="35" TextChanged="ValidateUserInput" />
+                <TextBox Name="txtGameStartDelay" Text="{Binding ServerSetting_.GameStartDelay}"     MaxLength="9" Tag="35" 
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"          
+                         />
                 <Label  Content="Consolation prize"/>
-                <TextBox Name="txtConsolationPrize" Text="{Binding ServerSetting_.Consolation}"    MaxLength="9" Tag="36" TextChanged="ValidateUserInput" />
-                <Label Name="txtConsolationprize" Content="Game recall password"/>
-                <TextBox Text="{Binding ServerSetting_.GameRecallPassw}"   MaxLength="25" Tag="37" TextChanged="ValidateUserInput"/>
-                <Label   Name="txtWaitCountDown" Content="Wait count down (sec)"/>
-                <TextBox Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25" Tag="38" TextChanged="ValidateUserInput"/>
+                <TextBox Name="txtConsolationPrize" Text="{Binding ServerSetting_.Consolation}"    MaxLength="9" Tag="36" 
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"           
+                         />
+                <Label  Content="Game recall password"/>
+                <TextBox Name="txtGameRecallPassword" Text="{Binding ServerSetting_.GameRecallPassw}"   MaxLength="25" Tag="37" 
+                        TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput"                       
+                         />
+                <Label   Content="Wait count down (sec)"/>
+                <TextBox Name="txtGameWaitCountDown" Text="{Binding ServerSetting_.WaitCountDown}"  MaxLength="25" Tag="38" 
+                          TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"          
+                         />
             </StackPanel>
         </Grid>
     </Border>
