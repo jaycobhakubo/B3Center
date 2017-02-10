@@ -43,11 +43,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             else//If its not empty then lets validate all values.
             {
                 var tempResult = false;
-                int tempResultInt;
+                Int64 tempResultInt64;
       
-                if (int.TryParse(txtbxPayoutLimit.Text.ToString(), out tempResultInt))
+                if (Int64.TryParse(txtbxPayoutLimit.Text.ToString(), out tempResultInt64))
                 {
-                    if (int.TryParse( txtbxJackpotlimit.Text.ToString(), out tempResultInt))
+                    if (Int64.TryParse( txtbxJackpotlimit.Text.ToString(), out tempResultInt64))
                     {                        
                         tempResult = true;
                         var ii = SettingViewModel.Instance;

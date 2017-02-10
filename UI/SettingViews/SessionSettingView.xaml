@@ -23,7 +23,7 @@
 
             <StackPanel Name="stkpnlSessionSetting" Grid.Column="1" Grid.Row="1">
                 <Label x:Name="lblCallSpeedMin_Copy"   Content="Payout limit" />
-                <TextBox Text="{Binding SessionSetting_.PayoutLimit}"  TabIndex="1" Tag="39" MaxLength="9" 
+                <TextBox Text="{Binding SessionSetting_.PayoutLimit}"  TabIndex="1" Tag="39" MaxLength="19" 
                          Name="txtbxPayoutLimit"
                          TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
@@ -34,7 +34,7 @@
                 <TextBox 
                     Text="{Binding SessionSetting_.JackpotLimit}"  
                     TabIndex="2" Tag="40"   
-                    MaxLength="9" 
+                    MaxLength="19" 
                         Name="txtbxJackpotlimit"
                         TextChanged="ValidateUserInput"                                          
                         PreviewKeyDown="DontAllowThisKeyboardinput" 

@@ -60,9 +60,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                  {
                      if (Int32.TryParse(txtGameStartDelay.Text.ToString(), out tempResultInt))
                      {
-                         if (Int32.TryParse(txtConsolationPrize.Text.ToString(), out tempResultInt))
+                         if (Int64.TryParse(txtConsolationPrize.Text.ToString(), out tempResultInt64))
                          {
-                             if (Int64.TryParse(txtGameWaitCountDown.Text.ToString(), out tempResultInt64))
+                             if (Int32.TryParse(txtGameWaitCountDown.Text.ToString(), out tempResultInt))
                             {
                                 tempResult = true;
                                 var ii = SettingViewModel.Instance;

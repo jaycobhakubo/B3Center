@@ -36,7 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             {
                 var tempResult = true;
                 int tempResultInt;
-                Int64 tempResultInt32;
+                Int64 tempResultInt64;
                 string tempResultString;
 
 
@@ -59,9 +59,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 }
 
 
-                if (Int32.TryParse(txtbxHandPayoutTrigger.Text.ToString(), out tempResultInt))
+                if (Int64.TryParse(txtbxHandPayoutTrigger.Text.ToString(), out tempResultInt64))
                 {
-                    if (Int32.TryParse(txtbxVipPointPlayer.Text.ToString(), out tempResultInt))
+                    if (Int64.TryParse(txtbxVipPointPlayer.Text.ToString(), out tempResultInt64))
                     {
                         if (Int32.TryParse(txtbxPlayerpinLength.Text.ToString(), out tempResultInt))
                         {

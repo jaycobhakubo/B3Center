@@ -37,7 +37,7 @@
                          PreviewTextInput="_PreviewTextInput"          
                          />
                 <Label  Content="Consolation prize"/>
-                <TextBox Name="txtConsolationPrize" Text="{Binding ServerSetting_.Consolation}"    MaxLength="9" Tag="36" 
+                <TextBox Name="txtConsolationPrize" Text="{Binding ServerSetting_.Consolation}"    MaxLength="19" Tag="36" 
                          TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
                          PreviewTextInput="_PreviewTextInput"           
