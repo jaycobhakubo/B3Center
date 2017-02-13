@@ -121,7 +121,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
               new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3BingoCardReport ), ReportDisplayName = "Bingo Card",rpttemplatevm =   B3BingoCardReport   , rptView = new ReportTemplate(  B3BingoCardReport )}, 
             };
 
-            SetBallCallReportBySessionOrByGame(m_isRngBallCall);//Set our ball call report 
+            SetBallCallReportBySessionOrByGame(!m_isRngBallCall);//Set our ball call report 
             m_reportCollection = new ObservableCollection<ReportMain>(m_reportCollection.OrderBy(l => l.ReportDisplayName));
             SelectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
@@ -316,7 +316,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
       
         #endregion
-
         #region (public)
 
         //Check which ball call report to show base on RNGBallCall setting.
@@ -370,7 +369,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
            
                
         #endregion
-
         #region (on event)
 
         //Dates change event
@@ -409,19 +407,48 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
             }
+
+            //Indicator visibility
+   
+            if (m_reportSelected.Id == ReportId.B3BingoCardReport
+                //|| m_reportSelected.Id == ReportId.B3Detail
+                //  || m_reportSelected.Id == ReportId.B3Monthly
+                //    || m_reportSelected.Id == ReportId.B3Void
+                //      || m_reportSelected.Id == ReportId.B3Accounts
+                )
+            {
+                IndicatorVisibility = true;
+             }   
+            else
+            {
+                IndicatorVisibility = false;
+            }
+        }
+        private bool m_indicatorVisibility;
+        public bool IndicatorVisibility
+        {
+            get { return m_indicatorVisibility; }
+            set
+            {
+                if (m_indicatorVisibility != value)
+                {
+                    m_indicatorVisibility = value;
+                    RaisePropertyChanged("IndicatorVisibility");
+                }
+            }
         }
 
         #endregion
         #region (view and print report)
 
-      
+
 
         private void LoadCrystalReport(B3Report report)
         {
             var server = m_controller.Settings.DatabaseServer;
             var name = m_controller.Settings.DatabaseName;
             var user = m_controller.Settings.DatabaseUser;
-            var password = "cobalt$45";//m_controller.Settings.DatabasePassword;
+            var password = m_controller.Settings.DatabasePassword;
             report.LoadCrystalReport(server, name, user, password);
         }
 

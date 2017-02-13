@@ -164,36 +164,6 @@
     <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
       <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ReportViews\AccountHistoryReportView.xaml.cs">
-      <DependentUpon>AccountHistoryReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\AccountsReportView.xaml.cs">
-      <DependentUpon>AccountsReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\BallCallBySessionView.xaml.cs">
-      <DependentUpon>BallCallBySessionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\BallCallReportView.xaml.cs">
-      <DependentUpon>BallCallReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\BingoCardView.xaml.cs">
-      <DependentUpon>BingoCardView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\DailyReportView.xaml.cs">
-      <DependentUpon>DailyReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\DetailReportView.xaml.cs">
-      <DependentUpon>DetailReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\DrawerReportView.xaml.cs">
-      <DependentUpon>DrawerReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\JackpotReportView.xaml.cs">
-      <DependentUpon>JackpotReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\MonthlyReportView.xaml.cs">
-      <DependentUpon>MonthlyReportView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\ReportViews\ReportParameter.xaml.cs">
       <DependentUpon>ReportParameter.xaml</DependentUpon>
     </Compile>
@@ -202,21 +172,6 @@
     </Compile>
     <Compile Include="UI\ReportViews\ReportTemplate.xaml.cs">
       <DependentUpon>ReportTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\SessionReportView.xaml.cs">
-      <DependentUpon>SessionReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\SessionSummaryView.xaml.cs">
-      <DependentUpon>SessionSummaryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\SessionTransactionReportView.xaml.cs">
-      <DependentUpon>SessionTransactionReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\VoidReportView.xaml.cs">
-      <DependentUpon>VoidReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ReportViews\WinnerCardsReportView.xaml.cs">
-      <DependentUpon>WinnerCardsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingViews\GameSettingView\GameSetting76Bingo.xaml.cs">
       <DependentUpon>GameSetting76Bingo.xaml</DependentUpon>
@@ -346,46 +301,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\ReportViews\AccountHistoryReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\AccountsReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\BallCallBySessionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\BallCallReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\BingoCardView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\ReportViews\DailyReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\DetailReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\DrawerReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\JackpotReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\MonthlyReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\ReportViews\ReportParameter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -395,26 +310,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ReportViews\ReportTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\SessionReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\SessionSummaryView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\SessionTransactionReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\VoidReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ReportViews\WinnerCardsReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -58,8 +58,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                     {
                         showControl = Visibility.Visible;
                     }
-                }
+                }              
+            }
+            return showControl;
+        }
 
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+
+    public class BoolToVisibilityConvHidden : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)//parameter true = revert valuek false do not revert
+        {
+            Visibility showControl = new Visibility();
+            showControl = Visibility.Hidden;
+
+            if (value is bool)
+            {
+                if ((bool)value == true)
+                {
+                    showControl = Visibility.Visible;
+                }        
             }
             return showControl;
         }
@@ -184,11 +207,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return result;
         }
     }
-
-
-    
-
-    
+   
   public class ShowDefaultColumnDef : IValueConverter
     {
 
@@ -200,7 +219,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
             if (columnDefWidthValue == gridStarType)
             {
-
                 return new GridLength(0, GridUnitType.Auto); 
             }
             else
@@ -213,13 +231,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             return null;
         }
-
-
     }
 
     public class ValueToBoolForEmptyString : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool result = true;
@@ -231,7 +246,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                     result = false;
                 }
             }
-
             return result;
         }
 
@@ -239,7 +253,5 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             return null;
         }
-
-
     }
 }
