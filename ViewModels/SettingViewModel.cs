@@ -76,9 +76,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             SetCommand();
             SetDefaultValue();
-            LoadSetting();     
-          
-          
+            LoadSetting();
+            ViewReportVisibility = true;
+
+
         }
         #endregion
         #region OTHER ACCESSOR (static)
@@ -287,7 +288,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                     }
                                 case 58:
                                     {
-                                        sg.B3SettingValue = _GameSettingNewValue.MathPayTableSetting;
+                                        sg.B3SettingValue = _GameSettingNewValue.SelectedMathPayTableSettingInt.ToString();
                                         break;
                                     }
                                 case 59:

@@ -317,7 +317,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
                 else if ((int)B3SettingId.MathPayTableSetting == b3SettingGlobal_.B3SettingID)
                 {
-                    gs.MathPayTableSetting = b3SettingGlobal_.B3SettingValue;
+                    gs.SelectedMathPayTableSettingInt = Convert.ToInt32(b3SettingGlobal_.B3SettingValue);
 
 
                 }

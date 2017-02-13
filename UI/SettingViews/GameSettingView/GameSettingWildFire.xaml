@@ -27,7 +27,8 @@
                 <ComboBox Name="cmbxGamePayTable" Tag="58"
                            ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
                               DisplayMemberPath="PackageDesc"
-                              SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"
+                           SelectedValuePath="MathPackageID"   
+                       SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"   
                           />
 
                 <Label Content="Max bet level" />
