@@ -23,6 +23,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1">
+                            
                 <Label  Content="Game pay table"  />
                 <ComboBox Name="cmbxGamePayTable" Tag="58"
                           ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
@@ -60,6 +61,7 @@
             	x:Name="cmbxCallSpeedOrMax" SelectedItem="{Binding Gamesetting_.CallSpeedMin, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="11">
                 </ComboBox>
+
                 <Label   Content="Game denominations" />
                 <GroupBox  Background="White"   BorderThickness="2" Margin="-1,0,-1,0" Padding="15,0,0,3" Style="{DynamicResource GroupBoxStyle1}" >
                     <Grid >
@@ -75,6 +77,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
+                            <RowDefinition Height="6"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -92,8 +95,11 @@
                         <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" IsChecked="{Binding Gamesetting_.Denom500, Converter={StaticResource ValuetoBool}}"/>
                     </Grid>
                 </GroupBox>
+
             </StackPanel>
 
+            <Grid></Grid>
+            
             <StackPanel Grid.Column="3">
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
                 <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>

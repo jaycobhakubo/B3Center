@@ -55,6 +55,64 @@
         </Style>
         <!--<Setter Property="Padding" Value="0,0,0,0"/>-->
 
+        <Style x:Key="AnimatedSwitch2" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="BorderBrush" Value="Gray"/>
+         
+            <Setter Property="VerticalAlignment" Value="Top"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Name="Layer_1" Width="20" Height="20" Canvas.Left="10" Canvas.Top="0">
+                                <Rectangle   Canvas.Left="0" Width="20" Height="20" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.5"/>
+                                <Rectangle  Canvas.Left="20" Width="20" Height="20" Fill="Gray" Stroke="Gray" StrokeThickness="0.5" Name="ewan"/>
+                                <Border Canvas.Left="10" Width="20" Height="20" Name="rect416927" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"/>
+                                <Rectangle x:Name="ellipse"   Canvas.Left="0" Width="20" Height="20" Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.5">
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform X="0" Y="0" />
+                                    </Rectangle.RenderTransform>
+                                    <Rectangle.BitmapEffect>
+                                        <DropShadowBitmapEffect Softness="0" ShadowDepth="0" Direction="270" Color="#FF0050AA"/>
+                                    </Rectangle.BitmapEffect>
+                                </Rectangle>
+                            </Canvas>
+                        </Viewbox>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True" >
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF0050AA" Duration="0:0:0.2" />
+                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="#FF0050AA" Duration="0:0:0.2" />
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
+                                                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                <SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="20"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Gray" Duration="0:0:0.2" />
+                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="Gray" Duration="0:0:0.2" />
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
+                                                <SplineDoubleKeyFrame KeyTime="0" Value="20"/>
+                                                <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
     

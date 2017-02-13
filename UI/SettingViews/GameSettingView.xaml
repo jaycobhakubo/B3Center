@@ -51,7 +51,7 @@
                                         <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
                                     </MultiBinding>
                                 </Border.OpacityMask>
-                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
                                     <!--<Border BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>-->
                                 </Border>
                             </Border>
@@ -71,8 +71,8 @@
 
     <Border x:Name="m_layoutRoot" >
         <Grid Name="gridServerMessage" >
-            
-            <TabControl Focusable="False"  Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
+           
+            <TabControl Grid.Column="0" Focusable="False"  Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
                
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
