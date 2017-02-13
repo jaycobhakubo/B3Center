@@ -51,7 +51,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private ObservableCollection<Session> m_sessionList;
         private List<B3Report> m_reports;
         private CrystalReportsViewer tempcr = new CrystalReportsViewer();
-       
+        private bool m_isRngBallCall;
 
         #endregion
         #region CONSTRUCTORS
@@ -407,37 +407,71 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation();
             }
-
-            //Indicator visibility
-   
-            if (m_reportSelected.Id == ReportId.B3BingoCardReport
-                //|| m_reportSelected.Id == ReportId.B3Detail
-                //  || m_reportSelected.Id == ReportId.B3Monthly
-                //    || m_reportSelected.Id == ReportId.B3Void
-                //      || m_reportSelected.Id == ReportId.B3Accounts
-                )
-            {
-                IndicatorVisibility = true;
-             }   
-            else
-            {
-                IndicatorVisibility = false;
-            }
+            SetLabelMessageToUser();
         }
-        private bool m_indicatorVisibility;
-        public bool IndicatorVisibility
+
+        public void SetLabelMessageToUser()
         {
-            get { return m_indicatorVisibility; }
-            set
+            //Indicator visibility
+            if (m_reportSelected != null)
             {
-                if (m_indicatorVisibility != value)
+                var y = m_reportSelected.Id;
+                if
+                    (
+                    y == ReportId.B3AccountHistory
+                    || y == ReportId.B3BallCallByGame
+                    || y == ReportId.B3Jackpot
+                    || y == ReportId.B3Session
+                            || y == ReportId.B3SessionSummary
+                            || y == ReportId.B3SessionTransaction
+                            || y == ReportId.B3WinnerCards
+                            || y == ReportId.B3BingoCardReport
+                    )
                 {
-                    m_indicatorVisibility = value;
-                    RaisePropertyChanged("IndicatorVisibility");
+                    IndicatorVisibility = true;
+                    if (ReportId.B3BingoCardReport != y)
+                    {
+                        var sessSelected = SelectedReportColl.rpttemplatevm.parVm.SelectedSession;
+                        if (sessSelected == null)
+                        {
+                            NoSession = true;
+                            NoAccount = true;
+                        }
+                        else
+                        {
+                            if (ReportId.B3AccountHistory == y)
+                            {
+                                var accountSelected = SelectedReportColl.rpttemplatevm.parVm.AccountSelected;
+                                if (accountSelected == null)
+                                {
+                                    NoSession = false;
+                                    NoAccount = true;
+                                }
+                                else
+                                {
+                                    IndicatorVisibility = false;
+                                }
+                            }
+                            else
+                            {
+                                IndicatorVisibility = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        IndicatorVisibility = true;
+                        NoSession = false;
+                        NoAccount = false;
+                    }
+                }
+                else
+                {
+                    IndicatorVisibility = false;
                 }
             }
         }
-
+      
         #endregion
         #region (view and print report)
 
@@ -610,20 +644,43 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
         #endregion
-
         #endregion
         #region PROPERTIES
 
-        private bool m_isRngBallCall;
-        //public bool IsRngBallCall
-        //{
-        //    get { return m_isRngBallCall; }
-        //    set
-        //    {
-        //        m_isRngBallCall = value;
-        //        RaisePropertyChanged("IsRngBalCall");
-        //    }
-        //}
+        private bool m_noSession;
+        public bool NoSession
+        {
+            get { return m_noSession; }
+            set {
+                m_noSession = value;
+                RaisePropertyChanged("NoSession");
+            }
+        }
+
+        private bool m_noAccount;
+        public bool NoAccount
+        {
+            get { return m_noAccount; }
+            set
+            {
+                m_noAccount = value;
+                RaisePropertyChanged("NoAccount");
+            }
+        }
+
+        private bool m_indicatorVisibility;
+        public bool IndicatorVisibility
+        {
+            get { return m_indicatorVisibility; }
+            set
+            {
+                if (m_indicatorVisibility != value)
+                {
+                    m_indicatorVisibility = value;
+                    RaisePropertyChanged("IndicatorVisibility");
+                }
+            }
+        }
 
         private ObservableCollection<ReportMain> m_reportCollection = new ObservableCollection<ReportMain>();
         public ObservableCollection<ReportMain> ReportListCol

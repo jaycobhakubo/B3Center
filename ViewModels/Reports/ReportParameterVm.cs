@@ -222,12 +222,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SessionList = m_sessionList;
                 SelectedSession = m_sessionList.LastOrDefault();
+                var rptvm = ReportsViewModel.Instance;
+                rptvm.NoSession = false;
+                rptvm.SetLabelMessageToUser();
             }
             else
             {
+                var rptvm = ReportsViewModel.Instance;
+                rptvm.NoSession = true;
+                rptvm.SetLabelMessageToUser();
                 if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
                 {
                     m_accountList.Clear();
+                }
+                else
+                {
+                    //var rptvm = ReportsViewModel.Instance;
+                    //rptvm.NoSession = true;
+                    //rptvm.SetLabelMessageToUser();
                 }
             }
             CheckUserValidation();
@@ -246,6 +258,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         AccountList = msg.AccountNumberList;
                         AccountSelected = m_accountList.FirstOrDefault();
+                        var rptvm = ReportsViewModel.Instance;
+                        rptvm.NoAccount = false;
+                        rptvm.SetLabelMessageToUser();
+                    }
+                    else
+                    {
+                        var rptvm = ReportsViewModel.Instance;
+                        rptvm.NoAccount = true;
+                        rptvm.SetLabelMessageToUser();
                     }
                     CheckUserValidation();
                 }

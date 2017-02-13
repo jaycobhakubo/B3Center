@@ -92,15 +92,44 @@
                                 </Grid>
                             </Border>
                             <Border Visibility="{Binding IndicatorVisibility, Converter={StaticResource ConvertBooltoVisHidden}}"  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
-                                <Label Style="{x:Null}" 
-                                    Content="* Indicates a required field" Foreground="Red"                                      
-                                       />
+                                <Label                                                                                                     >
+                                    <Label.Style>
+                                        <Style  TargetType="Label" >
+                                          
+                                            <Setter Property="Foreground" Value="Red"/>
+                                            <Setter Property="Content" Value="* Indicates a required field"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding NoSession}" Value="true"/>
+                                                        <Condition Binding="{Binding NoAccount}" Value="true"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                   
+                                                    <Setter Property="Content" Value="No session played"/>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding NoSession}" Value="false"/>
+                                                        <Condition Binding="{Binding NoAccount}" Value="true"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Content" Value="No account played"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
                             </Border>
                         </Grid>
                     </Border>
                 </Grid>
             </Border>
-
+            <!--<Style TargetType="Label">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsData}" Value="NoSession">
+                        <Setter Property=""
+                                            </DataTrigger>
+                </Style.Triggers>
+            </Style>-->
             <Border Visibility="{Binding ElementName=brdrViewPrint, Path=Visibility}" Name="brdrSettingMenuCol" Width="192" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
