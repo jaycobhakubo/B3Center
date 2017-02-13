@@ -225,21 +225,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 var rptvm = ReportsViewModel.Instance;
                 rptvm.NoSession = false;
                 rptvm.SetLabelMessageToUser();
+                IsSessionEnable = true;
             }
             else
             {
                 var rptvm = ReportsViewModel.Instance;
                 rptvm.NoSession = true;
+                IsSessionEnable = false;          
                 rptvm.SetLabelMessageToUser();
+
                 if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
                 {
                     m_accountList.Clear();
+                    IsAccountEnable = false;
                 }
                 else
-                {
-                    //var rptvm = ReportsViewModel.Instance;
-                    //rptvm.NoSession = true;
-                    //rptvm.SetLabelMessageToUser();
+                {                  
                 }
             }
             CheckUserValidation();
@@ -261,12 +262,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         var rptvm = ReportsViewModel.Instance;
                         rptvm.NoAccount = false;
                         rptvm.SetLabelMessageToUser();
+                        IsAccountEnable = true;
                     }
                     else
                     {
                         var rptvm = ReportsViewModel.Instance;
                         rptvm.NoAccount = true;
                         rptvm.SetLabelMessageToUser();
+                        IsAccountEnable = false;
                     }
                     CheckUserValidation();
                 }
@@ -377,6 +380,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public Visibility StartEndDate { get; set; }
         public Visibility MonthYearInput { get; set; }
         public Visibility DateInput { get; set; }
+
+        private bool m_isSessionEnable;
+        public bool IsSessionEnable
+        {
+            get { return m_isSessionEnable; }
+            set
+            {
+                if (m_isSessionEnable != value)
+                {
+                    m_isSessionEnable = value;
+                    RaisePropertyChanged("IsSessionEnable");
+                }
+            }
+        }
+
+        private bool m_isAccountEnable;
+        public bool IsAccountEnable
+        {
+            get { return m_isAccountEnable; }
+            set
+            {
+                if (m_isAccountEnable != value)
+                {
+                    m_isAccountEnable = value;
+                    RaisePropertyChanged("IsAccountEnable");
+                }
+            }
+        }
 
         public DateTime SelectedDateTime
         {

@@ -77,10 +77,11 @@
                                DisplayMemberPath="DisplayName"
                                x:Name="SessionCombobox" 
                      Visibility="{Binding ElementName=Sessionpar, Path=Visibility}"
+                    IsEnabled="{Binding IsSessionEnable}"
                         />
-                <TextBlock Text="* Account number:" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
+                <TextBlock  Text="* Account number:" Name="AcctPar" Visibility="{Binding AccountNumberInput}" />
                 <ComboBox 
-                                                        
+                               IsEnabled="{Binding IsAccountEnable}"                         
                                x:Name="AccountNumberCombobox"
                                 ItemsSource="{Binding AccountList}"
                                 SelectedItem="{Binding AccountSelected}"

@@ -510,11 +510,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         DefaultViewMode = Visibility.Collapsed;
                         CRViewMode = Visibility.Visible;
                         SelectedReportViewCol.ViewReport(report);
-
-                         //m_selectedReportTemplateViewModel.vReportViewer = tempcr;
-                        //tempcr.ViewerCore.ReportSource = report;
-                        //tempcr.Focusable = true;
-                        //tempcr.Focus();
                     }));
                 }
                 catch (Exception ex)
