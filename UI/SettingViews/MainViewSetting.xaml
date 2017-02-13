@@ -6,8 +6,10 @@
              xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
                  xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
              mc:Ignorable="d" 
-             >
+    xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+            >
     <UserControl.Resources>
+        <Converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></Converter:BoolToVisibilityConvHidden>
 
     </UserControl.Resources>
     <Border >
@@ -78,7 +80,7 @@
                                  />
                                 </Grid>
                             </Border>
-                            <Border Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                            <Border Visibility="{Binding IndicatorVisibility, Converter={StaticResource ConvertBooltoVisHidden}}" Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
                                 <Label
                                     Style="{x:Null}"
                                     HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>

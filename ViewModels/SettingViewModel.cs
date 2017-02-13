@@ -607,6 +607,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (m_selectedSettingEquivToId != 1)
             {
                 ConvertSettingToModel();
+                IndicatorVisibility = true;
+            }
+            else
+            {
+                IndicatorVisibility = false;
             }
 
             UserControl view = null;
@@ -702,6 +707,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region PROPERTIES 
         #region (with private member)
+
+        private bool m_indicatorVisibility;
+        public bool IndicatorVisibility
+        {
+            get { return m_indicatorVisibility; }
+            set
+            {
+                if (m_indicatorVisibility != value)
+                {
+                    m_indicatorVisibility = value;
+                    RaisePropertyChanged("IndicatorVisibility");
+                }
+            }
+        }
 
         private bool m_viewReportVisibility;
         public bool ViewReportVisibility
