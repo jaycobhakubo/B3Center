@@ -23,7 +23,7 @@
         </Style>
     </ui:EliteWindowBase.Style>
     <ui:EliteWindowBase.Resources>
-        <Style TargetType="TabItem">
+        <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
 

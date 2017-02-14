@@ -9,9 +9,6 @@
 
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
-        <Style TargetType="Button">
-            <Setter Property="FontWeight" Value="Bold" />
-        </Style>
     </UserControl.Resources>
 
     <Border Style="{DynamicResource LightBlueBorder}" Margin="5">
