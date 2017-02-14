@@ -77,8 +77,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller = controller;
             m_reports = controller.Reports;         
             m_controller.SessionInfoCompleted += OnListInfoDone;
-            m_isRngBallCall = controller.Settings.IsCommonRngBallCall;
-            
+            m_isRngBallCall = !controller.Settings.IsCommonRngBallCall;
 
             //set session list
             foreach (var session in controller.Sessions)
@@ -121,7 +120,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
               new ReportMain(){B3Reports = m_reports.Single(l => l.Id == ReportId.B3BingoCardReport ), ReportDisplayName = "Bingo Card",rpttemplatevm =   B3BingoCardReport   , rptView = new ReportTemplate(  B3BingoCardReport )}, 
             };
 
-            SetBallCallReportBySessionOrByGame(!m_isRngBallCall);//Set our ball call report 
+            SetBallCallReportBySessionOrByGame(controller.Settings.IsCommonRngBallCall);//Set our ball call report 
             m_reportCollection = new ObservableCollection<ReportMain>(m_reportCollection.OrderBy(l => l.ReportDisplayName));
             SelectedReportColl = m_reportCollection.FirstOrDefault();
             SetCommand();           
