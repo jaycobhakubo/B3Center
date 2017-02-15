@@ -324,44 +324,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (m_isRngBallCall != SettingRngBallCall)
             {
                 Task.Factory.StartNew(() =>
-                {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        if (SettingRngBallCall == true)//ball call game by session
-                        {
-                            var ReportMainBallCallByGame = m_reportCollection.Single(l => l.B3Reports.Id == ReportId.B3BallCallByGame);
-                            var tempresultToList = m_reportCollection.ToList();
-                            tempresultToList.Remove(ReportMainBallCallByGame);
+                   {
+                       Application.Current.Dispatcher.Invoke(new Action(() =>
+                       {
+                           if (SettingRngBallCall == true)//ball call game by session
+                           {
+                               var ReportMainBallCallByGame = m_reportCollection.Single(l => l.B3Reports.Id == ReportId.B3BallCallByGame);
+                               var tempresultToList = m_reportCollection.ToList();
+                               tempresultToList.Remove(ReportMainBallCallByGame);
 
-                            //check if exists 
-                            var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallBySession);
-                            if (exists != true)
-                            {
-                                ReportTemplateViewModel B3BallCallBySession = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallBySession));
-                                ReportMain x = new ReportMain() { B3Reports = m_reports.Single(l => l.Id == ReportId.B3BallCallBySession), ReportDisplayName = "BallCall by session", rpttemplatevm = B3BallCallBySession, rptView = new ReportTemplate(B3BallCallBySession) };
-                                tempresultToList.Add(x);
-                            }
-                            ReportListCol = new ObservableCollection<ReportMain>(tempresultToList.OrderBy(l => l.ReportDisplayName));
-                        }
-                        else
-                        {
-                            var ReportMainBallCallBySession = m_reportCollection.Single(l => l.B3Reports.Id == ReportId.B3BallCallBySession);
-                            var tempresultToList = m_reportCollection.ToList();
-                            tempresultToList.Remove(ReportMainBallCallBySession);
+                               //check if exists 
+                               var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallBySession);
+                               if (exists != true)
+                               {
+                                   ReportTemplateViewModel B3BallCallBySession = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallBySession));
+                                   ReportMain x = new ReportMain() { B3Reports = m_reports.Single(l => l.Id == ReportId.B3BallCallBySession), ReportDisplayName = "BallCall by session", rpttemplatevm = B3BallCallBySession, rptView = new ReportTemplate(B3BallCallBySession) };
+                                   tempresultToList.Add(x);
+                               }
+                               ReportListCol = new ObservableCollection<ReportMain>(tempresultToList.OrderBy(l => l.ReportDisplayName));
+                           }
+                           else
+                           {
+                               var ReportMainBallCallBySession = m_reportCollection.Single(l => l.B3Reports.Id == ReportId.B3BallCallBySession);
+                               var tempresultToList = m_reportCollection.ToList();
+                               tempresultToList.Remove(ReportMainBallCallBySession);
 
-                            //check if exists 
-                            var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallByGame);
-                            if (exists != true)
-                            {
-                                ReportTemplateViewModel B3BallCallByGame = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallByGame));
-                                ReportMain xy = new ReportMain() { B3Reports = m_reports.Single(l => l.Id == ReportId.B3BallCallByGame), ReportDisplayName = "BallCall by game", rpttemplatevm = B3BallCallByGame, rptView = new ReportTemplate(B3BallCallByGame) };
-                                tempresultToList.Add(xy);
-                            }
-                            ReportListCol = new ObservableCollection<ReportMain>(tempresultToList.OrderBy(l => l.ReportDisplayName));
-                        }
-                        m_isRngBallCall = SettingRngBallCall;
-                    }));
-                });
+                               //check if exists 
+                               var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallByGame);
+                               if (exists != true)
+                               {
+                                   ReportTemplateViewModel B3BallCallByGame = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallByGame));
+                                   ReportMain xy = new ReportMain() { B3Reports = m_reports.Single(l => l.Id == ReportId.B3BallCallByGame), ReportDisplayName = "BallCall by game", rpttemplatevm = B3BallCallByGame, rptView = new ReportTemplate(B3BallCallByGame) };
+                                   tempresultToList.Add(xy);
+                               }
+                               ReportListCol = new ObservableCollection<ReportMain>(tempresultToList.OrderBy(l => l.ReportDisplayName));
+                           }
+                           m_isRngBallCall = SettingRngBallCall;
+                       }));
+                   });
+           
 
             }
         }

@@ -589,8 +589,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     var ii = ReportsViewModel.Instance;
                     ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
-                }
-                //lblSavedNotification.Visibility = Visibility.Visible;
+                }               
             }
             catch (Exception ex)
             {

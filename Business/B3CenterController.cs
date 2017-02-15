@@ -21,6 +21,8 @@ using GameTech.Elite.Client.Reports;
 using GameTech.Elite.Reports;
 using GameTech.Elite.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
@@ -115,7 +117,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             if (!GetB3UserModulePermission())
             {
-                    return IsInitialized;   
+                return IsInitialized;
             }
 
             if(!CreateLogger())
@@ -350,7 +352,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             {
                 var sendMessage = new GetStaffModuleFeaturesMessage(m_staffId, 247, 0);//247 is the ModuleID for B3Center (select * from daily.dbo.modules where modulename = 'B3 Center')
                 sendMessage.Send();
-                m_moduleFeaturesList = sendMessage.ModuleFeatures;
+
+                var TranferValueFromMessage = new List<int>();
+                foreach (int ModuleFeaturid in sendMessage.ModuleFeatures)  //If user has multiple position with same modulefeatures then do not re-add them. //Cant really filter it from GetStaffModulefeature.cs -> It may affect other module so Im doing it here.
+                {
+                    if (!TranferValueFromMessage.Exists(l => l == ModuleFeaturid))
+                    {
+                        TranferValueFromMessage.Add(ModuleFeaturid);
+                    }
+                }
+                m_moduleFeaturesList = TranferValueFromMessage;
             }
             catch(Exception ex)
             {
