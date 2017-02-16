@@ -21,10 +21,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
-                <ColumnDefinition Width="28"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Path=ReportTitle}" Grid.Column="0"   />
-            <Button Content="X" Grid.Column="2" Command="{Binding CloseViewReportCommand}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
+            <Button Content="Close Report" FontSize="12" FontWeight="ExtraLight"  Grid.Column="2" Command="{Binding CloseViewReportCommand}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
         </Grid>
         <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}" >
             <!--<ContentPresenter Content="{Binding vReportViewer}" ></ContentPresenter>-->
