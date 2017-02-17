@@ -42,6 +42,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private PlayerSettingView m_playerSettingView;
         private SessionSettingView m_sessionSettingView;
         private ObservableCollection<B3SettingGlobal> m_b3Setting { get; set; }
+        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable { get; set; }
         //Model
         private ServerSetting m_serverSetting;
         private SessionSetting m_sessionSetting;
@@ -51,6 +52,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private GameSetting m_gameSetting;
         //Other
         private int m_selectedSettingEquivToId;
+        private bool m_isRngBallCall;
 
         private Dictionary<string, int> m_B3SettingCategory;//Matches the primary key of B3Settingcategory
 
@@ -66,8 +68,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 throw new ArgumentNullException();
 
             m_controller = controller;
+            //var x = m_controller.Settings.B3GameSetting_;
             //m_gameSettingView = new GameSettingView();
-
+             m_b3SettingEnableDisable = new ObservableCollection<B3GameSetting>(m_controller.Settings.B3GameSetting_);    
             if (IsClassIIB3GameEnable == true)
             {
             }
@@ -389,8 +392,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }         
         }
 
-        private bool m_isRngBallCall;
-
         private void LoadSetting()
         {
             m_settingList.Clear();
@@ -627,8 +628,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             switch (m_selectedSettingEquivToId)
             {
                 case 1:
-                    {                     
-                        GameSetting_Vm = new GameSettingVm(m_b3Setting);
+                    {
+
+                        GameSetting_Vm = new GameSettingVm(m_b3Setting, m_b3SettingEnableDisable);
                         m_gameSettingView = new GameSettingView(GameSetting_Vm);
                          view = m_gameSettingView;
                         break;

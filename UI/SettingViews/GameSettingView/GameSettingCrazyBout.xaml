@@ -9,7 +9,10 @@
             <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
     </UserControl.Resources>
-    <Border>
+    <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />-->
+
+    <Border >
         <Grid Name="gridCrazyBout">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -63,21 +66,21 @@
                 </ComboBox>
 
                 <Label   Content="Game denominations" />
-                <GroupBox  Background="White"   BorderThickness="2" Margin="-1,0,-1,0" Padding="15,0,0,3" Style="{DynamicResource GroupBoxStyle1}" >
+                <GroupBox  Style="{DynamicResource GroupBoxStyle1}" >
                     <Grid >
                         <Grid.Resources>
                             <Style TargetType="CheckBox" >
                                 <Setter Property="Margin" Value="0,0,0,0"></Setter>
                                 <Setter Property="Height" Value="18"/>
-                                <Setter Property="VerticalAlignment" Value="Bottom"/>
-                                <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+                                <Setter Property="VerticalAlignment" Value="Top"/>
+                                <Setter Property="VerticalContentAlignment" Value="Top"/>
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
-                            <RowDefinition Height="6"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -104,7 +107,8 @@
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
                 <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
                 <CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>
-                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>              
+                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>          
+                <CheckBox Content="Enable game"/>
             </StackPanel>
         </Grid>
     </Border>

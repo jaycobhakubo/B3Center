@@ -9,7 +9,7 @@
               xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
             >
     <UserControl.Resources>
-        <ResourceDictionary>
+        <!--<ResourceDictionary>-->
             
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
             <Style
@@ -18,10 +18,20 @@
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="0,15,0,2"/>
             </Style>
-           
+
+            <!--<Style TargetType="CheckBox" >
+                <Setter Property="Margin" Value="0,0,0,0"></Setter>
+                <Setter Property="Height" Value="18"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
+            </Style>-->
+
             <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
             <Setter Property="BorderBrush" Value="#FF0050AA"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="15,0,0,3"/>
+            <Setter Property="Margin" Value="-1,0,-1,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type GroupBox}">
@@ -59,10 +69,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
-            <ResourceDictionary.MergedDictionaries>
+            <!--<ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>     
-        </ResourceDictionary>
+        </ResourceDictionary>-->
     </UserControl.Resources>
 
     

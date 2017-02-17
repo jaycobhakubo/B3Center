@@ -39,15 +39,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #region MEMBER
 
         private ObservableCollection<B3SettingGlobal> m_b3GameStting;
+        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable { get; set; }
         private GameSetting gs = new GameSetting();
         private ObservableCollection<TabItem> GameTabItem { get; set; }
         private int m_currentGameId;
 
         #endregion
         #region CONSTRUCTOR
-        public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting)
+        public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting, ObservableCollection<B3GameSetting> _GameEnableDisableSetting)
         {
             GameTabItem = new ObservableCollection<TabItem>();
+            m_b3SettingEnableDisable = _GameEnableDisableSetting;
             m_b3GameStting = _b3GameSetting;
             TabItem temp = new TabItem();
 
@@ -138,6 +140,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #endregion
         #region METHOD
 
+        private B3GameSetting GetEnableDisableSettingValue(int GameId_)
+        {
+            return  m_b3SettingEnableDisable.Single(l => l.GameId == GameId_);
+        }
+
         public void ReloadSelectedItemForAnyChangesNotSaved()
         {
             int tabSelectedIndex = m_tabSelectedindex;
@@ -221,9 +228,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
         private GameSettingVmAllGame GetSelectedVm()
-        {
-          
+        {         
             return GameTabItem[m_tabSelectedindex].ViewModel;
+        }
+
+        private void SetEnableDisableGameSetting(int GameId)
+        {
+
+            //var x = 
+            //switch (GameId)
+            //{
+            //    case (int)B3Game.CRAZYBOUT:
+            //        break;
+            //}
         }
 
         private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> _b3Setting)
@@ -329,9 +346,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if ((int)B3SettingId.CallSpeedBonus == b3SettingGlobal_.B3SettingID)
                 {
                     gs.CallSpeedBonus = b3SettingGlobal_.B3SettingValue;
-
                 }
-
             }
 
             if (m_currentGameId == (int)B3Game.CRAZYBOUT
@@ -354,6 +369,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 gs.LCallSpeedBonus = SettingViewModel.Volume();
             }
 
+            gs.IsEnableGame = GetEnableDisableSettingValue(m_currentGameId);
             gs.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(m_currentGameId).ToList();
 
             return gs;
