@@ -138,7 +138,13 @@
                     <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                      
-                            Name="lstbx_ReportList" Margin="15"   ItemsSource="{Binding ReportListCol}" SelectedItem="{Binding SelectedReportColl}" DisplayMemberPath="ReportDisplayName" SelectionChanged="lstbx_ReportList_SelectionChanged"  >                    
+                            Name="lstbx_ReportList" 
+                            Margin="15"   
+                            ItemsSource="{Binding ReportListCol}" 
+                            SelectedItem="{Binding SelectedReportColl}" 
+                            DisplayMemberPath="ReportDisplayName" 
+                            SelectionChanged="lstbx_ReportList_SelectionChanged" 
+                            SelectedIndex="{Binding ReportSelectedIndex}">                  
                         </ListBox>
                     </ScrollViewer>
                 </Grid>

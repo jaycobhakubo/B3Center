@@ -588,6 +588,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)
                 {
                     var ii = ReportsViewModel.Instance;
+                    ii.ReportSelectedIndex = -1;
                     ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
                 }               
             }

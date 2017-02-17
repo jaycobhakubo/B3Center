@@ -327,6 +327,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                    {
                        Application.Current.Dispatcher.Invoke(new Action(() =>
                        {
+                           //ReportSelectedIndex = -1;
                            if (SettingRngBallCall == true)//ball call game by session
                            {
                                var ReportMainBallCallByGame = m_reportCollection.Single(l => l.B3Reports.Id == ReportId.B3BallCallByGame);
@@ -641,6 +642,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region PROPERTIES
 
+        private int m_reportSelectedIndex;
+        public int ReportSelectedIndex
+        {
+            get { return m_reportSelectedIndex; }
+            set
+            {
+                if (value != m_reportSelectedIndex)
+                {
+                    m_reportSelectedIndex = value;
+                    RaisePropertyChanged("ReportSelectedIndex");
+                }
+            }
+        }
+
         private bool m_noSession;
         public bool NoSession
         {
@@ -693,11 +708,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return m_selectedReportColl; }
             set
             {
-                m_selectedReportColl = value;
-                SelectedReportViewCol = value.rptView;
-                m_selectedReportTemplateViewModel = value.rpttemplatevm;
-                m_reportSelected = value.B3Reports;
-                RaisePropertyChanged("SelectedReportColl");
+                if (value != null)
+                {
+                    m_selectedReportColl = value;
+                    SelectedReportViewCol = value.rptView;
+                    m_selectedReportTemplateViewModel = value.rpttemplatevm;
+                    m_reportSelected = value.B3Reports;
+                    RaisePropertyChanged("SelectedReportColl");
+                }
             }
         }
 
