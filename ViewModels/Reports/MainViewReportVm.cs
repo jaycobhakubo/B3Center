@@ -389,7 +389,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     )
                 {
                     SelectedReportColl.rpttemplatevm.parVm.UpdateSessionList(i);
-
                 }
                 SelectedReportColl.rpttemplatevm.parVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
             }

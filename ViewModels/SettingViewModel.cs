@@ -674,7 +674,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             switch ((int)m_B3SettingCategory[SettingSelected])
             {
-                
+                case 1:
+                    {
+                        GameSetting_Vm.ReloadSelectedItemForAnyChangesNotSaved();
+                        break;
+                    }
                 case 3:
                     {
                         PlayerSetting_Vm.PlayerSetting_ = m_playerSetting;
