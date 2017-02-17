@@ -61,32 +61,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             DataContext = this;
         }
 
-        //public GameSettingCrazyBoutView(List<B3SettingGlobal> B3SettingCrazyBout, List<B3MathGamePay> ListB3MathGamePlay)
-        //{
-        //    InitializeComponent();
-            //m_B3SettingCrazyBt = B3SettingCrazyBout;
-
-            //if (m_B3SettingCrazyBt[0].B3GameID == 1)
-            //{
-            //    m_hasMinSpeed = true;
-            //}
-            //else
-            //{
-            //    m_hasMinSpeed = false;
-            //    lblCallSpeedOrMax.Content = "Call Speed";
-            //    cmbxCallSpeedMin.Visibility = Visibility.Collapsed;
-            //    lblCallSpeedMin.Visibility = Visibility.Collapsed;
-            ////    rowDefCallSpeedItems.Height = GridLength.Auto;
-            ////    rowDefCallSpeedMargin.Height = GridLength.Auto;
-            //}
-            
-            //m_listB3MathGamePlay = ListB3MathGamePlay;
-            //PopulateComboBoxControls();
-            //PopulateDataIntoVar();
-            //PopulateDataIntoControls();
-            //m_lB3Settings = new List<SettingMember>();           
-        //}
-
         #endregion
  
         #region METHODS

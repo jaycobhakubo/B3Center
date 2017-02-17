@@ -6,6 +6,62 @@
              mc:Ignorable="d" 
           >
     <UserControl.Resources>
+        <ResourceDictionary>
+
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+            <!--<Style
+             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0,15,0,2"/>
+            </Style>-->
+
+            <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
+                <Setter Property="BorderBrush" Value="#FF0050AA"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="6"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="6"/>
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
+                                <!--<Border Background="Transparent" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" x:Name="Header" Grid.Column="1" Padding="0" Grid.Row="0" Grid.RowSpan="2">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>-->
+                                <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <Border   Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
+                                    <Border.OpacityMask>
+                                        <MultiBinding ConverterParameter="6" Converter="{StaticResource BorderGapMaskConverter}">
+                                            <Binding ElementName="Header" Path="ActualWidth"/>
+                                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </Border.OpacityMask>
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
+                                    </Border>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Border>
@@ -46,6 +102,16 @@
                 <CheckBox Name="chkbxAnnounceCall" Content="Announce call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
                 <CheckBox Name="chkbxPressToCollect"  Content="Press to collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
                 <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting_.Disclaimer}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3">
+                <Label   Content="Enable game" />
+                <GroupBox  Background="White"   BorderThickness="2" Margin="-1,0,-1,0" Padding="15,0,0,3" Style="{DynamicResource GroupBoxStyle1}" >
+                    <StackPanel>
+                        <CheckBox Content="Crazy Bout"/>
+                        <CheckBox Content="Jail Break"/>
+                        <CheckBox Content="Maya Money"/>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
         </Grid>
     </Border>

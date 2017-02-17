@@ -46,7 +46,7 @@
             <Setter Property="Height" Value="22"/>
             <!--<Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="VerticalContentAlignment" Value="Bottom"/>-->
-            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+            <Setter Property="ContentStringFormat" Value="{}{0}"/>
         </Style>
 
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
