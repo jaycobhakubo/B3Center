@@ -25,15 +25,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         public ReportTemplate(ReportTemplateViewModel reportvm)
         {
             InitializeComponent();
-            DataContext = reportvm;            
+            DataContext = reportvm;
+            ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
+            ReportViewer_.Focusable = true;
+            ReportViewer_.Focus();
         }
 
         public void ViewReport(ReportDocument rptDoc)
         {
-            ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
-            ReportViewer_.ViewerCore.ReportSource = rptDoc;
-            ReportViewer_.Focusable = true;
-            ReportViewer_.Focus();
+            ReportViewer_.Dispatcher.Invoke(new Action(() =>
+                {
+                    ReportViewer_.ViewerCore.ReportSource = rptDoc;
+                }));        
         }
     }
 }

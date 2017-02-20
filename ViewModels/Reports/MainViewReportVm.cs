@@ -38,6 +38,7 @@ using GameTech.Elite.UI;
 using System.Windows.Threading;
 using CrystalDecisions.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Report;
+using System.Threading;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -76,7 +77,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             m_controller = controller;
             m_reports = controller.Reports;         
-            m_controller.SessionInfoCompleted += OnListInfoDone;
+            //m_controller.SessionInfoCompleted += OnListInfoDone;
             m_isRngBallCall = !controller.Settings.IsCommonRngBallCall;
 
             //set session list
@@ -489,8 +490,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //view
         public void ViewReportRel(ReportId reportID)
         {
-            Task.Factory.StartNew(() =>
-            {
+           //var y = Task.Factory.StartNew(() =>
+           // {
                 try
                 {            
                     var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
@@ -504,13 +505,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         return;
                     }
 
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {         
-                        
-                        DefaultViewMode = Visibility.Collapsed;
-                        CRViewMode = Visibility.Visible;
+                    var _STAThread = new Thread(new ThreadStart(() =>
+                    {
+                    
                         SelectedReportViewCol.ViewReport(report);
+                        Thread.CurrentThread.Join();
                     }));
+
+
+                    _STAThread.SetApartmentState(ApartmentState.STA);
+                    _STAThread.IsBackground = true;
+                    _STAThread.Start();  
+
+
+                    DefaultViewMode = Visibility.Collapsed;
+                    CRViewMode = Visibility.Visible;
                 }
                 catch (Exception ex)
                 {
@@ -526,7 +535,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     IsLoading = false;
                
                 }
-            });              
+            //});              
         }
 
 
@@ -847,73 +856,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
         #region EVENTS
-        /// <summary>
-        /// Occurs when [full screen event].
-        /// </summary>
-        public event EventHandler<EventArgs> FullScreenEvent;
-
-        /// <summary>
-        /// Occurs when [exit screen event].
-        /// </summary>
-        public event EventHandler<EventArgs> ExitScreenEvent;
-        
-
-        /// <summary>
-        /// Called when [full screen event].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnFullScreenEvent(object sender, EventArgs eventArgs)
-        {
-  
-            var handler = FullScreenEvent;
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Called when [exit screen event].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnExitScreenEvent(object sender, EventArgs eventArgs)
-        {
-
-            var handler = ExitScreenEvent;
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
-        }
-
     
-    /// <summary>
-        /// Called when [list information done].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="AsyncCompletedEventArgs"/> instance containing the event data.</param>
-        private void OnListInfoDone(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Error == null)
-            {
-                if (m_controller.Sessions.Count != SessionList.Count)
-                {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        SessionList.Clear();
-                        foreach (var session in m_controller.Sessions)
-                        {
-                            SessionList.Add(session);
-                        }
-
-                        //SessionReportSessionSelected = SessionList.LastOrDefault();
-                        //JackpotReportSessionSelected = SessionList.LastOrDefault();
-                    }));
-                }
-            }
-        }
         #endregion
         #region COMMAND
 

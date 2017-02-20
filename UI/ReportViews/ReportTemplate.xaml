@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
-                 xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
-                xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
-                   xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels"
-             mc:Ignorable="d" 
+            xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+            xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
+            xmlns:shared="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.Shared"
+            xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels"
+            mc:Ignorable="d" 
            >
 
     <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"></Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,7 +25,12 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Path=ReportTitle}" Grid.Column="0"   />
-            <Button Content="Close Report" FontSize="12" FontWeight="ExtraLight"  Grid.Column="2" Command="{Binding CloseViewReportCommand}" Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
+            <Button 
+                Content="Close Report" 
+                FontSize="12"   
+                Grid.Column="2"
+                Command="{Binding CloseViewReportCommand}" 
+                Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
         </Grid>
         <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}" >
             <!--<ContentPresenter Content="{Binding vReportViewer}" ></ContentPresenter>-->
