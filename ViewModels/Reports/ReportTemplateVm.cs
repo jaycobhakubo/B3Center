@@ -15,6 +15,7 @@ using CrystalDecisions.CrystalReports.Engine;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Reports;
 using System.Globalization;
+using System.Threading;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -233,12 +234,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             
             if (Report.CrystalReportDocument != null)
             {
-                CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
+                //var x = Thread.CurrentThread;
+                //CrViewer.Dispatcher.Thread.Join();
+                //CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
+
+
+                Dispatcher.CurrentDispatcher.Invoke(new Action(() =>
+                {
+                    lock (lockObj)
+                    { 
+                    CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
+                    }
+                }), DispatcherPriority.Render);
+
                 RaisePropertyChanged("CrViewer");
             }
             return Report.CrystalReportDocument;
         }
 
-          
+        private  Object lockObj = new Object();
+        private Object rndLock = new Object();
     }
 }

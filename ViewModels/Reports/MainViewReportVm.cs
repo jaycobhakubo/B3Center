@@ -499,13 +499,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
                     if (Rpt == null) { return; }
                     LoadCrystalReport(Rpt);
-                    var report =  m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
-
-                    if (report == null)
-                    {
-                        IsLoading = false;
-                        return;
-                    }                
+                m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
+              
+              
                     //SelectedReportViewCol.ViewReport(report);                                    
                     DefaultViewMode = Visibility.Collapsed;
                     CRViewMode = Visibility.Visible;
