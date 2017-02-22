@@ -13,7 +13,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         {
             public string ReportTitle{ get; set; }       
             public List<string> ReportParameter { get; set; }
-            public CrystalReportsViewer CrystalReportViewer{ get; set; }                  
+            public CrystalReportsViewer CrystalReportViewer_{ get; set; }                  
             public ReportParameterModel rptParModel { get; set; }
             public Visibility ReportViewerm     { get; set; }
             public Visibility DefaultViewerm { get; set; }

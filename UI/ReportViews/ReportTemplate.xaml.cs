@@ -26,23 +26,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         {
             InitializeComponent();
             DataContext = reportvm;
-            ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
-            ReportViewer_.Focusable = true;
-            ReportViewer_.Focus();
+            //ReportViewer_ = new CrystalReportsViewer();
+            //ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
+            //ReportViewer_.Focusable = true;
+            //ReportViewer_.Focus();
         }
 
-        public void ViewReport(ReportDocument rptDoc)
-        {
-            ReportViewer_.Dispatcher.Invoke(new Action(() =>
-                {
-                    ReportViewer_.ViewerCore.ReportSource = rptDoc;
-                }));        
-        }
+        //public void ViewReport(ReportDocument rptDoc)
+        //{
+            //ReportViewer_.Dispatcher.Invoke(new Action(() =>
+            //        {
+            //ReportViewer_.Dispatcher.Thread.Join();
+            //            ReportViewer_.Cursor = Cursors.Wait;
+                        //ReportViewer_.ViewerCore.ReportSource = rptDoc;
+                        //ReportViewer_.ViewerCore.ShowFirstPage();
+                        //ReportViewer_.Cursor = Cursors.Arrow;
+
+                    //}));
+
+            //a.Completed += dispatcherOp_Completed;
+
+        //}
+
+        //void dispatcherOp_Completed(object sender, EventArgs e)
+        //{
+        //    var c = (CrystalReportsViewer)sender;
+        //    var d = e;
+        //    MessageBox.Show("c");
+
+        //}
     }
 }
-//ReportViewer.ViewerCore.Zoom(85);
-//ReportViewer.ViewerCore.ToggleSidePanel = Constants.SidePanelKind.None;
-
-//NewReportButton.Visibility = Visibility.Hidden;
-//ReportViewerBorder.Visibility = Visibility.Hidden;
-//SelectDateBorder.Visibility = Visibility.Visible;

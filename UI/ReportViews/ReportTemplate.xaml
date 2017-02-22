@@ -33,8 +33,8 @@
                 Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
         </Grid>
         <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}" >
-            <!--<ContentPresenter Content="{Binding vReportViewer}" ></ContentPresenter>-->
-            <viewer:CrystalReportsViewer x:Name="ReportViewer_"  ShowToolbar="True" />
+            <ContentPresenter Content="{Binding CrViewer}" ></ContentPresenter>
+            <!--<viewer:CrystalReportsViewer x:Name="ReportViewer_"  ShowToolbar="True" />-->
         </Border>
         <Grid Grid.Row="1">
             <Border  Visibility="{Binding ReportParameterVisible}">

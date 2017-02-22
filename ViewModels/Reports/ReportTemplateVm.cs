@@ -34,6 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterList = ReportTemplate_Model.ReportParameter;
             parVm = new ReportParameterViewModel(reportParameterList, ReportTemplate_Model.rptParModel);//.Instance;
             CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
+            CrViewer = ReportTemplate_Model.CrystalReportViewer_;
         }
 
         public ReportTemplateModel ReportTemplate_Model
@@ -99,7 +100,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 "Nov", "Dec"
             };
                return Array.IndexOf(m_months, monthname) + 1;
-           }
+           }   
+
+        public CrystalReportsViewer CrViewer
+        { get; set; }
 
 
            public ReportDocument LoadReportDocument(B3Report Report)
@@ -226,8 +230,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                            break;
                        }
                }
-               return Report.CrystalReportDocument;
-           }
+            
+            if (Report.CrystalReportDocument != null)
+            {
+                CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
+                RaisePropertyChanged("CrViewer");
+            }
+            return Report.CrystalReportDocument;
+        }
 
           
     }

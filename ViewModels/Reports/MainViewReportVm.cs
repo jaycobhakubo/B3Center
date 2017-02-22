@@ -171,7 +171,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             temprptparmodel.b3DateData = new Model.Shared.DatePickerM();
             result.CurrentUser = m_controller.Parent.StaffId;
             result.CurrentMachine = m_controller.Parent.MachineId;
-            
+            CrystalReportsViewer ReportViewer_ = new CrystalReportsViewer();
+            ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
+            ReportViewer_.Focusable = true;
+            ReportViewer_.Focus();
+            result.CrystalReportViewer_ = ReportViewer_;
             switch (b3rpt)
             {
                 case ReportId.B3Accounts:
@@ -490,8 +494,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //view
         public void ViewReportRel(ReportId reportID)
         {
-           //var y = Task.Factory.StartNew(() =>
-           // {
                 try
                 {            
                     var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
@@ -503,21 +505,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         IsLoading = false;
                         return;
-                    }
-
-                    var _STAThread = new Thread(new ThreadStart(() =>
-                    {
-                    
-                        SelectedReportViewCol.ViewReport(report);
-                        Thread.CurrentThread.Join();
-                    }));
-
-
-                    _STAThread.SetApartmentState(ApartmentState.STA);
-                    _STAThread.IsBackground = true;
-                    _STAThread.Start();  
-
-
+                    }                
+                    //SelectedReportViewCol.ViewReport(report);                                    
                     DefaultViewMode = Visibility.Collapsed;
                     CRViewMode = Visibility.Visible;
                 }
@@ -534,8 +523,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     IsLoading = false;
                
-                }
-            //});              
+                }           
         }
 
 
