@@ -19,15 +19,11 @@ using System.Threading;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
-
-    
-
     public partial class ReportTemplateViewModel :ViewModelBase
     {
         private ReportTemplateModel m_reportTemplateModel;
         public ICommand CloseViewReportCommand { get; set; }
         private List<string> reportParameterList;
-
 
         public ReportTemplateViewModel(ReportTemplateModel reportTemplateModel)
         {         
@@ -103,8 +99,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                return Array.IndexOf(m_months, monthname) + 1;
            }   
 
-        public CrystalReportsViewer CrViewer
-        { get; set; }
+        public CrystalReportsViewer CrViewer { get; set; }
 
 
            public ReportDocument LoadReportDocument(B3Report Report)
@@ -238,21 +233,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 //CrViewer.Dispatcher.Thread.Join();
                 //CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
 
-
-                Dispatcher.CurrentDispatcher.Invoke(new Action(() =>
-                {
-                    lock (lockObj)
-                    { 
+                Thread x = CrViewer.Dispatcher.Thread;
+                 
                     CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
-                    }
-                }), DispatcherPriority.Render);
-
                 RaisePropertyChanged("CrViewer");
             }
             return Report.CrystalReportDocument;
         }
 
-        private  Object lockObj = new Object();
-        private Object rndLock = new Object();
+      
     }
 }
