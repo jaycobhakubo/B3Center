@@ -35,7 +35,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
     public class GameSettingVm : ViewModelBase
     {
-
         #region MEMBER
 
         private ObservableCollection<B3SettingGlobal> m_b3GameStting;
@@ -235,12 +234,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         private void SetEnableDisableGameSetting(int GameId)
         {
 
-            //var x = 
-            //switch (GameId)
-            //{
-            //    case (int)B3Game.CRAZYBOUT:
-            //        break;
-            //}
         }
 
         private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> _b3Setting)
@@ -376,8 +369,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
         #endregion
-
-
     }
 }
 

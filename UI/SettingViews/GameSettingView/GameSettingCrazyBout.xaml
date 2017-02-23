@@ -4,7 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-              xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"        >
+              xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers">
+    <UserControl.Style>
+        <Style>
+            <!--<Setter Property="Control.FontFamily" Value="Trebuchet MS" />
+            <Setter Property="Control.FontSize" Value="12" />
+            <Setter Property="Control.FontWeight" Value="Bold" />-->
+        </Style>
+    </UserControl.Style>
     <UserControl.Resources>
             <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
@@ -28,9 +35,9 @@
                 <Label  Content="Game pay table"  />
                 <ComboBox Name="cmbxGamePayTable" Tag="58"
                           ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
-                              DisplayMemberPath="PackageDesc"
-                           SelectedValuePath="MathPackageID"   
-                       SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"     
+                          DisplayMemberPath="PackageDesc"
+                          SelectedValuePath="MathPackageID"   
+                          SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"     
                           />
                 <!--SelectedItem="{Binding Gamesetting_.MathPayTableSetting}"-->
                 <Label Content="Max bet level" />
@@ -105,8 +112,8 @@
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
                 <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
                 <CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>
-                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>          
-                <CheckBox Content="Enable game"/>
+                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
+                <CheckBox Content="Enable game" IsChecked="{Binding Gamesetting_.IsEnableGame.IsEnabled}"/>
             </StackPanel>
         </Grid>
     </Border>
