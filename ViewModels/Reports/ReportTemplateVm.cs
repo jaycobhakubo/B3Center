@@ -31,7 +31,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             reportParameterList = ReportTemplate_Model.ReportParameter;
             parVm = new ReportParameterViewModel(reportParameterList, ReportTemplate_Model.rptParModel);//.Instance;
             CloseViewReportCommand = new RelayCommand(parameter => CloseViewReport());
-            CrViewer = ReportTemplate_Model.CrystalReportViewer_;
         }
 
         public ReportTemplateModel ReportTemplate_Model
@@ -99,9 +98,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                return Array.IndexOf(m_months, monthname) + 1;
            }   
 
-        public CrystalReportsViewer CrViewer { get; set; }
-
-
+     
            public ReportDocument LoadReportDocument(B3Report Report)
            {
                //Station is the machine Description of the machine. 
@@ -225,22 +222,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                            Report.CrystalReportDocument.SetParameterValue("@DateRun", parVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                            break;
                        }
-               }
-            
-            if (Report.CrystalReportDocument != null)
-            {
-                //var x = Thread.CurrentThread;
-                //CrViewer.Dispatcher.Thread.Join();
-                //CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
-
-                Thread x = CrViewer.Dispatcher.Thread;
-                 
-                    CrViewer.ViewerCore.ReportSource = Report.CrystalReportDocument;
-                RaisePropertyChanged("CrViewer");
-            }
+               }          
             return Report.CrystalReportDocument;
-        }
-
-      
+        }    
     }
 }

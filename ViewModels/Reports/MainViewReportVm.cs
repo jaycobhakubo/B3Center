@@ -51,7 +51,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3Controller m_controller;
         private ObservableCollection<Session> m_sessionList;
         private List<B3Report> m_reports;
-        private CrystalReportsViewer tempcr = new CrystalReportsViewer();
+        //private CrystalReportsViewer tempcr = new CrystalReportsViewer();
         private bool m_isRngBallCall;
 
         #endregion
@@ -171,11 +171,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             temprptparmodel.b3DateData = new Model.Shared.DatePickerM();
             result.CurrentUser = m_controller.Parent.StaffId;
             result.CurrentMachine = m_controller.Parent.MachineId;
-            CrystalReportsViewer ReportViewer_ = new CrystalReportsViewer();
-            ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
-            ReportViewer_.Focusable = true;
-            ReportViewer_.Focus();
-            result.CrystalReportViewer_ = ReportViewer_;
+            //CrystalReportsViewer ReportViewer_ = new CrystalReportsViewer();
+            //ReportViewer_.ToggleSidePanel = Constants.SidePanelKind.None;
+            //ReportViewer_.Focusable = true;
+            //ReportViewer_.Focus();
+            //result.CrystalReportViewer_ = ReportViewer_;
             switch (b3rpt)
             {
                 case ReportId.B3Accounts:
@@ -480,8 +480,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region (view and print report)
 
-
-
         private void LoadCrystalReport(B3Report report)
         {
             var server = m_controller.Settings.DatabaseServer;
@@ -491,35 +489,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             report.LoadCrystalReport(server, name, user, password);
         }
 
-        //view
+  
         public void ViewReportRel(ReportId reportID)
         {
-                try
-                {            
-                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
-                    if (Rpt == null) { return; }
-                    LoadCrystalReport(Rpt);
-                m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
-              
-              
-                    //SelectedReportViewCol.ViewReport(report);                                    
-                    DefaultViewMode = Visibility.Collapsed;
-                    CRViewMode = Visibility.Visible;
-                }
-                catch (Exception ex)
+            try
+            {
+                var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+                if (Rpt == null) { return; }
+                LoadCrystalReport(Rpt);
+                var m_rptDoc = m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
+                SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
+                DefaultViewMode = Visibility.Collapsed;
+                CRViewMode = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        MessageWindow.Show(
-                            string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
-                                ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
-                    }));
-                }
-                finally
-                {
-                    IsLoading = false;
-               
-                }           
+                    MessageWindow.Show(
+                        string.Format(CultureInfo.CurrentCulture, Properties.Resources.ErrorLoadingReport,
+                            ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
+                }));
+            }
+            finally { IsLoading = false; }           
         }
 
 
@@ -748,24 +740,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
    
         
         public Visibility CRViewMode
-        {
-            get
-            {
-                return m_selectedReportTemplateViewModel.ReportViewerVisibility;
-            }
+        { 
+            get { return m_selectedReportTemplateViewModel.ReportViewerVisibility; }
             set
             {
-                m_selectedReportTemplateViewModel.ReportViewerVisibility = value;
-                RaisePropertyChanged("CRViewMode");
-            }
+                if (value != m_selectedReportTemplateViewModel.ReportViewerVisibility)
+                {
+                    m_selectedReportTemplateViewModel.ReportViewerVisibility = value;
+                    RaisePropertyChanged("CRViewMode");
+                }
+            }              
         }
 
         public Visibility DefaultViewMode
-        {
-            get
-            {
-                return m_selectedReportTemplateViewModel.ReportParameterVisible;
-            }
+        {          
+            get { return m_selectedReportTemplateViewModel.ReportParameterVisible; }     
             set
             {
                 m_selectedReportTemplateViewModel.ReportParameterVisible = value;
