@@ -25,12 +25,8 @@ using System.Threading.Tasks;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
-    
-
-
     class SettingViewModel : ViewModelBase
-    {
-     
+    {     
         #region VAR
         //Parent
         private B3Controller m_controller;
@@ -321,10 +317,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Disclaimer	)).B3SettingValue = ((_PlayerSettingNewValue.Disclaimer	 == true) ? "T" : "F");                    
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerMainVolume)).B3SettingValue = GetVolumeEquivToDB(Convert.ToInt32(_PlayerSettingNewValue.PlayerMainVolume));
                         SettingTobeSaved = new ObservableCollection<B3SettingGlobal>(_m_b3Setting);
-
-                       
-
-
+                      
                         break;
                     }
                 case 4:
@@ -563,8 +556,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
         }
 
-        //WAIT TILL THE COMMAND IS COMPLETED
-        private void RunSavedCommand()
+        private void RunSavedCommand()        //WAIT TILL THE COMMAND IS COMPLETED
         {
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                 Task save = Task.Factory.StartNew(() => SaveSetting());
@@ -581,6 +573,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 try
                 {
                     msg.Send();
+
+                    if (m_selectedSettingEquivToId == (int)B3SettingCategory.Player)
+                    {
+                        foreach (B3GameSetting i in PlayerSetting_Vm.m_b3SettingEnableDisable)
+                        {
+                            if (i.IsEnabled != PlayerSetting_Vm.GetB3EnableSettingPreviousValue(i.GameId))
+                            {
+                                SetGameEnableSetting msg2 = new SetGameEnableSetting(i.GameId, i.IsEnabled);
+                                try
+                                {
+                                    msg2.Send();
+                                    if (msg2.ReturnCode != ServerReturnCode.Success)
+                                    {
+                                        throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(msg2.ReturnCode));
+                                    }
+                                }
+                                catch (ServerCommException ex)
+                                {
+                                    throw new Exception("SetGameEnableSetting: " + ex.Message);
+                                }
+                            }
+                        }             
+                    }
                 }
                 catch
                 {
@@ -588,7 +603,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
                 }
 
-                if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)
+                if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)//Update B3ReportCenter 
                 {
                     var ii = ReportsViewModel.Instance;
                     ii.ReportSelectedIndex = -1;

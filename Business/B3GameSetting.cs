@@ -23,7 +23,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         {
         }
         #endregion
-            #region Properties 
+        #region Properties 
 
         public int GameId
         {

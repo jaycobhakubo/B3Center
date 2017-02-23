@@ -9,7 +9,7 @@ using System.IO;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
-    internal class SetGameEnableSQL : ServerMessage
+    internal class SetGameEnableSetting : ServerMessage
     {
         private int m_gameID;
         private bool m_enable;
@@ -18,7 +18,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         /// <summary>
         /// Gti Server Message
         /// </summary>
-        public SetGameEnableSQL(int GameID, bool Enable)
+        public SetGameEnableSetting(int GameID, bool Enable)
         {    
             m_gameID = GameID + 1;
             m_enable = Enable;

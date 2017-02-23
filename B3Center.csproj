@@ -132,7 +132,7 @@
     <Compile Include="Messages\SetB3LoggedChanges.cs" />
     <Compile Include="Messages\SetB3OperatorMessage.cs" />
     <Compile Include="Messages\SetB3SettingsMessage.cs" />
-    <Compile Include="Messages\SetGameEnableSQL.cs" />
+    <Compile Include="Messages\SetGameEnableSetting.cs" />
     <Compile Include="Messages\VoidB3SessionTicketsMessage.cs" />
     <Compile Include="Messages\GetB3SessionTicketCountMessage.cs" />
     <Compile Include="Messages\GetB3BallsMessage.cs" />

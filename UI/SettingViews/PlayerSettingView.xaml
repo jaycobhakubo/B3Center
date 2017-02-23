@@ -57,14 +57,14 @@
                         </Style>
                     </GroupBox.Resources>
                     <StackPanel >
-                        <CheckBox Content="Crazy Bout" IsChecked="{Binding PlayerSetting_.IsEnableCRAZYBOUT}" ></CheckBox>
-                        <CheckBox Content="JailBreak" IsChecked="{Binding PlayerSetting_.IsEnableJAILBREAK}"></CheckBox>
-                        <CheckBox Content="Maya Money" IsChecked="{Binding PlayerSetting_.IsEnableMAYAMONEY}"></CheckBox>
-                        <CheckBox Content="76 Bingo" IsChecked="{Binding PlayerSetting_.IsEnableSPIRIT76}"></CheckBox>
-                        <CheckBox Content="Time Bomb" IsChecked="{Binding PlayerSetting_.IsEnableTIMEBOMB}"></CheckBox>
-                        <CheckBox Content="U kick Em" IsChecked="{Binding PlayerSetting_.IsEnableUKICKEM}"></CheckBox>
-                        <CheckBox Content="WildFire w/Bonus" IsChecked="{Binding PlayerSetting_.IsEnableWILDBALL}"></CheckBox>
-                        <CheckBox Content="WildFire" IsChecked="{Binding PlayerSetting_.IsEnableWILDFIRE}"></CheckBox>
+                        <CheckBox Content="Crazy Bout" IsChecked="{Binding IsEnableCRAZYBOUT.IsEnabled}" ></CheckBox>
+                        <CheckBox Content="JailBreak" IsChecked="{Binding IsEnableJAILBREAK.IsEnabled}"></CheckBox>
+                        <CheckBox Content="Maya Money" IsChecked="{Binding IsEnableMAYAMONEY.IsEnabled}"></CheckBox>
+                        <CheckBox Content="76 Bingo" IsChecked="{Binding IsEnableSPIRIT76.IsEnabled}"></CheckBox>
+                        <CheckBox Content="Time Bomb" IsChecked="{Binding IsEnableTIMEBOMB.IsEnabled}"></CheckBox>
+                        <CheckBox Content="U kick Em" IsChecked="{Binding IsEnableUKICKEM.IsEnabled}"></CheckBox>
+                        <CheckBox Content="WildFire w/Bonus" IsChecked="{Binding IsEnableWILDBALL.IsEnabled}"></CheckBox>
+                        <CheckBox Content="WildFire" IsChecked="{Binding IsEnableWILDFIRE.IsEnabled}"></CheckBox>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
