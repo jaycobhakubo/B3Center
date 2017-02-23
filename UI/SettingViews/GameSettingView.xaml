@@ -5,82 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
               xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
-                     xmlns:Converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+              xmlns:Converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
               xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
             >
     <UserControl.Resources>
-        <!--<ResourceDictionary>-->
-            
-        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
-            <Style
+        <Style
              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-                <Setter Property="ContentStringFormat" Value="{}{0}:"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="0,15,0,2"/>
-            </Style>
-
-            <!--<Style TargetType="CheckBox" >
-                <Setter Property="Margin" Value="0,0,0,0"></Setter>
-                <Setter Property="Height" Value="18"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-                <Setter Property="VerticalContentAlignment" Value="Top"/>
-            </Style>-->
-
-            <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}" >
-            <Setter Property="BorderBrush" Value="#FF0050AA"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Padding" Value="15,0,0,3"/>
-            <Setter Property="Margin" Value="-1,0,-1,0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GroupBox}">
-                        <Grid SnapsToDevicePixels="true">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="6"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="6"/>
-                            </Grid.RowDefinitions>
-                            <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
-                            <!--<Border Background="Transparent" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" x:Name="Header" Grid.Column="1" Padding="0" Grid.Row="0" Grid.RowSpan="2">
-                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Border>-->
-                            <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            <Border   Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
-                                <Border.OpacityMask>
-                                    <MultiBinding ConverterParameter="6" Converter="{StaticResource BorderGapMaskConverter}">
-                                        <Binding ElementName="Header" Path="ActualWidth"/>
-                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
-                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
-                                    </MultiBinding>
-                                </Border.OpacityMask>
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
-                                    </Border>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,15,0,2"/>
         </Style>
-            <!--<ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>     
-        </ResourceDictionary>-->
     </UserControl.Resources>
-
-    
+   
     <Border x:Name="m_layoutRoot" >
         <Grid Name="gridServerMessage" >
-
             <TabControl Grid.Column="0" Focusable="False"  Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
-
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
                         <local:GameSettingCrazyBoutView DataContext="{Binding GameCrzyBout}"/>

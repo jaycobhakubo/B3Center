@@ -20,13 +20,11 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1">
-                            
                 <Label  Content="Game pay table"  />
                 <ComboBox Name="cmbxGamePayTable" Tag="58"
                           ItemsSource="{Binding Gamesetting_.LGamePayTable}" 

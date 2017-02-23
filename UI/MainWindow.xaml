@@ -2,117 +2,32 @@
      United States and other countries.  All rights reserved.  Should
      publication occur the following will apply:  © 2011 GameTech
      International, Inc. -->
-<ui:EliteWindowBase x:Class="GameTech.Elite.Client.Modules.B3Center.UI.MainWindow" x:ClassModifier="internal"
+<ui:EliteWindowBase 
+    x:Class="GameTech.Elite.Client.Modules.B3Center.UI.MainWindow" x:ClassModifier="internal"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ui="clr-namespace:GameTech.Elite.UI;assembly=GameTech.Elite.UI"
-                    
-     xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
-     xmlns:localSettings="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
-     xmlns:localOperators="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
-     xmlns:localSessions="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SessionViews"
-   
+    xmlns:ui="clr-namespace:GameTech.Elite.UI;assembly=GameTech.Elite.UI"                
+    xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
+    xmlns:localSettings="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
+    xmlns:localOperators="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
+    xmlns:localSessions="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SessionViews"  
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
-     WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
+    WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
+    <!--Set default style for all-->
     <ui:EliteWindowBase.Style>
-        <!--Everything is bold-->
         <Style>
             <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
             <Setter Property="Control.FontSize" Value="12" />
             <Setter Property="Control.FontWeight" Value="Bold" />
         </Style>
     </ui:EliteWindowBase.Style>
+
     <ui:EliteWindowBase.Resources>
-        <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
-            <Setter Property="FontWeight" Value="Bold"></Setter>
-        </Style>
-
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Height" Value="22.22"></Setter>
-            <Setter Property="Padding" Value="0,0,0,0"></Setter>
-            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-        </Style>
-
-        <Style
-             TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,15,0,2"/>
-            <Setter Property="ContentStringFormat" Value="* {0}:"/>
-        </Style>
-
-        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Margin" Value="0,30,0,0"></Setter>
-            <Setter Property="Height" Value="22"/>
-            <!--<Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="VerticalContentAlignment" Value="Bottom"/>-->
-            <Setter Property="ContentStringFormat" Value="{}{0}"/>
-        </Style>
-
-        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-        </Style>
-        <!--<Setter Property="Padding" Value="0,0,0,0"/>-->
-
-        <Style x:Key="AnimatedSwitch2" TargetType="{x:Type ToggleButton}">
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="Background" Value="Gray" />
-            <Setter Property="BorderBrush" Value="Gray"/>
-         
-            <Setter Property="VerticalAlignment" Value="Top"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
-                        <Viewbox Stretch="Uniform">
-                            <Canvas Name="Layer_1" Width="20" Height="20" Canvas.Left="10" Canvas.Top="0">
-                                <Rectangle   Canvas.Left="0" Width="20" Height="20" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.5"/>
-                                <Rectangle  Canvas.Left="20" Width="20" Height="20" Fill="Gray" Stroke="Gray" StrokeThickness="0.5" Name="ewan"/>
-                                <Border Canvas.Left="10" Width="20" Height="20" Name="rect416927" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"/>
-                                <Rectangle x:Name="ellipse"   Canvas.Left="0" Width="20" Height="20" Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.5">
-                                    <Rectangle.RenderTransform>
-                                        <TranslateTransform X="0" Y="0" />
-                                    </Rectangle.RenderTransform>
-                                    <Rectangle.BitmapEffect>
-                                        <DropShadowBitmapEffect Softness="0" ShadowDepth="0" Direction="270" Color="#FF0050AA"/>
-                                    </Rectangle.BitmapEffect>
-                                </Rectangle>
-                            </Canvas>
-                        </Viewbox>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True" >
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF0050AA" Duration="0:0:0.2" />
-                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="#FF0050AA" Duration="0:0:0.2" />
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
-                                                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-                                                <SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="20"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Gray" Duration="0:0:0.2" />
-                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="Gray" Duration="0:0:0.2" />
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
-                                                <SplineDoubleKeyFrame KeyTime="0" Value="20"/>
-                                                <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
     

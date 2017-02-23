@@ -5,9 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
           >
-    <UserControl.Resources>      
-    </UserControl.Resources>
-
     <Border>
         <Grid Name="gridPlayerSetting"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
@@ -46,6 +43,32 @@
                 <CheckBox Name="chkbxAnnounceCall" Content="Announce call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
                 <CheckBox Name="chkbxPressToCollect"  Content="Press to collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
                 <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting_.Disclaimer}"/>
+            </StackPanel>
+        
+            <StackPanel Grid.Column="3">
+                <Label Content="Enable/Disable B3 Game:" ContentStringFormat="{x:Null}"></Label>
+                <GroupBox  
+                    Style="{DynamicResource GroupBoxStyle2}" 
+                    Margin="0"
+                    Padding="0">
+                    <GroupBox.Resources>
+                        <Style TargetType="{x:Type CheckBox}">
+                            <Setter Property="Margin" Value="0,15,0,0"></Setter>
+                            <!--<Setter Property="Height" Value="18"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <Setter Property="VerticalContentAlignment" Value="Top"/>-->
+                        </Style>
+                    </GroupBox.Resources>
+                    <StackPanel HorizontalAlignment="Right" Margin="0,0,0.4,0" Width="266" >
+                        <CheckBox Content="Crazy Bout" Margin="0,15,0,0"></CheckBox>
+                        <CheckBox Content="JailBreak"></CheckBox>
+                        <CheckBox Content="Maya Money"></CheckBox>
+                        <CheckBox Content="Time Bomb"></CheckBox>
+                        <CheckBox Content="U kick Em"></CheckBox>
+                        <CheckBox Content="WildFire w/Bonus"></CheckBox>
+                        <CheckBox Content="WildFire" Margin="0,15,0,15"></CheckBox>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
         </Grid>
     </Border>
