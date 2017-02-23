@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 {
@@ -24,6 +26,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public bool IsEnableUKICKEM { get; set; }
         public bool IsEnableWILDBALL { get; set; }
         public bool IsEnableWILDFIRE { get; set; }
+
+        public List<B3GameSetting> B3SettingEnableDisablePreviousValue { get; set; }
+      
 
     }
 }

@@ -64,8 +64,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 throw new ArgumentNullException();
 
             m_controller = controller;
-            //var x = m_controller.Settings.B3GameSetting_;
-            //m_gameSettingView = new GameSettingView();
              m_b3SettingEnableDisable = new ObservableCollection<B3GameSetting>(m_controller.Settings.B3GameSetting_);    
             if (IsClassIIB3GameEnable == true)
             {
@@ -77,8 +75,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SetDefaultValue();
             LoadSetting();
             ViewReportVisibility = true;
-
-
         }
         #endregion
         #region OTHER ACCESSOR (static)
@@ -103,6 +99,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
         #region METHOD
      
+
+
         private void ConvertSettingToModel()
         {
             switch (m_selectedSettingEquivToId)
@@ -205,7 +203,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         GameSetting _GameSettingNewValue = GameSetting_Vm.SelectedGameVm.Gamesetting_;
                         _m_b3Setting = m_b3Setting.Where(l => l.B3GameID == _GameSettingNewValue.GameId);
                     
-
                         foreach (B3SettingGlobal sg in _m_b3Setting)
                         {
                             switch (sg.B3SettingID)
@@ -576,9 +573,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     if (m_selectedSettingEquivToId == (int)B3SettingCategory.Player)
                     {
-                        foreach (B3GameSetting i in PlayerSetting_Vm.m_b3SettingEnableDisable)
+                        foreach (B3GameSetting i in PlayerSetting_Vm.B3SettingEnableDisable)
                         {
-                            if (i.IsEnabled != PlayerSetting_Vm.GetB3EnableSettingPreviousValue(i.GameId))
+                            if (i.IsEnabled != PlayerSetting_Vm.PlayerSetting_.B3SettingEnableDisablePreviousValue.Single(l => l.GameId == i.GameId).IsEnabled)
                             {
                                 SetGameEnableSetting msg2 = new SetGameEnableSetting(i.GameId, i.IsEnabled);
                                 try
@@ -612,7 +609,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             catch (Exception ex)
             {
-
+                throw new Exception("SetGameEnableSetting: " + ex.Message);
             }
         }
 
@@ -621,7 +618,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             string SettingName = m_settingSelected;
             m_selectedSettingEquivToId = (int)m_B3SettingCategory[SettingSelected];
             m_b3Setting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == m_selectedSettingEquivToId));
-
+            
             if (m_selectedSettingEquivToId != 1)
             {
                 ConvertSettingToModel();
@@ -655,7 +652,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             
                 case 3:
                     {
-                        m_playerSettingView = new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting, m_b3SettingEnableDisable));
+                        m_playerSettingView =  new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting, m_b3SettingEnableDisable));
                         view = m_playerSettingView;
                         break;
                     }
@@ -701,8 +698,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case 3:
                     {
+                        var GetPreviousValue = PlayerSetting_Vm.B3SettingEnableDisablePreviousValue;
                         PlayerSetting_Vm.PlayerSetting_ = m_playerSetting;
-                        break;
+                        PlayerSetting_Vm.B3SettingEnableDisable = new ObservableCollection<B3GameSetting>(GetPreviousValue);
+                        break;                      
                     }
                 case 4:
                     {
