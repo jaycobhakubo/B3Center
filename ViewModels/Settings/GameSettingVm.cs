@@ -38,7 +38,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #region MEMBER
 
         private ObservableCollection<B3SettingGlobal> m_b3GameStting;
-        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable { get; set; }
+        
         private GameSetting gs = new GameSetting();
         private ObservableCollection<TabItem> GameTabItem { get; set; }
         private int m_currentGameId;
@@ -138,6 +138,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         #endregion
         #region METHOD
+
+        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
+        public ObservableCollection<B3GameSetting> B3SettingEnableDisable
+        {
+            get { return m_b3SettingEnableDisable; }
+            set
+            {
+                if (value != null && value != m_b3SettingEnableDisable)
+                {
+                    m_b3SettingEnableDisable = value;
+                    RaisePropertyChanged("B3SettingEnableDisable");
+                }
+            }
+        }
 
         private B3GameSetting GetEnableDisableSettingValue(int GameId_)
         {

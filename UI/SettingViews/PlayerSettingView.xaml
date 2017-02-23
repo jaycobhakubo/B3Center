@@ -46,27 +46,25 @@
             </StackPanel>
         
             <StackPanel Grid.Column="3">
-                <Label Content="Enable/Disable B3 Game:" ContentStringFormat="{x:Null}"></Label>
+                <Label Content="B3 game enable:" ContentStringFormat="{x:Null}"></Label>
                 <GroupBox  
                     Style="{DynamicResource GroupBoxStyle2}" 
-                    Margin="0"
-                    Padding="0">
+                    Margin="0,0,0,0"
+                    Padding="0,0,0,30">
                     <GroupBox.Resources>
                         <Style TargetType="{x:Type CheckBox}">
-                            <Setter Property="Margin" Value="0,15,0,0"></Setter>
-                            <!--<Setter Property="Height" Value="18"/>
-                            <Setter Property="VerticalAlignment" Value="Top"/>
-                            <Setter Property="VerticalContentAlignment" Value="Top"/>-->
+                            <Setter Property="Margin" Value="30,30,0,0"></Setter>
                         </Style>
                     </GroupBox.Resources>
-                    <StackPanel HorizontalAlignment="Right" Margin="0,0,0.4,0" Width="266" >
-                        <CheckBox Content="Crazy Bout" Margin="0,15,0,0"></CheckBox>
-                        <CheckBox Content="JailBreak"></CheckBox>
-                        <CheckBox Content="Maya Money"></CheckBox>
-                        <CheckBox Content="Time Bomb"></CheckBox>
-                        <CheckBox Content="U kick Em"></CheckBox>
-                        <CheckBox Content="WildFire w/Bonus"></CheckBox>
-                        <CheckBox Content="WildFire" Margin="0,15,0,15"></CheckBox>
+                    <StackPanel >
+                        <CheckBox Content="Crazy Bout" IsChecked="{Binding PlayerSetting_.IsEnableCRAZYBOUT}" ></CheckBox>
+                        <CheckBox Content="JailBreak" IsChecked="{Binding PlayerSetting_.IsEnableJAILBREAK}"></CheckBox>
+                        <CheckBox Content="Maya Money" IsChecked="{Binding PlayerSetting_.IsEnableMAYAMONEY}"></CheckBox>
+                        <CheckBox Content="76 Bingo" IsChecked="{Binding PlayerSetting_.IsEnableSPIRIT76}"></CheckBox>
+                        <CheckBox Content="Time Bomb" IsChecked="{Binding PlayerSetting_.IsEnableTIMEBOMB}"></CheckBox>
+                        <CheckBox Content="U kick Em" IsChecked="{Binding PlayerSetting_.IsEnableUKICKEM}"></CheckBox>
+                        <CheckBox Content="WildFire w/Bonus" IsChecked="{Binding PlayerSetting_.IsEnableWILDBALL}"></CheckBox>
+                        <CheckBox Content="WildFire" IsChecked="{Binding PlayerSetting_.IsEnableWILDFIRE}"></CheckBox>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

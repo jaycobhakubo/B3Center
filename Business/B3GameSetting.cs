@@ -18,9 +18,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             IsEnabled = isEnabled;
             IsAllowed = isAllowed;
         }
+
+        public B3GameSetting()
+        {
+        }
         #endregion
-        #region Properties 
-        
+            #region Properties 
+
         public int GameId
         {
             get;

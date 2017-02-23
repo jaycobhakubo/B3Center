@@ -49,11 +49,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SalesSettings m_salesSetting;
         private PlayerSettings m_playerSetting;
         private SystemSetting m_systemSetting;
-        private GameSetting m_gameSetting;
+        //private GameSetting m_gameSetting;
         //Other
+        private ObservableCollection<B3SettingGlobal> SettingTobeSaved;
         private int m_selectedSettingEquivToId;
         private bool m_isRngBallCall;
-
         private Dictionary<string, int> m_B3SettingCategory;//Matches the primary key of B3Settingcategory
 
         #endregion
@@ -197,7 +197,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private ObservableCollection<B3SettingGlobal> SettingTobeSaved;
+        
 
         private void SetNewValue()
         {
@@ -305,7 +305,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                         break;
                                     }
                             }
-
                         }
                         SettingTobeSaved = new ObservableCollection<B3SettingGlobal>(_m_b3Setting);
                         break;
@@ -322,6 +321,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Disclaimer	)).B3SettingValue = ((_PlayerSettingNewValue.Disclaimer	 == true) ? "T" : "F");                    
                         _m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerMainVolume)).B3SettingValue = GetVolumeEquivToDB(Convert.ToInt32(_PlayerSettingNewValue.PlayerMainVolume));
                         SettingTobeSaved = new ObservableCollection<B3SettingGlobal>(_m_b3Setting);
+
+                       
+
+
                         break;
                     }
                 case 4:
@@ -409,7 +412,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             ObservableCollection<B3MathGamePay> tempResult;
             tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3GameMathPlay_.Where(l => l.GameID == GameId));
-
             return tempResult;
         }
 
@@ -638,7 +640,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             
                 case 3:
                     {
-                        m_playerSettingView = new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting));
+                        m_playerSettingView = new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting, m_b3SettingEnableDisable));
                         view = m_playerSettingView;
                         break;
                     }
