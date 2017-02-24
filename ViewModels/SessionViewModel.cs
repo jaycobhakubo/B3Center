@@ -45,6 +45,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private bool m_startSessionButtonVisibility;
         private bool m_endSessionButtonVisibility;
         private ObservableCollection<Session> m_sessionList;
+        private ObservableCollection<Business.Operator> m_operators;
         private bool m_setBallsIsEnabled;
         private B3Controller m_controller;
         private static volatile SessionViewModel m_instance;
@@ -205,7 +206,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_controller.Operators;
+                return m_operators;
+            }
+            set
+            {
+                {
+                    m_operators = value;
+                    RaisePropertyChanged("Operators");
+                }
             }
         }
 
@@ -515,6 +523,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
+                Operators = m_controller.Operators;
                 StatusMessage = Resources.SessionOperatorListSuccess;
             }
             else

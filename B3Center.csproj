@@ -145,7 +145,6 @@
     <Compile Include="Messages\SetB3BallsMessage.cs" />
     <Compile Include="Model\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
-    <Compile Include="ForMyEyesOnly\Model.cs" />
     <Compile Include="Model\Report\ReportMain.cs" />
     <Compile Include="Model\Report\ReportParameterModel.cs" />
     <Compile Include="Model\Report\Reports.cs" />
@@ -164,6 +163,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
+    <Compile Include="REF\Model.cs" />
+    <Compile Include="REF\ViewModel.cs" />
     <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
       <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
@@ -284,7 +285,6 @@
     <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
-    <Compile Include="ViewModels\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\NewStyle.xaml">
@@ -469,9 +469,8 @@
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="testng2.txt" />
+    <Resource Include="REF\testng2.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

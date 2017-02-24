@@ -15,8 +15,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         #region MEMBER
 
-        private PlayerSettings m_playerSetting;// = new PlayerSettings();
-        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;// m_b3SettingEnableDisable = new ObservableCollection<B3GameSetting>();
+        private PlayerSettings m_playerSetting;
+        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
 
         #endregion
         #region CONSTRUCTOR
@@ -26,8 +26,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             VolumeList = Volume();
             PlayerSetting_ = _playerSetting;
             m_b3SettingEnableDisable = m_b3SettingEnableDisable_;
-            AssignEnableSettingToGame();
-      
+            AssignEnableSettingToGame();    
         }
 
         #endregion

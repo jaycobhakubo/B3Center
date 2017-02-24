@@ -628,16 +628,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
         #region (on selection change)
+        int m_prevB3CatIdSelected = 0;
         public void SelectedItemEvent()
         {
             string SettingName = m_settingSelected;
             m_selectedSettingEquivToId = (int)m_B3SettingCategory[SettingSelected];
             m_b3Setting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == m_selectedSettingEquivToId));
 
-
             if (m_selectedSettingEquivToId != 1)
             {
                 ConvertSettingToModel();
+                if (m_prevB3CatIdSelected == 3)
+                {
+                    m_b3SettingEnableDisable = m_modelDefValue.B3SettingEnableDisablePreviousValue;                 
+                }
                 IndicatorVisibility = true;
             }
             else
@@ -654,14 +658,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         GameSetting_Vm = new GameSettingVm(m_b3Setting, m_b3SettingEnableDisable);
                         m_gameSettingView = new GameSettingView(GameSetting_Vm);
-                         view = m_gameSettingView;
+                        view = m_gameSettingView;
                         break;
                     }
             
                 case 3:
-                    {
-                        m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, 3);
+                    {                   
                         m_playerSettingView =  new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting, m_b3SettingEnableDisable));
+                        m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, 3);
                         view = m_playerSettingView;
                         break;
                     }
@@ -692,6 +696,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
             }
             SelectedSettingView = view;
+            m_prevB3CatIdSelected = m_selectedSettingEquivToId;
         }
         #endregion
         #region (cancel)

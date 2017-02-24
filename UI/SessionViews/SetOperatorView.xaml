@@ -8,13 +8,13 @@
              Height="400"
              ResizeMode="NoResize" ShowInTaskbar="False" Topmost="False" WindowStartupLocation="CenterScreen" Title="Start Session">
     <Window.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style TargetType="TextBlock" >
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
-        <Style TargetType="ComboBoxItem" >
+        <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
     </Window.Resources>

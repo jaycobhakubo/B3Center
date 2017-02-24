@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="GameBallBackground" Color="#FF44658D" />
         <SolidColorBrush x:Key="BonusBallBackGround" Color="#FFC44646" />
-        <Style TargetType="TextBlock" >
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
     </UserControl.Resources>

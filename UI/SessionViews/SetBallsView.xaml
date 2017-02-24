@@ -7,10 +7,10 @@
              Height="710" Width="1024" WindowStartupLocation="CenterScreen" Title="Set Balls">
 
     <Window.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style TargetType="TextBlock" >
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
     </Window.Resources>
@@ -62,7 +62,7 @@
                 <TextBlock Name="StatusMessageTextBlock" Foreground="Black" Grid.Row="3" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI" Margin="10, 0"/>
             </Border>
 
-            <Border Grid.Row="3" Margin="10" Style="{DynamicResource SemiTransparentBorder}">
+            <Border Grid.Row="3" Margin="10,5" Style="{DynamicResource SemiTransparentBorder}">
                 <Grid Name="SetBallGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
@@ -79,7 +79,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="3" Margin="10" Style="{DynamicResource SemiTransparentBorder}" Name="EditBallGrid">
+            <Border Grid.Row="3" Margin="10,5" Style="{DynamicResource SemiTransparentBorder}" Name="EditBallGrid">
                 <Grid  >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
