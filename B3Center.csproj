@@ -145,13 +145,14 @@
     <Compile Include="Messages\SetB3BallsMessage.cs" />
     <Compile Include="Model\CrazyBoutGameModel.cs" />
     <Compile Include="Model\GameModel.cs" />
+    <Compile Include="ForMyEyesOnly\Model.cs" />
     <Compile Include="Model\Report\ReportMain.cs" />
     <Compile Include="Model\Report\ReportParameterModel.cs" />
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
     <Compile Include="Model\SetModelDefaultValue.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
-    <Compile Include="Model\PlayerSetting.cs" />
+    <Compile Include="Model\Setting\PlayerSetting.cs" />
     <Compile Include="Model\Setting\SalesSettings.cs" />
     <Compile Include="Model\Setting\ServerSetting.cs" />
     <Compile Include="Model\Setting\SessionSetting.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\NewStyle.xaml">
@@ -465,6 +467,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="testng2.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
