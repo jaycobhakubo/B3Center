@@ -22,6 +22,7 @@ using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Threading.Tasks;
+using GameTech.Elite.Client.Modules.B3Center.Model;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -51,6 +52,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private int m_selectedSettingEquivToId;
         private bool m_isRngBallCall;
         private Dictionary<string, int> m_B3SettingCategory;//Matches the primary key of B3Settingcategory
+        private SetModelDefaultValue m_modelDefValue;
 
         #endregion
         #region CONSTRUCTOR
@@ -98,8 +100,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
         #endregion
         #region METHOD
-     
 
+        #region (Convert to our model class assign to a specific setting.)
 
         private void ConvertSettingToModel()
         {
@@ -121,6 +123,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_playerSetting.Disclaimer = (tempBool == "F") ? false : true;                                                      
                         var volumeSales = Convert.ToInt32((m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.PlayerMainVolume)).B3SettingValue.ToString()));
                         m_playerSetting.PlayerMainVolume = GetVolumeEquivValue(volumeSales);
+
                         break;
                     }
 
@@ -191,7 +194,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        
+        #endregion
+        #region (Assign new value)
 
         private void SetNewValue()
         {
@@ -385,6 +389,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }         
         }
 
+        #endregion
+        #region (unspecified)
+
         private void LoadSetting()
         {
             m_settingList.Clear();
@@ -405,9 +412,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return tempResult;
         }
 
-       #region (setDefault, hardcoded value, ID may reference ID on db table)
+        #endregion
+        #region (setDefault, hardcoded value, ID may reference ID on db table)
 
-       private void SetDefaultValue()
+        private void SetDefaultValue()
        {
            m_B3SettingCategory = new Dictionary<string, int>();
            m_B3SettingCategory.Add("Games", 1);
@@ -553,6 +561,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
         }
 
+        #region (save)
         private void RunSavedCommand()        //WAIT TILL THE COMMAND IS COMPLETED
         {
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
@@ -573,9 +582,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     if (m_selectedSettingEquivToId == (int)B3SettingCategory.Player)
                     {
-                        foreach (B3GameSetting i in PlayerSetting_Vm.B3SettingEnableDisable)
+                        foreach (B3GameSetting i in m_b3SettingEnableDisable)
                         {
-                            if (i.IsEnabled != PlayerSetting_Vm.PlayerSetting_.B3SettingEnableDisablePreviousValue.Single(l => l.GameId == i.GameId).IsEnabled)
+                            if (i.IsEnabled !=  m_modelDefValue.B3SettingEnableDisablePreviousValue.Single(l => l.GameId == i.GameId).IsEnabled)
                             {
                                 SetGameEnableSetting msg2 = new SetGameEnableSetting(i.GameId, i.IsEnabled);
                                 try
@@ -605,20 +614,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     var ii = ReportsViewModel.Instance;
                     ii.ReportSelectedIndex = -1;
                     ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
-                }               
+                }
+
+                if (m_selectedSettingEquivToId == (int)B3SettingCategory.Player)//Update B3ReportCenter 
+                {
+                    m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, m_selectedSettingEquivToId);
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception("SetGameEnableSetting: " + ex.Message);
             }
         }
-
+        #endregion
+        #region (on selection change)
         public void SelectedItemEvent()
         {
             string SettingName = m_settingSelected;
             m_selectedSettingEquivToId = (int)m_B3SettingCategory[SettingSelected];
             m_b3Setting = new ObservableCollection<B3SettingGlobal>(m_controller.Settings.B3SettingGlobal_.Where(l => l.B3SettingCategoryID == m_selectedSettingEquivToId));
-            
+
+
             if (m_selectedSettingEquivToId != 1)
             {
                 ConvertSettingToModel();
@@ -630,20 +646,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
 
             UserControl view = null;
-            if (SettingName == "Games")
-            {
-                SetBorderValue = 0;
-            }
-            else
-            {
-                SetBorderValue = 2;
-            }
-
+            SetBorderValue = (SettingName == "Games") ? 0 : 2;
+           
             switch (m_selectedSettingEquivToId)
             {
                 case 1:
                     {
-
                         GameSetting_Vm = new GameSettingVm(m_b3Setting, m_b3SettingEnableDisable);
                         m_gameSettingView = new GameSettingView(GameSetting_Vm);
                          view = m_gameSettingView;
@@ -652,6 +660,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             
                 case 3:
                     {
+                        m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, 3);
                         m_playerSettingView =  new PlayerSettingView(PlayerSetting_Vm = new PlayerSettingVm(m_playerSetting, m_b3SettingEnableDisable));
                         view = m_playerSettingView;
                         break;
@@ -684,7 +693,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
             SelectedSettingView = view;
         }
-
+        #endregion
+        #region (cancel)
         public void CancelSetting()
         {
             ConvertSettingToModel();
@@ -698,9 +708,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case 3:
                     {
-                        var GetPreviousValue = PlayerSetting_Vm.B3SettingEnableDisablePreviousValue;
+                        m_b3SettingEnableDisable = m_modelDefValue.B3SettingEnableDisablePreviousValue;
+                        PlayerSetting_Vm.B3SettingEnableDisable = m_b3SettingEnableDisable;
                         PlayerSetting_Vm.PlayerSetting_ = m_playerSetting;
-                        PlayerSetting_Vm.B3SettingEnableDisable = new ObservableCollection<B3GameSetting>(GetPreviousValue);
+                        PlayerSetting_Vm.RevertValueBack();
+                        m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, 3);                 
                         break;                      
                     }
                 case 4:
@@ -725,6 +737,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
             }
         }
+        #endregion
 
         #endregion
         #region PROPERTIES 

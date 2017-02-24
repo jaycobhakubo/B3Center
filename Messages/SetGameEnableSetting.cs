@@ -20,7 +20,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         /// </summary>
         public SetGameEnableSetting(int GameID, bool Enable)
         {    
-            m_gameID = GameID + 1;
+            m_gameID = GameID;
             m_enable = Enable;
         }
 

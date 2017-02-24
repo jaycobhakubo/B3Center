@@ -13,29 +13,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
     public class PlayerSettingVm : ViewModelBase
     {
-        private PlayerSettings m_playerSetting;
-        //private List<B3GameSetting> m_b3SettingEnableDisablePreviousValue = new List<B3GameSetting>();
-        public List<B3GameSetting> B3SettingEnableDisablePreviousValue = new List<B3GameSetting>();
+        #region MEMBER
+
+        private PlayerSettings m_playerSetting;// = new PlayerSettings();
+        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;// m_b3SettingEnableDisable = new ObservableCollection<B3GameSetting>();
+
+        #endregion
+        #region CONSTRUCTOR
 
         public PlayerSettingVm(PlayerSettings _playerSetting, ObservableCollection<B3GameSetting> m_b3SettingEnableDisable_)
         {
             VolumeList = Volume();
             PlayerSetting_ = _playerSetting;
-            B3SettingEnableDisable = m_b3SettingEnableDisable_;
-            AssignEnableSettingToGame(B3SettingEnableDisable);
-            PlayerSetting_.B3SettingEnableDisablePreviousValue = B3SettingEnableDisablePreviousValue;
+            m_b3SettingEnableDisable = m_b3SettingEnableDisable_;
+            AssignEnableSettingToGame();
+      
         }
 
-        private void SavedOriginalValueBeforeAnyChanges(B3GameSetting b3GameSetting)
-        {
-            var tempResult = new B3GameSetting();//Removed the binding.
-            tempResult.GameId = b3GameSetting.GameId;
-            tempResult.IsAllowed = b3GameSetting.IsAllowed;
-            tempResult.IsEnabled = b3GameSetting.IsEnabled;
-            B3SettingEnableDisablePreviousValue.Add(tempResult);//Read into new collection.
+        #endregion
+        #region METHOD
+
+        public void RevertValueBack()
+        {           
+            AssignEnableSettingToGame();
+            PlayerSetting_ = m_playerSetting;
         }
-             
-        private void AssignEnableSettingToGame(ObservableCollection<B3GameSetting> m_b3SettingEnableDisable)
+
+        private void AssignEnableSettingToGame()
         {     
             foreach (var i in m_b3SettingEnableDisable)
             {
@@ -43,92 +47,48 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 switch(b3gameid)
                 {
                     case (int)B3Game.CRAZYBOUT: 
-                        { 
-                            PlayerSetting_.IsEnableCRAZYBOUT = i.IsEnabled;
-                            IsEnableCRAZYBOUT = i;
+                        {
+                            m_playerSetting.IsEnableCRAZYBOUT = i;                       
                             break; 
                         }
                     case (int)B3Game.JAILBREAK: 
-                        { 
-                            PlayerSetting_.IsEnableJAILBREAK = i.IsEnabled;
-                            IsEnableJAILBREAK = i;
-                            break; 
+                        {
+                            m_playerSetting.IsEnableJAILBREAK = i;
+                            break;                         
                         }
                     case (int)B3Game.MAYAMONEY:
-                        { 
-                            PlayerSetting_.IsEnableMAYAMONEY = i.IsEnabled;
-                            IsEnableMAYAMONEY = i;
-                            break; 
+                        {
+                            m_playerSetting.IsEnableMAYAMONEY = i;
+                            break;
                         }
                     case (int)B3Game.SPIRIT76: 
-                        { 
-                            PlayerSetting_.IsEnableSPIRIT76 = i.IsEnabled;
-                            IsEnableSPIRIT76 = i;
-                            break; 
+                        {
+                            m_playerSetting.IsEnableSPIRIT76 = i;
+                            break;
                         }
                     case (int)B3Game.TIMEBOMB:
-                        { 
-                            PlayerSetting_.IsEnableTIMEBOMB = i.IsEnabled;
-                            IsEnableTIMEBOMB = i;
-                            break; 
+                        {
+                            m_playerSetting.IsEnableTIMEBOMB = i;
+                            break;
                         }
                     case (int)B3Game.UKICKEM:
-                        { 
-                            PlayerSetting_.IsEnableUKICKEM = i.IsEnabled;
-                            IsEnableUKICKEM = i;
-                            break; 
+                        {
+                            m_playerSetting.IsEnableUKICKEM =  i;
+                            break;
                         }
                     case (int)B3Game.WILDBALL: 
-                        { 
-                            PlayerSetting_.IsEnableWILDBALL = i.IsEnabled;
-                            IsEnableWILDBALL = i;
+                        {
+                            m_playerSetting.IsEnableWILDBALL = i;
                             break;
                         }
                     case (int)B3Game.WILDFIRE: 
-                        { 
-                            PlayerSetting_.IsEnableWILDFIRE = i.IsEnabled;
-                            IsEnableWILDFIRE = i;
-                            break; 
+                        {
+                            m_playerSetting.IsEnableWILDFIRE = i;
+                            break;
                         }
                 }
-                SavedOriginalValueBeforeAnyChanges(i);
             }
         }
-
-        public B3GameSetting IsEnableCRAZYBOUT { get; set; }
-        public B3GameSetting IsEnableJAILBREAK { get; set; }
-        public B3GameSetting IsEnableMAYAMONEY { get; set; }
-        public B3GameSetting IsEnableSPIRIT76 { get; set; }
-        public B3GameSetting IsEnableTIMEBOMB { get; set; }
-        public B3GameSetting IsEnableUKICKEM { get; set; }
-        public B3GameSetting IsEnableWILDBALL { get; set; }
-        public B3GameSetting IsEnableWILDFIRE { get; set; }
-
-        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
-        public ObservableCollection<B3GameSetting> B3SettingEnableDisable
-        {
-            get { return m_b3SettingEnableDisable; }
-            set
-            {
-                if (value != m_b3SettingEnableDisable)
-                {
-                    m_b3SettingEnableDisable = value;
-                    RaisePropertyChanged("B3SettingEnableDisable");
-                }
-            }
-        }
- 
-        public List<string> VolumeList { get; set; }
-        public PlayerSettings PlayerSetting_
-        {
-            get { return m_playerSetting; }          
-            set
-            {
-                m_playerSetting = value;
-                RaisePropertyChanged("PlayerSetting_");
-            }
-        }
-
         private List<string> Volume()
         {
             List<string> result = new List<string>();
@@ -144,7 +104,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             result.Add("9");
             result.Add("10");
             return result;
-        }        
+        }
+
+        #endregion
+        #region PROPERTIES
+        public List<string> VolumeList { get; set; }
+
+        public ObservableCollection<B3GameSetting> B3SettingEnableDisable
+        {
+       
+            get { return m_b3SettingEnableDisable; }
+            set
+            {
+                if (value != m_b3SettingEnableDisable)
+                {
+                    m_b3SettingEnableDisable = value;
+                    //RaisePropertyChanged("B3SettingEnableDisable");
+                }
+            }
+        }
+
+        public PlayerSettings PlayerSetting_
+        {
+            get { return m_playerSetting; }
+            set
+            {
+                m_playerSetting = value;
+                RaisePropertyChanged("PlayerSetting_");
+            }
+        }
+
+        #endregion
+
     }
 }
 
