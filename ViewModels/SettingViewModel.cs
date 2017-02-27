@@ -599,26 +599,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 {
                                     throw new Exception("SetGameEnableSetting: " + ex.Message);
                                 }
+                                m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, m_selectedSettingEquivToId);
+
                             }
                         }             
+                    }
+                    else if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)//Update B3ReportCenter 
+                    {
+                        var ii = ReportsViewModel.Instance;
+                        ii.ReportSelectedIndex = -1;
+                        ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
                     }
                 }
                 catch
                 {
                     if (msg.ReturnCode != ServerReturnCode.Success)
                         throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
-                }
-
-                if (m_selectedSettingEquivToId == (int)B3SettingCategory.System)//Update B3ReportCenter 
-                {
-                    var ii = ReportsViewModel.Instance;
-                    ii.ReportSelectedIndex = -1;
-                    ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
-                }
-
-                if (m_selectedSettingEquivToId == (int)B3SettingCategory.Player)//Update B3ReportCenter 
-                {
-                    m_modelDefValue = new SetModelDefaultValue(m_b3SettingEnableDisable, m_selectedSettingEquivToId);
                 }
             }
             catch (Exception ex)

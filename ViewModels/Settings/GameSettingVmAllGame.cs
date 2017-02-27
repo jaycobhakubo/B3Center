@@ -28,13 +28,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        public bool IsGameDisable
+        public bool IsGameEnable
         {
-            get { return Gamesetting_.IsEnableGame.IsEnabled; }
+            get { return !Gamesetting_.IsEnableGame.IsEnabled; }
             set
             {
-                Gamesetting_.IsEnableGame.IsEnabled = value;
-                RaisePropertyChanged("IsGameDisable");
+                Gamesetting_.IsEnableGame.IsEnabled = !value;
+                RaisePropertyChanged("IsGameEnable");
             }
         }
     }

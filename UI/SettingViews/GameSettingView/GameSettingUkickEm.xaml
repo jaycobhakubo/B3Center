@@ -11,7 +11,7 @@
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="IsHitTestVisible" Value="True"/>
-            <Setter Property="IsReadOnly" Value="{Binding IsGameDisable}" />
+            <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
             <Style.Triggers>
                 <Trigger Property="IsReadOnly" Value="True">
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

@@ -118,7 +118,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 if (value != m_b3SettingEnableDisable)
                 {
                     m_b3SettingEnableDisable = value;
-                    //RaisePropertyChanged("B3SettingEnableDisable");
                 }
             }
         }
@@ -132,70 +131,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 RaisePropertyChanged("PlayerSetting_");
             }
         }
-
         #endregion
-
     }
 }
 
-#region REF
-//private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
-//private B3GameSetting m_isCRAZYBOUTEnableIsAllowedSetting;
-//private B3GameSetting m_isJAILBREAKEnableIsAllowedSetting;
-//private B3GameSetting m_isMAYAMONEYEnableIsAllowedSetting;
-//private B3GameSetting m_isSPIRIT76EnableIsAllowedSetting;
-//private B3GameSetting m_isTIMEBOMBEnableIsAllowedSetting;
-//private B3GameSetting m_isUKICKEMEnableIsAllowedSetting;
-//private B3GameSetting m_isWILDBALLEnableIsAllowedSetting;
-//private B3GameSetting m_isWILDFIREEnableIsAllowedSetting;
-
-
-        //public bool GetB3EnableSettingPreviousValue(int GameId)
-        //{
-        //    bool tempResult = true;
-        //    switch (GameId)
-        //    {              
-        //            case (int)B3Game.CRAZYBOUT: 
-        //                {                          
-        //                    tempResult = m_playerSetting.IsEnableCRAZYBOUT;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.JAILBREAK: 
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableJAILBREAK;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.MAYAMONEY:
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableMAYAMONEY;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.SPIRIT76: 
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableSPIRIT76;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.TIMEBOMB:
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableTIMEBOMB;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.UKICKEM:
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableUKICKEM;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.WILDBALL: 
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableWILDBALL;
-        //                    break; 
-        //                }
-        //            case (int)B3Game.WILDFIRE: 
-        //                {
-        //                    tempResult = m_playerSetting.IsEnableWILDFIRE;
-        //                    break; 
-        //                }
-        //     }           
-        //     return tempResult;
-        //}
-#endregion

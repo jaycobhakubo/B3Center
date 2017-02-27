@@ -163,6 +163,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
+    <Compile Include="REF\ViewModels\Settings\PlayerSettingVm.cs" />
     <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
       <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
@@ -468,7 +469,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="REF\ViewModels\Reports\" />
-    <Folder Include="REF\ViewModels\Settings\" />
     <Folder Include="REF\ViewModels\Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
