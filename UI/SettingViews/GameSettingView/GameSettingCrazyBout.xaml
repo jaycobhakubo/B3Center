@@ -15,6 +15,22 @@
     <UserControl.Resources>
             <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="IsHitTestVisible" Value="True"/>
+            <Setter Property="IsReadOnly" Value="{Binding IsGameDisable}" />
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                    <Setter Property="IsHitTestVisible" Value="False"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+     
+
+
     </UserControl.Resources>
     <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
     <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />-->
@@ -113,7 +129,7 @@
                 <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
                 <CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
-                <CheckBox Content="Enable game" IsChecked="{Binding Gamesetting_.IsEnableGame.IsEnabled}"/>
+                <!--<CheckBox Content="Enable game" IsChecked="{Binding Gamesetting_.IsEnableGame.IsEnabled}"/>-->
             </StackPanel>
         </Grid>
     </Border>

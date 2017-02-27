@@ -26,6 +26,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 m_gameSetting_ = value;
                 RaisePropertyChanged("Gamesetting_");
             }
-        }     
+        }
+
+        public bool IsGameDisable
+        {
+            get { return Gamesetting_.IsEnableGame.IsEnabled; }
+            set
+            {
+                Gamesetting_.IsEnableGame.IsEnabled = value;
+                RaisePropertyChanged("IsGameDisable");
+            }
+        }
     }
 }

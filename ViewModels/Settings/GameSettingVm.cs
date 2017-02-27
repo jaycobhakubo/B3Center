@@ -161,7 +161,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public void ReloadSelectedItemForAnyChangesNotSaved()
         {
             int tabSelectedIndex = m_tabSelectedindex;
-            //GameSettingVmAllGame x;
             switch (tabSelectedIndex)
             {
                 case 0:
@@ -386,85 +385,3 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     }
 }
 
-
-#region SCRATCH PAPER
-//public GameSettingCrazyBoutVm_ GameCrzyBout
-//{ get { return (GameSettingCrazyBoutVm_)GameTabItem[0].ViewModel; }
-//    set
-//    {
-//        GameTabItem[0].ViewModel = value;
-//        RaisePropertyChanged("GameCrzyBout");
-//    }
-//}
-
-//public GameSettingVmAllGame GameJailBreak
-//{
-//    get { return GameTabItem[1].ViewModel; }
-//    set
-//    {
-//        GameTabItem[1].ViewModel = value;
-//        RaisePropertyChanged("GameJailBreak");
-//    }
-//}
-
-//public GameSettingVmAllGame GameMayaMoney
-//{
-//    get { return GameTabItem[2].ViewModel; }
-//    set
-//    {
-//        GameTabItem[2].ViewModel = value;
-//        RaisePropertyChanged("GameMayaMoney");
-//    }
-//}
-
-
-//public GameSettingVmAllGame GameSpirit76
-//{
-//    get { return GameTabItem[3].ViewModel; }
-//    set
-//    {
-//        GameTabItem[3].ViewModel = value;
-//        RaisePropertyChanged("GameSpirit76");
-//    }
-//}
-
-//public GameSettingVmAllGame GameTimeBomb
-//{
-//    get { return GameTabItem[4].ViewModel; }
-//    set
-//    {
-//        GameTabItem[4].ViewModel = value;
-//        RaisePropertyChanged("GameTimeBomb");
-//    }
-//}
-
-//public GameSettingVmAllGame GameUkickEm
-//{
-//    get { return GameTabItem[5].ViewModel; }
-//    set
-//    {
-//        GameTabItem[5].ViewModel = value;
-//        RaisePropertyChanged("GameUkickEm");
-//    }
-//}
-
-//public GameSettingVmAllGame GameWildBall
-//{
-//    get { return GameTabItem[6].ViewModel; }
-//    set
-//    {
-//        GameTabItem[6].ViewModel = value;
-//        RaisePropertyChanged("GameWildBall");
-//    }
-//}
-
-//public GameSettingVmAllGame GameWildfire
-//{
-//    get { return GameTabItem[7].ViewModel; }
-//    set
-//    {
-//        GameTabItem[7].ViewModel = value;
-//        RaisePropertyChanged("GameWildfire");
-//    }
-//}
-#endregion
