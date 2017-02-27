@@ -465,7 +465,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return result;
         }
 
-        public static List<string> BetLevelOrSpeedVal()
+        public static List<string> BetLevel()
         {
             List<string> result = new List<string>();
             result.Add("1");
@@ -1028,3 +1028,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
     #endregion
 }
+#region SRCATCH PAPER
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom1) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom1;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom5) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom5;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom10) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom10;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom25) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom25;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom50) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom50;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom100) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom100;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom200) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom200;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.Denom500) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.Denom500;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MaxBetLevel) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.MaxBetLevel;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MaxCards) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.MaxCards;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CallSpeed) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.CallSpeed;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoCall) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.AutoCall == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.AutoPlay) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.AutoPlay == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.HideSerialNumber) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.HideSerialNumber == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.SingleOfferBonus) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = ((_GameSettingNewValue.SingleOfferBonus == true) ? "T" : "F");
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.MathPayTableSetting) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.MathPayTableSetting;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CallSpeedMin) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.CallSpeedMin;
+//m_b3Setting.Single(l => Convert.ToInt32(l.B3SettingID) == Convert.ToInt32(B3SettingId.CallSpeedBonus) && l.B3GameID == _GameSettingNewValue.GameId).B3SettingValue = _GameSettingNewValue.CallSpeedBonus;
+//break;
+#endregion

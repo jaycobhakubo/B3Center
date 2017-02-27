@@ -45,6 +45,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         #endregion
         #region CONSTRUCTOR
+
         public GameSettingVm(ObservableCollection<B3SettingGlobal> _b3GameSetting, ObservableCollection<B3GameSetting> _GameEnableDisableSetting)
         {
             GameTabItem = new ObservableCollection<TabItem>();
@@ -80,7 +81,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             GameTabItem.Add(temp);
 
             temp = new TabItem();
-            m_currentGameId = (int)B3Game.SPIRIT76;
+            m_currentGameId = (int)B3Game.TIMEBOMB;
             GameTimeBomb = new GameSettingTimeBombVm((ConvertToModel(new ObservableCollection<B3SettingGlobal>(m_b3GameStting.Where(l => l.B3GameID == m_currentGameId)))), m_currentGameId);
             temp.GameIndex = 4;
             temp.ViewModel = GameTimeBomb;
@@ -358,8 +359,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             if (m_currentGameId == (int)B3Game.CRAZYBOUT
                 || m_currentGameId == (int)B3Game.MAYAMONEY)
             {
-                gs.LCallSpeedMin = SettingViewModel.Volume();
-                gs.LCallSpeed = SettingViewModel.Volume();                    
+                gs.LCallSpeedMin = SettingViewModel.BetLevelOrSpeedVal();
+                gs.LCallSpeed = SettingViewModel.BetLevelOrSpeedVal();            
             }
             else if (m_currentGameId == (int)B3Game.JAILBREAK
                 || m_currentGameId == (int)B3Game.UKICKEM
@@ -371,8 +372,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }        
             else if (m_currentGameId == (int)B3Game.SPIRIT76)
             {
-                gs.LCallSpeed = SettingViewModel.Volume();
-                gs.LCallSpeedBonus = SettingViewModel.Volume();
+                gs.LCallSpeed = SettingViewModel.BetLevelOrSpeedVal();
+                gs.LCallSpeedBonus = SettingViewModel.BetLevelOrSpeedVal();
             }
 
             gs.IsEnableGame = GetEnableDisableSettingValue(m_currentGameId);
