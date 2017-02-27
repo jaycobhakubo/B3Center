@@ -84,6 +84,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                var x = ReportsViewModel.Instance;
                x.DefaultViewMode = Visibility.Visible;
                x.CRViewMode = Visibility.Collapsed;
+          x.CloseReportAbortOperation();
            }
 
 

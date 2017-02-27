@@ -489,18 +489,63 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             report.LoadCrystalReport(server, name, user, password);
         }
 
-  
+
+        public void CloseReportAbortOperation()
+        {
+            var x = thread;
+            var y = crRun;
+            var z = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher;
+            var rr = 1;
+     
+        }
+
+        System.Threading.Thread thread;
+        private DispatcherOperation crRun;
+
         public void ViewReportRel(ReportId reportID)
         {
             try
             {
-                var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+               
+                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
                 if (Rpt == null) { return; }
                 LoadCrystalReport(Rpt);
                 var m_rptDoc = m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
-                SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
+
+                thread = new System.Threading.Thread(
+                    new System.Threading.ThreadStart(
+                      delegate ()
+                      {
+
+                          if (!SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher.CheckAccess())
+                            {
+                                crRun = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher.BeginInvoke(
+                                 DispatcherPriority.Background, new Action(
+                                 delegate ()
+                                 {
+                                     SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
+                                 }
+                                  ));
+                                crRun.Wait();
+                              
+                              crRun.Completed += new EventHandler(dispatcherOp_Completed);
+                              crRun.Aborted += new EventHandler(dispatcherOp_Aborted);
+                            }
+                            else
+                            {
+                                 SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
+                             }
+                      }
+                  ));
+
+                thread.Start();
                 DefaultViewMode = Visibility.Collapsed;
                 CRViewMode = Visibility.Visible;
+                var x = thread;
+                var y = crRun;
+                var z = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher;
+                var rx = 1;
+
             }
             catch (Exception ex)
             {
@@ -514,6 +559,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             finally { IsLoading = false; }           
         }
 
+
+        void dispatcherOp_Completed(object sender, EventArgs e)
+        {
+            //Console.WriteLine("The checkbox has finished being updated!");
+        }
+
+        void dispatcherOp_Aborted(object sender, EventArgs e)
+        {
+            MessageBox.Show("Aborted");
+            //Console.WriteLine("The checkbox has finished being updated!");
+        }
 
         #region print
         //NOTE: in order for the report to print in a particular printer name in your network,
@@ -847,56 +903,3 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     }
 }
 
-
-#region SCRATCH
-
-/// <summary>
-/// Loads the ball call report document.
-/// </summary>
-/// <returns></returns>
-//internal ReportDocument LoadBallCallReportDocument(DateTime startDate, DateTime endDate, int ballCalldefID)
-//{
-//    var BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallByGame);
-
-//    if (ballCalldefID == 1)
-//    {
-//        if (BallCallReport == null)
-//        {
-//            return null;
-//        }
-
-//        LoadCrystalReport(BallCallReport);
-
-//        if (BallCallReportSessionSelected == null)
-//        {
-//            return null;
-//        }
-
-//        var sessionId = BallCallReportSessionSelected.Number;
-
-//        BallCallReport.CrystalReportDocument.SetParameterValue("@session", sessionId);
-//        BallCallReport.CrystalReportDocument.SetParameterValue("@DateParameter", startDate.Date.ToString(CultureInfo.InvariantCulture));
-
-
-//    }
-//    else
-//    {
-//        BallCallReport = m_reports.FirstOrDefault(r => r.Id == ReportId.B3BallCallBySession);
-
-//        if (BallCallReport == null)
-//        {
-//            return null;
-//        }
-
-//        LoadCrystalReport(BallCallReport);
-//        BallCallReport.CrystalReportDocument.SetParameterValue("@StartDate", startDate.Date.ToString(CultureInfo.InvariantCulture));
-//        BallCallReport.CrystalReportDocument.SetParameterValue("@EndDate",  endDate.Date.ToString(CultureInfo.InvariantCulture));
-
-//    }
-
-//    return BallCallReport.CrystalReportDocument;
-//}
-
-
-
-#endregion
