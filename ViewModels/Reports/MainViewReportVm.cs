@@ -479,68 +479,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             report.LoadCrystalReport(server, name, user, password);
         }
 
-        #region ON DEBUG
-        /*
-        public void CloseReportAbortOperation()
-        {
-            var x = thread;
-            x.Abort();
-            //x.Suspend();
-            ViewerCore s = new ViewerCore();
-            s.RefreshReport();
-            SelectedReportViewCol.CrViewer.ViewerCore.RefreshReport();
-            var y = crRun;
-            var z = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher;
-            var rr = 1;
-     
-        }
-
-        System.Threading.Thread thread;
-        private DispatcherOperation crRun;
 
         public void ViewReportRel(ReportId reportID)
         {
             try
-            {              
+            {
                 var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
                 if (Rpt == null) { return; }
                 LoadCrystalReport(Rpt);
                 var m_rptDoc = m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
-
-                thread = new System.Threading.Thread(
-                    new System.Threading.ThreadStart(
-                      delegate ()
-                      {
-
-                          if (!SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher.CheckAccess())
-                            {
-                                crRun = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher.BeginInvoke(
-                                 DispatcherPriority.Background, new Action(
-                                 delegate ()
-                                 {
-                                     SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
-                                 }
-                                  ));
-                                crRun.Wait();
-                              
-                              crRun.Completed += new EventHandler(dispatcherOp_Completed);
-                              crRun.Aborted += new EventHandler(dispatcherOp_Aborted);
-                            }
-                            else
-                            {
-                                 SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
-                            }
-                      }
-                  ));
-
-                thread.Start();
+                SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
                 DefaultViewMode = Visibility.Collapsed;
                 CRViewMode = Visibility.Visible;
-                var x = thread;
-                var y = crRun;
-                var z = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher;
-                var rx = 1;
-
             }
             catch (Exception ex)
             {
@@ -551,29 +501,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             ex.Message), Properties.Resources.B3CenterName, MessageWindowType.Close);
                 }));
             }
-            finally { IsLoading = false; }           
+            finally { IsLoading = false; }
         }
-
-
-        void dispatcherOp_Completed(object sender, EventArgs e)
-        {
-            //Console.WriteLine("The checkbox has finished being updated!");
-        }
-
-        void dispatcherOp_Aborted(object sender, EventArgs e)
-        {
-            MessageBox.Show("Aborted");
-            //Console.WriteLine("The checkbox has finished being updated!");
-        }
-         * */
-        #endregion
-
 
         #region print
-        //NOTE: in order for the report to print in a particular printer name in your network,
-        //you should manually set the page setup -> Printer Options -> No printer name  false(uncheck) .
-        //(It dont matter what printer name you pick as long as it is uncheck).
-        //Also check the : Diassociate Formatting Page Size and Adjust Automatically to true(check).
+        
+        /// <summary>
+        /// NOTE: in order for the report to print in a particular printer name in your network,
+        /// you should manually set the page setup -> Printer Options -> No printer name  false(uncheck) .
+        /// (It dont matter what printer name you pick as long as it is uncheck).
+        /// Also check the : Diassociate Formatting Page Size and Adjust Automatically to true(check).
+        /// </summary>
+        /// <param name="reportID"></param>
         public void StartPrintReport(ReportId reportID)
         {
             var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);

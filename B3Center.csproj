@@ -163,8 +163,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
-    <Compile Include="REF\CODE\invoke\begininvoke.cs" />
-    <Compile Include="REF\CODE\invoke\inoke1.cs" />
     <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
       <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
@@ -468,14 +466,7 @@
   <ItemGroup>
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="REF\Model\" />
-    <Folder Include="REF\Report\VM\" />
-    <Folder Include="REF\Setting\UI\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="REF\Setting\VM\SettingViewModel.cs.txt" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

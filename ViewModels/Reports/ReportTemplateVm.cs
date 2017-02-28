@@ -43,9 +43,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public string ReportTitle{get{return ReportTemplate_Model.ReportTitle;}}
-        public ReportParameterViewModel parVm { get; set; }
-         
+        public string ReportTitle
+        {
+            get
+            {
+                return ReportTemplate_Model.ReportTitle;
+            }     
+        }
+
+        public ReportParameterViewModel parVm
+        {
+            get;
+            set;
+        }
+
         public Visibility ReportParameterVisible
         {
             get { return ReportTemplate_Model.DefaultViewerm; }//knc
@@ -73,9 +84,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                var x = ReportsViewModel.Instance;
                x.DefaultViewMode = Visibility.Visible;
                x.CRViewMode = Visibility.Collapsed;
-               x.CloseReportAbortOperation();
            }
-
 
            private int GetMonthEquivValue(string monthName)
            {
@@ -87,8 +96,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             };
                return Array.IndexOf(m_months, monthname) + 1;
            }   
-
-     
+   
            public ReportDocument LoadReportDocument(B3Report Report)
            {
                //Station is the machine Description of the machine. 
