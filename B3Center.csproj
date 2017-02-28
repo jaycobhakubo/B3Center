@@ -123,8 +123,6 @@
     <Compile Include="Business\B3Controller.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
-    <Compile Include="Helpers\Selecteditem.cs" />
-    <Compile Include="Helpers\SqlDirectComm.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
     <Compile Include="Messages\GetB3ColorIcon.cs" />
     <Compile Include="Messages\GetB3MathGamePlay.cs" />
@@ -466,7 +464,9 @@
   <ItemGroup>
     <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="REF\CODE\invoke\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

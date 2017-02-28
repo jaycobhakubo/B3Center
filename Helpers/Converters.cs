@@ -23,7 +23,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                 if (values[i] is double)
                     result *= (double)values[i];
             }
-
             return result;
         }
 
@@ -91,13 +90,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             return null;
         }
-
-
-    }
+   }
 
     public class ValueToBoolConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool tempresult = true;
@@ -124,9 +120,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                         tempresult = false;
                         break;
                     }
-            }
+            }        
             return tempresult;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -148,21 +143,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             }
             return tempresult;
         }
-
-
     }
 
 
+
+    public class ReverseBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)//parameter true = revert valuek false do not revert
+        {
+            bool tempResult = false;
+            if (value is bool)
+            {
+                tempResult = !(bool)value;
+            }
+            return tempResult;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
     public class ValueDBToValueAppCallSpeed : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             int callSpeedValue;
 
             if (System.Int32.TryParse(value.ToString(), out callSpeedValue))
             {
-
                 string tempCallSpeed = "";
                 if (callSpeedValue == 100) { tempCallSpeed = "10"; }
                 else if (callSpeedValue > 100 && callSpeedValue <= 590) { tempCallSpeed = "9"; }
@@ -180,15 +190,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             {
                 return null;
             }
-
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             int callspeedValue;
             var x = System.Int32.TryParse(value.ToString(), out callspeedValue);
-
 
             string result = "";
             switch (callspeedValue)
@@ -210,7 +217,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
    
   public class ShowDefaultColumnDef : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             GridLength columnDefWidthValue = new GridLength();

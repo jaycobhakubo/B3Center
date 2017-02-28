@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-            xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
-         >
+             xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+             mc:Ignorable="d" >   
     <UserControl.Resources>
+
         <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
+        <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
+
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="IsHitTestVisible" Value="True"/>
@@ -18,6 +20,23 @@
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                     <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
                     <Setter Property="IsHitTestVisible" Value="False"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="0,30,0,0"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="ContentStringFormat" Value="{}{0}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Setter Property="Background" Value="#F4F4F4"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -38,17 +57,16 @@
             <StackPanel Grid.Column="1">
                 <Label  Content="Game pay table"  />
                 <ComboBox Name="cmbxGamePayTable" Tag="58"
-                          ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
-                              DisplayMemberPath="PackageDesc"
-                           SelectedValuePath="MathPackageID"   
-                       SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"   
-                          />
+                        ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
+                        DisplayMemberPath="PackageDesc"
+                        SelectedValuePath="MathPackageID"   
+                        SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"/>
 
                 <Label Content="Max bet level" />
                 <ComboBox 
                 Name="cmbxMaxBetLevel"  ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
-                        SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
-               Tag="9"             
+                SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
+                Tag="9"             
                 >
                 </ComboBox>
 
@@ -105,18 +123,13 @@
                         <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" IsChecked="{Binding Gamesetting_.Denom500, Converter={StaticResource ValuetoBool}}"/>
                     </Grid>
                 </GroupBox>
-
             </StackPanel>
 
             <StackPanel Grid.Column="3">
-                <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
-                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
-                <!--<CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>-->
+                <CheckBox Name="chkbxAutoPlay"  Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
+                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>              
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
             </StackPanel>
-
-            <!--<StackPanel Name="stkpnlGameSettingCrazyBout" Grid.Column="3" >-->
-
         </Grid>
     </Border>
 </UserControl>

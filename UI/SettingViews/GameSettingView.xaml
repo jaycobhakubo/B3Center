@@ -15,8 +15,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="0,15,0,2"/>
         </Style>
-        
-        
+                
     </UserControl.Resources>
    
     <Border x:Name="m_layoutRoot" >
