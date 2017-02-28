@@ -18,27 +18,23 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using CrystalDecisions.CrystalReports.Engine;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Reports;
-using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
-using System.Windows.Controls;
-using System.Windows.Input;
-using GameTech.Elite.Client.Modules.B3Center.Model;
-using GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports;
-using GameTech.Elite.Client.Modules.B3Center.Helper;
-using System.Threading.Tasks;
-using SAPBusinessObjects.WPF.Viewer;
-using GameTech.Elite.UI;
-using System.Windows.Threading;
-using CrystalDecisions.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Report;
-using System.Threading;
+using GameTech.Elite.UI;
+using GameTech.Elite.Client.Modules.B3Center.UI.ReportViews;
+using GameTech.Elite.Client.Modules.B3Center.Model;
+using CrystalDecisions.Shared;
+using CrystalDecisions.CrystalReports.Engine;
+using SAPBusinessObjects.WPF.Viewer;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -150,8 +146,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             m_instance = new ReportsViewModel();
                     }
                 }
-
-                return m_instance;
+               return m_instance;
             }
         }
 
@@ -493,6 +488,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void CloseReportAbortOperation()
         {
             var x = thread;
+            x.Abort();
+            //x.Suspend();
+            ViewerCore s = new ViewerCore();
+            s.RefreshReport();
+            SelectedReportViewCol.CrViewer.ViewerCore.RefreshReport();
             var y = crRun;
             var z = SelectedReportViewCol.CrViewer.ViewerCore.Dispatcher;
             var rr = 1;
@@ -534,7 +534,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             else
                             {
                                  SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
-                             }
+                            }
                       }
                   ));
 

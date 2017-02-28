@@ -43,20 +43,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public string ReportTitle
-        {
-            get
-            {
-                return ReportTemplate_Model.ReportTitle;
-            }     
-        }
-
-        public ReportParameterViewModel parVm
-        {
-            get;
-            set;
-        }
-
+        public string ReportTitle{get{return ReportTemplate_Model.ReportTitle;}}
+        public ReportParameterViewModel parVm { get; set; }
+         
         public Visibility ReportParameterVisible
         {
             get { return ReportTemplate_Model.DefaultViewerm; }//knc
@@ -84,7 +73,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                var x = ReportsViewModel.Instance;
                x.DefaultViewMode = Visibility.Visible;
                x.CRViewMode = Visibility.Collapsed;
-          x.CloseReportAbortOperation();
+               x.CloseReportAbortOperation();
            }
 
 
