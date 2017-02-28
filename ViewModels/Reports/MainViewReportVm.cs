@@ -152,7 +152,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
         #region METHOD
-
         #region (private)
 
         //Set our data to be popualted to ReportTemplateViewModel then to the viewer.
@@ -312,8 +311,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             result.rptParModel = temprptparmodel;
             return result;
         }
-
-      
+    
         #endregion
         #region (public)
 
@@ -334,8 +332,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                var tempresultToList = m_reportCollection.ToList();
                                tempresultToList.Remove(ReportMainBallCallByGame);
 
-                               //check if exists 
-                               var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallBySession);
+                               var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallBySession);       //check if exists 
                                if (exists != true)
                                {
                                    ReportTemplateViewModel B3BallCallBySession = new ReportTemplateViewModel(getrtm(ReportId.B3BallCallBySession));
@@ -362,9 +359,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                            }
                            m_isRngBallCall = SettingRngBallCall;
                        }));
-                   });
-           
-
+                   });        
             }
         }
            
@@ -484,7 +479,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             report.LoadCrystalReport(server, name, user, password);
         }
 
-
+        #region ON DEBUG
+        /*
         public void CloseReportAbortOperation()
         {
             var x = thread;
@@ -505,9 +501,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void ViewReportRel(ReportId reportID)
         {
             try
-            {
-               
-                    var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
+            {              
+                var Rpt = m_reports.FirstOrDefault(r => r.Id == reportID);
                 if (Rpt == null) { return; }
                 LoadCrystalReport(Rpt);
                 var m_rptDoc = m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
@@ -570,6 +565,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             MessageBox.Show("Aborted");
             //Console.WriteLine("The checkbox has finished being updated!");
         }
+         * */
+        #endregion
+
 
         #region print
         //NOTE: in order for the report to print in a particular printer name in your network,
@@ -632,12 +630,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                     break;
             }
-
             return returnValue;
         }
 
-        //Epson
-        private bool TryPrintReceiptPrinter(ReportDocument report)
+        private bool TryPrintReceiptPrinter(ReportDocument report)     //Epson
         {
             var returnValue = true;
             try

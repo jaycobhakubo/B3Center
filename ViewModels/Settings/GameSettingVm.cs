@@ -265,21 +265,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 ((int)B3SettingId.Denom5 == b3SettingGlobal_.B3SettingID)
                 {
                     gs.Denom5 = b3SettingGlobal_.B3SettingValue;
-
                 }
                 else
                 if
                  ((int)B3SettingId.Denom10 == b3SettingGlobal_.B3SettingID)
                 {
                     gs.Denom10 = b3SettingGlobal_.B3SettingValue;
-
                 }
                 else
                 if
                  ((int)B3SettingId.Denom25 == b3SettingGlobal_.B3SettingID)
                 {
                     gs.Denom25 = b3SettingGlobal_.B3SettingValue;
-
                 }
                 else if
                    ((int)B3SettingId.Denom50 == b3SettingGlobal_.B3SettingID)
@@ -315,40 +312,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if ((int)B3SettingId.CallSpeed == b3SettingGlobal_.B3SettingID)
                 {
                     gs.CallSpeed = b3SettingGlobal_.B3SettingValue;
-                  
                 }
                 else if ((int)B3SettingId.AutoCall == b3SettingGlobal_.B3SettingID)
                 {
                     gs.AutoCall = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
-
                 }
                 else if ((int)B3SettingId.AutoPlay == b3SettingGlobal_.B3SettingID)
                 {
                     gs.AutoPlay = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
-
                 }
                 else if ((int)B3SettingId.HideSerialNumber == b3SettingGlobal_.B3SettingID)
                 {
                     gs.HideSerialNumber = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
-
-
                 }
                 else if ((int)B3SettingId.SingleOfferBonus == b3SettingGlobal_.B3SettingID)
                 {
                     gs.SingleOfferBonus = (b3SettingGlobal_.B3SettingValue == "T") ? true : false;
-
-
                 }
                 else if ((int)B3SettingId.MathPayTableSetting == b3SettingGlobal_.B3SettingID)
                 {
                     gs.SelectedMathPayTableSettingInt = Convert.ToInt32(b3SettingGlobal_.B3SettingValue);
-
-
                 }
                 else if ((int)B3SettingId.CallSpeedMin == b3SettingGlobal_.B3SettingID)
                 {
-                    gs.CallSpeedMin = b3SettingGlobal_.B3SettingValue;
-                 
+                    gs.CallSpeedMin = b3SettingGlobal_.B3SettingValue;              
                 }
                 else if ((int)B3SettingId.CallSpeedBonus == b3SettingGlobal_.B3SettingID)
                 {
