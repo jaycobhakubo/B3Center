@@ -116,6 +116,8 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource GroupBoxStyle1}" ></Style>
+
 </ResourceDictionary>
 
 <!--<Style x:Key="TextBlockFontStyle" TargetType="{x:Type TextBlock}">
