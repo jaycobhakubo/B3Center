@@ -16,16 +16,8 @@
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
         <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
 
-        <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource wtf}">
-            <!--<Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
-            <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                </Trigger>
-                </Style.Triggers>-->
-        </Style>
         
-        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="IsHitTestVisible" Value="True"/>
             <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
@@ -53,7 +45,7 @@
                     <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />               
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
     </UserControl.Resources>
     <Border >
         <Grid Name="gridCrazyBout">

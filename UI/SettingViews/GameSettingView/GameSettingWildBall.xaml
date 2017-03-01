@@ -11,7 +11,7 @@
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
         <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
 
-        <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+        <!--<Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"/>
             <Setter Property="Height" Value="22"/>
             <Setter Property="ContentStringFormat" Value="{}{0}"/>
@@ -26,7 +26,7 @@
                     <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="22"/>
             <Setter Property="IsHitTestVisible" Value="True"/>
