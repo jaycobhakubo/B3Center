@@ -93,7 +93,7 @@
             	 Tag="11">
                 </ComboBox>
                 <Label   Content="Game denominations" />
-                <GroupBox  Style="{DynamicResource GroupBoxStyle1}" >
+                <GroupBox >
                     <Grid >
                         <Grid.Resources>
                             <Style TargetType="CheckBox" >

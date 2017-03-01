@@ -6,10 +6,6 @@
              mc:Ignorable="d" 
               xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
          >
-    <UserControl.Style>
-        <Style>
-        </Style>
-    </UserControl.Style>
     <UserControl.Resources>
      
         <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
@@ -17,36 +13,17 @@
         <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
 
         
-        <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="IsHitTestVisible" Value="True"/>
-            <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                    <Setter Property="IsHitTestVisible" Value="False"/>
-                </Trigger>
-            </Style.Triggers>
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">         
+            <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />       
         </Style>
 
         <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Margin" Value="0,30,0,0"/>
-            <Setter Property="Height" Value="22"/>
             <Setter Property="ContentStringFormat" Value="{}{0}"/>
-            <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
-            <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                    <Setter Property="Background" Value="#F4F4F4"/>                  
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />               
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
+            <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />         
+        </Style>
+        
     </UserControl.Resources>
+    
     <Border >
         <Grid Name="gridCrazyBout">
             <Grid.ColumnDefinitions>
@@ -98,7 +75,9 @@
                 </ComboBox>
 
                 <Label   Content="Game denominations" />
-                <GroupBox   >
+                <GroupBox 
+                    Style="{DynamicResource GroupBoxStyle1}"
+                    IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" >
                     <Grid >
                         <Grid.Resources>
                             <Style TargetType="CheckBox" >

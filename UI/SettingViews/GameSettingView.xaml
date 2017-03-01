@@ -9,22 +9,14 @@
               xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
             >
     <UserControl.Resources>
-        <!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-           
-            
-            <Style TargetType="GroupBox" BasedOn="{StaticResource GroupBoxStyle1}"></Style>
-            
-        </ResourceDictionary>-->
-
-        <Style
+        
+            <Style
              TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,15,0,2"/>
-        </Style>
+                <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0,15,0,2"/>
+            </Style>    
+        
     </UserControl.Resources>
    
     <Border x:Name="m_layoutRoot" >

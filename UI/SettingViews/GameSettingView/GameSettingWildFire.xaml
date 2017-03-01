@@ -85,7 +85,7 @@
                         SelectedItem="{Binding Gamesetting_.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="59"/>
                 <Label   Content="Game denominations" />
-                <GroupBox  Style="{DynamicResource GroupBoxStyle1}" >
+                <GroupBox >
                     <Grid >
                         <Grid.Resources>
                             <Style TargetType="CheckBox" >
