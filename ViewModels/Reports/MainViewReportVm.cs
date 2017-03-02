@@ -489,6 +489,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 LoadCrystalReport(Rpt);
                 var m_rptDoc = m_selectedReportTemplateViewModel.LoadReportDocument(Rpt);
                 SelectedReportViewCol.CrViewer.ViewerCore.ReportSource = m_rptDoc;
+                SelectedReportViewCol.CrViewer.Owner = Window.GetWindow(SelectedReportViewCol); // DE13491 need a parent window to display errors on top of
                 DefaultViewMode = Visibility.Collapsed;
                 CRViewMode = Visibility.Visible;
             }

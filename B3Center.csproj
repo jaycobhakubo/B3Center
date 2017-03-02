@@ -161,6 +161,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Business\Common.cs" />
+    <Compile Include="REF\CODE\invoke\begininvoke.cs" />
+    <Compile Include="REF\CODE\invoke\inoke1.cs" />
+    <Compile Include="REF\CODE\invoke\Selecteditem.cs" />
+    <Compile Include="REF\CODE\invoke\SqlDirectComm.cs" />
+    <Compile Include="REF\Old\GameSettingJailBreakView.xaml.cs">
+      <DependentUpon>GameSettingJailBreakView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="REF\Old\GameSettingUkickEmView.xaml.cs">
+      <DependentUpon>GameSettingUkickEmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="REF\Old\GameSettingWildBallProgView.xaml.cs">
+      <DependentUpon>GameSettingWildBallProgView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\OperatorViews\OperatorView.xaml.cs">
       <DependentUpon>OperatorView.xaml</DependentUpon>
     </Compile>
@@ -283,11 +296,23 @@
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\NewStyle.xaml">
+    <Page Include="REF\Old\GameSettingJailBreakView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="REF\Old\GameSettingUkickEmView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="REF\Old\GameSettingWildBallProgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="REF\Xaml\NewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\OriginalStyle.xaml">
+    <Page Include="REF\Xaml\OriginalStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -462,10 +487,15 @@
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="REF\Report\VM\MainViewReportVm.txt" />
+    <Resource Include="REF\Setting\UI\GameSetting76Bingo.xaml.cs.txt" />
+    <Resource Include="REF\Setting\UI\GameSetting76Bingo.xaml.txt" />
+    <Resource Include="REF\Setting\UI\GameSettingCrazyBout.xaml.cs.txt" />
+    <Resource Include="REF\Setting\UI\GameSettingCrazyBout.xaml.txt" />
+    <Resource Include="REF\Setting\VM\PlayerSettingVm.txt" />
+    <Resource Include="REF\Setting\VM\SettingViewModel.cs.txt" />
+    <Resource Include="REF\Xaml\ReportsView.xaml.txt" />
     <Resource Include="REF\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="REF\CODE\invoke\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

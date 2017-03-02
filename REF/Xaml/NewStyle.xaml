@@ -30,6 +30,7 @@
     <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
         <Setter Property="Margin" Value="0,30,0,0"></Setter>
         <Setter Property="Height" Value="22"/>
+        <Setter Property="Foreground" Value="Blue"/>
         <Setter Property="ContentStringFormat" Value="{}{0}"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -59,9 +60,12 @@
     </Trigger>-->
 
     <!--COMBOBOX default-->
-    <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+    <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">-->
+        <Style  TargetType="{x:Type ComboBox}">
+        <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Height" Value="22"/>
         <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="Background" Value="Red"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Style.Triggers>
             <Trigger Property="IsReadOnly" Value="True">
@@ -157,5 +161,86 @@
         </Setter>
     </Style> 
     
+    <!--B3 OPERATOR STYLE-->
+
+    <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="IsHitTestVisible" Value="False"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <!--<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Height" Value="22.22"></Setter>
+        <Setter Property="Padding" Value="0,0,0,0"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <!--<Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}" x:Key="chkbxDefault">
+        <Setter Property="Margin" Value="0,30,0,0"></Setter>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="ContentStringFormat" Value="{}{0}"/>
+        <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <!--<Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="IsHitTestVisible" Value="False"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <!--<Style x:Key="B3DefaultStyleCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+        <Setter Property="Margin" Value="0,30,0,0"></Setter>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="ContentStringFormat" Value="{}{0}"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <!--<Style TargetType="CheckBox" x:Key="chkbxDenom">
+        <Setter Property="Margin" Value="0,0,0,0"></Setter>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
 </ResourceDictionary>
 

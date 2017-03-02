@@ -48,7 +48,7 @@
             <StackPanel Grid.Column="3">
                 <Label Content="B3 game enable:" ContentStringFormat="{x:Null}"></Label>
                 <GroupBox  
-                    Style="{DynamicResource GroupBoxStyle2}" 
+                    Style="{StaticResource B3StyleGroupBox2}"
                     Margin="0,0,0,0"
                     Padding="0,0,0,30">
                     <GroupBox.Resources>

@@ -12,44 +12,12 @@
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
         <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
 
-        <Style TargetType="CheckBox" x:Key="chkbxDenom">
-            <Setter Property="Margin" Value="0,0,0,0"></Setter>
-            <Setter Property="Height" Value="18"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>   
-        
-        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Margin" Value="0,30,0,0"></Setter>
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="ContentStringFormat" Value="{}{0}"/>
+        <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
             <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
-            <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
-        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="IsHitTestVisible" Value="True"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                    <Setter Property="IsHitTestVisible" Value="False"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Border>
@@ -96,12 +64,11 @@
             	x:Name="cmbxCallSpeedMin" 
             	 Tag="59"/>
                 <Label   Content="Game denominations" />
-                <GroupBox 
-                    Style="{DynamicResource GroupBoxStyle1}"
+                <GroupBox                  
                     IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" >
                     <Grid >
                         <Grid.Resources>
-                            <Style TargetType="CheckBox" BasedOn="{StaticResource chkbxDenom}">
+                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3StyleCheckBoxDenom}">
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
@@ -127,7 +94,7 @@
                 </GroupBox>
             </StackPanel>
 
-            <StackPanel Grid.Column="3">
+            <StackPanel Grid.Column="3">     
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
                 <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
                 <!--<CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>-->

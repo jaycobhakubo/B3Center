@@ -23,11 +23,14 @@
     </ui:EliteWindowBase.Style>
 
     <ui:EliteWindowBase.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/NewStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <Style BasedOn="{StaticResource B3DefaultStyleTextBox}" TargetType="{x:Type TextBox}" />         
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}"/>       
+        <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3DefaultStyleCheckBox}"/>
+        <Style  TargetType="{x:Type Label}" BasedOn="{StaticResource B3DefaultStyleLabel}"/>
+        <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource B3StyleGroupBox1}"></Style>
     </ui:EliteWindowBase.Resources>
     <DockPanel x:Name="m_layoutRoot">
     
@@ -40,7 +43,6 @@
       
                 <TabItem Header="Report">
                 <Border>
-
                     <localReports:ReportsView DataContext="{Binding ReportsVm}" />
                 </Border>
             </TabItem>

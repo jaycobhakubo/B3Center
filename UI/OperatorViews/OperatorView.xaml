@@ -20,32 +20,14 @@
             <Setter Property="ContentStringFormat" Value="{}{0}:"/>
         </Style>
 
-        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="IsHitTestVisible" Value="True"/>
-            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                    <Setter Property="IsHitTestVisible" Value="False"/>
-                </Trigger>
-            </Style.Triggers>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource B3DefaultStyleTextBox}">          
+            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />          
         </Style>
 
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Height" Value="22.22"></Setter>
-            <Setter Property="Padding" Value="0,0,0,0"></Setter>
-            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
+        <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+        
+    </Style>
 
         <Style TargetType="ColumnDefinition" x:Key="showOper">
             <Setter Property="Width" Value="Auto"/>
@@ -126,7 +108,9 @@
                             <StackPanel Grid.Row="1" Grid.Column="3">
 
                                 <Label Content="Icon color:" />
-                                <ComboBox  Name="cmbxIconColor" 
+                                <ComboBox  
+                                   
+                                    Name="cmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
                                           SelectedValuePath="ColorID"   
@@ -134,8 +118,9 @@
                                     ></ComboBox>
                     
                                 <Label Content="Phone number:" />
-                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
-
+                                <!--<TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>-->
+                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=cmbxIconColor, Path=Height}"/>
+                                
                                 <Label Content="Fax number:"  />
                                 <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
                             </StackPanel>

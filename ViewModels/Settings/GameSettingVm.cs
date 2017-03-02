@@ -37,11 +37,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         #region MEMBER
 
-        private ObservableCollection<B3SettingGlobal> m_b3GameStting;
-        
+        private ObservableCollection<B3SettingGlobal> m_b3GameStting;     
         private GameSetting gs = new GameSetting();
         private ObservableCollection<TabItem> GameTabItem { get; set; }
         private int m_currentGameId;
+        private int m_tabSelectedindex;
+        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
 
         #endregion
         #region CONSTRUCTOR
@@ -126,7 +127,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public GameSettingGameWildBallVm GameWildBall { get; set; }
         public GameSettingGameWildfireVm GameWildfire { get; set; }
 
-        private int m_tabSelectedindex;
+
         public int TabSelectedIndex
         {
             get { return m_tabSelectedindex; }
@@ -137,10 +138,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        #endregion
-        #region METHOD
-
-        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
         public ObservableCollection<B3GameSetting> B3SettingEnableDisable
         {
             get { return m_b3SettingEnableDisable; }
@@ -153,6 +150,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
             }
         }
+
+        #endregion
+        #region METHOD
+
+       
 
         private B3GameSetting GetEnableDisableSettingValue(int GameId_)
         {
@@ -302,12 +304,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if ((int)B3SettingId.MaxBetLevel == b3SettingGlobal_.B3SettingID)
                 {
                     gs.MaxBetLevel = b3SettingGlobal_.B3SettingValue;
-                    gs.LMaxCards = SystemSettingVm.MaxCard();
+                    gs.LMaxBetLevel = SystemSettingVm.BetLevel();
+                   
                 }
                 else if ((int)B3SettingId.MaxCards == b3SettingGlobal_.B3SettingID)
                 {
                     gs.MaxCards = b3SettingGlobal_.B3SettingValue;
-                    gs.LMaxBetLevel = SystemSettingVm.BetLevel();
+                    //gs.LMaxBetLevel = SystemSettingVm.BetLevel();
+                    gs.LMaxCards = SystemSettingVm.MaxCard();
                 }
                 else if ((int)B3SettingId.CallSpeed == b3SettingGlobal_.B3SettingID)
                 {

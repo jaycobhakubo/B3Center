@@ -8,8 +8,8 @@
     <UserControl.Resources>
         <Style  TargetType="{x:Type TextBlock}">        
         </Style>
-   
-        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}" x:Key="showtime">
+
+        <Style x:Key="showtime" TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}" >
          
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding ShowTime}" Value="true">
