@@ -462,7 +462,7 @@
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Design\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
+    <Resource Include="REF\Xaml\ScrollViewer_3%28Lighter Color%29.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="REF\CODE\invoke\" />

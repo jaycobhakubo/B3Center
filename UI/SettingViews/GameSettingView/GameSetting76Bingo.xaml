@@ -10,37 +10,8 @@
         <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
         <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
-     
- 
-        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="IsHitTestVisible" Value="True"/>
-            <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="true">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                    <Setter Property="IsHitTestVisible" Value="False"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
 
-        <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Margin" Value="0,30,0,0"/>
-            <Setter Property="Height" Value="22"/>
-            <Setter Property="ContentStringFormat" Value="{}{0}"/>
-            <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
-            <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                    <Setter Property="Background" Value="#F4F4F4"/>
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+     
     </UserControl.Resources>
     <Border>
         <Grid Name="gridCrazyBout">
@@ -61,13 +32,15 @@
                         ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
                         DisplayMemberPath="PackageDesc"
                         SelectedValuePath="MathPackageID"   
-                        SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"/>
+                        SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"
+                         IsReadOnly ="{Binding IsGameEnable}"/>
 
                 <Label Content="Max bet level" />
                 <ComboBox 
                 Name="cmbxMaxBetLevel"  ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
                 SelectedItem="{Binding Gamesetting_.MaxBetLevel}"
-                Tag="9"             
+                Tag="9"   
+                    IsReadOnly ="{Binding IsGameEnable}"
                 >
                 </ComboBox>
 
@@ -75,18 +48,19 @@
                 <ComboBox 
                 x:Name="cmbxMaxcards" 
                  Tag="10"   ItemsSource="{Binding Gamesetting_.LMaxCards}" 
-                    SelectedItem="{Binding Gamesetting_.MaxCards}">
+                    SelectedItem="{Binding Gamesetting_.MaxCards}"
+                    IsReadOnly ="{Binding IsGameEnable}">
                 </ComboBox>
 
                 <Label x:Name="lblCallSpeedMin"  Content="Call speed"    />
-                <ComboBox 
+                <ComboBox IsReadOnly ="{Binding IsGameEnable}"
                      ItemsSource="{Binding Gamesetting_.LCallSpeed}" 
                         SelectedItem="{Binding Gamesetting_.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	x:Name="cmbxCallSpeedMin" 
             	 Tag="59"/>
 
                 <Label x:Name="lblCallSpeedOrMax"  Content="Call speed bonus"    />
-                <ComboBox 
+                <ComboBox IsReadOnly ="{Binding IsGameEnable}"
             	x:Name="cmbxCallSpeedOrMax" 
                       ItemsSource="{Binding Gamesetting_.LCallSpeedBonus}" 
                         SelectedItem="{Binding Gamesetting_.CallSpeedBonus, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
@@ -117,21 +91,21 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox Name="chkbxDenom01" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0"   TabIndex="6" Tag="1" IsChecked="{Binding Gamesetting_.Denom1, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" IsChecked="{Binding Gamesetting_.Denom5, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  IsChecked="{Binding Gamesetting_.Denom10, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom25"  Content="0.25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TabIndex="9" Tag="4"  IsChecked="{Binding Gamesetting_.Denom25, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom50"  Content="0.50" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TabIndex="10" Tag="5" IsChecked="{Binding Gamesetting_.Denom50, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" IsChecked="{Binding Gamesetting_.Denom100, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" IsChecked="{Binding Gamesetting_.Denom200, Converter={StaticResource ValuetoBool}}"/>
-                        <CheckBox Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" IsChecked="{Binding Gamesetting_.Denom500, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom01" Content="0.01" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0"   TabIndex="6" Tag="1" IsChecked="{Binding Gamesetting_.Denom1, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom05" Content="0.05" VerticalAlignment="Bottom" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="0" TabIndex="7" Tag="2" IsChecked="{Binding Gamesetting_.Denom5, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom10"  Content="0.10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TabIndex="8" Tag="3"  IsChecked="{Binding Gamesetting_.Denom10, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom25"  Content="0.25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TabIndex="9" Tag="4"  IsChecked="{Binding Gamesetting_.Denom25, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom50"  Content="0.50" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TabIndex="10" Tag="5" IsChecked="{Binding Gamesetting_.Denom50, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom100"  Content="1.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TabIndex="11" Tag="6" IsChecked="{Binding Gamesetting_.Denom100, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom200"  Content="2.00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TabIndex="12" Tag="7" IsChecked="{Binding Gamesetting_.Denom200, Converter={StaticResource ValuetoBool}}"/>
+                        <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxDenom500"  Content="5.00" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Grid.Row="2" Grid.Column="3" TabIndex="13" Tag="8" IsChecked="{Binding Gamesetting_.Denom500, Converter={StaticResource ValuetoBool}}"/>
                     </Grid>
                 </GroupBox>
             </StackPanel>
 
             <StackPanel Grid.Column="3">
-                <CheckBox Name="chkbxAutoPlay"  Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
-                <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>              
+                <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" Name="chkbxAutoPlay"  Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
+                <CheckBox IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>              
                 <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
             </StackPanel>
         </Grid>
