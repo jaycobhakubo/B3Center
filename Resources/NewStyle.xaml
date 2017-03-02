@@ -39,6 +39,20 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="CheckBox" x:Key="chkbxDenom">
+        <Setter Property="Margin" Value="0,0,0,0"></Setter>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
     <!--<Trigger Property="IsEnabled" Value="True">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="Background" Value="#F4F4F4"/>
@@ -86,7 +100,9 @@
                         <!--<Border Background="Transparent" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" x:Name="Header" Grid.Column="1" Padding="0" Grid.Row="0" Grid.RowSpan="2">
                                 <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </Border>-->
-                        <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                          
+                        </ContentPresenter>
                         <Border   Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
                             <Border.OpacityMask>
                                 <MultiBinding ConverterParameter="6" Converter="{StaticResource BorderGapMaskConverter}">

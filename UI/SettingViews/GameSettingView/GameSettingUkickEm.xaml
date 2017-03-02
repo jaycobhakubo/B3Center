@@ -11,6 +11,19 @@
         <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
         <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
 
+        <Style TargetType="CheckBox" x:Key="chkbxDenom">
+            <Setter Property="Margin" Value="0,0,0,0"></Setter>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="0,30,0,0"></Setter>
             <Setter Property="Height" Value="22"/>
@@ -78,11 +91,7 @@
                     IsEnabled="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" >
                     <Grid >
                         <Grid.Resources>
-                            <Style TargetType="CheckBox" >
-                                <Setter Property="Margin" Value="0,0,0,0"></Setter>
-                                <Setter Property="Height" Value="18"/>
-                                <Setter Property="VerticalAlignment" Value="Top"/>
-                                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                            <Style TargetType="CheckBox" BasedOn="{StaticResource chkbxDenom}">
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
@@ -111,7 +120,7 @@
                 <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Gamesetting_.AutoPlay}"/>
                 <CheckBox  IsChecked="{Binding Gamesetting_.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
                 <!--<CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Gamesetting_.SingleOfferBonus}"/>-->
-                <CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>
+                <!--<CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>-->
             </StackPanel>
         </Grid>
     </Border>
