@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Design">
     <!--================================================================-->
-    <!--B3Center-->
+    <!--B3 Center-->
     <!--================================================================-->
 
     <Style x:Key="B3DefaultStyleTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
