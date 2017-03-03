@@ -72,11 +72,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         internal void Initialize(B3Controller controller)
         {
             m_controller = controller;
-            m_reports = controller.Reports;         
-            //m_controller.SessionInfoCompleted += OnListInfoDone;
+            m_reports = controller.Reports;           
             m_isRngBallCall = !controller.Settings.IsCommonRngBallCall;
 
-            //set session list
             foreach (var session in controller.Sessions)
             {
                 SessionList.Add(session);

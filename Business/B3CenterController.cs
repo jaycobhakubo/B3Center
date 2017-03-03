@@ -304,15 +304,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             LoadingForm.Status = Resources.LoadingResources;
 
             new Application();
-
             try
             {
                 Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 Application.ResourceAssembly = Assembly.GetExecutingAssembly();
 
                 Application.Current.Resources.MergedDictionaries.Add(ThemeLoader.LoadTheme(Settings.DisplayMode));
+                if (Settings.DisplayMode != DisplayMode.Touch && Settings.DisplayMode != DisplayMode.TouchCompact)
+                {
+                    ResourceDictionary dictionary = new ResourceDictionary();
+                    dictionary.Source = new Uri("/Design/B3ResourceDictionary.xaml", UriKind.RelativeOrAbsolute);
+                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageWindow.Show(string.Format(CultureInfo.CurrentCulture, Resources.LoadResourceDictionariesFailed, ex.Message), Resources.B3CenterName, MessageWindowType.Close);
             }
