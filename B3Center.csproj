@@ -165,7 +165,7 @@
     <Compile Include="REF\CODE\invoke\inoke1.cs" />
     <Compile Include="REF\CODE\invoke\Selecteditem.cs" />
     <Compile Include="REF\CODE\invoke\SqlDirectComm.cs" />
-    <Compile Include="REF\CrystalReportSourceBinding.cs" />
+    <Compile Include="REF\CODE\dependency\CrystalReportSourceBinding.cs" />
     <Compile Include="REF\Old\GameSettingJailBreakView.xaml.cs">
       <DependentUpon>GameSettingJailBreakView.xaml</DependentUpon>
     </Compile>
