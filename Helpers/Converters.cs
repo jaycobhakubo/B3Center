@@ -45,19 +45,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                 {
                     showControl = Visibility.Visible;
                 }
-              
-                var isReverse = parameter.ToString();
-                if (isReverse == "true")
+
+                if (parameter != null)
                 {
-                    if (showControl == Visibility.Visible)
+                    var isReverse = parameter.ToString();
+                    if (isReverse == "true")
                     {
-                        showControl = Visibility.Collapsed;
+                        if (showControl == Visibility.Visible)
+                        {
+                            showControl = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            showControl = Visibility.Visible;
+                        }
                     }
-                    else
-                    {
-                        showControl = Visibility.Visible;
-                    }
-                }              
+                }
             }
             return showControl;
         }
