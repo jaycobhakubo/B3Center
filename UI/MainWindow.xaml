@@ -25,7 +25,7 @@
 
     <ui:EliteWindowBase.Resources>
         <converter:BoolToVisibilityConv x:Key="BoolToVisibilityCollapsed"></converter:BoolToVisibilityConv>
-        <Style BasedOn="{StaticResource B3DefaultStyleTextBox}" TargetType="{x:Type TextBox}" />         
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource B3DefaultStyleTextBox}"  />         
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}"/>       
         <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3DefaultStyleCheckBox}"/>
         <Style  TargetType="{x:Type Label}" BasedOn="{StaticResource B3DefaultStyleLabel}"/>
@@ -48,8 +48,8 @@
                     <localReports:ReportsView DataContext="{Binding ReportsVm}" />
                 </Border>
             </TabItem>
-            
-            <TabItem Header="Setting" >
+
+            <TabItem Header="Setting" Visibility="{Binding HasB3SettingPermission, Converter={StaticResource BoolToVisibilityCollapsed}}">
                 <Border>
                     <localSettings:SettingView DataContext="{Binding SettingVm}" />
                 </Border>

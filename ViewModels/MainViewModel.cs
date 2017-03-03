@@ -48,7 +48,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case 44://Settings
                         SettingVm = SettingViewModel.Instance;
-                        SettingVm.Initialize(controller.B3Controller);                    
+                        SettingVm.Initialize(controller.B3Controller);
+                        HasB3SettingPermission = true;
                      break;
                 }
             }
@@ -59,13 +60,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             PropertyChangedEventManager.AddListener(Controller, this, string.Empty);    
         }
 
+        private bool m_hasB3SettingPermission = false;
+        public bool HasB3SettingPermission
+        {
+            get { return m_hasB3SettingPermission; }
+            set
+            {
+                if  (value != m_hasB3SettingPermission)
+                {
+                    m_hasB3SettingPermission = value;
+                    RaisePropertyChanged("HasB3SettingPermission");
+                }
+            }
+        }
+
         private bool m_hasB3RptPermission = false;
         public bool HasB3RptPermission
         {
             get { return m_hasB3RptPermission; }
             set 
             {
-                if (value != null && value != m_hasB3RptPermission)
+                if ( value != m_hasB3RptPermission)
                 {
                     m_hasB3RptPermission = value;
                     RaisePropertyChanged("HasB3RptPermission");
