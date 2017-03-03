@@ -97,7 +97,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                     {
 
                         var testr = GetMonthEquivValue(bcvm.parVm.MonthSelected) + 1;
-                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(bcvm.parVm.MonthSelected) + 1);
+                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(bcvm.parVm.MonthSelected));
                         Report.CrystalReportDocument.SetParameterValue("@nYear", bcvm.parVm.YearSelected.ToString(CultureInfo.InvariantCulture)); 
                         break;
                     }

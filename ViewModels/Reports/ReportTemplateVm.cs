@@ -79,14 +79,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-           public void CloseViewReport()
-           {
-               var x = ReportsViewModel.Instance;
-               x.DefaultViewMode = Visibility.Visible;
-               x.CRViewMode = Visibility.Collapsed;
-           }
+        public void CloseViewReport()
+        {
+            var x = ReportsViewModel.Instance;
+            x.DefaultViewMode = Visibility.Visible;
+            x.CRViewMode = Visibility.Collapsed;
+            x.CloseReportAbortOperation();
+            x.CloseReportAbortOperation();
+        }
 
-           private int GetMonthEquivValue(string monthName)
+        private int GetMonthEquivValue(string monthName)
            {
                string monthname = monthName;
                string[] m_months =
