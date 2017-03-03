@@ -30,30 +30,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         public MainViewModel(B3CenterController controller)
         {
-            if (controller == null)
-                throw new ArgumentNullException("controller");
+            if (controller == null)throw new ArgumentNullException("controller");
             Controller = controller;
             ModuleFeatureList = controller.ModuleFeatureList;
-
             SessionVm = SessionViewModel.Instance;
             SessionVm.Initialize(controller.B3Controller); 
-            HideAllBtnViewModel();
 
-            //No need to initialize if staff dont have permission.
-            foreach (int moduleFeatureID in controller.ModuleFeatureList)
+            foreach (int moduleFeatureID in controller.ModuleFeatureList)     //No need to initialize if staff dont have permission.
             {
                 switch (moduleFeatureID)
                 {
                     case 43://Reports
                             ReportsVm = ReportsViewModel.Instance;
-                            ReportsVm.Initialize(controller.B3Controller);
-                            IsReportVisible = Visibility.Visible;
+                            ReportsVm.Initialize(controller.B3Controller);                         
+                            HasB3RptPermission = true;
                     break;
 
                     case 44://Settings
                         SettingVm = SettingViewModel.Instance;
-                        SettingVm.Initialize(controller.B3Controller);
-                        IsSettingVisible = Visibility.Visible;
+                        SettingVm.Initialize(controller.B3Controller);                    
                      break;
                 }
             }
@@ -63,6 +58,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             FileExitCommand = new RelayCommand(parameter => Exit());     
             PropertyChangedEventManager.AddListener(Controller, this, string.Empty);    
         }
+
+        private bool m_hasB3RptPermission = false;
+        public bool HasB3RptPermission
+        {
+            get { return m_hasB3RptPermission; }
+            set 
+            {
+                if (value != null && value != m_hasB3RptPermission)
+                {
+                    m_hasB3RptPermission = value;
+                    RaisePropertyChanged("HasB3RptPermission");
+                }
+            }
+        }
+        
 
         #endregion
         #region Member Methods
@@ -75,11 +85,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             Controller.StartExit();
         }
 
-        private void HideAllBtnViewModel()
-        {
-            IsReportVisible = Visibility.Collapsed;
-            IsSettingVisible = Visibility.Collapsed;
-        }
+      
 
         /// <summary>
         /// Releases all resources used by MainViewModel.
@@ -109,18 +115,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set;
         }
 
-        public Visibility IsReportVisible
-        {
-            get;
-            set;
-        }
-
-        public Visibility IsSettingVisible
-        {
-            get;
-            set;
-        }
-
+     
         /// <summary>
         /// Gets or set the sub view model: game view model.
         /// </summary>
