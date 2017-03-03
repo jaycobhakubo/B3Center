@@ -11,10 +11,11 @@
     xmlns:localSettings="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
     xmlns:localOperators="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
     xmlns:localSessions="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SessionViews"  
+    xmlns:converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
     Title="B3 Center -- FortuNet, Inc." Width="1024" Height="710" Icon="../Resources/B3Center.ico"
     WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
-    <!--Set default style for all-->
-    <ui:EliteWindowBase.Style>
+
+    <ui:EliteWindowBase.Style>    <!--Set default style for all-->
         <Style>
             <Setter Property="Control.FontFamily" Value="Trebuchet MS" />
             <Setter Property="Control.FontSize" Value="12" />
@@ -23,6 +24,7 @@
     </ui:EliteWindowBase.Style>
 
     <ui:EliteWindowBase.Resources>
+        <converter:BoolToVisibilityConv x:Key="BoolToVisibilityCollapsed"></converter:BoolToVisibilityConv>
         <Style BasedOn="{StaticResource B3DefaultStyleTextBox}" TargetType="{x:Type TextBox}" />         
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}"/>       
         <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3DefaultStyleCheckBox}"/>
@@ -40,8 +42,8 @@
                     <localSessions:MainViewSession DataContext="{Binding SessionVm}"/>
                 </Border>
             </TabItem>
-      
-                <TabItem Header="Report">
+
+            <TabItem Header="Report"  Visibility="{Binding HasB3RptPermission, Converter={StaticResource BoolToVisibilityCollapsed}}">
                 <Border>
                     <localReports:ReportsView DataContext="{Binding ReportsVm}" />
                 </Border>
