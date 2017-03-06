@@ -72,10 +72,10 @@
                                     Grid.Column="1"
                                     Margin="15,15" Height="40" Width="140" 
                                     Content="Cancel"
-                                    HorizontalAlignment="Left"
-                                    Name="btnCancel" 
+                                    HorizontalAlignment="Left"                             
                                     VerticalAlignment="Top"
                                     Command="{Binding CancelSettingcmd}"  
+                                    IsEnabled="{Binding BtnSaveIsEnabled}"
                                     Focusable="False"
                                  />
                                 </Grid>

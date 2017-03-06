@@ -14,7 +14,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         public GameSettingVmAllGame(GameSetting _gameSetting, int GameId)
         {
-            m_gameSetting_ = _gameSetting;       
+            m_gameSetting_ = _gameSetting;
+            var settingvm = SettingViewModel.Instance;
+            settingvm.BtnSaveIsEnabled = Gamesetting_.IsEnableGame.IsEnabled; 
         }
 
         private GameSetting m_gameSetting_ = new GameSetting();
