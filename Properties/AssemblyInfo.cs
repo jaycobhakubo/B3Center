@@ -18,7 +18,7 @@ using System.Windows;
 #endif
 [assembly: AssemblyCompany("FortuNet, Inc.")]
 [assembly: AssemblyProduct("GameTech® Edge Bingo System™")]
-[assembly: AssemblyCopyright("Copyright © 2016 FortuNet All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2017 FortuNet All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,5 +30,5 @@ using System.Windows;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.ExternalAssembly)]
 
-[assembly: AssemblyVersion("0.3.2.17")]
-[assembly: AssemblyFileVersion("0.3.2.17")]
+[assembly: AssemblyVersion("0.4.0.0")]
+[assembly: AssemblyFileVersion("0.4.0.0")]
