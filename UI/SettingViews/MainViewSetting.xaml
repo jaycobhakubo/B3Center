@@ -81,9 +81,14 @@
                                 </Grid>
                             </Border>
                             <Border Visibility="{Binding IndicatorVisibility, Converter={StaticResource ConvertBooltoVisHidden}}" Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
-                                <Label
-                                    Style="{x:Null}"
-                                    HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>
+                                <Label                                                                                                     >
+                                    <Label.Style>
+                                        <Style  TargetType="Label" >
+                                            <Setter Property="Foreground" Value="Red"/>
+                                            <Setter Property="Content" Value="* Indicates a required field"/>
+                                       </Style>   
+                                        </Label.Style>
+                                    </Label>
                             </Border>
                         </Grid>
                     </Border>
@@ -110,3 +115,6 @@
 </UserControl>
 
 <!--<ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >-->
+<!--<Label
+                                    Style="{x:Null}"
+                                    HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>-->

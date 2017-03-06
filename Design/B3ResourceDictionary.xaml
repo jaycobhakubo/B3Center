@@ -42,6 +42,8 @@
 
     <Style x:Key="B3DefaultStyleComboBox"  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="Focusable" Value="True"/>
         <Style.Triggers>
             <Trigger Property="IsReadOnly" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

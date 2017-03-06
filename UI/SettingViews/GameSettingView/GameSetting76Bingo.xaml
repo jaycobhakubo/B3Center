@@ -39,14 +39,9 @@
                         ItemsSource="{Binding Gamesetting_.LGamePayTable}" 
                         DisplayMemberPath="PackageDesc"
                         SelectedValuePath="MathPackageID"   
-                        SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"   
-                       
+                        SelectedValue="{Binding Gamesetting_.SelectedMathPayTableSettingInt}"                        
                 >
-                    
-                    <!--Focusable="{ Binding IsGameEnable, Converter={StaticResource ConvertValue}}"-->
-                    <!--Focusable="{Binding IsGameEnablex}"-->
                 </ComboBox>
-                <!--<ComboBoxItem IsSelected="{Binding IsGameEnable}" ></ComboBoxItem>-->
                 <Label Content="Max bet level" />
                 <ComboBox 
                 Name="cmbxMaxBetLevel"  ItemsSource="{Binding Gamesetting_.LMaxBetLevel}" 
