@@ -654,6 +654,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         GameSetting_Vm = new GameSettingVm(m_b3Setting, m_b3SettingEnableDisable);
                         m_gameSettingView = new GameSettingView(GameSetting_Vm);
+                        BtnSaveIsEnabled = GameSetting_Vm.SelectedGameVm.IsGameEnable;
                         view = m_gameSettingView;
                         break;
                     }

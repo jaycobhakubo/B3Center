@@ -108,6 +108,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             temp.GameIndex = 7;
             temp.ViewModel = GameWildfire;
             GameTabItem.Add(temp);
+
+            SelectedGameVm = GameCrzyBout;
         }
         #endregion
         #region PROPERTIES
@@ -263,6 +265,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 {
                     gs.Denom1 = b3SettingGlobal_.B3SettingValue;
                 }
+                else
                 if
                 ((int)B3SettingId.Denom5 == b3SettingGlobal_.B3SettingID)
                 {

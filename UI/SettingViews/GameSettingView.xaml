@@ -19,7 +19,7 @@
    
     <Border x:Name="m_layoutRoot" >
         <Grid Name="gridServerMessage" >
-            <TabControl Grid.Column="0" Focusable="False"  Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
+            <TabControl Focusable="False" Grid.Column="0"   Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
                 <TabItem Header="Crazy Bout" Background="Transparent">
                     <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
                         <local:GameSettingCrazyBoutView DataContext="{Binding GameCrzyBout}"/>
