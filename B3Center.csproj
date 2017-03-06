@@ -283,10 +283,10 @@
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Design\B3ResourceDictionary.xaml">
+    <Resource Include="Design\B3ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Resource>
     <Page Include="UI\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
