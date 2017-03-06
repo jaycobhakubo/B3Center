@@ -76,7 +76,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SetCommand();
             SetDefaultValue();
             LoadSetting();
-            ViewReportVisibility = true;
+            BtnSaveIsEnabled = true;
         }
         #endregion
         #region OTHER ACCESSOR (static)
@@ -758,14 +758,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private bool m_viewReportVisibility;
-        public bool ViewReportVisibility
+        private bool m_btnSaveIsEnabledy;
+        public bool BtnSaveIsEnabled
         {
-            get { return m_viewReportVisibility; }
+            get { return m_btnSaveIsEnabledy; }
             set 
             {
-                m_viewReportVisibility = value;
-                RaisePropertyChanged("ViewReportVisibility");
+                m_btnSaveIsEnabledy = value;
+                RaisePropertyChanged("BtnSaveIsEnabled");
             }
         }
 

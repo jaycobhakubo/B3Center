@@ -30,7 +30,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             if (string.IsNullOrEmpty(currentTextBox.Text))
             {
                 var ii = SettingViewModel.Instance;
-                ii.ViewReportVisibility = false;
+                ii.BtnSaveIsEnabled = false;
             }
             else//If its not empty then lets validate all values.
             {
@@ -55,7 +55,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 if (tempResult == true)
                 {
                     var ii = SettingViewModel.Instance;
-                    ii.ViewReportVisibility = false;
+                    ii.BtnSaveIsEnabled = false;
                 }
 
 
@@ -71,7 +71,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                                 {
                                     tempResult = true;
                                     var ii = SettingViewModel.Instance;
-                                    ii.ViewReportVisibility = true;
+                                    ii.BtnSaveIsEnabled = true;
                                 }
                             }
                         }
@@ -81,7 +81,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 if (tempResult == false)
                 {
                     var ii = SettingViewModel.Instance;
-                    ii.ViewReportVisibility = false;
+                    ii.BtnSaveIsEnabled = false;
                 }
             }
         }

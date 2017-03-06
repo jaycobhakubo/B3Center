@@ -62,7 +62,7 @@
                                     x:Name="btnSave"
                                     VerticalAlignment="Top"
                                     Command="{Binding SaveSettingcmd}"  
-                                    IsEnabled="{Binding ViewReportVisibility}"
+                                    IsEnabled="{Binding BtnSaveIsEnabled}"
                                     Tag="1">
                                     </Button>
                                     <!--Content="{Binding IsEditOrSave}"-->
