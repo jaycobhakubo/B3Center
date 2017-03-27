@@ -7,7 +7,6 @@
 using System.IO;
 using System.Collections.ObjectModel;
 using GameTech.Elite.Client.Modules.B3Center.Business;
-using System.Linq;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
@@ -51,8 +50,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                 string faxnum = new string(responseReader.ReadChars(responseReader.ReadUInt16()));
                 //string iconcolor = new string(responseReader.ReadChars(responseReader.ReadUInt16()));
                 int iconcolor = responseReader.ReadInt32();
-                //db value had whitespaces saved, (cursor go to the last line when zipcode textbox is selected) 
-                zipcode = new string(zipcode.ToList().Where(c => c != ' ').ToArray());
                 Operator op = new Operator(opId, opName, opNameDescr, contactName, address, city, state, zipcode, phonenum, faxnum, iconcolor);
                 opList.Add(op);
             }

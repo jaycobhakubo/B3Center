@@ -120,7 +120,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             get;
             set;
         }
-
         #endregion
 
 

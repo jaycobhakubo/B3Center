@@ -52,13 +52,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
                     var startTime = responseReader.ReadChars(startLength);
 
-                    var endLength = responseReader.ReadInt16();
-
-                    var endTime = responseReader.ReadChars(startLength);
-
                     var active = responseReader.ReadBoolean();
 
-                    var session = new Session(number, active, new string(name), new string(startTime), new string(endTime));
+                    var session = new Session(number, active, new string(name), new string(startTime));
 
                     SessionList.Add(session);
                 }

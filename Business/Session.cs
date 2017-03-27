@@ -17,13 +17,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         /// <param name="sessionActive">Flag to set if the session is active or not.</param>
         /// <param name="name"></param>
         /// <param name="startTime"></param>
-        public Session(int sessionNumber, bool sessionActive, string name, string startTime, string endTime)
+        public Session(int sessionNumber, bool sessionActive, string name, string startTime)
         {
             Number = sessionNumber;
             Active = sessionActive;
             OperatorName = name;
             SessionStartTime = startTime;
-            SessionEndTime = endTime;
         }
         #endregion
 
@@ -45,12 +44,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         public string SessionStartTime
-        {
-            get;
-            private set;
-        }
-
-        public string SessionEndTime
         {
             get;
             private set;

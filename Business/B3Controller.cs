@@ -447,18 +447,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
-        public B3CenterSettings Settings 
+        public B3CenterSettings Settings
         {
             get { return Parent.Settings; }
         }
 
         public List<B3Report> Reports { get; set; }
-        public List<int> GameBallList { get; set; }
 
-        public IEnumerable ModuleFeatureList
-        {
-            get{ return Parent.ModuleFeatureList; }  
-        }
+        public List<int> GameBallList { get; set; }
 
         #endregion
     }

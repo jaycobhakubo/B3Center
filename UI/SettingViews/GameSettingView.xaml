@@ -4,70 +4,148 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
-              xmlns:Converter="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
-              xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings"
-            >
+            d:DesignHeight="710" d:DesignWidth="674">
     <UserControl.Resources>
-        
-            <Style
-             TargetType="{x:Type Label}" BasedOn="{StaticResource B3DefaultStyleLabel}">
-                <Setter Property="ContentStringFormat" Value="{}{0}:"/>                
-            </Style>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
 
+        <Style x:Name="FlatLableStyle" TargetType= "Label">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+     
     </UserControl.Resources>
-   
-    <Border x:Name="m_layoutRoot" >
-        <Grid Name="gridServerMessage" >
-            <TabControl Focusable="False" Grid.Column="0"   Background="Transparent" SelectedIndex="{Binding TabSelectedIndex}" SelectionChanged="TabControl_SelectionChanged" >
-                <TabItem Header="Crazy Bout" Background="Transparent">
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingCrazyBoutView DataContext="{Binding GameCrzyBout}"/>
-                    </Border>
-                </TabItem>
+    <Border >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <TabItem Header="JailBreak">
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingJailBreak DataContext="{Binding GameJailBreak}"/>
-                    </Border>
-                </TabItem>
+            <Grid Grid.Column="1" GotFocus="Grid_GotFocus">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="500"></RowDefinition>
+                    <RowDefinition />
+                    <RowDefinition Height="75"/>
+                </Grid.RowDefinitions>
+                
+                <Label x:Name="lblSavedNotification"
+                        Background="#44658D"
+                        Foreground="White"
+                        FontStyle="Italic"
+                        FontWeight="ExtraLight"
+                        Grid.Column="5"
+                        Content="Saved Successfully"
+                        Padding="5,2,5,3"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Top" 
+                        HorizontalContentAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Style="{x:Null}"
+                               >
+                </Label>
 
-                <TabItem Header="Maya Money">
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingMayaMoney DataContext="{Binding  GameMayaMoney}"/>
-                    </Border>
-                </TabItem>
+                <Border Height="50" Grid.Row="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="46"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="65"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                <TabItem Header="76 Bingo">
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSetting76Bingo  DataContext="{Binding GameSpirit76}"/>
-                    </Border>
-                </TabItem>
+                        <Label 
+                            x:Name="lblB3GameName" 
+                            Content="" 
+                            Grid.Column="1" 
+                            HorizontalAlignment="Left"  
+                            Grid.Row="0" 
+                            VerticalAlignment="Center"
+                            FontSize="26" 
+                            Height="Auto" 
+                            Width="auto" />
+                            
+                        <ToggleButton
+                                Grid.Column="2"
+                                Style="{StaticResource  AnimatedSwitch}"
+                                Height="25"
+                                Width="50"
+                                VerticalAlignment="Bottom"
+                                Name="tglBtnEnable" Checked="tglBtnEnable_Checked" Unchecked="tglBtnEnable_Unchecked" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,0,0,12">
+                            </ToggleButton>
 
-                <TabItem Header="Time Bomb">
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingTimeBomb DataContext="{Binding GameTimeBomb}"/>
-                    </Border>
-                </TabItem>
+                            <Label x:Name="lblEnable"
+                                Height="25"
+                                Grid.Column="3"
+                                Content="OFF"
+                                Padding="0"
+                                VerticalContentAlignment="Center"
+                                VerticalAlignment="Bottom" Visibility="Hidden" Margin="15,0,0,12">
 
-                <TabItem Header="U kick Em" >
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingUkickEm DataContext="{Binding GameUkickEm}"/>
-                    </Border>
-                </TabItem>
+                            </Label>
 
-                <TabItem Header="WildFire w/Bonus" >
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingWildFire DataContext="{Binding GameWildBall}"/>
+                    </Grid>
                     </Border>
-                </TabItem>
+                    <Border Height="500" Grid.Row="1" VerticalAlignment="Top" >
+                        <ContentPresenter
+                            KeyboardNavigation.TabNavigation="Local"
+                            Name="GameSettingTransitionControl" 
+                            Height="500" 
+                            />
+                    </Border>
 
-                <TabItem Header="WildFire">
-                    <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0">
-                        <local:GameSettingWildBall DataContext="{Binding GameWildfire}"/>
+                <Grid Grid.Row="3" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="8"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        Grid.Row="0"
+                    	Height="43" 
+                    	Width="360"
+                    	HorizontalAlignment ="Right"
+                        VerticalAlignment="Bottom"
+                        >
+                        <ContentPresenter 
+                    		x:Name="SaveCancelTransition" 
+                    		Height="43" 
+                    		VerticalAlignment="Bottom" 
+                    		HorizontalAlignment="Left" Visibility="Hidden"/>
                     </Border>
-                </TabItem>
-            </TabControl>
+
+                </Grid>
+
+
+            </Grid>
+
+            <!--<Border Grid.Column="0" Background="#FF8EAFD4">-->
+            <Border Grid.Column="0" Background="#FF44658D">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>         
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="btnBackOperatorSettingsFromGameSettings" Grid.Row="0"  Grid.Column="0"   
+                               Content="Game"
+                               Style="{StaticResource FlatDarkBlueButtonStyle4}" Click="btnBackOperatorSettingsFromGameSettings_Click" />
+                    <StackPanel Grid.Row="1" Name="stackpanel1"></StackPanel>           
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </UserControl>

@@ -6,7 +6,6 @@
 using System.Collections.Generic;
 using System.IO;
 using GameTech.Elite.Client.Modules.B3Center.Business;
-using System.Collections.ObjectModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
@@ -29,7 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         /// be use to read any response data necessary.</param>
         protected override void UnpackResponse(BinaryReader responseReader)
         {
-            b3SettingGlobal = new ObservableCollection<B3SettingGlobal>();
+            b3SettingGlobal = new List<B3SettingGlobal>();
             if (ReturnCode == ServerReturnCode.Success)
             {
 
@@ -60,14 +59,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                                 EnforceMix = (b3settingglobal.B3SettingValue == "T") ? true : false;
                                 break;
                             }
-                        case 30:
-                            {
-                                AllowInSessBallChange = (b3settingglobal.B3SettingValue == "T") ? true : false;
-                                break;
-                            }
                         case 51:
                             {
-                                IsDoubleAccount = (b3settingglobal.B3SettingValue == "T") ? true : false;
+                                AllowInSessBallChange = (b3settingglobal.B3SettingValue == "T") ? true : false;
                                 break;
                             }
                     }
@@ -99,7 +93,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         public bool EnforceMix { get; private set; }
         public bool IsDoubleAccount { get; private set; }
 
-        public ObservableCollection<B3SettingGlobal> b3SettingGlobal
+        public List<B3SettingGlobal> b3SettingGlobal
         {
             get;
             set;

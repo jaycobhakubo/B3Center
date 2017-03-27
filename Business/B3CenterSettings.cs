@@ -9,7 +9,6 @@ using System.Globalization;
 using GameTech.Elite.Base;
 using GameTech.Elite.UI;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
@@ -92,13 +91,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             {
                 switch(setting.Id)
                 {
-                    case LicenseSetting.EnableClassIIB3Game:
-                        bool tempResult;
-                        if (bool.TryParse(setting.Value, out tempResult))
-                        {
-                            IsClassIIB3Enable = tempResult;
-                        }
-                        break;
                     default:
                         base.LoadSetting(setting);
                         break;
@@ -135,15 +127,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         public bool IsMultiOperator { get; set; }
+
         public bool IsCommonRngBallCall { get; set; }
+
         public bool AllowInSessBallChange { get; set; }
-        public bool IsDoubleAccount { get; set; }
+
         public bool EnforceMix { get; set; }
+
         public string ReceiptPrinterName { get; private set; }
-        public bool IsClassIIB3Enable { get; set; }
+
         public string PrinterName { get; private set; }
+
         public List<B3GameSetting> B3GameSetting_ = new List<B3GameSetting>();
-        public ObservableCollection<B3SettingGlobal> B3SettingGlobal_; //= new List<B3SettingGlobal>();
+        public List<B3SettingGlobal> B3SettingGlobal_ = new List<B3SettingGlobal>();
         public List<B3IconColor> B3IconColor_ = new List<B3IconColor>();
         public List<B3MathGamePay> B3GameMathPlay_ = new List<B3MathGamePay>();
 

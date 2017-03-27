@@ -12,9 +12,6 @@ using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Business.GameModels;
 using GameTech.Elite.UI;
-using System.Collections;
-using System.Windows;
-using GameTech.Elite.Client.Modules.B3Center.Model;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -30,66 +27,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         public MainViewModel(B3CenterController controller)
         {
-            if (controller == null)throw new ArgumentNullException("controller");
+            if (controller == null)
+                throw new ArgumentNullException("controller");
+
             Controller = controller;
-            ModuleFeatureList = controller.ModuleFeatureList;
+            ObservableCollection<GameModel> games = new ObservableCollection<GameModel>
+            {
+                new CrazyBoutGameModel()
+            };
+
+            GameVm = new GameViewModel(games);
+
             SessionVm = SessionViewModel.Instance;
-            SessionVm.Initialize(controller.B3Controller); 
+            SessionVm.Initialize(controller.B3Controller);
+            ReportsVm = ReportsViewModel.Instance;
+            ReportsVm.Initialize(controller.B3Controller);
+            SettingVm = SettingViewModel.Instance;
+            SettingVm.Initialize(controller.B3Controller);
 
-            foreach (int moduleFeatureID in controller.ModuleFeatureList)     //No need to initialize if staff dont have permission.
-            {
-                switch (moduleFeatureID)
-                {
-                    case 43://Reports
-                            ReportsVm = ReportsViewModel.Instance;
-                            ReportsVm.Initialize(controller.B3Controller);                         
-                            HasB3RptPermission = true;
-                    break;
+            // Create the commands.
+            FileExitCommand = new RelayCommand(parameter => Exit());
 
-                    case 44://Settings
-                        SettingVm = SettingViewModel.Instance;
-                        SettingVm.Initialize(controller.B3Controller);
-                        HasB3SettingPermission = true;
-                     break;
-                }
-            }
-
-            OperatorVm = OperatorViewModel.Instance;
-            OperatorVm.Initialize(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_);
-            FileExitCommand = new RelayCommand(parameter => Exit());     
-            PropertyChangedEventManager.AddListener(Controller, this, string.Empty);    
+            // Listen for changes to the parent and children.
+            PropertyChangedEventManager.AddListener(Controller, this, string.Empty);
         }
-
-        private bool m_hasB3SettingPermission = false;
-        public bool HasB3SettingPermission
-        {
-            get { return m_hasB3SettingPermission; }
-            set
-            {
-                if  (value != m_hasB3SettingPermission)
-                {
-                    m_hasB3SettingPermission = value;
-                    RaisePropertyChanged("HasB3SettingPermission");
-                }
-            }
-        }
-
-        private bool m_hasB3RptPermission = false;
-        public bool HasB3RptPermission
-        {
-            get { return m_hasB3RptPermission; }
-            set 
-            {
-                if ( value != m_hasB3RptPermission)
-                {
-                    m_hasB3RptPermission = value;
-                    RaisePropertyChanged("HasB3RptPermission");
-                }
-            }
-        }
-        
 
         #endregion
+
         #region Member Methods
 
         /// <summary>
@@ -99,8 +63,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             Controller.StartExit();
         }
-
-      
 
         /// <summary>
         /// Releases all resources used by MainViewModel.
@@ -115,11 +77,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     PropertyChangedEventManager.RemoveListener(Controller, this, string.Empty);
                 }
+
                 base.Dispose(disposing);
             }
         }
 
         #endregion
+
         #region Member Properties
         /// <summary>
         /// Gets or set the view model's parent.
@@ -130,16 +94,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             set;
         }
 
-     
         /// <summary>
         /// Gets or set the sub view model: game view model.
         /// </summary>
-        public IEnumerable ModuleFeatureList
+        public GameViewModel GameVm
         {
             get;
             private set;
         }
-
 
         /// <summary>
         /// Gets or set the sub view model: session view model.
@@ -160,10 +122,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        /// </summary>
         public SettingViewModel SettingVm { get; private set; }
 
-        public static OperatorViewModel OperatorVm { get; private set; }
-
-
         #endregion
+
         #region Member Command Properties
 
         /// <summary>

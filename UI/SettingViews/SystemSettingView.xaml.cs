@@ -1,13 +1,21 @@
-﻿
-
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using GameTech.Elite.Client.Modules.B3Center.Business;
+using GameTech.Elite.Client.Modules.B3Center.Messages;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
-using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
-
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
@@ -16,77 +24,584 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// </summary>
     public partial class SystemSettingView : UserControl
     {
-        public SystemSettingView(SystemSettingVm _systemSetting)
+        #region MEMBER VARIABLES
+
+        private List<B3SettingGlobal> m_B3Settings = new List<B3SettingGlobal>();
+        private decimal m_handPayoutTrigger;
+        private int m_minimumPlayers;
+        private decimal m_vipPointMultiPlayer;
+        private string m_magcardSentinelStart;
+        private string m_magcardSentineEnd;
+        private string m_currency;
+        private int m_rngBallCallTime;
+        private int m_playerPinLength;
+        private bool m_enableUK;
+        private bool m_dualAccount;
+        private bool m_multiOperator;
+        private bool m_commonRNGBallCall;
+        private bool m_northDakotaMode;
+        private string m_autoSessionEnd; //'','T','F'
+        private string m_siteName;
+        private int m_systemSettingmainVolume;
+        private readonly SaveCancelCrtl m_saveCancelCtrl;
+        private Button m_btnSave;
+        private Button m_btnCancel;
+        private List<SettingMember> m_lB3Settings;//Save setting id that needs to be updated.
+        private bool isValidateOk;
+        private bool m_isNDSettingEnable;
+
+        #endregion
+
+        #region PROPERTIES
+       
+        public Button btnSave
+        {
+           get { return m_btnSave; }
+           set { m_btnSave = value; }
+        }
+
+        public bool isNDSettingEnable
+        {
+            get { return m_isNDSettingEnable; }
+        }
+       
+        #endregion
+
+    
+
+        #region CONSTRUCTORS
+
+        public SystemSettingView(List<B3SettingGlobal> B3Settings)
         {
             InitializeComponent();
-            DataContext = _systemSetting;
+            m_B3Settings = B3Settings;
+            PopulateComboBoxControls();
+            PopulateDataIntoVar();
+            PopulateDataIntoControls();
+            m_saveCancelCtrl = new SaveCancelCrtl();
+            m_btnSave = m_saveCancelCtrl.btnSave;
+            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+            m_btnCancel = m_saveCancelCtrl.btnCancel;
+            m_btnCancel.Click += new RoutedEventHandler(m_btnCancel_Click);
+            SaveCancelTransition.Content = (UserControl)m_saveCancelCtrl;
+            SaveCancelTransition.Visibility = Visibility.Visible;
+            lblSavedNotification.Visibility = Visibility.Hidden;
+        }
+
+        #endregion
+
+        #region PRIVATE METHODs
+
+        private void PopulateDataIntoVar()
+        {
+            bool result;
+            m_handPayoutTrigger = Convert.ToDecimal(m_B3Settings[0].B3SettingValue);
+            m_minimumPlayers = Convert.ToInt32(m_B3Settings[1].B3SettingValue);
+            m_vipPointMultiPlayer = Convert.ToDecimal(m_B3Settings[2].B3SettingValue);
+            m_magcardSentinelStart = (m_B3Settings[3].B3SettingValue.ToString());
+            m_magcardSentineEnd = (m_B3Settings[4].B3SettingValue.ToString());
+            m_currency = m_B3Settings[5].B3SettingValue.ToString();
+            m_rngBallCallTime = Convert.ToInt32(m_B3Settings[6].B3SettingValue);
+            m_playerPinLength = Convert.ToInt32(m_B3Settings[7].B3SettingValue);
+            m_enableUK = Convert.ToBoolean(result = (m_B3Settings[8].B3SettingValue == "T") ? true : false);
+            m_dualAccount = Convert.ToBoolean(result = (m_B3Settings[9].B3SettingValue == "T") ? true : false);
+            m_multiOperator = Convert.ToBoolean(result = (m_B3Settings[10].B3SettingValue == "T") ? true : false);
+            m_commonRNGBallCall = Convert.ToBoolean(result = (m_B3Settings[11].B3SettingValue == "T") ? true : false);
+            m_northDakotaMode = Convert.ToBoolean(result = (m_B3Settings[12].B3SettingValue == "T") ? true : false);
+            m_autoSessionEnd = m_B3Settings[13].B3SettingValue.ToString();            
+            m_siteName = m_B3Settings[14].B3SettingValue.ToString();
+            m_systemSettingmainVolume = Convert.ToInt32(m_B3Settings[15].B3SettingValue);
+        }
+
+        private void PopulateDataIntoControls()
+        {
+            txtbxHandPayoutTrigger.Text = m_handPayoutTrigger.ToString();
+            cmbxMinimumPlayer.SelectedIndex = cmbxMinimumPlayer.Items.IndexOf(m_minimumPlayers.ToString());
+            txtbxVipPointPlayer.Text = m_vipPointMultiPlayer.ToString();
+            txtbxMagCardStart.Text = m_magcardSentinelStart.ToString();
+            txtbxMagCardEnd.Text = m_magcardSentineEnd.ToString();
+            txtbxCurrency.Text = m_currency.ToString();
+            txtbxRNGBallCallTime.Text = m_rngBallCallTime.ToString();
+            cmbxSetPlayrPinLength.SelectedIndex = cmbxSetPlayrPinLength.Items.IndexOf(m_playerPinLength.ToString());
+            chkbxEnableUK.IsChecked = m_enableUK;
+            chkbxDualAccount.IsChecked = m_dualAccount;
+            chkbxMultiOperator.IsChecked = m_multiOperator;
+            chkbxCommonRNGBallCall.IsChecked = m_commonRNGBallCall;
+            chkbxNorthDakotaMode.IsChecked = m_northDakotaMode;
+            if (string.IsNullOrEmpty(m_autoSessionEnd.ToString()))
+            {
+                chkbxAutoSessionEnd.IsChecked = false;
+            }
+            else
+                if (m_autoSessionEnd == "T")
+                {
+                    chkbxAutoSessionEnd.IsChecked = true;
+                }
+                else
+                {
+                    chkbxAutoSessionEnd.IsChecked = false;
+                }
+
+            txtbxSiteName.Text = m_siteName.ToString();
+            cmbxMainVol.SelectedIndex = cmbxMainVol.Items.IndexOf(GetEquivValue(m_systemSettingmainVolume));
         }
 
 
-        private void ValidateUserInput(object sender, TextChangedEventArgs e)
+        private string GetOldValuesForComparison(int settingID)
         {
-            TextBox currentTextBox = (TextBox)sender;
+            string result = "";
 
-            if (string.IsNullOrEmpty(currentTextBox.Text))
+            switch (settingID)
             {
-                var ii = SettingViewModel.Instance;
-                ii.BtnSaveIsEnabled = false;
+                case 42: { result = m_handPayoutTrigger.ToString(); break; }
+                case 43: { result = m_minimumPlayers.ToString(); break; }
+                case 44: { result = m_vipPointMultiPlayer.ToString(); break; }
+                case 45: { result = m_magcardSentinelStart.ToString(); break; }
+                case 46: { result = m_magcardSentineEnd.ToString(); break; }
+                case 47: { result = m_currency.ToString(); break; }
+                case 48: { result = m_rngBallCallTime.ToString(); break; }
+                case 49: { result = m_playerPinLength.ToString(); break; }
+                case 50: { result = (m_enableUK == true) ? "T" : "F"; break; }
+                case 51: { result = (m_dualAccount == true) ? "T" : "F"; break; }
+                case 52: { result = (m_multiOperator == true) ? "T" : "F"; break; }
+                case 53: { result = (m_commonRNGBallCall == true) ? "T" : "F"; break; }
+                case 54: { result = (m_northDakotaMode == true) ? "T" : "F"; break; }
+                case 55: { result = m_autoSessionEnd.ToString(); break; }//Set to "F" if NULL.
+                case 56: { result =  m_siteName.ToString(); break; }
+                case 57: { result = m_systemSettingmainVolume.ToString(); break; }
             }
-            else//If its not empty then lets validate all values.
+
+            return result;
+        }
+
+        private void RepopulateNewSaveData(List<SettingMember> lsm)
+        {
+            bool result = false;
+            foreach (SettingMember sm in lsm)
             {
-                var tempResult = true;
-                int tempResultInt;
-                Int64 tempResultInt64;
-                string tempResultString;
-
-
-                tempResultString = txtbxSiteName.Text.ToString();//Do not allow whitespace on password
-                if (txtbxSiteName.Text.ToString().Contains(" "))
+                switch (sm.m_settingID)
                 {
-                    if (txtbxMagCardStart.Text.ToString().Contains(" "))
-                    {
-                        if (txtbxMagCardStart.Text.ToString().Contains(" "))
+                    case 42:
                         {
-                            tempResult = false;
-                        }   
-                    }                                   
+                            m_handPayoutTrigger  = Convert.ToDecimal(sm.m_value);
+                            break;
+                        }
+                    case 43:
+                        {
+                            m_minimumPlayers = Convert.ToInt32(sm.m_value);
+                            break;
+                        }
+                    case 44:
+                        {
+                            m_vipPointMultiPlayer = Convert.ToDecimal(sm.m_value);
+                            break;
+                        }
+                    case 45:
+                        {
+                            m_magcardSentinelStart = sm.m_value.ToString();
+                            break;
+                        }
+                    case 46:
+                        {
+                            m_magcardSentineEnd = sm.m_value.ToString();
+                            break;
+                        }
+                    case 47:
+                        {
+                            m_currency = sm.m_value.ToString();
+                            break;
+                        }
+                    case 48:
+                        {
+                          m_rngBallCallTime = Convert.ToInt32(sm.m_value);
+                            break;
+                        }
+                    case 49:
+                        {
+                            m_playerPinLength= Convert.ToInt32(sm.m_value);
+                            break;
+                        }
+                    case 50:
+                        {
+                           m_enableUK =  Convert.ToBoolean(result = (sm.m_value == "T") ? true : false);
+                            break;
+                        }
+                    case 51:
+                        {
+                            m_dualAccount = Convert.ToBoolean(result = (sm.m_value == "T") ? true : false);
+                            break;
+                        }
+                    case 52:
+                        {
+                            m_multiOperator = Convert.ToBoolean(result = (sm.m_value == "T") ? true : false);
+                            break;
+                        }
+                    case 53:
+                        {
+                            m_commonRNGBallCall = Convert.ToBoolean(result = (sm.m_value == "T") ? true : false);
+                            break;
+                        }
+                    case 54:
+                        {
+                            m_northDakotaMode = Convert.ToBoolean(result = (sm.m_value == "T") ? true : false);
+                            break;
+                        }
+                    case 55:
+                        {
+                            m_autoSessionEnd = sm.m_value.ToString();
+                            break;
+                        }
+                    case 56:
+                        {
+                            m_siteName = sm.m_value.ToString();
+                            break;
+                        }
+                    case 57:
+                        {
+                            m_systemSettingmainVolume = Convert.ToInt32(sm.m_value);
+                            break;
+                        }
+                }
+            }
+            PopulateDataIntoControls();
+        }
+
+        private bool ValidateUserInput()
+        {
+            bool result = true; //True = validation ok ; false validation not ok.
+            decimal decValuel;
+
+            if (string.IsNullOrEmpty( txtbxRNGBallCallTime.Text) == true)
+            {
+                result = false;
+                txtbxRNGBallCallTime.BorderBrush = Brushes.Red;
+            }
+
+            if (string.IsNullOrEmpty(txtbxHandPayoutTrigger.Text) == true)
+            {
+                result = false;
+                txtbxHandPayoutTrigger.BorderBrush = Brushes.Red;
+            }
+            else
+                if (!Decimal.TryParse(txtbxHandPayoutTrigger.Text, out decValuel))
+                {
+                    result = false;
+                    txtbxHandPayoutTrigger.BorderBrush = Brushes.Red;
                 }
 
-                if (tempResult == true)
+
+            if (string.IsNullOrEmpty(txtbxVipPointPlayer.Text) == true)
+            {
+                result = false;
+                txtbxVipPointPlayer.BorderBrush = Brushes.Red;
+            }
+            else
+                if (!Decimal.TryParse(txtbxVipPointPlayer.Text, out decValuel))
                 {
-                    var ii = SettingViewModel.Instance;
-                    ii.BtnSaveIsEnabled = false;
+                    result = false;
+                    txtbxVipPointPlayer.BorderBrush = Brushes.Red;
                 }
 
+            if (string.IsNullOrEmpty(txtbxMagCardStart.Text) == true || string.IsNullOrWhiteSpace(txtbxMagCardStart.Text) == true)
+            {
+                result = false;
+                txtbxMagCardStart.BorderBrush = Brushes.Red;
+            }
 
-                if (Int64.TryParse(txtbxHandPayoutTrigger.Text.ToString(), out tempResultInt64))
+            if (string.IsNullOrEmpty(txtbxMagCardEnd.Text) == true || string.IsNullOrWhiteSpace(txtbxMagCardEnd.Text) == true)
+            {
+                result = false;
+                txtbxMagCardEnd.BorderBrush = Brushes.Red;
+            }
+
+            if (string.IsNullOrEmpty(txtbxCurrency.Text) == true || string.IsNullOrWhiteSpace(txtbxCurrency.Text) == true)
+            {
+                result = false;
+                txtbxCurrency.BorderBrush = Brushes.Red;
+            }
+
+
+            if (string.IsNullOrEmpty(txtbxSiteName.Text) == true || string.IsNullOrWhiteSpace(txtbxSiteName.Text) == true)
+            {          
+                result = false;
+                txtbxSiteName.BorderBrush = Brushes.Red;
+            }
+
+            if (result == false)
+            {
+                isValidateOk = false;
+            }
+            return result;
+        }
+
+        private void SetBorderBrushToDefault()
+        {
+            txtbxRNGBallCallTime.BorderBrush = Brushes.LightGray;
+            txtbxSiteName.BorderBrush = Brushes.LightGray;
+            txtbxVipPointPlayer.BorderBrush = Brushes.LightGray;
+            txtbxHandPayoutTrigger.BorderBrush = Brushes.LightGray;
+            txtbxMagCardStart.BorderBrush = Brushes.LightGray;
+            txtbxMagCardEnd.BorderBrush = Brushes.LightGray;
+            txtbxCurrency.BorderBrush = Brushes.LightGray;
+        }
+
+
+        /// <summary>
+        /// Compare old value to the new value.
+        /// </summary>
+        private List<SettingMember> ListOfSettingIDToBeUpdated()
+        {
+            m_lB3Settings = new List<SettingMember>();
+            foreach (UIElement element in   gridSystemSettings.Children)
+            {
+                if (element is TextBox)
                 {
-                    if (Int64.TryParse(txtbxVipPointPlayer.Text.ToString(), out tempResultInt64))
+                    TextBox txt = (TextBox)element;
+                    if (txt.Tag != null && txt != null)
                     {
-                        if (Int32.TryParse(txtbxPlayerpinLength.Text.ToString(), out tempResultInt))
+                        SettingMember sm = new SettingMember();
+                        sm.m_settingID = Convert.ToInt32(txt.Tag);
+                        sm.m_gameID = 0;
+
+
+                        string OldValue = GetOldValuesForComparison(sm.m_settingID); //m_B3SettingCrazyBt.Single(l => l.B3SettingID == sm.m_settingID).B3SettingValue;
+                        string NewValue = txt.Text;
+
+                        sm.m_value = NewValue;
+                        sm.m_oldValue = OldValue;
+
+                        if (NewValue != OldValue)
                         {
-                            if (Int32.TryParse(txtbxRNGBallCallTime.Text.ToString(), out tempResultInt))
-                            {
-                                if (Int32.TryParse(txtbxPlayerpinLength.Text.ToString(), out tempResultInt))
-                                {
-                                    tempResult = true;
-                                    var ii = SettingViewModel.Instance;
-                                    ii.BtnSaveIsEnabled = true;
-                                }
-                            }
+                            m_lB3Settings.Add(sm);
                         }
                     }
                 }
 
-                if (tempResult == false)
+                else if (element is CheckBox)
                 {
-                    var ii = SettingViewModel.Instance;
-                    ii.BtnSaveIsEnabled = false;
+                    SettingMember sm = new SettingMember();
+                    CheckBox chkbx = (CheckBox)element;
+                    if (chkbx.Tag != null && chkbx != null)
+                    {
+                        sm.m_settingID = Convert.ToInt32(chkbx.Tag);
+                        sm.m_gameID = 0;
+                        sm.m_value = (chkbx.IsChecked == true) ? "T" : "F";
+                        string OldValue = GetOldValuesForComparison(sm.m_settingID);//m_B3SettingCrazyBt.Single(l => l.B3SettingID == sm.m_settingID).B3SettingValue;
+                        sm.m_oldValue = OldValue;
+
+                        if (sm.m_settingID == 55)
+                        {
+                            if (OldValue == "" && sm.m_value == "F")
+                            {
+                                sm.m_value = "";
+                            }
+                        }
+
+                        if (sm.m_value != OldValue)
+                        {
+                            m_lB3Settings.Add(sm);
+                        }
+                    }
+                }
+
+                else  if (element is ComboBox)
+                {
+                    ComboBox btn = (ComboBox)element;
+                    if (btn.Tag != null && btn != null)
+                    {
+                        SettingMember sm = new SettingMember();
+                        sm.m_settingID = Convert.ToInt32(btn.Tag);
+                        sm.m_gameID = 0;
+
+
+                        string OldValue = GetOldValuesForComparison(sm.m_settingID); //m_B3SettingCrazyBt.Single(l => l.B3SettingID == sm.m_settingID).B3SettingValue;
+                        string NewValue = "";
+
+                        if (sm.m_settingID == 57)
+                        {
+                            NewValue = btn.SelectedItem.ToString();
+                            OldValue = GetEquivValue(Convert.ToInt32(OldValue));
+                            if (NewValue != OldValue)
+                            {
+                                NewValue = GetVolumeEquivToDB(Convert.ToInt32(NewValue));
+                            }
+                        }
+                        else
+                        {
+                        NewValue = btn.SelectedItem.ToString();
+                        }
+
+                        sm.m_value = NewValue;
+                        sm.m_oldValue = OldValue;
+
+                        if (NewValue != OldValue)
+                        {
+                            m_lB3Settings.Add(sm);
+                        }
+                    }
+                }
+            }
+
+            return m_lB3Settings;
+        }
+
+        /// <summary>
+        /// Load combobox control.
+        /// </summary>
+
+        private void PopulateComboBoxControls()
+        {
+            cmbxMinimumPlayer.ItemsSource = cmbxValue(0, 20);
+            cmbxSetPlayrPinLength.ItemsSource = cmbxValue(1, 4);
+            cmbxMainVol.ItemsSource = cmbxValue(0, 10);
+        }
+
+        private string GetEquivValue(int fromvalue)
+        {
+            string toValue = "";
+              
+                if (fromvalue <= 100 && fromvalue >= 91) { toValue = "10"; }
+                else if (fromvalue < 91 && fromvalue >= 81) { toValue = "9"; }
+                else if (fromvalue < 81 && fromvalue >= 71) { toValue = "8"; }
+                else if (fromvalue < 71 && fromvalue >= 61) { toValue = "7"; }
+                else if (fromvalue < 61 && fromvalue >= 51) { toValue = "6"; }
+                else if (fromvalue < 51 && fromvalue >= 41) { toValue = "5"; }
+                else if (fromvalue < 41 && fromvalue >= 31) { toValue = "4"; }
+                else if (fromvalue < 31 && fromvalue >= 21) { toValue = "3"; }
+                else if (fromvalue < 21 && fromvalue >= 11) { toValue = "2"; }
+                else if (fromvalue < 11 && fromvalue >= 1) { toValue = "1"; }
+                else if (fromvalue == 0) { toValue = "0"; }
+        
+                return toValue;
+        }
+
+        private string GetVolumeEquivToDB(int VolumeLevel)
+        {
+            string result = "";
+            switch (VolumeLevel)
+            {
+                case 0: { result = "0"; break; }
+                case 1: { result = "10"; break; }
+                case 2: { result = "20"; break; }
+                case 3: { result = "30"; break; }
+                case 4: { result = "40"; break; }
+                case 5: { result = "50"; break; }
+                case 6: { result = "60"; break; }
+                case 7: { result = "70"; break; }
+                case 8: { result = "80"; break; }
+                case 9: { result = "90"; break; }
+                case 10: { result = "100"; break; }
+
+
+            }
+            return result;
+        }
+
+        private List<string> cmbxValue(int StartCount, int EndCount)
+        {
+            List<string> result = new List<string>();
+                     
+                for (int i = StartCount ; i < EndCount + 1; i++)
+                {
+                    result.Add(i.ToString());
+                }
+      
+            return result;
+        }
+
+        private void ClearSavedNotification()
+        {
+            if (lblSavedNotification.Visibility != Visibility.Hidden) lblSavedNotification.Visibility = Visibility.Hidden;
+        }
+
+        #endregion
+
+        #region PUBLIC METHODS
+
+        public void ReloadDataIntoControls()
+        {
+            ClearSavedNotification();
+            List<SettingMember> lSettingMember = new List<SettingMember>();
+            lSettingMember = ListOfSettingIDToBeUpdated();
+            if (lSettingMember.Count != 0)
+            {
+                PopulateDataIntoControls();
+            }
+        }
+
+        #endregion
+
+        #region EVENTS
+
+        void m_btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadDataIntoControls();
+        }
+
+        void m_btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (ValidateUserInput() == false)
+            {
+                return;
+            }
+
+            List<SettingMember> lSettingMember = new List<SettingMember>();
+            lSettingMember = ListOfSettingIDToBeUpdated();
+
+            if (lSettingMember.Count != 0)
+            {
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                SetB3SettingsMessage msg = new SetB3SettingsMessage(lSettingMember);
+                msg.Send();
+                Mouse.OverrideCursor = null;
+
+                if (msg.ReturnCode != ServerReturnCode.Success)
+                    throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed", ServerErrorTranslator.GetReturnCodeMessage(msg.ReturnCode)));
+           
+                if (lSettingMember.Exists(l => l.m_settingID == 54))
+                {
+                    m_isNDSettingEnable = (lSettingMember.Single(l => l.m_settingID == 54).m_value == "T" ? true : false);                   
+                }
+
+                RepopulateNewSaveData(lSettingMember);
+                lblSavedNotification.Visibility = Visibility.Visible;
+
+                //Logged any changes made.
+                B3_GetIdDefinition getB3SettingIdDef = new B3_GetIdDefinition();
+                string Description = "";
+                foreach (SettingMember i in lSettingMember)
+                {
+                    string NewValue = lSettingMember.FirstOrDefault(l => l.m_settingID == i.m_settingID).m_value.ToString();;
+                    
+                    if (i.m_settingID == 57)
+                    {
+                        NewValue = GetEquivValue( Convert.ToInt32(NewValue));
+                    }
+
+                    Description = getB3SettingIdDef.getSettingDefinition(i.m_settingID) + " for B3 Setting changed from " + lSettingMember.FirstOrDefault(l => l.m_settingID == i.m_settingID).m_oldValue.ToString() + " to " + NewValue +".";
+                    SetB3LoggedChanges loggedmsg = new SetB3LoggedChanges(SettingViewModel.Instance.StaffId, SettingViewModel.Instance.MachineId, SettingViewModel.Instance.OperatorId, Description);
                 }
             }
         }
 
-        private void DontAllowThisKeyboardinput(object sender, KeyEventArgs e)
+        private void Grid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ClearSavedNotification();
+            if (isValidateOk == false)
+            {
+                SetBorderBrushToDefault();
+                isValidateOk = true;
+            }
+        }
+
+
+        private void txtbxNumericOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void txtbx_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             bool notAllow = false;
 
@@ -102,12 +617,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             e.Handled = notAllow;
         }
 
-
-        private void _PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void txtbxPrice_PreviewTextInput2(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }       
-    }
+            bool NotAllow = false;
 
+            //Get all the text in the textbox including keypreview.
+            TextBox y = (TextBox)sender;
+            string x = y.Text;
+            x = x.Insert(y.SelectionStart, e.Text);
+
+            int count = x.Split('.').Length - 1;//Count how many decimal places on the text input
+
+            if (count > 1)//One decimal point only.
+            {
+                NotAllow = true;
+            }
+            else if ((Convert.ToChar(e.Text)) == '.')
+            {
+                NotAllow = false;
+            }
+            else if (Char.IsNumber(Convert.ToChar(e.Text)))
+            {
+                NotAllow = false;
+
+                if (Regex.IsMatch(x, @"\.\d\d\d"))//Only allow .## 
+                {
+                    NotAllow = true;
+                }
+            }
+            else
+            {
+                NotAllow = true;
+            }
+
+            e.Handled = NotAllow;
+        }
+
+
+        #endregion
+
+
+    }
 }

@@ -9,14 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 {
     /// <summary>
     ///     Interaction logic for DateTimePickerUserControl.xaml
     /// </summary>
-    public partial class DatePickerUserControl : UserControl
+    public partial class DatePickerUserControl
     {
         #region local variables
 
@@ -63,7 +62,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 
         #region constructor
 
-      
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerUserControl"/> class.
         /// </summary>
@@ -226,8 +224,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
         {
             var year = int.Parse(YearCombobox.SelectedValue.ToString());
             var month = MonthCombobox.SelectedIndex + 1;
-            var day = DayCombobox.SelectedIndex +1;
-            var hour = HourCombobox.SelectedIndex;// +1;
+            var day = DayCombobox.SelectedIndex + 1;
+            var hour = HourCombobox.SelectedIndex + 1;
 
             if (AmPmCombobox.SelectedIndex == 1)
             {
@@ -240,6 +238,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
                     hour += 12;
                 }
             }
+
             return new DateTime(year, month, day, hour, 0, 0);
         }
 

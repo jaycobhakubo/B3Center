@@ -15,9 +15,6 @@ using GameTech.Elite.Base;
 using GameTech.Elite.UI;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Properties;
-using System.Collections;
-using System.Linq;
-using System.Timers;
 
 //US4296: B3 Start Session
 //US4298: B3 End Session
@@ -29,28 +26,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     class SessionViewModel : ViewModelBase
     {
         #region Local Variables
-
-        private bool m_isSuccess;
-        private bool m_hasError;
         private string m_statusMessage;
-        private string m_sessionStatusMessage;
+        private string m_sessionStartStatusMessage;
+        private string m_sessionEndStatusMessage;
         private string m_sessionSetBallStatusMessage;
         private string m_outstandingTicketCountMessage;
-        private bool m_setBallsButtonVisibility;
-        private bool m_voidAccountButtonIsEnabled;
-        private bool m_voidAccountYesNoButtonIsEnabled;
-        private bool m_isUserPermissionBallCallSet;
-        private bool m_hasStartSessionFeaturePermission;
-        private bool m_hasEndSessionFeaturePermission;
-        private bool m_startSessionButtonVisibility;
-        private bool m_endSessionButtonVisibility;
-        private ObservableCollection<Session> m_sessionList;
-        private ObservableCollection<Business.Operator> m_operators;
-        private bool m_setBallsIsEnabled;
+        private bool m_startSessionVisibility;
+        private bool m_endSessionVisibility;
+        private bool m_setBallsVisibility;
+        private bool m_setBallsMenuVisibility;
+        private bool m_yesNoVoidAccountDialogVisibility;
         private B3Controller m_controller;
+        private bool m_isOperatorListModify;
+
         private static volatile SessionViewModel m_instance;
         private static readonly object m_syncRoot = new Object();
-        private readonly Timer m_statusMessageTimer;
         #endregion
 
         #region Constructors
@@ -59,23 +49,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// </summary>
         private SessionViewModel()
         {
-            //status message timer
-            m_statusMessageTimer = new Timer(5000);
-            m_statusMessageTimer.Elapsed += StatusTimerElapsedHandler;
-            m_statusMessageTimer.Stop();
-            m_statusMessageTimer.AutoReset = false;
-            
-            SessionStartCommand = new RelayCommand(parameter => StartSession());
-            SessionEndCommand = new RelayCommand(parameter => EndSession());
+            SessionStartCommand = new RelayCommand(parameter => Start());
+            SessionEndCommand = new RelayCommand(parameter => End());
             VoidAccountCommand = new RelayCommand(parameter => VoidAccounts());
             VoidAccountYesCommand = new RelayCommand(parameter => VoidAccountsYes());
-            SessionList = new ObservableCollection<Session>();
+            VoidAccountNoCommand = new RelayCommand(parameter => VoidAccountsNo());
         }
 
         #endregion
 
         #region Member Properties
-
 
         public static SessionViewModel Instance
         {
@@ -94,6 +77,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+        public bool IsOperatorListModify
+        {
+            get {return m_isOperatorListModify;}
+            set { m_isOperatorListModify = value; }
+        }
+
         public B3CenterSettings Settings
         {
             get
@@ -106,99 +96,88 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 return m_controller.Settings;
             }
         }
-
+        
         public bool IsSuccess
         {
-            get
-            {
-                return m_isSuccess;
-            }
-            set
-            {
-                m_isSuccess = value;
-                RaisePropertyChanged("IsSuccess");
-            }
+            get;
+            private set;
         }
-
-        public bool HasError
+        
+        public bool StartSessionDisabledVisibility
         {
             get
             {
-                return m_hasError;
+                return m_startSessionVisibility;
             }
             set
             {
-                m_hasError = value;
-                RaisePropertyChanged("HasError");
+                m_startSessionVisibility = value;
+
+                //if allow in session ball change is false and session is started then disable set balls
+                if (!Settings.AllowInSessBallChange && m_startSessionVisibility)
+                {
+                    SetBallsDisabledVisibility = true;
+                    SessionSetBallStatusMessage = Resources.SessionInSessionSetBallsDisabled;
+                }
+                else
+                {
+                    SetBallsDisabledVisibility = false;
+                    SessionSetBallStatusMessage = string.Empty;
+                }
+
+                RaisePropertyChanged("StartSessionDisabledVisibility");
             }
         }
 
-        public bool StartSessionButtonVisibility
+        public bool EndSessionDisabledVisibility
         {
             get
             {
-                return m_startSessionButtonVisibility;
+                return m_endSessionVisibility;
             }
             set
             {
-                m_startSessionButtonVisibility = value && m_hasStartSessionFeaturePermission;
-                RaisePropertyChanged("StartSessionButtonVisibility");
+                m_endSessionVisibility = value;
+                RaisePropertyChanged("EndSessionDisabledVisibility");
             }
         }
 
-        public bool EndSessionButtonVisibility
+        public bool SetBallsDisabledVisibility
         {
             get
             {
-                return m_endSessionButtonVisibility;
+                return m_setBallsVisibility;
             }
             set
             {
-                m_endSessionButtonVisibility = value && m_hasEndSessionFeaturePermission;
-                RaisePropertyChanged("EndSessionButtonVisibility");
+                m_setBallsVisibility = value;
+                RaisePropertyChanged("SetBallsDisabledVisibility");
             }
         }
 
-        public bool SetBallsButtonVisibility
-        {
-            get { return m_setBallsButtonVisibility; }
-            set
-            {
-                m_setBallsButtonVisibility = value;
-                RaisePropertyChanged("SetBallsButtonVisibility");
-            }
-        }
-
-        public bool SetBallsIsEnabled
+        public bool SetBallsMenuVisibility
         {
             get
             {
-                return m_setBallsIsEnabled;
+                return m_setBallsMenuVisibility;
             }
             set
             {
-                m_setBallsIsEnabled = value;
-                RaisePropertyChanged("SetBallsIsEnabled");
-            }
-        }
-
-        public bool VoidAccountButtonIsEnabled
-        {
-            get { return m_voidAccountButtonIsEnabled; }
-            set
-            {
-                m_voidAccountButtonIsEnabled = value;
-                RaisePropertyChanged("VoidAccountButtonIsEnabled");
+                m_setBallsMenuVisibility = value;
+                RaisePropertyChanged("SetBallsMenuVisibility");
             }
         }
-
-        public bool VoidAccountYesNoButtonIsEnabled
+        
+        public bool YesNoVoidAccountDialogVisibility
         {
-            get { return m_voidAccountYesNoButtonIsEnabled; }
+            get
+            {
+                return m_yesNoVoidAccountDialogVisibility;
+            }
             set
             {
-                m_voidAccountYesNoButtonIsEnabled = value;
-                RaisePropertyChanged("VoidAccountYesNoButtonIsEnabled");
+                m_yesNoVoidAccountDialogVisibility = value;
+                RaisePropertyChanged("YesNoVoidAccountDialogVisibility");
             }
         }
 
@@ -206,14 +185,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return m_operators;
-            }
-            set
-            {
-                {
-                    m_operators = value;
-                    RaisePropertyChanged("Operators");
-                }
+                return m_controller.Operators;
             }
         }
 
@@ -243,53 +215,37 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public string SessionStatusMessage
+        public string SessionStartStatusMessage
         {
             get
             {
-                return m_sessionStatusMessage;
+                return m_sessionStartStatusMessage;
             }
             set
             {
-                if (m_sessionStatusMessage != value)
+                if (m_sessionStartStatusMessage != value)
                 {
-                    m_sessionStatusMessage = value;
-                    RaisePropertyChanged("SessionStatusMessage");
+                    m_sessionStartStatusMessage = value;
+                    RaisePropertyChanged("SessionStartStatusMessage");
                 }
             }
         }
 
-        //public string SessionStartStatusMessage
-        //{
-        //    get
-        //    {
-        //        return m_sessionStatusMessage;
-        //    }
-        //    set
-        //    {
-        //        if (m_sessionStatusMessage != value)
-        //        {
-        //            m_sessionStatusMessage = value;
-        //            RaisePropertyChanged("SessionStartStatusMessage");
-        //        }
-        //    }
-        //}
-
-        //public string SessionEndStatusMessage
-        //{
-        //    get
-        //    {
-        //        return m_sessionEndStatusMessage;
-        //    }
-        //    set
-        //    {
-        //        if (m_sessionEndStatusMessage != value)
-        //        {
-        //            m_sessionEndStatusMessage = value;
-        //            RaisePropertyChanged("SessionEndStatusMessage");
-        //        }
-        //    }
-        //}
+        public string SessionEndStatusMessage
+        {
+            get
+            {
+                return m_sessionEndStatusMessage;
+            }
+            set
+            {
+                if (m_sessionEndStatusMessage != value)
+                {
+                    m_sessionEndStatusMessage = value;
+                    RaisePropertyChanged("SessionEndStatusMessage");
+                }
+            }
+        }
 
         public string SessionSetBallStatusMessage
         {
@@ -321,28 +277,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-        public ObservableCollection<Session> SessionList
-        {
-            get { return m_sessionList; }
-            set
-            {
-                m_sessionList = value;
-                RaisePropertyChanged("SessionList");
-            }
-        }
-
-        public Session CurrentSession
-        {
-            get
-            {
-                return m_controller.Session;
-            }
-        }
-        
         #endregion
 
         #region Member Command Properties
+
         /// <summary>
         /// Gets or set the command to start a session
         /// </summary>
@@ -362,6 +300,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// Gets or ses the command to end a session
         /// </summary>
         public ICommand VoidAccountYesCommand { get; set; }
+
+        /// <summary>
+        /// Gets or ses the command to end a session
+        /// </summary>
+        public ICommand VoidAccountNoCommand { get; set; }
         #endregion
 
         #region Member Methods
@@ -372,71 +315,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 throw new ArgumentNullException();
 
             m_controller = controller;
-            PropertyChangedEventManager.AddListener(m_controller, this, string.Empty);        // Listen for changes to the parent and children.
+
+            // Listen for changes to the parent and children.
+            PropertyChangedEventManager.AddListener(m_controller, this, string.Empty);
             m_controller.SessionStartCompleted += OnStartDone;
             m_controller.SessionEndCompleted += OnEndDone;
             m_controller.SessionInfoCompleted += OnInfoDone;
             m_controller.SessionOperatorListCompleted += OnOperatorListDone;
             m_controller.GetSessionList();
+
             SelectedBalls = new List<int>(m_controller.GameBallList);
-            DisableB3Features();
-            EnableB3Features(controller.ModuleFeatureList);
 
-            if (m_controller.Session != null && m_controller.Session.Active)
-            {
-                SessionStatusMessage = Resources.SessionStarted;
-            }
-            else
-            {
-                SessionStatusMessage = Resources.SessionEnded;
-            }
+            UpdateSesion();
 
-        }
-
-        private void DisableB3Features()
-        {
-            StartSessionButtonVisibility = false;
-            EndSessionButtonVisibility = false;
-            SetBallsButtonVisibility = false;
-        }
-
-        private void EnableB3Features(IEnumerable featureIdL)
-        {
-            m_isUserPermissionBallCallSet = false;
-
-            if (featureIdL != null)
-            {
-                foreach (int featureId in featureIdL)
-                {
-                    if (featureId == 40)
-                    {
-                        m_hasStartSessionFeaturePermission = true;
-                    }
-                    else
-                        if (featureId == 41)
-                        {
-                            m_hasEndSessionFeaturePermission = true;
-                        }
-                        else
-                            if (featureId == 42)
-                            {
-                                m_isUserPermissionBallCallSet = true;
-
-                                if (Settings.IsCommonRngBallCall == false)
-                                {
-                                    SetBallsButtonVisibility = true;
-                                }
-                            }
-                }
-            }
+            SetBallsDisabledVisibility = Settings.IsCommonRngBallCall;
+            SetBallsMenuVisibility = !Settings.IsCommonRngBallCall;
+            
+            SessionEndStatusMessage = Resources.SessionEnded;
+            SessionStartStatusMessage = Resources.SessionStarted;
         }
 
         /// <summary>
         /// Notifies the controller to start a session.
         /// </summary>
-        private void StartSession()
+        private void Start()
         {
-            SessionStatusMessage = Resources.SessionStartProgress;
+            SessionStartStatusMessage = Resources.SessionStartProgress;
+            StartSessionDisabledVisibility = true;
 
             //if multioperator, then send selected operator
             //else send default operator
@@ -456,33 +361,41 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <summary>
         /// Notifies the controller to end a session.
         /// </summary>
-        private void EndSession()
+        private void End()
         {
-            SessionStatusMessage = Resources.SessionEndProgress;
+            SessionEndStatusMessage = Resources.SessionEndProgress;
+            EndSessionDisabledVisibility = true;
             m_controller.SessionEnd();
         }
 
         private void VoidAccounts()
         {
             GetOutstandingSessionTicketCount();
+            YesNoVoidAccountDialogVisibility = true;
         }
 
         private void VoidAccountsYes()
         {
             m_controller.VoidOutstandingSessionTickets();
+            YesNoVoidAccountDialogVisibility = false;
+        }
+
+        private void VoidAccountsNo()
+        {
+            YesNoVoidAccountDialogVisibility = false;
         }
 
         private void OnStartDone(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Error == null)
             {
-                SetIconStatus(true);
-                SessionStatusMessage = Resources.SessionStartSuccess;
+                IsSuccess = true;
+                ProgressMessage = Resources.SessionStartSuccess;
+
             }
             else
             {
-                SetIconStatus(false);
-                SessionStatusMessage = Resources.SessionStartFailed;
+                IsSuccess = false;
                 DisplayMessageBox(string.Format(Resources.SessionStartFailed, e.Error));
             }
         }
@@ -491,13 +404,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                SetIconStatus(true);
-                SessionStatusMessage = Resources.SessionEndSuccess;
+                IsSuccess = true;
             }
             else
             {
-                SetIconStatus(false);
-                SessionStatusMessage = Resources.SessionEndFailed;
+                IsSuccess = false;
                 DisplayMessageBox(string.Format(Resources.SessionEndFailed, e.Error));
             }
         }
@@ -506,30 +417,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (e.Error == null)
             {
-                SetIconStatus(true);
+                IsSuccess = true;
                 StatusMessage = Resources.SessionInfoSuccess;
-                UpdateSesionListUi();
-                UpdateSessionButtons();
             }
             else
             {
-                SetIconStatus(false);
-                SessionStatusMessage = Resources.SessionInfoFailed;
+                IsSuccess = false;
                 DisplayMessageBox(string.Format(Resources.SessionInfoFailed, e.Error));
             }
+
+            UpdateSesion();
         }
 
         private void OnOperatorListDone(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Error == null)
             {
-                Operators = m_controller.Operators;
+                IsSuccess = true;
                 StatusMessage = Resources.SessionOperatorListSuccess;
             }
             else
             {
-                SetIconStatus(false);
-                SessionStatusMessage = Resources.SessionOperatorListFailed;
+                IsSuccess = false;
                 DisplayMessageBox(Resources.SessionOperatorListFailed);
             }
         }
@@ -563,71 +472,86 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private void UpdateSesionListUi()
+        private void UpdateSesion()
         {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
+            if (m_controller.Session == null)
             {
-                SessionList.Clear();
-                foreach (var session in m_controller.Sessions.OrderByDescending(s => s.Number))
-                {
-                    SessionList.Add(session);
-                }
-            }));
-        }
+                SessionStartStatusMessage = string.Empty;
+                StartSessionDisabledVisibility = false;
 
-        private void UpdateSessionButtons()
-        {
-            if (m_controller.Session != null && m_controller.Session.Active)
+                SessionEndStatusMessage = Resources.SessionEndSuccess;
+                EndSessionDisabledVisibility = true;
+                return;
+            }
+
+            if (m_controller.Session.Active)
             {
-                StartSessionButtonVisibility = false;
-                EndSessionButtonVisibility = true;
-                VoidAccountButtonIsEnabled = false;
+                SessionStartStatusMessage = Resources.SessionStartSuccess;
+                StartSessionDisabledVisibility = true;
 
-                //if setting is set, then enable set ball button even though in a session
-                SetBallsIsEnabled = m_controller.Settings.AllowInSessBallChange;
-
+                SessionEndStatusMessage = string.Empty;
+                EndSessionDisabledVisibility = false;
             }
             else
             {
-                StartSessionButtonVisibility = true;
-                EndSessionButtonVisibility = false;
-                SetBallsIsEnabled = true;
-                VoidAccountButtonIsEnabled = true;
+                SessionStartStatusMessage = string.Empty;
+                StartSessionDisabledVisibility = false;
+
+                SessionEndStatusMessage = Resources.SessionEndSuccess;
+                EndSessionDisabledVisibility = true;
             }
+
         }
 
-        public void UpdateIsBallCallPermission(bool result)
+        public void UpdateStatusMessage()
         {
-            if (result == false && m_isUserPermissionBallCallSet)
+           // GetUpdatedOperatorList();
+
+            if (m_controller.Session == null)
             {
-                SetBallsButtonVisibility = true;
+                SessionStartStatusMessage = string.Empty;
+                StartSessionDisabledVisibility = false;
+
+                SessionEndStatusMessage = Resources.SessionEnded;
+                EndSessionDisabledVisibility = true;
+                return;
+            }
+
+            if (m_controller.Session.Active)
+            {
+                SessionStartStatusMessage = Resources.SessionStarted;
+                StartSessionDisabledVisibility = true;
+
+                SessionEndStatusMessage = string.Empty;
+                EndSessionDisabledVisibility = false;
             }
             else
             {
-                SetBallsButtonVisibility = false;
+                SessionStartStatusMessage = string.Empty;
+                StartSessionDisabledVisibility = false;
+
+                SessionEndStatusMessage = Resources.SessionEnded;
+                EndSessionDisabledVisibility = true;
             }
         }
 
         public void SetBalls(List<int> balls)
         {
+            SetBallsDisabledVisibility = true;
+            SessionSetBallStatusMessage = Resources.SessionSetBallsProgress;
+
             m_controller.SetBalls(balls);
             SelectedBalls = new List<int>(balls);
+
+            SetBallsDisabledVisibility = false;
+            SessionSetBallStatusMessage = string.Empty;
         }
 
         private void GetOutstandingSessionTicketCount()
         {
             var count = m_controller.GetOutstandingSessionTicketCount();
 
-            if (count == 0)
-            {
-                VoidAccountYesNoButtonIsEnabled = false;
-                OutstandingTicketCountMessage = Resources.NoOutstandingAccountsToVoidString;
-            }
-            else
-            {
-                VoidAccountYesNoButtonIsEnabled = true;
-                OutstandingTicketCountMessage = string.Format(Resources.VoidOutstandingAccountsYesNoString, count);
-            }
+            OutstandingTicketCountMessage = string.Format(Resources.VoidOutstandingAccountsYesNoString, count);
         }
 
         public void GetUpdatedOperatorList()
@@ -635,22 +559,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller.SessionOperatorList();
         }
 
-        private void SetIconStatus(bool success)
-        {
-            IsSuccess = success;
-            HasError = !success;
-            m_statusMessageTimer.Stop();
-            m_statusMessageTimer.Start();
-        }
-
-        private void StatusTimerElapsedHandler(object sender, EventArgs args)
-        {
-            //clear status
-            SessionStatusMessage = string.Empty;
-            HasError = false;
-            IsSuccess = false;
-            m_statusMessageTimer.Stop();
-        }
         #endregion
     }
 }
