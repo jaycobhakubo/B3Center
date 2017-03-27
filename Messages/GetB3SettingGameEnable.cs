@@ -49,8 +49,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                     int GameId = responseReader.ReadInt32();
                     bool IsEnabled = responseReader.ReadBoolean();
                     bool IsAllowed = responseReader.ReadBoolean();
-                    B3GameSetting B3GameSetting_ = new B3GameSetting(GameId, IsEnabled, IsAllowed);
-                    ListB3GameSetting.Add(B3GameSetting_);
+                    B3GameSetting settings = new B3GameSetting(GameId, IsEnabled, IsAllowed);
+                    ListB3GameSetting.Add(settings);
                 }            
             }
         }

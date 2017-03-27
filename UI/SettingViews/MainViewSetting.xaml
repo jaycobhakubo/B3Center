@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.SettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+                 xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
+             mc:Ignorable="d" 
+    xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+            >
+    <UserControl.Resources>
+        <Converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></Converter:BoolToVisibilityConvHidden>
+
+    </UserControl.Resources>
+    <Border >
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="ColumnSettings" Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1"  Style="{DynamicResource LightBlueBorder}"  Margin ="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0"  >
+                        <Border.Resources>
+                          
+                        </Border.Resources>
+                        <ContentPresenter Content="{Binding SelectedSettingView}" />
+                        <!--<local:GameSettingView ></local:GameSettingView>-->
+                    </Border>
+
+                    <Border Grid.Row="1"  Margin="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
+                                <Grid Grid.Column="1" Grid.Row="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Button  
+                                    Grid.Column="0"
+                                    Margin="15,15" Height="40" Width="140"     
+                                    Content="Save"
+                                    HorizontalAlignment="Right" 
+                                    x:Name="btnSave"
+                                    VerticalAlignment="Top"
+                                    Command="{Binding SaveSettingcmd}"  
+                                    IsEnabled="{Binding BtnSaveIsEnabled}"
+                                    Tag="1">
+                                    </Button>
+                                    <!--Content="{Binding IsEditOrSave}"-->
+                                    <!--Focusable="{Binding IsFocus,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
+
+                                    <Button 
+                                    Grid.Column="1"
+                                    Margin="15,15" Height="40" Width="140" 
+                                    Content="Cancel"
+                                    HorizontalAlignment="Left"                             
+                                    VerticalAlignment="Top"
+                                    Command="{Binding CancelSettingcmd}"  
+                                    IsEnabled="{Binding BtnSaveIsEnabled}"
+                                    Focusable="False"
+                                 />
+                                </Grid>
+                            </Border>
+                            <Border Visibility="{Binding IndicatorVisibility, Converter={StaticResource ConvertBooltoVisHidden}}" Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
+                                <Label                                                                                                     >
+                                    <Label.Style>
+                                        <Style  TargetType="Label" >
+                                            <Setter Property="Foreground" Value="Red"/>
+                                            <Setter Property="Content" Value="* Indicates a required field"/>
+                                       </Style>   
+                                        </Label.Style>
+                                    </Label>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+
+
+                <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--FontWeight="Regular"-->
+                    <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
+                        <ListBox                        
+                            Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
+                          </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
+
+<!--<ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >-->
+<!--<Label
+                                    Style="{x:Null}"
+                                    HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>-->

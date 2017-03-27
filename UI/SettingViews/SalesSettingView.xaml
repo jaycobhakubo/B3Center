@@ -4,176 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-                  d:DesignHeight="710" d:DesignWidth="674">
+               >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultDesignForCheckBox}"/>
-
-        <Style  TargetType="TextBox">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Text" Value="00.00"/>
-            <Setter Property="Height" Value="31"/>
-            <Setter Property="Padding" Value="8,0,0,0"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border SnapsToDevicePixels="True"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" >
-                            <ScrollViewer 
-                                x:Name="PART_ContentHost" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="Blue"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="False">
-                                <Setter Property="BorderBrush" Value="LightGray"/>
-                            </Trigger>
-
-                            <Trigger Property="IsReadOnly" Value="True">
-                                <Setter Property="Background" Value="LightGray"></Setter>
-                            </Trigger>
-
-                        </ControlTemplate.Triggers>
-
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Width" Value="Auto"/>
-            <Setter Property="Height" Value="18"/>
-            <Setter Property="Padding" Value="0"/>
-        </Style>
     </UserControl.Resources>
+    
     <Border>
-        <Grid Name="gridSalesSettings" GotFocus="Grid_GotFocus">
+        <Grid Name="gridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
                 <ColumnDefinition />
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="279"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition/>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <CheckBox Name="chkbxScreenCursor" Content="Screen Cursor" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Bottom" TabIndex="1" Tag="24" />
 
-            <CheckBox Name="chkbxAutoPrintSession" Content="Auto Print Session Report" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Bottom" TabIndex="2" Tag="26" />
-
-            <CheckBox Name="chkbxQuickSales" Content="Quick Sales" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Bottom" TabIndex="3" Tag="28" />
-
-            <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in Session Ball Change" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Bottom" Width="232" TabIndex="4" Tag="30" />
-
-            <CheckBox Name="chkbxPrintLogo" Content="Print Logo" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="9" VerticalAlignment="Bottom" TabIndex="5" Tag="29" />
-
-            <CheckBox Name="chkbxAutoPagePrinter" Content="Page Printer" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="11" VerticalAlignment="Bottom" TabIndex="6" Tag="27" />
-
-            <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate Touch" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="13" VerticalAlignment="Bottom" TabIndex="7" Tag="25" />
-                  
-            <CheckBox Name="chkbxLoggingEnable" Content="Logging Enable" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="15" VerticalAlignment="Bottom" TabIndex="8" Tag="31"  />
-
-            <Label x:Name="lblCallSpeedMin" Grid.Row="1" Grid.Column="3" Content="Main Vol" HorizontalAlignment="Left"    Width="66" Height="Auto"  VerticalAlignment="Top"/>
-            <ComboBox 
+            <StackPanel Name="stkpnlSalesSetting1" Grid.Row="1" Grid.Column="1">
+              
+                <Label x:Name="lblCallSpeedMin_Copy"  Content="Log recycle days"     />
+                <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"
+                    Name="txtbxLogRecycleDays"
+                    TextChanged="ValidateUserInput"                                          
+                    PreviewKeyDown="DontAllowThisKeyboardinput" 
+                    PreviewTextInput="_PreviewTextInput"          
+                    />
+                <Label x:Name="lblCallSpeedMin" Content="Sale main volume:" Style="{StaticResource B3DefaultStyleLabel}"/>
+                <ComboBox 
+                    ItemsSource="{Binding VolumeList}"
+                    SelectedItem="{Binding SalesSetting_.VolumeSales}"
             	x:Name="cmbxMainVolume" 
-            	Grid.Row="1" 
-            	Grid.Column="3" 
-            	 VerticalAlignment="Bottom"  TabIndex="9" Height="22" 
-            	FontWeight="Light" FontFamily="Segoe UI" Tag="33">
-            </ComboBox>
-          
-            <Label x:Name="lblCallSpeedMin_Copy" Grid.Row="3" Grid.Column="3" Content="Log Recycle Days" HorizontalAlignment="Left"  VerticalAlignment="Top"  Width="130"  Height="Auto"/>
-            <TextBox PreviewTextInput="txtbxNumericOnly_PreviewTextInput" Name="txtbxLogRecycleDays" Grid.Column="3"    Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" Padding="8,0,0,0" TabIndex="10" Tag="32" MaxLength="9" PreviewKeyDown="txtbxLogRecycleDays_PreviewKeyDown" />
+            	Tag="33">
+                </ComboBox>
+                <CheckBox IsChecked="{Binding SalesSetting_.ScreenCursor}" Name="chkbxScreenCursor" Content="Screen cursor"    Tag="24" />
+                <CheckBox Name="chkbxAutoPrintSession" Content="Auto print session report"    Tag="26" IsChecked="{Binding SalesSetting_.AutoPrintSessionReport}"/>
+                <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in session ball changes" Tag="30" IsChecked="{Binding SalesSetting_.AlowinSessionBall}"/>
+                <CheckBox Name="chkbxPrintLogo" Content="Print logo"   Tag="29" IsChecked="{Binding SalesSetting_.PrintLogo}"/>
+                <CheckBox Name="chkbxAutoPagePrinter" Content="Page printer"  Tag="27" IsChecked="{Binding SalesSetting_.PagePrinter}"/>
+                <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate touch"      Tag="25" IsChecked="{Binding SalesSetting_.CalibrateTouch}"/>
+                           
+            </StackPanel>
 
-            <Grid Grid.Row="18" Grid.ColumnSpan="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="5"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Border
-                        Grid.Row="0"
-                    	Height="43" 
-                    	Width="360"
-                    	HorizontalAlignment ="Right"
-                        VerticalAlignment="Bottom"
-                        >
-                    <ContentPresenter 
-                    		x:Name="SaveCancelTransition" 
-                    		Height="43" 
-                    		VerticalAlignment="Bottom" 
-                    		HorizontalAlignment="Left" Visibility="Hidden"/>
-                </Border>
-
-            </Grid>
-
-            <Grid Grid.Column="3" Grid.ColumnSpan="2">
-                <Label x:Name="lblSavedNotification"
-                            Background="#44658D"
-                               Foreground="White"
-                               FontStyle="Italic"
-                               FontWeight="ExtraLight"
-                                Grid.Column="5"
-                                Content="Saved Successfully"
-                                Padding="5,2,5,3"
-                                VerticalContentAlignment="Center"
-                                VerticalAlignment="Top" 
-                                HorizontalAlignment="Right"
-                               Style="{x:Null}"
-                               >
-
-                </Label>
-            </Grid>
-            <Label x:Name="lblNewOperator" Content="Sales" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" FontSize="26" Height="Auto" Width="163" Margin="0,7.5"/>
-
-
+            <StackPanel Name="stkpnlSalesSetting2" Grid.Column="3" Grid.Row="1">
+                <CheckBox Name="chkbxQuickSales" Content="Quick sales"   TabIndex="3" Tag="28" IsChecked="{Binding SalesSetting_.QuickSales}"/>
+                <CheckBox Name="chkbxLoggingEnable" Content="Logging enable"    TabIndex="8" Tag="31"  IsChecked="{Binding SalesSetting_.LoggingEnable}"/>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

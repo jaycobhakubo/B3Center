@@ -2,58 +2,75 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
-    public class GetB3AccountNumber
-    {
-        private bool m_result;
 
-        public GetB3AccountNumber(int SessNum)
+    public class GetB3AccountNumber : ServerMessage
+    {
+
+        private int m_SessionNumber;
+
+        public GetB3AccountNumber(int sessionNumber)
         {
-            m_result = false;
-            SqlConnection sc = new SqlConnection(Properties.Resources.SQLB3Connection);
-            try
+            AccountNumberList = new ObservableCollection<string>();
+            m_SessionNumber = sessionNumber;
+        }
+
+                /// <summary>
+        /// packs the request to send to the server
+        /// </summary>
+        /// <param name="requestWriter"></param>
+        protected override void PackRequest(BinaryWriter requestWriter)
+        {
+            requestWriter.Write(m_SessionNumber);
+        }
+      
+
+        /// <summary>
+        /// Parses the response received from the server.
+        /// </summary>
+        /// <param name="responseReader">The binary stream read that should
+        /// be use to read any response data necessary.</param>
+        protected override void UnpackResponse(BinaryReader responseReader)
+        {
+           
+            if (ReturnCode == ServerReturnCode.Success)
             {
 
-                sc.Open();
-                using (SqlCommand cmd = new SqlCommand(@"spB3_rptGetAccountNumber @SessNum", sc))
+                int count = responseReader.ReadInt16();
+
+                for (int i = 0; i < count; i++)
                 {
-                    AccountNumberList = new ObservableCollection<int>();
-                    cmd.Parameters.AddWithValue("SessNum", SessNum);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        int AccountNumber = (int)reader.GetInt32(0);
-                        AccountNumberList.Add(AccountNumber);
-                    }
-
-                    if (AccountNumberList.Count != 0)
-                    {
-                        m_result = true;
-                    }
+                    int AccountNumber = responseReader.ReadInt32();
+                    AccountNumberList.Add(AccountNumber.ToString());                   
                 }
             }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                sc.Close();
-            }
         }
 
-        public bool Result
+        public override int Id
         {
-            get { return m_result; }
-            set { m_result = value; }
+            get
+            {
+                return 39056;
+            }
         }
 
-        public ObservableCollection<int> AccountNumberList;
+        public override string Name
+        {
+            get
+            {
+                return "Get B3 Account Number";
+            }
+        }
 
+        public ObservableCollection<string> AccountNumberList
+        {
+            get;
+            set;
+        }
     }
 }

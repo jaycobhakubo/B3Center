@@ -32,7 +32,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
         private const int TotalNumberOfBalls = 75;
         private readonly int m_maxNumberOfGamePicks;
         private readonly int m_maxNumberOfBonusPicks;
-        private readonly bool m_enforceMix;
+        private bool m_enforceMix;
         private bool m_isBonusBalls;
         private bool m_isInEditMode;
 
@@ -79,24 +79,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
                 //var gButton = new ToggleButton { Content = (i + 45).ToString(), Style = Resources["GToggleButtonStyle"] as Style };
                 //var oButton = new ToggleButton { Content = (i + 60).ToString(), Style = Resources["OToggleButtonStyle"] as Style };
 
+                //initialize game balls user controls and set the offset
                 var bButton = new GameBallUserControl("B", i);
                 var iButton = new GameBallUserControl("I", i + 15);
                 var nButton = new GameBallUserControl("N", i + 30);
                 var gButton = new GameBallUserControl("G", i + 45);
                 var oButton = new GameBallUserControl("O", i + 60);
 
+                //add to dictionary for faster access
                 m_allGameNumbers.Add(bButton, i);
                 m_allGameNumbers.Add(iButton, i + 15);
                 m_allGameNumbers.Add(nButton, i + 30);
                 m_allGameNumbers.Add(gButton, i + 45);
                 m_allGameNumbers.Add(oButton, i + 60);
 
+                //attach events
                 bButton.Click += GameBallButton_Click;
                 iButton.Click += GameBallButton_Click;
                 nButton.Click += GameBallButton_Click;
                 gButton.Click += GameBallButton_Click;
                 oButton.Click += GameBallButton_Click;
 
+                //add balls user controls to the UI
                 BRow.Children.Add(bButton);
                 IRow.Children.Add(iButton);
                 NRow.Children.Add(nButton);
@@ -279,7 +283,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
             //hide game balls
             SetGameBallButton.Visibility = Visibility.Hidden;
 
-            InitializeBonusBalls();
+            //InitializeBonusBalls(); //DE13098 Dont show current bonus ball when trying to set up a new one.
+
+            //we need to disable the bonus ball button until they select the correct quantity
+            SetBonusBallButton.IsEnabled = false;
 
             //clear status message
             StatusMessageTextBlock.Text = string.Empty;
@@ -293,6 +300,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void SetBonusBallsButton_Click(object sender, RoutedEventArgs e)
         {
+            StatusMessageTextBlock.Text = Properties.Resources.SessionSetBallsProgress;
+
             var viewModel = SessionViewModel.Instance;
 
             Task.Factory.StartNew(() =>
@@ -312,6 +321,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
 
                     //set balls
                     viewModel.SetBalls(m_selectedGameNumbers);
+
 
                     //remove the extra balls added for the message
                     m_selectedGameNumbers.RemoveRange(24, TotalNumberOfBalls - 24);
@@ -335,7 +345,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
 
                         CountTextBlock.Text = string.Format("{0}/{1}", m_selectedGameNumbers.Count, m_maxNumberOfGamePicks);
                         //clear status message
-                        StatusMessageTextBlock.Text = string.Empty;
+                        StatusMessageTextBlock.Text = "Set balls successfully";
                     }));
 
                     m_isInEditMode = false;
@@ -347,6 +357,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
                     {
                         MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Properties.Resources.SessionSetBallsFailed, ex.Message),
                                         Properties.Resources.B3CenterName, MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+
+                        StatusMessageTextBlock.Text = string.Empty;
                     }));
 
                 }
@@ -502,15 +514,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
                         }
                     }
                 }
-            }
-
-            if (m_selectedBonusNumbers.Count == m_maxNumberOfBonusPicks)
-            {
-                SetBonusBallButton.IsEnabled = true;
-            }
-            else
-            {
-                SetBonusBallButton.IsEnabled = false;
             }
         }
 
@@ -836,6 +839,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
             }
         }
 
+        private void CloseWindowButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
         #endregion
+
     }
 }

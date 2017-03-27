@@ -20,6 +20,9 @@ using GameTech.Elite.Client.Modules.B3Center.UI;
 using GameTech.Elite.Client.Reports;
 using GameTech.Elite.Reports;
 using GameTech.Elite.UI;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
@@ -29,23 +32,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
     internal sealed class B3CenterController : Notifier, IEliteModuleController, IB3CenterController
     {
         #region Member Variables
-        private const int B3SessionChangedCommandId = 2030;
         private bool m_isInitialized;
-        private int m_instanceId = -1;
         private bool m_isBusy;
-
-        private B3CenterSettings m_settings;
-
-        private LoadingForm m_loadingForm;
-        private Window m_mainWindow;
-        private Window m_currentWindow;
-
+        private int m_instanceId = -1;
         private int m_staffId;
         private int m_operatorId;
         private int m_machineId;
-
         private B3Controller m_b3Controller;
         private MessageRouter m_msgRouter;
+        private B3CenterSettings m_settings;
+        private LoadingForm m_loadingForm;
+        private Window m_mainWindow;
+        private Window m_currentWindow;
+        private IEnumerable m_moduleFeaturesList;
+        private const int B3SessionChangedCommandId = 2030;
         #endregion
 
         #region Member Methods
@@ -114,6 +114,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             if(!LoadSettings(operatorId, machineId))
                 return IsInitialized;
+
+            if (!GetB3UserModulePermission())
+            {
+                return IsInitialized;
+            }
 
             if(!CreateLogger())
                 return IsInitialized;
@@ -299,15 +304,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             LoadingForm.Status = Resources.LoadingResources;
 
             new Application();
-
             try
             {
                 Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 Application.ResourceAssembly = Assembly.GetExecutingAssembly();
 
                 Application.Current.Resources.MergedDictionaries.Add(ThemeLoader.LoadTheme(Settings.DisplayMode));
+                if (Settings.DisplayMode != DisplayMode.Touch && Settings.DisplayMode != DisplayMode.TouchCompact)
+                {
+                    ResourceDictionary dictionary = new ResourceDictionary();
+                    dictionary.Source = new Uri("/Design/B3ResourceDictionary.xaml", UriKind.RelativeOrAbsolute);
+                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageWindow.Show(string.Format(CultureInfo.CurrentCulture, Resources.LoadResourceDictionariesFailed, ex.Message), Resources.B3CenterName, MessageWindowType.Close);
             }
@@ -340,6 +350,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             return true;
         }
+
+        private bool GetB3UserModulePermission()
+        {
+            try
+            {
+                var sendMessage = new GetStaffModuleFeaturesMessage(m_staffId, 247, 0);//247 is the ModuleID for B3Center (select * from daily.dbo.modules where modulename = 'B3 Center')
+                sendMessage.Send();
+
+                var TranferValueFromMessage = new List<int>();
+                foreach (int ModuleFeaturid in sendMessage.ModuleFeatures)  //If user has multiple position with same modulefeatures then do not re-add them. //Cant really filter it from GetStaffModulefeature.cs -> It may affect other module so Im doing it here.
+                {
+                    if (!TranferValueFromMessage.Exists(l => l == ModuleFeaturid))
+                    {
+                        TranferValueFromMessage.Add(ModuleFeaturid);
+                    }
+                }
+                m_moduleFeaturesList = TranferValueFromMessage;
+            }
+            catch(Exception ex)
+            {
+                MessageWindow.Show(string.Format(CultureInfo.CurrentCulture, Resources.GetSettingsFailed, ex.Message), Resources.B3CenterName, MessageWindowType.Close);
+                return false;
+            }       
+            return true;
+        }
     
 
         private void GetB3Settings()
@@ -353,7 +388,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 Settings.IsCommonRngBallCall = message.IsCommonRng;
                 Settings.AllowInSessBallChange = message.AllowInSessBallChange;
                 Settings.EnforceMix = message.EnforceMix;
-
+                Settings.IsDoubleAccount = message.IsDoubleAccount;
                 Settings.B3SettingGlobal_ = message.b3SettingGlobal;
 
             }
@@ -371,7 +406,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             if (message.ReturnCode == ServerReturnCode.Success)
             {
-                Settings.B3GameSetting_ = message.ListB3GameSetting;
+                Settings.B3GameSettings = message.ListB3GameSetting;
 
             }
             else
@@ -382,7 +417,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
         private void GetB3iconColor()
         {
-
             var message = new GetB3ColorIcon();
             message.Send();
 
@@ -399,7 +433,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         private void GetB3MathGamePlay()
         {
             var message = new GetB3MathGamePlay();
-            if (message.Result == true)
+            message.Send();
+
+            if (message.ReturnCode == ServerReturnCode.Success)
             {
                 Settings.B3GameMathPlay_ = message.ListB3MathGamePlay;
             }
@@ -794,6 +830,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             {
                 m_settings = value;
                 RaisePropertyChanged("Settings");
+            }
+        }
+
+        /// <summary>
+        /// Gets List of Module Features enable
+        /// </summary>
+        public IEnumerable ModuleFeatureList
+        {
+            get
+            {
+                return m_moduleFeaturesList;
+            }
+            private set
+            {
+                m_moduleFeaturesList = value;
+                RaisePropertyChanged("ModuleFeatureList");
             }
         }
 

@@ -18,10 +18,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             IsEnabled = isEnabled;
             IsAllowed = isAllowed;
         }
-        #endregion
 
+        public B3GameSetting()
+        {
+        }
+        #endregion
         #region Properties 
-        
+
         public int GameId
         {
             get;
@@ -61,7 +64,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         #endregion
-
         #region Properties
 
         public int B3SettingID
@@ -88,6 +90,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
+        public string B3SettingdefaultValue
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 
@@ -96,6 +104,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
     {
         #region Constructors
 
+        public B3IconColor()
+        {
+        }
+
         public B3IconColor(int colorID, string colorValue)
         {
             ColorID = colorID;
@@ -103,7 +115,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
         #endregion
-
         #region Properties
 
         public int ColorID
@@ -118,55 +129,44 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
+
+        public override string ToString()
+        {
+            return ColorValue;
+        }
+
         #endregion
 
     }
 
     public class B3MathGamePay
     {
-        //private int m_mathPackageID;
-        //private int m_gameID;
-        //private string  m_packageDesc;
-        //private bool m_isRNG;
-
         public B3MathGamePay()
         {
-
         }
 
         public int MathPackageID
         {
             get;
             set;
-            //get { return m_mathPackageID; }
-            //set { m_mathPackageID = value; }
         }
 
         public int GameID
         {
             get;
             set;
-            //get { return m_gameID; }
-            //set { m_gameID = value; }
         }
 
         public string PackageDesc
         {
             get;
             set;
-            //get { return m_packageDesc; }
-            //set { m_packageDesc = value; }
         }
 
         public bool IsRNG
         {
             get;
             set;
-            //get { return m_isRNG; }
-            //set { m_isRNG = value; }
         }
-
     }
-
-
 }

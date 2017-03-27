@@ -4,165 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-            d:DesignHeight="710" d:DesignWidth="674">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <Style TargetType="Button" BasedOn="{StaticResource FlatWhiteMediumButtonStyle}"/>
-        <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultDesignForCheckBox}"/>
-
-        <Style  TargetType="TextBox">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Text" Value="00.00"/>
-            <Setter Property="Height" Value="31"/>
-            <Setter Property="Padding" Value="8,0,0,0"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border SnapsToDevicePixels="True"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" >
-                            <ScrollViewer 
-                                x:Name="PART_ContentHost" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="Blue"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="False">
-                                <Setter Property="BorderBrush" Value="LightGray"/>
-                            </Trigger>
-
-                            <Trigger Property="IsReadOnly" Value="True">
-                                <Setter Property="Background" Value="LightGray"></Setter>
-                            </Trigger>
-
-                        </ControlTemplate.Triggers>
-
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Width" Value="Auto"/>
-            <Setter Property="Height" Value="18"/>
-            <Setter Property="Padding" Value="0"/>
-        </Style>
-    </UserControl.Resources>
+          >
     <Border>
-        <Grid Name="gridPlayerSetting" GotFocus="Grid_GotFocus">
+        <Grid Name="gridPlayerSetting"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
                 <ColumnDefinition />
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="279"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <CheckBox Name="chkbxScreenCursor"  Content="Screen Cursor" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Bottom" TabIndex="4" Tag="19"  />
-            <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate Touch" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Bottom" TabIndex="1" Tag="16" />
-            <CheckBox Name="chkbxAnnounceCall" Content="Announce Call" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Bottom" TabIndex="3" Tag="18" />
-            <CheckBox Name="chkbxPressToCollect"  Content="Press To Collect" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Bottom" TabIndex="2" Tag="17"  />
-            <ComboBox 
+
+
+            <StackPanel Name="stkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
+                <Label x:Name="lblCallSpeedMin_Copy2"  Content="Time to collect (milliseconds)"  />
+                <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting_.TimeToCollect}"
+                          Name="txtbxTimeToCollect"
+                           TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"          
+                          />
+
+                <Label x:Name="lblCallSpeedMin"  Content="Player main volume:" Style="{StaticResource B3DefaultStyleLabel}"/>
+                <ComboBox 
             	x:Name="cmbxMainVol" 
-            	Grid.Row="1" 
-            	Grid.Column="3" 
-            	HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="Auto" TabIndex="8" Height="22" 
-            	FontWeight="Light" FontFamily="Segoe UI" Tag="23">
-            </ComboBox>
-            <Label x:Name="lblCallSpeedMin" Grid.Row="1" Grid.Column="3" Content="Main Vol" HorizontalAlignment="Left"    Width="66" Height="Auto" Margin="0,0,0,32" VerticalAlignment="Stretch"/>
-            <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="9" VerticalAlignment="Bottom" TabIndex="5" Tag="21" />
-            <TextBox PreviewTextInput="txtbxNumericOnly_PreviewTextInput" Name="txtbxTimeToCollect" Grid.Column="1"    Grid.Row="13" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" TabIndex="7" Tag="20" MaxLength="9" PreviewKeyDown="txtbx_PreviewKeyDown" />
-            <Label x:Name="lblCallSpeedMin_Copy1" Grid.Row="11" Grid.Column="1" Content="Disclaimer Text ID" HorizontalAlignment="Left"    Width="130"/>
-            <TextBox Name="txtbxDisclaimerID" Grid.Column="1"   Grid.Row="11" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="" TabIndex="6" Tag="22" PreviewTextInput="txtbxNumericOnly_PreviewTextInput" MaxLength="9" PreviewKeyDown="txtbx_PreviewKeyDown" />
-            <Label x:Name="lblCallSpeedMin_Copy2" Grid.Row="13" Grid.Column="1" Content="Time To Collect (sec)"    />
+                  Tag="23"
+                        ItemsSource="{Binding VolumeList}"
+                    SelectedItem="{Binding PlayerSetting_.PlayerMainVolume}"
+                    >
 
-            <Grid Grid.Row="19" Grid.ColumnSpan="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="5"></RowDefinition>
-                </Grid.RowDefinitions>
+                </ComboBox>
 
-                <Border
-                        Grid.Row="0"
-                    	Height="43" 
-                    	Width="360"
-                    	HorizontalAlignment ="Right"
-                        VerticalAlignment="Bottom"
-                        >
-                    <ContentPresenter 
-                    		x:Name="SaveCancelTransition" 
-                    		Height="43" 
-                    		VerticalAlignment="Bottom" 
-                    		HorizontalAlignment="Left" Visibility="Hidden"/>
-                </Border>
-            </Grid>
-
-            <Grid Grid.Column="3" Grid.ColumnSpan="2">
-                <Label x:Name="lblSavedNotification"
-                            Background="#44658D"
-                               Foreground="White"
-                               FontStyle="Italic"
-                               FontWeight="ExtraLight"
-                                Grid.Column="5"
-                                Content="Saved Successfully"
-                                Padding="5,2,5,3"
-                                VerticalContentAlignment="Center"
-                                VerticalAlignment="Top" 
-                                HorizontalAlignment="Right"
-                               Style="{x:Null}"
-                               >
-
-                </Label>
-            </Grid>
-            <Label x:Name="lblNewOperator" Content="Player" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Center" FontSize="26" Height="Auto" Width="163" Margin="0,7.5"/>
+                <CheckBox Name="chkbxScreenCursor"  Content="Screen cursor"   Tag="19" IsChecked="{Binding PlayerSetting_.PlayerScreenCursor}"/>
+                <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate touch"   Tag="16" IsChecked="{Binding PlayerSetting_.PlayerCalibrateTouch}"/>
+                <CheckBox Name="chkbxAnnounceCall" Content="Announce call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
+                <CheckBox Name="chkbxPressToCollect"  Content="Press to collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
+                <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting_.Disclaimer}"/>
+            </StackPanel>
+        
+            <StackPanel Grid.Column="3">
+                <Label Content="B3 game enable:" Style="{StaticResource B3DefaultStyleLabel}"></Label>
+                <GroupBox  
+                    Style="{StaticResource B3StyleGroupBox2}"
+                    Margin="0,0,0,0"
+                    Padding="0,0,0,30">
+                    <GroupBox.Resources>
+                        <Style TargetType="{x:Type CheckBox}">
+                            <Setter Property="Margin" Value="30,30,0,0"></Setter>
+                        </Style>
+                    </GroupBox.Resources>
+                    <StackPanel >
+                        <CheckBox Content="Crazy Bout" IsChecked="{Binding PlayerSetting_.IsEnableCRAZYBOUT.IsEnabled}" ></CheckBox>
+                        <CheckBox Content="JailBreak" IsChecked="{Binding PlayerSetting_.IsEnableJAILBREAK.IsEnabled}"></CheckBox>
+                        <CheckBox Content="Maya Money" IsChecked="{Binding PlayerSetting_.IsEnableMAYAMONEY.IsEnabled}"></CheckBox>
+                        <CheckBox Content="76 Bingo" IsChecked="{Binding PlayerSetting_.IsEnableSPIRIT76.IsEnabled}"></CheckBox>
+                        <CheckBox Content="Time Bomb" IsChecked="{Binding PlayerSetting_.IsEnableTIMEBOMB.IsEnabled}"></CheckBox>
+                        <CheckBox Content="U kick Em" IsChecked="{Binding PlayerSetting_.IsEnableUKICKEM.IsEnabled}"></CheckBox>
+                        <CheckBox Content="WildFire w/Bonus" IsChecked="{Binding PlayerSetting_.IsEnableWILDBALL.IsEnabled}"></CheckBox>
+                        <CheckBox Content="WildFire" IsChecked="{Binding PlayerSetting_.IsEnableWILDFIRE.IsEnabled}"></CheckBox>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
         </Grid>
-
     </Border>
 </UserControl>

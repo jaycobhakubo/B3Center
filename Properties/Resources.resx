@@ -230,7 +230,7 @@ Reason: {0}</value>
     <value>Unable to download reports. {0}</value>
   </data>
   <data name="ErrorEndDateOccuresBeforStartDate" xml:space="preserve">
-    <value>The End Date Occurs Before the Start Date Date</value>
+    <value>The start date must be before the end date.</value>
   </data>
   <data name="ExitFullScreen" xml:space="preserve">
     <value>Exit Full Screen</value>
@@ -270,6 +270,21 @@ Reason: {0}</value>
 Would you like to void all outstanding accounts? </value>
   </data>
   <data name="SQLB3Connection" xml:space="preserve">
-    <value>Data Source=B3-Server;Initial Catalog=Daily;Persist Security Info=True;User ID=sa;Password=B3 beats the hell out of GRS!</value>
+    <value>Data Source=B3-Server;Initial Catalog=Daily;Persist Security Info=True;User ID=sqluser;Password=gly*cine83</value>
+  </data>
+  <data name="SQLGtiConnection" xml:space="preserve">
+    <value>Data Source=GtiServer;Initial Catalog=Daily;Persist Security Info=True;User ID=sqluser;Password=gly*cine83</value>
+  </data>
+  <data name="ErrorEndingCardOccuresBeforeStartingCard" xml:space="preserve">
+    <value>The starting card must be before the ending card.</value>
+  </data>
+  <data name="SesionEndActiveSessionString" xml:space="preserve">
+    <value>End Active Session</value>
+  </data>
+  <data name="SesionStartNewSessionString" xml:space="preserve">
+    <value>Start New Session</value>
+  </data>
+  <data name="NoOutstandingAccountsToVoidString" xml:space="preserve">
+    <value>There are no accounts to void</value>
   </data>
 </root>

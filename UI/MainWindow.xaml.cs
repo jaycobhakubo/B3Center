@@ -25,18 +25,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
     {
         #region Local Variables
 
-        private readonly GridLength m_originalMenuColumnWidth;
+        //private readonly GridLength m_originalMenuColumnWidth;
         private readonly  GridLength m_collapsedMenuColumnWidth = new GridLength(0);
         private readonly List<ToggleButton> m_menuItems;
-        private readonly SessionView m_sessionView;
+        private readonly MainViewSession m_sessionView;
         private readonly ReportsView m_reportsView;
         private readonly SettingView m_settingsView;
-        private B3Setting B3Setting;
         private  Button m_btnSave;
         private ToggleButton m_tglbtnOperator;
         private ToggleButton m_tglbtnGameSettings;
-        private Button m_btnShowMainMenu;
-        private Button m_btnShowMainMenu2;
+        private Button m_btnBackReports;
+        private Button m_btnBackSessions;
+        private Button m_btnBackSettings;
 
         #endregion
 
@@ -59,41 +59,59 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                 throw new ArgumentNullException("parent");
 
             InitializeComponent();
-            m_originalMenuColumnWidth = MenuColumn.Width;
+            //m_originalMenuColumnWidth = MenuColumn.Width;
 
             m_menuItems = new List<ToggleButton> 
             {
-                SessionToggleButton, 
-                ReportsToggleButton,
-                SettingsToggleButton
+                //SessionToggleButton, 
+                //ReportsToggleButton,
+                //SettingsToggleButton
             };
 
             //set datacontext
             DataContext = mainViewModel;
+            ParentController = parent;
 
-            //initialize views. MainViewModel contains ViewModels for rest of Views
-            m_sessionView = new SessionView { DataContext = mainViewModel.SessionVm };
-            m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
-            m_settingsView = new SettingView{DataContext = mainViewModel.SettingVm};          
-            m_reportsView.FullScreenEvent += ReportsViewOnFullScreenEvent;
-            m_reportsView.ExitScreenEvent += ReportsViewOnExitFullScreenEvent;            
-            ParentController = parent;         
+            m_sessionView = new MainViewSession { DataContext = mainViewModel.SessionVm };
+            //m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };
+            //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
+            //m_btnBackSessions = m_sessionView.btnBackSessions;
+            //m_btnBackSessions.Click += new RoutedEventHandler(m_btnBack_Click);
 
-            m_btnSave = m_settingsView.btnSave;
-            m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
 
-            m_tglbtnOperator = m_settingsView.OperatorSettingToggleButton;
-            m_tglbtnOperator.Checked += new RoutedEventHandler (m_tglbtnOperator_Checked);
+            //No need to initialize if staff dont have permission.
+            foreach (int moduleFeatureID in mainViewModel.ModuleFeatureList)
+            {
+                switch (moduleFeatureID)
+                {
+                    case 43://Reports
+                                //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };
+                                //m_reportsView.FullScreenEvent += ReportsViewOnFullScreenEvent;
+                                //m_reportsView.ExitScreenEvent += ReportsViewOnExitFullScreenEvent;    
 
-            m_tglbtnGameSettings = m_settingsView.GameSettingToggleButton;
-            m_tglbtnGameSettings.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
+                                //m_btnBackReports = m_reportsView.btnBackReports;
+                                //m_btnBackReports.Click += new RoutedEventHandler(m_btnBack_Click);
+                        break;
 
-            m_btnShowMainMenu = m_settingsView.btnbtnBackOperatorSetting;
-            m_btnShowMainMenu.Click += new RoutedEventHandler(m_btnShowMainMenu_Click);
+                    case 44://Settings
+                            //m_settingsView = new SettingView { DataContext = mainViewModel.SettingVm };   
 
-            m_btnShowMainMenu2 = m_settingsView.btnBackOperatorSettingFromGameSetting;
-            m_btnShowMainMenu2.Click += new RoutedEventHandler(m_btnShowMainMenu_Click);
-            B3Setting = new B3Setting();
+                            //m_btnSave = m_settingsView.btnSave;
+                            //m_btnSave.Click += new RoutedEventHandler(m_btnSave_Click);
+
+                            //m_tglbtnOperator = m_settingsView.OperatorSettingToggleButton;
+                            //m_tglbtnOperator.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
+
+                            //m_tglbtnGameSettings = m_settingsView.GameSettingToggleButton;
+                            //m_tglbtnGameSettings.Checked += new RoutedEventHandler(m_tglbtnOperator_Checked);
+
+                            //m_btnBackSettings = m_settingsView.btnBackSettings;
+                            //m_btnBackSettings.Click += new RoutedEventHandler(m_btnBack_Click);
+
+                        break;
+                }
+            }
+       
         }
 
          
@@ -119,7 +137,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ReportsViewOnExitFullScreenEvent(object sender, EventArgs eventArgs)
         {
-            MenuColumn.Width = m_originalMenuColumnWidth;
+            //MenuColumn.Width = m_originalMenuColumnWidth;
         }
 
         /// <summary>
@@ -129,7 +147,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ReportsViewOnFullScreenEvent(object sender, EventArgs eventArgs)
         {
-            MenuColumn.Width = m_collapsedMenuColumnWidth;
+            //MenuColumn.Width = m_collapsedMenuColumnWidth;
         }
 
         /// <summary>
@@ -147,27 +165,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
             }
 
             UserControl view = null;
+            //MenuColumn.Width = GridLength.Auto;
+            //brdrMenuColumn.Visibility = Visibility.Collapsed;
 
             switch (toggleButton.Name)
             {
 
 
                 case "SessionToggleButton":
-                    {
-                        m_sessionView.ClearSelected();
+                    {      
                         view = m_sessionView;
                         break;
                     }
                 case "ReportsToggleButton":
                     {
-                        m_reportsView.ClearSelected();
-                        view = m_reportsView;
+                  
+
                         break;
                     }
                     case "SettingsToggleButton":
                     {
-                        m_settingsView.ClearSelected();
-                        view = m_settingsView;
+                        //m_settingsView.ClearSelected();
+                        //view = m_settingsView;
                         break;
                    }
 
@@ -188,11 +207,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
                         menuItem.IsChecked = false;
                     }
                 }
-                MainWindowTransitionControl.Content = view;
+                //MainWindowTransitionControl.Content = view;
             }
             else
             {
-                MainWindowTransitionControl.Content = null;
+                //MainWindowTransitionControl.Content = null;
             }
         }
 
@@ -209,36 +228,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
             e.Cancel = !ParentController.Exit();
         }
 
-        /// <summary>
-        /// Handles the Click event of the CloseButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        void m_btnSave_Click(object sender, RoutedEventArgs e)
-        {           
-            ParentController.Settings.B3GameSetting_ = m_settingsView.B3_Setting.B3GameSetting_;
-        }
-
-        void m_btnShowMainMenu_Click(object sender, RoutedEventArgs e)
-        {  
-            MenuColumn.Width = new GridLength(200, GridUnitType.Pixel);
-            brdrMenuColumn.Visibility = Visibility.Visible;
-        }
+       
+     
        
 
-        private void m_tglbtnOperator_Checked(object sender, RoutedEventArgs e)
-        {   
-            MenuColumn.Width = GridLength.Auto;
-            brdrMenuColumn.Visibility = Visibility.Collapsed;
-        }
+      
 
 
-        #endregion
 
     }
 }
+#endregion

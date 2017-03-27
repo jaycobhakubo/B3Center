@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
@@ -9,7 +8,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
     /// <summary>
     /// Interaction logic for GameBallUserControl.xaml
     /// </summary>
-    public partial class GameBallUserControl : UserControl
+    public partial class GameBallUserControl
     {
         private BallType m_type;
         private bool m_isChecked;

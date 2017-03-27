@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.Shared.DatePickerUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style  TargetType="{x:Type TextBlock}">        
+        </Style>
+
+        <Style x:Key="showtime" TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}" >
+         
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowTime}" Value="true">
+                        <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                <DataTrigger Binding="{Binding ShowTime}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+            </Style>
+        
+    </UserControl.Resources>
+    <Grid> 
+        <Grid.RowDefinitions>
+            <RowDefinition  Name="DateGridRow"/>
+            <RowDefinition  Name="SpaceGridRow"/>
+            <RowDefinition  Name="TimeGridRow"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" Margin="0,0,2,0" ItemsSource="{Binding MonthList}" SelectedItem="{Binding SelectedMonth}" SelectionChanged="YearMonthList_SelectionChanged"/>
+            <ComboBox Grid.Column="1" Margin="2,0,2,0"  ItemsSource="{Binding DayOfMonthList}" SelectedItem="{Binding SelectedDay}"  SelectionChanged="DateList_SelectionChanged"/>
+            <ComboBox Grid.Column="2" Margin="2,0,0,0" ItemsSource="{Binding YearList}" SelectedItem="{Binding SelectedYear}" SelectionChanged="YearMonthList_SelectionChanged"></ComboBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Style="{StaticResource showtime}" Name="cmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}"  SelectionChanged="DateList_SelectionChanged">
+                </ComboBox>
+            <ComboBox Style="{StaticResource showtime}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}"  SelectionChanged="DateList_SelectionChanged"/>
+        </Grid>
+    </Grid>
+</UserControl>
