@@ -9,13 +9,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// <summary>
     /// Interaction logic for SalesSettingView.xaml
     /// </summary>
-    public partial class SalesSettingView : UserControl
+    public partial class SalesSettingView
     {
  
-        public SalesSettingView(SalesSettingVm SessionSettingVm)
+        public SalesSettingView(SalesSettingVm sessionSettingVm)
         {
             InitializeComponent();
-            DataContext = SessionSettingVm;
+            DataContext = sessionSettingVm;
         }
 
         private void ValidateUserInput(object sender, TextChangedEventArgs e)
@@ -32,7 +32,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 var tempResult = false;
                 int tempResultInt;
 
-                if (int.TryParse(txtbxLogRecycleDays.Text.ToString(), out tempResultInt))
+                if (int.TryParse(TxtbxLogRecycleDays.Text, out tempResultInt))
                 {                
                     tempResult = true;
                     var ii = SettingViewModel.Instance;
@@ -49,17 +49,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void DontAllowThisKeyboardinput(object sender, KeyEventArgs e)
         {
-            bool notAllow = false;
+            var notAllow = false;
 
-            if (e.Key == Key.Space)
+            switch (e.Key)
             {
-                notAllow = true;
+                case Key.Space:
+                    notAllow = true;
+                    break;
+                case Key.Back:
+                    break;
             }
-            else
-                if (e.Key == Key.Back)
-                {
-                    notAllow = false;
-                }
             e.Handled = notAllow;
         }
 

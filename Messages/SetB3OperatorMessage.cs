@@ -1,73 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Collections.ObjectModel;
+﻿using System.IO;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
     class SetB3OperatorMessage : ServerMessage
     {
-        private Operator m_operator_;
-        private int m_OperatorID;
-        private int m_isDelete;
+        private readonly Operator m_operator;
+        private int m_operatorId;
+        private readonly int m_isDelete;
 
-        public SetB3OperatorMessage(Operator operator_, int IsDelete)
+        public SetB3OperatorMessage(Operator currentOperator, int isDelete)
         {
-            m_operator_ = operator_;
-            m_isDelete = IsDelete;
+            m_operator = currentOperator;
+            m_isDelete = isDelete;
         }
 
         protected override void PackRequest(BinaryWriter requestWriter)
         {
-            requestWriter.Write(m_operator_.OperatorId);//0 New operator; # Update operator
+            requestWriter.Write(m_operator.OperatorId);//0 New operator; # Update operator
 
             requestWriter.Write((byte)m_isDelete);
 
-            requestWriter.Write((ushort)m_operator_.OperatorName.Length);
-            requestWriter.Write(m_operator_.OperatorName.ToCharArray());
+            requestWriter.Write((ushort)m_operator.OperatorName.Length);
+            requestWriter.Write(m_operator.OperatorName.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.OperatorNameDescription.Length);
-            requestWriter.Write(m_operator_.OperatorNameDescription.ToCharArray());
+            requestWriter.Write((ushort)m_operator.OperatorNameDescription.Length);
+            requestWriter.Write(m_operator.OperatorNameDescription.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.ContactName.Length);
-            requestWriter.Write(m_operator_.ContactName.ToCharArray());
+            requestWriter.Write((ushort)m_operator.ContactName.Length);
+            requestWriter.Write(m_operator.ContactName.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.Address.Length);
-            requestWriter.Write(m_operator_.Address.ToCharArray());
+            requestWriter.Write((ushort)m_operator.Address.Length);
+            requestWriter.Write(m_operator.Address.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.City.Length);
-            requestWriter.Write(m_operator_.City.ToCharArray());
+            requestWriter.Write((ushort)m_operator.City.Length);
+            requestWriter.Write(m_operator.City.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.State.Length);
-            requestWriter.Write(m_operator_.State.ToCharArray());
+            requestWriter.Write((ushort)m_operator.State.Length);
+            requestWriter.Write(m_operator.State.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.ZipCode.Length);
-            requestWriter.Write(m_operator_.ZipCode.ToCharArray());
+            requestWriter.Write((ushort)m_operator.ZipCode.Length);
+            requestWriter.Write(m_operator.ZipCode.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.PhoneNumber.Length);
-            requestWriter.Write(m_operator_.PhoneNumber.ToCharArray());
+            requestWriter.Write((ushort)m_operator.PhoneNumber.Length);
+            requestWriter.Write(m_operator.PhoneNumber.ToCharArray());
 
-            requestWriter.Write((ushort)m_operator_.FaxNumber.Length);
-            requestWriter.Write(m_operator_.FaxNumber.ToCharArray());
+            requestWriter.Write((ushort)m_operator.FaxNumber.Length);
+            requestWriter.Write(m_operator.FaxNumber.ToCharArray());
 
-            requestWriter.Write(m_operator_.IconColor);
+            requestWriter.Write(m_operator.IconColor);
         }
 
         protected override void UnpackResponse(BinaryReader responseReader)
         {
             if (ReturnCode == ServerReturnCode.Success)
             {
-                m_OperatorID = responseReader.ReadInt16();                   
+                m_operatorId = responseReader.ReadInt16();                   
             }
                      
         }
 
-        public int OperatorID
+        public int OperatorId
         {
-            get { return m_OperatorID; }
+            get { return m_operatorId; }
    
         }
 

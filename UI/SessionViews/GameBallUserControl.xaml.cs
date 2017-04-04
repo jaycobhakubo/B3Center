@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews

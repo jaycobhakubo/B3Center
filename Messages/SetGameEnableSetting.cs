@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using GameTech.Elite.Client.Modules.B3Center.Business;
 using System.IO;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
     internal class SetGameEnableSetting : ServerMessage
     {
-        private int m_gameID;
-        private bool m_enable;
+        private readonly int m_gameId;
+        private readonly bool m_enable;
 
 
         /// <summary>
         /// Gti Server Message
         /// </summary>
-        public SetGameEnableSetting(int GameID, bool Enable)
+        public SetGameEnableSetting(int gameId, bool enable)
         {    
-            m_gameID = GameID;
-            m_enable = Enable;
+            m_gameId = gameId;
+            m_enable = enable;
         }
 
         public override int Id
@@ -36,7 +30,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
         protected override void PackRequest(BinaryWriter requestWriter)
         {
-            requestWriter.Write(Convert.ToInt32(m_gameID));
+            requestWriter.Write(Convert.ToInt32(m_gameId));
             requestWriter.Write(Convert.ToByte(Convert.ToBoolean(m_enable)));
 
         }

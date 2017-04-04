@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 
@@ -24,11 +11,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// <summary>
     /// Interaction logic for GameSettingCrazyBoutView.xaml
     /// </summary>
-    public partial class GameSettingWildFire : UserControl
+    public partial class GameSettingWildFire
     {
         #region Variables(private)
 
-        private List<B3SettingGlobal> m_B3SettingCrazyBt = new List<B3SettingGlobal>();
+        private List<B3SettingGlobal> m_b3SettingCrazyBt = new List<B3SettingGlobal>();
         private int m_maxBetLevel;
         private int m_maxCards;
         private int m_callSpeed;
@@ -384,7 +371,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         /// <summary>
         /// Compare old value to the new value.
         /// </summary>
-        public List<SettingMember> ListOfSettingIDToBeUpdated(int gameId)
+        public List<SettingMember> ListOfSettingIdToBeUpdated(int gameId)
         {
             m_lB3Settings = new List<SettingMember>();
             //foreach (UIElement element in gridCrazyBout.Children)
@@ -407,7 +394,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             return m_lB3Settings;   
         }
 
-        private void SetAllControlsToComplyWithPayTable(int gameID)//Set all checkboxes to true if its a pay table changes.
+        private void SetAllControlsToComplyWithPayTable(int gameId)//Set all checkboxes to true if its a pay table changes.
         {
             //string NewValue;
             //string OldValue;
@@ -553,7 +540,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             return tempCallSpeed;
         }
 
-        private string GetCallSpeedEquivToDB(int callspeedvalue)
+        private string GetCallSpeedEquivToDb(int callspeedvalue)
         {
             string result = "";
             //switch (callspeedvalue)
@@ -572,7 +559,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             return result;
         }
 
-        private string GetOldValuesForComparison(int settingID)
+        private string GetOldValuesForComparison(int settingId)
         {
             string result = "";
             //switch (settingID)

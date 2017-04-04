@@ -1,10 +1,5 @@
 ﻿using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
@@ -12,12 +7,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         private ServerSetting m_serverSetting;
 
-        public ServerSettingVm(ServerSetting _serversetting)
+        public ServerSettingVm(ServerSetting serversetting)
         {
-             ServerSetting_ = _serversetting;
+            ServerSettings = serversetting;
         }
       
-        public ServerSetting ServerSetting_
+        public ServerSetting ServerSettings
         {
             get
             {
@@ -26,7 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set
             {
                 m_serverSetting = value;
-                RaisePropertyChanged("ServerSetting_");
+                RaisePropertyChanged("ServerSetting");
             }
         }     
     }

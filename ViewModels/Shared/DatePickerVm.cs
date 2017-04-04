@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
-using System.Windows.Controls;
-using System.Windows.Input;
-using GameTech.Elite.Client.Modules.B3Center.Helper;
 using System.Collections.ObjectModel;
-using GameTech.Elite.Reports;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 {
@@ -53,7 +48,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region CONSTRUCTOR
 
-        public DatePickerVm(DatePickerM datePickerModel, bool showTime )
+        public DatePickerVm(DatePickerM datePickerModel, bool showTime)
         {
          
             ShowTime = showTime;
@@ -69,7 +64,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
      
         private void PopulateItemList()
         {
-            var currentDateTime = DateTime.Now;
             MonthList = new ObservableCollection<string>(m_months);
             var cMonthint = DateTime.Now.Month;
             var cMonthName = m_months[cMonthint - 1];
@@ -89,15 +83,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             var cDaystring = m_dayOfMonthList[cDayint - 1];
             SelectedDay = cDaystring;
       
-                TimeList_ = m_hours.ToList();
+                TimeList = m_hours.ToList();
                 var hour = DateTime.Now.Hour % 12;
                 var hourString = m_timeList[hour];
                 SelectedTime = hourString;
 
                 AmpmList = m_amPm.ToList();
-                var AMPMindex = DateTime.Now.Hour > 11 ? 1 : 0;
-                var AMPMstring = m_ampmList[AMPMindex];
-                SelectedAmpm = AMPMstring;
+                var amPmIndex = DateTime.Now.Hour > 11 ? 1 : 0;
+                var amPmString = m_ampmList[amPmIndex];
+                SelectedAmpm = amPmString;
 
         }
 
@@ -156,8 +150,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         #region SELECTEDITEM (properties and private member)
 
-
-        private string m_selectedMonth;
         public string SelectedMonth
         {
             get { return DatepickerModel.DateMonthWord; }
@@ -169,7 +161,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         }
 
 
-        private string m_selectedYear;
         public string SelectedYear
         {
             get { return DatepickerModel.DateYearInt; }
@@ -181,7 +172,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         }
 
-        private string m_selectedDay;
         public string SelectedDay
         {
             get { return DatepickerModel.DateDayInt; }
@@ -193,7 +183,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         }
 
-        private string m_selectedTime;
         public string SelectedTime
         {
             get { return DatepickerModel.DateTimestring; }
@@ -204,13 +193,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             }
         }
 
-        private string m_selectedAmpm;
         public string SelectedAmpm
         {
-            get { return DatepickerModel.dateAMPM; }
+            get { return DatepickerModel.DateAmpm; }
             set
             {
-                DatepickerModel.dateAMPM = value;
+                DatepickerModel.DateAmpm = value;
                 RaisePropertyChanged("SelectedAmpm");
             }
         }
@@ -254,7 +242,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
         }
 
         private List<string> m_timeList;
-        public List<string> TimeList_
+        public List<string> TimeList
         {
             get { return m_timeList; }
             set
@@ -281,16 +269,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
 
         public void YearMonthSelectedChanged()
         {
-            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();         
-            updateItemDateSelected();
+            DayOfMonthList = GetNumOfDayInMonth().Select(i => i.ToString()).ToList();
         }
 
      
 
         public void DateSelectedChanged()
         {
-            
-            updateItemDateSelected();
         }
 
         public DateTime GetSelectedDate()
@@ -299,28 +284,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared
             DateTime.TryParse(DatepickerModel.DateFullwTime, out tempResult);
             return tempResult;
         }
-
-        private void updateItemDateSelected()
-        {
-            //var x = ReportParameterViewModel.Instance;
-            //if
-            //    (
-            //    x.RptParameterDataHandler.rptid == ReportId.B3AccountHistory
-            //    || x.RptParameterDataHandler.rptid == ReportId.B3BallCallByGame
-            //    || x.RptParameterDataHandler.rptid == ReportId.B3Jackpot
-            //    || x.RptParameterDataHandler.rptid == ReportId.B3Session
-            //            || x.RptParameterDataHandler.rptid == ReportId.B3SessionSummary
-            //            || x.RptParameterDataHandler.rptid == ReportId.B3SessionTransaction
-            //            || x.RptParameterDataHandler.rptid == ReportId.B3WinnerCards
-            //    )
-            //{
-                //var i = GetSelectedDate();
-            //    x.UpdateSessionList(i);
-            //}
-            //x.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
-        }
-
-       
 
         #endregion
 

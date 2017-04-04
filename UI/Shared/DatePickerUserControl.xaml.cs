@@ -9,14 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.Shared
 {
     /// <summary>
     ///     Interaction logic for DateTimePickerUserControl.xaml
     /// </summary>
-    public partial class DatePickerUserControl : UserControl
+    public partial class DatePickerUserControl
     {
         #region local variables
 

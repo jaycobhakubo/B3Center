@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
@@ -37,14 +33,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
                 for (int i = 0; i < count; i++)
                 {
-                    B3MathGamePay B3mathGamePlayData = new B3MathGamePay();
+                    B3MathGamePay b3MathGamePlayData = new B3MathGamePay
+                    {
+                        MathPackageId = responseReader.ReadInt32(),
+                        GameId = responseReader.ReadInt32(),
+                        PackageDesc = new string(responseReader.ReadChars(responseReader.ReadInt16())),
+                        IsRng = responseReader.ReadBoolean()
+                    };
 
-                    B3mathGamePlayData.MathPackageID = responseReader.ReadInt32();
-                    B3mathGamePlayData.GameID = responseReader.ReadInt32();
-                    B3mathGamePlayData.PackageDesc = new string(responseReader.ReadChars(responseReader.ReadInt16()));
-                    B3mathGamePlayData.IsRNG = responseReader.ReadBoolean();
-                    
-                    ListB3MathGamePlay.Add(B3mathGamePlayData); 
+
+                    ListB3MathGamePlay.Add(b3MathGamePlayData); 
                 }
             }
         }

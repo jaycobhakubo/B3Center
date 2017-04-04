@@ -4,23 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"        >
+             xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"        >
     <UserControl.Resources>
 
-        <Converter:ValueToBoolConverter x:Key="ValuetoBool"></Converter:ValueToBoolConverter>
-        <Converter:ValueDBToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></Converter:ValueDBToValueAppCallSpeed>
-        <Converter:ReverseBoolConverter x:Key="ConvertValue"></Converter:ReverseBoolConverter>
+        <converter:ValueDbToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></converter:ValueDbToValueAppCallSpeed>
 
         <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
-            <Setter Property="IsEnabled" Value="{Binding IsGameEnable, Converter={StaticResource ConvertValue}}" />
+            <Setter Property="IsEnabled" Value="{Binding IsGameEnable}" />
         </Style>
 
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
-            <Setter Property="IsReadOnly" Value="{Binding IsGameEnable}" />
+            <Setter Property="IsEnabled" Value="{Binding IsGameEnable}" />
         </Style>
     </UserControl.Resources>
     <Border>
-        <Grid Name="gridCrazyBout">
+        <Grid Name="GridCrazyBout">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -34,7 +32,7 @@
 
             <StackPanel Grid.Column="1">
                 <Label  Content="Game pay table"  />
-                <ComboBox Name="cmbxGamePayTable" Tag="58"
+                <ComboBox Name="CmbxGamePayTable" Tag="58"
                             ItemsSource="{Binding Settings.LGamePayTable}" 
                               DisplayMemberPath="PackageDesc"
                            SelectedValuePath="MathPackageID"   
@@ -43,31 +41,31 @@
 
                 <Label Content="Max bet level" />
                 <ComboBox 
-                Name="cmbxMaxBetLevel"  
+                Name="CmbxMaxBetLevel"  
                     ItemsSource="{Binding Settings.LMaxBetLevel}" 
                         SelectedItem="{Binding Settings.MaxBetLevel}"
                Tag="9"             
                 >
                 </ComboBox>
 
-                <Label x:Name="lblMaxCards"  Content="Max cards"/>
+                <Label x:Name="LblMaxCards"  Content="Max cards"/>
                 <ComboBox 
-                x:Name="cmbxMaxcards" 
+                x:Name="CmbxMaxcards" 
                  Tag="10"   ItemsSource="{Binding Settings.LMaxCards}" 
                     SelectedItem="{Binding Settings.MaxCards}">
                 </ComboBox>
 
-                <Label x:Name="lblCallSpeedMin"  Content="Call speed"   />
+                <Label x:Name="LblCallSpeedMin"  Content="Call speed"   />
                 <ComboBox 
-            	x:Name="cmbxCallSpeedMin" 
+            	x:Name="CmbxCallSpeedMin" 
                         ItemsSource="{Binding Settings.LCallSpeed}" 
                         SelectedItem="{Binding Settings.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="59"/>
               
             </StackPanel>
             <StackPanel Grid.Column="3">            
-                <CheckBox Name="chkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Settings.AutoPlay}"/>
-                <CheckBox  IsChecked="{Binding Settings.HideSerialNumber}" Name="chkbxHideSerialNumber" Content="Hide serial number"/>
+                <CheckBox Name="ChkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Settings.AutoPlay}"/>
+                <CheckBox  IsChecked="{Binding Settings.HideSerialNumber}" Name="ChkbxHideSerialNumber" Content="Hide serial number"/>
                 <!--<CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Settings.SingleOfferBonus}"/>-->
                 <!--<CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>-->
             </StackPanel>

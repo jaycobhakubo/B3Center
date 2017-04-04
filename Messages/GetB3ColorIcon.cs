@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 
@@ -39,9 +36,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
                 for (int i = 0; i < count; i++)
                 {
-                    int colorID = responseReader.ReadInt32();
+                    int colorId = responseReader.ReadInt32();
                     string colorDefinition = new string(responseReader.ReadChars(responseReader.ReadInt16()));
-                    B3IconColor b3IconColor = new B3IconColor(colorID, colorDefinition);
+                    B3IconColor b3IconColor = new B3IconColor(colorId, colorDefinition);
                     Listb3IconColor.Add(b3IconColor);                   
                 }
             }

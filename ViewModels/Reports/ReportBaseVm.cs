@@ -5,16 +5,11 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
 using CrystalDecisions.CrystalReports.Engine;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using GameTech.Elite.Reports;
-using SAPBusinessObjects.WPF.Viewer;
 using GameTech.Elite.Base;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
@@ -23,23 +18,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
     {
         #region Private Members
 
-        private ReportTemplateModel m_rptTemplateModel = new ReportTemplateModel();
-
         #endregion
 
         #region Constructors
 
-        public ReportBaseVm()
-        {
-        }
+        #endregion
 
         internal void Initialize(ReportTemplateModel rptTemplateModel)
         {
-            m_rptTemplateModel = rptTemplateModel;
         }
 
         private static volatile ReportBaseVm m_instance;
-        private static readonly object m_syncRoot = new Object();
+        private static readonly object m_syncRoot = new object();
 
         public static ReportBaseVm Instance
         {
@@ -57,152 +47,151 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Reports
                 return m_instance;
             }
         }
-        #endregion
 
         #region Methods
         private int GetMonthEquivValue(string monthName)
         {
             string monthname = monthName;
-            string[] m_months =
+            string[] months =
             {
                 "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
                 "Nov", "Dec"
             };
-            return Array.IndexOf(m_months, monthname) + 1;
+            return Array.IndexOf(months, monthname) + 1;
         }
 
-        public ReportDocument LoadReportDocument(B3Report Report)
+        public ReportDocument LoadReportDocument(B3Report report)
         {
             //Station is the machine Description of the machine. 
             //E.g machine ID 22 Description POS SALES
             //Since I cant find it. Ill just send the ID and just use subreport to get the machine description on Crystal report.
 
-            var userId = ReportVM.ReportTemplate_Model.CurrentUser;
-            var machineId = ReportVM.ReportTemplate_Model.CurrentMachine;
+            var userId = ReportVm.ReportTemplateModel.CurrentUser;
+            var machineId = ReportVm.ReportTemplateModel.CurrentMachine;
 
-            switch (Report.Id)
+            switch (report.Id)
             {
                 case ReportId.B3AccountHistory:
                     {
 
-                        Report.CrystalReportDocument.SetParameterValue("@P_Date_", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture)); //tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.RptParameterDataHandler.Date_*/
-                        Report.CrystalReportDocument.SetParameterValue("@SessionID_", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@AccountNumber", ReportVM.ParamVm.RptParameterDataHandler.b3AccountNumber);
+                        report.CrystalReportDocument.SetParameterValue("@P_Date_", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture)); //tempdate.Date.ToString(CultureInfo.InvariantCulture)); /*bcvm.parVm.RptParameterDataHandler.Date_*/
+                        report.CrystalReportDocument.SetParameterValue("@SessionID_", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@AccountNumber", ReportVm.ParamVm.RptParameterDataHandler.B3AccountNumber);
                         break;
                     }
                 case ReportId.B3Accounts:
                     {
 
-                        var testr = GetMonthEquivValue(ReportVM.ParamVm.MonthSelected) + 1;
-                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(ReportVM.ParamVm.MonthSelected));
-                        Report.CrystalReportDocument.SetParameterValue("@nYear", ReportVM.ParamVm.YearSelected.ToString(CultureInfo.InvariantCulture));
+                        GetMonthEquivValue(ReportVm.ParamVm.MonthSelected);
+                        report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(ReportVm.ParamVm.MonthSelected));
+                        report.CrystalReportDocument.SetParameterValue("@nYear", ReportVm.ParamVm.YearSelected.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3BallCallByGame:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@session", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateParameter", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@session", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@DateParameter", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
 
                     }
                 case ReportId.B3BallCallBySession:
                     {
-                        var startdate = ReportVM.ParamVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        var enddate = ReportVM.ParamVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        Report.CrystalReportDocument.SetParameterValue("@StartDate", startdate);
-                        Report.CrystalReportDocument.SetParameterValue("@EndDate", enddate);
+                        var startdate = ReportVm.ParamVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = ReportVm.ParamVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        report.CrystalReportDocument.SetParameterValue("@StartDate", startdate);
+                        report.CrystalReportDocument.SetParameterValue("@EndDate", enddate);
                         break;
                     }
                 case ReportId.B3BingoCardReport:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@startId", ReportVM.ParamVm.RptParameterDataHandler.b3StartingCard);
-                        Report.CrystalReportDocument.SetParameterValue("@endId", ReportVM.ParamVm.RptParameterDataHandler.b3EndingCard);
+                        report.CrystalReportDocument.SetParameterValue("@startId", ReportVm.ParamVm.RptParameterDataHandler.B3StartingCard);
+                        report.CrystalReportDocument.SetParameterValue("@endId", ReportVm.ParamVm.RptParameterDataHandler.B3EndingCard);
                         break;
                     }
                 case ReportId.B3Daily:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@SessionNum", null);
-                        Report.CrystalReportDocument.SetParameterValue("@UserId", ReportVM.ReportTemplate_Model.CurrentUser);
-                        Report.CrystalReportDocument.SetParameterValue("@Station", ReportVM.ReportTemplate_Model.CurrentMachine);
-                        Report.CrystalReportDocument.SetParameterValue("@DateTime", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@SessionNum", null);
+                        report.CrystalReportDocument.SetParameterValue("@UserId", ReportVm.ReportTemplateModel.CurrentUser);
+                        report.CrystalReportDocument.SetParameterValue("@Station", ReportVm.ReportTemplateModel.CurrentMachine);
+                        report.CrystalReportDocument.SetParameterValue("@DateTime", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Detail:
                     {
-                        var startdate = ReportVM.ParamVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        var enddate = ReportVM.ParamVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
-                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
+                        var startdate = ReportVm.ParamVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = ReportVm.ParamVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
+                        report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
                         break;
                     }
                 case ReportId.B3Drawer://No data: Issue on clientmac(This report need fix)
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@MachineID", machineId);
-                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
-                        Report.CrystalReportDocument.SetParameterValue("@nDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@UserId", ReportVM.ReportTemplate_Model.CurrentUser);
+                        report.CrystalReportDocument.SetParameterValue("@MachineID", machineId);
+                        report.CrystalReportDocument.SetParameterValue("@Station", machineId);
+                        report.CrystalReportDocument.SetParameterValue("@nDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@UserId", ReportVm.ReportTemplateModel.CurrentUser);
                         break;
                     }
                 case ReportId.B3Jackpot:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@nSessNum", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@UserId", userId);
-                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
-                        Report.CrystalReportDocument.SetParameterValue("@nDate", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@nSessNum", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@UserId", userId);
+                        report.CrystalReportDocument.SetParameterValue("@Station", machineId);
+                        report.CrystalReportDocument.SetParameterValue("@nDate", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Monthly:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(ReportVM.ParamVm.MonthSelected));
-                        Report.CrystalReportDocument.SetParameterValue("@nYear", ReportVM.ParamVm.YearSelected.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@nMonth", GetMonthEquivValue(ReportVm.ParamVm.MonthSelected));
+                        report.CrystalReportDocument.SetParameterValue("@nYear", ReportVm.ParamVm.YearSelected.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Session:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@SessionID", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateN", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@UserID", userId);
-                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
+                        report.CrystalReportDocument.SetParameterValue("@SessionID", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@DateN", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@UserID", userId);
+                        report.CrystalReportDocument.SetParameterValue("@Station", machineId);
                         break;
                     }
 
                 case ReportId.B3SessionSummary:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@SessionN", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateTime", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
-                        Report.CrystalReportDocument.SetParameterValue("@UserID", userId);
-                        Report.CrystalReportDocument.SetParameterValue("@Station", machineId);
+                        report.CrystalReportDocument.SetParameterValue("@SessionN", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@DateTime", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@UserID", userId);
+                        report.CrystalReportDocument.SetParameterValue("@Station", machineId);
                         break;
                     }
                 case ReportId.B3SessionTransaction:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@SessionNumber", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateTime", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@SessionNumber", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@DateTime", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
                 case ReportId.B3Void:
                     {
-                        var startdate = ReportVM.ParamVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        var enddate = ReportVM.ParamVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
-                        Report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
-                        Report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
+                        var startdate = ReportVm.ParamVm.StartDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        var enddate = ReportVm.ParamVm.EndDatePickerVm.DatepickerModel.DateFullwTime.ToString(CultureInfo.InvariantCulture);
+                        report.CrystalReportDocument.SetParameterValue("@dtStartDateTime", startdate);
+                        report.CrystalReportDocument.SetParameterValue("@dtEndDateTime", enddate);
                         break;
                     }
                 case ReportId.B3WinnerCards:
                     {
-                        Report.CrystalReportDocument.SetParameterValue("@SessionNum", ReportVM.ParamVm.RptParameterDataHandler.b3Session.Number);
-                        Report.CrystalReportDocument.SetParameterValue("@DateRun", ReportVM.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
+                        report.CrystalReportDocument.SetParameterValue("@SessionNum", ReportVm.ParamVm.RptParameterDataHandler.B3Session.Number);
+                        report.CrystalReportDocument.SetParameterValue("@DateRun", ReportVm.ParamVm.GetDate().Date.ToString(CultureInfo.InvariantCulture));
                         break;
                     }
             }
-            return Report.CrystalReportDocument;
+            return report.CrystalReportDocument;
         }
 
         #endregion
 
         #region Public Properties
 
-        public ReportTemplateViewModel ReportVM
+        public ReportTemplateViewModel ReportVm
         {
             get;
             set;

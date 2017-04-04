@@ -3,7 +3,7 @@
 // States and other countries.  All rights reserved.  Should publication occur
 // the following will apply:  © 2015 GameTech International, Inc.
 #endregion
-using System.Collections.Generic;
+
 using System.IO;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using System.Collections.ObjectModel;
@@ -29,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         /// be use to read any response data necessary.</param>
         protected override void UnpackResponse(BinaryReader responseReader)
         {
-            b3SettingGlobal = new ObservableCollection<B3SettingGlobal>();
+            B3SettingGlobal = new ObservableCollection<B3SettingGlobal>();
             if (ReturnCode == ServerReturnCode.Success)
             {
 
@@ -37,42 +37,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
                 for (int i = 0; i < count; i++)
                 {
-                    B3SettingGlobal b3settingglobal = new B3SettingGlobal();
-                    b3settingglobal.B3SettingID = responseReader.ReadInt32();
-                    b3settingglobal.B3SettingCategoryID = responseReader.ReadInt32();
-                    b3settingglobal.B3GameID = responseReader.ReadInt32();
-                    b3settingglobal.B3SettingValue = new string(responseReader.ReadChars(responseReader.ReadInt16()));   
-          
-                    switch (b3settingglobal.B3SettingID)
+                    B3SettingGlobal b3Settingglobal = new B3SettingGlobal
+                    {
+                        B3SettingId = responseReader.ReadInt32(),
+                        B3SettingCategoryId = responseReader.ReadInt32(),
+                        B3GameId = responseReader.ReadInt32(),
+                        B3SettingValue = new string(responseReader.ReadChars(responseReader.ReadInt16()))
+                    };
+
+
+                    switch (b3Settingglobal.B3SettingId)
                     {
                         case 52:
                             {
-                                IsMultiOperator = (b3settingglobal.B3SettingValue == "T") ? true : false;
+                                IsMultiOperator = b3Settingglobal.B3SettingValue == "T";
                                 break;
                             }
                         case 53:
                             {
-                                IsCommonRng = (b3settingglobal.B3SettingValue == "T") ? true : false;
+                                IsCommonRng = b3Settingglobal.B3SettingValue == "T";
                             break;
                             }
                         case 41:
                             {
-                                EnforceMix = (b3settingglobal.B3SettingValue == "T") ? true : false;
+                                EnforceMix = b3Settingglobal.B3SettingValue == "T";
                                 break;
                             }
                         case 30:
                             {
-                                AllowInSessBallChange = (b3settingglobal.B3SettingValue == "T") ? true : false;
+                                AllowInSessBallChange = b3Settingglobal.B3SettingValue == "T";
                                 break;
                             }
                         case 51:
                             {
-                                IsDoubleAccount = (b3settingglobal.B3SettingValue == "T") ? true : false;
+                                IsDoubleAccount = b3Settingglobal.B3SettingValue == "T";
                                 break;
                             }
                     }
 
-                    b3SettingGlobal.Add(b3settingglobal);
+                    B3SettingGlobal.Add(b3Settingglobal);
                 }        
             }
         }
@@ -99,7 +102,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         public bool EnforceMix { get; private set; }
         public bool IsDoubleAccount { get; private set; }
 
-        public ObservableCollection<B3SettingGlobal> b3SettingGlobal
+        public ObservableCollection<B3SettingGlobal> B3SettingGlobal
         {
             get;
             set;

@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
               xmlns:localReports="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.ReportViews"
-              xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+              xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
             >
     <UserControl.Resources>
-        <Converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></Converter:BoolToVisibilityConvHidden>
+        <converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></converter:BoolToVisibilityConvHidden>
         <Style TargetType="{x:Type StackPanel}">
             <Setter Property="Width" Value="279"/>
             <Setter Property="Orientation" Value="Vertical"/>
@@ -47,7 +47,7 @@
                         <ContentPresenter  Content="{Binding SelectedReportViewCol}"></ContentPresenter>
                     </Border>
 
-                    <Border Visibility="{Binding DefaultViewMode}" Grid.Row="1" Margin="8" Name="brdrViewPrint">
+                    <Border Visibility="{Binding DefaultViewMode}" Grid.Row="1" Margin="8" Name="BrdrViewPrint">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -55,10 +55,10 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                            <Border Grid.Row="0" x:Name="ErrBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
                                 <StackPanel Orientation="Horizontal">
-                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
-                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                    <Ellipse x:Name="ErrIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="TxtblckErr" FontWeight="Bold" />
                                 </StackPanel>
                             </Border>
 
@@ -72,7 +72,7 @@
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="View report"
                                 HorizontalAlignment="Right" 
-                                x:Name="btnSave"
+                                x:Name="BtnSave"
                                 VerticalAlignment="Top"
                                 Command="{Binding ViewReportCommand}"
                                 IsEnabled="{Binding ViewReportVisibility}"
@@ -82,10 +82,10 @@
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Print report"
                                 HorizontalAlignment="Left"
-                                Name="btnCancel" 
+                                Name="BtnCancel" 
                                 VerticalAlignment="Top"
                                             Command="{Binding PrintReportCommand}"
-                                IsEnabled="{Binding ElementName=btnSave, Path=IsEnabled}"
+                                IsEnabled="{Binding ElementName=BtnSave, Path=IsEnabled}"
                             />
                                     <!--Click="btnCancel_Click"-->
 
@@ -130,7 +130,7 @@
                                             </DataTrigger>
                 </Style.Triggers>
             </Style>-->
-            <Border Visibility="{Binding ElementName=brdrViewPrint, Path=Visibility}" Name="brdrSettingMenuCol" Width="192" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+            <Border Visibility="{Binding ElementName=BrdrViewPrint, Path=Visibility}" Name="BrdrSettingMenuCol" Width="192" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -138,7 +138,7 @@
                     <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                      
-                            Name="lstbx_ReportList" 
+                            Name="LstbxReportList" 
                             Margin="15"   
                             ItemsSource="{Binding ReportListCol}" 
                             SelectedItem="{Binding SelectedReportColl}" 

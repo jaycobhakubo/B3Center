@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GameTech.Elite.Base;
-using SAPBusinessObjects.WPF.Viewer;
+﻿using System.Collections.Generic;
 using System.Windows;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model

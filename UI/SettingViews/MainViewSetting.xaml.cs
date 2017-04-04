@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+﻿using System.Windows.Controls;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
-using GameTech.Elite.Client.Modules.B3Center.Business;
-using System.Linq;
-using System.Collections.ObjectModel;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {

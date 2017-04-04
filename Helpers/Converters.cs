@@ -6,9 +6,10 @@
 
 using System;
 using System.Globalization;
-using System.Windows.Data;
-using System.Windows;
 using System.Linq;
+using System.Windows;
+using System.Windows.Data;
+
 //Hello there
 namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 {
@@ -34,14 +35,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     public class BoolToVisibilityConv : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)//parameter true = revert valuek false do not revert
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)//parameter true = revert valuek false do not revert
         {           
             Visibility showControl = new Visibility();
             showControl = Visibility.Collapsed;
 
             if (value is bool)
             {
-                if ((bool)value == true)
+                if ((bool)value)
                 {
                     showControl = Visibility.Visible;
                 }
@@ -65,7 +66,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return showControl;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
@@ -74,14 +75,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     public class BoolToVisibilityConvHidden : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)//parameter true = revert valuek false do not revert
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)//parameter true = revert valuek false do not revert
         {
             Visibility showControl = new Visibility();
             showControl = Visibility.Hidden;
 
             if (value is bool)
             {
-                if ((bool)value == true)
+                if ((bool)value)
                 {
                     showControl = Visibility.Visible;
                 }        
@@ -89,7 +90,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return showControl;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
@@ -97,7 +98,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     public class ValueToBoolConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool tempresult = true;
             switch (value.ToString())
@@ -127,7 +128,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return tempresult;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string tempresult = "";
             var tempResult = (bool)value;
@@ -152,7 +153,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     public class ReverseBoolConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)//parameter true = revert valuek false do not revert
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)//parameter true = revert valuek false do not revert
         {
             bool tempResult = false;
             if (value is bool)
@@ -162,19 +163,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return tempResult;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
     }
 
-    public class ValueDBToValueAppCallSpeed : IValueConverter
+    public class ValueDbToValueAppCallSpeed : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int callSpeedValue;
 
-            if (System.Int32.TryParse(value.ToString(), out callSpeedValue))
+            if (int.TryParse(value.ToString(), out callSpeedValue))
             {
                 string tempCallSpeed = "";
                 if (callSpeedValue == 100) { tempCallSpeed = "10"; }
@@ -187,18 +188,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                 else if (callSpeedValue > 3040 && callSpeedValue <= 3530) { tempCallSpeed = "3"; }
                 else if (callSpeedValue > 3530 && callSpeedValue <= 4020) { tempCallSpeed = "2"; }
                 else if (callSpeedValue == 5000) { tempCallSpeed = "1"; }
-                return tempCallSpeed.ToString();
+                return tempCallSpeed;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int callspeedValue;
-            var x = System.Int32.TryParse(value.ToString(), out callspeedValue);
+            var x = int.TryParse(value.ToString(), out callspeedValue);
 
             string result = "";
             switch (callspeedValue)
@@ -220,7 +218,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
    
   public class ShowDefaultColumnDef : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             GridLength columnDefWidthValue = new GridLength();
             columnDefWidthValue = (GridLength)value;
@@ -230,13 +228,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             {
                 return new GridLength(0, GridUnitType.Auto); 
             }
-            else
-            {
-                return new GridLength(1, GridUnitType.Star);
-            }
+            return new GridLength(1, GridUnitType.Star);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
@@ -244,7 +239,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
     public class ValueToBoolForEmptyString : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result = true;
             if (value is string)
@@ -258,7 +253,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return result;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }

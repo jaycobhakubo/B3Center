@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.SqlClient;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
@@ -12,12 +7,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
     public class GetB3AccountNumber : ServerMessage
     {
 
-        private int m_SessionNumber;
+        private readonly int m_sessionNumber;
 
         public GetB3AccountNumber(int sessionNumber)
         {
             AccountNumberList = new ObservableCollection<string>();
-            m_SessionNumber = sessionNumber;
+            m_sessionNumber = sessionNumber;
         }
 
                 /// <summary>
@@ -26,7 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         /// <param name="requestWriter"></param>
         protected override void PackRequest(BinaryWriter requestWriter)
         {
-            requestWriter.Write(m_SessionNumber);
+            requestWriter.Write(m_sessionNumber);
         }
       
 
@@ -45,8 +40,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
                 for (int i = 0; i < count; i++)
                 {
-                    int AccountNumber = responseReader.ReadInt32();
-                    AccountNumberList.Add(AccountNumber.ToString());                   
+                    int accountNumber = responseReader.ReadInt32();
+                    AccountNumberList.Add(accountNumber.ToString());                   
                 }
             }
         }

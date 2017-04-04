@@ -29,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
         private List<int> m_originalSelectedBonusNumbers;
         private readonly List<int> m_randomlist;
 
-        private const int TotalNumberOfBalls = 75;
+        private const int TOTAL_NUMBER_OF_BALLS = 75;
         private readonly int m_maxNumberOfGamePicks;
         private readonly int m_maxNumberOfBonusPicks;
         private bool m_enforceMix;
@@ -70,7 +70,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
 
             m_randomlist = new List<int>();
 
-            for (int i = 1; i <= TotalNumberOfBalls / 5; i++)
+            for (int i = 1; i <= TOTAL_NUMBER_OF_BALLS / 5; i++)
             {
                 //game balls
                 //var bButton = new ToggleButton { Content = i.ToString(), Style = Resources["BToggleButtonStyle"] as Style };
@@ -324,7 +324,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SessionViews
 
 
                     //remove the extra balls added for the message
-                    m_selectedGameNumbers.RemoveRange(24, TotalNumberOfBalls - 24);
+                    m_selectedGameNumbers.RemoveRange(24, TOTAL_NUMBER_OF_BALLS - 24);
 
                     //set default
                     m_originalSelectedBonusNumbers = new List<int>(m_selectedBonusNumbers);

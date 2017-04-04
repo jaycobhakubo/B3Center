@@ -6,12 +6,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.OperatorViews"
              mc:Ignorable="d"                
-                xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+                xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
    >
     <UserControl.Resources>
-        <Converter:BoolToVisibilityConv x:Key="ConvertBooltoVis" ></Converter:BoolToVisibilityConv>
-        <Converter:ShowDefaultColumnDef x:Key="DefaultVal"></Converter:ShowDefaultColumnDef>
-        <Converter:ValueToBoolForEmptyString x:Key="ConvertStringToBool"></Converter:ValueToBoolForEmptyString>
+        <converter:BoolToVisibilityConv x:Key="ConvertBooltoVis" ></converter:BoolToVisibilityConv>
+        <converter:ShowDefaultColumnDef x:Key="DefaultVal"></converter:ShowDefaultColumnDef>
+        <converter:ValueToBoolForEmptyString x:Key="ConvertStringToBool"></converter:ValueToBoolForEmptyString>
 
         <Style
              TargetType="{x:Type Label}" BasedOn="{x:Null}">
@@ -43,8 +43,8 @@
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Name="ColumnSettings" Width="200"/>
-                <ColumnDefinition Style="{StaticResource ShowOperatorStyle}" Name="clmnDefShowOper"/>
-                <ColumnDefinition Width="{Binding ElementName=clmnDefShowOper, Path=Width, Converter={StaticResource DefaultVal}}"></ColumnDefinition>
+                <ColumnDefinition Style="{StaticResource ShowOperatorStyle}" Name="ClmnDefShowOper"/>
+                <ColumnDefinition Width="{Binding ElementName=ClmnDefShowOper, Path=Width, Converter={StaticResource DefaultVal}}"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Border  Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowOperator, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}">
@@ -69,7 +69,7 @@
                             </Style>
                         </Border.Resources>
                
-                        <Grid  Name="gridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
+                        <Grid  Name="GridCharity" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="279"/>
@@ -84,19 +84,19 @@
                             
                             <StackPanel Grid.Column="1" Grid.Row="1">
                                 <Label Content="Operator name:" Style="{StaticResource B3RequiredFieldLabelStyle}"/>
-                                <TextBox Name="txtbxOperatorName"  Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
+                                <TextBox Name="TxtbxOperatorName"  Text="{Binding  SelectedOperator.OperatorName}" MaxLength="18"/>
 
                                 <Label Content="Description:"  />
                                 <TextBox   Text="{Binding  SelectedOperator.OperatorNameDescription}" MaxLength="40" MaxLines="1" />
 
                                 <Label Content="Address:"    />
-                                <TextBox Name="txtbxAddress"  MaxLength="60" Text="{Binding  SelectedOperator.Address}"/>
+                                <TextBox Name="TxtbxAddress"  MaxLength="60" Text="{Binding  SelectedOperator.Address}"/>
 
                                 <Label Content="City:"  />
-                                <TextBox Name="txtbxCity"   MaxLength="15"  Text="{Binding  SelectedOperator.City}"/>
+                                <TextBox Name="TxtbxCity"   MaxLength="15"  Text="{Binding  SelectedOperator.City}"/>
 
                                 <Label  Content="State:"   />
-                                <TextBox x:Name="txtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
+                                <TextBox x:Name="TxtbxState"   MaxLength="15"   Text="{Binding  SelectedOperator.State}"/>
 
                                 <Label  Content="Zip code:" />
                                 <TextBox  MaxLength="5" Text="{Binding  SelectedOperator.ZipCode}"></TextBox>
@@ -104,19 +104,19 @@
 
                             <StackPanel Grid.Row="1" Grid.Column="3">
                                 <Label Content="Contact name:" />
-                                <TextBox Name="txtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
+                                <TextBox Name="TxtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
                    
                                 <Label Content="Phone number:" />
                                 <!--<TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>-->
-                                <TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=cmbxIconColor, Path=Height}"/>
+                                <TextBox  Name="TxtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=CmbxIconColor, Path=Height}"/>
                                 
                                 <Label Content="Fax number:"  />
-                                <TextBox Name="txtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
+                                <TextBox Name="TxtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
                                 
                                 <Label Content="Icon color:" />
                                 <ComboBox  
                                    
-                                    Name="cmbxIconColor" 
+                                    Name="CmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
                                           SelectedValuePath="ColorID"   
@@ -134,10 +134,10 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                            <Border Grid.Row="0" x:Name="ErrBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
                                 <StackPanel Orientation="Horizontal">
-                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
-                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                    <Ellipse x:Name="ErrIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="TxtblckErr" FontWeight="Bold" />
                                 </StackPanel>
                             </Border>
 
@@ -155,7 +155,7 @@
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Edit"
                                 HorizontalAlignment="Center" 
-                                x:Name="btnEdit"                                      
+                                x:Name="BtnEdit"                                      
                                 VerticalAlignment="Top"
                                 Command="{Binding SaveOperatorcmd}"   
                                 Visibility="{Binding IsEdit, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=false}"
@@ -166,18 +166,18 @@
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Save"
                                 HorizontalAlignment="Center" 
-                                x:Name="btnSave"
+                                x:Name="BtnSave"
                                 VerticalAlignment="Top"
                                  Command="{Binding SaveOperatorcmd}" 
                                 Visibility="{Binding IsEdit, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}"
-                                IsEnabled="{Binding ElementName=txtbxOperatorName, Path=Text, Converter={StaticResource ConvertStringToBool}}"  
+                                IsEnabled="{Binding ElementName=TxtbxOperatorName, Path=Text, Converter={StaticResource ConvertStringToBool}}"  
                                             Tag="1"></Button>
                                     <!--CANCEL-->
                                 <Button Grid.Column="2"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Cancel"
                                 HorizontalAlignment="Left"
-                                Name="btnCancel" 
+                                Name="BtnCancel" 
                                 VerticalAlignment="Top"
                                 Command="{Binding CancelCmd}"/>
                                     <!--Foreground="Red"-->
@@ -186,7 +186,7 @@
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Delete"
                                 HorizontalAlignment="Right"
-                                Name="btnDelete" 
+                                Name="BtnDelete" 
                                 VerticalAlignment="Top"                         
                                 Command="{Binding DeleteOperatorcmd}" 
                                   IsEnabled="{Binding IsEdit}"                          
@@ -206,7 +206,7 @@
 
 
 
-            <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+            <Border Name="BrdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -215,7 +215,7 @@
 
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox 
-                            Name="lstbx_OperatorList" 
+                            Name="LstbxOperatorList" 
                             Margin="15"                   
                             ItemsSource="{Binding Operators}" 
                             SelectedItem="{Binding SelectedOperator}"     

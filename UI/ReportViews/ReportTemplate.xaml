@@ -26,13 +26,13 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Path=ReportTitle}" Grid.Column="0"   />
             <Button 
-                Content="Close Report" 
+                Content="Close report" 
                 FontSize="12"   
                 Grid.Column="2"
                 Command="{Binding CloseViewReportCommand}" 
-                Visibility="{Binding ElementName=brdrReportViewer, Path=Visibility}"></Button>
+                Visibility="{Binding ElementName=BrdrReportViewer, Path=Visibility}"></Button>
         </Grid>
-        <Border x:Name="brdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}" >
+        <Border x:Name="BrdrReportViewer" Grid.Row="1"  Visibility="{Binding ReportViewerVisibility}" >
             <!--<ContentPresenter Content="{Binding CrViewer}" ></ContentPresenter>-->
             <viewer:CrystalReportsViewer 
                 x:Name="CrViewer"  
@@ -42,7 +42,7 @@
         </Border>
         <Grid Grid.Row="1">
             <Border  Visibility="{Binding ReportParameterVisible}">
-                    <local:ReportParameter DataContext="{Binding parVm}"></local:ReportParameter>
+                    <local:ReportParameter DataContext="{Binding ParamVm}"></local:ReportParameter>
             </Border>
         </Grid>
 

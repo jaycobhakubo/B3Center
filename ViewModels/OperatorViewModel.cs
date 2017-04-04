@@ -217,7 +217,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             var firstOrDefault = m_operatorColorList.FirstOrDefault();
             if (firstOrDefault != null)
-                SelectedOperator.IconColor = firstOrDefault.ColorID;
+                SelectedOperator.IconColor = firstOrDefault.ColorId;
 
             SelectedOperator.OperatorId = 0;
             SelectedOperator.OperatorName = string.Empty;
@@ -279,7 +279,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             if (SelectedOperator.OperatorId == 0)
             {
-                m_newOperatorId = msg.OperatorID;
+                m_newOperatorId = msg.OperatorId;
             }
         }
         

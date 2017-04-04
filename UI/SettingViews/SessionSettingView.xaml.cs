@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GameTech.Elite.Client.Modules.B3Center.Business;
-using GameTech.Elite.Client.Modules.B3Center.Messages;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 
@@ -25,10 +11,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// </summary>
     public partial class SessionSettingView : UserControl
     {
-        public SessionSettingView(SessionSettingVm SessionSettingVm)
+        public SessionSettingView(SessionSettingVm sessionSettingVm)
         {
             InitializeComponent();
-            DataContext = SessionSettingVm;
+            DataContext = sessionSettingVm;
         }
 
         private void ValidateUserInput(object sender, TextChangedEventArgs e)
@@ -43,11 +29,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             else//If its not empty then lets validate all values.
             {
                 var tempResult = false;
-                Int64 tempResultInt64;
+                long tempResultInt64;
       
-                if (Int64.TryParse(txtbxPayoutLimit.Text.ToString(), out tempResultInt64))
+                if (long.TryParse(TxtbxPayoutLimit.Text, out tempResultInt64))
                 {
-                    if (Int64.TryParse( txtbxJackpotlimit.Text.ToString(), out tempResultInt64))
+                    if (long.TryParse( TxtbxJackpotlimit.Text, out tempResultInt64))
                     {                        
                         tempResult = true;
                         var ii = SettingViewModel.Instance;

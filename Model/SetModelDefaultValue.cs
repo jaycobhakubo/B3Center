@@ -1,11 +1,6 @@
 ﻿using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model
 {
@@ -14,9 +9,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         public readonly ObservableCollection<B3GameSetting> B3SettingEnableDisablePreviousValue =  new ObservableCollection<B3GameSetting>();
         private readonly int m_gameCategoryId;
 
-        public SetModelDefaultValue(object value, int SettingCategoryId)
+        public SetModelDefaultValue(object value, int settingCategoryId)
         {
-            m_gameCategoryId = SettingCategoryId;     
+            m_gameCategoryId = settingCategoryId;     
            UnbindTheseCollection(value);                               
         }
 
@@ -32,9 +27,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
             }
         }
 
-        private void B3SettingGameEnableDisable(ObservableCollection<B3GameSetting> Collection_)
+        private void B3SettingGameEnableDisable(ObservableCollection<B3GameSetting> collection)
         {
-            foreach (var setting in Collection_)
+            foreach (var setting in collection)
             {
                 var x = new B3GameSetting() { GameId = setting.GameId, IsEnabled = setting.IsEnabled, IsAllowed = setting.IsAllowed };              
                 B3SettingEnableDisablePreviousValue.Add(x);

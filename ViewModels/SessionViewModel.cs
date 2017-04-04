@@ -49,7 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private bool m_setBallsIsEnabled;
         private B3Controller m_controller;
         private static volatile SessionViewModel m_instance;
-        private static readonly object m_syncRoot = new Object();
+        private static readonly object m_syncRoot = new object();
         private readonly Timer m_statusMessageTimer;
         #endregion
 

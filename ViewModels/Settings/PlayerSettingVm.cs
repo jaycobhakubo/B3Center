@@ -1,12 +1,8 @@
 ﻿using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
 
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
@@ -21,11 +17,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #endregion
         #region CONSTRUCTOR
 
-        public PlayerSettingVm(PlayerSettings _playerSetting, ObservableCollection<B3GameSetting> m_b3SettingEnableDisable_)
+        public PlayerSettingVm(PlayerSettings playerSetting, ObservableCollection<B3GameSetting> b3SettingEnableDisable)
         {
             VolumeList = Volume();
-            PlayerSetting_ = _playerSetting;
-            m_b3SettingEnableDisable = m_b3SettingEnableDisable_;
+            PlayerSetting = playerSetting;
+            m_b3SettingEnableDisable = b3SettingEnableDisable;
             AssignEnableSettingToGame();    
         }
 
@@ -35,54 +31,54 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public void RevertValueBack()
         {           
             AssignEnableSettingToGame();
-            PlayerSetting_ = m_playerSetting;
+            PlayerSetting = m_playerSetting;
         }
 
         private void AssignEnableSettingToGame()
         {     
-            foreach (var i in m_b3SettingEnableDisable)
+            foreach (var gameSettings in m_b3SettingEnableDisable)
             {
-                int b3gameid = i.GameId;
-                switch(b3gameid)
+                int b3Gameid = gameSettings.GameId;
+                switch(b3Gameid)
                 {
-                    case (int)B3Game.CRAZYBOUT: 
+                    case (int)B3Game.Crazybout: 
                         {
-                            m_playerSetting.IsEnableCRAZYBOUT = i;                       
+                            m_playerSetting.CrazyboutGameSetting = gameSettings;                       
                             break; 
                         }
-                    case (int)B3Game.JAILBREAK: 
+                    case (int)B3Game.Jailbreak: 
                         {
-                            m_playerSetting.IsEnableJAILBREAK = i;
+                            m_playerSetting.JailBreakGameSetting = gameSettings;
                             break;                         
                         }
-                    case (int)B3Game.MAYAMONEY:
+                    case (int)B3Game.Mayamoney:
                         {
-                            m_playerSetting.IsEnableMAYAMONEY = i;
+                            m_playerSetting.MayaMoneyGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.SPIRIT76: 
+                    case (int)B3Game.Spirit76: 
                         {
-                            m_playerSetting.IsEnableSPIRIT76 = i;
+                            m_playerSetting.Spirit76GameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.TIMEBOMB:
+                    case (int)B3Game.Timebomb:
                         {
-                            m_playerSetting.IsEnableTIMEBOMB = i;
+                            m_playerSetting.TimeBombGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.UKICKEM:
+                    case (int)B3Game.Ukickem:
                         {
-                            m_playerSetting.IsEnableUKICKEM =  i;
+                            m_playerSetting.UKickemGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.WILDBALL: 
+                    case (int)B3Game.Wildball: 
                         {
-                            m_playerSetting.IsEnableWILDBALL = i;
+                            m_playerSetting.WildBallGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.WILDFIRE: 
+                    case (int)B3Game.Wildfire: 
                         {
-                            m_playerSetting.IsEnableWILDFIRE = i;
+                            m_playerSetting.WildFireGameSetting = gameSettings;
                             break;
                         }
                 }
@@ -90,18 +86,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
         private List<string> Volume()
         {
-            List<string> result = new List<string>();
-            result.Add("0");
-            result.Add("1");
-            result.Add("2");
-            result.Add("3");
-            result.Add("4");
-            result.Add("5");
-            result.Add("6");
-            result.Add("7");
-            result.Add("8");
-            result.Add("9");
-            result.Add("10");
+            List<string> result = new List<string> {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
             return result;
         }
 
@@ -115,20 +100,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             get { return m_b3SettingEnableDisable; }
             set
             {
-                if (value != m_b3SettingEnableDisable)
+                if (m_b3SettingEnableDisable != null && value != m_b3SettingEnableDisable)
                 {
                     m_b3SettingEnableDisable = value;
                 }
             }
         }
 
-        public PlayerSettings PlayerSetting_
+        public PlayerSettings PlayerSetting
         {
             get { return m_playerSetting; }
             set
             {
                 m_playerSetting = value;
-                RaisePropertyChanged("PlayerSetting_");
+                RaisePropertyChanged("PlayerSetting");
             }
         }
         #endregion

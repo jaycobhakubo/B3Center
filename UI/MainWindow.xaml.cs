@@ -80,9 +80,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI
 
 
             //No need to initialize if staff dont have permission.
-            foreach (int moduleFeatureID in mainViewModel.ModuleFeatureList)
+            foreach (int moduleFeatureId in mainViewModel.ModuleFeatureList)
             {
-                switch (moduleFeatureID)
+                switch (moduleFeatureId)
                 {
                     case 43://Reports
                                 //m_reportsView = new ReportsView { DataContext = mainViewModel.ReportsVm };

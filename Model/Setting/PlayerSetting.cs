@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using GameTech.Elite.Client.Modules.B3Center.Business;
+﻿using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 {
@@ -15,29 +10,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public bool PlayerScreenCursor { get; set; }
         public string TimeToCollect { get; set; }
         public bool Disclaimer { get; set; }
-        public bool DisclaimerTextID { get; set; }
+        public bool DisclaimerTextId { get; set; }
         public string PlayerMainVolume { get; set; }
-
-        //public bool IsEnableCRAZYBOUT { get; set; }
-        //public bool IsEnableJAILBREAK { get; set; }
-        //public bool IsEnableMAYAMONEY { get; set; }
-        //public bool IsEnableSPIRIT76 { get; set; }
-        //public bool IsEnableTIMEBOMB { get; set; }
-        //public bool IsEnableUKICKEM { get; set; }
-        //public bool IsEnableWILDBALL { get; set; }
-        //public bool IsEnableWILDFIRE { get; set; }
-
-        public B3GameSetting IsEnableCRAZYBOUT { get; set; }
-        public B3GameSetting IsEnableJAILBREAK { get; set; }
-        public B3GameSetting IsEnableMAYAMONEY { get; set; }
-        public B3GameSetting IsEnableSPIRIT76 { get; set; }
-        public B3GameSetting IsEnableTIMEBOMB { get; set; }
-        public B3GameSetting IsEnableUKICKEM { get; set; }
-        public B3GameSetting IsEnableWILDBALL { get; set; }
-        public B3GameSetting IsEnableWILDFIRE { get; set; }
-
-        //public List<B3GameSetting> B3SettingEnableDisablePreviousValue { get; set; }
-
-
+        public B3GameSetting CrazyboutGameSetting { get; set; }
+        public B3GameSetting JailBreakGameSetting { get; set; }
+        public B3GameSetting MayaMoneyGameSetting { get; set; }
+        public B3GameSetting Spirit76GameSetting { get; set; }
+        public B3GameSetting TimeBombGameSetting { get; set; }
+        public B3GameSetting UKickemGameSetting { get; set; }
+        public B3GameSetting WildBallGameSetting { get; set; }
+        public B3GameSetting WildFireGameSetting { get; set; }
     }
 }

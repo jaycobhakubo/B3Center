@@ -4,7 +4,6 @@
 // the following will apply:  © 2011 GameTech International, Inc.
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business

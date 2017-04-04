@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+             xmlns:converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
                  xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
              mc:Ignorable="d" 
-    xmlns:Converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+    xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
             >
     <UserControl.Resources>
-        <Converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></Converter:BoolToVisibilityConvHidden>
+        <converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></converter:BoolToVisibilityConvHidden>
 
     </UserControl.Resources>
     <Border >
@@ -41,10 +41,10 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" x:Name="errBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
+                            <Border Grid.Row="0" x:Name="ErrBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
                                 <StackPanel Orientation="Horizontal">
-                                    <Ellipse x:Name="errIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
-                                    <Label x:Name="txtblckErr" FontWeight="Bold" />
+                                    <Ellipse x:Name="ErrIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Label x:Name="TxtblckErr" FontWeight="Bold" />
                                 </StackPanel>
                             </Border>
 
@@ -59,7 +59,7 @@
                                     Margin="15,15" Height="40" Width="140"     
                                     Content="Save"
                                     HorizontalAlignment="Right" 
-                                    x:Name="btnSave"
+                                    x:Name="BtnSave"
                                     VerticalAlignment="Top"
                                     Command="{Binding SaveSettingcmd}"  
                                     IsEnabled="{Binding BtnSaveIsEnabled}"
@@ -97,7 +97,7 @@
 
 
 
-                <Border Name="brdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
+                <Border Name="BrdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -105,7 +105,7 @@
                     <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                        
-                            Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
+                            Name="LstbxSettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
                           </ListBox>
                     </ScrollViewer>
                 </Grid>

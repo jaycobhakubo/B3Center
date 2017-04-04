@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-namespace GameTech.Elite.Client.Modules.B3Center.Business
+﻿namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
     public class B3GameSetting
     {
@@ -12,9 +6,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         /// <summary>
         /// Use to set value
         /// </summary>
-        public B3GameSetting(int gameID, bool isEnabled, bool isAllowed)
+        public B3GameSetting(int gameId, bool isEnabled, bool isAllowed)
         {
-            GameId = gameID;
+            GameId = gameId;
             IsEnabled = isEnabled;
             IsAllowed = isAllowed;
         }
@@ -51,12 +45,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
     {
         #region Constructor
 
-        public B3SettingGlobal(int B3SettingID_, int B3SettingCategoryID_, int B3GameID_, string B3SettingValue_)
+        public B3SettingGlobal(int b3SettingId, int b3SettingCategoryId, int b3GameId, string b3SettingValue)
         {
-            B3SettingID = B3SettingID_;
-            B3SettingCategoryID = B3SettingCategoryID_;
-            B3GameID = B3GameID_;
-            B3SettingValue = B3SettingValue_;
+            B3SettingId = b3SettingId;
+            B3SettingCategoryId = b3SettingCategoryId;
+            B3GameId = b3GameId;
+            B3SettingValue = b3SettingValue;
         }
 
         public B3SettingGlobal()
@@ -66,19 +60,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         #endregion
         #region Properties
 
-        public int B3SettingID
+        public int B3SettingId
         {
             get;
             set;
         }
 
-        public int B3SettingCategoryID
+        public int B3SettingCategoryId
         {
             get;
             set;
         }
 
-        public int B3GameID
+        public int B3GameId
         {
             get;
             set;
@@ -108,16 +102,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         {
         }
 
-        public B3IconColor(int colorID, string colorValue)
+        public B3IconColor(int colorId, string colorValue)
         {
-            ColorID = colorID;
+            ColorId = colorId;
             ColorValue = colorValue;
         }
 
         #endregion
         #region Properties
 
-        public int ColorID
+        public int ColorId
         {
             get;
             set;
@@ -141,17 +135,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
     public class B3MathGamePay
     {
-        public B3MathGamePay()
-        {
-        }
-
-        public int MathPackageID
+        public int MathPackageId
         {
             get;
             set;
         }
 
-        public int GameID
+        public int GameId
         {
             get;
             set;
@@ -163,7 +153,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
-        public bool IsRNG
+        public bool IsRng
         {
             get;
             set;

@@ -13,7 +13,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
         {
             InitializeComponent();
             DataContext = this;
-            txtbxStartingCard.GotFocus += delegate { txtbxStartingCard.Select(0, 0); };
+            TxtbxStartingCard.GotFocus += delegate { TxtbxStartingCard.Select(0, 0); };
         }
 
         private void SessionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -28,8 +28,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.ReportViews
 
         private void StartingCard_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var start = txtbxStartingCard.Text;
-            var end = txtbxEndingCard.Text;
+            var start = TxtbxStartingCard.Text;
+            var end = TxtbxEndingCard.Text;
             var reportParameterViewModel = (ReportParameterViewModel)DataContext;
 
             reportParameterViewModel.ValidateCard(start, end);

@@ -143,9 +143,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         public bool IsClassIIB3Enable { get; set; }
         public string PrinterName { get; private set; }
         public List<B3GameSetting> B3GameSettings = new List<B3GameSetting>();
-        public ObservableCollection<B3SettingGlobal> B3SettingGlobal_; //= new List<B3SettingGlobal>();
-        public List<B3IconColor> B3IconColor_ = new List<B3IconColor>();
-        public List<B3MathGamePay> B3GameMathPlay_ = new List<B3MathGamePay>();
+        public ObservableCollection<B3SettingGlobal> B3GlobalSettings; //= new List<B3SettingGlobal>();
+        public List<B3IconColor> B3IconColors = new List<B3IconColor>();
+        public List<B3MathGamePay> B3MathGamePays = new List<B3MathGamePay>();
 
         #endregion
     }

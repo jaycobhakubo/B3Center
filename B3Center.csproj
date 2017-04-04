@@ -264,14 +264,6 @@
     <Compile Include="ViewModels\Reports\ReportParameterVm.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingCrazyBoutVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingGameUkickEmVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingGameWildBallVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingGameWildfireVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingJailBreakVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingMayaMoneyVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingSpirit76Vm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingTimeBombVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVmAllGame.cs" />
     <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />

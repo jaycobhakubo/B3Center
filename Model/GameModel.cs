@@ -5,10 +5,7 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using GameTech.Elite.Base;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
@@ -18,13 +15,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
         #region Member Variables
         protected string m_name;
         #endregion
-
-        #region Constructors
-        public GameModel()
-        {
-        }
-        #endregion
-
+        
         #region Member Methods
         public abstract object Clone();
         #endregion

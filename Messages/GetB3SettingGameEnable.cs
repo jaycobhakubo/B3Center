@@ -46,10 +46,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
                 for (int i = 0; i < count; i++)
                 {
-                    int GameId = responseReader.ReadInt32();
-                    bool IsEnabled = responseReader.ReadBoolean();
-                    bool IsAllowed = responseReader.ReadBoolean();
-                    B3GameSetting settings = new B3GameSetting(GameId, IsEnabled, IsAllowed);
+                    int gameId = responseReader.ReadInt32();
+                    bool isEnabled = responseReader.ReadBoolean();
+                    bool isAllowed = responseReader.ReadBoolean();
+                    B3GameSetting settings = new B3GameSetting(gameId, isEnabled, isAllowed);
                     ListB3GameSetting.Add(settings);
                 }            
             }

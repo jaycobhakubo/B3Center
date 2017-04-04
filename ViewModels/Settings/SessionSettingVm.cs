@@ -1,9 +1,5 @@
 ﻿using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
@@ -11,12 +7,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         private SessionSetting m_sessionSetting;
 
-        public SessionSettingVm(SessionSetting _sessionSetting)
+        public SessionSettingVm(SessionSetting sessionSetting)
         {
-            SessionSetting_ = _sessionSetting;
+            SessionSettings = sessionSetting;
         }
 
-        public SessionSetting SessionSetting_
+        public SessionSetting SessionSettings
         {
             get
             {
@@ -25,7 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set
             {
                 m_sessionSetting = value;
-                RaisePropertyChanged("SessionSetting_");
+                RaisePropertyChanged("SessionSettings");
             }
         }
     }

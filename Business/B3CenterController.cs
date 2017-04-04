@@ -22,7 +22,6 @@ using GameTech.Elite.Reports;
 using GameTech.Elite.UI;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
@@ -312,8 +311,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 Application.Current.Resources.MergedDictionaries.Add(ThemeLoader.LoadTheme(Settings.DisplayMode));
                 if (Settings.DisplayMode != DisplayMode.Touch && Settings.DisplayMode != DisplayMode.TouchCompact)
                 {
-                    ResourceDictionary dictionary = new ResourceDictionary();
-                    dictionary.Source = new Uri("/Design/B3ResourceDictionary.xaml", UriKind.RelativeOrAbsolute);
+                    ResourceDictionary dictionary = new ResourceDictionary
+                    {
+                        Source = new Uri("/Design/B3ResourceDictionary.xaml", UriKind.RelativeOrAbsolute)
+                    };
                     Application.Current.Resources.MergedDictionaries.Add(dictionary);
                 }
             }
@@ -339,7 +340,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
                 GetB3Settings();
                 GetB3GamesEnable();
-                GetB3iconColor();
+                GetB3IconColor();
                 GetB3MathGamePlay();
             }
             catch(Exception ex)
@@ -358,15 +359,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 var sendMessage = new GetStaffModuleFeaturesMessage(m_staffId, 247, 0);//247 is the ModuleID for B3Center (select * from daily.dbo.modules where modulename = 'B3 Center')
                 sendMessage.Send();
 
-                var TranferValueFromMessage = new List<int>();
-                foreach (int ModuleFeaturid in sendMessage.ModuleFeatures)  //If user has multiple position with same modulefeatures then do not re-add them. //Cant really filter it from GetStaffModulefeature.cs -> It may affect other module so Im doing it here.
+                var tranferValueFromMessage = new List<int>();
+                foreach (int moduleFeaturid in sendMessage.ModuleFeatures)  //If user has multiple position with same modulefeatures then do not re-add them. //Cant really filter it from GetStaffModulefeature.cs -> It may affect other module so Im doing it here.
                 {
-                    if (!TranferValueFromMessage.Exists(l => l == ModuleFeaturid))
+                    if (!tranferValueFromMessage.Exists(l => l == moduleFeaturid))
                     {
-                        TranferValueFromMessage.Add(ModuleFeaturid);
+                        tranferValueFromMessage.Add(moduleFeaturid);
                     }
                 }
-                m_moduleFeaturesList = TranferValueFromMessage;
+                m_moduleFeaturesList = tranferValueFromMessage;
             }
             catch(Exception ex)
             {
@@ -389,7 +390,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 Settings.AllowInSessBallChange = message.AllowInSessBallChange;
                 Settings.EnforceMix = message.EnforceMix;
                 Settings.IsDoubleAccount = message.IsDoubleAccount;
-                Settings.B3SettingGlobal_ = message.b3SettingGlobal;
+                Settings.B3GlobalSettings = message.B3SettingGlobal;
 
             }
             else
@@ -415,14 +416,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
 
 
-        private void GetB3iconColor()
+        private void GetB3IconColor()
         {
             var message = new GetB3ColorIcon();
             message.Send();
 
             if (message.ReturnCode == ServerReturnCode.Success)
             {
-                Settings.B3IconColor_ = message.Listb3IconColor;
+                Settings.B3IconColors = message.Listb3IconColor;
 
             }
             else
@@ -437,7 +438,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
 
             if (message.ReturnCode == ServerReturnCode.Success)
             {
-                Settings.B3GameMathPlay_ = message.ListB3MathGamePlay;
+                Settings.B3MathGamePays = message.ListB3MathGamePlay;
             }
             else
             {

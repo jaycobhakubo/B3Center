@@ -9,7 +9,7 @@
     </UserControl.Resources>
     
     <Border>
-        <Grid Name="gridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
+        <Grid Name="GridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -17,38 +17,34 @@
                 <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <StackPanel Name="stkpnlSalesSetting1" Grid.Row="1" Grid.Column="1">
+            <StackPanel Name="StkpnlSalesSetting1" Grid.Column="1">
               
-                <Label x:Name="lblCallSpeedMin_Copy"  Content="Log recycle days"     />
-                <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting_.LogRecycleDays}"
-                    Name="txtbxLogRecycleDays"
+                <Label x:Name="LblCallSpeedMinCopy"  Content="Log recycle days"     />
+                <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting.LogRecycleDays}"
+                    Name="TxtbxLogRecycleDays"
                     TextChanged="ValidateUserInput"                                          
                     PreviewKeyDown="DontAllowThisKeyboardinput" 
                     PreviewTextInput="_PreviewTextInput"          
                     />
-                <Label x:Name="lblCallSpeedMin" Content="Sale main volume:" Style="{StaticResource B3DefaultStyleLabel}"/>
+                <Label x:Name="LblCallSpeedMin" Content="Sale main volume:" Style="{StaticResource B3DefaultStyleLabel}"/>
                 <ComboBox 
                     ItemsSource="{Binding VolumeList}"
-                    SelectedItem="{Binding SalesSetting_.VolumeSales}"
-            	x:Name="cmbxMainVolume" 
+                    SelectedItem="{Binding SalesSetting.VolumeSales}"
+            	x:Name="CmbxMainVolume" 
             	Tag="33">
                 </ComboBox>
-                <CheckBox IsChecked="{Binding SalesSetting_.ScreenCursor}" Name="chkbxScreenCursor" Content="Screen cursor"    Tag="24" />
-                <CheckBox Name="chkbxAutoPrintSession" Content="Auto print session report"    Tag="26" IsChecked="{Binding SalesSetting_.AutoPrintSessionReport}"/>
-                <CheckBox Name="chkbxAllowSessionBallChange" Content="Allow in session ball changes" Tag="30" IsChecked="{Binding SalesSetting_.AlowinSessionBall}"/>
-                <CheckBox Name="chkbxPrintLogo" Content="Print logo"   Tag="29" IsChecked="{Binding SalesSetting_.PrintLogo}"/>
-                <CheckBox Name="chkbxAutoPagePrinter" Content="Page printer"  Tag="27" IsChecked="{Binding SalesSetting_.PagePrinter}"/>
-                <CheckBox Name="chkbxCalibrateTouch" Content="Calibrate touch"      Tag="25" IsChecked="{Binding SalesSetting_.CalibrateTouch}"/>
+                <CheckBox IsChecked="{Binding SalesSetting.ScreenCursor}" Name="ChkbxScreenCursor" Content="Screen cursor"    Tag="24" />
+                <CheckBox Name="ChkbxAutoPrintSession" Content="Auto print session report"    Tag="26" IsChecked="{Binding SalesSetting.AutoPrintSessionReport}"/>
+                <CheckBox Name="ChkbxAllowSessionBallChange" Content="Allow in session ball changes" Tag="30" IsChecked="{Binding SalesSetting.AlowinSessionBall}"/>
+                <CheckBox Name="ChkbxPrintLogo" Content="Print logo"   Tag="29" IsChecked="{Binding SalesSetting.PrintLogo}"/>
+                <CheckBox Name="ChkbxAutoPagePrinter" Content="Page printer"  Tag="27" IsChecked="{Binding SalesSetting.PagePrinter}"/>
+                <CheckBox Name="ChkbxCalibrateTouch" Content="Calibrate touch"      Tag="25" IsChecked="{Binding SalesSetting.CalibrateTouch}"/>
                            
             </StackPanel>
 
-            <StackPanel Name="stkpnlSalesSetting2" Grid.Column="3" Grid.Row="1">
-                <CheckBox Name="chkbxQuickSales" Content="Quick sales"   TabIndex="3" Tag="28" IsChecked="{Binding SalesSetting_.QuickSales}"/>
-                <CheckBox Name="chkbxLoggingEnable" Content="Logging enable"    TabIndex="8" Tag="31"  IsChecked="{Binding SalesSetting_.LoggingEnable}"/>
+            <StackPanel Name="StkpnlSalesSetting2" Grid.Column="3">
+                <CheckBox Name="ChkbxQuickSales" Content="Quick sales"   TabIndex="3" Tag="28" IsChecked="{Binding SalesSetting.QuickSales}"/>
+                <CheckBox Name="ChkbxLoggingEnable" Content="Logging enable"    TabIndex="8" Tag="31"  IsChecked="{Binding SalesSetting.LoggingEnable}"/>
             </StackPanel>
         </Grid>
     </Border>

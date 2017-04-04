@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Helper
 {
     class CommandHandler : ICommand
     {
-        private Action m_action;
-        private bool m_canExecute;
+        private readonly Action m_action;
+        private readonly bool m_canExecute;
 
         public CommandHandler(Action action, bool canExecute)
         {

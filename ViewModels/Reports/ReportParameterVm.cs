@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model;
 using System.Windows;
 using GameTech.Elite.Reports;
-using GameTech.Elite.Client.Modules.B3Center.UI.Shared;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Shared;
 using GameTech.Elite.Client.Modules.B3Center.Model.Shared;
-using System.Windows.Input;
-using System.Text.RegularExpressions;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -21,15 +17,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
     {
         #region MEMBER VARIABLE
 
-        private DatePickerM m_datepickerModel;
-        private ObservableCollection<Session> AllSessionList;
-        private List<string> m_paramList;
         private ObservableCollection<string> m_accountList;
         private List<string> m_categoryList;
         private ObservableCollection<Session> m_sessionList;
-        private Session m_SelectedSession;
-        private string m_AccountSelected;
-        private string m_endingCard;
         private Visibility m_visibility;
         private ObservableCollection<string> m_months;
 
@@ -40,11 +30,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             m_accountList = new ObservableCollection<string>();
             m_sessionList = new ObservableCollection<Session>();
-            m_paramList = paramlist;
             RptParameterDataHandler = rptParameter;
             HideAllparameter();
             HideEnableParamControls(paramlist);
-            if (rptParameter.rptid == ReportId.B3AccountHistory)
+            if (rptParameter.Rptid == ReportId.B3AccountHistory)
             {
                 SelectedSessionChange();
             }
@@ -57,7 +46,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //This also trigger from codebehind ReportParameter.xaml.cs
         public void SelectedSessionChange()
         {
-            if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+            if (RptParameterDataHandler.Rptid == ReportId.B3AccountHistory)
             {
                 if (SelectedSession != null)
                 {
@@ -70,7 +59,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //Enable or disable view and print button.
         public void ValidateCard(string startingCard, string endingCard)
         {
-            bool ViewReportVisibility = false;
+            bool viewReportVisibility = false;
  
 
             int tempStartingCard;
@@ -79,50 +68,50 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var tempResultsc = int.TryParse(startingCard, out tempStartingCard); //Right now user can enter any character on the textbox 
             var tempResultec = int.TryParse(endingCard, out tempEndingCard);
 
-            if (tempResultec == true && tempResultsc == true)
+            if (tempResultec && tempResultsc)
             {
                 if (tempStartingCard > tempEndingCard)
                 {
-                    ViewReportVisibility = false;
+                    viewReportVisibility = false;
                 }
                 else
                 {
                     if (tempEndingCard == 0)
                     {
-                        ViewReportVisibility = false;
+                        viewReportVisibility = false;
                     }
                     else
                     {
-                        ViewReportVisibility = true;
+                        viewReportVisibility = true;
                     }
                 }
             }
             else
             {
-                ViewReportVisibility = false;
+                viewReportVisibility = false;
             }
 
             var ii = ReportsViewModel.Instance;
-            ii.ViewReportVisibility = ViewReportVisibility;
+            ii.ViewReportVisibility = viewReportVisibility;
         }
 
 
         //For all user validation (Enable or disable View and print button in the B3Report)
         public void CheckUserValidation()
         {
-            bool ViewReportVisibility = false;
+            bool viewReportVisibility = false;
 
-            switch (RptParameterDataHandler.rptid)
+            switch (RptParameterDataHandler.Rptid)
             {
                 case ReportId.B3AccountHistory://For account
                     {
                         if (AccountSelected != null)
                         {
-                            ViewReportVisibility = true;
+                            viewReportVisibility = true;
                         }
                         else
                         {
-                            ViewReportVisibility = false;
+                            viewReportVisibility = false;
                         }
                         break;
                     }
@@ -135,11 +124,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         if (SelectedSession != null)
                         {
-                            ViewReportVisibility = true;
+                            viewReportVisibility = true;
                         }
                         else
                         {
-                            ViewReportVisibility = false;
+                            viewReportVisibility = false;
                         }
                         break;
                     }
@@ -148,16 +137,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3BallCallBySession:
                 case ReportId.B3Void:
                     {
-                        DateTime TempStartDate = DateTime.Parse(StartDatePickerVm.DatepickerModel.DateFullwTime);//No need to check if its a date. It will always be a date
-                        DateTime TempEndDate = DateTime.Parse(EndDatePickerVm.DatepickerModel.DateFullwTime);
+                        DateTime tempStartDate = DateTime.Parse(StartDatePickerVm.DatepickerModel.DateFullwTime);//No need to check if its a date. It will always be a date
+                        DateTime tempEndDate = DateTime.Parse(EndDatePickerVm.DatepickerModel.DateFullwTime);
                         //Loop 28x
-                        if (TempStartDate > TempEndDate)
+                        if (tempStartDate > tempEndDate)
                         {
-                            ViewReportVisibility = false;
+                            viewReportVisibility = false;
                         }
                         else
                         {
-                            ViewReportVisibility = true;
+                            viewReportVisibility = true;
                         }
 
                         break;
@@ -167,22 +156,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case ReportId.B3Daily:
                 case ReportId.B3Accounts:
                     {
-                        ViewReportVisibility = true;
+                        viewReportVisibility = true;
                         break;
                     }
             }
 
-               if ( ReportId.B3BingoCardReport != RptParameterDataHandler.rptid)
+               if ( ReportId.B3BingoCardReport != RptParameterDataHandler.Rptid)
                     {
                         var ii = ReportsViewModel.Instance;
-                        ii.ViewReportVisibility = ViewReportVisibility;
+                        ii.ViewReportVisibility = viewReportVisibility;
                     }          
         }
 
         private bool IsShowTime()
         {
             bool result = false;
-            if (RptParameterDataHandler.rptid == ReportId.B3Detail || RptParameterDataHandler.rptid == ReportId.B3Void)
+            if (RptParameterDataHandler.Rptid == ReportId.B3Detail || RptParameterDataHandler.Rptid == ReportId.B3Void)
             {
                 result = true;
             }
@@ -208,8 +197,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
 
                 if (sessionStartDateTime.Year == selectedDateTime.Year &&
-                sessionStartDateTime.Month == selectedDateTime.Month &&
-                (sessionStartDateTime.Day <= selectedDateTime.Day && sessionEndDateTime.Day >= selectedDateTime.Day))
+                    sessionStartDateTime.Month == selectedDateTime.Month && sessionStartDateTime.Day <= selectedDateTime.Day && sessionEndDateTime.Day >= selectedDateTime.Day)
                 {
                     WorkInProgress = true;
                     m_sessionList.Add(session);
@@ -234,7 +222,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 IsSessionEnable = false;          
                 rptvm.SetLabelMessageToUser();
 
-                if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+                if (RptParameterDataHandler.Rptid == ReportId.B3AccountHistory)
                 {
                     m_accountList.Clear();
                     IsAccountEnable = false;
@@ -251,7 +239,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (SelectedSession != null)
             {
                 m_accountList.Clear();
-                if (RptParameterDataHandler.rptid == ReportId.B3AccountHistory)
+                if (RptParameterDataHandler.Rptid == ReportId.B3AccountHistory)
                 {
                     Messages.GetB3AccountNumber msg = new Messages.GetB3AccountNumber(SelectedSession.Number);
                     msg.Send();
@@ -285,13 +273,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                     case "Date":
                         {
-                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.B3DateData, false);
                             DateInput = Visibility.Visible;
                             break;
                         }
                     case "MonthYear":
                         {
-                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.b3DateData, false);
+                            DatePickerVm = new DatePickerVm(RptParameterDataHandler.B3DateData, false);
                             Months = DatePickerVm.MonthList;
                             MonthSelected = DatePickerVm.SelectedMonth;//m_months.FirstOrDefault();
                             Years = DatePickerVm.YearList;
@@ -361,7 +349,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public DateTime GetDate()
         {
             DateTime tempResult;
-            DateTime.TryParse(RptParameterDataHandler.b3DateData.DateFullwTime, out tempResult);
+            DateTime.TryParse(RptParameterDataHandler.B3DateData.DateFullwTime, out tempResult);
             return tempResult;
         }
         #endregion
@@ -416,17 +404,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
        
 
-        public DatePickerM datePickermModel
+        public DatePickerM DatePickermModel
         {
-            get { return RptParameterDataHandler.b3DateData; }
+            get { return RptParameterDataHandler.B3DateData; }
             set
             {
-                RptParameterDataHandler.b3DateData = value;
+                RptParameterDataHandler.B3DateData = value;
                 RaisePropertyChanged("datePickermModel");
             }
         }
 
-        public Visibility setVisibility
+        public Visibility SetVisibility
         {
             get { return m_visibility; }
             set
@@ -464,31 +452,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return RptParameterDataHandler.b3Session;
+                return RptParameterDataHandler.B3Session;
             }
             set
             {
-                RptParameterDataHandler.b3Session = value;
+                RptParameterDataHandler.B3Session = value;
                 RaisePropertyChanged("SelectedSession");
             }
         }
 
         public string StartingCard
         {
-            get { return RptParameterDataHandler.b3StartingCard; }
+            get { return RptParameterDataHandler.B3StartingCard; }
             set
             {
-                RptParameterDataHandler.b3StartingCard = value;      
+                RptParameterDataHandler.B3StartingCard = value;      
                 RaisePropertyChanged("StartingCard");             
             }
         }
 
         public string EndingCard
         {
-            get { return RptParameterDataHandler.b3EndingCard; }
+            get { return RptParameterDataHandler.B3EndingCard; }
             set
             {
-                RptParameterDataHandler.b3EndingCard = value;    
+                RptParameterDataHandler.B3EndingCard = value;    
                 RaisePropertyChanged("EndingCard");            
             }
         }
@@ -506,11 +494,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get
             {
-                return RptParameterDataHandler.b3AccountNumber;
+                return RptParameterDataHandler.B3AccountNumber;
             }
             set
             {
-                RptParameterDataHandler.b3AccountNumber = value;
+                RptParameterDataHandler.B3AccountNumber = value;
                 RaisePropertyChanged("AccountSelected");
             }
         }
@@ -585,69 +573,3 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
     }
 }
-
-#region REF(old script)
-//    class ReportParameterViewModel : ViewModelBase
-//    {
-
-//        private ReportParameterModel m_reportParameter = new ReportParameterModel();
-
-
-//        public ReportParameterViewModel(ReportParameterModel reportparamaterdata)
-//        {
-
-//            Months = Enum.GetNames(typeof(Month)).Where(m => m != Month.NotSet.ToString());
-
-//            DateDay = reportparamaterdata.dateDay;
-//            DateYear = reportparamaterdata.dateYear;
-//            B3Session = reportparamaterdata.b3Session;
-//            B3AccountNumber = reportparamaterdata.b3AccountNumber;
-//            B3Category = reportparamaterdata.b3Category;
-//            B3StartingCard = reportparamaterdata.b3StartingCard;
-//            B3EndingCard = reportparamaterdata.b3EndingCard;
-//            TimeHrMin = reportparamaterdata.timeHrMin;
-//            AMPM = reportparamaterdata.AMPM;
-
-
-//        }
-
-//        public ReportParameterModel ReportParameter
-//        {
-//            get { return m_reportParameter; }
-//            set { m_reportParameter = value; }
-//        }
-
-
-
-//        private int m_dateDay;
-//        public int DateDay { get; set; }
-
-//        private int m_dateYear;
-//        public int DateYear { get; set; }
-
-//        private int m_b3_Session;
-//        public int B3Session { get; set; }
-
-//        private int m_b3_AccountNumber;
-//        public int B3AccountNumber { get; set; }
-
-//        private string m_b3_Category;
-//        public string B3Category { get; set; }
-
-//        private int m_b3StartingCard;
-//        public int B3StartingCard { get; set; }
-
-//        private int m_b3EndingCard;
-//        public int B3EndingCard { get; set; }
-
-//        private string m_timeHrMin;
-//        public string TimeHrMin { get; set; }
-
-//        private string m_AMPM;
-//        public string AMPM { get; set; }
-
-
-
-//    }
-//}
-#endregion

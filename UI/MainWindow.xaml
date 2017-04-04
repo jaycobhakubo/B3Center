@@ -34,7 +34,7 @@
         </Style>
         <Style TargetType="GroupBox" BasedOn="{StaticResource B3StyleGroupBox1}"></Style>
     </ui:EliteWindowBase.Resources>
-    <DockPanel x:Name="m_layoutRoot">
+    <DockPanel x:Name="MLayoutRoot">
     
         <TabControl Focusable="False">
             <TabItem Header="Sessions">

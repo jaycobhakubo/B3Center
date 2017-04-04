@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
           >
     <Border>
-        <Grid Name="gridPlayerSetting"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
+        <Grid Name="GridPlayerSetting"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -19,30 +19,30 @@
             </Grid.RowDefinitions>
 
 
-            <StackPanel Name="stkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
-                <Label x:Name="lblCallSpeedMin_Copy2"  Content="Time to collect (milliseconds)"  />
-                <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting_.TimeToCollect}"
-                          Name="txtbxTimeToCollect"
+            <StackPanel Name="StkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
+                <Label x:Name="LblCallSpeedMinCopy2"  Content="Time to collect (milliseconds)"  />
+                <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting.TimeToCollect}"
+                          Name="TxtbxTimeToCollect"
                            TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
                          PreviewTextInput="_PreviewTextInput"          
                           />
 
-                <Label x:Name="lblCallSpeedMin"  Content="Player main volume:" Style="{StaticResource B3DefaultStyleLabel}"/>
+                <Label x:Name="LblCallSpeedMin"  Content="Player main volume:" Style="{StaticResource B3DefaultStyleLabel}"/>
                 <ComboBox 
-            	x:Name="cmbxMainVol" 
+            	x:Name="CmbxMainVol" 
                   Tag="23"
                         ItemsSource="{Binding VolumeList}"
-                    SelectedItem="{Binding PlayerSetting_.PlayerMainVolume}"
+                    SelectedItem="{Binding PlayerSetting.PlayerMainVolume}"
                     >
 
                 </ComboBox>
 
-                <CheckBox Name="chkbxScreenCursor"  Content="Screen cursor"   Tag="19" IsChecked="{Binding PlayerSetting_.PlayerScreenCursor}"/>
-                <CheckBox Name="chkbxCalibrateTouch"  Content="Calibrate touch"   Tag="16" IsChecked="{Binding PlayerSetting_.PlayerCalibrateTouch}"/>
-                <CheckBox Name="chkbxAnnounceCall" Content="Announce call"  Tag="18" IsChecked="{Binding PlayerSetting_.AnnounceCall	}"/>
-                <CheckBox Name="chkbxPressToCollect"  Content="Press to collect"   Tag="17" IsChecked="{Binding PlayerSetting_.PresstoCollect}"/>
-                <CheckBox Name="chkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting_.Disclaimer}"/>
+                <CheckBox Name="ChkbxScreenCursor"  Content="Screen cursor"   Tag="19" IsChecked="{Binding PlayerSetting.PlayerScreenCursor}"/>
+                <CheckBox Name="ChkbxCalibrateTouch"  Content="Calibrate touch"   Tag="16" IsChecked="{Binding PlayerSetting.PlayerCalibrateTouch}"/>
+                <CheckBox Name="ChkbxAnnounceCall" Content="Announce call"  Tag="18" IsChecked="{Binding PlayerSetting.AnnounceCall	}"/>
+                <CheckBox Name="ChkbxPressToCollect"  Content="Press to collect"   Tag="17" IsChecked="{Binding PlayerSetting.PresstoCollect}"/>
+                <CheckBox Name="ChkbxDisclaimer"  Content="Disclaimer"  Tag="21" IsChecked="{Binding PlayerSetting.Disclaimer}"/>
             </StackPanel>
         
             <StackPanel Grid.Column="3">
@@ -57,14 +57,14 @@
                         </Style>
                     </GroupBox.Resources>
                     <StackPanel >
-                        <CheckBox Content="Crazy Bout" IsChecked="{Binding PlayerSetting_.IsEnableCRAZYBOUT.IsEnabled}" ></CheckBox>
-                        <CheckBox Content="JailBreak" IsChecked="{Binding PlayerSetting_.IsEnableJAILBREAK.IsEnabled}"></CheckBox>
-                        <CheckBox Content="Maya Money" IsChecked="{Binding PlayerSetting_.IsEnableMAYAMONEY.IsEnabled}"></CheckBox>
-                        <CheckBox Content="76 Bingo" IsChecked="{Binding PlayerSetting_.IsEnableSPIRIT76.IsEnabled}"></CheckBox>
-                        <CheckBox Content="Time Bomb" IsChecked="{Binding PlayerSetting_.IsEnableTIMEBOMB.IsEnabled}"></CheckBox>
-                        <CheckBox Content="U kick Em" IsChecked="{Binding PlayerSetting_.IsEnableUKICKEM.IsEnabled}"></CheckBox>
-                        <CheckBox Content="WildFire w/Bonus" IsChecked="{Binding PlayerSetting_.IsEnableWILDBALL.IsEnabled}"></CheckBox>
-                        <CheckBox Content="WildFire" IsChecked="{Binding PlayerSetting_.IsEnableWILDFIRE.IsEnabled}"></CheckBox>
+                        <CheckBox Content="Crazy Bout" IsChecked="{Binding PlayerSetting.CrazyboutGameSetting.IsEnabled}"/>
+                        <CheckBox Content="JailBreak" IsChecked="{Binding PlayerSetting.JailBreakGameSetting.IsEnabled}"/>
+                        <CheckBox Content="Maya Money" IsChecked="{Binding PlayerSetting.MayaMoneyGameSetting.IsEnabled}"/>
+                        <CheckBox Content="76 Bingo" IsChecked="{Binding PlayerSetting.Spirit76GameSetting.IsEnabled}"/>
+                        <CheckBox Content="Time Bomb" IsChecked="{Binding PlayerSetting.TimeBombGameSetting.IsEnabled}"/>
+                        <CheckBox Content="U kick Em" IsChecked="{Binding PlayerSetting.UKickemGameSetting.IsEnabled}"/>
+                        <CheckBox Content="WildFire w/Bonus" IsChecked="{Binding PlayerSetting.WildBallGameSetting.IsEnabled}"/>
+                        <CheckBox Content="WildFire" IsChecked="{Binding PlayerSetting.WildFireGameSetting.IsEnabled}"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

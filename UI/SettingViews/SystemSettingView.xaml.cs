@@ -1,8 +1,4 @@
-﻿
-
-using System;
-using System.Text.RegularExpressions;
-using System.Windows;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
@@ -16,10 +12,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// </summary>
     public partial class SystemSettingView : UserControl
     {
-        public SystemSettingView(SystemSettingVm _systemSetting)
+        public SystemSettingView(SystemSettingVm systemSetting)
         {
             InitializeComponent();
-            DataContext = _systemSetting;
+            DataContext = systemSetting;
         }
 
 
@@ -36,38 +32,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             {
                 var tempResult = true;
                 int tempResultInt;
-                Int64 tempResultInt64;
+                long tempResultInt64;
                 string tempResultString;
 
 
-                tempResultString = txtbxSiteName.Text.ToString();//Do not allow whitespace on password
-                if (txtbxSiteName.Text.ToString().Contains(" "))
+                tempResultString = TxtbxSiteName.Text;//Do not allow whitespace on password
+                if (TxtbxSiteName.Text.Contains(" "))
                 {
-                    if (txtbxMagCardStart.Text.ToString().Contains(" "))
+                    if (TxtbxMagCardStart.Text.Contains(" "))
                     {
-                        if (txtbxMagCardStart.Text.ToString().Contains(" "))
+                        if (TxtbxMagCardStart.Text.Contains(" "))
                         {
                             tempResult = false;
                         }   
                     }                                   
                 }
 
-                if (tempResult == true)
+                if (tempResult)
                 {
                     var ii = SettingViewModel.Instance;
                     ii.BtnSaveIsEnabled = false;
                 }
 
 
-                if (Int64.TryParse(txtbxHandPayoutTrigger.Text.ToString(), out tempResultInt64))
+                if (long.TryParse(TxtbxHandPayoutTrigger.Text, out tempResultInt64))
                 {
-                    if (Int64.TryParse(txtbxVipPointPlayer.Text.ToString(), out tempResultInt64))
+                    if (long.TryParse(TxtbxVipPointPlayer.Text, out tempResultInt64))
                     {
-                        if (Int32.TryParse(txtbxPlayerpinLength.Text.ToString(), out tempResultInt))
+                        if (int.TryParse(TxtbxPlayerpinLength.Text, out tempResultInt))
                         {
-                            if (Int32.TryParse(txtbxRNGBallCallTime.Text.ToString(), out tempResultInt))
+                            if (int.TryParse(TxtbxRngBallCallTime.Text, out tempResultInt))
                             {
-                                if (Int32.TryParse(txtbxPlayerpinLength.Text.ToString(), out tempResultInt))
+                                if (int.TryParse(TxtbxPlayerpinLength.Text, out tempResultInt))
                                 {
                                     tempResult = true;
                                     var ii = SettingViewModel.Instance;

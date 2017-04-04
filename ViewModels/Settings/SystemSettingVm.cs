@@ -1,10 +1,6 @@
 ﻿using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
@@ -13,16 +9,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         private SystemSetting m_systemSetting;
 
-        public SystemSettingVm(SystemSetting _systemSetting)
+        public SystemSettingVm(SystemSetting systemSetting)
         {
             VolumeList = Volume();
             CurrencyList = GetCurrencyList();
             AutoSessionEndList = GetAutoSessionEndItemList();
-            SystemSetting_ = _systemSetting;
+            SystemSettings = systemSetting;
 
-            if (string.IsNullOrEmpty(SystemSetting_.AutoSessionEnd))
+            if (string.IsNullOrEmpty(SystemSettings.AutoSessionEnd))
             {
-                SystemSetting_.AutoSessionEnd = "OFF";
+                SystemSettings.AutoSessionEnd = "OFF";
             }
         }
 
@@ -44,7 +40,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set;
         }
 
-        public SystemSetting SystemSetting_
+        public SystemSetting SystemSettings
         {
             get
             {
@@ -53,48 +49,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set
             {
                 m_systemSetting = value;
-                RaisePropertyChanged("SystemSetting_");
+                RaisePropertyChanged("SystemSettings");
             }
         }
 
         private List<string> Volume()
         {
-            List<string> result = new List<string>();
-            result.Add("0");
-            result.Add("1");
-            result.Add("2");
-            result.Add("3");
-            result.Add("4");
-            result.Add("5");
-            result.Add("6");
-            result.Add("7");
-            result.Add("8");
-            result.Add("9");
-            result.Add("10");
+            List<string> result = new List<string> {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
             return result;
         }
 
         public static List<string> BetLevel()
         {
-            List<string> result = new List<string>();
-            result.Add("1");
-            result.Add("2");
-            result.Add("3");
-            result.Add("4");
-            result.Add("5");
-            result.Add("6");
-            result.Add("7");
-            result.Add("8");
-            result.Add("9");
-            result.Add("10");
+            List<string> result = new List<string> {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
             return result;
         }
 
         public static List<string> MaxCard()
         {
-            var result = new List<string>();
-            result.Add("4");
-            result.Add("6");
+            var result = new List<string> {"4", "6"};
             return result;
         }
 
@@ -102,42 +75,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
       
         private List<string> GetCurrencyList()
         {
-            List<string> CurrencyItems = new List<string>();
-            CurrencyItems.Add("CREDIT");
-            CurrencyItems.Add("DOLLAR");
-            CurrencyItems.Add("PESO");
-            CurrencyItems.Add("POUND");
-            return CurrencyItems;
+            List<string> currencyItems = new List<string> {"CREDIT", "DOLLAR", "PESO", "POUND"};
+            return currencyItems;
         }
 
 
         private List<string> GetAutoSessionEndItemList()
         {
-            List<string> AutoSessionEndItems = new List<string>();
-            AutoSessionEndItems.Add("JACKPOT");
-            AutoSessionEndItems.Add("PAYOUT");
-            AutoSessionEndItems.Add("OFF");
-            return AutoSessionEndItems;
-        }
-
-
-        private string GetCallSpeedEquivToDB(int callspeedvalue)
-        {
-            string result = "";
-            switch (callspeedvalue)
-            {
-                case 1: { result = "5000"; break; }
-                case 2: { result = "4020"; break; }
-                case 3: { result = "3530"; break; }
-                case 4: { result = "3040"; break; }
-                case 5: { result = "2550"; break; }
-                case 6: { result = "2060"; break; }
-                case 7: { result = "1570"; break; }
-                case 8: { result = "1080"; break; }
-                case 9: { result = "590"; break; }
-                case 10: { result = "100"; break; }
-            }
-            return result;
+            List<string> autoSessionEndItems = new List<string> {"JACKPOT", "PAYOUT", "OFF"};
+            return autoSessionEndItems;
         }
     }
 

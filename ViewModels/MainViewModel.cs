@@ -7,14 +7,10 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Collections.ObjectModel;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
-using GameTech.Elite.Client.Modules.B3Center.Business.GameModels;
 using GameTech.Elite.UI;
 using System.Collections;
-using System.Windows;
-using GameTech.Elite.Client.Modules.B3Center.Model;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -36,9 +32,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionVm = SessionViewModel.Instance;
             SessionVm.Initialize(controller.B3Controller); 
 
-            foreach (int moduleFeatureID in controller.ModuleFeatureList)     //No need to initialize if staff dont have permission.
+            foreach (int moduleFeatureId in controller.ModuleFeatureList)     //No need to initialize if staff dont have permission.
             {
-                switch (moduleFeatureID)
+                switch (moduleFeatureId)
                 {
                     case 43://Reports
                             ReportsVm = ReportsViewModel.Instance;
@@ -55,12 +51,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
 
             OperatorVm = OperatorViewModel.Instance;
-            OperatorVm.Initialize(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColor_);
+            OperatorVm.Initialize(controller.B3Controller.Operators, controller.B3Controller.Settings.B3IconColors);
             FileExitCommand = new RelayCommand(parameter => Exit());     
             PropertyChangedEventManager.AddListener(Controller, this, string.Empty);    
         }
 
-        private bool m_hasB3SettingPermission = false;
+        private bool m_hasB3SettingPermission;
         public bool HasB3SettingPermission
         {
             get { return m_hasB3SettingPermission; }
@@ -74,7 +70,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        private bool m_hasB3RptPermission = false;
+        private bool m_hasB3RptPermission;
         public bool HasB3RptPermission
         {
             get { return m_hasB3RptPermission; }

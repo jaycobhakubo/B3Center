@@ -1,22 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GameTech.Elite.Client.Modules.B3Center.Business;
-using GameTech.Elite.Client.Modules.B3Center.Messages;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
-using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
@@ -24,12 +9,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// <summary>
     /// Interaction logic for ServerGameSettingView.xaml
     /// </summary>
-    public partial class ServerGameSettingView : UserControl
+    public partial class ServerGameSettingView
     {
-     public ServerGameSettingView(ServerSettingVm ServerSettingViewModel)
+     public ServerGameSettingView(ServerSettingVm serverSettingViewModel)
         {
             InitializeComponent();
-            DataContext = ServerSettingViewModel;
+            DataContext = serverSettingViewModel;
         }
 
          private void ValidateUserInput(object sender, TextChangedEventArgs e)
@@ -45,24 +30,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
              { 
                 var tempResult = false;
                  int tempResultInt;
-                 Int64 tempResultInt64;
-                 string tempResultString;
 
                  //Do not allow whitespace on password
-                 tempResultString = txtGameRecallPassword.Text.ToString();
+                 var tempResultString = TxtGameRecallPassword.Text;
                  if (tempResultString.Contains(" "))
                  {
-                     tempResult = false;
                      return;
                  }
 
-                if (Int32.TryParse(txtMinPlayer.Text.ToString(), out tempResultInt))
+                if (int.TryParse(TxtMinPlayer.Text, out tempResultInt))
                  {
-                     if (Int32.TryParse(txtGameStartDelay.Text.ToString(), out tempResultInt))
+                     if (int.TryParse(TxtGameStartDelay.Text, out tempResultInt))
                      {
-                         if (Int64.TryParse(txtConsolationPrize.Text.ToString(), out tempResultInt64))
+                         long tempResultInt64;
+                         if (long.TryParse(TxtConsolationPrize.Text, out tempResultInt64))
                          {
-                             if (Int32.TryParse(txtGameWaitCountDown.Text.ToString(), out tempResultInt))
+                             if (int.TryParse(TxtGameWaitCountDown.Text, out tempResultInt))
                             {
                                 tempResult = true;
                                 var ii = SettingViewModel.Instance;
@@ -84,15 +67,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
          {
              bool notAllow = false;
 
-             if (e.Key == Key.Space)
+             switch (e.Key)
              {
-                 notAllow = true;
+                 case Key.Space:
+                     notAllow = true;
+                     break;
+                 case Key.Back:
+                     break;
              }
-             else
-                 if (e.Key == Key.Back)
-                 {
-                     notAllow = false;
-                 }
              e.Handled = notAllow;
          }
 

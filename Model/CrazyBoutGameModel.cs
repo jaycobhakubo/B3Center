@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
 {
@@ -17,14 +14,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
         /// <summary>
         /// Max and min call speed values in miliseconds.
         /// </summary>
-        private const uint AbsoluteCallSpeedMin = 500;
-        private const uint AbsoluteCallSpeedMax = 5000;
+        private const uint ABSOLUTE_CALL_SPEED_MIN = 500;
+        private const uint ABSOLUTE_CALL_SPEED_MAX = 5000;
         #endregion
 
         #region Member Variables
-        ObservableCollection<uint> m_maxCardsList;
-        ObservableCollection<uint> m_maxBetLevelList;
-        ObservableCollection<string> m_payTableList;
+
+        readonly ObservableCollection<uint> m_maxCardsList;
+        readonly ObservableCollection<uint> m_maxBetLevelList;
+        readonly ObservableCollection<string> m_payTableList;
         #endregion
 
         #region Constructors
@@ -33,20 +31,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
         /// </summary>
         public CrazyBoutGameModel()
         {
-            m_maxCardsList = new ObservableCollection<uint>();
-            m_maxCardsList.Add(4);
-            m_maxCardsList.Add(6);
+            m_maxCardsList = new ObservableCollection<uint> {4, 6};
 
-            m_maxBetLevelList = new ObservableCollection<uint>();
-            m_maxBetLevelList.Add(1);
-            m_maxBetLevelList.Add(2);
-            m_maxBetLevelList.Add(3);
-            m_maxBetLevelList.Add(4);
+            m_maxBetLevelList = new ObservableCollection<uint> {1, 2, 3, 4};
 
-            m_payTableList = new ObservableCollection<string>();
-            m_payTableList.Add("60%");
-            m_payTableList.Add("70%");
-            m_payTableList.Add("80%");
+            m_payTableList = new ObservableCollection<string> {"60%", "70%", "80%"};
 
             GameSpeedMin = GameSpeedAbsoluteMin;
             GameSpeedMax = GameSpeedAbsoluteMax;
@@ -129,7 +118,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
         {
             get
             {
-                return AbsoluteCallSpeedMin;
+                return ABSOLUTE_CALL_SPEED_MIN;
             }
         }
 
@@ -137,7 +126,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business.GameModels
         {
             get
             {
-                return AbsoluteCallSpeedMax;
+                return ABSOLUTE_CALL_SPEED_MAX;
             }
         }
 
