@@ -36,7 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                     B3MathGamePay b3MathGamePlayData = new B3MathGamePay
                     {
                         MathPackageId = responseReader.ReadInt32(),
-                        GameId = responseReader.ReadInt32(),
+                        GameType = (B3GameType)responseReader.ReadInt32(),
                         PackageDesc = new string(responseReader.ReadChars(responseReader.ReadInt16())),
                         IsRng = responseReader.ReadBoolean()
                     };

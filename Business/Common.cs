@@ -42,5 +42,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 list[n] = value;
             }
         }
+
+                /// <summary>
+        /// Converts boolean to a string value of "T" or "F"
+        /// </summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <returns></returns>
+        public static string ConvertToB3StringValue(this bool value)
+        {
+            return value ? "T" : "F";
+        }
+
+        /// <summary>
+        /// Converts the b3 string value to bool.
+        /// </summary>
+        /// <param name="b3Setting">The b3 setting.</param>
+        /// <returns></returns>
+        public static bool ConvertB3StringValueToBool(this B3SettingGlobal b3Setting)
+        {
+            return b3Setting.B3SettingValue == "T";
+        }
     }
+
 }

@@ -19,7 +19,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         public PlayerSettingVm(PlayerSettings playerSetting, ObservableCollection<B3GameSetting> b3SettingEnableDisable)
         {
-            VolumeList = Volume();
+            VolumeList = SettingViewModel.ZeroToTenList();
             PlayerSetting = playerSetting;
             m_b3SettingEnableDisable = b3SettingEnableDisable;
             AssignEnableSettingToGame();    
@@ -38,56 +38,50 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         {     
             foreach (var gameSettings in m_b3SettingEnableDisable)
             {
-                int b3Gameid = gameSettings.GameId;
-                switch(b3Gameid)
+                switch(gameSettings.GameType)
                 {
-                    case (int)B3Game.Crazybout: 
+                    case B3GameType.Crazybout: 
                         {
                             m_playerSetting.CrazyboutGameSetting = gameSettings;                       
                             break; 
                         }
-                    case (int)B3Game.Jailbreak: 
+                    case B3GameType.Jailbreak: 
                         {
                             m_playerSetting.JailBreakGameSetting = gameSettings;
                             break;                         
                         }
-                    case (int)B3Game.Mayamoney:
+                    case B3GameType.Mayamoney:
                         {
                             m_playerSetting.MayaMoneyGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.Spirit76: 
+                    case B3GameType.Spirit76: 
                         {
                             m_playerSetting.Spirit76GameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.Timebomb:
+                    case B3GameType.Timebomb:
                         {
                             m_playerSetting.TimeBombGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.Ukickem:
+                    case B3GameType.Ukickem:
                         {
                             m_playerSetting.UKickemGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.Wildball: 
+                    case B3GameType.Wildball: 
                         {
                             m_playerSetting.WildBallGameSetting = gameSettings;
                             break;
                         }
-                    case (int)B3Game.Wildfire: 
+                    case B3GameType.Wildfire: 
                         {
                             m_playerSetting.WildFireGameSetting = gameSettings;
                             break;
                         }
                 }
             }
-        }
-        private List<string> Volume()
-        {
-            List<string> result = new List<string> {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-            return result;
         }
 
         #endregion

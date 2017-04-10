@@ -36,7 +36,7 @@
                             ItemsSource="{Binding Settings.LGamePayTable}" 
                               DisplayMemberPath="PackageDesc"
                            SelectedValuePath="MathPackageID"   
-                       SelectedValue="{Binding Settings.SelectedMathPayTableSettingInt}"   
+                       SelectedIndex="{Binding Settings.SelectedMathPayTableSettingInt}"   
                           />
 
                 <Label Content="Max bet level" />

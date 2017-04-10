@@ -1,5 +1,6 @@
 ﻿using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Base;
+using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
@@ -7,12 +8,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
         private GameSetting m_gameSetting;
 
-        public GameSettingVmAllGame(GameSetting gameSetting)
+        public GameSettingVmAllGame(GameSetting gameSetting, B3GameType gameType)
         {
             m_gameSetting = gameSetting;
+            GameType = gameType;
             SettingViewModel.Instance.BtnSaveIsEnabled = Settings.IsEnableGame.IsEnabled; 
         }
-
 
         public GameSetting Settings
         {
@@ -33,5 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 RaisePropertyChanged("IsGameEnable");
             }
         }
+
+        public B3GameType GameType { get; private set; }
     }
 }

@@ -39,38 +39,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                 {
                     B3SettingGlobal b3Settingglobal = new B3SettingGlobal
                     {
-                        B3SettingId = responseReader.ReadInt32(),
-                        B3SettingCategoryId = responseReader.ReadInt32(),
-                        B3GameId = responseReader.ReadInt32(),
+                        SettingType = (B3SettingType)responseReader.ReadInt32(),
+                        B3SettingCategoryType = (B3SettingCategory)responseReader.ReadInt32(),
+                        GameType = (B3GameType)responseReader.ReadInt32(),
                         B3SettingValue = new string(responseReader.ReadChars(responseReader.ReadInt16()))
                     };
 
 
-                    switch (b3Settingglobal.B3SettingId)
+                    switch (b3Settingglobal.SettingType)
                     {
-                        case 52:
+                        case B3SettingType.MultiOperator:
                             {
-                                IsMultiOperator = b3Settingglobal.B3SettingValue == "T";
+                                IsMultiOperator = b3Settingglobal.ConvertB3StringValueToBool();
                                 break;
                             }
-                        case 53:
+                        case B3SettingType.CommonRngBallCall:
                             {
-                                IsCommonRng = b3Settingglobal.B3SettingValue == "T";
+                                IsCommonRng = b3Settingglobal.ConvertB3StringValueToBool();
                             break;
                             }
-                        case 41:
+                        case B3SettingType.EnforceMix:
                             {
-                                EnforceMix = b3Settingglobal.B3SettingValue == "T";
+                                EnforceMix = b3Settingglobal.ConvertB3StringValueToBool();
                                 break;
                             }
-                        case 30:
+                        case B3SettingType.AlowinSessionBall:
                             {
-                                AllowInSessBallChange = b3Settingglobal.B3SettingValue == "T";
+                                AllowInSessBallChange = b3Settingglobal.ConvertB3StringValueToBool();
                                 break;
                             }
-                        case 51:
+                        case B3SettingType.DualAccount:
                             {
-                                IsDoubleAccount = b3Settingglobal.B3SettingValue == "T";
+                                IsDoubleAccount = b3Settingglobal.ConvertB3StringValueToBool();
                                 break;
                             }
                     }

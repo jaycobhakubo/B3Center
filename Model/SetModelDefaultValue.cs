@@ -31,7 +31,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model
         {
             foreach (var setting in collection)
             {
-                var x = new B3GameSetting() { GameId = setting.GameId, IsEnabled = setting.IsEnabled, IsAllowed = setting.IsAllowed };              
+                var x = new B3GameSetting { GameType = setting.GameType, IsEnabled = setting.IsEnabled, IsAllowed = setting.IsAllowed };              
                 B3SettingEnableDisablePreviousValue.Add(x);
             }
         }

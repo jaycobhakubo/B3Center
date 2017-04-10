@@ -2,13 +2,14 @@
 {
     public class B3GameSetting
     {
+
         #region Constructors
         /// <summary>
         /// Use to set value
         /// </summary>
-        public B3GameSetting(int gameId, bool isEnabled, bool isAllowed)
+        public B3GameSetting(B3GameType game, bool isEnabled, bool isAllowed)
         {
-            GameId = gameId;
+            GameType = game;
             IsEnabled = isEnabled;
             IsAllowed = isAllowed;
         }
@@ -19,7 +20,7 @@
         #endregion
         #region Properties 
 
-        public int GameId
+        public B3GameType GameType
         {
             get;
             set;
@@ -45,11 +46,11 @@
     {
         #region Constructor
 
-        public B3SettingGlobal(int b3SettingId, int b3SettingCategoryId, int b3GameId, string b3SettingValue)
+        public B3SettingGlobal(B3SettingType b3Setting, B3SettingCategory b3SettingCategoryType, B3GameType b3GameType, string b3SettingValue)
         {
-            B3SettingId = b3SettingId;
-            B3SettingCategoryId = b3SettingCategoryId;
-            B3GameId = b3GameId;
+            SettingType = b3Setting;
+            B3SettingCategoryType = b3SettingCategoryType;
+            GameType = b3GameType;
             B3SettingValue = b3SettingValue;
         }
 
@@ -60,19 +61,19 @@
         #endregion
         #region Properties
 
-        public int B3SettingId
+        public B3SettingType SettingType
         {
             get;
             set;
         }
 
-        public int B3SettingCategoryId
+        public B3SettingCategory B3SettingCategoryType
         {
             get;
             set;
         }
 
-        public int B3GameId
+        public B3GameType GameType
         {
             get;
             set;
@@ -141,7 +142,7 @@
             set;
         }
 
-        public int GameId
+        public B3GameType GameType
         {
             get;
             set;

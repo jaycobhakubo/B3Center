@@ -11,7 +11,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         public SystemSettingVm(SystemSetting systemSetting)
         {
-            VolumeList = Volume();
+            VolumeList = SettingViewModel.ZeroToTenList();
             CurrencyList = GetCurrencyList();
             AutoSessionEndList = GetAutoSessionEndItemList();
             SystemSettings = systemSetting;
@@ -53,22 +53,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        private List<string> Volume()
-        {
-            List<string> result = new List<string> {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-            return result;
-        }
-
         public static List<string> BetLevel()
         {
-            List<string> result = new List<string> {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-            return result;
+            return SettingViewModel.OneToTenList();
         }
 
         public static List<string> MaxCard()
         {
-            var result = new List<string> {"4", "6"};
-            return result;
+            return SettingViewModel.MaxCardCountList();
         }
 
 

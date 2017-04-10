@@ -10,7 +10,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         public SalesSettingVm(SalesSettings salesSetting)
         {
-            VolumeList = Volume();
+            VolumeList = SettingViewModel.ZeroToTenList();
             SalesSetting = salesSetting;              
         }
 
@@ -33,12 +33,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 RaisePropertyChanged("SalesSetting");
             }
         }
-
-        private List<string> Volume()
-        {
-            List<string> result = new List<string> {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-            return result;
-        }       
     }
 }
 

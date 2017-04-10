@@ -15,8 +15,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
             {
                 var settingMember = new SettingMember
                 {
-                    GameId = sm.B3GameId,
-                    SettingId = sm.B3SettingId,
+                    GameType = sm.GameType,
+                    SettingType = sm.SettingType,
                     Value = sm.B3SettingValue,
                     OldValue = sm.B3SettingdefaultValue
                 };
@@ -38,8 +38,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
             foreach (SettingMember sm in m_lB3Settings)
             {
-                requestWriter.Write(sm.SettingId);
-                requestWriter.Write(sm.GameId);
+                requestWriter.Write((int)sm.SettingType);
+                requestWriter.Write((int)sm.GameType);
                 requestWriter.Write((ushort)sm.Value.Length);
                 requestWriter.Write(sm.Value.ToCharArray());//3
             }         
@@ -63,8 +63,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
     public class SettingMember
     {
-        public int SettingId;
-        public int GameId;
+        public B3SettingType SettingType;
+        public B3GameType GameType;
         public string Value;
         public string OldValue;
     }

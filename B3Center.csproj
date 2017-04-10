@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\B3CenterController.cs" />
+    <Compile Include="Business\B3CenterEnums.cs" />
     <Compile Include="Business\B3CenterException.cs" />
     <Compile Include="Business\B3CenterModule.cs" />
     <Compile Include="Business\B3CenterSettings.cs" />
