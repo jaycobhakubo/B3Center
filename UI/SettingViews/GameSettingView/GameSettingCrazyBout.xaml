@@ -44,7 +44,7 @@
                 <Label Content="Max bet level" />
                 <ComboBox 
                 Name="CmbxMaxBetLevel"  
-                    ItemsSource="{Binding Settings.LMaxBetLevel}" 
+                    ItemsSource="{Binding ListMaxBetLevel}" 
                         SelectedItem="{Binding Settings.MaxBetLevel}"
                Tag="9"             
                 >
@@ -53,20 +53,20 @@
                 <Label x:Name="LblMaxCards"  Content="Max cards"/>
                 <ComboBox 
                 x:Name="CmbxMaxcards" 
-                 Tag="10"   ItemsSource="{Binding Settings.LMaxCards}" 
+                 Tag="10"   ItemsSource="{Binding ListMaxCards}" 
                     SelectedItem="{Binding Settings.MaxCards}">
                 </ComboBox>
 
                 <Label x:Name="LblCallSpeedMin"  Content="Call speed min"    />
                 <ComboBox 
             	x:Name="CmbxCallSpeedMin" 
-                        ItemsSource="{Binding Settings.LCallSpeedMin}" 
+                        ItemsSource="{Binding ListCallSpeedMin}" 
                         SelectedItem="{Binding Settings.CallSpeedMin, Converter={StaticResource ConvertDbToAppValueCallSpeed}, ConverterParameter=0}"
             	 Tag="59"/>
 
                 <Label x:Name="LblCallSpeedOrMax"  Content="Call speed max"    />
                 <ComboBox  
-                ItemsSource="{Binding Settings.LCallSpeed}" 
+                ItemsSource="{Binding ListCallSpeed}" 
             	x:Name="CmbxCallSpeedOrMax" SelectedItem="{Binding Settings.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	 Tag="11">
                 </ComboBox>

@@ -64,10 +64,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
 
-      
+
         private List<string> GetCurrencyList()
         {
-            List<string> currencyItems = new List<string> {"CREDIT", "DOLLAR", "PESO", "POUND"};
+            List<string> currencyItems = new List<string> { "CREDIT", "DOLLAR", "PESO", "POUND" };
             return currencyItems;
         }
 

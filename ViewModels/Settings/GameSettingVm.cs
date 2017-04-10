@@ -261,14 +261,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 else if (B3SettingType.MaxBetLevel == b3SettingGlobal.SettingType)
                 {
                     m_gs.MaxBetLevel = b3SettingGlobal.B3SettingValue;
-                    m_gs.LMaxBetLevel = SystemSettingVm.BetLevel();
+                    //m_gs.LMaxBetLevel = SystemSettingVm.BetLevel();
 
                 }
                 else if (B3SettingType.MaxCards == b3SettingGlobal.SettingType)
                 {
                     m_gs.MaxCards = b3SettingGlobal.B3SettingValue;
                     //gs.LMaxBetLevel = SystemSettingVm.BetLevel();
-                    m_gs.LMaxCards = SystemSettingVm.MaxCard();
+                    //m_gs.LMaxCards = SystemSettingVm.MaxCard();
                 }
                 else if (B3SettingType.CallSpeed == b3SettingGlobal.SettingType)
                 {
@@ -304,25 +304,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
             }
 
-            if (m_currentGameType == B3GameType.Crazybout
-                || m_currentGameType == B3GameType.Mayamoney)
-            {
-                m_gs.LCallSpeedMin = SettingViewModel.OneToTenList();
-                m_gs.LCallSpeed = SettingViewModel.OneToTenList();
-            }
-            else if (m_currentGameType == B3GameType.Jailbreak
-                || m_currentGameType == B3GameType.Ukickem
-                || m_currentGameType == B3GameType.Timebomb
-                || m_currentGameType == B3GameType.Wildfire
-                || m_currentGameType == B3GameType.Wildball)
-            {
-                m_gs.LCallSpeed = SettingViewModel.ZeroToTenList();
-            }
-            else if (m_currentGameType == B3GameType.Spirit76)
-            {
-                m_gs.LCallSpeed = SettingViewModel.OneToTenList();
-                m_gs.LCallSpeedBonus = SettingViewModel.OneToTenList();
-            }
+            //if (m_currentGameType == B3GameType.Crazybout
+            //    || m_currentGameType == B3GameType.Mayamoney)
+            //{
+            //    m_gs.LCallSpeedMin = SettingViewModel.OneToTenList();
+            //    m_gs.LCallSpeed = SettingViewModel.OneToTenList();
+            //}
+            //else if (m_currentGameType == B3GameType.Jailbreak
+            //    || m_currentGameType == B3GameType.Ukickem
+            //    || m_currentGameType == B3GameType.Timebomb
+            //    || m_currentGameType == B3GameType.Wildfire
+            //    || m_currentGameType == B3GameType.Wildball)
+            //{
+            //    m_gs.LCallSpeed = SettingViewModel.OneToTenList();
+            //}
+            //else if (m_currentGameType == B3GameType.Spirit76)
+            //{
+            //    m_gs.LCallSpeed = SettingViewModel.OneToTenList();
+            //    m_gs.LCallSpeedBonus = SettingViewModel.OneToTenList();
+            //}
 
             m_gs.IsEnableGame = GetEnableDisableSettingValue(m_currentGameType);
             m_gs.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(m_currentGameType).ToList();

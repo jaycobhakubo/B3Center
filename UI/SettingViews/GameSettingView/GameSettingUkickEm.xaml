@@ -41,14 +41,14 @@
                 <ComboBox 
                 Name="CmbxMaxBetLevel" 
                Tag="9"  
-                    ItemsSource="{Binding Settings.LMaxBetLevel}" 
+                    ItemsSource="{Binding ListMaxBetLevel}" 
                         SelectedItem="{Binding Settings.MaxBetLevel}"
                 >
                 </ComboBox>
 
                 <Label x:Name="LblCallSpeedMin"  Content="Call speed"    />
                 <ComboBox 
-                    ItemsSource="{Binding Settings.LCallSpeed}" 
+                    ItemsSource="{Binding ListCallSpeed}" 
                     SelectedItem="{Binding Settings.CallSpeed, Converter={StaticResource ConvertDbToAppValueCallSpeed}}"
             	x:Name="CmbxCallSpeedMin" 
             	 Tag="59"/>
