@@ -25,12 +25,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public string CallSpeedMin { get; set; }
         public string CallSpeedBonus { get; set; }
         public List<B3MathGamePay> LGamePayTable { get; set; }
-        //public List<string> LMaxBetLevel { get; set; }
-        //public List<string> LMaxCards { get; set; }
-        //public List<string> LCallSpeedMin { get; set; }
-        //public List<string> LCallSpeedMax { get; set; }
-        //public List<string> LCallSpeed { get; set; }
-        //public List<string> LCallSpeedBonus { get; set; }
         public B3GameSetting IsEnableGame { get; set; }
     }
 }

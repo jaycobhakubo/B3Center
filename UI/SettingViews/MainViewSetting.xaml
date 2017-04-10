@@ -65,9 +65,7 @@
                                     IsEnabled="{Binding BtnSaveIsEnabled}"
                                     Tag="1">
                                     </Button>
-                                    <!--Content="{Binding IsEditOrSave}"-->
-                                    <!--Focusable="{Binding IsFocus,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
-
+                                  
                                     <Button 
                                     Grid.Column="1"
                                     Margin="15,15" Height="40" Width="140" 
