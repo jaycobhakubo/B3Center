@@ -44,7 +44,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Style="{StaticResource Showtime}" Name="CmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList_}" SelectedItem="{Binding SelectedTime}"  SelectionChanged="DateList_SelectionChanged">
+            <ComboBox Style="{StaticResource Showtime}" Name="CmbxName" Grid.Column="0" Margin="0,4,2,0" ItemsSource="{Binding TimeList}" SelectedItem="{Binding SelectedTime}"  SelectionChanged="DateList_SelectionChanged">
                 </ComboBox>
             <ComboBox Style="{StaticResource Showtime}" Grid.Column="1" Margin="2,4,0,0" ItemsSource="{Binding AmpmList}" SelectedItem="{Binding SelectedAmpm}"  SelectionChanged="DateList_SelectionChanged"/>
         </Grid>
