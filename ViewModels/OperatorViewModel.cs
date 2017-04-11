@@ -115,6 +115,47 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+        public B3IconColor SelectedColor
+        {
+            get 
+            { 
+                return                  
+                    GetColorValue(SelectedOperator.IconColor);             
+            }
+            set 
+            {
+               
+                if (value != null)
+                {
+                  var colorValueInt = GetColorValueInt(value);
+                      if (colorValueInt != SelectedOperator.IconColor)
+                      {
+
+                          SelectedOperator.IconColor = colorValueInt;
+                          RaisePropertyChanged("SelectedColor");
+                      }
+                }
+                    
+                    
+                }
+        }
+
+        private B3IconColor GetColorValue(int colorId)
+        {
+            var result = new B3IconColor();
+            if (colorId != 0)
+            {
+               result = OperatorColorList.First(l => l.ColorId == colorId);
+            }
+            return result;
+        }
+
+        private int GetColorValueInt(B3IconColor colorValue)
+        {
+            return OperatorColorList.First(l => l == colorValue).ColorId;
+        }
+
         public Operator SelectedOperator
         {
             get
@@ -126,8 +167,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 if (value != null)
                 {
                     m_selectedOperator = value;
+                    RaisePropertyChanged("SelectedColor");
+                   
                 }
                 RaisePropertyChanged("SelectedOperator");
+
             }
         }
 
@@ -145,6 +189,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SaveListSettingOriginalValue(operators);
             ShowOperator = false;
             IsEdit = true;
+
             SetCommand();
         }
 

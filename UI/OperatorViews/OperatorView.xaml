@@ -119,8 +119,8 @@
                                     Name="CmbxIconColor" 
                                           ItemsSource="{Binding OperatorColorList}" 
                                           DisplayMemberPath="ColorValue"
-                                          SelectedValuePath="ColorID"   
-                                           SelectedValue="{Binding SelectedOperator.IconColor}"
+                                        SelectedItem="{Binding SelectedColor}"
+                              
                                     />
                             </StackPanel>
                         </Grid>
