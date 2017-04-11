@@ -12,7 +12,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         #endregion
 
         #region Constructors
-        public Operator(int operatorId, string operatorName, string operatordesc, string contactname, string address, string city, string state, string zipcode, string phonenumber, string faxnumber, int iconcolor)
+       public Operator(int operatorId, string operatorName, string operatordesc, string contactname, string address, string city, string state, string zipcode, string phonenumber, string faxnumber, int iconcolor)
         {
             OperatorId = operatorId;
             OperatorName = operatorName;

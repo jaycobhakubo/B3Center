@@ -16,10 +16,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //This will access anything that is public on this View Model.
         private static volatile OperatorViewModel m_instance;
         private static readonly object m_syncRoot = new object();
-
         private ObservableCollection<Operator> m_orginalOperatorSettings = new ObservableCollection<Operator>();
         private int m_newOperatorId;
-
         private bool m_showOperator;
         private bool m_isEdit;
         private int m_operatorSelectedIndex;
@@ -30,11 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #endregion
 
         #region Constructor
-
-        private OperatorViewModel()
-        {
-        }
-
+        private OperatorViewModel() {}
         #endregion
 
         #region Properties
@@ -56,13 +50,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         public ICommand NewOperatorCmd { get; set; }
-
         public ICommand SaveOperatorcmd { get; set; }
-
         public ICommand DeleteOperatorcmd { get; set; }
-
         public ICommand CancelCmd { get; set; }
-
         public bool WorkInProgress { get; set; }
 
         public bool ShowOperator
@@ -118,27 +108,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public B3IconColor SelectedColor
         {
-            get 
-            { 
-                return                  
-                    GetColorValue(SelectedOperator.IconColor);             
-            }
-            set 
+            get
             {
-               
+                return
+                   GetColorValue(SelectedOperator.IconColor);
+            }
+            set
+            {
                 if (value != null)
                 {
-                  var colorValueInt = GetColorValueInt(value);
-                      if (colorValueInt != SelectedOperator.IconColor)
-                      {
+                    var colorValueInt = GetColorValueInt(value);
+                    if (colorValueInt != SelectedOperator.IconColor)
+                    {
 
-                          SelectedOperator.IconColor = colorValueInt;
-                          RaisePropertyChanged("SelectedColor");
-                      }
+                        SelectedOperator.IconColor = colorValueInt;
+                        RaisePropertyChanged("SelectedColor");
+                    }
                 }
-                    
-                    
-                }
+            }
         }
 
         private B3IconColor GetColorValue(int colorId)
@@ -146,7 +133,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var result = new B3IconColor();
             if (colorId != 0)
             {
-               result = OperatorColorList.First(l => l.ColorId == colorId);
+                result = OperatorColorList.First(l => l.ColorId == colorId);
             }
             return result;
         }
