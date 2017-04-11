@@ -85,7 +85,7 @@
             <StackPanel Grid.Column="3">
           
                 <CheckBox Name="ChkbxAutoPlay"   Content="Auto play"  IsChecked="{Binding Settings.AutoPlay}"/>
-                <CheckBox  IsChecked="{Binding Settings.HideSerialNumber}" Name="ChkbxHideSerialNumber" Content="Hide serial number"/>
+                <!--<CheckBox Visibility="Visible" IsChecked="{Binding Settings.HideSerialNumber}" Name="ChkbxHideSerialNumber" Content="Hide serial number"/>-->
                 <!--<CheckBox Name="chkbxSingleOfferBonus" Content="Single offer bonus"  IsChecked="{Binding Settings.SingleOfferBonus}"/>-->
                 <!--<CheckBox Name="chkbxAutoCall" Visibility="Collapsed"  Content="Auto Call"  Tag="12"/>-->
             </StackPanel>
