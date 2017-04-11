@@ -21,7 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         public bool AutoPlay { get; set; }
         public bool HideSerialNumber { get; set; }
         public bool SingleOfferBonus { get; set; }
-        public int SelectedMathPayTableSettingInt { get; set; }
+        public B3MathGamePay MathPayTable { get; set; }
         public string CallSpeedMin { get; set; }
         public string CallSpeedBonus { get; set; }
         public List<B3MathGamePay> LGamePayTable { get; set; }

@@ -301,7 +301,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                     }
                                 case B3SettingType.MathPayTableSetting:
                                     {
-                                        sg.B3SettingValue = gameSettingNewValue.SelectedMathPayTableSettingInt.ToString();
+                                        sg.B3SettingValue = gameSettingNewValue.MathPayTable.MathPackageId.ToString();
                                         break;
                                     }
                                 case B3SettingType.CallSpeedMin:

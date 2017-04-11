@@ -215,6 +215,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             return m_gameSettingViewModels[m_tabSelectedindex];
         }
 
+        private B3MathGamePay GetB3MathGamePay(int B3MathPlayId)
+        {
+            if (B3MathPlayId == 0 || B3MathPlayId == -1)
+                return null;
+            return m_gs.LGamePayTable.First(l => l.MathPackageId == B3MathPlayId);
+        }
+
         private GameSetting ConvertToModel(ObservableCollection<B3SettingGlobal> b3Setting)
         {
             m_gs = new GameSetting { GameType = m_currentGameType };
@@ -288,7 +295,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
                 else if (B3SettingType.MathPayTableSetting == b3SettingGlobal.SettingType)
                 {
-                    m_gs.SelectedMathPayTableSettingInt = Convert.ToInt32(b3SettingGlobal.B3SettingValue);
+                    m_gs.MathPayTable = GetB3MathGamePay(Convert.ToInt32(b3SettingGlobal.B3SettingValue));
                 }
                 else if (B3SettingType.CallSpeedMin == b3SettingGlobal.SettingType)
                 {
