@@ -49,7 +49,7 @@
 
             <Border  Margin="4" Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowOperator, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}">
                 <Grid>
-                <Label Content="Please select a operator to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Content="Please select an operator to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </Border>
 
