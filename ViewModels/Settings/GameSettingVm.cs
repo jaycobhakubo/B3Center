@@ -219,6 +219,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         {
             if (B3MathPlayId == 0 || B3MathPlayId == -1)
                 return null;
+            if (m_gs.LGamePayTable.Exists(l => l.MathPackageId == B3MathPlayId) != true)
+                return null;
+
             return m_gs.LGamePayTable.First(l => l.MathPackageId == B3MathPlayId);
         }
 
