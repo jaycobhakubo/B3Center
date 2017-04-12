@@ -107,20 +107,18 @@
                                 <TextBox Name="TxtbxContactName" MaxLength="30" Text="{Binding  SelectedOperator.ContactName}"/>
                    
                                 <Label Content="Phone number:" />
-                                <!--<TextBox  Name="txtbxPhoneNumber"  MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>-->
-                                <TextBox  Name="TxtbxPhoneNumber"  MaxLength="14" Text="{Binding  ElementName=CmbxIconColor, Path=Height}"/>
+                               
+                                <TextBox  Name="TxtbxPhoneNumber"   MaxLength="14" Text="{Binding  SelectedOperator.PhoneNumber}"/>
                                 
                                 <Label Content="Fax number:"  />
                                 <TextBox Name="TxtbxFaxNumber" MaxLength="14" Text="{Binding  SelectedOperator.FaxNumber}"/>
                                 
                                 <Label Content="Icon color:" />
-                                <ComboBox  
-                                   
+                                <ComboBox                                     
                                     Name="CmbxIconColor" 
-                                          ItemsSource="{Binding OperatorColorList}" 
-                                          DisplayMemberPath="ColorValue"
-                                        SelectedItem="{Binding SelectedColor}"
-                              
+                                    ItemsSource="{Binding OperatorColorList}" 
+                                    DisplayMemberPath="ColorValue"
+                                    SelectedItem="{Binding SelectedColor}"                          
                                     />
                             </StackPanel>
                         </Grid>
