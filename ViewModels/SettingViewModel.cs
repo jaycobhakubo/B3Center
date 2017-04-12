@@ -326,80 +326,156 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case B3SettingCategory.Player:
                     {
                         PlayerSettings playerSettingNewValue = PlayerSettingVm.PlayerSetting;
-                        b3Setting = B3Setting;//.Where(l => l.B3SettingID == _GameSettingNewValue.);
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PlayerCalibrateTouch)).B3SettingValue = playerSettingNewValue.PlayerCalibrateTouch.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PresstoCollect)).B3SettingValue = playerSettingNewValue.PresstoCollect.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.AnnounceCall)).B3SettingValue = playerSettingNewValue.AnnounceCall.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PlayerScreenCursor)).B3SettingValue = playerSettingNewValue.PlayerScreenCursor.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.TimeToCollect)).B3SettingValue = playerSettingNewValue.TimeToCollect;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.Disclaimer)).B3SettingValue = playerSettingNewValue.Disclaimer.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PlayerMainVolume)).B3SettingValue = GetVolumeEquivToDb(Convert.ToInt32(playerSettingNewValue.PlayerMainVolume));
-                        m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3Setting);
+                        b3Setting = B3Setting;
 
+                        foreach (var b3setting in b3Setting)
+                        {
+                            b3setting.B3SettingdefaultValue = b3setting.B3SettingValue;
+                            switch (b3setting.SettingType)
+                            {
+                                case B3SettingType.PlayerCalibrateTouch:
+                                   {                                      
+                                        b3setting.B3SettingValue = playerSettingNewValue.PlayerCalibrateTouch.ConvertToB3StringValue();
+                                        break;
+                                    }
+                                case B3SettingType.PresstoCollect:
+                                   {
+                                       b3setting.B3SettingValue = playerSettingNewValue.PresstoCollect.ConvertToB3StringValue();
+                                       break;
+                                   }
+                                case B3SettingType.AnnounceCall:
+                                   {
+                                       b3setting.B3SettingValue = playerSettingNewValue.AnnounceCall.ConvertToB3StringValue();
+                                       break;
+                                   }
+                                case B3SettingType.PlayerScreenCursor:
+                                   {
+                                       b3setting.B3SettingValue = playerSettingNewValue.PlayerScreenCursor.ConvertToB3StringValue();
+                                       break;
+                                   }
+                                case B3SettingType.TimeToCollect:
+                                   {
+                                       b3setting.B3SettingValue = playerSettingNewValue.TimeToCollect;
+                                       break;
+                                   }
+                                case B3SettingType.Disclaimer:
+                                   {
+                                       b3setting.B3SettingValue = playerSettingNewValue.Disclaimer.ConvertToB3StringValue();
+                                       break;
+                                   }
+                                case B3SettingType.PlayerMainVolume:
+                                   {
+                                       b3setting.B3SettingValue = GetVolumeEquivToDb(Convert.ToInt32(playerSettingNewValue.PlayerMainVolume));
+                                       break;
+                                   }
+                            }
+                        }                     
+                        m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3Setting);
                         break;
                     }
                 case B3SettingCategory.Sales:
                     {
                         SalesSettings salesSettingNewValue = SalesSettingVm.SalesSetting;
-                        b3Setting = B3Setting; //_m_b3Setting = m_b3Setting.Where(l => l.B3SettingID == (int)B3SettingCategory.Sales);
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.ScreenCursor)).B3SettingValue = salesSettingNewValue.ScreenCursor.ConvertToB3StringValue(); ;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.CalibrateTouch)).B3SettingValue = salesSettingNewValue.CalibrateTouch.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.AutoPrintSessionReport)).B3SettingValue = salesSettingNewValue.AutoPrintSessionReport.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PagePrinter)).B3SettingValue = salesSettingNewValue.PagePrinter.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.QuickSales)).B3SettingValue = salesSettingNewValue.QuickSales.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PrintLogo)).B3SettingValue = salesSettingNewValue.PrintLogo.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.AlowinSessionBall)).B3SettingValue = salesSettingNewValue.AlowinSessionBall.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.LoggingEnable)).B3SettingValue = salesSettingNewValue.LoggingEnable.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.LogRecycleDays)).B3SettingValue = salesSettingNewValue.LogRecycleDays;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.VolumeSales)).B3SettingValue = GetVolumeEquivToDb(Convert.ToInt32(salesSettingNewValue.VolumeSales));
+                        b3Setting = B3Setting; 
+
+                        foreach (var b3setting in b3Setting)
+                        {
+                            b3setting.B3SettingdefaultValue = b3setting.B3SettingValue;
+                            switch (b3setting.SettingType)
+                            {
+                                case B3SettingType.ScreenCursor: { b3setting.B3SettingValue = salesSettingNewValue.ScreenCursor.ConvertToB3StringValue(); break; }
+                                case B3SettingType.CalibrateTouch:{b3setting.B3SettingValue = salesSettingNewValue.CalibrateTouch.ConvertToB3StringValue();break;}
+                                case B3SettingType.AutoPrintSessionReport: { b3setting.B3SettingValue = salesSettingNewValue.AutoPrintSessionReport.ConvertToB3StringValue(); break; }
+                                case B3SettingType.PagePrinter: { b3setting.B3SettingValue = salesSettingNewValue.PagePrinter.ConvertToB3StringValue(); break; }
+                                case B3SettingType.QuickSales: { b3setting.B3SettingValue = salesSettingNewValue.QuickSales.ConvertToB3StringValue(); break; }
+                                case B3SettingType.PrintLogo: { b3setting.B3SettingValue = salesSettingNewValue.PrintLogo.ConvertToB3StringValue(); break; }
+                                case B3SettingType.AlowinSessionBall: { b3setting.B3SettingValue = salesSettingNewValue.AlowinSessionBall.ConvertToB3StringValue(); break; }
+                                case B3SettingType.LoggingEnable: { b3setting.B3SettingValue = salesSettingNewValue.LoggingEnable.ConvertToB3StringValue(); break; }
+                                case B3SettingType.LogRecycleDays: { b3setting.B3SettingValue = salesSettingNewValue.LogRecycleDays; break; }
+                                case B3SettingType.VolumeSales: { b3setting.B3SettingValue = GetVolumeEquivToDb(Convert.ToInt32(salesSettingNewValue.VolumeSales)); break; }                            
+                            }
+                        }
+
                         m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3Setting);
                         break;
                     }
                 case B3SettingCategory.ServerGame:
                     {
                         ServerSetting serverSettingNewValue = ServerSettingVm.ServerSettings;
-                        b3Setting = B3Setting;// _m_b3Setting = m_b3Setting.Where(l => l.B3SettingID == (int)B3SettingCategory.ServerGame);
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.MinPlayer)).B3SettingValue = serverSettingNewValue.MinPlayer;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.GameStartDelay)).B3SettingValue = serverSettingNewValue.GameStartDelay;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.ConsolotionPrize)).B3SettingValue = serverSettingNewValue.Consolation;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.GameRecallPass)).B3SettingValue = serverSettingNewValue.GameRecallPassw;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.WaiCountDown)).B3SettingValue = serverSettingNewValue.WaitCountDown;
+                        b3Setting = B3Setting;
+
+                        foreach (var b3setting in b3Setting)
+                        {
+                            b3setting.B3SettingdefaultValue = b3setting.B3SettingValue;
+                            switch (b3setting.SettingType)
+                            {     
+                                case B3SettingType.MinPlayer: { b3setting.B3SettingValue = serverSettingNewValue.MinPlayer; break; }
+                                case B3SettingType.GameStartDelay: { b3setting.B3SettingValue = serverSettingNewValue.GameStartDelay; break; }
+                                case B3SettingType.ConsolotionPrize: { b3setting.B3SettingValue = serverSettingNewValue.Consolation; break; }
+                                case B3SettingType.GameRecallPass: { b3setting.B3SettingValue = serverSettingNewValue.GameRecallPassw; break; }
+                                case B3SettingType.WaiCountDown: { b3setting.B3SettingValue = serverSettingNewValue.WaitCountDown; break; }
+                            }
+                        }
+                     
                         m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3Setting);
                         break;
                     }
                 case B3SettingCategory.Session:
                     {
                         SessionSetting sessionSettingNewValue = SessionSettingVm.SessionSettings;
-                        b3Setting = B3Setting; //_m_b3Setting = m_b3Setting.Where(l => l.B3SettingID == (int)B3SettingCategory.Session);
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PayoutLimit)).B3SettingValue = sessionSettingNewValue.PayoutLimit;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.JackpotLimit)).B3SettingValue = sessionSettingNewValue.JackpotLimit;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.EnforceMix)).B3SettingValue = sessionSettingNewValue.EnforceMix.ConvertToB3StringValue();
+                        b3Setting = B3Setting;
+
+                        foreach (var b3setting in b3Setting)
+                        {
+                            b3setting.B3SettingdefaultValue = b3setting.B3SettingValue;
+                            switch (b3setting.SettingType)
+                            {
+                                case B3SettingType.PayoutLimit: { b3setting.B3SettingValue = sessionSettingNewValue.PayoutLimit; break; }
+                                case B3SettingType.JackpotLimit: { b3setting.B3SettingValue = sessionSettingNewValue.JackpotLimit; break; }
+                                case B3SettingType.EnforceMix: { b3setting.B3SettingValue = sessionSettingNewValue.EnforceMix.ConvertToB3StringValue(); break; }
+                            }
+                        }
+                                            
                         m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3Setting);
                         break;
                     }
                 case B3SettingCategory.System:
                     {
                         SystemSetting systemSettingNewValue = SystemSettingVm.SystemSettings;
-                        b3Setting = B3Setting; //_m_b3Setting = m_b3Setting.Where(l => l.B3SettingID == (int)B3SettingCategory.System);
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.EnableUk)).B3SettingValue = systemSettingNewValue.EnableUk.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.DualAccount)).B3SettingValue = systemSettingNewValue.DualAccount.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.MultiOperator)).B3SettingValue = systemSettingNewValue.MultiOperator.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.CommonRngBallCall)).B3SettingValue = systemSettingNewValue.CommonRngBallCall.ConvertToB3StringValue();
+                        b3Setting = B3Setting;
 
-                        m_isRngBallCall = systemSettingNewValue.CommonRngBallCall;
-
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.NorthDakotaMode)).B3SettingValue = systemSettingNewValue.NorthDakotaMode.ConvertToB3StringValue();
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.HandPayTrigger)).B3SettingValue = systemSettingNewValue.HandPayTrigger;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.MinimumPlayers)).B3SettingValue = systemSettingNewValue.MinimumPlayers;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.VipPointMultiplier)).B3SettingValue = systemSettingNewValue.VipPointMultiplier;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.MagCardSentinelStart)).B3SettingValue = systemSettingNewValue.MagCardSentinelStart;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.MagCardSentinelEnd)).B3SettingValue = systemSettingNewValue.MagCardSentinelEnd;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.Currency)).B3SettingValue = systemSettingNewValue.Currency;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.RngBallCallTime)).B3SettingValue = systemSettingNewValue.RngBallCallTime;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.PlayerPinLength)).B3SettingValue = systemSettingNewValue.PlayerPinLength;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.AutoSessionEnd)).B3SettingValue = systemSettingNewValue.AutoSessionEnd;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.SiteName)).B3SettingValue = systemSettingNewValue.SiteName;
-                        b3Setting.Single(l => Convert.ToInt32(l.SettingType) == Convert.ToInt32(B3SettingType.SystemMainVolume)).B3SettingValue = GetVolumeEquivToDb(Convert.ToInt32(systemSettingNewValue.SystemMainVolume));
+                        foreach (var b3setting in b3Setting)
+                        {
+                            b3setting.B3SettingdefaultValue = b3setting.B3SettingValue;
+                            switch (b3setting.SettingType)
+                            {
+                                case B3SettingType.EnableUk: { b3setting.B3SettingValue = systemSettingNewValue.EnableUk.ConvertToB3StringValue(); break; }
+                                case B3SettingType.DualAccount: { b3setting.B3SettingValue = systemSettingNewValue.DualAccount.ConvertToB3StringValue(); break; }
+                                case B3SettingType.MultiOperator: { b3setting.B3SettingValue = systemSettingNewValue.MultiOperator.ConvertToB3StringValue(); break; }
+                                case B3SettingType.CommonRngBallCall: 
+                                    { 
+                                        b3setting.B3SettingValue = systemSettingNewValue.CommonRngBallCall.ConvertToB3StringValue();
+                                        if (b3setting.B3SettingValue != b3setting.B3SettingdefaultValue)
+                                        {
+                                            m_isRngBallCall = systemSettingNewValue.CommonRngBallCall;
+                                        }
+                                        break; 
+                                    }
+                                case B3SettingType.NorthDakotaMode: { b3setting.B3SettingValue = systemSettingNewValue.NorthDakotaMode.ConvertToB3StringValue(); break; }
+                                case B3SettingType.HandPayTrigger: { b3setting.B3SettingValue = systemSettingNewValue.HandPayTrigger; break; }
+                                case B3SettingType.MinimumPlayers: { b3setting.B3SettingValue = systemSettingNewValue.MinimumPlayers; break; }
+                                case B3SettingType.VipPointMultiplier: { b3setting.B3SettingValue = systemSettingNewValue.VipPointMultiplier; break; }
+                                case B3SettingType.MagCardSentinelStart: { b3setting.B3SettingValue = systemSettingNewValue.MagCardSentinelStart; break; }
+                                case B3SettingType.MagCardSentinelEnd: { b3setting.B3SettingValue = systemSettingNewValue.MagCardSentinelEnd; break; }
+                                case B3SettingType.Currency: { b3setting.B3SettingValue = systemSettingNewValue.Currency; break; }
+                                case B3SettingType.RngBallCallTime: { b3setting.B3SettingValue = systemSettingNewValue.RngBallCallTime; break; }
+                                case B3SettingType.PlayerPinLength: { b3setting.B3SettingValue = systemSettingNewValue.PlayerPinLength; break; }
+                                case B3SettingType.AutoSessionEnd: { b3setting.B3SettingValue = systemSettingNewValue.AutoSessionEnd; break; }
+                                case B3SettingType.SiteName: { b3setting.B3SettingValue = systemSettingNewValue.SiteName; break; }                               
+                                case B3SettingType.SystemMainVolume: { b3setting.B3SettingValue = GetVolumeEquivToDb(Convert.ToInt32(systemSettingNewValue.SystemMainVolume)); break; }
+                            }
+                        }
+                 
                         m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3Setting);
                         break;
                     }
@@ -483,10 +559,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 {
                                     throw new Exception("SetGameEnableSetting: " + ex.Message);
                                 }
-                                m_modelDefValue = new SetModelDefaultValue(B3SettingEnableDisable, (int)m_selectedSettingCategoryType);
+                               
 
                             }
                         }
+                        m_modelDefValue = new SetModelDefaultValue(B3SettingEnableDisable, (int)m_selectedSettingCategoryType);
                     }
                     else if (m_selectedSettingCategoryType == B3SettingCategory.System)//Update B3ReportCenter 
                     {
