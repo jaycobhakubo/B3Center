@@ -222,6 +222,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         var b3SettingGlobals = b3Setting as B3SettingGlobal[] ?? b3Setting.ToArray();
                         foreach (B3SettingGlobal sg in b3SettingGlobals)
                         {
+                            sg.B3SettingdefaultValue = sg.B3SettingValue;
                             switch (sg.SettingType)
                             {
                                 case B3SettingType.Denom1:
@@ -301,7 +302,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                     }
                                 case B3SettingType.MathPayTableSetting:
                                     {
-                                        sg.B3SettingValue = gameSettingNewValue.MathPayTable.MathPackageId.ToString();
+                                        if (gameSettingNewValue.MathPayTable != null)
+                                        {
+                                            sg.B3SettingValue = gameSettingNewValue.MathPayTable.MathPackageId.ToString();
+                                        }
                                         break;
                                     }
                                 case B3SettingType.CallSpeedMin:

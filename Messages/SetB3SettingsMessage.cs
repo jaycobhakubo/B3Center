@@ -13,15 +13,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         {
             foreach (B3SettingGlobal sm in lB3Settings)
             {
-                var settingMember = new SettingMember
+                if (sm.B3SettingValue != sm.B3SettingdefaultValue)
                 {
-                    GameType = sm.GameType,
-                    SettingType = sm.SettingType,
-                    Value = sm.B3SettingValue,
-                    OldValue = sm.B3SettingdefaultValue
-                };
+                    var settingMember = new SettingMember
+                    {
+                        GameType = sm.GameType,
+                        SettingType = sm.SettingType,
+                        Value = sm.B3SettingValue,
+                        OldValue = sm.B3SettingdefaultValue
+                    };
 
-                m_lB3Settings.Add(settingMember);
+                    m_lB3Settings.Add(settingMember);
+                }
             }
         }
 
