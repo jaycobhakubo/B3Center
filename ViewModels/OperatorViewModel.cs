@@ -249,7 +249,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             var firstOrDefault = m_operatorColorList.FirstOrDefault();
             if (firstOrDefault != null)
-                SelectedOperator.IconColor = firstOrDefault.ColorId;
+                SelectedColor = m_operatorColorList.FirstOrDefault();
 
             SelectedOperator.OperatorId = 0;
             SelectedOperator.OperatorName = string.Empty;
