@@ -47,7 +47,7 @@
                 <ColumnDefinition Width="{Binding ElementName=ClmnDefShowOper, Path=Width, Converter={StaticResource DefaultVal}}"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border  Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowOperator, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}">
+            <Border  Margin="4" Grid.Column="2"  Style="{DynamicResource DarkBlueBorder}" Visibility="{Binding ShowOperator, Converter={StaticResource ConvertBooltoVis}, ConverterParameter=true}">
                 <Grid>
                 <Label Content="Please select a operator to edit" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
