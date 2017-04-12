@@ -39,11 +39,12 @@
                     SelectedItem="{Binding Settings.MathPayTable}"
                           />
 
-                <Label Content="Max bet level" />
+                <Label Content="Max bet level" Visibility="Collapsed"/>
                 <ComboBox 
                 Name="CmbxMaxBetLevel"  
                     ItemsSource="{Binding ListMaxBetLevel}" 
                         SelectedItem="{Binding Settings.MaxBetLevel}"
+                    Visibility="Collapsed"
                Tag="9"             
                 >
                 </ComboBox>
