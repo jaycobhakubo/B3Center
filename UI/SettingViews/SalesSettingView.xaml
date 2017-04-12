@@ -19,7 +19,7 @@
 
             <StackPanel Name="StkpnlSalesSetting1" Grid.Column="1">
               
-                <Label x:Name="LblCallSpeedMinCopy"  Content="Log recycle days"     />
+                <Label x:Name="LblCallSpeedMinCopy"  Content="Log recycle days:"     />
                 <TextBox   Tag="32" MaxLength="9"  Text="{Binding SalesSetting.LogRecycleDays}"
                     Name="TxtbxLogRecycleDays"
                     TextChanged="ValidateUserInput"                                          

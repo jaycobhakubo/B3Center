@@ -6,7 +6,10 @@
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
-        
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource B3RequiredFieldLabelStyle}">
+            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+        </Style>
+
     </UserControl.Resources>
     <Border>
         <Grid    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">

@@ -20,7 +20,7 @@
 
 
             <StackPanel Name="StkpnlPlayerSetting" Grid.Column="1" Grid.Row="1">
-                <Label x:Name="LblCallSpeedMinCopy2"  Content="Time to collect (milliseconds)"  />
+                <Label x:Name="LblCallSpeedMinCopy2"  Content="Time to collect (milliseconds):"  />
                 <TextBox  Tag="20" MaxLength="9" Text="{Binding PlayerSetting.TimeToCollect}"
                           Name="TxtbxTimeToCollect"
                            TextChanged="ValidateUserInput"                                          

@@ -4,6 +4,14 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 
+using System;
+using System.Linq;
+using GameTech.Elite.Base;
+using System.Collections.ObjectModel;
+using GameTech.Elite.Client.Modules.B3Center.Business;
+using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
+
+
 namespace GameTech.Elite.Client.Modules.B3Center.Messages
 {
     public class SetB3SettingsMessage : ServerMessage
@@ -12,10 +20,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
         public SetB3SettingsMessage(ObservableCollection<B3SettingGlobal> lB3Settings)
         {
+            B3SettingGlobal MathPayTableSetting = new B3SettingGlobal();
+            bool IsMathPayTable = true;
 
-            var MathPayTableSetting = lB3Settings.Single(l => l.SettingType == B3SettingType.MathPayTableSetting);
-            if (MathPayTableSetting.B3SettingValue != MathPayTableSetting.B3SettingdefaultValue) //Check if it is a paytable setting  request.
-            {
+            try { MathPayTableSetting = lB3Settings.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); }
+            catch { IsMathPayTable = false; }
+     
+                if (MathPayTableSetting.B3SettingValue != MathPayTableSetting.B3SettingdefaultValue && IsMathPayTable == true) //Check if it is a paytable setting  request.
+                {
                 var settingMember = new SettingMember()
                 {
                     GameType = MathPayTableSetting.GameType,
