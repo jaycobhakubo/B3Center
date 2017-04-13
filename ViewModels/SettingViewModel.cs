@@ -218,8 +218,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         GameSetting gameSettingNewValue = GameSettingsVm.SelectedGameVm.Settings;
                         b3Setting = B3Setting.Where(l => l.GameType == gameSettingNewValue.GameType);
-
                         var b3SettingGlobals = b3Setting as B3SettingGlobal[] ?? b3Setting.ToArray();
+                        var IsGamePaytableSettingChanged = false;
+
                         foreach (B3SettingGlobal sg in b3SettingGlobals)
                         {
                             sg.B3SettingdefaultValue = sg.B3SettingValue;
@@ -305,9 +306,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                         if (gameSettingNewValue.MathPayTable != null)
                                         {
                                             sg.B3SettingValue = gameSettingNewValue.MathPayTable.MathPackageId.ToString();
+                                            if (sg.B3SettingValue != sg.B3SettingdefaultValue)
+                                             {
+                                                IsGamePaytableSettingChanged = true;
+                                             }
                                         }
-                                        break;
                                     }
+                                        break;                                   
                                 case B3SettingType.CallSpeedMin:
                                     {
                                         sg.B3SettingValue = gameSettingNewValue.CallSpeedMin;
@@ -320,6 +325,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                     }
                             }
                         }
+                      
+                        if (IsGamePaytableSettingChanged)//Moved the paytable setting at the very first list. 
+                        {
+                            var y = b3SettingGlobals.ToList();                       
+                            var x = b3SettingGlobals.Single(l => l.SettingType == B3SettingType.MathPayTableSetting);
+                            y.Remove(x);
+                            y.Select(c => { c.B3SettingdefaultValue = ""; return c; }).ToList();
+                            y.Insert(0, x);
+                            b3SettingGlobals = y.ToArray();                         
+                        }
+
                         m_settingTobeSaved = new ObservableCollection<B3SettingGlobal>(b3SettingGlobals);
                         break;
                     }
