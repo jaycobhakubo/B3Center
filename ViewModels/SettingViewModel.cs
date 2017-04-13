@@ -66,7 +66,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private static readonly object m_syncRoot = new object();
 
         #endregion
-        #region CONSTRUCTOR
+        #region CONSTRUCTOR/Initialization
 
         public void Initialize(B3Controller controller)
         {
