@@ -50,8 +50,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             set;
         }
 
-        //public bool IsNorthDakotaModeSettingHasChanged { get; set; }
-
         public SystemSetting SystemSettings
         {
             get
@@ -108,11 +106,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.CommonRngBallCall:
                         SystemSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
                         break;
-                    case B3SettingType.NorthDakotaMode:
-                        {
-                           
-                            SystemSettings.NorthDakotaMode = setting.ConvertB3StringValueToBool();
-                        }
+                    case B3SettingType.NorthDakotaMode:                                          
+                        SystemSettings.NorthDakotaMode = setting.ConvertB3StringValueToBool();
                         break;
                     case B3SettingType.HandPayTrigger:
                         SystemSettings.HandPayTrigger = setting.B3SettingValue;
@@ -171,7 +166,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         setting.B3SettingValue = SystemSettings.CommonRngBallCall.ConvertToB3StringValue();
                         break;
                     case B3SettingType.NorthDakotaMode:
-                        //IsNorthDakotaModeSettingHasChanged = (SystemSettings.NorthDakotaMode != setting.ConvertB3StringValueToBool()) ? true : false;
                         setting.B3SettingValue = SystemSettings.NorthDakotaMode.ConvertToB3StringValue();
                         break;
                     case B3SettingType.HandPayTrigger:
