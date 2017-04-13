@@ -13,6 +13,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         private readonly List<B3SettingGlobal> m_originalGameSettings;
         private GameSetting m_gameSetting;
         private B3IsGameEnabledSetting m_isGameEnabledSetting;
+        private bool m_isPayTableSettingHasChanged;
         #endregion
 
         #region Constructor
@@ -20,15 +21,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public GameSettingVmAllGame(List<B3SettingGlobal> gameSettingsList, B3GameType gameType, B3IsGameEnabledSetting isGameEnabledSetting)
         {
             GameType = gameType;
-
             Settings = new GameSetting { GameType = gameType };
             UpdateGameSettingsListToModel(gameSettingsList, isGameEnabledSetting);
-
-
             SettingViewModel.Instance.BtnSaveIsEnabled = Settings.IsEnableGame.IsEnabled;
-
             m_originalGameSettings = gameSettingsList;
             m_isGameEnabledSetting = isGameEnabledSetting;
+            m_isPayTableSettingHasChanged = false;//We only care if its true.
         }
 
         #endregion
@@ -68,6 +66,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public List<string> ListCallSpeed { get { return Business.Helpers.OneToTenList; } }
 
         public List<string> ListCallSpeedBonus { get { return Business.Helpers.OneToTenList; } }
+
+        public bool IsPayTableSettingHasChanged { get { return m_isPayTableSettingHasChanged; } }
 
         #endregion
 
@@ -146,9 +146,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        private void UpdateModelToGameSettingsList()
+        public bool IsPayTableModify(bool result)
         {
-            var IsGamePaytableSettingChanged = false;
+            return result;
+        }
+
+        private void UpdateModelToGameSettingsList()
+        {         
             foreach (B3SettingGlobal gameSetting in m_originalGameSettings)
             {
                 gameSetting.B3SettingDefaultValue = gameSetting.B3SettingValue;
@@ -200,8 +204,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             gameSetting.B3SettingValue = Settings.SingleOfferBonus.ConvertToB3StringValue();
                             break;
                     case B3SettingType.MathPayTableSetting:
-                            gameSetting.B3SettingValue = Settings.MathPayTable.MathPackageId.ToString();
-                            break;
+                            {
+                                //Set if math pay table setting has changed or not.
+                                m_isPayTableSettingHasChanged = (gameSetting.B3SettingValue != Settings.MathPayTable.MathPackageId.ToString()) ? true : false;
+                                gameSetting.B3SettingValue = Settings.MathPayTable.MathPackageId.ToString();                              
+                                break;
+                            }
                     case B3SettingType.CallSpeedMin:
                             gameSetting.B3SettingValue = Settings.CallSpeedMin;
                             break;

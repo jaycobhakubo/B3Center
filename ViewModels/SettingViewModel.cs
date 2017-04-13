@@ -145,6 +145,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case B3SettingCategory.Games:
                     {
                         m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();
+                        if (GameSettingsVm.SelectedGameVm.IsPayTableSettingHasChanged)//We need to include all settings and we need to set the pay table settings at very first item in the list.
+                        {
+                            var TempPayTableSetting = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
+                            m_settingTobeSaved.Remove(TempPayTableSetting);//Removed it on the list.
+                            m_settingTobeSaved.Insert(0, TempPayTableSetting);//Reinsert it on the first item.
+                        }
                         break;
                     }
                 case B3SettingCategory.Player:
