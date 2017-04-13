@@ -25,7 +25,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
     class SettingViewModel : ViewModelBase
     {
-        #region Fields
+        #region VARIABLES(private)
         //Parent
         private B3Controller m_controller;
         //Views
@@ -55,16 +55,49 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private readonly List<string> m_settingList = new List<string>();
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
+
+        #endregion
+        #region VARIABLES(static)
+
         private static readonly List<string> m_zeroToTenList = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
         private static readonly List<string> m_oneToTenList = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
         private static readonly List<string> m_maxCardCountList = new List<string> { "4", "6" };
-
         private static volatile SettingViewModel m_instance;
-
         private static readonly object m_syncRoot = new object();
-        #endregion
 
-        #region METHOD
+        #endregion
+        #region CONSTRUCTOR
+
+        public void Initialize(B3Controller controller)
+        {
+            if (controller == null) throw new ArgumentNullException();
+            m_controller = controller;
+            B3SettingEnableDisable = new ObservableCollection<B3GameSetting>(m_controller.Settings.B3GameSettings);
+            SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
+            CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
+            LoadSettingList();
+            BtnSaveIsEnabled = true;
+        }
+
+        //singleton instance
+        public static SettingViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                {
+                    lock (m_syncRoot)
+                    {
+                        if (m_instance == null)
+                            m_instance = new SettingViewModel();
+                    }
+                }
+                return m_instance;
+            }
+        }
+
+        #endregion
+        #region METHOD(private)
 
         //No ref to db.
         private string GetVolumeEquivValue(int volume)
@@ -84,12 +117,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return tempValue;
         }
 
-        private void RunSavedCommand()        //WAIT TILL THE COMMAND IS COMPLETED
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            SaveSetting();
-            Mouse.OverrideCursor = null;
-        }
+  
 
         private void ConvertSettingToModel()
         {
@@ -513,6 +541,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
 
             SettingSelected = m_settingList.FirstOrDefault();
+        }  
+        #endregion
+        #region METHOD(public/static)
+        public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
+        {
+            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
+            return tempResult;
+        }
+
+        public string GetVolumeEquivToDb(int volumeLevel)
+        {
+
+            var level = volumeLevel * 10; //volume values are 0-100 for database
+
+            //if below 0 return zero
+            if (level < 0)
+            {
+                return 0.ToString();
+            }
+
+            //if above 100 then return 100
+            if (level > 100)
+            {
+                return 100.ToString();
+            }
+
+            return level.ToString();
         }
 
         public static List<string> ZeroToTenList()
@@ -530,20 +585,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return m_maxCardCountList;
         }
 
-        public void Initialize(B3Controller controller)
+        #endregion
+        #region SAVEcmd
+
+        private void RunSavedCommand()        //WAIT TILL THE COMMAND IS COMPLETED
         {
-            if (controller == null)
-                throw new ArgumentNullException();
-
-            m_controller = controller;
-            B3SettingEnableDisable = new ObservableCollection<B3GameSetting>(m_controller.Settings.B3GameSettings);
-
-            //set commands
-            SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
-            CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
-
-            LoadSettingList();
-            BtnSaveIsEnabled = true;
+            Mouse.OverrideCursor = Cursors.Wait;
+            SaveSetting();
+            Mouse.OverrideCursor = null;
         }
 
         public void SaveSetting()
@@ -575,7 +624,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 {
                                     throw new Exception("SetGameEnableSetting: " + ex.Message);
                                 }
-                               
+
 
                             }
                         }
@@ -600,31 +649,54 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
+        #endregion
+        #region CANCELcmd
+
+        public void CancelSetting()
         {
-            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
-            return tempResult;
+            ConvertSettingToModel();
+
+            switch (m_selectedSettingCategoryType)
+            {
+                case B3SettingCategory.Games:
+                    {
+                        GameSettingsVm.ReloadSelectedItemForAnyChangesNotSaved();
+                        break;
+                    }
+                case B3SettingCategory.Player:
+                    {
+                        B3SettingEnableDisable = m_modelDefValue.B3SettingEnableDisablePreviousValue;
+                        PlayerSettingVm.B3SettingEnableDisable = B3SettingEnableDisable;
+                        PlayerSettingVm.PlayerSetting = m_playerSetting;
+                        PlayerSettingVm.RevertValueBack();
+                        m_modelDefValue = new SetModelDefaultValue(B3SettingEnableDisable, 3);
+                        break;
+                    }
+                case B3SettingCategory.Sales:
+                    {
+                        SalesSettingVm.SalesSetting = m_salesSetting;
+                        break;
+                    }
+                case B3SettingCategory.ServerGame:
+                    {
+                        ServerSettingVm.ServerSettings = m_serverSetting;
+                        break;
+                    }
+                case B3SettingCategory.Session:
+                    {
+                        SessionSettingVm.SessionSettings = m_sessionSetting;
+                        break;
+                    }
+                case B3SettingCategory.System:
+                    {
+                        SystemSettingVm.SystemSettings = m_systemSetting;
+                        break;
+                    }
+            }
         }
 
-        public string GetVolumeEquivToDb(int volumeLevel)
-        {
-            //volume values are 0-100 for database
-            var level = volumeLevel * 10;
-
-            //if below 0 return zero
-            if (level < 0)
-            {
-                return 0.ToString();
-            }
-
-            //if above 100 then return 100
-            if (level > 100)
-            {
-                return 100.ToString();
-            }
-
-            return level.ToString();
-        }
+        #endregion
+        #region SELECTEDITEMcmd
 
         public void SelectedItemEvent()
         {
@@ -702,77 +774,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_previousB3SettingCategory = m_selectedSettingCategoryType;
         }
 
-        public void CancelSetting()
-        {
-            ConvertSettingToModel();
-
-            switch (m_selectedSettingCategoryType)
-            {
-                case B3SettingCategory.Games:
-                    {
-                        GameSettingsVm.ReloadSelectedItemForAnyChangesNotSaved();
-                        break;
-                    }
-                case B3SettingCategory.Player:
-                    {
-                        B3SettingEnableDisable = m_modelDefValue.B3SettingEnableDisablePreviousValue;
-                        PlayerSettingVm.B3SettingEnableDisable = B3SettingEnableDisable;
-                        PlayerSettingVm.PlayerSetting = m_playerSetting;
-                        PlayerSettingVm.RevertValueBack();
-                        m_modelDefValue = new SetModelDefaultValue(B3SettingEnableDisable, 3);
-                        break;
-                    }
-                case B3SettingCategory.Sales:
-                    {
-                        SalesSettingVm.SalesSetting = m_salesSetting;
-                        break;
-                    }
-                case B3SettingCategory.ServerGame:
-                    {
-                        ServerSettingVm.ServerSettings = m_serverSetting;
-                        break;
-                    }
-                case B3SettingCategory.Session:
-                    {
-                        SessionSettingVm.SessionSettings = m_sessionSetting;
-                        break;
-                    }
-                case B3SettingCategory.System:
-                    {
-                        SystemSettingVm.SystemSettings = m_systemSetting;
-                        break;
-                    }
-            }
-        }
-
         #endregion
-
-        #region Properties
+        #region PROPERTIES
 
         private ObservableCollection<B3SettingGlobal> B3Setting { get; set; }
-
         private ObservableCollection<B3GameSetting> B3SettingEnableDisable { get; set; }
-
-        //singleton instance
-        public static SettingViewModel Instance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    lock (m_syncRoot)
-                    {
-                        if (m_instance == null)
-                            m_instance = new SettingViewModel();
-                    }
-                }
-                return m_instance;
-            }
-        }
-
         public ICommand SaveSettingcmd { get; set; }
-
         public ICommand CancelSettingcmd { get; set; }
+        public bool IsSelectedSetting { get; set; }
+        public ServerSettingVm ServerSettingVm { get; set; }
+        public SessionSettingVm SessionSettingVm { get; set; }
+        public SalesSettingVm SalesSettingVm { get; set; }
+        public PlayerSettingVm PlayerSettingVm { get; set; }
+        public SystemSettingVm SystemSettingVm { get; set; }
+        public GameSettingVm GameSettingsVm { get; set; }
 
         public bool IndicatorVisibility
         {
@@ -917,20 +932,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             get { return m_settingList; }
         }
-
-        public bool IsSelectedSetting { get; set; }
-
-        public ServerSettingVm ServerSettingVm { get; set; }
-
-        public SessionSettingVm SessionSettingVm { get; set; }
-
-        public SalesSettingVm SalesSettingVm { get; set; }
-
-        public PlayerSettingVm PlayerSettingVm { get; set; }
-
-        public SystemSettingVm SystemSettingVm { get; set; }
-
-        public GameSettingVm GameSettingsVm { get; set; }
 
         #endregion
 
