@@ -320,8 +320,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             var reportMainBallCallByGame = m_reportCollection.Single(l => l.B3Reports.Id == ReportId.B3BallCallByGame);
                             var tempresultToList = m_reportCollection.ToList();
                             tempresultToList.Remove(reportMainBallCallByGame);
-
                             var exists = tempresultToList.Exists(l => l.B3Reports.Id == ReportId.B3BallCallBySession);       //check if exists 
+
                             if (exists != true)
                             {
                                 ReportTemplateViewModel b3BallCallBySession = new ReportTemplateViewModel(GetReportModel(ReportId.B3BallCallBySession));

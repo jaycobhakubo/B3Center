@@ -41,33 +41,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SalesSettings m_salesSetting;
         private PlayerSettings m_playerSetting;
         private SystemSetting m_systemSetting;
-        //private GameSetting m_gameSetting;
         //Other
-        private ObservableCollection<B3SettingGlobal> m_settingTobeSaved;
-        private B3SettingCategory m_selectedSettingCategoryType;
         private bool m_isRngBallCall;
-        //private Dictionary<string, int> m_b3SettingCategory;//Matches the primary key of B3Settingcategory
-        private SetModelDefaultValue m_modelDefValue;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabledy;
+        private bool m_IsNorthDakotaSettingModify;
+        private SetModelDefaultValue m_modelDefValue;
         private int m_borderValue;
-        private string m_settingSelected;
-        private readonly List<string> m_settingList = new List<string>();
+        private string m_settingSelected;     
+        private  List<string> m_settingList = new List<string>();
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
-
+        private ObservableCollection<B3SettingGlobal> m_settingTobeSaved;
+        private B3SettingCategory m_selectedSettingCategoryType;
         #endregion
-        #region VARIABLES(static)
 
+        #region VARIABLES(static)
         private static readonly List<string> m_zeroToTenList = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
         private static readonly List<string> m_oneToTenList = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
         private static readonly List<string> m_maxCardCountList = new List<string> { "4", "6" };
         private static volatile SettingViewModel m_instance;
         private static readonly object m_syncRoot = new object();
-
         #endregion
-        #region CONSTRUCTOR/Initialization
 
+
+
+        #region CONSTRUCTOR/Initialization
         public void Initialize(B3Controller controller)
         {
             if (controller == null) throw new ArgumentNullException();
@@ -77,7 +76,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
             LoadSettingList();
             BtnSaveIsEnabled = true;
+            var x = controller.Settings.B3GlobalSettings.Where(l => l.SettingType == B3SettingType.NorthDakotaMode);
         }
+
+        public void ResetSettingList(bool ndSettings)
+        {
+            //index of gameserver setting = 3 base on B3SettingCategory minus operator.
+            if (!ndSettings)
+            {
+                var x = m_settingList;
+                x.RemoveAt(3);
+                SettingList = x;
+            }
+            else
+            {
+                SettingList.Insert(3 ,B3SettingCategory.ServerGame.ToString());
+            }
+        }
+
+
+        private void LoadSettingLis2t()
+        {
+            m_settingList.Clear();
+            var categories = Enum.GetValues(typeof(B3SettingCategory)).Cast<B3SettingCategory>();
+            foreach (var b3SettingCategory in categories)
+            {
+                if ((int)b3SettingCategory != 2)
+                {
+                    m_settingList.Add(b3SettingCategory.ToString());
+                }
+            }
+            SettingSelected = m_settingList.FirstOrDefault();
+        }  
 
         //singleton instance
         public static SettingViewModel Instance
@@ -116,8 +146,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             else if (volume == 0) { tempValue = "0"; }
             return tempValue;
         }
-
-  
 
         private void ConvertSettingToModel()
         {
@@ -354,7 +382,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             }
                         }
                       
-                        if (IsGamePaytableSettingChanged)//Moved the paytable setting at the very first list. 
+                        if (IsGamePaytableSettingChanged)//Moved the paytable setting at the very first list this will execute first in the server message.
                         {
                             var y = b3SettingGlobals.ToList();                       
                             var x = b3SettingGlobals.Single(l => l.SettingType == B3SettingType.MathPayTableSetting);
@@ -487,7 +515,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         SystemSetting systemSettingNewValue = SystemSettingVm.SystemSettings;
                         b3Setting = B3Setting;
-
+                      
                         foreach (var b3setting in b3Setting)
                         {
                             b3setting.B3SettingdefaultValue = b3setting.B3SettingValue;
@@ -505,7 +533,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                         }
                                         break; 
                                     }
-                                case B3SettingType.NorthDakotaMode: { b3setting.B3SettingValue = systemSettingNewValue.NorthDakotaMode.ConvertToB3StringValue(); break; }
+                                case B3SettingType.NorthDakotaMode: 
+                                    {
+                                        m_IsNorthDakotaSettingModify = false;
+                                        b3setting.B3SettingValue = systemSettingNewValue.NorthDakotaMode.ConvertToB3StringValue();
+                                        if (b3setting.B3SettingValue != b3setting.B3SettingdefaultValue)
+                                        {
+                                            m_IsNorthDakotaSettingModify = true;
+                                        }
+                                        break; 
+                                    }
+                                                             
                                 case B3SettingType.HandPayTrigger: { b3setting.B3SettingValue = systemSettingNewValue.HandPayTrigger; break; }
                                 case B3SettingType.MinimumPlayers: { b3setting.B3SettingValue = systemSettingNewValue.MinimumPlayers; break; }
                                 case B3SettingType.VipPointMultiplier: { b3setting.B3SettingValue = systemSettingNewValue.VipPointMultiplier; break; }
@@ -529,9 +567,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private void LoadSettingList()
         {
             m_settingList.Clear();
-
             var categories = Enum.GetValues(typeof(B3SettingCategory)).Cast<B3SettingCategory>();
-
             foreach (var b3SettingCategory in categories)
             {
                 if ((int)b3SettingCategory != 2)
@@ -539,9 +575,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     m_settingList.Add(b3SettingCategory.ToString());
                 }
             }
-
             SettingSelected = m_settingList.FirstOrDefault();
         }  
+
         #endregion
         #region METHOD(public/static)
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
@@ -624,8 +660,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 {
                                     throw new Exception("SetGameEnableSetting: " + ex.Message);
                                 }
-
-
                             }
                         }
                         m_modelDefValue = new SetModelDefaultValue(B3SettingEnableDisable, (int)m_selectedSettingCategoryType);
@@ -635,6 +669,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         var ii = ReportsViewModel.Instance;
                         ii.ReportSelectedIndex = -1;
                         ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
+
+                        if (m_IsNorthDakotaSettingModify == true)
+                        {
+                            //ii = SettingViewModel.Instance;
+                         
+                            //ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
+                        }
                     }
                 }
                 catch
@@ -931,6 +972,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public List<string> SettingList
         {
             get { return m_settingList; }
+            set
+            {
+                if (m_settingList != value && m_settingList != null)
+                {
+                    m_settingList = value;
+                    RaisePropertyChanged("SettingList");
+                }
+            }
         }
 
         #endregion

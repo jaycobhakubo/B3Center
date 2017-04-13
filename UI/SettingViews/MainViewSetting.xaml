@@ -92,9 +92,6 @@
                     </Border>
                 </Grid>
             </Border>
-
-
-
                 <Border Name="BrdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
