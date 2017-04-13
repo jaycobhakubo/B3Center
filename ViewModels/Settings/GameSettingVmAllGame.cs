@@ -146,11 +146,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        public bool IsPayTableModify(bool result)
-        {
-            return result;
-        }
-
         private void UpdateModelToGameSettingsList()
         {         
             foreach (B3SettingGlobal gameSetting in m_originalGameSettings)

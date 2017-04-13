@@ -330,7 +330,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         /// </summary>
         public void SessionOperatorList()
         {
-
             if (!IsBusy)
             {
                 IsBusy = true;
@@ -358,7 +357,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 e.Result = message.OperatorList;
             else
                 throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, Resources.SessionOperatorListFailed, ServerErrorTranslator.GetReturnCodeMessage(message.ReturnCode)));
-
         }
 
         private void DoSessionOperatorListNow()

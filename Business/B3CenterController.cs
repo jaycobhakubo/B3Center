@@ -391,7 +391,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 Settings.EnforceMix = message.EnforceMix;
                 Settings.IsDoubleAccount = message.IsDoubleAccount;
                 Settings.B3GlobalSettings = message.B3SettingGlobal;
-
+                Settings.NorthDakotaMode = message.NorthDakotaMode;
             }
             else
                 throw new B3CenterException(string.Format(CultureInfo.CurrentCulture,

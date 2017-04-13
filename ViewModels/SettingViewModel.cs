@@ -41,12 +41,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private List<B3SettingGlobal> m_settingTobeSaved;
         private B3SettingCategory m_selectedSettingCategoryType;
         private bool m_isRngBallCall;
-
+        private bool m_northDakotaModeSetting;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
         private int m_borderValue;
         private string m_selectedB3SettingsCategory;
-        private readonly List<string> m_settingList = new List<string>();
+        private  ObservableCollection<string> m_settingList = new ObservableCollection<string>();
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
 
@@ -147,9 +147,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();
                         if (GameSettingsVm.SelectedGameVm.IsPayTableSettingHasChanged)//We need to include all settings and we need to set the pay table settings at very first item in the list.
                         {
-                            var TempPayTableSetting = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
-                            m_settingTobeSaved.Remove(TempPayTableSetting);//Removed it on the list.
-                            m_settingTobeSaved.Insert(0, TempPayTableSetting);//Reinsert it on the first item.
+                            var tempResult = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
+                            m_settingTobeSaved.Remove(tempResult);//Removed it on the list.
+                            m_settingTobeSaved.Insert(0, tempResult);//Reinsert it on the first item.
                         }
                         break;
                     }
@@ -177,6 +177,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         m_settingTobeSaved = SystemSettingVm.Save();
                         m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
+
+
+                        if (SystemSettingVm.SystemSettings.NorthDakotaMode)
+                        {
+                            if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                            {
+                                SettingList.Add(B3SettingCategory.ServerGame.ToString());
+                            }
+                        }
+                        else
+                        {
+                            if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                            {
+                                SettingList.Remove(B3SettingCategory.ServerGame.ToString());
+                            }
+                        }
                         break;
                     }
             }
@@ -190,17 +206,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             foreach (var b3SettingCategory in categories)
             {
-                if ((int)b3SettingCategory != 2)
+                if (b3SettingCategory != B3SettingCategory.Operator)
                 {
+                    if (b3SettingCategory == B3SettingCategory.ServerGame && !m_northDakotaModeSetting)
+                    {
+                        continue;
+                    }
                     m_settingList.Add(b3SettingCategory.ToString());
                 }
             }
-
-            m_settingList.Sort();
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
-
-
+     
         public void Initialize(B3Controller controller)
         {
             if (controller == null)
@@ -212,7 +229,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             //set commands
             SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
             CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
-
+            m_northDakotaModeSetting = controller.Settings.NorthDakotaMode;
             LoadSettingList();
             BtnSaveIsEnabled = true;
         }
@@ -462,6 +479,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        public ObservableCollection<string> SettingList
+        {
+            get { return m_settingList; }
+            set
+            {
+                m_settingList = value;
+                RaisePropertyChanged("SettingList");
+            }
+        }
+
         public B3CenterSettings Settings
         {
             get
@@ -540,11 +567,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 return m_controller.Parent.Settings.IsClassIIB3Enable;
             }
-        }
-
-        public List<string> SettingList
-        {
-            get { return m_settingList; }
         }
 
         public bool IsSelectedSetting { get; set; }

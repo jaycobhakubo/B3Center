@@ -139,6 +139,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         public bool AllowInSessBallChange { get; set; }
         public bool IsDoubleAccount { get; set; }
         public bool EnforceMix { get; set; }
+        public bool NorthDakotaMode { get; set; }
         public string ReceiptPrinterName { get; private set; }
         public bool IsClassIIB3Enable { get; set; }
         public string PrinterName { get; private set; }

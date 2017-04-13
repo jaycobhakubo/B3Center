@@ -73,6 +73,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                                 IsDoubleAccount = b3Settingglobal.ConvertB3StringValueToBool();
                                 break;
                             }
+                        case B3SettingType.NorthDakotaMode: { NorthDakotaMode = b3Settingglobal.ConvertB3StringValueToBool(); break; }
                     }
 
                     B3SettingGlobal.Add(b3Settingglobal);
@@ -101,6 +102,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         public bool AllowInSessBallChange { get; private set; }
         public bool EnforceMix { get; private set; }
         public bool IsDoubleAccount { get; private set; }
+        public bool NorthDakotaMode { get; private set; }
 
         public ObservableCollection<B3SettingGlobal> B3SettingGlobal
         {
