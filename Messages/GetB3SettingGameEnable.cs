@@ -17,7 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
 
         public GetB3SettingGameEnable()
         {
-            ListB3GameSetting = new List<B3GameSetting>();
+            ListB3GameSetting = new List<B3IsGameEnabledSetting>();
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                     int gameId = responseReader.ReadInt32();
                     bool isEnabled = responseReader.ReadBoolean();
                     bool isAllowed = responseReader.ReadBoolean();
-                    B3GameSetting settings = new B3GameSetting((B3GameType)gameId, isEnabled, isAllowed);
+                    B3IsGameEnabledSetting settings = new B3IsGameEnabledSetting((B3GameType)gameId, isEnabled, isAllowed);
                     ListB3GameSetting.Add(settings);
                 }            
             }
@@ -71,7 +71,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
             }
         }
 
-        public List<B3GameSetting> ListB3GameSetting
+        public List<B3IsGameEnabledSetting> ListB3GameSetting
         {
             get;
             set;

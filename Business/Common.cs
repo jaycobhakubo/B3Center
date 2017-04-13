@@ -62,6 +62,52 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         {
             return b3Setting.B3SettingValue == "T";
         }
+
+        //No ref to db.
+
+        internal static string GetVolumeEquivValue(int volume)
+        {
+            string tempValue = "";
+            if (volume <= 100 && volume >= 91) { tempValue = "10"; }
+            else if (volume < 91 && volume >= 81) { tempValue = "9"; }
+            else if (volume < 81 && volume >= 71) { tempValue = "8"; }
+            else if (volume < 71 && volume >= 61) { tempValue = "7"; }
+            else if (volume < 61 && volume >= 51) { tempValue = "6"; }
+            else if (volume < 51 && volume >= 41) { tempValue = "5"; }
+            else if (volume < 41 && volume >= 31) { tempValue = "4"; }
+            else if (volume < 31 && volume >= 21) { tempValue = "3"; }
+            else if (volume < 21 && volume >= 11) { tempValue = "2"; }
+            else if (volume < 11 && volume >= 1) { tempValue = "1"; }
+            else if (volume == 0) { tempValue = "0"; }
+            return tempValue;
+        }
+
+        internal static string GetVolumeEquivToDb(int volumeLevel)
+        {
+            //volume values are 0-100 for database
+            var level = volumeLevel * 10;
+
+            //if below 0 return zero
+            if (level < 0)
+            {
+                return 0.ToString();
+            }
+
+            //if above 100 then return 100
+            if (level > 100)
+            {
+                return 100.ToString();
+            }
+
+            return level.ToString();
+        }
+
+        //static
+        public static readonly List<string> ZeroToTenList = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
+        public static readonly List<string> OneToTenList = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
+        public static readonly List<string> MaxCardCountList = new List<string> { "4", "6" };
     }
 
 }

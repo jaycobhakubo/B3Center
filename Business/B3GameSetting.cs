@@ -1,23 +1,31 @@
-﻿namespace GameTech.Elite.Client.Modules.B3Center.Business
+﻿using GameTech.Elite.Base;
+
+namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
-    public class B3GameSetting
+    public class B3IsGameEnabledSetting : Notifier
     {
+        #region Fields
+
+        private bool m_isEnabled;
+        private bool m_isAllowed;
+        #endregion
 
         #region Constructors
         /// <summary>
         /// Use to set value
         /// </summary>
-        public B3GameSetting(B3GameType game, bool isEnabled, bool isAllowed)
+        public B3IsGameEnabledSetting(B3GameType game, bool isEnabled, bool isAllowed)
         {
             GameType = game;
             IsEnabled = isEnabled;
             IsAllowed = isAllowed;
         }
 
-        public B3GameSetting()
+        public B3IsGameEnabledSetting()
         {
         }
         #endregion
+
         #region Properties 
 
         public B3GameType GameType
@@ -28,14 +36,28 @@
 
         public bool IsEnabled
         {
-            get;
-            set;
+            get
+            {
+                return m_isEnabled;
+            }
+            set
+            {
+                m_isEnabled = value;
+                RaisePropertyChanged("IsEnabled");
+            }
         }
 
         public bool IsAllowed
         {
-            get;
-            set;
+            get
+            {
+                return m_isAllowed;
+            }
+            set
+            {
+                m_isAllowed = value;
+                RaisePropertyChanged("IsAllowed");
+            }
         }
 
         #endregion
@@ -85,7 +107,7 @@
             set;
         }
 
-        public string B3SettingdefaultValue
+        public string B3SettingDefaultValue
         {
             get;
             set;

@@ -25,7 +25,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         Sales = 4,
         ServerGame = 5,
         Session = 6,
-        System = 7,
+        System = 7, 
+        //Paytables = 8
     }
 
     public enum B3SettingType
@@ -67,7 +68,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         GameStartDelay = 35,
         ConsolotionPrize = 36,
         GameRecallPass = 37,
-        WaiCountDown = 38,
+        WaitCountDown = 38,
         PayoutLimit = 39,
         JackpotLimit = 40,
         EnforceMix = 41,

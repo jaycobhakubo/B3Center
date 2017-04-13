@@ -18,18 +18,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
     {
         private readonly List<SettingMember> m_lB3Settings = new List<SettingMember>();
 
-        public SetB3SettingsMessage(ObservableCollection<B3SettingGlobal> lB3Settings)
+        public SetB3SettingsMessage(List<B3SettingGlobal> lB3Settings)
         {         
             foreach (B3SettingGlobal sm in lB3Settings)
             {
-                if (sm.B3SettingValue != sm.B3SettingdefaultValue)//filter only setting that need to be changed.
+                if (sm.B3SettingValue != sm.B3SettingDefaultValue)//filter only setting that need to be changed.
                 {
                     var settingMember = new SettingMember
                     {
                         GameType = sm.GameType,
                         SettingType = sm.SettingType,
                         Value = sm.B3SettingValue,
-                        OldValue = sm.B3SettingdefaultValue
+                        OldValue = sm.B3SettingDefaultValue
                     };
                     m_lB3Settings.Add(settingMember);
                 }

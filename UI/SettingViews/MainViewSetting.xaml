@@ -92,6 +92,9 @@
                     </Border>
                 </Grid>
             </Border>
+
+
+
                 <Border Name="BrdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -100,7 +103,7 @@
                     <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                        
-                            Name="LstbxSettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
+                            Name="LstbxSettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SelectedB3SettingsCategory}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
                           </ListBox>
                     </ScrollViewer>
                 </Grid>

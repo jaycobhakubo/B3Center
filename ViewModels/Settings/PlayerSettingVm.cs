@@ -1,96 +1,189 @@
-﻿using GameTech.Elite.Base;
+﻿using System;
+using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
     public class PlayerSettingVm : ViewModelBase
     {
-        #region MEMBER
+        #region Fields
 
         private PlayerSettings m_playerSetting;
-        private ObservableCollection<B3GameSetting> m_b3SettingEnableDisable;
+        private List<B3IsGameEnabledSetting> m_b3SettingEnableDisable;
+        private readonly List<B3SettingGlobal> m_origianlPlayerSettings; 
 
         #endregion
-        #region CONSTRUCTOR
 
-        public PlayerSettingVm(PlayerSettings playerSetting, ObservableCollection<B3GameSetting> b3SettingEnableDisable)
+        #region Constructor
+
+        public PlayerSettingVm(List<B3SettingGlobal> playerSettingsList, List<B3IsGameEnabledSetting> b3SettingEnableDisable)
         {
-            VolumeList = SettingViewModel.ZeroToTenList();
-            PlayerSetting = playerSetting;
+            VolumeList = Business.Helpers.ZeroToTenList;
+
+            PlayerSetting = new PlayerSettings();
+            UpdateSettingsListToModel(playerSettingsList, b3SettingEnableDisable);
+            
+            m_origianlPlayerSettings = playerSettingsList;
             m_b3SettingEnableDisable = b3SettingEnableDisable;
-            AssignEnableSettingToGame();    
         }
 
         #endregion
-        #region METHOD
 
-        public void RevertValueBack()
-        {           
-            AssignEnableSettingToGame();
-            PlayerSetting = m_playerSetting;
+        #region Method
+
+        public List<B3SettingGlobal> Save()
+        {
+            UpdateModelToSettingsList();
+            return m_origianlPlayerSettings;
         }
 
-        private void AssignEnableSettingToGame()
-        {     
-            foreach (var gameSettings in m_b3SettingEnableDisable)
+        public void ResetSettingsToDefault()
+        {
+            UpdateSettingsListToModel(m_origianlPlayerSettings, m_b3SettingEnableDisable);
+        }
+
+        private void UpdateSettingsListToModel(List<B3SettingGlobal> playerSettingsList, List<B3IsGameEnabledSetting> isGameEnabledSettings)
+        {
+            foreach (var setting in playerSettingsList)
             {
-                switch(gameSettings.GameType)
+
+                switch (setting.SettingType)
                 {
-                    case B3GameType.Crazybout: 
-                        {
-                            m_playerSetting.CrazyboutGameSetting = gameSettings;                       
-                            break; 
-                        }
-                    case B3GameType.Jailbreak: 
-                        {
-                            m_playerSetting.JailBreakGameSetting = gameSettings;
-                            break;                         
-                        }
+                    case B3SettingType.PlayerCalibrateTouch:
+                        PlayerSetting.PlayerCalibrateTouch = setting.ConvertB3StringValueToBool();
+                        break;
+                    case B3SettingType.PresstoCollect:
+                        PlayerSetting.PresstoCollect = setting.ConvertB3StringValueToBool();
+                        break;
+                    case B3SettingType.AnnounceCall:
+                        PlayerSetting.AnnounceCall = setting.ConvertB3StringValueToBool();
+                        break;
+                    case B3SettingType.PlayerScreenCursor:
+                        PlayerSetting.PlayerScreenCursor = setting.ConvertB3StringValueToBool();
+                        break;
+                    case B3SettingType.TimeToCollect:
+                        PlayerSetting.TimeToCollect = setting.B3SettingValue;
+                        break;
+                    case B3SettingType.Disclaimer:
+                        PlayerSetting.Disclaimer = setting.ConvertB3StringValueToBool();
+                        break;
+                    case B3SettingType.PlayerMainVolume:
+                        PlayerSetting.PlayerMainVolume = Business.Helpers.GetVolumeEquivValue(Convert.ToInt32(setting.B3SettingValue));
+                        break;
+                }
+            }
+
+            foreach (var gameEnabledSetting in isGameEnabledSettings)
+            {
+                switch (gameEnabledSetting.GameType)
+                {
+                    case B3GameType.Crazybout:
+                        PlayerSetting.CrazyboutGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
+                            break;
+                    case B3GameType.Jailbreak:
+                            PlayerSetting.JailBreakGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
+                            break;
                     case B3GameType.Mayamoney:
-                        {
-                            m_playerSetting.MayaMoneyGameSetting = gameSettings;
+                            PlayerSetting.MayaMoneyGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
                             break;
-                        }
-                    case B3GameType.Spirit76: 
-                        {
-                            m_playerSetting.Spirit76GameSetting = gameSettings;
+                    case B3GameType.Spirit76:
+                            PlayerSetting.Spirit76GameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
                             break;
-                        }
                     case B3GameType.Timebomb:
-                        {
-                            m_playerSetting.TimeBombGameSetting = gameSettings;
+                            PlayerSetting.TimeBombGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
                             break;
-                        }
                     case B3GameType.Ukickem:
-                        {
-                            m_playerSetting.UKickemGameSetting = gameSettings;
+                            PlayerSetting.UKickemGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
                             break;
-                        }
-                    case B3GameType.Wildball: 
-                        {
-                            m_playerSetting.WildBallGameSetting = gameSettings;
+                    case B3GameType.Wildball:
+                            PlayerSetting.WildBallGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
                             break;
-                        }
-                    case B3GameType.Wildfire: 
-                        {
-                            m_playerSetting.WildFireGameSetting = gameSettings;
+                    case B3GameType.Wildfire:
+                            PlayerSetting.WildFireGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
                             break;
-                        }
                 }
             }
         }
 
-        #endregion
-        #region PROPERTIES
-        public List<string> VolumeList { get; set; }
-
-        public ObservableCollection<B3GameSetting> B3SettingEnableDisable
+        private void UpdateModelToSettingsList()
         {
-       
+            foreach (var setting in m_origianlPlayerSettings)
+            {
+                setting.B3SettingDefaultValue = setting.B3SettingValue;
+                switch (setting.SettingType)
+                {
+                    case B3SettingType.PlayerCalibrateTouch:
+                        setting.B3SettingValue = PlayerSetting.PlayerCalibrateTouch.ConvertToB3StringValue();
+                        break;
+                    case B3SettingType.PresstoCollect:
+                        setting.B3SettingValue = PlayerSetting.PresstoCollect.ConvertToB3StringValue();
+                        break;
+                    case B3SettingType.AnnounceCall:
+                        setting.B3SettingValue = PlayerSetting.AnnounceCall.ConvertToB3StringValue();
+                        break;
+                    case B3SettingType.PlayerScreenCursor:
+                        setting.B3SettingValue = PlayerSetting.PlayerScreenCursor.ConvertToB3StringValue();
+                        break;
+                    case B3SettingType.TimeToCollect:
+                        setting.B3SettingValue = PlayerSetting.TimeToCollect;
+                        break;
+                    case B3SettingType.Disclaimer:
+                        setting.B3SettingValue = PlayerSetting.Disclaimer.ConvertToB3StringValue();
+                        break;
+                    case B3SettingType.PlayerMainVolume:
+                        setting.B3SettingValue = Business.Helpers.GetVolumeEquivToDb(Convert.ToInt32(PlayerSetting.PlayerMainVolume));
+                        break;
+                }
+            }
+
+            foreach (var gameEnabledSetting in m_b3SettingEnableDisable)
+            {
+                switch (gameEnabledSetting.GameType)
+                {
+                    case B3GameType.Crazybout:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.CrazyboutGameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Jailbreak:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.JailBreakGameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Mayamoney:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.MayaMoneyGameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Spirit76:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.Spirit76GameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Timebomb:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.TimeBombGameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Ukickem:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.UKickemGameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Wildball:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.WildBallGameSetting.IsEnabled;
+                        break;
+                    case B3GameType.Wildfire:
+                        gameEnabledSetting.IsEnabled = PlayerSetting.WildFireGameSetting.IsEnabled;
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        #region Properties
+
+        public List<string> VolumeList { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the B3 Game Setting. Tells whether a game is enabled or disabled. These are not real-time values. The settings get updated when saved. 
+        /// </summary>
+        /// <value>
+        /// The b3 setting enable disable.
+        /// </value>
+        public List<B3IsGameEnabledSetting> B3SettingEnableDisable
+        {
             get { return m_b3SettingEnableDisable; }
             set
             {

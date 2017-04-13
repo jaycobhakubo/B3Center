@@ -39,13 +39,13 @@
                          PreviewTextInput="_PreviewTextInput"          
                          />
                 <Label  Content="Consolation prize"/>
-                <TextBox Name="TxtConsolationPrize" Text="{Binding ServerSettings.Consolation}"    MaxLength="19" Tag="36" 
+                <TextBox Name="TxtConsolationPrize" Text="{Binding ServerSettings.ConsolationPrize}"    MaxLength="19" Tag="36" 
                          TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
                          PreviewTextInput="_PreviewTextInput"           
                          />
                 <Label  Content="Game recall password"/>
-                <TextBox Name="TxtGameRecallPassword" Text="{Binding ServerSettings.GameRecallPassw}"   MaxLength="25" Tag="37" 
+                <TextBox Name="TxtGameRecallPassword" Text="{Binding ServerSettings.GameRecallPassword}"   MaxLength="25" Tag="37" 
                         TextChanged="ValidateUserInput"                                          
                          PreviewKeyDown="DontAllowThisKeyboardinput"                       
                          />
