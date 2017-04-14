@@ -28,7 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         private string m_callSpeedMin;
         private string m_callSpeedBonus;
         private ObservableCollection<B3MathGamePay> m_gamePaytableList;
-        private B3IsGameEnabledSetting m_isEnableGame;
+        private B3IsGameEnabledSetting m_enableGameSetting;
 
         #endregion
 
@@ -283,16 +283,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        public B3IsGameEnabledSetting IsEnableGame
+        public B3IsGameEnabledSetting EnableGameSetting
         {
             get
             {
-                return m_isEnableGame;
+                return m_enableGameSetting;
             }
             set
             {
-                m_isEnableGame = value;
-                RaisePropertyChanged("IsEnableGame");
+                m_enableGameSetting = value;
+                RaisePropertyChanged("EnableGameSetting");
             }
         }
 

@@ -28,14 +28,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 
         public PlayerSettings()
         {
-            CrazyboutGameSetting = new B3IsGameEnabledSetting();
-            JailBreakGameSetting = new B3IsGameEnabledSetting();
-            MayaMoneyGameSetting = new B3IsGameEnabledSetting();
-            Spirit76GameSetting = new B3IsGameEnabledSetting();
-            TimeBombGameSetting = new B3IsGameEnabledSetting();
-            UKickemGameSetting = new B3IsGameEnabledSetting();
-            WildBallGameSetting = new B3IsGameEnabledSetting();
-            WildFireGameSetting = new B3IsGameEnabledSetting();
+            CrazyboutGameSetting = new B3IsGameEnabledSetting{GameType = B3GameType.Crazybout};
+            JailBreakGameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Jailbreak };
+            MayaMoneyGameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Mayamoney };
+            Spirit76GameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Spirit76 };
+            TimeBombGameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Timebomb };
+            UKickemGameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Ukickem };
+            WildBallGameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Wildball };
+            WildFireGameSetting = new B3IsGameEnabledSetting { GameType = B3GameType.Wildfire };
         }
 
         #endregion

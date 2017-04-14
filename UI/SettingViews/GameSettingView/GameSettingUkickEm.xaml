@@ -11,11 +11,11 @@
         <converter:ValueDbToValueAppCallSpeed x:Key="ConvertDbToAppValueCallSpeed"></converter:ValueDbToValueAppCallSpeed>
 
         <Style  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
-            <Setter Property="IsEnabled" Value="{Binding IsGameEnable}" />
+            <Setter Property="IsEnabled" Value="{Binding Settings.EnableGameSetting.IsEnabled}" />
         </Style>
 
         <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
-            <Setter Property="IsEnabled" Value="{Binding IsGameEnable}" />
+            <Setter Property="IsEnabled" Value="{Binding Settings.EnableGameSetting.IsEnabled}" />
         </Style>
     </UserControl.Resources>
     <Border>
@@ -54,7 +54,7 @@
             	 Tag="59"/>
                 <Label   Content="Game denominations" />
                 <GroupBox 
-                    IsEnabled="{Binding IsGameEnable}" >
+                    IsEnabled="{Binding Settings.EnableGameSetting.IsEnabled}" >
                     <Grid >
                         <Grid.Resources>
                             <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource B3StyleCheckBoxDenom}">

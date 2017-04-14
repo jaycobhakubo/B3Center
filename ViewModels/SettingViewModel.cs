@@ -40,13 +40,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //Other
         private List<B3SettingGlobal> m_settingTobeSaved;
         private B3SettingCategory m_selectedSettingCategoryType;
-        //private bool m_isRngBallCall;
-        private bool m_northDakotaModeSetting;
+        private bool m_isRngBallCall;
+
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
         private int m_borderValue;
         private string m_selectedB3SettingsCategory;
-        private  ObservableCollection<string> m_settingList = new ObservableCollection<string>();
+        private ObservableCollection<string> m_settingList = new ObservableCollection<string>();
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
 
@@ -72,6 +72,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_lazyServerSettingVm = new Lazy<ServerSettingVm>(InitializeServerSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
             m_lazySessionSettingVm = new Lazy<SessionSettingVm>(InitializeSessionSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
             m_lazySystemSettingVm = new Lazy<SystemSettingVm>(InitializeSystemSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
+        }
+
+        #endregion
+
+        #region Method(Initialize)
+
+        public void Initialize(B3Controller controller)
+        {
+            if (controller == null)
+                throw new ArgumentNullException();
+
+            m_controller = controller;
+            B3IsGameEnabledSettings = new List<B3IsGameEnabledSetting>(m_controller.Settings.B3GameSettings);
+
+            //set commands
+            SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
+            CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
+
+            LoadSettingList(controller.Settings.NorthDakotaMode);
+            BtnSaveIsEnabled = true;
         }
 
         #endregion
@@ -139,7 +159,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetNewValue()
         {
-            var b3Setting = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == m_selectedSettingCategoryType).ToList();
             switch (m_selectedSettingCategoryType)
             {
                 case B3SettingCategory.Games:
@@ -155,6 +174,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case B3SettingCategory.Player:
                     {
+                        //save enabled game settings
+                        foreach (var gameEnabledSetting in PlayerSettingVm.ModifiedB3GameEnabledSettings)
+                        {
+                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
+                            try
+                            {
+                                setGameEnabledMessage.Send();
+                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
+                                {
+                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                                }
+                            }
+                            catch (ServerCommException ex)
+                            {
+                                throw new Exception("SetGameEnableSetting: " + ex.Message);
+                            }
+                        }
+
                         m_settingTobeSaved = PlayerSettingVm.Save();
                         break;
                     }
@@ -175,48 +212,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case B3SettingCategory.System:
                     {
-                        m_settingTobeSaved = SystemSettingVm.Save();                                          
+                        m_settingTobeSaved = SystemSettingVm.Save();
+                        m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
                         break;
                     }
             }
         }
 
-        private void LoadSettingList()
-        {
-            m_settingList.Clear();
-            var categories = Enum.GetValues(typeof(B3SettingCategory)).Cast<B3SettingCategory>();
-
-            foreach (var b3SettingCategory in categories)
-            {
-                if (b3SettingCategory != B3SettingCategory.Operator)               
-                    if (b3SettingCategory == B3SettingCategory.ServerGame && !m_northDakotaModeSetting)                   
-                        continue;
-                    
-                    m_settingList.Add(b3SettingCategory.ToString());              
-            }
-
-            SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
-        }
-     
-        public void Initialize(B3Controller controller)
-        {
-            if (controller == null)
-                throw new ArgumentNullException();
-
-            m_controller = controller;
-            B3IsGameEnabledSettings = new List<B3IsGameEnabledSetting>(m_controller.Settings.B3GameSettings);
-
-            //set commands
-            SaveSettingcmd = new RelayCommand(parameter => RunSavedCommand());
-            CancelSettingcmd = new RelayCommand(parameter => CancelSetting());
-            m_northDakotaModeSetting = controller.Settings.NorthDakotaMode;
-            LoadSettingList();
-            BtnSaveIsEnabled = true;
-        }
-
+        //Will update UI for certain B3 Setting changed.
         private void UpdateUIPerSettingChanged(List<B3SettingGlobal> b3settingList)
         {
-            foreach (B3SettingGlobal b3setting in b3settingList) 
+            foreach (B3SettingGlobal b3setting in b3settingList)
             {
                 switch (b3setting.SettingType)
                 {
@@ -229,7 +235,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case B3SettingType.NorthDakotaMode:
                         {
-                          
+
                             if ((b3setting.B3SettingValue == "F") ? false : true)
                             {
                                 if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
@@ -249,6 +255,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private void LoadSettingList(bool IsDakotaMode)
+        {
+            m_settingList.Clear();
+            var categories = Enum.GetValues(typeof(B3SettingCategory)).Cast<B3SettingCategory>();
+
+            foreach (var b3SettingCategory in categories)
+            {
+                if (b3SettingCategory != B3SettingCategory.Operator)
+                    if (b3SettingCategory == B3SettingCategory.ServerGame && !IsDakotaMode)
+                        continue;
+
+                m_settingList.Add(b3SettingCategory.ToString());
+            }
+
+            SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
+        }
+
         public void SaveSetting()
         {
             try
@@ -259,31 +282,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     msg.Send();
                     UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
-                   
-                   
-                    if (m_selectedSettingCategoryType == B3SettingCategory.Player)
-                    {
-                        foreach (B3IsGameEnabledSetting i in B3IsGameEnabledSettings)
-                        {
-                            //if (i.IsEnabled != m_modelDefValue.B3SettingEnableDisablePreviousValue.Single(l => l.GameType == i.GameType).IsEnabled)
-                            //{
-                            //    SetGameEnableSetting msg2 = new SetGameEnableSetting(i.GameType, i.IsEnabled);
-                            //    try
-                            //    {
-                            //        msg2.Send();
-                            //        if (msg2.ReturnCode != ServerReturnCode.Success)
-                            //        {
-                            //            throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(msg2.ReturnCode));
-                            //        }
-                            //    }
-                            //    catch (ServerCommException ex)
-                            //    {
-                            //        throw new Exception("SetGameEnableSetting: " + ex.Message);
-                            //    }
-                            //    m_modelDefValue = new SetModelDefaultValue(B3IsGameEnabledSettings, (int)m_selectedSettingCategoryType);
-                            //}
-                        }
-                    }               
                 }
                 catch
                 {
@@ -328,7 +326,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case B3SettingCategory.Games:
                     {
                         GameSettingsVm = m_lazyGameSettingVm.Value;
-                        BtnSaveIsEnabled = GameSettingsVm.SelectedGameVm.IsGameEnable;
+                        BtnSaveIsEnabled = GameSettingsVm.SelectedGameVm.Settings.EnableGameSetting.IsEnabled;
                         SelectedSettingView = m_gameSettingView;
                         break;
                     }
@@ -406,9 +404,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
 
-        #region Properties
-
-        private List<B3IsGameEnabledSetting> B3IsGameEnabledSettings { get; set; }
+        #region Properties(singleton instance)
 
         //singleton instance
         public static SettingViewModel Instance
@@ -427,6 +423,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        #endregion
+
+        #region Properties
+
+        private List<B3IsGameEnabledSetting> B3IsGameEnabledSettings { get; set; }
+    
         public ICommand SaveSettingcmd { get; set; }
 
         public ICommand CancelSettingcmd { get; set; }
@@ -487,16 +489,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 m_selectedSettingView = value;
                 RaisePropertyChanged("SelectedSettingView");
-            }
-        }
-
-        public ObservableCollection<string> SettingList
-        {
-            get { return m_settingList; }
-            set
-            {
-                m_settingList = value;
-                RaisePropertyChanged("SettingList");
             }
         }
 
@@ -580,12 +572,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        public ObservableCollection<string> SettingList
+        {
+            get { return m_settingList; }
+        }
+
         public bool IsSelectedSetting { get; set; }
+
         public ServerSettingVm ServerSettingVm { get; set; }
+
         public SessionSettingVm SessionSettingVm { get; set; }
+
         public SalesSettingVm SalesSettingVm { get; set; }
+
         public PlayerSettingVm PlayerSettingVm { get; set; }
+
         public SystemSettingVm SystemSettingVm { get; set; }
+
         public GameSettingVm GameSettingsVm { get; set; }
 
         #endregion

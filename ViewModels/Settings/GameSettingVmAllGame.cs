@@ -23,7 +23,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             GameType = gameType;
             Settings = new GameSetting { GameType = gameType };
             UpdateGameSettingsListToModel(gameSettingsList, isGameEnabledSetting);
-            SettingViewModel.Instance.BtnSaveIsEnabled = Settings.IsEnableGame.IsEnabled;
+            SettingViewModel.Instance.BtnSaveIsEnabled = Settings.EnableGameSetting.IsEnabled;
             m_originalGameSettings = gameSettingsList;
             m_isGameEnabledSetting = isGameEnabledSetting;
             m_isPayTableSettingHasChanged = false;//We only care if its true.
@@ -43,16 +43,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        public bool IsGameEnable
-        {
-            get { return Settings.IsEnableGame.IsEnabled; }
-            set
-            {
-                Settings.IsEnableGame.IsEnabled = value;
-                RaisePropertyChanged("IsGameEnable");
-            }
-        }
-
         public B3GameType GameType { get; private set; }
         public List<string> ListMaxBetLevel { get { return Business.Helpers.OneToTenList; } }
         public List<string> ListMaxCards { get { return Business.Helpers.MaxCardCountList; } }
@@ -61,6 +51,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public List<string> ListCallSpeed { get { return Business.Helpers.OneToTenList; } }
         public List<string> ListCallSpeedBonus { get { return Business.Helpers.OneToTenList; } }
         public bool IsPayTableSettingHasChanged { get { return m_isPayTableSettingHasChanged; } }
+
         #endregion
 
         #region Methods
@@ -74,7 +65,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         private void UpdateGameSettingsListToModel(List<B3SettingGlobal> gameSettingList, B3IsGameEnabledSetting isGameEnabledSetting)
         {
             Settings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(GameType);
-            Settings.IsEnableGame = isGameEnabledSetting;
+            Settings.EnableGameSetting = isGameEnabledSetting;
 
             foreach (B3SettingGlobal setting in gameSettingList)
             {
@@ -139,7 +130,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
         private void UpdateModelToGameSettingsList()
-        {         
+        {
             foreach (B3SettingGlobal gameSetting in m_originalGameSettings)
             {
                 gameSetting.B3SettingDefaultValue = gameSetting.B3SettingValue;
@@ -191,12 +182,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             gameSetting.B3SettingValue = Settings.SingleOfferBonus.ConvertToB3StringValue();
                             break;
                     case B3SettingType.MathPayTableSetting:
-                            {
-                                //Set if math pay table setting has changed or not.
-                                m_isPayTableSettingHasChanged = (gameSetting.B3SettingValue != Settings.MathPayTable.MathPackageId.ToString()) ? true : false;
-                                gameSetting.B3SettingValue = Settings.MathPayTable.MathPackageId.ToString();                              
-                                break;
-                            }
+                            //Set if math pay table setting has changed or not.
+                            m_isPayTableSettingHasChanged = (gameSetting.B3SettingValue != Settings.MathPayTable.MathPackageId.ToString()) ? true : false;
+                            gameSetting.B3SettingValue = Settings.MathPayTable.MathPackageId.ToString();
+                            break;
                     case B3SettingType.CallSpeedMin:
                             gameSetting.B3SettingValue = Settings.CallSpeedMin;
                             break;
@@ -209,10 +198,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private B3MathGamePay GetB3MathGamePayTable(GameSetting settings, B3SettingGlobal mathSetting)
         {
-            int mathPackageId;         
-            if (mathSetting == null){return null;}//check for null         
-            if (!int.TryParse(mathSetting.B3SettingValue, out mathPackageId)) { return null; }  //make sure we are able to parse an int
-            
+            int mathPackageId;
+
+            //check for null
+            if (mathSetting == null)
+            {
+                return null;
+            }
+
+            //make sure we are able to parse an int
+            if (!int.TryParse(mathSetting.B3SettingValue, out mathPackageId))
+            {
+                return null;
+            }
+
             //check setting for null or empty list
             if (settings == null ||
                 settings.LGamePayTable == null ||
@@ -227,7 +226,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public List<B3SettingGlobal> Save()
         {
             UpdateModelToGameSettingsList();
-            m_isGameEnabledSetting = Settings.IsEnableGame;
+            m_isGameEnabledSetting = Settings.EnableGameSetting;
             return m_originalGameSettings;
         }
 
