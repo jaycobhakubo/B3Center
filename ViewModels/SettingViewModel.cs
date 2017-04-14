@@ -178,21 +178,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         m_settingTobeSaved = SystemSettingVm.Save();
                         m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
 
-
                         if (SystemSettingVm.SystemSettings.NorthDakotaMode)
                         {
                             if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
                             {
-                                SettingList.Add(B3SettingCategory.ServerGame.ToString());
+                                var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
+                                SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());
                             }
                         }
                         else
                         {
                             if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
-                            {
                                 SettingList.Remove(B3SettingCategory.ServerGame.ToString());
-                            }
-                        }
+                        }                                              
                         break;
                     }
             }
@@ -201,20 +199,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private void LoadSettingList()
         {
             m_settingList.Clear();
-
             var categories = Enum.GetValues(typeof(B3SettingCategory)).Cast<B3SettingCategory>();
 
             foreach (var b3SettingCategory in categories)
             {
-                if (b3SettingCategory != B3SettingCategory.Operator)
-                {
-                    if (b3SettingCategory == B3SettingCategory.ServerGame && !m_northDakotaModeSetting)
-                    {
+                if (b3SettingCategory != B3SettingCategory.Operator)               
+                    if (b3SettingCategory == B3SettingCategory.ServerGame && !m_northDakotaModeSetting)                   
                         continue;
-                    }
-                    m_settingList.Add(b3SettingCategory.ToString());
-                }
+                    
+                    m_settingList.Add(b3SettingCategory.ToString());              
             }
+
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
      
