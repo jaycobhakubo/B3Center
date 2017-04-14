@@ -163,7 +163,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         setting.B3SettingValue = SystemSettings.MultiOperator.ConvertToB3StringValue();
                         break;
                     case B3SettingType.CommonRngBallCall:
-                        setting.B3SettingValue = SystemSettings.CommonRngBallCall.ConvertToB3StringValue();
+                        setting.B3SettingValue = SystemSettings.CommonRngBallCall.ConvertToB3StringValue();     
                         break;
                     case B3SettingType.NorthDakotaMode:
                         setting.B3SettingValue = SystemSettings.NorthDakotaMode.ConvertToB3StringValue();

@@ -56,6 +56,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                         case B3SettingType.CommonRngBallCall:
                             {
                                 IsCommonRng = b3Settingglobal.ConvertB3StringValueToBool();
+                                b3Settingglobal.UIUpdateRequired = true;
                             break;
                             }
                         case B3SettingType.EnforceMix:
@@ -73,7 +74,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                                 IsDoubleAccount = b3Settingglobal.ConvertB3StringValueToBool();
                                 break;
                             }
-                        case B3SettingType.NorthDakotaMode: { NorthDakotaMode = b3Settingglobal.ConvertB3StringValueToBool(); break; }
+                        case B3SettingType.NorthDakotaMode:
+                            {
+                                NorthDakotaMode = b3Settingglobal.ConvertB3StringValueToBool();
+                                b3Settingglobal.UIUpdateRequired = true;
+                                break;
+                            }
                     }
 
                     B3SettingGlobal.Add(b3Settingglobal);

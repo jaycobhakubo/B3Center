@@ -40,7 +40,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //Other
         private List<B3SettingGlobal> m_settingTobeSaved;
         private B3SettingCategory m_selectedSettingCategoryType;
-        private bool m_isRngBallCall;
+        //private bool m_isRngBallCall;
         private bool m_northDakotaModeSetting;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
@@ -175,22 +175,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case B3SettingCategory.System:
                     {
-                        m_settingTobeSaved = SystemSettingVm.Save();
-                        m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
-
-                        if (SystemSettingVm.SystemSettings.NorthDakotaMode)
-                        {
-                            if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
-                            {
-                                var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
-                                SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());
-                            }
-                        }
-                        else
-                        {
-                            if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
-                                SettingList.Remove(B3SettingCategory.ServerGame.ToString());
-                        }                                              
+                        m_settingTobeSaved = SystemSettingVm.Save();                                          
                         break;
                     }
             }
@@ -229,6 +214,41 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             BtnSaveIsEnabled = true;
         }
 
+        private void UpdateUIPerSettingChanged(List<B3SettingGlobal> b3settingList)
+        {
+            foreach (B3SettingGlobal b3setting in b3settingList) 
+            {
+                switch (b3setting.SettingType)
+                {
+                    case B3SettingType.CommonRngBallCall:
+                        {
+                            var ii = ReportsViewModel.Instance;
+                            ii.ReportSelectedIndex = -1;
+                            ii.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
+                            break;
+                        }
+                    case B3SettingType.NorthDakotaMode:
+                        {
+                          
+                            if ((b3setting.B3SettingValue == "F") ? false : true)
+                            {
+                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                                {
+                                    var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
+                                    SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());
+                                }
+                            }
+                            else
+                            {
+                                if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                                    SettingList.Remove(B3SettingCategory.ServerGame.ToString());
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+
         public void SaveSetting()
         {
             try
@@ -238,7 +258,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 try
                 {
                     msg.Send();
-
+                    UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
+                   
+                   
                     if (m_selectedSettingCategoryType == B3SettingCategory.Player)
                     {
                         foreach (B3IsGameEnabledSetting i in B3IsGameEnabledSettings)
@@ -261,13 +283,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             //    m_modelDefValue = new SetModelDefaultValue(B3IsGameEnabledSettings, (int)m_selectedSettingCategoryType);
                             //}
                         }
-                    }
-                    else if (m_selectedSettingCategoryType == B3SettingCategory.System)//Update B3ReportCenter 
-                    {
-                        var ii = ReportsViewModel.Instance;
-                        ii.ReportSelectedIndex = -1;
-                        ii.SetBallCallReportBySessionOrByGame(m_isRngBallCall);
-                    }
+                    }               
                 }
                 catch
                 {
