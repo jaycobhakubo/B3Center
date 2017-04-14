@@ -168,6 +168,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         {
                             var tempResult = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
                             m_settingTobeSaved.Remove(tempResult);//Removed it on the list.
+                            m_settingTobeSaved.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
                             m_settingTobeSaved.Insert(0, tempResult);//Reinsert it on the first item.
                         }
                         break;
@@ -578,17 +579,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         public bool IsSelectedSetting { get; set; }
-
         public ServerSettingVm ServerSettingVm { get; set; }
-
         public SessionSettingVm SessionSettingVm { get; set; }
-
         public SalesSettingVm SalesSettingVm { get; set; }
-
         public PlayerSettingVm PlayerSettingVm { get; set; }
-
         public SystemSettingVm SystemSettingVm { get; set; }
-
         public GameSettingVm GameSettingsVm { get; set; }
 
         #endregion
