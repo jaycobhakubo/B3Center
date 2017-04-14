@@ -570,17 +570,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
         public bool IsSelectedSetting { get; set; }
-
         public ServerSettingVm ServerSettingVm { get; set; }
-
         public SessionSettingVm SessionSettingVm { get; set; }
-
         public SalesSettingVm SalesSettingVm { get; set; }
-
         public PlayerSettingVm PlayerSettingVm { get; set; }
-
         public SystemSettingVm SystemSettingVm { get; set; }
-
         public GameSettingVm GameSettingsVm { get; set; }
 
         #endregion

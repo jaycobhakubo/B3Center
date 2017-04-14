@@ -54,21 +54,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
         public B3GameType GameType { get; private set; }
-
         public List<string> ListMaxBetLevel { get { return Business.Helpers.OneToTenList; } }
-
         public List<string> ListMaxCards { get { return Business.Helpers.MaxCardCountList; } }
-
         public List<string> ListCallSpeedMin { get { return Business.Helpers.OneToTenList; } }
-
         public List<string> ListCallSpeedMax { get { return Business.Helpers.OneToTenList; } }
-
         public List<string> ListCallSpeed { get { return Business.Helpers.OneToTenList; } }
-
         public List<string> ListCallSpeedBonus { get { return Business.Helpers.OneToTenList; } }
-
         public bool IsPayTableSettingHasChanged { get { return m_isPayTableSettingHasChanged; } }
-
         #endregion
 
         #region Methods
@@ -217,20 +209,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private B3MathGamePay GetB3MathGamePayTable(GameSetting settings, B3SettingGlobal mathSetting)
         {
-            int mathPackageId;
-
-            //check for null
-            if (mathSetting == null)
-            {
-                return null;
-            }
-
-            //make sure we are able to parse an int
-            if (!int.TryParse(mathSetting.B3SettingValue, out mathPackageId))
-            {
-                return null;
-            }
-
+            int mathPackageId;         
+            if (mathSetting == null){return null;}//check for null         
+            if (!int.TryParse(mathSetting.B3SettingValue, out mathPackageId)) { return null; }  //make sure we are able to parse an int
+            
             //check setting for null or empty list
             if (settings == null ||
                 settings.LGamePayTable == null ||
