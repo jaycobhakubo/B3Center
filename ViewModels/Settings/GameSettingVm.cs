@@ -22,7 +22,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #endregion
         #region CONSTRUCTOR
 
-        public GameSettingVm(List<B3SettingGlobal> b3GameSetting, List<B3IsGameEnabledSetting> gameEnableDisableSetting)
+        public GameSettingVm(List<B3SettingGlobal> b3GameSetting, List<B3IsGameEnabledSetting> gameEnableDisableSetting )
         {
             m_gameSettingViewModels = new List<GameSettingVmAllGame>();
             m_b3SettingEnableDisable = gameEnableDisableSetting;
@@ -184,7 +184,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     RaisePropertyChanged("GameWildfire");
                     break;
                 }
-            }
+            }      
+            SettingViewModel.Instance.BtnSaveIsEnabled = SelectedGameVm.Settings.EnableGameSetting.IsEnabled;//Enable or disable button.
         }
 
         public int Myprevindex = -1;
