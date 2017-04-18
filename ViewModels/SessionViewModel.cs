@@ -431,13 +431,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
         /// <summary>
         /// Notifies the controller to start a session.
         /// </summary>
         private void StartSession()
         {
             SessionStatusMessage = Resources.SessionStartProgress;
-
+       
             //if multioperator, then send selected operator
             //else send default operator
             if (Settings.IsMultiOperator)
@@ -450,7 +451,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             else
             {
                 m_controller.SessionStart(new Business.Operator(0, "B3 Session"));
-            }
+            }               
         }
 
         /// <summary>
@@ -478,6 +479,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SetIconStatus(true);
                 SessionStatusMessage = Resources.SessionStartSuccess;
+                while (m_controller.IsBusy == true) { } ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();                             
             }
             else
             {
@@ -508,7 +510,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SetIconStatus(true);
                 StatusMessage = Resources.SessionInfoSuccess;
-                UpdateSesionListUi();
+                UpdateSesionListUi();              
                 UpdateSessionButtons();
             }
             else

@@ -50,7 +50,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private bool m_isLoading;
         private bool m_isPrinting;
         private B3Controller m_controller;
-        private ObservableCollection<Session> m_sessionList;
         private List<B3Report> m_reports;
         private bool m_isRngBallCall;
         private B3CenterSettings Settings
@@ -70,10 +69,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public ReportsViewModel()
         {
             m_selectedReportColl = new ReportMain();
-            SessionList = new ObservableCollection<Session>();
             IsLoading = false;
             IsPrinting = false;
-        }
+        }    
 
         /// <summary>
         /// Initializes the ViewModel with the specified controller.
@@ -84,11 +82,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller = controller;
             m_reports = controller.Reports;
             m_isRngBallCall = controller.Settings.IsCommonRngBallCall;
-
-            foreach (var session in controller.Sessions)
-            {
-                SessionList.Add(session);
-            }
 
             var b3Accounts = new ReportTemplateViewModel(GetReportModel(ReportId.B3Accounts));
             var b3Daily = new ReportTemplateViewModel(GetReportModel(ReportId.B3Daily));
@@ -314,6 +307,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #region Public
 
+        public List<Session> GetSessionList()
+        {
+            var SessionList = new System.Collections.Generic.List<Business.Session>();
+            foreach (var session in m_controller.Sessions)
+            {
+                SessionList.Add(session);
+            }
+            return SessionList;
+        }
+
         public void SetBallCallReportBySessionOrByGame(string settingRngBallCall)
         {
             m_isRngBallCall = (settingRngBallCall == "F")? false : true;
@@ -364,6 +367,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 SelectedReportColl.RptTemplateVm.ParamVm.CheckUserValidation(); //Just check user validation no need to filter it shouldnt be that much.      
             }
         }
+
+       public void UpdateReportUIOnStartNewSession()
+        {
+          
+            foreach (var reportUI in m_reportCollection)
+            {
+                var reportId = reportUI.B3Reports.Id;
+                 if (reportId == ReportId.B3AccountHistory
+                    || reportId == ReportId.B3BallCallByGame
+                    || reportId == ReportId.B3Jackpot
+                    || reportId == ReportId.B3Session
+                    || reportId == ReportId.B3SessionSummary
+                    || reportId == ReportId.B3SessionTransaction
+                    || reportId == ReportId.B3WinnerCards
+                    )
+                {
+                    reportUI.RptTemplateVm.ParamVm.UpdateSessionList(DateTime.Now);
+                }         
+            }
+          }
+        
 
         /// <summary>
         /// Actions that occur when the selected report changes
@@ -763,25 +787,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 RaisePropertyChanged("DefaultViewMode");
             }
 
-        }
-
-        /// <summary>
-        /// Gets or sets the session list.
-        /// </summary>
-        /// <value>
-        /// The session list.
-        /// </value>
-        public ObservableCollection<Session> SessionList
-        {
-            get
-            {
-                return m_sessionList;
-            }
-            set
-            {
-                m_sessionList = value;
-                RaisePropertyChanged("SessionList");
-            }
         }
 
         /// <summary>

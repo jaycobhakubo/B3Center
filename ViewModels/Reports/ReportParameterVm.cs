@@ -183,10 +183,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public void UpdateSessionList(DateTime selectedDateTime)
         {
             WorkInProgress = true;
+
             m_sessionList.Clear();
             WorkInProgress = false;
 
-            foreach (var session in ReportsViewModel.Instance.SessionList)
+            foreach (var session in ReportsViewModel.Instance.GetSessionList())
             {
                 var sessionStartDateTime = DateTime.Parse(session.SessionStartTime);
                 var sessionEndDateTime = DateTime.Parse(session.SessionEndTime);
