@@ -323,7 +323,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
 
             SetBorderValue = m_selectedSettingCategoryType == B3SettingCategory.Games ? 0 : 2;
-
+            BtnSaveIsEnabled = true;
             switch (m_selectedSettingCategoryType)
             {
                 case B3SettingCategory.Games:

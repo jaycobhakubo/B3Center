@@ -97,7 +97,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="3">
-                <CheckBox IsEnabled="{Binding Settings.EnableGameSetting.IsEnabled}" Name="ChkbxAutoPlay"  Content="Auto play"  IsChecked="{Binding Settings.AutoPlay}"/>
+                <!--<CheckBox IsEnabled="{Binding Settings.EnableGameSetting.IsEnabled}" Name="ChkbxAutoPlay"  Content="Auto play"  IsChecked="{Binding Settings.AutoPlay}"/>-->
                 <CheckBox IsEnabled="{Binding Settings.EnableGameSetting.IsEnabled}" IsChecked="{Binding Settings.HideSerialNumber}" Name="ChkbxHideSerialNumber" Content="Hide serial number"/>
             </StackPanel>
         </Grid>
