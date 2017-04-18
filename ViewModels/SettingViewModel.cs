@@ -264,12 +264,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             foreach (var b3SettingCategory in categories)
             {
                 if (b3SettingCategory != B3SettingCategory.Operator)
+                {
                     if (b3SettingCategory == B3SettingCategory.ServerGame && !IsDakotaMode)
+                    {
                         continue;
-
-                m_settingList.Add(b3SettingCategory.ToString());
+                    }
+                    m_settingList.Add(b3SettingCategory.ToString());
+                }             
             }
-
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
 
