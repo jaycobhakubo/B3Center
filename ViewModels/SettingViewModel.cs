@@ -236,8 +236,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case B3SettingType.NorthDakotaMode:
                         {
-
-                            if ((b3setting.B3SettingValue == "F") ? false : true)
+                            if (b3setting.B3SettingValue == "T")
                             {
                                 if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
                                 {
@@ -248,7 +247,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             else
                             {
                                 if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                                {
                                     SettingList.Remove(B3SettingCategory.ServerGame.ToString());
+                                }
                             }
                             break;
                         }
