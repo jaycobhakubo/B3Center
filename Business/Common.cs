@@ -6,6 +6,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Business
 {
@@ -108,6 +110,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         public static readonly List<string> OneToTenList = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
         public static readonly List<string> MaxCardCountList = new List<string> { "4", "6" };
+
+        public static void Sort<T>(this ObservableCollection<T> collection)
+        {
+            var sorted = collection.OrderBy(x => x).ToList();
+            int index = 0;
+
+            while (index < sorted.Count)
+            {
+                if (!collection[index].Equals(sorted[index]))
+                {
+                    T t = collection[index];
+                    collection.Move(index,sorted.IndexOf(t));
+                }
+                else
+                {
+                    index++;
+                }
+            }
+        }
     }
 
 }
