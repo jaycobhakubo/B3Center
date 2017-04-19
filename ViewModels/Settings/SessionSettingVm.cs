@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
@@ -8,10 +8,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     public class SessionSettingVm : ViewModelBase
     {
 
-        #region Fields
-        
+        #region Fields       
         private SessionSetting m_sessionSetting;
-
+   		private bool m_isEnforceMixEnable;
         private readonly List<B3SettingGlobal> m_originalSessionSettings; 
         #endregion
         
@@ -23,6 +22,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             SessionSettings = new SessionSetting();
             UpdateSettingsListToModel(sessionSettingsList);
             m_originalSessionSettings = sessionSettingsList;
+            IsEnforceMixEnable = !(SettingViewModel.Instance.GetIsRngSetting());//If false then 55455 (enforce mix should be true)
         }
 
         #endregion
@@ -40,6 +40,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             {
                 m_sessionSetting = value;
                 RaisePropertyChanged("SessionSettings");
+            }
+        }
+
+        public bool IsEnforceMixEnable
+        {
+            get { return m_isEnforceMixEnable; }
+            set
+            {
+                m_isEnforceMixEnable = value;
+                RaisePropertyChanged("IsEnforceMixEnable");
             }
         }
 

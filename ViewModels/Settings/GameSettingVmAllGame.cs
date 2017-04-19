@@ -236,7 +236,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UpdateGameSettingsListToModel(m_originalGameSettings, m_isGameEnabledSetting);
         }
 
-        public void UpdatePayTable()
+        public void UpdatePayTableUI()
         {
             Settings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(GameType);
         }
