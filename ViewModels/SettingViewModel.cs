@@ -1,4 +1,4 @@
-﻿#region Copyright
+#region Copyright
 // This is an unpublished work protected under the copyright laws of the United
 // States and other countries.  All rights reserved.  Should publication occur
 // the following will apply: © 2015 GameTech International, Inc.
@@ -92,6 +92,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             LoadSettingList(controller.Settings.NorthDakotaMode);
             BtnSaveIsEnabled = true;
+            m_isRngBallCall = m_controller.Settings.IsCommonRngBallCall;
         }
 
         #endregion
@@ -220,7 +221,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        //Will update UI for certain B3 Setting changed.
+        //Update UI for certain B3 Setting changed.
         private void UpdateUIPerSettingChanged(List<B3SettingGlobal> b3settingList)
         {
             foreach (B3SettingGlobal b3setting in b3settingList)
@@ -229,9 +230,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     case B3SettingType.CommonRngBallCall:
                         {
-                            var ii = ReportsViewModel.Instance;
-                            ii.ReportSelectedIndex = -1;
-                            ii.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
+                            var rptViewModel = ReportsViewModel.Instance;
+                            rptViewModel.ReportSelectedIndex = -1;
+                            rptViewModel.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
+
+                            if (m_gameSettingView != null)
+                            {
+                                foreach (var gameSettingVm in m_lazyGameSettingVm.Value.GameSettingViewModels)
+                                {
+                                    gameSettingVm.UpdatePayTable();
+                                }
+                            }
+                          
                             break;
                         }
                     case B3SettingType.NorthDakotaMode:
@@ -301,7 +311,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
         {
-            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
+            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType && l.IsRng == m_isRngBallCall));
             return tempResult;
         }
 
@@ -405,7 +415,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
             }
         }
-
         #endregion
 
         #region Properties(singleton instance)
@@ -431,11 +440,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #region Properties
 
-        private List<B3IsGameEnabledSetting> B3IsGameEnabledSettings { get; set; }
-    
+        private List<B3IsGameEnabledSetting> B3IsGameEnabledSettings { get; set; }  
         public ICommand SaveSettingcmd { get; set; }
-
         public ICommand CancelSettingcmd { get; set; }
+        public bool IsSelectedSetting { get; set; }
+        public ServerSettingVm ServerSettingVm { get; set; }
+        public SessionSettingVm SessionSettingVm { get; set; }
+        public SalesSettingVm SalesSettingVm { get; set; }
+        public PlayerSettingVm PlayerSettingVm { get; set; }
+        public SystemSettingVm SystemSettingVm { get; set; }
+        public GameSettingVm GameSettingsVm { get; set; }
+
 
         public bool IndicatorVisibility
         {
@@ -581,14 +596,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return m_settingList; }
         }
 
-        public bool IsSelectedSetting { get; set; }
-        public ServerSettingVm ServerSettingVm { get; set; }
-        public SessionSettingVm SessionSettingVm { get; set; }
-        public SalesSettingVm SalesSettingVm { get; set; }
-        public PlayerSettingVm PlayerSettingVm { get; set; }
-        public SystemSettingVm SystemSettingVm { get; set; }
-        public GameSettingVm GameSettingsVm { get; set; }
-
+     
         #endregion
     }
 }

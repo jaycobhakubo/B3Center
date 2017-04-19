@@ -14,6 +14,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         private GameSetting m_gameSetting;
         private B3IsGameEnabledSetting m_isGameEnabledSetting;
         private bool m_isPayTableSettingHasChanged;
+
         #endregion
 
         #region Constructor
@@ -235,9 +236,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UpdateGameSettingsListToModel(m_originalGameSettings, m_isGameEnabledSetting);
         }
 
+        public void UpdatePayTable()
+        {
+            Settings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(GameType);
+        }
+    
         #endregion
-
-
 
     }
 }

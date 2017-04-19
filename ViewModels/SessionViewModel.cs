@@ -18,6 +18,7 @@ using GameTech.Elite.Client.Modules.B3Center.Properties;
 using System.Collections;
 using System.Linq;
 using System.Timers;
+using System.Threading.Tasks;
 
 //US4296: B3 Start Session
 //US4298: B3 End Session
@@ -258,39 +259,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
         }
-
-        //public string SessionStartStatusMessage
-        //{
-        //    get
-        //    {
-        //        return m_sessionStatusMessage;
-        //    }
-        //    set
-        //    {
-        //        if (m_sessionStatusMessage != value)
-        //        {
-        //            m_sessionStatusMessage = value;
-        //            RaisePropertyChanged("SessionStartStatusMessage");
-        //        }
-        //    }
-        //}
-
-        //public string SessionEndStatusMessage
-        //{
-        //    get
-        //    {
-        //        return m_sessionEndStatusMessage;
-        //    }
-        //    set
-        //    {
-        //        if (m_sessionEndStatusMessage != value)
-        //        {
-        //            m_sessionEndStatusMessage = value;
-        //            RaisePropertyChanged("SessionEndStatusMessage");
-        //        }
-        //    }
-        //}
-
+    
         public string SessionSetBallStatusMessage
         {
             get { return m_sessionSetBallStatusMessage; }
@@ -451,7 +420,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             else
             {
                 m_controller.SessionStart(new Business.Operator(0, "B3 Session"));
-            }               
+            }     
+            while (m_controller.IsBusy == true) { } ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();              
         }
 
         /// <summary>
@@ -479,7 +449,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 SetIconStatus(true);
                 SessionStatusMessage = Resources.SessionStartSuccess;
-                while (m_controller.IsBusy == true) { } ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();                             
+              //  while (m_controller.IsBusy == true) { } ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();                             
             }
             else
             {

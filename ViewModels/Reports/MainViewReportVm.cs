@@ -370,22 +370,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
        public void UpdateReportUIOnStartNewSession()
         {
-          
-            foreach (var reportUI in m_reportCollection)
-            {
-                var reportId = reportUI.B3Reports.Id;
-                 if (reportId == ReportId.B3AccountHistory
-                    || reportId == ReportId.B3BallCallByGame
-                    || reportId == ReportId.B3Jackpot
-                    || reportId == ReportId.B3Session
-                    || reportId == ReportId.B3SessionSummary
-                    || reportId == ReportId.B3SessionTransaction
-                    || reportId == ReportId.B3WinnerCards
-                    )
+                foreach (var reportUI in m_reportCollection)
                 {
-                    reportUI.RptTemplateVm.ParamVm.UpdateSessionList(DateTime.Now);
+                    var reportId = reportUI.B3Reports.Id;
+                    if (reportId == ReportId.B3AccountHistory
+                       || reportId == ReportId.B3BallCallByGame
+                       || reportId == ReportId.B3Jackpot
+                       || reportId == ReportId.B3Session
+                       || reportId == ReportId.B3SessionSummary
+                       || reportId == ReportId.B3SessionTransaction
+                       || reportId == ReportId.B3WinnerCards
+                       )
+                    {
+                        reportUI.RptTemplateVm.ParamVm.UpdateSessionList(DateTime.Now);
+                    }
                 }         
-            }
           }
         
 

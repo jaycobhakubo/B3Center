@@ -106,6 +106,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
+        public List<GameSettingVmAllGame> GameSettingViewModels { get { return m_gameSettingViewModels; } }
+
         #endregion
 
         #region METHOD
@@ -202,6 +204,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             return m_gameSettingViewModels[m_tabSelectedindex];
         }
 
+
+      
         #endregion
     }
 }
