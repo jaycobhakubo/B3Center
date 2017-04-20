@@ -7,50 +7,11 @@
              xmlns:b3games="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.Template"
              mc:Ignorable="d" 
               >
-    <UserControl.Resources>
-
-        
-   
-        
-        <ControlTemplate x:Key="NocornerradiusGrpBox" TargetType="{x:Type GroupBox}">
-            <Grid SnapsToDevicePixels="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="6"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="6"/>
-                </Grid.RowDefinitions>
-                <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
-                <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
-                    <Border.OpacityMask>
-                        <MultiBinding ConverterParameter="7" UpdateSourceTrigger="Default">
-                            <MultiBinding.Converter>
-                                <BorderGapMaskConverter/>
-                            </MultiBinding.Converter>
-                            <Binding ElementName="Header" Path="ActualWidth"/>
-                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
-                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
-                        </MultiBinding>
-                    </Border.OpacityMask>
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
-                        <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
-                    </Border>
-                </Border>
-                <Border x:Name="Header" Grid.Column="1" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
-                    <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                </Border>
-                <ContentPresenter Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-            </Grid>
-        </ControlTemplate>
+    <UserControl.Resources> 
     </UserControl.Resources>
     
     <Border>
+              
         <Grid Name="GridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -62,9 +23,9 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Column="1">
-    
-                <GroupBox Template="{DynamicResource NocornerradiusGrpBox}">
+                      
+            <StackPanel Grid.Column="1" Grid.ColumnSpan="3">
+                <GroupBox Template="{StaticResource NocornerradiusGrpBox}">
                     <GroupBox.Header>
                         <Border>
                             <Grid>
@@ -76,40 +37,33 @@
                                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
-
                                                 <TextBlock Text="Common RNG ball call: " Padding="5,5,5,5" ></TextBlock>
                                                 <StackPanel VerticalAlignment="Center"  Margin="10,0,10,0" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
                                                     <RadioButton Content="Yes"></RadioButton>
                                                     <RadioButton Margin="10,0,0,0" Content="No"></RadioButton>
                                                 </StackPanel>
                                             </Grid>
-
                                         </ControlTemplate>
                                     </Label.Template>
                                 </Label>
                             </Grid>
-                        </Border>
-                      
-                    </GroupBox.Header>
-                  
+                        </Border>                     
+                    </GroupBox.Header>              
                     <CheckBox Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto"></CheckBox>
                 </GroupBox>
-
-
-
-                <Label Content="Math packages:" Margin="0,30,0,2" ></Label>
+                <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages / B3 game enable :" Margin="0,30,0,2" ></Label>
             </StackPanel>
-
-            <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4"                    
-                    >
+         
+            <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4">                    
                 <StackPanel >
                     <StackPanel.Resources>
-                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3DefaultStyleLabel}">
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">
                             <Setter Property="Margin" Value="0"></Setter>
                             <Setter Property="Padding" Value="0"/>
                             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                             <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Padding" Value="20,0,0,0"/>
+                            <Setter Property="Padding" Value="10,0,0,0"/>
+                            <Setter Property="ContentStringFormat" Value="{}{0}:"></Setter>
                         </Style>
                         <Style TargetType="{x:Type Grid}">
                             <Setter Property="Margin" Value="0,10,0,2"></Setter>
@@ -117,14 +71,31 @@
                         <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
                             <Setter Property="Margin" Value="0,0,15,0"/>
                         </Style>
-
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource B3StyleCheckBoxDenom}">
+                            <Setter Property="Height" Value="Auto"></Setter>                           
+                        </Style>
+                       
                     </StackPanel.Resources>
                     <Grid Margin="0,23,0,2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="Carzy Bout"></Label>
+                        <!--<Label Grid.Column="0" Content="Carzy Bout"></Label>-->
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="Crazy Bout" ></Label>                                  
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -132,7 +103,21 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Jailbreak:" DockPanel.Dock="Left"></Label>
+                        <!--<Label Content="Jailbreak" DockPanel.Dock="Left"></Label>-->
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="Jailbreak" ></Label>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -140,7 +125,21 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Maya Money:" ></Label>
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="Maya Money" ></Label>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
+                        <!--<Label Content="Maya Money"></Label>-->
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -148,7 +147,21 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Content="76 Bingo:" ></Label>
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="76 Bingo" ></Label>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
+                        <!--<Label Content="76 Bingo" ></Label>-->
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -156,7 +169,21 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Content="U kick Em" ></Label>
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="U kick Em" ></Label>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
+                        <!--<Label Content="U kick Em" ></Label>-->
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -164,7 +191,21 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Content="WildFire w/Bonus:" ></Label>
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="WildFire w/Bonus" ></Label>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
+                        <!--<Label Content="WildFire w/Bonus" ></Label>-->
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid Margin="0,10,0,13">
@@ -172,7 +213,21 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Content="WildFire:" ></Label>
+                        <Label Grid.Column="0">
+                            <Label.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <Label Grid.Column="1" Content="WildFire" ></Label>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Label.Template>
+                        </Label>
+                        <!--<Label Content="WildFire" ></Label>-->
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                 </StackPanel>
