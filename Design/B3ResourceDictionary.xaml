@@ -89,9 +89,8 @@
         <Setter Property="Margin" Value="0,15,0,2"/>
     </Style>
 
-
-
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+    
     <Style  x:Key="B3StyleGroupBox1" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
         <Setter Property="BorderBrush" Value="#FF0050AA"/>
         <Setter Property="BorderThickness" Value="2"/>
@@ -173,4 +172,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    
 </ResourceDictionary>

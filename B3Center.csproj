@@ -201,7 +201,7 @@
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\Template\B3GamePayTable.xaml.cs">
+    <Compile Include="ForMyEyesOnly\Template\B3GamePayTable.xaml.cs">
       <DependentUpon>B3GamePayTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Shared\DatePickerUserView.xaml.cs">
@@ -342,7 +342,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\Template\B3GamePayTable.xaml">
+    <Page Include="ForMyEyesOnly\Template\B3GamePayTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
