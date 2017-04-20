@@ -36,6 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SalesSettingView m_salesSettingView;
         private PlayerSettingView m_playerSettingView;
         private SessionSettingView m_sessionSettingView;
+        private PayTableSettingView m_payTableSettingView;
 
         //Other
         private List<B3SettingGlobal> m_settingTobeSaved;
@@ -58,6 +59,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private readonly Lazy<ServerSettingVm> m_lazyServerSettingVm;
         private readonly Lazy<SessionSettingVm> m_lazySessionSettingVm;
         private readonly Lazy<SystemSettingVm> m_lazySystemSettingVm;
+        private readonly Lazy<PayTableSettingVm> m_lazyPayTableSettingVm;
 
         private static readonly object m_syncRoot = new object();
         #endregion
@@ -72,6 +74,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_lazyServerSettingVm = new Lazy<ServerSettingVm>(InitializeServerSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
             m_lazySessionSettingVm = new Lazy<SessionSettingVm>(InitializeSessionSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
             m_lazySystemSettingVm = new Lazy<SystemSettingVm>(InitializeSystemSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
+            m_lazyPayTableSettingVm = new Lazy<PayTableSettingVm>(InitializePayTableSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
         #endregion
@@ -105,6 +108,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var gameSettingsVm = new GameSettingVm(new List<B3SettingGlobal>(gameSettingsFromServer), B3IsGameEnabledSettings);
             m_gameSettingView = new GameSettingView(gameSettingsVm);
             return gameSettingsVm;
+        }
+
+        private PayTableSettingVm InitializePayTableSettingVm()
+        {
+            var payTableSettingVm = new PayTableSettingVm();
+            m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
+            return payTableSettingVm;
         }
 
         private PlayerSettingVm InitializePlayerSettingVm()
@@ -390,6 +400,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         SelectedSettingView = m_systemSettingView;
                         break;
                     }
+                case B3SettingCategory.PayTable:
+                    {
+                        PayTableSettingVm = m_lazyPayTableSettingVm.Value;
+                        SelectedSettingView = m_payTableSettingView;
+                        break; 
+                    }
             }
 
             m_previousB3SettingCategory = m_selectedSettingCategoryType;
@@ -429,6 +445,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         SystemSettingVm.ResetSettingsToDefault();
                         break;
                     }
+                case B3SettingCategory.PayTable:
+                    {
+                       // PayTableSettingVm.ResetSettingsToDefault();
+                        break;
+                    }
             }
         }
         #endregion
@@ -466,6 +487,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public PlayerSettingVm PlayerSettingVm { get; set; }
         public SystemSettingVm SystemSettingVm { get; set; }
         public GameSettingVm GameSettingsVm { get; set; }
+        public PayTableSettingVm PayTableSettingVm { get; set; }
 
 
         public bool IndicatorVisibility

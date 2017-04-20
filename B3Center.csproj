@@ -149,6 +149,7 @@
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
+    <Compile Include="Model\Setting\PayTableSetting.cs" />
     <Compile Include="Model\Setting\PlayerSetting.cs" />
     <Compile Include="Model\Setting\SalesSettings.cs" />
     <Compile Include="Model\Setting\ServerSetting.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVmAllGame.cs" />
+    <Compile Include="ViewModels\Settings\PayTableSettingVm.cs" />
     <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SalesSettingVm.cs" />
     <Compile Include="ViewModels\Settings\ServerSettingVm.cs" />
@@ -448,6 +450,9 @@
   <ItemGroup>
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\PayTableViews\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

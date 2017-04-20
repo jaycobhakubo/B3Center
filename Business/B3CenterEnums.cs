@@ -26,6 +26,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         ServerGame = 5,
         Session = 6,
         System = 7,
+        PayTable = 8,
     }
 
     public enum B3SettingType

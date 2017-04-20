@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
+using System.Windows.Controls;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
@@ -7,9 +8,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// </summary>
     public partial class PayTableSettingView
     {
-        public PayTableSettingView()
+        public PayTableSettingView(PayTableSettingVm vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
