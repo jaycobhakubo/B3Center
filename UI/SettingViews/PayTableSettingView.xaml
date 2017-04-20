@@ -4,11 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:b3games="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.Template"
              mc:Ignorable="d" 
-               d:DesignHeight="710" d:DesignWidth="674">
+              >     
     <UserControl.Resources>
-    
- 
     </UserControl.Resources>
     <Border>
         <Grid Name="GridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
@@ -19,75 +18,117 @@
                 <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="1">
-                <Label Content="Is 55455 distribution required:"></Label>
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton Content="Yes"></RadioButton>
-                    <RadioButton Content="No"></RadioButton>
-                </StackPanel>
-                <CheckBox Content="Enable RNG"></CheckBox>
-                <CheckBox Content="Enable Enforce Mix 55455"></CheckBox>
+                <!--<Label>
+                    <Label.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
                              
+                                <TextBlock Text="Is 55455 distribution required:"></TextBlock>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                                    <RadioButton Content="Yes"></RadioButton>
+                                    <RadioButton Content="No"></RadioButton>
+                                </StackPanel>
+                            </Grid>
+                           
+                        </ControlTemplate>
+                    </Label.Template>
+                </Label>-->
+
+
+                <CheckBox Content="Common RNG ball call"></CheckBox>
+                
+                <Label Content="Math packages:" Margin="0,30,0,2" ></Label>
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4">
-                <Label Content="Math packages:"></Label>
-                <GroupBox  
-                    Style="{StaticResource B3StyleGroupBox2}"
-                    Margin="0,0,0,0"
-                    Padding="0,0,0,30">
-                    <GroupBox.Resources>
-                    </GroupBox.Resources>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <!--<ColumnDefinition></ColumnDefinition>-->
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            
-                            
-                          
-                        </StackPanel>
-                        <!--<StackPanel Grid.Column="1">
-                            <ComboBox ></ComboBox>
-                            <ComboBox ></ComboBox>
-                        </StackPanel>-->
-                    </Grid>
-                   
-                        
-                    <!--<DockPanel>
-                        <Label Content="Crazy Bout:" DockPanel.Dock="Left"></Label>
-                        <ComboBox DockPanel.Dock="Right"></ComboBox>
-                    </DockPanel>
-                        <DockPanel>
-                            <Label Content="Jailbreak:" DockPanel.Dock="Left"></Label>
-                            <ComboBox DockPanel.Dock="Right"></ComboBox>
-                        </DockPanel>
-                        <DockPanel>
-                            <Label Content="Maya Money:" DockPanel.Dock="Left"></Label>
-                            <ComboBox DockPanel.Dock="Right"></ComboBox>
-                        </DockPanel>
-                        <DockPanel>
-                            <Label Content="76 Bingo:" DockPanel.Dock="Left"></Label>
-                            <ComboBox DockPanel.Dock="Right"></ComboBox>
-                        </DockPanel>
-                        <DockPanel>
-                            <Label Content="U kick Em:" DockPanel.Dock="Left"></Label>
-                            <ComboBox DockPanel.Dock="Right"></ComboBox>
-                        </DockPanel>
-                        <DockPanel>
-                            <Label Content="WildFire w/Bonus:" DockPanel.Dock="Left"></Label>
-                            <ComboBox DockPanel.Dock="Right"></ComboBox>
-                        </DockPanel>
-                        <DockPanel>
-                            <Label Content="WildFire:" DockPanel.Dock="Left"></Label>
-                            <ComboBox DockPanel.Dock="Right"></ComboBox>
-                        </DockPanel>-->
-                   
-                </GroupBox>
+            
+            <StackPanel Grid.Column="3">
+                <CheckBox Content="Enforce mix (55455)"></CheckBox>
             </StackPanel>
+
+            <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4"                    
+                    >
+            <StackPanel >
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource B3RequiredFieldLabelStyle}">
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="20,0,0,0"/>
+                    </Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Margin" Value="0,10,0,2"></Setter>
+                    </Style>
+                        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
+                            <Setter Property="Margin" Value="0,0,15,0"/>
+                        </Style>
+
+                    </StackPanel.Resources>
+                <Grid Margin="0,23,0,2">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                    <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Carzy Bout"></Label>
+                <ComboBox Grid.Column="1"></ComboBox>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+            <Label Content="Jailbreak:" DockPanel.Dock="Left"></Label>
+            <ComboBox Grid.Column="1"></ComboBox>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+            <Label Content="Maya Money:" ></Label>
+            <ComboBox Grid.Column="1"></ComboBox>
+        </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="76 Bingo:" ></Label>
+                    <ComboBox Grid.Column="1"></ComboBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="U kick Em" ></Label>
+                    <ComboBox Grid.Column="1"></ComboBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="WildFire w/Bonus:" ></Label>
+                    <ComboBox Grid.Column="1"></ComboBox>
+                </Grid>
+                <Grid Margin="0,10,0,13">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="WildFire:" ></Label>
+                    <ComboBox Grid.Column="1"></ComboBox>
+                </Grid>
+            </StackPanel>
+            </GroupBox>
         </Grid>
     </Border>
 </UserControl>

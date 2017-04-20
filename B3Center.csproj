@@ -201,6 +201,9 @@
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SettingViews\Template\B3GamePayTable.xaml.cs">
+      <DependentUpon>B3GamePayTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Shared\DatePickerUserView.xaml.cs">
       <DependentUpon>DatePickerUserView.xaml</DependentUpon>
     </Compile>
@@ -339,6 +342,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\SettingViews\Template\B3GamePayTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Shared\DatePickerUserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -451,9 +458,7 @@
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\PayTableViews\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -89,11 +89,13 @@
         <Setter Property="Margin" Value="0,15,0,2"/>
     </Style>
 
+
+
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
     <Style  x:Key="B3StyleGroupBox1" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
         <Setter Property="BorderBrush" Value="#FF0050AA"/>
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="15,0,0,3"/>
         <Setter Property="Margin" Value="-1,0,-1,0"/>
         <Setter Property="Template">
@@ -146,7 +148,7 @@
     <Style  x:Key="B3StyleGroupBox2" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
         <Setter Property="BorderBrush" Value="#FF0050AA"/>
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Template">
