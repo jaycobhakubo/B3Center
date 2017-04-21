@@ -1,0 +1,1 @@
+﻿  <DataTrigger Binding="{Binding ShowOperator}"  Value="true">

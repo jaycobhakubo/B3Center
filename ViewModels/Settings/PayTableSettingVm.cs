@@ -28,18 +28,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        private readonly List<B3SettingGlobal> m_originalPayTableSettings;
-
-        private bool m_BindingTest;
-        public bool BindingTest 
+        private bool m_isRNG;
+        public bool IsRNG
         {
-            get { return PayTableSettings.CommonRngBallCall; }
-            set
+            get { return m_isRNG; }
+            set 
             {
-                m_BindingTest = PayTableSettings.CommonRngBallCall;
-                RaisePropertyChanged("BindingTest");
+                m_isRNG = value;
+                RaisePropertyChanged("IsRNG");
             }
         }
+
+        private readonly List<B3SettingGlobal> m_originalPayTableSettings;
+
+        //private bool m_BindingTest;
+        //public bool BindingTest 
+        //{
+        //    get { return PayTableSettings.CommonRngBallCall; }
+        //    set
+        //    {
+        //        m_BindingTest = PayTableSettings.CommonRngBallCall;
+        //        RaisePropertyChanged("BindingTest");
+        //    }
+        //}
 
        public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
         {
@@ -47,7 +58,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             PayTableSettings = new PayTableSetting();
             UpdateSettingsListToModel(payTableSettingList);
             m_originalPayTableSettings = payTableSettingList;
-            BindingTest = true;
+            //m_isRNG = m_PayTableSettings.CommonRngBallCall;
+            //BindingTest = true;
         }
 
 
@@ -62,6 +74,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                    case B3SettingType.CommonRngBallCall:
                        PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
                        break;
+                   case B3SettingType.EnforceMix:
+                       {
+                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
+                           break;
+                       }
                   
                }
            }
@@ -74,17 +91,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            SettingHasChanged = false;
            foreach (var setting in m_originalPayTableSettings)
            {
-               setting.B3SettingDefaultValue = setting.B3SettingValue;
+              
                switch (setting.SettingType)
                {
                    case B3SettingType.CommonRngBallCall:
                        {
                            if (setting.B3SettingValue != PayTableSettings.CommonRngBallCall.ConvertToB3StringValue())
                            {
+                               setting.B3SettingDefaultValue = setting.B3SettingValue;
+                               setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
                                SettingHasChanged = true;
-                               continue;
                            }
-                           setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
+                          
                            break;
                        }
                }

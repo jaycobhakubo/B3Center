@@ -228,17 +228,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case B3SettingCategory.System:
                         {
                             m_settingTobeSaved = SystemSettingVm.Save();
-                            //m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
                             break;
                         }
                     case B3SettingCategory.PayTable:
                         {
                             m_settingTobeSaved = PayTableSettingVm.Save();
                             IsSettingChanged = PayTableSettingVm.SettingHasChanged;
-                            //if (IsSettingChanged)
-                            //{
-                            //    m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
-                            //}
                             break;
                         }
                 }
@@ -258,7 +253,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                             //Show BallCallReport by Game or by session
                             var rptViewModel = ReportsViewModel.Instance;
-                            rptViewModel.ReportSelectedIndex = -1;
+                            rptViewModel.ReportSelectedIndex = 0;
                             rptViewModel.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
 
                             //Show only RNG or 55455 on paytable setting
@@ -275,7 +270,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             //If 55455 then enable the EnforceMix Setting and set it to true. 
                             if (m_sessionSettingView != null)
                             {
-                                m_lazySessionSettingVm.Value.SessionSettings.EnforceMix = !m_isRngBallCall;
+                                //m_lazySessionSettingVm.Value.SessionSettings.EnforceMix = !m_isRngBallCall;
                                 m_lazySessionSettingVm.Value.IsEnforceMixEnable = !m_isRngBallCall;
                             }
                           

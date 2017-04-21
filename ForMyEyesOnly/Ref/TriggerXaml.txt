@@ -17,3 +17,18 @@ TRIGGER (xaml)
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
+
+	________________________
+	Property Trigger
+	_______________________
+
+1.)
+
+	<Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Blue"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="Red" />
+                <Setter Property="TextDecorations" Value="Underline" />
+            </Trigger>
+        </Style.Triggers>

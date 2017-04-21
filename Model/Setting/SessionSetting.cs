@@ -8,7 +8,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 
         private string m_payoutLimit;
         private string m_jackpotLimit;
-        private bool m_enforceMix;
+        //private bool m_enforceMix;
         #endregion
 
         #region Properties
@@ -39,18 +39,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        public bool EnforceMix
-        {
-            get
-            {
-                return m_enforceMix;
-            }
-            set
-            {
-                m_enforceMix = value;
-                RaisePropertyChanged("EnforceMix");
-            }
-        }
+        //public bool EnforceMix
+        //{
+        //    get
+        //    {
+        //        return m_enforceMix;
+        //    }
+        //    set
+        //    {
+        //        m_enforceMix = value;
+        //        RaisePropertyChanged("EnforceMix");
+        //    }
+        //}
 
         #endregion
         

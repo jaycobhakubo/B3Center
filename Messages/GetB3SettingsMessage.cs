@@ -64,6 +64,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                         case B3SettingType.EnforceMix:
                             {
                                 EnforceMix = b3Settingglobal.ConvertB3StringValueToBool();
+                                b3Settingglobal.UIUpdateRequired = true;
+                                b3Settingglobal.IsPayTableSettings = true;
+                                b3Settingglobal.B3SettingCategoryType = B3SettingCategory.PayTable;//Replace the setting category 
                                 break;
                             }
                         case B3SettingType.AlowinSessionBall:

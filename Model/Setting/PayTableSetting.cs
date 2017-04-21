@@ -11,6 +11,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         #region field
 
        private bool m_commonRngBallCall;
+       private bool m_enforceMix;
         #endregion
 
         #region Properties
@@ -22,6 +23,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
            {
                m_commonRngBallCall = value;
                RaisePropertyChanged("CommonRngBallCall");
+           }
+       }
+
+       public bool EnforceMix
+       {
+           get
+           {
+               return m_enforceMix;
+           }
+           set
+           {
+               m_enforceMix = value;
+               RaisePropertyChanged("EnforceMix");
            }
        }
 

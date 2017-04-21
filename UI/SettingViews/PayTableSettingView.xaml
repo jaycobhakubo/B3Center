@@ -9,7 +9,27 @@
                   xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
               >
     <UserControl.Resources>
-        <converter:ReverseBoolConverter x:Key="RevertValueConverter" ></converter:ReverseBoolConverter>
+        <converter:ReverseBoolConverter x:Key="RevertValueConverter"></converter:ReverseBoolConverter>
+        
+        
+
+        <!--<Style x:Key="RNGIsCheck" TargetType="CheckBox" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=rdobtnIsRNG, Path=IsChecked}" Value="False">
+                    <Setter Property="IsChecked" Value="True"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>-->
+
+        <!--<Style x:Key="RNGIsCheck" TargetType="CheckBox" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsRNG}" Value="false" >
+                    <Setter Property="IsChecked" Value="True"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>-->
+
+
     </UserControl.Resources>
     <Border>
               
@@ -40,7 +60,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Common RNG ball call: " Padding="5,5,5,5" ></TextBlock>
                                                 <StackPanel VerticalAlignment="Center"  Margin="10,0,10,0" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                                                    <RadioButton  Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}"></RadioButton>
+                                                    <RadioButton Name="rdobtnIsRNG" Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}"></RadioButton>
                                                     <RadioButton Margin="10,0,0,0" Content="No" IsChecked="{Binding PayTableSettings.CommonRngBallCall, Converter={StaticResource RevertValueConverter}}">                         
                                                     </RadioButton>
                                                 </StackPanel>
@@ -50,11 +70,12 @@
                                 </Label>
                             </Grid>
                         </Border>                     
-                    </GroupBox.Header>              
-                    <CheckBox Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto"></CheckBox>
+                    </GroupBox.Header>
+                    <CheckBox  IsChecked="{Binding PayTableSettings.EnforceMix}" Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto" ></CheckBox>
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages / B3 game enable :" Margin="0,30,0,2" ></Label>
             </StackPanel>
+            <!--Style="{StaticResource RNGIsCheck}"-->
             <!--<RadioButton Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}"></RadioButton>-->
             <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4">                    
                 <StackPanel >
