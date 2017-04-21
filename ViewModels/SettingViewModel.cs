@@ -110,13 +110,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return gameSettingsVm;
         }
 
-        private PayTableSettingVm InitializePayTableSettingVm()
-        {
-            var payTableSettingVm = new PayTableSettingVm();
-            m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
-            return payTableSettingVm;
-        }
-
         private PlayerSettingVm InitializePlayerSettingVm()
         {
             var playerSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.Player).ToList();
@@ -153,11 +146,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private SystemSettingVm InitializeSystemSettingVm()
         {
-            var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System).ToList();
+            var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System && l.IsPayTableSettings == false).ToList();
             var systemSettingVm = new SystemSettingVm(systemSettingsFromServer);
             m_systemSettingView = new SystemSettingView(systemSettingVm);
 
             return systemSettingVm;
+        }
+
+        private PayTableSettingVm InitializePayTableSettingVm()
+        {
+            var payTableSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.IsPayTableSettings == true).ToList();
+            var payTableSettingVm = new PayTableSettingVm(payTableSettingsFromServer);
+            m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
+            return payTableSettingVm;
         }
 
 
@@ -225,7 +226,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 case B3SettingCategory.System:
                     {
                         m_settingTobeSaved = SystemSettingVm.Save();
-                        m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
+                        //m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
                         break;
                     }
             }

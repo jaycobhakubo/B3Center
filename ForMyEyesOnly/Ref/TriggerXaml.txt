@@ -1,0 +1,19 @@
+﻿
+==============
+TRIGGER (xaml)
+==============
+    ________________
+    Data Trigger ->
+    _________________
+     
+1.) Bindto a properties: ShowOerator
+    Using a ColumnDefinition target type
+
+     <Style TargetType="ColumnDefinition" x:Key="ShowOperatorStyle">
+                <Setter Property="Width" Value="Auto"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowOperator}"  Value="true">
+                        <Setter Property="Width" Value="*"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>

@@ -6,10 +6,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:b3games="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.Template"
              mc:Ignorable="d" 
+                  xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
               >
-    <UserControl.Resources> 
+    <UserControl.Resources>
+        <converter:ReverseBoolConverter x:Key="RevertValueConverter" ></converter:ReverseBoolConverter>
     </UserControl.Resources>
-    
     <Border>
               
         <Grid Name="GridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
@@ -39,8 +40,9 @@
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Common RNG ball call: " Padding="5,5,5,5" ></TextBlock>
                                                 <StackPanel VerticalAlignment="Center"  Margin="10,0,10,0" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                                                    <RadioButton Content="Yes"></RadioButton>
-                                                    <RadioButton Margin="10,0,0,0" Content="No"></RadioButton>
+                                                    <RadioButton  Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}"></RadioButton>
+                                                    <RadioButton Margin="10,0,0,0" Content="No" IsChecked="{Binding PayTableSettings.CommonRngBallCall, Converter={StaticResource RevertValueConverter}}">                         
+                                                    </RadioButton>
                                                 </StackPanel>
                                             </Grid>
                                         </ControlTemplate>
@@ -53,7 +55,7 @@
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages / B3 game enable :" Margin="0,30,0,2" ></Label>
             </StackPanel>
-         
+            <!--<RadioButton Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}"></RadioButton>-->
             <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4">                    
                 <StackPanel >
                     <StackPanel.Resources>
@@ -81,8 +83,8 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <!--<Label Grid.Column="0" Content="Carzy Bout"></Label>-->
-                        <Label Grid.Column="0">
+                        <Label Grid.Column="0" Content="Carzy Bout"></Label>
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -95,7 +97,7 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
+                        </Label>-->
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -104,7 +106,7 @@
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <!--<Label Content="Jailbreak" DockPanel.Dock="Left"></Label>-->
-                        <Label Grid.Column="0">
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -117,7 +119,8 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
+                        </Label>-->
+                        <Label Content="Jailbreak" ></Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -125,7 +128,7 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0">
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -138,8 +141,8 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
-                        <!--<Label Content="Maya Money"></Label>-->
+                        </Label>-->
+                        <Label Content="Maya Money"></Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -147,7 +150,7 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0">
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -160,8 +163,8 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
-                        <!--<Label Content="76 Bingo" ></Label>-->
+                        </Label>-->
+                        <Label Content="76 Bingo" ></Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -169,7 +172,7 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0">
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -182,8 +185,8 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
-                        <!--<Label Content="U kick Em" ></Label>-->
+                        </Label>-->
+                        <Label Content="U kick Em" ></Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid>
@@ -191,7 +194,7 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0">
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -204,8 +207,8 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
-                        <!--<Label Content="WildFire w/Bonus" ></Label>-->
+                        </Label>-->
+                        <Label Content="WildFire w/Bonus" ></Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                     <Grid Margin="0,10,0,13">
@@ -213,7 +216,7 @@
                             <ColumnDefinition Width="{Binding grdColumnB3GameName}"></ColumnDefinition>
                             <ColumnDefinition Width="{Binding grdColumnPayTableSetting}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0">
+                        <!--<Label Grid.Column="0">
                             <Label.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -226,8 +229,8 @@
                                     </Grid>
                                 </ControlTemplate>
                             </Label.Template>
-                        </Label>
-                        <!--<Label Content="WildFire" ></Label>-->
+                        </Label>-->
+                        <Label Content="WildFire" ></Label>
                         <ComboBox Grid.Column="1"></ComboBox>
                     </Grid>
                 </StackPanel>

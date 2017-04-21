@@ -17,7 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         private bool m_enableUk;
         private bool m_dualAccount;
         private bool m_multiOperator;
-        private bool m_commonRngBallCall;
+        //private bool m_commonRngBallCall;
         private bool m_northDakotaMode;
         private string m_autoSessionEnd;
         private string m_siteName;
@@ -138,15 +138,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        public bool CommonRngBallCall
-        {
-            get { return m_commonRngBallCall; }
-            set
-            {
-                m_commonRngBallCall = value;
-                RaisePropertyChanged("CommonRngBallCall");
-            }
-        }
+        //public bool CommonRngBallCall
+        //{
+        //    get { return m_commonRngBallCall; }
+        //    set
+        //    {
+        //        m_commonRngBallCall = value;
+        //        RaisePropertyChanged("CommonRngBallCall");
+        //    }
+        //}
 
         public bool NorthDakotaMode
         {
