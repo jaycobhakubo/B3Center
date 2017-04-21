@@ -41,16 +41,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private readonly List<B3SettingGlobal> m_originalPayTableSettings;
 
-        //private bool m_BindingTest;
-        //public bool BindingTest 
-        //{
-        //    get { return PayTableSettings.CommonRngBallCall; }
-        //    set
-        //    {
-        //        m_BindingTest = PayTableSettings.CommonRngBallCall;
-        //        RaisePropertyChanged("BindingTest");
-        //    }
-        //}
 
        public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
         {
@@ -58,14 +48,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             PayTableSettings = new PayTableSetting();
             UpdateSettingsListToModel(payTableSettingList);
             m_originalPayTableSettings = payTableSettingList;
-            //m_isRNG = m_PayTableSettings.CommonRngBallCall;
-            //BindingTest = true;
+            
         }
 
 
 
        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
        {
+           //PayTableSettings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(GameType);
            foreach (var setting in settingsList)
            {
                switch (setting.SettingType)
@@ -77,6 +67,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                    case B3SettingType.EnforceMix:
                        {
                            PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
+                           break;
+                       }
+                   case B3SettingType.MathPayTableSetting:
+                       {
+                           foreach (var gameTypeObj in Enum.GetValues(typeof(B3GameType)))
+                           {
+                               var gameType = (B3GameType)gameTypeObj;
+                               PayTableSettings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(gameType);
+                           }
                            break;
                        }
                   

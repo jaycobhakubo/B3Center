@@ -24,10 +24,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         private bool m_autoPlay;
         private bool m_hideSerialNumber;
         private bool m_singleOfferBonus;
-        private B3MathGamePay m_mathPayTable;
+        //private B3MathGamePay m_mathPayTable;
         private string m_callSpeedMin;
         private string m_callSpeedBonus;
-        private ObservableCollection<B3MathGamePay> m_gamePaytableList;
+        //private ObservableCollection<B3MathGamePay> m_gamePaytableList;
         private B3IsGameEnabledSetting m_enableGameSetting;
 
         #endregion
@@ -231,18 +231,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        public B3MathGamePay MathPayTable 
-        {
-            get
-            {
-                return m_mathPayTable;
-            }
-            set
-            {
-                m_mathPayTable = value;
-                RaisePropertyChanged("MathPayTable");
-            }
-        }
+        //public B3MathGamePay MathPayTable 
+        //{
+        //    get
+        //    {
+        //        return m_mathPayTable;
+        //    }
+        //    set
+        //    {
+        //        m_mathPayTable = value;
+        //        RaisePropertyChanged("MathPayTable");
+        //    }
+        //}
 
         public string CallSpeedMin
         {
@@ -270,18 +270,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        public ObservableCollection<B3MathGamePay> LGamePayTable
-        {
-            get
-            {
-                return m_gamePaytableList;
-            }
-            set
-            {
-                m_gamePaytableList = value;
-                RaisePropertyChanged("LGamePayTable");
-            }
-        }
+        //public ObservableCollection<B3MathGamePay> LGamePayTable
+        //{
+        //    get
+        //    {
+        //        return m_gamePaytableList;
+        //    }
+        //    set
+        //    {
+        //        m_gamePaytableList = value;
+        //        RaisePropertyChanged("LGamePayTable");
+        //    }
+        //}
 
         public B3IsGameEnabledSetting EnableGameSetting
         {
