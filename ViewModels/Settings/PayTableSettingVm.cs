@@ -105,6 +105,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                           
                            break;
                        }
+                   case B3SettingType.EnforceMix:
+                       {
+                           if (setting.B3SettingValue != PayTableSettings.EnforceMix.ConvertToB3StringValue())
+                           {
+                               setting.B3SettingDefaultValue = setting.B3SettingValue;
+                               setting.B3SettingValue = PayTableSettings.EnforceMix.ConvertToB3StringValue();
+                               SettingHasChanged = true;
+                           }
+
+                           break;
+                       }
                }
            }
        }
