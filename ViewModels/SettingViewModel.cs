@@ -171,64 +171,77 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void SetNewValue()
         {
-            switch (m_selectedSettingCategoryType)
+            if (SelectedSettingView != null)
             {
-                case B3SettingCategory.Games:
-                    {
-                        m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();
-                        if (GameSettingsVm.SelectedGameVm.IsPayTableSettingHasChanged)//We need to include all settings and we need to set the pay table settings at very first item in the list.
+                switch (m_selectedSettingCategoryType)
+                {
+                    case B3SettingCategory.Games:
                         {
-                            var tempResult = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
-                            m_settingTobeSaved.Remove(tempResult);//Removed it on the list.
-                            m_settingTobeSaved.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
-                            m_settingTobeSaved.Insert(0, tempResult);//Reinsert it on the first item.
-                        }
-                        break;
-                    }
-                case B3SettingCategory.Player:
-                    {
-                        //save enabled game settings
-                        foreach (var gameEnabledSetting in PlayerSettingVm.ModifiedB3GameEnabledSettings)
-                        {
-                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
-                            try
+                            m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();
+                            if (GameSettingsVm.SelectedGameVm.IsPayTableSettingHasChanged)//We need to include all settings and we need to set the pay table settings at very first item in the list.
                             {
-                                setGameEnabledMessage.Send();
-                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
+                                var tempResult = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
+                                m_settingTobeSaved.Remove(tempResult);//Removed it on the list.
+                                m_settingTobeSaved.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
+                                m_settingTobeSaved.Insert(0, tempResult);//Reinsert it on the first item.
+                            }
+                            break;
+                        }
+                    case B3SettingCategory.Player:
+                        {
+                            //save enabled game settings
+                            foreach (var gameEnabledSetting in PlayerSettingVm.ModifiedB3GameEnabledSettings)
+                            {
+                                var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
+                                try
                                 {
-                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                                    setGameEnabledMessage.Send();
+                                    if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
+                                    {
+                                        throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                                    }
+                                }
+                                catch (ServerCommException ex)
+                                {
+                                    throw new Exception("SetGameEnableSetting: " + ex.Message);
                                 }
                             }
-                            catch (ServerCommException ex)
-                            {
-                                throw new Exception("SetGameEnableSetting: " + ex.Message);
-                            }
-                        }
 
-                        m_settingTobeSaved = PlayerSettingVm.Save();
-                        break;
-                    }
-                case B3SettingCategory.Sales:
-                    {
-                        m_settingTobeSaved = SalesSettingVm.Save();
-                        break;
-                    }
-                case B3SettingCategory.ServerGame:
-                    {
-                        m_settingTobeSaved = ServerSettingVm.Save();
-                        break;
-                    }
-                case B3SettingCategory.Session:
-                    {
-                        m_settingTobeSaved = SessionSettingVm.Save();
-                        break;
-                    }
-                case B3SettingCategory.System:
-                    {
-                        m_settingTobeSaved = SystemSettingVm.Save();
-                        //m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
-                        break;
-                    }
+                            m_settingTobeSaved = PlayerSettingVm.Save();
+                            break;
+                        }
+                    case B3SettingCategory.Sales:
+                        {
+                            m_settingTobeSaved = SalesSettingVm.Save();
+                            break;
+                        }
+                    case B3SettingCategory.ServerGame:
+                        {
+                            m_settingTobeSaved = ServerSettingVm.Save();
+                            break;
+                        }
+                    case B3SettingCategory.Session:
+                        {
+                            m_settingTobeSaved = SessionSettingVm.Save();
+                            break;
+                        }
+                    case B3SettingCategory.System:
+                        {
+                            m_settingTobeSaved = SystemSettingVm.Save();
+                            //m_isRngBallCall = SystemSettingVm.SystemSettings.CommonRngBallCall;
+                            break;
+                        }
+                    case B3SettingCategory.PayTable:
+                        {
+                            m_settingTobeSaved = PayTableSettingVm.Save();
+                            IsSettingChanged = PayTableSettingVm.SettingHasChanged;
+                            //if (IsSettingChanged)
+                            //{
+                            //    m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
+                            //}
+                            break;
+                        }
+                }
             }
         }
 
@@ -241,6 +254,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     case B3SettingType.CommonRngBallCall:
                         {
+                            m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
+
                             //Show BallCallReport by Game or by session
                             var rptViewModel = ReportsViewModel.Instance;
                             rptViewModel.ReportSelectedIndex = -1;
@@ -308,21 +323,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
 
+        private bool IsSettingChanged;
+
         public void SaveSetting()
         {
             try
             {
                 SetNewValue();
-                SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
-                try
+                if (IsSettingChanged == true)//Do not send if no changes was made.
                 {
-                    msg.Send();
-                    UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
-                }
-                catch
-                {
-                    if (msg.ReturnCode != ServerReturnCode.Success)
-                        throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
+                    SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
+                    try
+                    {
+                        msg.Send();
+                        UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
+                    }
+                    catch
+                    {
+                        if (msg.ReturnCode != ServerReturnCode.Success)
+                            throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
+                    }
                 }
             }
             catch (Exception ex)
@@ -336,7 +356,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType && l.IsRng == m_isRngBallCall));
             return tempResult;
         }
-
 
         public bool GetIsRngSetting()
         {

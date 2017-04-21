@@ -51,6 +51,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
 
+
        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
        {
            foreach (var setting in settingsList)
@@ -66,6 +67,40 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            }
        }
 
+       public bool SettingHasChanged { get; set; }
+
+       private void UpdateModelToSettingsList()
+       {
+           SettingHasChanged = false;
+           foreach (var setting in m_originalPayTableSettings)
+           {
+               setting.B3SettingDefaultValue = setting.B3SettingValue;
+               switch (setting.SettingType)
+               {
+                   case B3SettingType.CommonRngBallCall:
+                       {
+                           if (setting.B3SettingValue != PayTableSettings.CommonRngBallCall.ConvertToB3StringValue())
+                           {
+                               SettingHasChanged = true;
+                               continue;
+                           }
+                           setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
+                           break;
+                       }
+               }
+           }
+       }
+
+       public List<B3SettingGlobal> Save()
+       {
+           UpdateModelToSettingsList();
+           return m_originalPayTableSettings;
+       }
+
+       public void ResetSettingsToDefault()
+       {
+           UpdateSettingsListToModel(m_originalPayTableSettings);
+       }
 
        private void AssignColumnDefWidth()
    {

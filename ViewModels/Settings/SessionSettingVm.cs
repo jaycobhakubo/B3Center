@@ -14,7 +14,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         private readonly List<B3SettingGlobal> m_originalSessionSettings; 
         #endregion
         
-
         #region Constructor
 
         public SessionSettingVm(List<B3SettingGlobal> sessionSettingsList)
@@ -26,7 +25,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         }
 
         #endregion
-
 
         #region Properties
 
