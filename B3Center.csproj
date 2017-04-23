@@ -199,7 +199,12 @@
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
       <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
+    <Compile Include="UI\SettingViews\PayTable\GamePayTable.xaml.cs">
+      <DependentUpon>GamePayTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingViews\PayTable\GamePayTableModel.cs" />
+    <Compile Include="UI\SettingViews\PayTable\GamePayTableVm.cs" />
+    <Compile Include="UI\SettingViews\PayTable\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ForMyEyesOnly\Template\B3GamePayTable.xaml.cs">
@@ -341,7 +346,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\SettingViews\PayTableSettingView.xaml">
+    <Page Include="UI\SettingViews\PayTable\GamePayTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SettingViews\PayTable\PayTableSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

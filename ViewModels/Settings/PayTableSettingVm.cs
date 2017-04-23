@@ -6,13 +6,13 @@ using System.Text;
 using System.Windows;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
+using GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
    public class PayTableSettingVm : ViewModelBase
     {
-        public GridLength grdColumnB3GameName { get; set; }
-        public GridLength grdColumnPayTableSetting { get; set; }
+        
 
         private PayTableSetting m_PayTableSettings;
         public PayTableSetting PayTableSettings
@@ -44,7 +44,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
         {
-            AssignColumnDefWidth();
+           
             PayTableSettings = new PayTableSetting();
             UpdateSettingsListToModel(payTableSettingList);
             m_originalPayTableSettings = payTableSettingList;
@@ -71,17 +71,30 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        }
                    case B3SettingType.MathPayTableSetting:
                        {
-                           foreach (var gameTypeObj in Enum.GetValues(typeof(B3GameType)))
-                           {
-                               var gameType = (B3GameType)gameTypeObj;
-                               PayTableSettings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(gameType);
-                           }
+                            var tempGameType = setting.GameType;
+
+
+                            switch (tempGameType)
+                            {
+                                case B3GameType.Crazybout:
+                                    {
+                                        //PayTableSettings.GamePayTableModelProperty.MathPayTable = setting.B3SettingValue();
+                                        CrazyBoutPayTableVm = new GamePayTableVm(tempGameType, PayTableSettings.GamePayTableModelProperty);
+                                        //PayTableSettings.GamePayTable.GamePayTableList = SettingViewModel.Instance.GetB3MathGamePlay(gameType).ToList();
+                                        break;
+                                    }
+
+                            }                             
+                          
                            break;
                        }
                   
                }
            }
        }
+
+        public GamePayTableVm CrazyBoutPayTableVm
+        { get; set; }
 
        public bool SettingHasChanged { get; set; }
 
@@ -130,15 +143,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            UpdateSettingsListToModel(m_originalPayTableSettings);
        }
 
-       private void AssignColumnDefWidth()
-   {
-       var grdlength = new GridLength(1, GridUnitType.Star);
-       grdColumnB3GameName = grdlength;
-       RaisePropertyChanged("grdColumnB3GameName");
-       grdlength = new GridLength(3, GridUnitType.Star);
-       grdColumnPayTableSetting = grdlength;
-       RaisePropertyChanged("grdColumnPayTableSetting");
-   }
+   //    private void AssignColumnDefWidth()
+   //{
+   //    var grdlength = new GridLength(1, GridUnitType.Star);
+   //    grdColumnB3GameName = grdlength;
+   //    RaisePropertyChanged("grdColumnB3GameName");
+   //    grdlength = new GridLength(3, GridUnitType.Star);
+   //    grdColumnPayTableSetting = grdlength;
+   //    RaisePropertyChanged("grdColumnPayTableSetting");
+   //}
 
       
     }

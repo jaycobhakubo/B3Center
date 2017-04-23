@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable.GamePayTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
+             mc:Ignorable="d" 
+             >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">
+            <Setter Property="Margin" Value="0"></Setter>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,0,0,0"/>
+            <Setter Property="ContentStringFormat" Value="{}{0}:"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Grid}">
+            <Setter Property="Margin" Value="0,10,0,2"></Setter>
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
+            <Setter Property="Margin" Value="0,0,15,0"/>
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource B3StyleCheckBoxDenom}">
+            <Setter Property="Height" Value="Auto"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="{Binding GameType}"></Label>
+        <ComboBox Grid.Column="1" 
+                  ItemsSource="{Binding GamePayTableModel.GamePayTableList}" 
+                  DisplayMemberPath="PackageDesc"
+                  SelectedItem="{Binding GamePayTableModel.MathPayTable}"
+                  ></ComboBox>
+    </Grid>
+</UserControl>

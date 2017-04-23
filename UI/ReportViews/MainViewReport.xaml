@@ -77,7 +77,6 @@
                                 Command="{Binding ViewReportCommand}"
                                 IsEnabled="{Binding ViewReportVisibility}"
                                 Tag="1"/>
-                                    <!--Click="btnSave_Click"-->
                                     <Button Grid.Column="1"
                                 Margin="15,15" Height="40" Width="140" 
                                 Content="Print report"
@@ -87,15 +86,13 @@
                                             Command="{Binding PrintReportCommand}"
                                 IsEnabled="{Binding ElementName=BtnSave, Path=IsEnabled}"
                             />
-                                    <!--Click="btnCancel_Click"-->
-
                                 </Grid>
                             </Border>
                             <Border Visibility="{Binding IndicatorVisibility, Converter={StaticResource ConvertBooltoVisHidden}}"  Grid.Row="2" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom">
                                 <Label                                                                                                     >
                                     <Label.Style>
                                         <Style  TargetType="Label" >
-                                          
+
                                             <Setter Property="Foreground" Value="Red"/>
                                             <Setter Property="Content" Value="* Indicates a required field"/>
                                             <Style.Triggers>
@@ -104,7 +101,7 @@
                                                         <Condition Binding="{Binding NoSession}" Value="true"/>
                                                         <Condition Binding="{Binding NoAccount}" Value="true"/>
                                                     </MultiDataTrigger.Conditions>
-                                                   
+
                                                     <Setter Property="Content" Value="No session played"/>
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
@@ -123,19 +120,13 @@
                     </Border>
                 </Grid>
             </Border>
-            <!--<Style TargetType="Label">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsData}" Value="NoSession">
-                        <Setter Property=""
-                                            </DataTrigger>
-                </Style.Triggers>
-            </Style>-->
+            
             <Border Visibility="{Binding ElementName=BrdrViewPrint, Path=Visibility}" Name="BrdrSettingMenuCol" Width="192" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <!--FontWeight="Regular"-->
+
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                      
                             Name="LstbxReportList" 
@@ -152,21 +143,3 @@
         </Grid>
     </DockPanel>
 </UserControl>
-
-
-<!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/NewStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        </ResourceDictionary>-->
-
-
-<!--<Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsPrinting, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Printing"/>
-                    </Border>
-                    <Border Grid.Column="1" Background="White" Opacity=".9" Visibility="{Binding IsLoading, Converter={StaticResource VisibilityConverter}}" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                      
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="200" TextWrapping="Wrap" TextAlignment="Center" Text="Loading"/>
-                    </Border>-->
-<!--<Border Grid.Column="1" Background="White" Opacity=".9" Margin="0,100,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">-->

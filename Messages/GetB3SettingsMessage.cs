@@ -85,6 +85,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                                 b3Settingglobal.UIUpdateRequired = true;
                                 break;
                             }
+                        case B3SettingType.MathPayTableSetting:
+                            {
+                                b3Settingglobal.UIUpdateRequired = true;
+                                b3Settingglobal.IsPayTableSettings = true;
+                                break;
+                            }
                     }
 
                     B3SettingGlobal.Add(b3Settingglobal);
