@@ -138,6 +138,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             { B3GameType.Mayamoney, "Maya Money" },
             { B3GameType.Spirit76, "76 Bingo" },
             { B3GameType.Timebomb, "Time Bomb" },
+            { B3GameType.Ukickem, "U kick Em" },
             { B3GameType.Wildball, "WildFire w/Bonus" },
             { B3GameType.Wildfire, "WildFire" },
         };

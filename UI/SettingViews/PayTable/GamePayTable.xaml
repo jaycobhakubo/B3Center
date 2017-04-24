@@ -22,14 +22,12 @@
         <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="Margin" Value="0,0,15,0"/>
         </Style>
-        <Style TargetType="CheckBox" BasedOn="{StaticResource B3StyleCheckBoxDenom}">
-            <Setter Property="Height" Value="Auto"></Setter>
-        </Style>
+       
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="{Binding GameName}"></Label>
         <ComboBox Grid.Column="1" 

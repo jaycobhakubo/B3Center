@@ -47,11 +47,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            
             PayTableSettings = new PayTableSetting();
             UpdateSettingsListToModel(payTableSettingList);
-            m_originalPayTableSettings = payTableSettingList;
-            
+            m_originalPayTableSettings = payTableSettingList;           
         }
-
-
 
        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
        {
@@ -69,37 +66,52 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                            PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
                            break;
                        }
-                   case B3SettingType.MathPayTableSetting:
+                    case B3SettingType.MathPayTableSetting:
                        {
                             var tempGameType = setting.GameType;
-
-
                             switch (tempGameType)
-                            {
+                            {                              
                                 case B3GameType.Crazybout:
-                                    {
-                                        //PayTableSettings.GamePayTableModelProperty. SettingViewModel.Instance.GetB3MathGamePlay(GameType);
-                                        //Settings.EnableGameSetting = isGameEnabledSetting;
-                                       
-                                        CrazyBoutPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                        //PayTableSettings.GamePayTable.GamePayTableList = SettingViewModel.Instance.GetB3MathGamePlay(gameType).ToList();
-                                        break;
-                                    }
-
-                            }                             
-                          
-                           break;
-                       }
-                  
+                                CrazyBoutPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                break;
+                                case B3GameType.Jailbreak:
+                                    JailBreakPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    break;
+                                    // case B3GameType.Mayamoney:
+                                    // MayaMoneyPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    // break;
+                                    // case B3GameType.Spirit76:
+                                    // Spirit76PayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    // break;
+                                    // case B3GameType.Timebomb:
+                                    //TimeBombPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    // break;
+                                    // case B3GameType.Ukickem:
+                                    // UkickEmPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    // break;
+                                    // case B3GameType.Wildball:
+                                    //     WildBallPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    //     break;
+                                    // case B3GameType.Wildfire:
+                                    //     WildFirePayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    //     break;
+                            }
+                            break;                                                      
+                    }                 
                }
            }
        }
+              
+        public GamePayTableVm CrazyBoutPayTableVm{ get; set; }
+        public GamePayTableVm JailBreakPayTableVm { get; set; }
+        public GamePayTableVm MayaMoneyPayTableVm { get; set; }
+        public GamePayTableVm Spirit76PayTableVm { get; set; }
+        public GamePayTableVm TimeBombPayTableVm { get; set; }
+        public GamePayTableVm UkickEmPayTableVm { get; set; }
+        public GamePayTableVm WildBallPayTableVm { get; set; }
+        public GamePayTableVm WildFirePayTableVm { get; set; }
 
-       
-        public GamePayTableVm CrazyBoutPayTableVm
-        { get; set; }
-
-       public bool SettingHasChanged { get; set; }
+        public bool SettingHasChanged { get; set; }
 
        private void UpdateModelToSettingsList()
        {
@@ -144,18 +156,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        public void ResetSettingsToDefault()
        {
            UpdateSettingsListToModel(m_originalPayTableSettings);
-       }
-
-   //    private void AssignColumnDefWidth()
-   //{
-   //    var grdlength = new GridLength(1, GridUnitType.Star);
-   //    grdColumnB3GameName = grdlength;
-   //    RaisePropertyChanged("grdColumnB3GameName");
-   //    grdlength = new GridLength(3, GridUnitType.Star);
-   //    grdColumnPayTableSetting = grdlength;
-   //    RaisePropertyChanged("grdColumnPayTableSetting");
-   //}
-
-      
+       }      
     }
 }
