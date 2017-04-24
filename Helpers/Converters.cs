@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 //Hello there
 namespace GameTech.Elite.Client.Modules.B3Center.Helpers
@@ -36,7 +37,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
     public class BoolToVisibilityConv : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)//parameter true = revert valuek false do not revert
-        {           
+        {
             Visibility showControl = new Visibility();
             showControl = Visibility.Collapsed;
 
@@ -85,7 +86,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                 if ((bool)value)
                 {
                     showControl = Visibility.Visible;
-                }        
+                }
             }
             return showControl;
         }
@@ -94,7 +95,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             return null;
         }
-   }
+    }
 
     public class ValueToBoolConverter : IValueConverter
     {
@@ -124,7 +125,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
                         tempresult = false;
                         break;
                     }
-            }        
+            }
             return tempresult;
         }
 
@@ -215,8 +216,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
             return result;
         }
     }
-   
-  public class ShowDefaultColumnDef : IValueConverter
+
+    public class ShowDefaultColumnDef : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -226,7 +227,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
 
             if (columnDefWidthValue == gridStarType)
             {
-                return new GridLength(0, GridUnitType.Auto); 
+                return new GridLength(0, GridUnitType.Auto);
             }
             return new GridLength(1, GridUnitType.Star);
         }
