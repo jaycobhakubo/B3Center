@@ -349,7 +349,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
         {
-            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType && l.IsRng == m_isRngBallCall));
+            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
             return tempResult;
         }
 
