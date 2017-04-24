@@ -8,16 +8,15 @@
              >
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">
-            <Setter Property="Margin" Value="0"></Setter>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="15,0,0,0"></Setter>
+            <Setter Property="Padding" Value="0,0,0,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="10,0,0,0"/>
             <Setter Property="ContentStringFormat" Value="{}{0}:"></Setter>
         </Style>
 
         <Style TargetType="{x:Type Grid}">
-            <Setter Property="Margin" Value="0,10,0,2"></Setter>
+            <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
         <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="Margin" Value="0,0,15,0"/>

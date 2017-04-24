@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:b3games="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
+             xmlns:b3Game="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
              mc:Ignorable="d" 
              xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
               >
@@ -29,8 +29,7 @@
 
     </UserControl.Resources>
     <Border>
-              
-        <Grid Name="GridSalesSettings"  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
+        <Grid  HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="279"/>
@@ -38,7 +37,7 @@
                 <ColumnDefinition Width="279"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -72,24 +71,20 @@
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages:" Margin="0,30,0,2" ></Label>
             </StackPanel>
-            <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4">
+            <!--<Setter Property="Padding" Value="15,0,0,3"/>
+            <Setter Property="Margin" Value="-1,0,-1,0"/>-->
+            <GroupBox Style="{StaticResource B3StyleGroupBox2}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="0" Padding="0,3.5,0,15">
                 <StackPanel >
-                    <b3games:GamePayTable  DataContext="{Binding CrazyBoutPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding JailBreakPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding MayaMoneyPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding Spirit76PayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding TimeBombPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding UkickEmPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding WildBallPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding WildFirePayTableVm}"></b3games:GamePayTable>
+                    <b3Game:GamePayTable   DataContext="{Binding CrazyBoutPayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding JailBreakPayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding MayaMoneyPayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding Spirit76PayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding TimeBombPayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding UkickEmPayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding WildBallPayTableVm}"></b3Game:GamePayTable>
+                    <b3Game:GamePayTable DataContext="{Binding WildFirePayTableVm}"></b3Game:GamePayTable>
                 </StackPanel>
             </GroupBox>
         </Grid>
     </Border>
 </UserControl>
-<!--<b3games:GamePayTable DataContext="{Binding MayaMoneyPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding Spirit76PayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding TimeBombPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding UkickEmPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding WildBallPayTableVm}"></b3games:GamePayTable>
-                    <b3games:GamePayTable DataContext="{Binding WildFirePayTableVm}"></b3games:GamePayTable>-->
