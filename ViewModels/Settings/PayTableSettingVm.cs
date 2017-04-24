@@ -242,6 +242,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            }
        }
 
+       public void IsRngCheckEvent()
+        {
+            m_isRNG = PayTableSettings.CommonRngBallCall;
+            EnforceMixEnable = !m_isRNG;
+            if (m_isRNG)//setting.ConvertB3StringValueToBool();)
+            {
+                PayTableSettings.EnforceMix = EnforceMixEnable;
+            }
+            else
+            {
+                PayTableSettings.EnforceMix = (m_originalPayTableSettings.Single(l => l.SettingType == B3SettingType.EnforceMix).B3SettingValue) == "T" ? true : false;
+            }
+        }
+
        public List<B3SettingGlobal> Save()
        {
            UpdateModelToSettingsList();

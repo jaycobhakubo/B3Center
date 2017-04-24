@@ -19,7 +19,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             RadioButton rdobtn = (RadioButton)sender;
          
                 PayTableSettingVm ii = (PayTableSettingVm)DataContext;
-            ii.EnforceMixEnable = (bool)rdobtn.IsChecked;
+            ii.IsRngCheckEvent();
 
 
 
