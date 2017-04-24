@@ -173,6 +173,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (SelectedSettingView != null)
             {
+                m_settingTobeSaved = new List<B3SettingGlobal>();
                 switch (m_selectedSettingCategoryType)
                 {
                     case B3SettingCategory.Games:

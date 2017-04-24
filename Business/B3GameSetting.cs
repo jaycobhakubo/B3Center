@@ -114,8 +114,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
         
         public bool UIUpdateRequired {get; set;}
-
         public bool IsPayTableSettings { get; set; }
+        public bool HasChanged { get; set; }
 
         #endregion
     }

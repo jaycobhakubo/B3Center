@@ -101,7 +101,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                }
            }
        }
-              
+           
+
+               
         public GamePayTableVm CrazyBoutPayTableVm{ get; set; }
         public GamePayTableVm JailBreakPayTableVm { get; set; }
         public GamePayTableVm MayaMoneyPayTableVm { get; set; }
@@ -118,14 +120,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            SettingHasChanged = false;
            foreach (var setting in m_originalPayTableSettings)
            {
-              
+                setting.HasChanged = false;
                switch (setting.SettingType)
                {
                    case B3SettingType.CommonRngBallCall:
                        {
-                           if (setting.B3SettingValue != PayTableSettings.CommonRngBallCall.ConvertToB3StringValue())
-                           {
-                               setting.B3SettingDefaultValue = setting.B3SettingValue;
+                            setting.B3SettingDefaultValue = setting.B3SettingValue;
+                            if (setting.B3SettingValue != PayTableSettings.CommonRngBallCall.ConvertToB3StringValue())
+                            {
+                               setting.HasChanged = true;                          
                                setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
                                SettingHasChanged = true;
                            }
@@ -134,23 +137,100 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        }
                    case B3SettingType.EnforceMix:
                        {
-                           if (setting.B3SettingValue != PayTableSettings.EnforceMix.ConvertToB3StringValue())
-                           {
-                               setting.B3SettingDefaultValue = setting.B3SettingValue;
-                               setting.B3SettingValue = PayTableSettings.EnforceMix.ConvertToB3StringValue();
+                            setting.B3SettingDefaultValue = setting.B3SettingValue;
+                            if (setting.B3SettingValue != PayTableSettings.EnforceMix.ConvertToB3StringValue())
+                            {
+                                setting.HasChanged = true;
+                                setting.B3SettingValue = PayTableSettings.EnforceMix.ConvertToB3StringValue();
                                SettingHasChanged = true;
                            }
 
                            break;
                        }
-               }
+                    case B3SettingType.MathPayTableSetting:
+                        {
+                            var tempGameType = setting.GameType;
+                            var settingvalue = setting.B3SettingValue;                          
+                            m_isRNG = PayTableSettings.CommonRngBallCall;
+                            switch (tempGameType)
+                            {
+                                case B3GameType.Crazybout:
+                                    {
+                                        if (CrazyBoutPayTableVm.GamePayTableModel.MathPayTable != null 
+                                            && CrazyBoutPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                        { settingvalue = CrazyBoutPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString(); }
+
+                                    }
+                                    break;
+                                case B3GameType.Jailbreak:
+                                    {
+                                        if (JailBreakPayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && JailBreakPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = JailBreakPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+
+                                    }
+                                    break;
+                                case B3GameType.Mayamoney:
+                                    {
+                                        if (MayaMoneyPayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && MayaMoneyPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = MayaMoneyPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+
+                                    }
+                                    break;
+                                case B3GameType.Spirit76:
+                                    {
+                                        if (Spirit76PayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && Spirit76PayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = Spirit76PayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+                                    }
+                                    break;
+                                case B3GameType.Timebomb:
+                                    {
+                                        if (TimeBombPayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && TimeBombPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = TimeBombPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+                                    }
+                                    break;
+                                case B3GameType.Ukickem:
+                                    {
+                                        if (UkickEmPayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && UkickEmPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = UkickEmPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+                                    }
+                                    break;
+                                case B3GameType.Wildball:
+                                    {
+                                        if (WildBallPayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && WildBallPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = WildBallPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+                                    }
+                                    break;
+                                case B3GameType.Wildfire:
+                                    {
+                                        if (WildFirePayTableVm.GamePayTableModel.MathPayTable != null
+                                                  && WildFirePayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            settingvalue = WildFirePayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
+                                    }
+                                    break;
+                            }
+                            if (setting.B3SettingValue != settingvalue && setting.GameType != 0)
+                            {
+                                setting.HasChanged = true;
+                                setting.B3SettingDefaultValue = setting.B3SettingValue;
+                                setting.B3SettingValue = settingvalue;
+                                SettingHasChanged = true;
+                            }
+                            break;
+                        }
+                }
            }
        }
 
        public List<B3SettingGlobal> Save()
        {
            UpdateModelToSettingsList();
-           return m_originalPayTableSettings;
+           return m_originalPayTableSettings.Where(l => l.HasChanged == true).ToList();
        }
 
        public void ResetSettingsToDefault()
