@@ -78,8 +78,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             {
                                 case B3GameType.Crazybout:
                                     {
-                                        //PayTableSettings.GamePayTableModelProperty.MathPayTable = setting.B3SettingValue();
-                                        CrazyBoutPayTableVm = new GamePayTableVm(tempGameType, PayTableSettings.GamePayTableModelProperty);
+                                        //PayTableSettings.GamePayTableModelProperty. SettingViewModel.Instance.GetB3MathGamePlay(GameType);
+                                        //Settings.EnableGameSetting = isGameEnabledSetting;
+                                       
+                                        CrazyBoutPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
                                         //PayTableSettings.GamePayTable.GamePayTableList = SettingViewModel.Instance.GetB3MathGamePlay(gameType).ToList();
                                         break;
                                     }
@@ -93,6 +95,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            }
        }
 
+       
         public GamePayTableVm CrazyBoutPayTableVm
         { get; set; }
 

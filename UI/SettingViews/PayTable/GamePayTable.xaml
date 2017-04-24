@@ -33,7 +33,7 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="{Binding GameType}"></Label>
         <ComboBox Grid.Column="1" 
-                  ItemsSource="{Binding GamePayTableModel.GamePayTableList}" 
+                  ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
                   SelectedItem="{Binding GamePayTableModel.MathPayTable}"
                   ></ComboBox>

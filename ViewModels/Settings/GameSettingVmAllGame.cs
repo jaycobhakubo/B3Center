@@ -118,7 +118,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         Settings.SingleOfferBonus = setting.ConvertB3StringValueToBool();
                         break;
                     //case B3SettingType.MathPayTableSetting:
-                    //    Settings.MathPayTable = GetB3MathGamePayTable(m_gameSetting, setting);
+                     //   Settings.MathPayTable = GetB3MathGamePayTable(m_gameSetting, setting);
                     //    break;
                     case B3SettingType.CallSpeedMin:
                         Settings.CallSpeedMin = setting.B3SettingValue;
@@ -185,7 +185,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     //case B3SettingType.MathPayTableSetting:
                     //        //Set if math pay table setting has changed or not.
                     //        m_isPayTableSettingHasChanged = (gameSetting.B3SettingValue != Settings.MathPayTable.MathPackageId.ToString()) ? true : false;
-                    //        gameSetting.B3SettingValue = Settings.MathPayTable.MathPackageId.ToString();
+                     //     gameSetting.B3SettingValue = Settings.MathPayTable.MathPackageId.ToString();
                     //        break;
                     case B3SettingType.CallSpeedMin:
                             gameSetting.B3SettingValue = Settings.CallSpeedMin;
@@ -196,22 +196,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
             }
         }
-        /*
-        private B3MathGamePay GetB3MathGamePayTable(GameSetting settings, B3SettingGlobal mathSetting)
-        {
-            int mathPackageId;
+
+        //private B3MathGamePay GetB3MathGamePayTable(GameSetting settings, B3SettingGlobal mathSetting)
+        //{
+            //int mathPackageId;
 
             //check for null
-            if (mathSetting == null)
-            {
-                return null;
-            }
+            //if (mathSetting == null)
+            //{
+            //    return null;
+            //}
 
-            //make sure we are able to parse an int
-            if (!int.TryParse(mathSetting.B3SettingValue, out mathPackageId))
-            {
-                return null;
-            }
+            ////make sure we are able to parse an int
+            //if (!int.TryParse(mathSetting.B3SettingValue, out mathPackageId))
+            //{
+            //    return null;
+            //}
 
             //check setting for null or empty list
             //if (settings == null ||
@@ -221,9 +221,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             //    return null;
             //}
             
-            return settings.LGamePayTable.FirstOrDefault(l => l.MathPackageId == mathPackageId);
-        }
-         * */
+            //return settings.LGamePayTable.FirstOrDefault(l => l.MathPackageId == mathPackageId);
+        //}
+      
 
         public List<B3SettingGlobal> Save()
         {
