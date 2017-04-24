@@ -156,6 +156,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private PayTableSettingVm InitializePayTableSettingVm()
         {
             var payTableSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.IsPayTableSettings == true).ToList();
+            foreach (var gameEnable in B3IsGameEnabledSettings.Where(l => l.IsEnabled == true))
+            {
+               var B3GamePayTableSetting = payTableSettingsFromServer.Single(l => l.GameType == gameEnable.GameType);
+               B3GamePayTableSetting.IsGameENabled = gameEnable.IsEnabled;
+            }
+
             var payTableSettingVm = new PayTableSettingVm(payTableSettingsFromServer);
             m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
             return payTableSettingVm;
@@ -357,6 +363,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             return m_isRngBallCall;
         }
+
+        public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()
+        {
+            return B3IsGameEnabledSettings;
+        }
+
+        //public bool GetGameIsEnableSettingValue
 
         public void SelectedItemEvent()
         {

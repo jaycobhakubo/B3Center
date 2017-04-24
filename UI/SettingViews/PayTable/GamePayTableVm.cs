@@ -26,6 +26,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }
         }
 
+
+
+
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
 
 
@@ -48,7 +51,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             set;
         }
 
-   
+        public bool IsGameEnable { get; set; }
 
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
         {
@@ -67,8 +70,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         {
             B3MathGamePayList = new List<B3MathGamePay>();
             B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
-            GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);
-            
+            GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
         }
 
         private readonly B3SettingGlobal m_originalPayTableSettings;

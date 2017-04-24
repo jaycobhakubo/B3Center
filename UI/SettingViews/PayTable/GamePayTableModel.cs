@@ -22,7 +22,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                 m_mathPayTable = value;
                 RaisePropertyChanged("MathPayTable");
             }
-        }   
+        }
+
+
+
     }
 
 
