@@ -13,5 +13,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void rdobtnIsRNG_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            RadioButton rdobtn = (RadioButton)sender;
+         
+                PayTableSettingVm ii = (PayTableSettingVm)DataContext;
+            ii.EnforceMixEnable = (bool)rdobtn.IsChecked;
+
+
+
+        }
     }
 }

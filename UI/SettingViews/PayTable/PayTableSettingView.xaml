@@ -12,7 +12,7 @@
         <!--<b3games:GamePayTable x:Key="crzyBout"></b3games:GamePayTable>-->
         <!--<Style x:Key="RNGIsCheck" TargetType="CheckBox" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=rdobtnIsRNG, Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=rdobtnIsRNG, Path=IsChecked}" Value="rdobtnIsRNG">
                     <Setter Property="IsChecked" Value="True"></Setter>
                 </DataTrigger>
             </Style.Triggers>
@@ -20,8 +20,8 @@
 
         <!--<Style x:Key="RNGIsCheck" TargetType="CheckBox" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsRNG}" Value="false" >
-                    <Setter Property="IsChecked" Value="True"></Setter>
+                <DataTrigger Binding="{Binding PayTableSettings.CommonRngBallCall}" Value="false" >
+                    <Setter Property="IsEnabled" Value="True"></Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>-->
@@ -42,6 +42,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1" Grid.ColumnSpan="3">
+            
                 <GroupBox Template="{StaticResource NocornerradiusGrpBox}">
                     <GroupBox.Header>
                         <Border>
@@ -49,6 +50,7 @@
                                 <Label Margin="0">
                                     <Label.Template>
                                         <ControlTemplate>
+                                          
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -56,7 +58,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Common RNG ball call: " Padding="5,5,5,5" ></TextBlock>
                                                 <StackPanel VerticalAlignment="Center"  Margin="10,0,10,0" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                                                    <RadioButton Name="rdobtnIsRNG" Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}"></RadioButton>
+                                                    <RadioButton Name="rdobtnIsRNG" Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Checked="rdobtnIsRNG_Checked" Unchecked="rdobtnIsRNG_Checked"></RadioButton>
                                                     <RadioButton Margin="10,0,0,0" Content="No" IsChecked="{Binding PayTableSettings.CommonRngBallCall, Converter={StaticResource RevertValueConverter}}">
                                                     </RadioButton>
                                                 </StackPanel>
@@ -67,7 +69,9 @@
                             </Grid>
                         </Border>
                     </GroupBox.Header>
-                    <CheckBox  IsChecked="{Binding PayTableSettings.EnforceMix}" Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto" ></CheckBox>
+                    <CheckBox  IsEnabled="{Binding EnforceMixEnable}" IsChecked="{Binding PayTableSettings.EnforceMix}" Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto" >
+
+                    </CheckBox>
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages:" Margin="0,30,0,2" ></Label>
             </StackPanel>

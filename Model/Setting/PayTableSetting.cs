@@ -15,8 +15,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 
        private bool m_commonRngBallCall;
        private bool m_enforceMix;
-        //private GamePayTableModel m_gamePayTablemodel = new GamePayTableModel();
-        //private B3MathGamePay m_b3MathGamePay;
+
         #endregion
 
         #region Constructors
@@ -26,20 +25,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 
         #region Properties
 
-        //List<B3MathGamePay> B3MathGamePayList
-        //{
-
-        //}
-        //public GamePayTableModel GamePayTableModelProperty
-        //{
-        //    get { return m_gamePayTablemodel; }
-        //    set
-        //    {
-
-        //        m_gamePayTablemodel = value;
-        //        RaisePropertyChanged("GamePayTableModelProperty");
-        //    }
-        //}
 
        public bool CommonRngBallCall
        {
@@ -51,7 +36,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
            }
        }
 
-       public bool EnforceMix
+        //public bool m_enforceMixEnable;
+        //public bool EnforceMixEnable
+        //{
+        //    get
+        //    {
+        //        return m_enforceMixEnable;
+        //    }
+        //    set
+        //    {
+        //        m_enforceMixEnable = value;
+        //        RaisePropertyChanged("EnforceMixEnable");
+        //    }
+        //}
+
+        public bool EnforceMix
        {
            get
            {
@@ -64,31 +63,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
            }
        }
 
-       //public B3MathGamePay MathPayTable
-       //{
-       //    get
-       //    {
-       //        return m_mathPayTableCrazyBout;
-       //    }
-       //    set
-       //    {
-       //        m_mathPayTableCrazyBout = value;
-       //        RaisePropertyChanged("MathPayTable");
-       //    }
-       //}
-
-       //public ObservableCollection<B3MathGamePay> LGamePayTable
-       //{
-       //    get
-       //    {
-       //        return m_gamePaytableList;
-       //    }
-       //    set
-       //    {
-       //        m_gamePaytableList = value;
-       //        RaisePropertyChanged("LGamePayTable");
-       //    }
-       //}
 
         #endregion
     }

@@ -28,14 +28,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        private bool m_isRNG;
-        public bool IsRNG
+        public bool m_enforceMixEnable;
+        public bool EnforceMixEnable
         {
-            get { return m_isRNG; }
-            set 
+            get
             {
-                m_isRNG = value;
-                RaisePropertyChanged("IsRNG");
+                return m_enforceMixEnable;
+            }
+            set
+            {
+                m_enforceMixEnable = value;
+                RaisePropertyChanged("EnforceMixEnable");
             }
         }
 
@@ -47,10 +50,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            
             PayTableSettings = new PayTableSetting();
             UpdateSettingsListToModel(payTableSettingList);
-            m_originalPayTableSettings = payTableSettingList;           
+
+            m_originalPayTableSettings = payTableSettingList;  
+                     
         }
 
-       private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
+        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList) 
        {
            //PayTableSettings.LGamePayTable = SettingViewModel.Instance.GetB3MathGamePlay(GameType);
            foreach (var setting in settingsList)
@@ -60,10 +65,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                   
                    case B3SettingType.CommonRngBallCall:
                        PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
-                       break;
+                        m_isRNG = PayTableSettings.CommonRngBallCall;
+                        EnforceMixEnable = !m_isRNG;
+                        if (m_isRNG)//setting.ConvertB3StringValueToBool();)
+                        {
+                            PayTableSettings.EnforceMix = EnforceMixEnable;
+                        }
+                        
+                        break;
                    case B3SettingType.EnforceMix:
                        {
-                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
+                       
+                                PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
+                           
                            break;
                        }
                     case B3SettingType.MathPayTableSetting:
@@ -101,9 +115,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                }
            }
        }
-           
 
-               
+        private bool m_isRNG;
+
+
         public GamePayTableVm CrazyBoutPayTableVm{ get; set; }
         public GamePayTableVm JailBreakPayTableVm { get; set; }
         public GamePayTableVm MayaMoneyPayTableVm { get; set; }
@@ -151,7 +166,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         {
                             var tempGameType = setting.GameType;
                             var settingvalue = setting.B3SettingValue;                          
-                            m_isRNG = PayTableSettings.CommonRngBallCall;
+                       
                             switch (tempGameType)
                             {
                                 case B3GameType.Crazybout:
