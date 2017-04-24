@@ -129,6 +129,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
                 }
             }
         }
+
+        //Im not a big fun of typing definition over and over again do not delete these please.
+        public static Dictionary<B3GameType, string> B3GameActualName = new Dictionary<B3GameType, string>()
+        {
+            { B3GameType.Crazybout, "Crazy Bout" },
+            { B3GameType.Jailbreak, "JailBreak" },
+            { B3GameType.Mayamoney, "Maya Money" },
+            { B3GameType.Spirit76, "76 Bingo" },
+            { B3GameType.Timebomb, "Time Bomb" },
+            { B3GameType.Wildball, "WildFire w/Bonus" },
+            { B3GameType.Wildfire, "WildFire" },
+        };
+
+            
+
     }
 
 }

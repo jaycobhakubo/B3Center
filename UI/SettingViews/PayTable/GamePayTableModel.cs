@@ -11,8 +11,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
     public class GamePayTableModel : Notifier
     {
         private B3MathGamePay m_mathPayTable;
-        //private List<B3MathGamePay> m_gamePaytableList;
-
         public B3MathGamePay MathPayTable
         {
             get
@@ -24,21 +22,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                 m_mathPayTable = value;
                 RaisePropertyChanged("MathPayTable");
             }
-        }
-
-        //public List<B3MathGamePay> GamePayTableList
-        //{
-        //    get
-        //    {
-        //        return m_gamePaytableList;
-        //    }
-        //    set
-        //    {
-        //        m_gamePaytableList = value;
-        //        RaisePropertyChanged("LGamePayTable");
-        //    }
-        //}
-
+        }   
     }
 
 

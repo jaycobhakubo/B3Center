@@ -31,7 +31,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="{Binding GameType}"></Label>
+        <Label Grid.Column="0" Content="{Binding GameName}"></Label>
         <ComboBox Grid.Column="1" 
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"

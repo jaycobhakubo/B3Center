@@ -27,15 +27,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         }
 
      
-     public List<B3MathGamePay> B3MathGamePayList { get; }
-        
+     public  List<B3MathGamePay> B3MathGamePayList { get; }
+        public string  GameName { get; }
 
 
         public GamePayTableVm( GamePayTableModel gamePayTableModel, B3SettingGlobal b3SettingGlobal)
         {
             B3MathGamePayList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
             GamePayTableModel = gamePayTableModel;
-            GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);        
+            GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
+            GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
         }
 
         private B3MathGamePay GetB3MathGamePay(string MathPackageId)
