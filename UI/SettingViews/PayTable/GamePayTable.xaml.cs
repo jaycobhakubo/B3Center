@@ -22,6 +22,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         public GamePayTable()
         {
             InitializeComponent();
+            DataContext = this;
         }
     }
 }

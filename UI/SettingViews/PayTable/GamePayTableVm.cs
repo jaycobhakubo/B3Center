@@ -31,10 +31,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         public string  GameName { get; }
 
 
-        public GamePayTableVm( GamePayTableModel gamePayTableModel, B3SettingGlobal b3SettingGlobal)
+        public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
         {
             B3MathGamePayList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
-            GamePayTableModel = gamePayTableModel;
+            m_gamePayTableModel = new GamePayTableModel();
             GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
         }

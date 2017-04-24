@@ -15,7 +15,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 
        private bool m_commonRngBallCall;
        private bool m_enforceMix;
-        private GamePayTableModel m_gamePayTablemodel = new GamePayTableModel();
+        //private GamePayTableModel m_gamePayTablemodel = new GamePayTableModel();
         //private B3MathGamePay m_b3MathGamePay;
         #endregion
 
@@ -30,16 +30,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         //{
 
         //}
-        public GamePayTableModel GamePayTableModelProperty
-        {
-            get { return m_gamePayTablemodel; }
-            set
-            {
+        //public GamePayTableModel GamePayTableModelProperty
+        //{
+        //    get { return m_gamePayTablemodel; }
+        //    set
+        //    {
 
-                m_gamePayTablemodel = value;
-                RaisePropertyChanged("GamePayTableModelProperty");
-            }
-        }
+        //        m_gamePayTablemodel = value;
+        //        RaisePropertyChanged("GamePayTableModelProperty");
+        //    }
+        //}
 
        public bool CommonRngBallCall
        {

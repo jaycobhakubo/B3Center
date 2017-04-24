@@ -9,7 +9,7 @@
               >
     <UserControl.Resources>
         <converter:ReverseBoolConverter x:Key="RevertValueConverter"></converter:ReverseBoolConverter>
-   
+        <!--<b3games:GamePayTable x:Key="crzyBout"></b3games:GamePayTable>-->
         <!--<Style x:Key="RNGIsCheck" TargetType="CheckBox" BasedOn="{StaticResource B3DefaultStyleCheckBox}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=rdobtnIsRNG, Path=IsChecked}" Value="False">
@@ -74,7 +74,7 @@
             </StackPanel>
             <GroupBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4">
                 <StackPanel >
-                    <b3games:GamePayTable DataContext="{Binding CrazyBoutPayTableVm}"></b3games:GamePayTable>
+                    <b3games:GamePayTable  DataContext="{Binding CrazyBoutPayTableVm}"></b3games:GamePayTable>
                     <b3games:GamePayTable DataContext="{Binding JailBreakPayTableVm}"></b3games:GamePayTable>
                     <b3games:GamePayTable DataContext="{Binding MayaMoneyPayTableVm}"></b3games:GamePayTable>
                     <b3games:GamePayTable DataContext="{Binding Spirit76PayTableVm}"></b3games:GamePayTable>
@@ -87,3 +87,9 @@
         </Grid>
     </Border>
 </UserControl>
+<!--<b3games:GamePayTable DataContext="{Binding MayaMoneyPayTableVm}"></b3games:GamePayTable>
+                    <b3games:GamePayTable DataContext="{Binding Spirit76PayTableVm}"></b3games:GamePayTable>
+                    <b3games:GamePayTable DataContext="{Binding TimeBombPayTableVm}"></b3games:GamePayTable>
+                    <b3games:GamePayTable DataContext="{Binding UkickEmPayTableVm}"></b3games:GamePayTable>
+                    <b3games:GamePayTable DataContext="{Binding WildBallPayTableVm}"></b3games:GamePayTable>
+                    <b3games:GamePayTable DataContext="{Binding WildFirePayTableVm}"></b3games:GamePayTable>-->

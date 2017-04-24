@@ -72,29 +72,29 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             switch (tempGameType)
                             {                              
                                 case B3GameType.Crazybout:
-                                CrazyBoutPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                break;
-                                case B3GameType.Jailbreak:
-                                    JailBreakPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
+                                    CrazyBoutPayTableVm = new GamePayTableVm(setting);
                                     break;
-                                    // case B3GameType.Mayamoney:
-                                    // MayaMoneyPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                    // break;
-                                    // case B3GameType.Spirit76:
-                                    // Spirit76PayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                    // break;
-                                    // case B3GameType.Timebomb:
-                                    //TimeBombPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                    // break;
-                                    // case B3GameType.Ukickem:
-                                    // UkickEmPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                    // break;
-                                    // case B3GameType.Wildball:
-                                    //     WildBallPayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                    //     break;
-                                    // case B3GameType.Wildfire:
-                                    //     WildFirePayTableVm = new GamePayTableVm(PayTableSettings.GamePayTableModelProperty, setting);
-                                    //     break;
+                                case B3GameType.Jailbreak:
+                                    JailBreakPayTableVm = new GamePayTableVm(setting);
+                                    break;
+                                case B3GameType.Mayamoney:
+                                    MayaMoneyPayTableVm = new GamePayTableVm(setting);
+                                    break;
+                                case B3GameType.Spirit76:
+                                    Spirit76PayTableVm = new GamePayTableVm(setting);
+                                    break;
+                                case B3GameType.Timebomb:
+                                    TimeBombPayTableVm = new GamePayTableVm( setting);
+                                    break;
+                                case B3GameType.Ukickem:
+                                    UkickEmPayTableVm = new GamePayTableVm( setting);
+                                    break;
+                                case B3GameType.Wildball:
+                                    WildBallPayTableVm = new GamePayTableVm(setting);
+                                    break;
+                                case B3GameType.Wildfire:
+                                    WildFirePayTableVm = new GamePayTableVm(setting);
+                                    break;
                             }
                             break;                                                      
                     }                 
