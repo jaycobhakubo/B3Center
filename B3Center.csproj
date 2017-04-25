@@ -121,8 +121,7 @@
     <Compile Include="Business\B3Report.cs" />
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
-    <Compile Include="Business\B3Controller.cs" />
-    <None Include="ForMyEyesOnly\Ref.txt" />
+    <Compile Include="Business\B3Controller.cs" />  
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
@@ -207,9 +206,6 @@
     <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ForMyEyesOnly\Template\B3GamePayTable.xaml.cs">
-      <DependentUpon>B3GamePayTable.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Shared\DatePickerUserView.xaml.cs">
       <DependentUpon>DatePickerUserView.xaml</DependentUpon>
     </Compile>
@@ -284,8 +280,6 @@
     <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
-    <None Include="ForMyEyesOnly\Ref\Binding.txt" />
-    <None Include="ForMyEyesOnly\Ref\TriggerXaml.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Design\B3ResourceDictionary.xaml">
@@ -354,10 +348,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <None Include="ForMyEyesOnly\Template\B3GamePayTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
     <Page Include="UI\Shared\DatePickerUserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
