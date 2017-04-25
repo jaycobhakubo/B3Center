@@ -15,9 +15,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        private PayTableSetting m_PayTableSettings;
        private bool m_enforceMixEnable;
        private readonly List<B3SettingGlobal> m_originalPayTableSettings;
+       private bool m_isRNG;
 
        #region CONSTRUCTOR
-
        public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
        {
            ListB3GameEnable = new List<GamePayTableVm>();
@@ -26,15 +26,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            UpdateSettingsListToModel(payTableSettingList);
            UpdateEnableB3GameSettingToModel();
            m_originalPayTableSettings = payTableSettingList;
-           //PayTableSettings.VisibleTest = Visibility.Collapsed;
-           //m_VisibleTest = new Visibility();
-           //VisibleTest = Visibility.Collapsed;
+                 
        }
-
        #endregion
-
-       //private Visibility m_VisibleTest;
-       //public Visibility VisibleTest { get; set; }
 
        private void UpdateEnableB3GameSettingToModel()
        {
@@ -67,41 +61,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             PayTableSettings.WildFireGameSetting = enablesetting;
                             break;
                 }
-            }
-           
+            }           
        }
-
-       public PayTableSetting PayTableSettings
-        {
-            get
-            {
-                return m_PayTableSettings;
-            }
-            set
-            {
-                m_PayTableSettings = value;
-                RaisePropertyChanged("PayTableSettings");
-            }
-        }
-
-
-        public bool EnforceMixEnable
-        {
-            get
-            {
-                return m_enforceMixEnable;
-            }
-            set
-            {
-                m_enforceMixEnable = value;
-                RaisePropertyChanged("EnforceMixEnable");
-            }
-        }
-
-
-    
-       
-
+  
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList) 
        {        
            foreach (var setting in settingsList)
@@ -184,22 +146,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                }
            }
        }
-
-        public List<GamePayTableVm> ListB3GameEnable { get; set; }
-
-        private bool m_isRNG;
-
-
-        public GamePayTableVm CrazyBoutPayTableVm{ get; set; }
-        public GamePayTableVm JailBreakPayTableVm { get; set; }
-        public GamePayTableVm MayaMoneyPayTableVm { get; set; }
-        public GamePayTableVm Spirit76PayTableVm { get; set; }
-        public GamePayTableVm TimeBombPayTableVm { get; set; }
-        public GamePayTableVm UkickEmPayTableVm { get; set; }
-        public GamePayTableVm WildBallPayTableVm { get; set; }
-        public GamePayTableVm WildFirePayTableVm { get; set; }
-
-        public bool SettingHasChanged { get; set; }
 
        private void UpdateModelToSettingsList()
        {
@@ -335,7 +281,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UkickEmPayTableVm.UpdateMathPayTableUI(m_isRNG);
             WildBallPayTableVm.UpdateMathPayTableUI(m_isRNG);
             WildFirePayTableVm.UpdateMathPayTableUI(m_isRNG);
-
         }
 
        public List<B3SettingGlobal> Save()
@@ -347,6 +292,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        public void ResetSettingsToDefault()
        {
            UpdateSettingsListToModel(m_originalPayTableSettings);
-       }      
+       }
+
+       public bool SettingHasChanged { get; set; }
+       public List<GamePayTableVm> ListB3GameEnable { get; set; }
+       public GamePayTableVm CrazyBoutPayTableVm { get; set; }
+       public GamePayTableVm JailBreakPayTableVm { get; set; }
+       public GamePayTableVm MayaMoneyPayTableVm { get; set; }
+       public GamePayTableVm Spirit76PayTableVm { get; set; }
+       public GamePayTableVm TimeBombPayTableVm { get; set; }
+       public GamePayTableVm UkickEmPayTableVm { get; set; }
+       public GamePayTableVm WildBallPayTableVm { get; set; }
+       public GamePayTableVm WildFirePayTableVm { get; set; }
+
+
+       public PayTableSetting PayTableSettings
+       {
+           get
+           {
+               return m_PayTableSettings;
+           }
+           set
+           {
+               m_PayTableSettings = value;
+               RaisePropertyChanged("PayTableSettings");
+           }
+       }
+
+
+       public bool EnforceMixEnable
+       {
+           get
+           {
+               return m_enforceMixEnable;
+           }
+           set
+           {
+               m_enforceMixEnable = value;
+               RaisePropertyChanged("EnforceMixEnable");
+           }
+       }
     }
 }

@@ -38,13 +38,6 @@
                         PreviewKeyDown="DontAllowThisKeyboardinput" 
                         PreviewTextInput="_PreviewTextInput"     
                     />
-                <CheckBox 
-                    Name="ChkbxEnforeMix" 
-                    Content="Enforce mix" 
-                    Tag="41" 
-                    IsChecked="{Binding SessionSettings.EnforceMix}"
-                    IsEnabled="{Binding IsEnforceMixEnable}"
-                    />
             </StackPanel>
     </Grid>
     </Border>

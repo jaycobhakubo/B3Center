@@ -257,29 +257,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case B3SettingType.CommonRngBallCall:
                         {
                             m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
-
                             //Show BallCallReport by Game or by session
                             var rptViewModel = ReportsViewModel.Instance;
                             rptViewModel.ReportSelectedIndex = 0;
                             rptViewModel.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
-
-                            //Show only RNG or 55455 on paytable setting
-                            if (m_gameSettingView != null)
-                            {
-                                foreach (var gameSettingVm in m_lazyGameSettingVm.Value.GameSettingViewModels)
-                                {
-                                    gameSettingVm.UpdatePayTableUI();
-                                }
-                            }
-
-                            //Disable or enable enforce mix ; 
-                            //If RNG then disable the EnforceMix setting and set it to false.
-                            //If 55455 then enable the EnforceMix Setting and set it to true. 
-                            if (m_sessionSettingView != null)
-                            {
-                                //m_lazySessionSettingVm.Value.SessionSettings.EnforceMix = !m_isRngBallCall;
-                                m_lazySessionSettingVm.Value.IsEnforceMixEnable = !m_isRngBallCall;
-                            }
                           
                             break;
                         }
@@ -368,8 +349,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             return B3IsGameEnabledSettings;
         }
-
-        //public bool GetGameIsEnableSettingValue
 
         public void SelectedItemEvent()
         {

@@ -24,37 +24,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
        private B3IsGameEnabledSetting m_uKickemGameSetting = new B3IsGameEnabledSetting();
        private B3IsGameEnabledSetting m_wildBallGameSetting = new B3IsGameEnabledSetting();
        private B3IsGameEnabledSetting m_wildFireGameSetting = new B3IsGameEnabledSetting();
-
         #endregion
 
         #region Constructors
-
-
         #endregion
 
         #region Properties
-
-       //private Visibility m_VisibleTest;
-       //public Visibility VisibleTest
-       //{
-       //    get { return m_VisibleTest; }
-       //    set
-       //    {
-       //        m_VisibleTest = value;
-       //        RaisePropertyChanged("VisibleTest");
-       //    }
-       //}
-
-       //private Visibility m_VisibleTest;
-       //public Visibility VisibleTest { get; set; }
-       //{
-       //    get { return m_VisibleTest; }
-       //    set
-       //    {
-       //        m_VisibleTest = value;
-       //        RaisePropertyChanged("VisibleTest");
-       //    }
-       //}
 
        public bool CommonRngBallCall
        {
@@ -170,19 +145,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        //public bool m_enforceMixEnable;
-        //public bool EnforceMixEnable
-        //{
-        //    get
-        //    {
-        //        return m_enforceMixEnable;
-        //    }
-        //    set
-        //    {
-        //        m_enforceMixEnable = value;
-        //        RaisePropertyChanged("EnforceMixEnable");
-        //    }
-        //}
 
         public bool EnforceMix
        {

@@ -67,9 +67,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.JackpotLimit:
                         SessionSettings.JackpotLimit = setting.B3SettingValue;
                         break;
-                    //case B3SettingType.EnforceMix:
-                    //    SessionSettings.EnforceMix = setting.ConvertB3StringValueToBool();
-                    //    break;
                 }
             }
         }
@@ -87,9 +84,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.JackpotLimit:
                         setting.B3SettingValue = SessionSettings.JackpotLimit;
                         break;
-                    //case B3SettingType.EnforceMix:
-                    //    setting.B3SettingValue = SessionSettings.EnforceMix.ConvertToB3StringValue();
-                    //    break;
                 }
             }
         }

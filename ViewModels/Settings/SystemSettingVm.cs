@@ -10,15 +10,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     public class SystemSettingVm : ViewModelBase
     {
         #region Fields
-
         private SystemSetting m_systemSetting;
-
         private readonly List<B3SettingGlobal> m_originalSystemSettings; 
-
         #endregion
 
         #region Constructor
-
         public SystemSettingVm(List<B3SettingGlobal> systemSettingList)
         {
             VolumeList = Business.Helpers.ZeroToTenList;
@@ -28,22 +24,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UpdateSettingsListToModel(systemSettingList);
             m_originalSystemSettings = systemSettingList;
         }
-
         #endregion
 
         #region Properties
-        public List<string> VolumeList
-        {
-            get;
-            set;
-        }
-
-        public List<string> CurrencyList
-        {
-            get;
-            set;
-        }
-
+        public List<string> VolumeList{get;set;}
+        public List<string> CurrencyList{get;set;}
+		
         public List<string> AutoSessionEndList
         {
             get;
@@ -61,33 +47,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 m_systemSetting = value;
                 RaisePropertyChanged("SystemSettings");
             }
-        }
+        }		
+        #endregion
 
-        public static List<string> BetLevel()
-        {
-            return Business.Helpers.OneToTenList;
-        }
-
-        public static List<string> MaxCard()
-        {
-            return Business.Helpers.MaxCardCountList;
-        }
-
-        private List<string> GetCurrencyList()
-        {
-            List<string> currencyItems = new List<string> { "CREDIT", "DOLLAR", "PESO", "POUND" };
-            return currencyItems;
-        }
+        #region Methods
 
         private List<string> GetAutoSessionEndItemList()
         {
             List<string> autoSessionEndItems = new List<string> { "JACKPOT", "PAYOUT", "OFF" };
             return autoSessionEndItems;
         }
-        #endregion
-
-        #region Methods
-
+		
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
         {
             foreach (var setting in settingsList)
@@ -103,9 +73,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.MultiOperator:
                         SystemSettings.MultiOperator = setting.ConvertB3StringValueToBool();
                         break;
-                    //case B3SettingType.CommonRngBallCall:
-                    //    SystemSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
-                    //    break;
                     case B3SettingType.NorthDakotaMode:                                          
                         SystemSettings.NorthDakotaMode = setting.ConvertB3StringValueToBool();
                         break;
@@ -162,9 +129,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.MultiOperator:
                         setting.B3SettingValue = SystemSettings.MultiOperator.ConvertToB3StringValue();
                         break;
-                    //case B3SettingType.CommonRngBallCall:
-                    //    setting.B3SettingValue = SystemSettings.CommonRngBallCall.ConvertToB3StringValue();     
-                    //    break;
                     case B3SettingType.NorthDakotaMode:
                         setting.B3SettingValue = SystemSettings.NorthDakotaMode.ConvertToB3StringValue();
                         break;
@@ -214,6 +178,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public void ResetSettingsToDefault()
         {
             UpdateSettingsListToModel(m_originalSystemSettings);
+        }
+		
+				public static List<string> BetLevel()
+        {
+            return Business.Helpers.OneToTenList;
+        }
+
+        public static List<string> MaxCard()
+        {
+            return Business.Helpers.MaxCardCountList;
+        }
+
+        private List<string> GetCurrencyList()
+        {
+            List<string> currencyItems = new List<string> { "CREDIT", "DOLLAR", "PESO", "POUND" };
+            return currencyItems;
         }
 
         #endregion

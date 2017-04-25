@@ -144,8 +144,7 @@
 IsChecked="{Binding SystemSettings.DualAccount}"/>
                     </DockPanel>
 
-                    <CheckBox  Name="ChkbxCommonRngBallCall" Content="Common RNG ball call" TabIndex="14"
-IsChecked="{Binding SystemSettings.CommonRngBallCall}"/>
+
                   
                 </StackPanel>
             </Grid>

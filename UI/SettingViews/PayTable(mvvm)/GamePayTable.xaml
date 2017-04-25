@@ -19,20 +19,9 @@
             <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
         <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
-            <Setter Property="Margin" Value="0,0,15,0"/>
-           
+            <Setter Property="Margin" Value="0,0,15,0"/>          
         </Style>
-
-        <!--<Style TargetType="{x:Type ComboBoxItem}"  BasedOn="{StaticResource {x:Type ComboBoxItem}}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Harf}"
-                      Value="1">
-                    <Setter Property="Background"
-                  Value="Red" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>-->
-        
+     
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

@@ -16,13 +16,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
         private void rdobtnIsRNG_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            RadioButton rdobtn = (RadioButton)sender;
-         
-                PayTableSettingVm ii = (PayTableSettingVm)DataContext;
+            RadioButton rdobtn = (RadioButton)sender;         
+            PayTableSettingVm ii = (PayTableSettingVm)DataContext;
             ii.IsRngCheckEvent();
-
-
-
         }
     }
 }

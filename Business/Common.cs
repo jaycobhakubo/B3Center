@@ -130,7 +130,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             }
         }
 
-        //Im not a big fun of typing definition over and over again do not delete these please.
+        //Please do not removed this script. If you dont like it dont use it.
         public static Dictionary<B3GameType, string> B3GameActualName = new Dictionary<B3GameType, string>()
         {
             { B3GameType.Crazybout, "Crazy Bout" },
