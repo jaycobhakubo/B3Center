@@ -24,10 +24,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         private bool m_autoPlay;
         private bool m_hideSerialNumber;
         private bool m_singleOfferBonus;
-        //private B3MathGamePay m_mathPayTable;
         private string m_callSpeedMin;
         private string m_callSpeedBonus;
-        //private ObservableCollection<B3MathGamePay> m_gamePaytableList;
         private B3IsGameEnabledSetting m_enableGameSetting;
 
         #endregion

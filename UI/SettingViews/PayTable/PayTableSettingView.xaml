@@ -24,16 +24,14 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="1" Grid.ColumnSpan="3">
-            
+            <StackPanel Grid.Column="1" Grid.ColumnSpan="3">          
                 <GroupBox Template="{StaticResource NocornerradiusGrpBox}">
                     <GroupBox.Header>
                         <Border>
                             <Grid>
                                 <Label Margin="0">
                                     <Label.Template>
-                                        <ControlTemplate>
-                                          
+                                        <ControlTemplate>                                         
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -53,13 +51,10 @@
                         </Border>
                     </GroupBox.Header>
                     <CheckBox  IsEnabled="{Binding EnforceMixEnable}" IsChecked="{Binding PayTableSettings.EnforceMix}" Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto" >
-
                     </CheckBox>
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages:" Margin="0,30,0,2" ></Label>
             </StackPanel>
-            <!--<Setter Property="Padding" Value="15,0,0,3"/>
-            <Setter Property="Margin" Value="-1,0,-1,0"/>-->
             <GroupBox Style="{StaticResource B3StyleGroupBox2}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="0" Padding="0,3.5,0,15">
                 <StackPanel >
                     <Grid Visibility="{Binding PayTableSettings.CrazyboutGameSetting.IsEnabled, Converter={StaticResource booltovis}}">

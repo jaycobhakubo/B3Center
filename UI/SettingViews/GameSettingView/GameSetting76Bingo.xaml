@@ -33,15 +33,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1">
-                <Label  Content="Game pay table"  />
-                <ComboBox 
-                    Name="CmbxGamePayTable" Tag="58"
-                    ItemsSource="{Binding Settings.LGamePayTable}" 
-                    DisplayMemberPath="PackageDesc"
-                    SelectedItem="{Binding Settings.MathPayTable}"
-                    />
-      
-                
+                 
                 <Label Content="Max bet level" />
                 <ComboBox Name="CmbxMaxBetLevel"  
                           ItemsSource="{Binding ListMaxBetLevel}" 
