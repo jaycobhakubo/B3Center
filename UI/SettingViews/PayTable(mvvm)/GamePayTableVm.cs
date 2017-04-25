@@ -38,7 +38,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         public string GetMathNewPackageId()
         {
-            m_originalPayTableSettings.B3SettingValue = GamePayTableModel.MathPayTable.MathPackageId.ToString();
+            if (m_originalPayTableSettings.B3SettingValue != GamePayTableModel.MathPayTable.MathPackageId.ToString())
+            {
+                m_originalPayTableSettings.B3SettingDefaultValue = m_originalPayTableSettings.B3SettingValue; //Transfer old value to defaultvalue setting
+                m_originalPayTableSettings.B3SettingValue = GamePayTableModel.MathPayTable.MathPackageId.ToString();//Assign new value
+            }
             return m_originalPayTableSettings.B3SettingValue;
         }
 

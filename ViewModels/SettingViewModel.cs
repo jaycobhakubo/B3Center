@@ -29,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         #region Fields
         //Parent
         private B3Controller m_controller;
-        //Views
+        //Views/vm
         private GameSettingView m_gameSettingView;
         private SystemSettingView m_systemSettingView;
         private ServerGameSettingView m_serverGameSettingView;
@@ -37,22 +37,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private PlayerSettingView m_playerSettingView;
         private SessionSettingView m_sessionSettingView;
         private PayTableSettingView m_payTableSettingView;
-
-        //Other
-        private List<B3SettingGlobal> m_settingTobeSaved;
-        private B3SettingCategory m_selectedSettingCategoryType;
-        private bool m_isRngBallCall;
-
-        private bool m_indicatorVisibility;
-        private bool m_btnSaveIsEnabled;
-        private int m_borderValue;
-        private string m_selectedB3SettingsCategory;
-        private ObservableCollection<string> m_settingList = new ObservableCollection<string>();
-        private UserControl m_selectedSettingView = new UserControl();
-        private B3SettingCategory m_previousB3SettingCategory;
-
-        private static volatile SettingViewModel m_instance;
-
         private readonly Lazy<GameSettingVm> m_lazyGameSettingVm;
         private readonly Lazy<PlayerSettingVm> m_lazyPlayerSettingVm;
         private readonly Lazy<SalesSettingVm> m_lazySalesSettingVm;
@@ -60,7 +44,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private readonly Lazy<SessionSettingVm> m_lazySessionSettingVm;
         private readonly Lazy<SystemSettingVm> m_lazySystemSettingVm;
         private readonly Lazy<PayTableSettingVm> m_lazyPayTableSettingVm;
-
+        //Other
+        private List<B3SettingGlobal> m_settingTobeSaved;
+        private ObservableCollection<string> m_settingList = new ObservableCollection<string>();
+        private B3SettingCategory m_selectedSettingCategoryType;
+        private UserControl m_selectedSettingView = new UserControl();
+        private B3SettingCategory m_previousB3SettingCategory;
+        private bool IsSettingChanged;
+        private bool m_isRngBallCall;
+        private bool m_indicatorVisibility;
+        private bool m_btnSaveIsEnabled;
+        private int m_borderValue;
+        private string m_selectedB3SettingsCategory;
+        //static
+        private static volatile SettingViewModel m_instance;
         private static readonly object m_syncRoot = new object();
         #endregion
 
@@ -149,19 +146,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System && l.IsPayTableSettings == false).ToList();
             var systemSettingVm = new SystemSettingVm(systemSettingsFromServer);
             m_systemSettingView = new SystemSettingView(systemSettingVm);
-
             return systemSettingVm;
         }
 
         private PayTableSettingVm InitializePayTableSettingVm()
         {
             var payTableSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.IsPayTableSettings == true).ToList();
-            foreach (var gameEnable in B3IsGameEnabledSettings.Where(l => l.IsEnabled == true))
-            {
-               var B3GamePayTableSetting = payTableSettingsFromServer.Single(l => l.GameType == gameEnable.GameType);
-               B3GamePayTableSetting.IsGameENabled = gameEnable.IsEnabled;
-            }
-
             var payTableSettingVm = new PayTableSettingVm(payTableSettingsFromServer);
             m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
             return payTableSettingVm;
@@ -184,14 +174,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     case B3SettingCategory.Games:
                         {
-                            m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();
-                            if (GameSettingsVm.SelectedGameVm.IsPayTableSettingHasChanged)//We need to include all settings and we need to set the pay table settings at very first item in the list.
-                            {
-                                var tempResult = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MathPayTableSetting); //Copy the current setting.
-                                m_settingTobeSaved.Remove(tempResult);//Removed it on the list.
-                                m_settingTobeSaved.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
-                                m_settingTobeSaved.Insert(0, tempResult);//Reinsert it on the first item.
-                            }
+                            m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();                          
                             break;
                         }
                     case B3SettingCategory.Player:
@@ -241,9 +224,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         {
                             m_settingTobeSaved = PayTableSettingVm.Save();
                             IsSettingChanged = PayTableSettingVm.SettingHasChanged;
+                            var isPayTableChanged = m_settingTobeSaved.Exists(l => l.SettingType == B3SettingType.MathPayTableSetting);
+                            if (isPayTableChanged)
+                            {
+                                //If MathPayChanges()
+                                //Get all the game that has been changed
+                                List<B3SettingGlobal> z = new List<B3SettingGlobal>();
+                                foreach (var x in m_settingTobeSaved.Where(l => l.SettingType == B3SettingType.MathPayTableSetting))
+                                {
+                                    switch (x.GameType)
+                                    {
+                                        case B3GameType.Crazybout:
+                                            {
+                                             var y = GameSettingsVm.GameCrzyBout.Save();
+                                                y.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
+                                                z.AddRange(y);
+                                                break;
+                                            }
+                                    }
+                                }
+
+                                m_settingTobeSaved.AddRange(z);
+                              
+                            }
+
                             break;
                         }
                 }
+
+                
+
             }
         }
 
@@ -257,8 +267,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case B3SettingType.CommonRngBallCall:
                         {
                             m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
-                            //Show BallCallReport by Game or by session
-                            var rptViewModel = ReportsViewModel.Instance;
+                            var rptViewModel = ReportsViewModel.Instance;          //Show BallCallReport by Game or by session
                             rptViewModel.ReportSelectedIndex = 0;
                             rptViewModel.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
                           
@@ -306,7 +315,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
 
-        private bool IsSettingChanged;
+
 
         public void SaveSetting()
         {
@@ -455,7 +464,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
                 case B3SettingCategory.PayTable:
                     {
-                       // PayTableSettingVm.ResetSettingsToDefault();
+                       PayTableSettingVm.ResetSettingsToDefault();
                         break;
                     }
             }

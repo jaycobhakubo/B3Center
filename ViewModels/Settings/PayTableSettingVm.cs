@@ -183,15 +183,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.MathPayTableSetting:
                         {
                             var tempGameType = setting.GameType;
-                            var settingvalue = setting.B3SettingValue;                          
-                       
+                            var settingvalue = setting.B3SettingValue;
+                            var settingdefaultvalue = setting.B3SettingValue;//Set temp original  value.             
                             switch (tempGameType)
                             {
                                 case B3GameType.Crazybout:
                                     {
                                         if (CrazyBoutPayTableVm.GamePayTableModel.MathPayTable != null 
                                             && CrazyBoutPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
-                                        { settingvalue = CrazyBoutPayTableVm.GetMathNewPackageId(); }
+                                        { settingvalue = CrazyBoutPayTableVm.GetMathNewPackageId(); }//Set temp new  value.
 
                                     }
                                     break;
@@ -247,11 +247,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     }
                                     break;
                             }
-                            if (setting.B3SettingValue != settingvalue && setting.GameType != 0)
+                            if (settingdefaultvalue != settingvalue && setting.GameType != 0)
                             {
                                 setting.HasChanged = true;
-                                setting.B3SettingDefaultValue = setting.B3SettingValue;
-                                setting.B3SettingValue = settingvalue;
+                                setting.B3SettingDefaultValue = settingdefaultvalue;
                                 SettingHasChanged = true;
                             }
                             break;

@@ -22,13 +22,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public PlayerSettingVm(List<B3SettingGlobal> playerSettingsList, List<B3IsGameEnabledSetting> b3SettingEnableDisable)
         {
             VolumeList = Business.Helpers.ZeroToTenList;
-
             PlayerSetting = new PlayerSettings();
-
-            UpdateSettingsListToModel(playerSettingsList, b3SettingEnableDisable);
-            
+            UpdateSettingsListToModel(playerSettingsList, b3SettingEnableDisable);           
             m_origianlPlayerSettings = playerSettingsList;
-
             m_b3SettingEnableDisable = b3SettingEnableDisable;
         }
 
