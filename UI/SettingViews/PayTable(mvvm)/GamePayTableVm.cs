@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
@@ -57,10 +58,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
                 B3MathGamePayList.Add(newB3MathGamePay);
                 tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
+
             }
 
             return tempMathGamePaySetting;
         }
+        //SolidColorBrush(Colors.White);
+        //public SolidColorBrush m_ColorTest = new SolidColorBrush();
+        //public SolidColorBrush ColorTest
+        //{
+        //    get { return m_ColorTest; }
+        //    set
+        //    {
+        //        m_ColorTest = value;
+        //        RaisePropertyChanged("ColorTest");
+        //    }
+        //}
+
+
+        //public string m_ColorTest;
+        //public string ColorTest
+        //{
+        //    get { return m_ColorTest; }
+        //    set
+        //    {
+        //        m_ColorTest = value;
+        //        RaisePropertyChanged("ColorTest");
+        //    }
+        //}
 
         public GamePayTableModel GamePayTableModel
         {
