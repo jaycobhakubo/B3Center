@@ -29,6 +29,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         #region Properties 
 
         public bool HasChanged { get; set; }
+        public bool B3SettingDefaultValue { get; set; }
+
 
         public B3GameType GameType
         {

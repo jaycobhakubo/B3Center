@@ -125,12 +125,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
             }
         }
-
+        public bool HasChanged { get; set; }
         private void UpdateModelToGameSettingsList()
         {
+            HasChanged = false;
             foreach (B3SettingGlobal gameSetting in m_originalGameSettings)
             {
-                gameSetting.B3SettingDefaultValue = gameSetting.B3SettingValue;
+                gameSetting.HasChanged = false;
+                var tempOldSettingValue = gameSetting.B3SettingValue;//saved current setting value
                 switch (gameSetting.SettingType)
                 {
                     case B3SettingType.Denom1:
@@ -184,6 +186,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.CallSpeedBonus:
                             gameSetting.B3SettingValue = Settings.CallSpeedBonus;
                             break;
+                }
+                if (tempOldSettingValue != gameSetting.B3SettingValue)//check if current = new setting
+                {
+                    gameSetting.B3SettingDefaultValue = tempOldSettingValue;
+                    gameSetting.HasChanged = true;
+                    if (HasChanged != true) HasChanged = true;
                 }
             }
         }

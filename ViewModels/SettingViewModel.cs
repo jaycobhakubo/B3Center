@@ -174,30 +174,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     case B3SettingCategory.Games:
                         {
-                            m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save();                          
+                            m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save().Where(l => l.HasChanged == true).ToList();
+                            m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.Player:
                         {
-                            //save enabled game settings
-                            foreach (var gameEnabledSetting in PlayerSettingVm.ModifiedB3GameEnabledSettings)
-                            {
-                                var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
-                                try
-                                {
-                                    setGameEnabledMessage.Send();
-                                    if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
-                                    {
-                                        throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
-                                    }
-                                }
-                                catch (ServerCommException ex)
-                                {
-                                    throw new Exception("SetGameEnableSetting: " + ex.Message);
-                                }
-                            }
+                           
 
-                            m_settingTobeSaved = PlayerSettingVm.Save();
+                            m_settingTobeSaved = PlayerSettingVm.Save().Where(l => l.HasChanged == true).ToList();
                             //m_hasChanged = SystemSettingVm.HasChanged;
                             m_hasChanged = true;
                             break;
@@ -329,8 +314,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             try
             {
+              
                 SetNewValue();
-                if (m_hasChanged == true)//Do not send if no changes was made.
+
+                //This one goes first need to update UI after saved.
+                if (m_selectedSettingCategoryType == B3SettingCategory.Player)
+                {
+                    //Check for enabledisablesetting update
+                    var enableDisableGameSetting = PlayerSettingVm.GetEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
+                    if (enableDisableGameSetting.Count != 0)
+                    {
+                        foreach (var gameEnabledSetting in enableDisableGameSetting)
+                        {
+                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
+                            try
+                            {
+                                setGameEnabledMessage.Send();
+                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
+                                {
+                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                                }
+                            }
+                            catch (ServerCommException ex)
+                            {
+                                throw new Exception("SetGameEnableSetting: " + ex.Message);
+                            }
+                        }
+                    }
+                }
+
+
+
+                if (m_settingTobeSaved.Count != 0)//Do not send if no changes was made.
                 {
                     SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
                     try
@@ -349,7 +364,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 throw new Exception("SetGameEnableSetting: " + ex.Message);
             }
+
+         
         }
+
+
+       
 
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
         {
@@ -375,7 +395,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 if (m_previousB3SettingCategory == B3SettingCategory.Player)
                 {
-                    B3IsGameEnabledSettings = PlayerSettingVm.B3SettingEnableDisable;
+                    B3IsGameEnabledSettings = PlayerSettingVm.GetEnableDisableGameSettings();
                 }
                 IndicatorVisibility = true;
             }

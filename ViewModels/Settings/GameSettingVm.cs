@@ -93,18 +93,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        public List<B3IsGameEnabledSetting> B3SettingEnableDisable
-        {
-            get { return m_b3SettingEnableDisable; }
-            set
-            {
-                if (value != null && value != m_b3SettingEnableDisable)
-                {
-                    m_b3SettingEnableDisable = value;
-                    RaisePropertyChanged("B3SettingEnableDisable");
-                }
-            }
-        }
+        //public List<B3IsGameEnabledSetting> B3SettingEnableDisable
+        //{
+        //    get { return m_b3SettingEnableDisable; }
+        //    set
+        //    {
+        //        if (value != null && value != m_b3SettingEnableDisable)
+        //        {
+        //            m_b3SettingEnableDisable = value;
+        //            RaisePropertyChanged("B3SettingEnableDisable");
+        //        }
+        //    }
+        //}
 
         public List<GameSettingVmAllGame> GameSettingViewModels { get { return m_gameSettingViewModels; } }
 
