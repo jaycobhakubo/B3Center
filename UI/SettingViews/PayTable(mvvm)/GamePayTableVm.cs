@@ -35,17 +35,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
             GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
         }
-
-        public string GetMathNewPackageId()
-        {
-            if (m_originalPayTableSettings.B3SettingValue != GamePayTableModel.MathPayTable.MathPackageId.ToString())
-            {
-                m_originalPayTableSettings.B3SettingDefaultValue = m_originalPayTableSettings.B3SettingValue; //Transfer old value to defaultvalue setting
-                m_originalPayTableSettings.B3SettingValue = GamePayTableModel.MathPayTable.MathPackageId.ToString();//Assign new value
-            }
-            return m_originalPayTableSettings.B3SettingValue;
-        }
-
+    
         private B3MathGamePay GetB3MathGamePay(string MathPackageId)
         {
             int mathPackageId;

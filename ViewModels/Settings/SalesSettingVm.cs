@@ -54,9 +54,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
         {
-            HasChanged = false;
+          
             foreach (var setting in settingsList)
-            {
+            {               
                 switch (setting.SettingType)
                 {
                     case B3SettingType.ScreenCursor:
@@ -90,19 +90,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         SalesSetting.VolumeSales = Business.Helpers.GetVolumeEquivValue(Convert.ToInt32(setting.B3SettingValue));
                         break;
                 }
-                if (HasChanged == false && setting.B3SettingDefaultValue != setting.B3SettingValue)
-                {
-                    HasChanged = true;
-                }
+             
             }
         }
 
         public bool HasChanged { get; set; }
         private void UpdateModelToSettingsList()
         {
+            HasChanged = false;
             foreach (var setting in m_originalSaleSettings)
             {
-                setting.B3SettingDefaultValue = setting.B3SettingValue;
+                setting.HasChanged = false;
+                var tempOldSettingValue = setting.B3SettingValue;//saved current setting value
                 switch (setting.SettingType)
                 {
                     case B3SettingType.ScreenCursor:
@@ -135,6 +134,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.VolumeSales:
                         setting.B3SettingValue = Business.Helpers.GetVolumeEquivToDb(Convert.ToInt32(SalesSetting.VolumeSales));
                         break;
+                }
+                if (tempOldSettingValue != setting.B3SettingValue)//check if current = new setting
+                {
+                    setting.B3SettingDefaultValue = tempOldSettingValue;
+                    setting.HasChanged = true;
+                    if (HasChanged != true) HasChanged = true;
                 }
             }
         }

@@ -56,10 +56,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         #region Methods
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
-        {
-            HasChanged = false;
+        {           
             foreach (var setting in settingsList)
-            {
+            {             
                 switch (setting.SettingType)
                 {
                     case B3SettingType.PayoutLimit:
@@ -69,11 +68,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         SessionSettings.JackpotLimit = setting.B3SettingValue;
                         break;
                 }
-
-                if (HasChanged == false && setting.B3SettingDefaultValue != setting.B3SettingValue)
-                {
-                    HasChanged = true;
-                }
             }
         }
 
@@ -81,9 +75,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateModelToSettingsList()
         {
+            HasChanged = false;
             foreach (var setting in m_originalSessionSettings)
             {
-                setting.B3SettingDefaultValue = setting.B3SettingValue;
+                setting.HasChanged = false;
+                var tempOldSettingValue = setting.B3SettingValue;//saved current setting value
                 switch (setting.SettingType)
                 {
                     case B3SettingType.PayoutLimit:
@@ -93,7 +89,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         setting.B3SettingValue = SessionSettings.JackpotLimit;
                         break;
                 }
-            }
+                if (tempOldSettingValue != setting.B3SettingValue)//check if current = new setting
+                {
+                    setting.B3SettingDefaultValue = tempOldSettingValue;
+                    setting.HasChanged = true;
+                    if (HasChanged != true) HasChanged = true;
+                }
+            }          
         }
 
         public List<B3SettingGlobal> Save()

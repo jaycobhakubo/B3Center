@@ -118,7 +118,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             HasChanged = false;
             foreach (var setting in m_originalSystemSettings)
             {
-                setting.B3SettingDefaultValue = setting.B3SettingValue;
+                setting.HasChanged = false;
+                var tempOldSettingValue = setting.B3SettingValue;//saved current setting value
+
                 switch (setting.SettingType)
                 {
                     case B3SettingType.EnableUk:
@@ -168,10 +170,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         break;
                 }
 
-                if (setting.B3SettingDefaultValue != setting.B3SettingValue)
+                if (tempOldSettingValue != setting.B3SettingValue)//check if current = new setting
                 {
+                    setting.B3SettingDefaultValue = tempOldSettingValue;
                     setting.HasChanged = true;
-                    HasChanged = true;
+                    if (HasChanged != true) HasChanged = true;
                 }
             }
         }

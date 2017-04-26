@@ -47,6 +47,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> playerSettingsList, List<B3IsGameEnabledSetting> isGameEnabledSettings)
         {
+       
             foreach (var setting in playerSettingsList)
             {
                 switch (setting.SettingType)
@@ -112,6 +113,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             HasChanged = false;
             foreach (var setting in m_origianlPlayerSettings)
             {
+                setting.HasChanged = false;
                 setting.B3SettingDefaultValue = setting.B3SettingValue;
                 switch (setting.SettingType)
                 {

@@ -44,8 +44,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
        {
            foreach (var setting in settingsList)
-           {
-               switch (setting.SettingType)
+           {             
+              switch (setting.SettingType)
                {
                    case B3SettingType.MinPlayer:
                        ServerSettings.MinPlayer = setting.B3SettingValue;
@@ -63,6 +63,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        ServerSettings.WaitCountDown = setting.B3SettingValue;
                        break;
                }
+
+              
            }
        }
 
@@ -71,7 +73,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             HasChanged = false;
             foreach (var setting in m_origianlServerSettings)
            {
-               setting.B3SettingDefaultValue = setting.B3SettingValue;
+               setting.HasChanged = false;
+               var tempOldSettingValue = setting.B3SettingValue;//saved current setting value
                switch (setting.SettingType)
                {
                    case B3SettingType.MinPlayer:
@@ -91,10 +94,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        break;
                }
 
-                if (HasChanged == false && setting.B3SettingDefaultValue != setting.B3SettingValue)
-                {
-                    HasChanged = true;
-                }
+               if (tempOldSettingValue != setting.B3SettingValue)//check if current = new setting
+               {
+                   setting.B3SettingDefaultValue = tempOldSettingValue;
+                   setting.HasChanged = true;
+                   if (HasChanged != true) HasChanged = true;
+               }
             }
         }
 

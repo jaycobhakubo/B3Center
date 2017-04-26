@@ -233,7 +233,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case B3SettingCategory.PayTable:
                         {
                             m_settingTobeSaved = PayTableSettingVm.Save();
-                            m_hasChanged = PayTableSettingVm.SettingHasChanged;
+                            m_hasChanged = PayTableSettingVm.HasChanged;
                             if (m_hasChanged == true)//Check if user requested for any setting update.
                             {                              
                                 if (m_settingTobeSaved.Exists(l => l.SettingType == B3SettingType.MathPayTableSetting))//Check if it is a game paytable update.
