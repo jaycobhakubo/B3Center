@@ -204,28 +204,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     case B3SettingCategory.Sales:
                         {
-                            m_settingTobeSaved = SalesSettingVm.Save();
+                            m_settingTobeSaved = SalesSettingVm.Save().Where(l => l.HasChanged == true).ToList();
                             //m_hasChanged = SalesSettingVm.HasChanged;
                             m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.ServerGame:
                         {
-                            m_settingTobeSaved = ServerSettingVm.Save();
+                            m_settingTobeSaved = ServerSettingVm.Save().Where(l => l.HasChanged == true).ToList();
                             //m_hasChanged = ServerSettingVm.HasChanged;
                             m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.Session:
                         {
-                            m_settingTobeSaved = SessionSettingVm.Save();
+                            m_settingTobeSaved = SessionSettingVm.Save().Where(l => l.HasChanged == true).ToList();
                             //m_hasChanged = SessionSettingVm.HasChanged;
                             m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.System:
                         {
-                            m_settingTobeSaved = SystemSettingVm.Save();
+                            m_settingTobeSaved = SystemSettingVm.Save().Where(l => l.HasChanged == true).ToList();
                             //m_hasChanged = SystemSettingVm.HasChanged;
                             m_hasChanged = true;
                             break;
