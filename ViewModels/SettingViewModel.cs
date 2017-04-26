@@ -199,30 +199,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                             m_settingTobeSaved = PlayerSettingVm.Save();
                             //m_hasChanged = SystemSettingVm.HasChanged;
+                            m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.Sales:
                         {
                             m_settingTobeSaved = SalesSettingVm.Save();
-                            m_hasChanged = SalesSettingVm.HasChanged;
+                            //m_hasChanged = SalesSettingVm.HasChanged;
+                            m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.ServerGame:
                         {
                             m_settingTobeSaved = ServerSettingVm.Save();
-                            m_hasChanged = ServerSettingVm.HasChanged;
+                            //m_hasChanged = ServerSettingVm.HasChanged;
+                            m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.Session:
                         {
                             m_settingTobeSaved = SessionSettingVm.Save();
-                            m_hasChanged = SessionSettingVm.HasChanged;
+                            //m_hasChanged = SessionSettingVm.HasChanged;
+                            m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.System:
                         {
-                            m_settingTobeSaved = SystemSettingVm.Save().Where(l => l.HasChanged ==true).ToList();
-                            m_hasChanged = SystemSettingVm.HasChanged;
+                            m_settingTobeSaved = SystemSettingVm.Save();
+                            //m_hasChanged = SystemSettingVm.HasChanged;
+                            m_hasChanged = true;
                             break;
                         }
                     case B3SettingCategory.PayTable:
