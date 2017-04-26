@@ -121,7 +121,7 @@
     <Compile Include="Business\B3Report.cs" />
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
-    <Compile Include="Business\B3Controller.cs" />  
+    <Compile Include="Business\B3Controller.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
@@ -270,15 +270,15 @@
     <Compile Include="ViewModels\Reports\ReportParameterVm.cs" />
     <Compile Include="ViewModels\Reports\ReportTemplateVm.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingVm.cs" />
-    <Compile Include="ViewModels\Settings\GameSettingVmAllGame.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingVm\GameSettingVm.cs" />
+    <Compile Include="ViewModels\Settings\GameSettingVm\GameSettingVmAllGame.cs" />
     <Compile Include="ViewModels\Settings\PayTableSettingVm.cs" />
     <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SalesSettingVm.cs" />
     <Compile Include="ViewModels\Settings\ServerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SessionSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SystemSettingVm.cs" />
-    <Compile Include="ViewModels\SettingViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingViewModel.cs" />
     <Compile Include="ViewModels\Shared\DatePickerVm.cs" />
   </ItemGroup>
   <ItemGroup>

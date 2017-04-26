@@ -272,9 +272,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
 
-
-        //All saved transaction should go here
-        public void SaveSetting()
+        public void SaveSetting()   //All saved transaction should go here
         {
             try
             {             
@@ -322,13 +320,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             catch (Exception ex)
             {
                 throw new Exception("SetGameEnableSetting: " + ex.Message);
-            }
-
-         
+            }       
         }
-
-
-       
 
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
         {
