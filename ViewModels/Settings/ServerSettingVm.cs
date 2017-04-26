@@ -68,7 +68,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        private void UpdateModelToSettingsList()
        {
-           foreach (var setting in m_origianlServerSettings)
+            HasChanged = false;
+            foreach (var setting in m_origianlServerSettings)
            {
                setting.B3SettingDefaultValue = setting.B3SettingValue;
                switch (setting.SettingType)
@@ -89,10 +90,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        setting.B3SettingValue = ServerSettings.WaitCountDown;
                        break;
                }
-           }
-       }
 
-       public List<B3SettingGlobal> Save()
+                if (HasChanged == false && setting.B3SettingDefaultValue != setting.B3SettingValue)
+                {
+                    HasChanged = true;
+                }
+            }
+        }
+
+        public bool HasChanged { get; set; }
+
+        public List<B3SettingGlobal> Save()
        {
            UpdateModelToSettingsList();
            return m_origianlServerSettings;

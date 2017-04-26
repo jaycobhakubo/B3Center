@@ -54,6 +54,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList)
         {
+            HasChanged = false;
             foreach (var setting in settingsList)
             {
                 switch (setting.SettingType)
@@ -89,9 +90,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         SalesSetting.VolumeSales = Business.Helpers.GetVolumeEquivValue(Convert.ToInt32(setting.B3SettingValue));
                         break;
                 }
+                if (HasChanged == false && setting.B3SettingDefaultValue != setting.B3SettingValue)
+                {
+                    HasChanged = true;
+                }
             }
         }
 
+        public bool HasChanged { get; set; }
         private void UpdateModelToSettingsList()
         {
             foreach (var setting in m_originalSaleSettings)

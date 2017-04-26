@@ -115,6 +115,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateModelToSettingsList()
         {
+            HasChanged = false;
             foreach (var setting in m_originalSystemSettings)
             {
                 setting.B3SettingDefaultValue = setting.B3SettingValue;
@@ -166,8 +167,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         setting.B3SettingValue = Business.Helpers.GetVolumeEquivToDb(Convert.ToInt32(SystemSettings.SystemMainVolume));
                         break;
                 }
+
+                if (setting.B3SettingDefaultValue != setting.B3SettingValue)
+                {
+                    setting.HasChanged = true;
+                    HasChanged = true;
+                }
             }
         }
+
+        public bool HasChanged { get; set; }
 
         public List<B3SettingGlobal> Save()
         {

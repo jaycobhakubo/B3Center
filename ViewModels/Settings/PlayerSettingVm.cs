@@ -74,7 +74,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         break;
                 }
             }
-
+         
             foreach (var gameEnabledSetting in isGameEnabledSettings)
             {
                 switch (gameEnabledSetting.GameType)
@@ -106,9 +106,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
             }
         }
-
+        public bool HasChanged { get; set; }
         private void UpdateModelToSettingsList()
         {
+            HasChanged = false;
             foreach (var setting in m_origianlPlayerSettings)
             {
                 setting.B3SettingDefaultValue = setting.B3SettingValue;
@@ -135,6 +136,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     case B3SettingType.PlayerMainVolume:
                         setting.B3SettingValue = Business.Helpers.GetVolumeEquivToDb(Convert.ToInt32(PlayerSetting.PlayerMainVolume));
                         break;
+                }
+
+                if (HasChanged == false && setting.B3SettingDefaultValue != setting.B3SettingValue)
+                {
+                    HasChanged = true;
                 }
             }
 
