@@ -50,7 +50,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3SettingCategory m_selectedSettingCategoryType;
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
-        private bool IsSettingChanged;
+        private bool m_hasChanged;
         private bool m_isRngBallCall;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
@@ -223,37 +223,35 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case B3SettingCategory.PayTable:
                         {
                             m_settingTobeSaved = PayTableSettingVm.Save();
-                            IsSettingChanged = PayTableSettingVm.SettingHasChanged;
-                            var isPayTableChanged = m_settingTobeSaved.Exists(l => l.SettingType == B3SettingType.MathPayTableSetting);
-                            if (isPayTableChanged)
-                            {
-                                //If MathPayChanges()
-                                //Get all the game that has been changed
-                                List<B3SettingGlobal> z = new List<B3SettingGlobal>();
-                                foreach (var x in m_settingTobeSaved.Where(l => l.SettingType == B3SettingType.MathPayTableSetting))
-                                {
-                                    switch (x.GameType)
+                            m_hasChanged = PayTableSettingVm.SettingHasChanged;
+                            if (m_hasChanged == true)//Check if user requested for any setting update.
+                            {                              
+                                if (m_settingTobeSaved.Exists(l => l.SettingType == B3SettingType.MathPayTableSetting))//Check if it is a game paytable update.
+                                {                                                               
+                                    var tempAllgamesetting = new List<B3SettingGlobal>();     //Get all the game that has been changed                                  
+                                    foreach (var paytablesetting in m_settingTobeSaved.Where(l => l.SettingType == B3SettingType.MathPayTableSetting))
                                     {
-                                        case B3GameType.Crazybout:
-                                            {
-                                             var y = GameSettingsVm.GameCrzyBout.Save();
-                                                y.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
-                                                z.AddRange(y);
-                                                break;
-                                            }
+                                        var tempEachgamesetting = new List<B3SettingGlobal>();
+                                        switch (paytablesetting.GameType)
+                                        {                                          
+                                            case B3GameType.Crazybout: tempEachgamesetting = GameSettingsVm.GameCrzyBout.Save(); break;
+                                            case B3GameType.Jailbreak: tempEachgamesetting = GameSettingsVm.GameJailBreak.Save(); break;
+                                            case B3GameType.Mayamoney: tempEachgamesetting = GameSettingsVm.GameMayaMoney.Save(); break;
+                                            case B3GameType.Spirit76: tempEachgamesetting = GameSettingsVm.GameSpirit76.Save(); break;
+                                            case B3GameType.Timebomb: tempEachgamesetting = GameSettingsVm.GameTimeBomb.Save(); break;
+                                            case B3GameType.Ukickem: tempEachgamesetting = GameSettingsVm.GameUkickEm.Save(); break;
+                                            case B3GameType.Wildball: tempEachgamesetting = GameSettingsVm.GameWildBall.Save(); break;
+                                            case B3GameType.Wildfire: tempEachgamesetting = GameSettingsVm.GameWildfire.Save(); break;
+                                        }
+                                        tempAllgamesetting.AddRange(tempEachgamesetting);
                                     }
+                                    tempAllgamesetting.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
+                                    m_settingTobeSaved.AddRange(tempAllgamesetting);
                                 }
-
-                                m_settingTobeSaved.AddRange(z);
-                              
                             }
-
                             break;
                         }
-                }
-
-                
-
+                }           
             }
         }
 
@@ -322,7 +320,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             try
             {
                 SetNewValue();
-                if (IsSettingChanged == true)//Do not send if no changes was made.
+                if (m_hasChanged == true)//Do not send if no changes was made.
                 {
                     SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
                     try
