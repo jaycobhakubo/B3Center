@@ -115,7 +115,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateModelToSettingsList()
         {
-            HasChanged = false;
             foreach (var setting in m_originalSystemSettings)
             {
                 setting.HasChanged = false;
@@ -173,13 +172,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 if (tempOldSettingValue != setting.B3SettingValue)//check if current = new setting
                 {
                     setting.B3SettingDefaultValue = tempOldSettingValue;
-                    setting.HasChanged = true;
-                    if (HasChanged != true) HasChanged = true;
+                    setting.HasChanged = true;;
                 }
             }
         }
 
-        public bool HasChanged { get; set; }
 
         public List<B3SettingGlobal> Save()
         {

@@ -21,9 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
         public SetB3SettingsMessage(List<B3SettingGlobal> lB3Settings)
         {         
             foreach (B3SettingGlobal sm in lB3Settings)
-            {
-                if (sm.B3SettingValue != sm.B3SettingDefaultValue)//filter only setting that need to be changed.
-                {
+            {              
                     var settingMember = new SettingMember
                     {
                         GameType = sm.GameType,
@@ -31,8 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                         Value = sm.B3SettingValue,
                         OldValue = sm.B3SettingDefaultValue
                     };
-                    m_lB3Settings.Add(settingMember);
-                }
+                    m_lB3Settings.Add(settingMember);           
             }
         }
 

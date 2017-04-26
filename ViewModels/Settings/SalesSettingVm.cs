@@ -97,7 +97,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public bool HasChanged { get; set; }
         private void UpdateModelToSettingsList()
         {
-            HasChanged = false;
             foreach (var setting in m_originalSaleSettings)
             {
                 setting.HasChanged = false;
@@ -139,7 +138,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 {
                     setting.B3SettingDefaultValue = tempOldSettingValue;
                     setting.HasChanged = true;
-                    if (HasChanged != true) HasChanged = true;
                 }
             }
         }

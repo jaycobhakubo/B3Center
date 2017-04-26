@@ -125,10 +125,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 }
             }
         }
-        public bool HasChanged { get; set; }
+
         private void UpdateModelToGameSettingsList()
         {
-            HasChanged = false;
             foreach (B3SettingGlobal gameSetting in m_originalGameSettings)
             {
                 gameSetting.HasChanged = false;
@@ -191,7 +190,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 {
                     gameSetting.B3SettingDefaultValue = tempOldSettingValue;
                     gameSetting.HasChanged = true;
-                    if (HasChanged != true) HasChanged = true;
                 }
             }
         }

@@ -172,49 +172,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 m_settingTobeSaved = new List<B3SettingGlobal>();
                 switch (m_selectedSettingCategoryType)
                 {
-                    case B3SettingCategory.Games:
-                        {
-                            m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save().Where(l => l.HasChanged == true).ToList();
-                            m_hasChanged = true;
-                            break;
-                        }
-                    case B3SettingCategory.Player:
-                        {
-                           
+                    case B3SettingCategory.Games: m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.Player: m_settingTobeSaved = PlayerSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.Sales: m_settingTobeSaved = SalesSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.ServerGame: m_settingTobeSaved = ServerSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.Session: m_settingTobeSaved = SessionSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.System: m_settingTobeSaved = SystemSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
 
-                            m_settingTobeSaved = PlayerSettingVm.Save().Where(l => l.HasChanged == true).ToList();
-                            //m_hasChanged = SystemSettingVm.HasChanged;
-                            m_hasChanged = true;
-                            break;
-                        }
-                    case B3SettingCategory.Sales:
-                        {
-                            m_settingTobeSaved = SalesSettingVm.Save().Where(l => l.HasChanged == true).ToList();
-                            //m_hasChanged = SalesSettingVm.HasChanged;
-                            m_hasChanged = true;
-                            break;
-                        }
-                    case B3SettingCategory.ServerGame:
-                        {
-                            m_settingTobeSaved = ServerSettingVm.Save().Where(l => l.HasChanged == true).ToList();
-                            //m_hasChanged = ServerSettingVm.HasChanged;
-                            m_hasChanged = true;
-                            break;
-                        }
-                    case B3SettingCategory.Session:
-                        {
-                            m_settingTobeSaved = SessionSettingVm.Save().Where(l => l.HasChanged == true).ToList();
-                            //m_hasChanged = SessionSettingVm.HasChanged;
-                            m_hasChanged = true;
-                            break;
-                        }
-                    case B3SettingCategory.System:
-                        {
-                            m_settingTobeSaved = SystemSettingVm.Save().Where(l => l.HasChanged == true).ToList();
-                            //m_hasChanged = SystemSettingVm.HasChanged;
-                            m_hasChanged = true;
-                            break;
-                        }
                     case B3SettingCategory.PayTable:
                         {
                             m_settingTobeSaved = PayTableSettingVm.Save();
@@ -309,22 +273,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-
+        //All saved transaction should go here
         public void SaveSetting()
         {
             try
-            {
-              
+            {             
                 SetNewValue();
 
-                //This one goes first need to update UI after saved.
-                if (m_selectedSettingCategoryType == B3SettingCategory.Player)
+                if (m_selectedSettingCategoryType == B3SettingCategory.Player)//This one goes first need to update UI after saved.
                 {
-                    //Check for enabledisablesetting update
-                    var enableDisableGameSetting = PlayerSettingVm.GetEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
+                    var enableDisableGameSetting = PlayerSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
                     if (enableDisableGameSetting.Count != 0)
                     {
-                        foreach (var gameEnabledSetting in enableDisableGameSetting)
+                        foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
                         {
                             var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
                             try
@@ -342,8 +303,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         }
                     }
                 }
-
-
 
                 if (m_settingTobeSaved.Count != 0)//Do not send if no changes was made.
                 {
@@ -395,7 +354,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 if (m_previousB3SettingCategory == B3SettingCategory.Player)
                 {
-                    B3IsGameEnabledSettings = PlayerSettingVm.GetEnableDisableGameSettings();
+                    B3IsGameEnabledSettings = PlayerSettingVm.GetCurrentEnableDisableGameSettings();
                 }
                 IndicatorVisibility = true;
             }

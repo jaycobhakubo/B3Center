@@ -32,7 +32,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         #region Method
 
-        public List<B3IsGameEnabledSetting> GetEnableDisableGameSettings()
+        public List<B3IsGameEnabledSetting> GetCurrentEnableDisableGameSettings()
         {
             return m_originalEnableDisableSetings;
         }
@@ -40,14 +40,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
         public List<B3SettingGlobal> Save()
         {
             UpdateModelToSettingsList();
-            //ModifiedB3GameEnabledSettings.Clear();
             return m_origianlPlayerSettings;
         }
 
         public void ResetSettingsToDefault()
         {
             UpdateSettingsListToModel(m_origianlPlayerSettings, m_originalEnableDisableSetings);
-            //ModifiedB3GameEnabledSettings.Clear();
         }
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> playerSettingsList, List<B3IsGameEnabledSetting> isGameEnabledSettings)
@@ -113,10 +111,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        public bool HasChanged { get; set; }
         private void UpdateModelToSettingsList()
         {
-            HasChanged = false;
             foreach (var setting in m_origianlPlayerSettings)
             {
                 setting.HasChanged = false;
@@ -150,7 +146,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 {
                     setting.B3SettingDefaultValue = tempOldSettingValue;
                     setting.HasChanged = true;
-                    if (HasChanged != true) HasChanged = true;
                 }
             }
 
@@ -191,114 +186,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 {
                     gameEnabledSetting.B3SettingDefaultValue = tempOldSettingValue;
                     gameEnabledSetting.HasChanged = true;
-                    if (HasChanged != true) HasChanged = true;
                 }
             }          
         }
-        //public bool HasChanged { get; set; }
-        //private List<B3IsGameEnabledSetting> UpdateModifiedB3GameEnabledSettingList()
-        //{
-        //    var modifiedSettings = new List<B3IsGameEnabledSetting>();
-        //    HasChanged = false;
-        //    foreach (var gameEnabledSetting in m_b3SettingEnableDisable)
-        //    {
-        //        gameEnabledSetting.HasChanged = false;
-        //        var tempOldSettingValue = gameEnabledSetting.IsEnabled;//saved current setting value
-             
-        //        switch (gameEnabledSetting.GameType)
-        //        {
-        //            case B3GameType.Crazybout:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.CrazyboutGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.CrazyboutGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Jailbreak:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.JailBreakGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.JailBreakGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Mayamoney:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.MayaMoneyGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.MayaMoneyGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Spirit76:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.Spirit76GameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.Spirit76GameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Timebomb:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.TimeBombGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.TimeBombGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Ukickem:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.UKickemGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.UKickemGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Wildball:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.WildBallGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.WildBallGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //            case B3GameType.Wildfire:
-        //                {
-        //                    if (gameEnabledSetting.IsEnabled != PlayerSetting.WildFireGameSetting.IsEnabled)
-        //                    {
-        //                        modifiedSettings.Add(PlayerSetting.WildFireGameSetting);
-        //                    }
-        //                    break;
-        //                }
-        //        }
-        //    }
-        //    return modifiedSettings;
-        //}
-
+      
         #endregion
 
         #region Properties
 
         public List<string> VolumeList { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the B3 Game Setting. Tells whether a game is enabled or disabled. These are not real-time values. The settings get updated when saved. 
-        /// </summary>
-        /// <value>
-        /// The b3 setting enable disable.
-        /// </value>
-        //public List<B3IsGameEnabledSetting> B3SettingEnableDisable
-        //{
-        //    get { return m_b3SettingEnableDisable; }
-        //    set
-        //    {
-        //        if (m_b3SettingEnableDisable != null && value != m_b3SettingEnableDisable)
-        //        {
-        //            m_b3SettingEnableDisable = value;
-        //        }
-        //    }
-        //}
 
         public PlayerSettings PlayerSetting
         {
@@ -310,11 +206,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             }
         }
 
-        //public List<B3IsGameEnabledSetting> ModifiedB3GameEnabledSettings
-        //{
-        //    get { return UpdateModifiedB3GameEnabledSettingList(); } 
-        //}
-
+   
         #endregion
     }
 }
