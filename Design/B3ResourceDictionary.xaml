@@ -174,6 +174,9 @@
         </Setter>
     </Style>
 
+    <!--================================================================================================-->
+    <!--==============================MATHPAYTABLE DESIGN===============================================-->
+    <!--================================================================================================-->
     
     <!--CONTROL TEMPLATE-->
     <ControlTemplate x:Key="NocornerradiusGrpBox" TargetType="{x:Type GroupBox}">
@@ -212,6 +215,58 @@
             <ContentPresenter Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
         </Grid>
     </ControlTemplate>
+
+    <Style x:Key="lblStyleMathPayTable" TargetType="{x:Type Label}" BasedOn="{StaticResource B3RequiredFieldLabelStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Margin" Value="15,0,0,0"></Setter>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="ContentStringFormat" Value="{}{0}:"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="RequiredAsterisk"  Foreground="Red" Text="* "/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              RecognizesAccessKey="True" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">                          
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="cmbxStyleMathPayTable"  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
+        <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="Focusable" Value="True"/>
+        <Setter Property="Margin" Value="0,0,15,0"/>
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="IsHitTestVisible" Value="False"/>
+                <Setter Property="Focusable" Value="False"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding changeme}"  Value="true">
+                <Setter Property="Foreground" Value="Red"/>
+            </DataTrigger>
+            <!--<DataTrigger Binding="{Binding changeme}"  Value="false">
+                <Setter Property="Foreground" Value="Black"/>
+            </DataTrigger>-->
+        </Style.Triggers>
+    </Style>
 
 
 </ResourceDictionary>

@@ -49,7 +49,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
             B3MathGamePay tempMathGamePaySetting = new B3MathGamePay();
             var tempList = m_b3MathGamePayList;
-            if (IsEnableGame != true) IsEnableGame = true;
+            if (m_GameDisabled != false) GameDisabled = false;
 
            if (tempList.Count == 0)//If selected setting dont support RNG or 55455 then lets disable this game
            {
@@ -65,7 +65,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                };
                tempList.Add(newB3MathGamePay);
                mathPackageId = 0;
-               if (IsEnableGame != false) IsEnableGame = false;
+               if (m_GameDisabled != true) GameDisabled = true;
            }
            else
            {
@@ -109,14 +109,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }
         }
 
-        private bool m_IsEnableGame;
-        public bool IsEnableGame
+        private bool m_GameDisabled;
+        public bool GameDisabled
         {
-            get { return m_IsEnableGame; }
+            get { return m_GameDisabled; }
             set
             {
-                m_IsEnableGame = value;
-                RaisePropertyChanged("IsEnableGame");
+                m_GameDisabled = value;
+                RaisePropertyChanged("GameDisabled");
 
             }
         }

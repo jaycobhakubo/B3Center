@@ -5,35 +5,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
              mc:Ignorable="d" 
+              xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              >
     <!--<Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">-->
         <UserControl.Resources>
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Margin" Value="15,0,0,0"></Setter>
-            <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="ContentStringFormat" Value="{}{0}:"></Setter>
+
+        <converter:ReverseBoolConverter x:Key="RevertValueConverter"></converter:ReverseBoolConverter>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource lblStyleMathPayTable}">          
         </Style>
 
         <Style TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
-        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}" x:Key="hello">
-            <Setter Property="Margin" Value="0,0,15,0"/>          
-        </Style>
 
-        <Style TargetType="ComboBox" >
+        <!--<Style TargetType="ComboBox" BasedOn="{StaticResource cmbxStyleMathPayTable}">         
+        </Style>-->
+
+        <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}" x:Key="cmbxitemStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
+                    <Setter Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--x:Key="cmbxStyleMathPayTable"-->
+        <Style  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
+            <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
+            <Setter Property="IsHitTestVisible" Value="True"/>
+            <Setter Property="Focusable" Value="True"/>
             <Setter Property="Margin" Value="0,0,15,0"/>
             <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                    <Setter Property="IsHitTestVisible" Value="False"/>
+                    <Setter Property="Focusable" Value="False"/>
+                </Trigger>
                 <DataTrigger Binding="{Binding changeme}"  Value="true">
                     <Setter Property="Foreground" Value="Red"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding changeme}"  Value="false">
-                    <Setter Property="Foreground" Value="Black"/>
-                </DataTrigger>
+                <Setter Property="Foreground" Value="Black"/>
+            </DataTrigger>
             </Style.Triggers>
         </Style>
+
 
     </UserControl.Resources>
     <Grid>
@@ -43,7 +59,7 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" 
                Content="{Binding GameName}"
-               IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled}"
+              IsEnabled ="{Binding ElementName=cmbxPayTableList, Path=IsReadOnly, Converter={StaticResource RevertValueConverter}}"
                ></Label>
         <ComboBox  
             Name="cmbxPayTableList"
@@ -51,18 +67,11 @@
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
                   SelectedItem="{Binding GamePayTableModel.MathPayTable}" SelectionChanged="ComboBox_SelectionChanged" 
-            IsEnabled="{Binding IsEnableGame}"      
+                 IsReadOnly="{Binding GameDisabled}"   
+                  ItemContainerStyle="{StaticResource cmbxitemStyle}"
             >
-            <ComboBox.ItemContainerStyle>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Foreground" Value="Gray" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
-                            <Setter Property="Foreground" Value="Red" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ComboBox.ItemContainerStyle>
         </ComboBox>
     </Grid>
 </UserControl>
+<!--<SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource Blue}" />
+<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource Yellow}" />-->
