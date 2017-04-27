@@ -25,6 +25,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             DataContext = this;
         }
 
-    
+        private void OnSelected(object sender, RoutedEventArgs e)
+        {
+            //ListBoxItem lbi = e.Source as ListBoxItem;
+
+            //if (lbi != null)
+            //{
+            //    label1.Content = lbi.Content.ToString() + " is selected.";
+            //}
+        }
+
+        private void cmbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cmbxitem = new ComboBoxItem();
+            ComboBox cmbx = new ComboBox();
+            cmbx = (ComboBox)sender;
+            //cmbxitem = cmbx.SelectedItem;
+
+
+        }
     }
 }

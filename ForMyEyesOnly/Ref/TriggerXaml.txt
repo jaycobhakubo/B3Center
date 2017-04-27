@@ -32,3 +32,36 @@ TRIGGER (xaml)
                 <Setter Property="TextDecorations" Value="Underline" />
             </Trigger>
         </Style.Triggers>
+
+
+______________________
+Multidatatrigger
+______________________
+
+1)
+<Label                                                                                                     >
+                                    <Label.Style>
+                                        <Style  TargetType="Label" >
+                                          
+                                            <Setter Property="Foreground" Value="Red"/>
+                                            <Setter Property="Content" Value="* Indicates a required field"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding NoSession}" Value="true"/>
+                                                        <Condition Binding="{Binding NoAccount}" Value="true"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                   
+                                                    <Setter Property="Content" Value="No session played"/>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding NoSession}" Value="false"/>
+                                                        <Condition Binding="{Binding NoAccount}" Value="true"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Content" Value="No account played"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>

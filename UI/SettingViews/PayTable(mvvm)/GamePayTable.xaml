@@ -24,13 +24,20 @@
 
         <Style TargetType="ComboBox" >
             <Setter Property="Margin" Value="0,0,15,0"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding changeme}"  Value="true">
+
+                <!--<DataTrigger Binding="{Binding ElementName=cmbx ,Path=SelectedItem.NeedToReplace}"  Value="true">
                     <Setter Property="Foreground" Value="Red"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding changeme}"  Value="false">
+                </DataTrigger>-->
+                <!--<DataTrigger Binding="{Binding changeme}"  Value="false">
                     <Setter Property="Foreground" Value="Black"/>
-                </DataTrigger>
+                </DataTrigger>-->
+
+                <!--<Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="Red" />
+                   
+                </Trigger>-->
             </Style.Triggers>
         </Style>
 
@@ -42,14 +49,15 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="{Binding GameName}"></Label>
         <ComboBox 
-         
+         Name="cmbx"
             Grid.Column="1" 
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
-                  SelectedItem="{Binding GamePayTableModel.MathPayTable}" 
+                  SelectedItem="{Binding GamePayTableModel.MathPayTable}" SelectionChanged="cmbx_SelectionChanged" 
                   >
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
+                  
                     <Setter Property="Foreground" Value="Gray" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
