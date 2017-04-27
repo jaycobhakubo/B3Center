@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameTech.Elite.Client.Modules.B3Center.Business;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
@@ -25,6 +26,22 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             DataContext = this;
         }
 
-    
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GamePayTableVm ii = (GamePayTableVm)DataContext;
+            B3MathGamePay y = new B3MathGamePay();
+            y = ii.GamePayTableModel.MathPayTable;
+            if (y != null)
+            {
+                if (ii.GamePayTableModel.MathPayTable.NeedToReplace == true)
+                {
+                    ii.changeme = true;
+                }
+                else
+                {
+                    if (ii.changeme != false) ii.changeme = false;
+                }
+            }
+        }   
     }
 }

@@ -24,7 +24,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             m_b3MathGamePayFullList = new List<B3MathGamePay>();
             m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
             var tempIsRng = SettingViewModel.Instance.GetIsRngSetting();
-            B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == tempIsRng).ToList();
+            m_b3MathGamePayList = new List<B3MathGamePay>();
+            m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == tempIsRng).ToList();
             m_gamePayTableModel = new GamePayTableModel();
             GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
@@ -32,9 +33,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         public void UpdateMathPayTableUI(bool isRng)
         {
-            B3MathGamePayList = new List<B3MathGamePay>();
-            B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
-            B3MathGamePayList.Select(c => { c.NeedToReplace = false; return c; }).ToList();
+           var x  = new List<B3MathGamePay>();
+            x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
+           x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
+           m_b3MathGamePayList = x;
             GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
         }
     
@@ -45,11 +47,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             if (!int.TryParse(MathPackageId, out mathPackageId)) return null;////make sure we are able to parse an int
             if (B3MathGamePayList == null) return null;
 
-            var tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
-            changeme = false;
-            if (tempMathGamePaySetting == null)
+            B3MathGamePay tempMathGamePaySetting = new B3MathGamePay();
+            var tempList = m_b3MathGamePayList;
+            var ItExists = B3MathGamePayList.Exists(l => l.MathPackageId == mathPackageId);
+
+            if (ItExists == false)
             {
                 tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
+                
                 var newB3MathGamePay = new B3MathGamePay()
                 {
                     MathPackageId = tempMathGamePaySetting.MathPackageId,
@@ -58,12 +63,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                     IsRng = tempMathGamePaySetting.IsRng,
                     NeedToReplace = true
                 };
-                changeme = true;
-                B3MathGamePayList.Add(newB3MathGamePay);
-                tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
-
+                tempList.Add(newB3MathGamePay);             
             }
-          
+            B3MathGamePayList = tempList;
+            tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
             return tempMathGamePaySetting;
         }
 
@@ -78,30 +81,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
             }
         }
-
-        //SolidColorBrush(Colors.White);
-        //public SolidColorBrush m_ColorTest = new SolidColorBrush();
-        //public SolidColorBrush ColorTest
-        //{
-        //    get { return m_ColorTest; }
-        //    set
-        //    {
-        //        m_ColorTest = value;
-        //        RaisePropertyChanged("ColorTest");
-        //    }
-        //}
-
-
-        //public string m_ColorTest;
-        //public string ColorTest
-        //{
-        //    get { return m_ColorTest; }
-        //    set
-        //    {
-        //        m_ColorTest = value;
-        //        RaisePropertyChanged("ColorTest");
-        //    }
-        //}
 
         public GamePayTableModel GamePayTableModel
         {
