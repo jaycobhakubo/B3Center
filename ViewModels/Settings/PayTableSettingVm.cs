@@ -287,6 +287,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            return m_originalPayTableSettings.Where(l => l.HasChanged == true).ToList();
        }
 
+       public void ValidateUserInput()
+       {
+           var x = ListGamePayTableVm.Exists(l => l.changeme == true);
+           if (x == true)
+           {
+               SettingViewModel.Instance.BtnSaveIsEnabled = false;
+           }
+           else
+           {
+               SettingViewModel.Instance.BtnSaveIsEnabled = true;
+           }
+          
+       }
+
        public void ResetSettingsToDefault()
        {
            UpdateSettingsListToModel(m_originalPayTableSettings);
