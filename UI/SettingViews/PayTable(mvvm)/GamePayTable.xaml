@@ -18,10 +18,19 @@
         <Style TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
-        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
+        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}" x:Key="hello">
             <Setter Property="Margin" Value="0,0,15,0"/>          
         </Style>
-     
+
+        <Style TargetType="ComboBox" >
+            <Setter Property="Margin" Value="0,0,15,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding changeme}"  Value="true">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -29,7 +38,9 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="{Binding GameName}"></Label>
-        <ComboBox Grid.Column="1" 
+        <ComboBox 
+         
+            Grid.Column="1" 
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
                   SelectedItem="{Binding GamePayTableModel.MathPayTable}" 
@@ -38,8 +49,8 @@
                 <Style TargetType="ComboBoxItem">
                     <Setter Property="Foreground" Value="Gray" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ColorTest}" Value="1">
-                            <Setter Property="Foreground" Value="Green" />
+                        <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
+                            <Setter Property="Foreground" Value="Red" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

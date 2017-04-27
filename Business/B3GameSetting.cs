@@ -191,7 +191,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
-        public bool IsThisGameEnable
+        public bool NeedToReplace
         {
             get;
             set;

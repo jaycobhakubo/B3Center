@@ -34,6 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         {
             B3MathGamePayList = new List<B3MathGamePay>();
             B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
+            B3MathGamePayList.Select(c => { c.NeedToReplace = false; return c; }).ToList();
             GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
         }
     
@@ -53,9 +54,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                     MathPackageId = tempMathGamePaySetting.MathPackageId,
                     GameType = tempMathGamePaySetting.GameType,
                     PackageDesc = "Current math package is " + tempMathGamePaySetting.PackageDesc,
-                    IsRng = tempMathGamePaySetting.IsRng
+                    IsRng = tempMathGamePaySetting.IsRng,
+                    NeedToReplace = true
                 };
-
+                changeme = true;
                 B3MathGamePayList.Add(newB3MathGamePay);
                 tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
 
@@ -63,6 +65,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
             return tempMathGamePaySetting;
         }
+
+        private bool m_changeme;
+        public bool changeme
+        {
+            get { return m_changeme; }
+            set
+            {
+                m_changeme = value;
+                RaisePropertyChanged("changeme");
+
+            }
+        }
+
         //SolidColorBrush(Colors.White);
         //public SolidColorBrush m_ColorTest = new SolidColorBrush();
         //public SolidColorBrush ColorTest

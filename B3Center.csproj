@@ -460,7 +460,13 @@
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ForMyEyesOnly\Ref\Binding.txt" />
+    <Resource Include="ForMyEyesOnly\Ref\TriggerXaml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ForMyEyesOnly\Ref\Lambda.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
