@@ -281,6 +281,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             WildFirePayTableVm.UpdateMathPayTableUI(m_isRNG);
         }
 
+
+
+
        public List<B3SettingGlobal> Save()
        {
            UpdateModelToSettingsList();

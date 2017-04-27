@@ -32,27 +32,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             GamePayTableVm ii = (GamePayTableVm)DataContext;
             B3MathGamePay y = new B3MathGamePay();
             y = ii.GamePayTableModel.MathPayTable;
-            if (y != null)
+            if (ii.IsEnableGame != false)
             {
-                if (ii.GamePayTableModel.MathPayTable.NeedToReplace == true)
+                if (y != null)
                 {
-                    if (ii.changeme != true)
+                    if (ii.GamePayTableModel.MathPayTable.NeedToReplace == true)
                     {
-                        ii.changeme = true;
-                        SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
+                        if (ii.changeme != true)
+                        {
+                            ii.changeme = true;
+                            SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
+                        }
                     }
-                }
-                else
-                {
-                    if (ii.changeme != false)
+                    else
                     {
-                        ii.changeme = false;
-                        SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
-                       
+                        if (ii.changeme != false)
+                        {
+                            ii.changeme = false;
+                            SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
+
+                        }
+
                     }
-                    
                 }
             }
+            
         }   
     }
 }

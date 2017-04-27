@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
              mc:Ignorable="d" 
              >
-    <UserControl.Resources>
-        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">
+    <!--<Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">-->
+        <UserControl.Resources>
+        <Style TargetType="{x:Type Label}">
             <Setter Property="Margin" Value="15,0,0,0"></Setter>
             <Setter Property="Padding" Value="0,0,0,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
@@ -40,13 +41,18 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="{Binding GameName}"></Label>
-        <ComboBox         
+        <Label Grid.Column="0" 
+               Content="{Binding GameName}"
+               IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled}"
+               ></Label>
+        <ComboBox  
+            Name="cmbxPayTableList"
             Grid.Column="1" 
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
                   SelectedItem="{Binding GamePayTableModel.MathPayTable}" SelectionChanged="ComboBox_SelectionChanged" 
-                  >
+            IsEnabled="{Binding IsEnableGame}"      
+            >
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
                     <Setter Property="Foreground" Value="Gray" />
