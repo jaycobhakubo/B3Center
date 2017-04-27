@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
              mc:Ignorable="d" 
+              xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              >
     <!--<Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">-->
         <UserControl.Resources>
+
+        <converter:ReverseBoolConverter x:Key="RevertValueConverter"></converter:ReverseBoolConverter>
+
         <Style TargetType="{x:Type Label}">
             <Setter Property="Margin" Value="15,0,0,0"></Setter>
             <Setter Property="Padding" Value="0,0,0,0"/>
@@ -19,19 +23,19 @@
         <Style TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
-        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}" x:Key="hello">
+        <!--<Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="Margin" Value="0,0,15,0"/>          
-        </Style>
+        </Style>-->
 
-        <Style TargetType="ComboBox" >
+        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="Margin" Value="0,0,15,0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding changeme}"  Value="true">
                     <Setter Property="Foreground" Value="Red"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding changeme}"  Value="false">
+                <!--<DataTrigger Binding="{Binding changeme}"  Value="false">
                     <Setter Property="Foreground" Value="Black"/>
-                </DataTrigger>
+                </DataTrigger>-->
             </Style.Triggers>
         </Style>
 
@@ -43,19 +47,21 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" 
                Content="{Binding GameName}"
-               IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled}"
+             
+                 IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled}"
                ></Label>
+        <!--IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled, Converter={StaticResource RevertValueConverter}}"-->
         <ComboBox  
             Name="cmbxPayTableList"
             Grid.Column="1" 
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
                   SelectedItem="{Binding GamePayTableModel.MathPayTable}" SelectionChanged="ComboBox_SelectionChanged" 
-            IsEnabled="{Binding IsEnableGame}"      
+            IsEnabled="{Binding GameDisabled, Converter={StaticResource RevertValueConverter}}"      
             >
             <ComboBox.ItemContainerStyle>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Foreground" Value="Gray" />
+                <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
                             <Setter Property="Foreground" Value="Red" />
