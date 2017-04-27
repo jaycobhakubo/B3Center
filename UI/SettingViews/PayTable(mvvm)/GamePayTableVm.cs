@@ -46,6 +46,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             if (B3MathGamePayList == null) return null;
 
             var tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
+            changeme = false;
             if (tempMathGamePaySetting == null)
             {
                 tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
@@ -62,7 +63,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                 tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
 
             }
-
+          
             return tempMathGamePaySetting;
         }
 

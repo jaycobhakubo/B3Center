@@ -28,6 +28,9 @@
                 <DataTrigger Binding="{Binding changeme}"  Value="true">
                     <Setter Property="Foreground" Value="Red"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding changeme}"  Value="false">
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
 
