@@ -50,7 +50,7 @@
                             </Grid>
                         </Border>
                     </GroupBox.Header>
-                    <CheckBox  IsEnabled="{Binding RNGEnable}" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Content="Enable RNG" Margin="10,10,5,5" Height="Auto" >
+                    <CheckBox  IsEnabled="{Binding IsRNGEnable}" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Content="Enable RNG" Margin="10,10,5,5" Height="Auto" >
                     </CheckBox>
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages:" Margin="0,30,0,2" ></Label>
