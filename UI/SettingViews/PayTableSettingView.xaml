@@ -39,9 +39,11 @@
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Enable Enforce Mix (55455)" Padding="5,5,5,5" ></TextBlock>
                                                 <StackPanel VerticalAlignment="Center"  Margin="10,0,10,0" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                                                    <RadioButton  Name="rdobtnEnforceMix"  Margin="10,0,0,0" Content="Yes" IsChecked="{Binding PayTableSettings.EnforceMix}" Checked="rdobtnEnforceMix_Checked" Unchecked="rdobtnEnforceMix_Checked"></RadioButton>
-                                                    <RadioButton  Content="No" IsChecked="{Binding ElementName=rdobtnEnforceMix, Path=IsChecked, Converter={StaticResource RevertValueConverter}}"></RadioButton>
+                                                    <RadioButton   Margin="10,0,0,0" Content="Yes" IsChecked="{Binding PayTableSettings.EnforceMix}"></RadioButton>
+                                                    <RadioButton  Content="No" IsChecked="{Binding PayTableSettings.EnforceMix, Converter={StaticResource RevertValueConverter}}"></RadioButton>
                                                 </StackPanel>
+                                                <!--<RadioButton  Name="rdobtnEnforceMix"  Margin="10,0,0,0" Content="Yes" IsChecked="{Binding PayTableSettings.EnforceMix}" Unchecked="rdobtnEnforceMix_Unchecked"></RadioButton>-->
+                                                <!--IsChecked="{Binding ElementName=rdobtnEnforceMix, Path=IsChecked, Converter={StaticResource RevertValueConverter}}-->
                                                 <!--IsChecked="{Binding PayTableSettings.EnforceMix, Converter={StaticResource RevertValueConverter}}"-->
                                             </Grid>
                                         </ControlTemplate>

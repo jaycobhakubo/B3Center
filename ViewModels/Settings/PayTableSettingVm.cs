@@ -75,19 +75,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                switch (setting.SettingType)
                {
                    case B3SettingType.CommonRngBallCall:
-                       {
-                           PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
-                           m_isRNG = PayTableSettings.CommonRngBallCall;                         
+                        {
+                            if (EnforceMix)//setting.ConvertB3StringValueToBool();)
+                            {
+                                IsRNGEnable = false;
+                                PayTableSettings.CommonRngBallCall = !EnforceMix;
+                            }
+                            else
+                            {
+                                IsRNGEnable = true;
+                                PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
+                            }
+                                       
                            break;
                        }
                    case B3SettingType.EnforceMix:
                        {                     
-                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();                        
-                            IsRNGEnable = !EnforceMix;
-                            if (EnforceMix)//setting.ConvertB3StringValueToBool();)
-                            {
-                                PayTableSettings.CommonRngBallCall = IsRNGEnable;
-                            }
+                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
+                            
+                            //if (EnforceMix)//setting.ConvertB3StringValueToBool();)
+                            //{
+                            //    m_isRNG = !EnforceMix;
+                            //}
                             break;
                        }
                     case B3SettingType.MathPayTableSetting:
@@ -260,17 +269,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        public void IsRngCheckEvent()
         {
-            m_isRNG = PayTableSettings.CommonRngBallCall;
-    
-            IsRNGEnable = !EnforceMix;
+   
 
             if (EnforceMix)
             {
-                PayTableSettings.CommonRngBallCall = m_isRNGEnable;
+                PayTableSettings.CommonRngBallCall = !EnforceMix;
+                IsRNGEnable = true;
             }
             else
             {
                 PayTableSettings.CommonRngBallCall = (m_originalPayTableSettings.Single(l => l.SettingType == B3SettingType.CommonRngBallCall).B3SettingValue) == "T" ? true : false;
+                IsRNGEnable = false;
             }
 
             CrazyBoutPayTableVm.UpdateMathPayTableUI(m_isRNG);
