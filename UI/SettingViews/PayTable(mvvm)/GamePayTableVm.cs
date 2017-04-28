@@ -12,12 +12,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
     public class GamePayTableVm : ViewModelBase
     {
         private GamePayTableModel m_gamePayTableModel;
-        private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
         private List<B3MathGamePay> m_b3MathGamePayList;
-        public string GameName { get; set; }
-        public bool IsGameEnable { get; set; }
         private readonly B3SettingGlobal m_originalPayTableSettings;
-  
+        private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
+        public string GameName { get; set; }
+        
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
         {
             m_b3MathGamePayFullList = new List<B3MathGamePay>();
@@ -26,8 +25,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             var tempEnforceMix = SettingViewModel.Instance.GetEnforceMixSetting();
             m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
             m_originalPayTableSettings = b3SettingGlobal;                 
-            m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == !tempEnforceMix).ToList();           
-            GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
+            m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == !tempEnforceMix).ToList();
+            GamePayTableModel.MathPayValue = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
         }
 
@@ -37,7 +36,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
             x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
             m_b3MathGamePayList = x;
-            GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
+            GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
         }
     
         private B3MathGamePay GetB3MathGamePay(string MathPackageId)
