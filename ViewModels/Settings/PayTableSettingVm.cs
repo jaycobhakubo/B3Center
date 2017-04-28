@@ -255,11 +255,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        }
 
        public void IsRngCheckEvent()
-        {
-      
-                
-            PayTableSettings.CommonRngBallCall = !EnforceMix;
-     
+        {               
             CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
             JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
             MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
@@ -269,9 +265,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
             WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
         }
-
-
-
 
        public List<B3SettingGlobal> Save()
        {
@@ -310,7 +303,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        public GamePayTableVm WildFirePayTableVm { get; set; }
 
         public bool EnforceMix { get { return PayTableSettings.EnforceMix; } }
-        public bool IsRNG { get { return PayTableSettings.CommonRngBallCall; } }
+        public bool IsRNG { get { return !PayTableSettings.EnforceMix; } }
 
        public PayTableSetting PayTableSettings
        {
