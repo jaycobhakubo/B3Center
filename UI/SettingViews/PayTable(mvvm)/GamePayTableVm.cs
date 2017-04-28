@@ -24,7 +24,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             m_b3MathGamePayFullList = new List<B3MathGamePay>();
             m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
             var tempIsRng = SettingViewModel.Instance.GetIsRngSetting();
-            B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == tempIsRng).ToList();
+            m_b3MathGamePayList = new List<B3MathGamePay>();
+            m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == tempIsRng).ToList();
             m_gamePayTableModel = new GamePayTableModel();
             GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
@@ -32,40 +33,69 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         public void UpdateMathPayTableUI(bool isRng)
         {
-            B3MathGamePayList = new List<B3MathGamePay>();
-            B3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
-            B3MathGamePayList.Select(c => { c.NeedToReplace = false; return c; }).ToList();
+            var x  = new List<B3MathGamePay>();
+            x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
+            x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
+            m_b3MathGamePayList = x;
             GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
         }
     
         private B3MathGamePay GetB3MathGamePay(string MathPackageId)
         {
             int mathPackageId;
-            if (MathPackageId == null) return null;       //check for null                
-            if (!int.TryParse(MathPackageId, out mathPackageId)) return null;////make sure we are able to parse an int
-            if (B3MathGamePayList == null) return null;
+            if (MathPackageId == null     
+            ||!int.TryParse(MathPackageId, out mathPackageId)
+          || m_b3MathGamePayList == null) return null;
 
-            var tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
-            changeme = false;
-            if (tempMathGamePaySetting == null)
-            {
-                tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
-                var newB3MathGamePay = new B3MathGamePay()
-                {
-                    MathPackageId = tempMathGamePaySetting.MathPackageId,
-                    GameType = tempMathGamePaySetting.GameType,
-                    PackageDesc = "Current math package is " + tempMathGamePaySetting.PackageDesc,
-                    IsRng = tempMathGamePaySetting.IsRng,
-                    NeedToReplace = true
-                };
-                changeme = true;
-                B3MathGamePayList.Add(newB3MathGamePay);
-                tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
+            B3MathGamePay tempMathGamePaySetting = new B3MathGamePay();
+            var tempList = m_b3MathGamePayList;
+            if (GameDisabled != false) GameDisabled = false;
 
-            }
-          
+           if (tempList.Count == 0)//If selected setting dont support RNG or 55455 then lets disable this game
+           {
+               tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
+
+               var newB3MathGamePay = new B3MathGamePay()
+               {
+                   MathPackageId = 0,
+                   GameType = tempMathGamePaySetting.GameType,
+                   PackageDesc = "This setting is not applicable to this game. This game is now disabled.",
+                   IsRng = tempMathGamePaySetting.IsRng,
+                   NeedToReplace = false,
+               };
+               tempList.Add(newB3MathGamePay);
+               mathPackageId = 0;
+               if (GameDisabled != true) GameDisabled = true;
+           }
+           else
+           {
+
+               var ItExists = m_b3MathGamePayList.Exists(l => l.MathPackageId == mathPackageId);
+               if (ItExists == false)
+               {
+                   tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
+
+                   var newB3MathGamePay = new B3MathGamePay()
+                   {
+                       MathPackageId = tempMathGamePaySetting.MathPackageId,
+                       GameType = tempMathGamePaySetting.GameType,
+                       PackageDesc = "Current math package is " + tempMathGamePaySetting.PackageDesc,
+                       IsRng = tempMathGamePaySetting.IsRng,
+                       NeedToReplace = true
+                   };
+                   tempList.Add(newB3MathGamePay);
+               }
+           }
+
+
+
+            B3MathGamePayList = tempList;
+            tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
             return tempMathGamePaySetting;
         }
+
+        //If selected setting does not support RNG or 55455
+
 
         private bool m_changeme;
         public bool changeme
@@ -79,29 +109,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }
         }
 
-        //SolidColorBrush(Colors.White);
-        //public SolidColorBrush m_ColorTest = new SolidColorBrush();
-        //public SolidColorBrush ColorTest
-        //{
-        //    get { return m_ColorTest; }
-        //    set
-        //    {
-        //        m_ColorTest = value;
-        //        RaisePropertyChanged("ColorTest");
-        //    }
-        //}
+        private bool m_GameDisabled;
+        public bool GameDisabled
+        {
+            get { return m_GameDisabled; }
+            set
+            {
+                m_GameDisabled = value;
+                RaisePropertyChanged("GameDisabled");
 
-
-        //public string m_ColorTest;
-        //public string ColorTest
-        //{
-        //    get { return m_ColorTest; }
-        //    set
-        //    {
-        //        m_ColorTest = value;
-        //        RaisePropertyChanged("ColorTest");
-        //    }
-        //}
+            }
+        }
 
         public GamePayTableModel GamePayTableModel
         {

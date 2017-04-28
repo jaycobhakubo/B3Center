@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameTech.Elite.Client.Modules.B3Center.Business;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
@@ -25,24 +27,36 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             DataContext = this;
         }
 
-        private void OnSelected(object sender, RoutedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ListBoxItem lbi = e.Source as ListBoxItem;
+            GamePayTableVm ii = (GamePayTableVm)DataContext;
+            B3MathGamePay y = new B3MathGamePay();
+            y = ii.GamePayTableModel.MathPayTable;
+            if (ii.GameDisabled != true)
+            {
+                if (y != null)
+                {
+                    if (ii.GamePayTableModel.MathPayTable.NeedToReplace == true)
+                    {
+                        if (ii.changeme != true)
+                        {
+                            ii.changeme = true;
+                            SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
+                        }
+                    }
+                    else
+                    {
+                        if (ii.changeme != false)
+                        {
+                            ii.changeme = false;
+                            SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
 
-            //if (lbi != null)
-            //{
-            //    label1.Content = lbi.Content.ToString() + " is selected.";
-            //}
-        }
+                        }
 
-        private void cmbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem cmbxitem = new ComboBoxItem();
-            ComboBox cmbx = new ComboBox();
-            cmbx = (ComboBox)sender;
-            //cmbxitem = cmbx.SelectedItem;
-
-
-        }
+                    }
+                }
+            }
+            
+        }   
     }
 }

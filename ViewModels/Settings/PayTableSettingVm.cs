@@ -281,10 +281,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             WildFirePayTableVm.UpdateMathPayTableUI(m_isRNG);
         }
 
+
+
+
        public List<B3SettingGlobal> Save()
        {
            UpdateModelToSettingsList();
            return m_originalPayTableSettings.Where(l => l.HasChanged == true).ToList();
+       }
+
+       public void ValidateUserInput()
+       {
+           var x = ListGamePayTableVm.Exists(l => l.changeme == true);
+           if (x == true)
+           {
+               SettingViewModel.Instance.BtnSaveIsEnabled = false;
+           }
+           else
+           {
+               SettingViewModel.Instance.BtnSaveIsEnabled = true;
+           }
+          
        }
 
        public void ResetSettingsToDefault()

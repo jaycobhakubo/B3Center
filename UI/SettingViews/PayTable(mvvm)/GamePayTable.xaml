@@ -5,9 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable"
              mc:Ignorable="d" 
+              xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
              >
-    <UserControl.Resources>
-        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">
+    <!--<Style TargetType="{x:Type Label}" BasedOn="{StaticResource  B3RequiredFieldLabelStyle}">-->
+        <UserControl.Resources>
+
+        <converter:ReverseBoolConverter x:Key="RevertValueConverter"></converter:ReverseBoolConverter>
+
+        <Style TargetType="{x:Type Label}">
             <Setter Property="Margin" Value="15,0,0,0"></Setter>
             <Setter Property="Padding" Value="0,0,0,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
@@ -18,26 +23,19 @@
         <Style TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
-        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}" x:Key="hello">
+        <!--<Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="Margin" Value="0,0,15,0"/>          
-        </Style>
+        </Style>-->
 
-        <Style TargetType="ComboBox" >
+        <Style TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
             <Setter Property="Margin" Value="0,0,15,0"/>
-            <Setter Property="Foreground" Value="Black"/>
             <Style.Triggers>
-
-                <!--<DataTrigger Binding="{Binding ElementName=cmbx ,Path=SelectedItem.NeedToReplace}"  Value="true">
+                <DataTrigger Binding="{Binding changeme}"  Value="true">
                     <Setter Property="Foreground" Value="Red"/>
-                </DataTrigger>-->
+                </DataTrigger>
                 <!--<DataTrigger Binding="{Binding changeme}"  Value="false">
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>-->
-
-                <!--<Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Foreground" Value="Red" />
-                   
-                </Trigger>-->
             </Style.Triggers>
         </Style>
 
@@ -47,18 +45,23 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="{Binding GameName}"></Label>
-        <ComboBox 
-         Name="cmbx"
+        <Label Grid.Column="0" 
+               Content="{Binding GameName}"
+             
+                 IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled}"
+               ></Label>
+        <!--IsEnabled="{Binding ElementName=cmbxPayTableList, Path=IsEnabled, Converter={StaticResource RevertValueConverter}}"-->
+        <ComboBox  
+            Name="cmbxPayTableList"
             Grid.Column="1" 
                   ItemsSource="{Binding B3MathGamePayList}" 
                   DisplayMemberPath="PackageDesc"
-                  SelectedItem="{Binding GamePayTableModel.MathPayTable}" SelectionChanged="cmbx_SelectionChanged" 
-                  >
+                  SelectedItem="{Binding GamePayTableModel.MathPayTable}" SelectionChanged="ComboBox_SelectionChanged" 
+            IsEnabled="{Binding GameDisabled, Converter={StaticResource RevertValueConverter}}"      
+            >
             <ComboBox.ItemContainerStyle>
-                <Style TargetType="ComboBoxItem">
-                  
-                    <Setter Property="Foreground" Value="Gray" />
+                <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
                             <Setter Property="Foreground" Value="Red" />
