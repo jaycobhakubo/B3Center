@@ -1,9 +1,10 @@
-﻿using GameTech.Elite.Base;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable;
@@ -12,8 +13,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
    public class PayTableSettingVm : ViewModelBase
     {
-       private PayTableSetting m_PayTableSettings; 
-       private readonly List<B3SettingGlobal> m_originalPayTableSettings;
+        private PayTableSetting m_PayTableSettings; 
+        private readonly List<B3SettingGlobal> m_originalPayTableSettings;
         private bool m_isRNGEnable;
         private bool m_enforceMixEnable;
 
