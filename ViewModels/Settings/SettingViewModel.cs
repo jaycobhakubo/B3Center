@@ -183,12 +183,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     case B3SettingCategory.PayTable:
                         {
                             m_settingTobeSaved = PayTableSettingVm.Save();
-                            m_hasChanged = PayTableSettingVm.HasChanged;
-                            if (m_hasChanged == true)//Check if user requested for any setting update.
+
+                            if (m_settingTobeSaved.Where(l => l.SettingType == B3SettingType.MathPayTableSetting).Count() > 0)//Check if user requested for any setting update.
                             {                              
-                                if (m_settingTobeSaved.Exists(l => l.SettingType == B3SettingType.MathPayTableSetting))//Check if it is a game paytable update.
-                                {                                                               
-                                    var tempAllgamesetting = new List<B3SettingGlobal>();     //Get all the game that has been changed                                  
+                                  var tempAllgamesetting = new List<B3SettingGlobal>();     //Get all the game that has been changed                                  
                                     foreach (var paytablesetting in m_settingTobeSaved.Where(l => l.SettingType == B3SettingType.MathPayTableSetting))
                                     {
                                         var tempEachgamesetting = new List<B3SettingGlobal>();
@@ -203,11 +201,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                             case B3GameType.Wildball: tempEachgamesetting = GameSettingsVm.GameWildBall.Save(); break;
                                             case B3GameType.Wildfire: tempEachgamesetting = GameSettingsVm.GameWildfire.Save(); break;
                                         }
-                                        tempAllgamesetting.AddRange(tempEachgamesetting);
+                                        tempAllgamesetting.AddRange(tempEachgamesetting);                                                                                            
                                     }
-                                    tempAllgamesetting.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();
+                                    tempAllgamesetting.Select(c => { c.B3SettingDefaultValue = ""; return c; }).ToList();              
                                     m_settingTobeSaved.AddRange(tempAllgamesetting);
-                                }
                             }
                             break;
                         }
