@@ -14,7 +14,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
     {
        private PayTableSetting m_PayTableSettings; 
        private readonly List<B3SettingGlobal> m_originalPayTableSettings;
-       private bool m_isRNG;
         private bool m_isRNGEnable;
         private bool m_enforceMixEnable;
         #region CONSTRUCTOR
@@ -65,7 +64,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm)
        {
-           gamePayTableVm.UpdateMathPayTableUI(m_isRNG);
+           gamePayTableVm.UpdateMathPayTableUI(IsRNG);
        }
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList) 
@@ -95,7 +94,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             
                             //if (EnforceMix)//setting.ConvertB3StringValueToBool();)
                             //{
-                            //    m_isRNG = !EnforceMix;
+                            //    IsRNG = !EnforceMix;
                             //}
                             break;
                        }
@@ -181,7 +180,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         case B3SettingType.CommonRngBallCall:
                        {                                               
                                setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
-                                m_isRNG = (setting.B3SettingValue == "T") ? true : false;                         
+                                //IsRNG = (setting.B3SettingValue == "T") ? true : false;                         
                            break;
                        }
                         case B3SettingType.EnforceMix:
@@ -197,7 +196,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                 case B3GameType.Crazybout:
                                     {
                                         if (CrazyBoutPayTableVm.GamePayTableModel.MathPayTable != null
-                                            && CrazyBoutPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                            && CrazyBoutPayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                         {
                                             setting.B3SettingValue = CrazyBoutPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                         }
@@ -207,7 +206,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                 case B3GameType.Jailbreak:
                                     {
                                         if (JailBreakPayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && JailBreakPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && JailBreakPayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = JailBreakPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
 
                                     }
@@ -215,42 +214,42 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                 case B3GameType.Mayamoney:
                                     {
                                         if (MayaMoneyPayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && MayaMoneyPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && MayaMoneyPayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = MayaMoneyPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Spirit76:
                                     {
                                         if (Spirit76PayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && Spirit76PayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && Spirit76PayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = Spirit76PayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Timebomb:
                                     {
                                         if (TimeBombPayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && TimeBombPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && TimeBombPayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = TimeBombPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Ukickem:
                                     {
                                         if (UkickEmPayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && UkickEmPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && UkickEmPayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = UkickEmPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Wildball:
                                     {
                                         if (WildBallPayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && WildBallPayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && WildBallPayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = WildBallPayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Wildfire:
                                     {
                                         if (WildFirePayTableVm.GamePayTableModel.MathPayTable != null
-                                                  && WildFirePayTableVm.GamePayTableModel.MathPayTable.IsRng == m_isRNG)
+                                                  && WildFirePayTableVm.GamePayTableModel.MathPayTable.IsRng == IsRNG)
                                             setting.B3SettingValue = WildFirePayTableVm.GamePayTableModel.MathPayTable.MathPackageId.ToString();
                                     }
                                     break;
@@ -269,27 +268,28 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        public void IsRngCheckEvent()
         {
-   
+
+            var testr = EnforceMix;
 
             if (EnforceMix)
             {
                 PayTableSettings.CommonRngBallCall = !EnforceMix;
-                IsRNGEnable = true;
+                IsRNGEnable = false;
             }
             else
             {
                 PayTableSettings.CommonRngBallCall = (m_originalPayTableSettings.Single(l => l.SettingType == B3SettingType.CommonRngBallCall).B3SettingValue) == "T" ? true : false;
-                IsRNGEnable = false;
+                IsRNGEnable = true;
             }
 
-            CrazyBoutPayTableVm.UpdateMathPayTableUI(m_isRNG);
-            JailBreakPayTableVm.UpdateMathPayTableUI(m_isRNG);
-            MayaMoneyPayTableVm.UpdateMathPayTableUI(m_isRNG);
-            Spirit76PayTableVm.UpdateMathPayTableUI(m_isRNG);
-            TimeBombPayTableVm.UpdateMathPayTableUI(m_isRNG);
-            UkickEmPayTableVm.UpdateMathPayTableUI(m_isRNG);
-            WildBallPayTableVm.UpdateMathPayTableUI(m_isRNG);
-            WildFirePayTableVm.UpdateMathPayTableUI(m_isRNG);
+            CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
+            JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
+            MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
+            Spirit76PayTableVm.UpdateMathPayTableUI(IsRNG);
+            TimeBombPayTableVm.UpdateMathPayTableUI(IsRNG);
+            UkickEmPayTableVm.UpdateMathPayTableUI(IsRNG);
+            WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
+            WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
         }
 
 
@@ -332,6 +332,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        public GamePayTableVm WildFirePayTableVm { get; set; }
 
         public bool EnforceMix { get { return PayTableSettings.EnforceMix; } }
+        public bool IsRNG { get { return PayTableSettings.CommonRngBallCall; } }
 
        public PayTableSetting PayTableSettings
        {

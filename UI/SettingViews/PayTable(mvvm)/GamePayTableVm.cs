@@ -34,7 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         public void UpdateMathPayTableUI(bool isRng)
         {
             var x  = new List<B3MathGamePay>();
-            x = m_b3MathGamePayFullList.Where(l => l.IsRng == !isRng).ToList();
+            x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
             x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
             m_b3MathGamePayList = x;
             GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
