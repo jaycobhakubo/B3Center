@@ -49,40 +49,46 @@
                             </Grid>
                         </Border>
                     </GroupBox.Header>
-                    <CheckBox  IsEnabled="{Binding IsRNGEnable}" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Content="Enable RNG" Margin="10,10,5,5" Height="Auto" >
+                    <CheckBox  IsEnabled="{Binding PayTableSettings.EnforceMix ,Converter ={StaticResource RevertValueConverter}}" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Content="Enable RNG" Margin="10,10,5,5" Height="Auto" >
                     </CheckBox>
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages:" Margin="0,30,0,2" ></Label>
             </StackPanel>
             <GroupBox Style="{StaticResource B3StyleGroupBox2}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="0" Padding="0,3.5,0,15">
                 <StackPanel >
-                    <Grid Visibility="{Binding PayTableSettings.CrazyboutGameSetting.IsEnabled, Converter={StaticResource booltovis}}"                 
-                          >
+                   
+                    <Grid Visibility="{Binding PayTableSettings.CrazyboutGameSetting.IsEnabled, Converter={StaticResource booltovis}}" >                
                         <b3Game:GamePayTable DataContext="{Binding CrazyBoutPayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
+                    
                     <Grid Visibility="{Binding PayTableSettings.JailBreakGameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding JailBreakPayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
+                    
                     <Grid Visibility="{Binding PayTableSettings.MayaMoneyGameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding MayaMoneyPayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
+                    
                     <Grid Visibility="{Binding PayTableSettings.Spirit76GameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding Spirit76PayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
+                    
                     <Grid Visibility="{Binding PayTableSettings.TimeBombGameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding TimeBombPayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
-                    <Grid Visibility="{Binding PayTableSettings.UKickemGameSetting.IsEnabled, Converter={StaticResource booltovis}}"
-                           IsEnabled="{Binding PayTableSettings.CrazyboutGameSetting.DisableThisGame, Converter={StaticResource booltovis}}"
-                          >
+                    
+                    <Grid Visibility="{Binding PayTableSettings.UKickemGameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding UkickEmPayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
+                    
                     <Grid Visibility="{Binding PayTableSettings.WildBallGameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding WildBallPayTableVm}" ></b3Game:GamePayTable>
                     </Grid>
+                    
                     <Grid  Visibility="{Binding PayTableSettings.WildFireGameSetting.IsEnabled, Converter={StaticResource booltovis}}">
                         <b3Game:GamePayTable DataContext="{Binding WildFirePayTableVm}"></b3Game:GamePayTable>
-                    </Grid>                
+                    </Grid>   
+                    
                 </StackPanel>
             </GroupBox>
         </Grid>
