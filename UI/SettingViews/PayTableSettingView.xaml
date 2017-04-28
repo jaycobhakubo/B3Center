@@ -37,12 +37,12 @@
                                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock Text="Common RNG ball call: " Padding="5,5,5,5" ></TextBlock>
+                                                <TextBlock Text="Enable Enforce Mix (55455)" Padding="5,5,5,5" ></TextBlock>
                                                 <StackPanel VerticalAlignment="Center"  Margin="10,0,10,0" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                                                    <RadioButton Name="rdobtnIsRNG" Content="Yes" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Checked="rdobtnIsRNG_Checked" Unchecked="rdobtnIsRNG_Checked"></RadioButton>
-                                                    <RadioButton Margin="10,0,0,0" Content="No" IsChecked="{Binding PayTableSettings.CommonRngBallCall, Converter={StaticResource RevertValueConverter}}">
-                                                    </RadioButton>
+                                                    <RadioButton  Name="rdobtnEnforceMix"  Margin="10,0,0,0" Content="Yes" IsChecked="{Binding PayTableSettings.EnforceMix}" Checked="rdobtnEnforceMix_Checked" Unchecked="rdobtnEnforceMix_Checked"></RadioButton>
+                                                    <RadioButton  Content="No" IsChecked="{Binding ElementName=rdobtnEnforceMix, Path=IsChecked, Converter={StaticResource RevertValueConverter}}"></RadioButton>
                                                 </StackPanel>
+                                                <!--IsChecked="{Binding PayTableSettings.EnforceMix, Converter={StaticResource RevertValueConverter}}"-->
                                             </Grid>
                                         </ControlTemplate>
                                     </Label.Template>
@@ -50,7 +50,7 @@
                             </Grid>
                         </Border>
                     </GroupBox.Header>
-                    <CheckBox  IsEnabled="{Binding EnforceMixEnable}" IsChecked="{Binding PayTableSettings.EnforceMix}" Content="Enforce mix (55455)" Margin="10,10,5,5" Height="Auto" >
+                    <CheckBox  IsEnabled="{Binding RNGEnable}" IsChecked="{Binding PayTableSettings.CommonRngBallCall}" Content="Enable RNG" Margin="10,10,5,5" Height="Auto" >
                     </CheckBox>
                 </GroupBox>
                 <Label Style="{StaticResource B3DefaultStyleLabel}" Content="Math packages:" Margin="0,30,0,2" ></Label>
