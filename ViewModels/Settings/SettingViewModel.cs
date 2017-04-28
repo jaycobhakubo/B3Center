@@ -93,6 +93,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             LoadSettingList(controller.Settings.NorthDakotaMode);
             BtnSaveIsEnabled = true;
             m_isRngBallCall = m_controller.Settings.IsCommonRngBallCall;
+
         }
 
         #endregion
@@ -332,6 +333,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public bool GetIsRngSetting()
         {
             return m_isRngBallCall;
+        }
+
+        public bool GetEnforceMixSetting()
+        {
+            var tempresult = false;
+            if (PayTableSettingVm != null)
+            { tempresult = PayTableSettingVm.EnforceMix; }
+            else {tempresult = m_controller.Settings.EnforceMix; }
+            return tempresult;
         }
 
         public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()

@@ -20,13 +20,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
   
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
         {
-            m_originalPayTableSettings = b3SettingGlobal;
             m_b3MathGamePayFullList = new List<B3MathGamePay>();
-            m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
-            var tempIsRng = SettingViewModel.Instance.GetIsRngSetting();
             m_b3MathGamePayList = new List<B3MathGamePay>();
-            m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == tempIsRng).ToList();
             m_gamePayTableModel = new GamePayTableModel();
+            var tempEnforceMix = SettingViewModel.Instance.GetEnforceMixSetting();
+            m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
+            m_originalPayTableSettings = b3SettingGlobal;                 
+            m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == !tempEnforceMix).ToList();           
             GamePayTableModel.MathPayTable = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
         }
@@ -34,7 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         public void UpdateMathPayTableUI(bool isRng)
         {
             var x  = new List<B3MathGamePay>();
-            x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
+            x = m_b3MathGamePayFullList.Where(l => l.IsRng == !isRng).ToList();
             x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
             m_b3MathGamePayList = x;
             GamePayTableModel.MathPayTable = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
@@ -87,15 +87,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                }
            }
 
-
-
             B3MathGamePayList = tempList;
             tempMathGamePaySetting = B3MathGamePayList.FirstOrDefault(l => l.MathPackageId == mathPackageId);
             return tempMathGamePaySetting;
         }
-
         //If selected setting does not support RNG or 55455
-
 
         private bool m_changeme;
         public bool changeme
@@ -117,8 +113,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             {
                 m_GameDisabled = value;
                 RaisePropertyChanged("GameDisabled");
-
-            }
+           }
         }
 
         public GamePayTableModel GamePayTableModel
