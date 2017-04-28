@@ -16,7 +16,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        private readonly List<B3SettingGlobal> m_originalPayTableSettings;
        private bool m_isRNG;
         private bool m_isRNGEnable;
-        private bool m_enforceMix;
         private bool m_enforceMixEnable;
         #region CONSTRUCTOR
         public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
@@ -83,10 +82,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        }
                    case B3SettingType.EnforceMix:
                        {                     
-                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();
-                            m_enforceMix = PayTableSettings.EnforceMix;
-                            IsRNGEnable = !m_enforceMix;
-                            if (m_enforceMix)//setting.ConvertB3StringValueToBool();)
+                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();                        
+                            IsRNGEnable = !EnforceMix;
+                            if (EnforceMix)//setting.ConvertB3StringValueToBool();)
                             {
                                 PayTableSettings.CommonRngBallCall = IsRNGEnable;
                             }
@@ -263,10 +261,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        public void IsRngCheckEvent()
         {
             m_isRNG = PayTableSettings.CommonRngBallCall;
-            m_enforceMix = PayTableSettings.EnforceMix;
-            IsRNGEnable = !m_enforceMix;
+    
+            IsRNGEnable = !EnforceMix;
 
-            if (m_enforceMix)
+            if (EnforceMix)
             {
                 PayTableSettings.CommonRngBallCall = m_isRNGEnable;
             }
