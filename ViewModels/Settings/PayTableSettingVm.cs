@@ -74,15 +74,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                switch (setting.SettingType)
                {
                    case B3SettingType.CommonRngBallCall:
-                        {
-                            if (EnforceMix)//setting.ConvertB3StringValueToBool();)
-                            {
-                                IsRNGEnable = false;
-                                PayTableSettings.CommonRngBallCall = !EnforceMix;
-                            }
-                            else
-                            {
-                                IsRNGEnable = true;
+                        {                          
+                            {                         
                                 PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
                             }
                                        
@@ -263,20 +256,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        public void IsRngCheckEvent()
         {
-
-            var testr = EnforceMix;
-
-            if (EnforceMix)
-            {
-                PayTableSettings.CommonRngBallCall = !EnforceMix;
-                IsRNGEnable = false;
-            }
-            else
-            {
-                PayTableSettings.CommonRngBallCall = (m_originalPayTableSettings.Single(l => l.SettingType == B3SettingType.CommonRngBallCall).B3SettingValue) == "T" ? true : false;
-                IsRNGEnable = true;
-            }
-
+      
+                
+            PayTableSettings.CommonRngBallCall = !EnforceMix;
+     
             CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
             JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
             MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
@@ -340,32 +323,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                m_PayTableSettings = value;
                RaisePropertyChanged("PayTableSettings");
            }
-       }
-
-        public bool EnforceMixEnable
-        {
-            get
-            {
-                return m_enforceMixEnable;
-            }
-            set
-            {
-                m_enforceMixEnable = value;
-                RaisePropertyChanged("EnforceMixEnable");
-            }
-        }
-
-        public bool IsRNGEnable
-        {
-           get
-           {
-               return m_isRNGEnable;
-           }
-           set
-           {
-                m_isRNGEnable = value;
-               RaisePropertyChanged("IsRNGEnable");
-           }
-       }
+       }     
     }
 }
