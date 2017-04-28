@@ -174,11 +174,9 @@
         </Setter>
     </Style>
 
-    <!--================================================================================================-->
-    <!--==============================MATHPAYTABLE DESIGN===============================================-->
-    <!--================================================================================================-->
-    
+    <!--==============================-->
     <!--CONTROL TEMPLATE-->
+    <!--==============================-->
     <ControlTemplate x:Key="NocornerradiusGrpBox" TargetType="{x:Type GroupBox}">
         <Grid SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
@@ -246,11 +244,7 @@
         </Setter>
     </Style>
 
-
-    <Style x:Key="cmbxStyleMathPayTable"  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource B3DefaultStyleComboBox}">
-        <Setter Property="IsReadOnly" Value="{Binding IsEdit}" />
-        <Setter Property="IsHitTestVisible" Value="True"/>
-        <Setter Property="Focusable" Value="True"/>
+    <Style x:Key="cmbxForPayTableSettingUI" TargetType="ComboBox" BasedOn="{StaticResource B3DefaultStyleComboBox}">
         <Setter Property="Margin" Value="0,0,15,0"/>
         <Style.Triggers>
             <Trigger Property="IsReadOnly" Value="True">
@@ -262,10 +256,24 @@
             <DataTrigger Binding="{Binding changeme}"  Value="true">
                 <Setter Property="Foreground" Value="Red"/>
             </DataTrigger>
-            <!--<DataTrigger Binding="{Binding changeme}"  Value="false">
-                <Setter Property="Foreground" Value="Black"/>
-            </DataTrigger>-->
         </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="cmbxitemFORPayTableSettingUI" TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding NeedToReplace}" Value="true">
+                <Setter Property="Foreground" Value="Red" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="lblFORPayTableSettingUI" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="Margin" Value="15,0,0,0"></Setter>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="ContentStringFormat" Value="{}{0}:"></Setter>
     </Style>
 
 
