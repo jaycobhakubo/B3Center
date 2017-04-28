@@ -10,17 +10,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
     public class GamePayTableModel : Notifier
     {
-        private B3MathGamePay m_mathPayTable;
-        public B3MathGamePay MathPayTable
+        private B3MathGamePay m_mathPayValue;
+        public B3MathGamePay MathPayValue
         {
             get
             {
-                return m_mathPayTable;
+                return m_mathPayValue;
             }
             set
             {
-                m_mathPayTable = value;
-                RaisePropertyChanged("MathPayTable");
+                m_mathPayValue = value;
+                RaisePropertyChanged("MathPay");
             }
         }
     }

@@ -31,12 +31,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         {
             GamePayTableVm ii = (GamePayTableVm)DataContext;
             B3MathGamePay y = new B3MathGamePay();
-            y = ii.GamePayTableModel.MathPayTable;
+            y = ii.GamePayTableModel.MathPayValue;
             if (ii.GameDisabled != true)
             {
                 if (y != null)
                 {
-                    if (ii.GamePayTableModel.MathPayTable.NeedToReplace == true)
+                    if (ii.GamePayTableModel.MathPayValue.NeedToReplace == true)
                     {
                         if (ii.changeme != true)
                         {
