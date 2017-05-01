@@ -16,33 +16,45 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         private List<B3MathGamePay> m_b3MathGamePayList;
         private readonly B3SettingGlobal m_originalPayTableSettings;
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
-        B3IsGameEnabledSetting m_GameDisable = new B3IsGameEnabledSetting();
+        
         public string GameName { get; set; }
+
+        B3IsGameEnabledSetting m_isGameEnable = new B3IsGameEnabledSetting();
+        public B3IsGameEnabledSetting IsGameEnable
+        {
+            get { return m_isGameEnable; }
+            set
+            {
+                m_isGameEnable = value;
+                RaisePropertyChanged("IsGameEnable");
+            }
+        }
         
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
         {
+            GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
             m_b3MathGamePayFullList = new List<B3MathGamePay>();
             m_b3MathGamePayList = new List<B3MathGamePay>();
             m_gamePayTableModel = new GamePayTableModel();
             var tempEnforceMix = SettingViewModel.Instance.GetEnforceMixSetting();
-            m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
+            m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();     
             m_originalPayTableSettings = b3SettingGlobal;                 
             m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == !tempEnforceMix).ToList();
             GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);
-            GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
+        
         }
 
-        public void IsGameEnable(B3IsGameEnabledSetting IsEnabled)
+        public void UpdatePayTableUIDisableGame(B3IsGameEnabledSetting isGameEnable)
         {
-            m_GameDisable = IsEnabled;
-            if (!IsEnabled.IsEnabled || m_b3MathGamePayList.Count == 1)
-            {
-                GameDisabled = true;
-            }
-            else
-            {
-                GameDisabled = false;
-            }
+            //m_isGameEnable = isGameEnable;
+            //if (!m_isGameEnable.IsEnabled || m_b3MathGamePayList.Count == 1)
+            //{
+            //    GameDisable.IsEnabled = true;
+            //}
+            //else
+            //{
+            //    GameDisable.IsEnabled = false;
+            //}
         }
 
         public void UpdateMathPayTableUI(bool isRng)
@@ -80,14 +92,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                };
                tempList.Add(newB3MathGamePay);
                mathPackageId = 0;
-               if (GameDisabled != true) GameDisabled = true;
+               IsGameEnable.IsEnabled = false;
 
            }
            else
            {
 
                var ItExists = m_b3MathGamePayList.Exists(l => l.MathPackageId == mathPackageId);
-               if (ItExists == false && m_GameDisable.IsEnabled == true)
+               if (ItExists == false)
                {
                    tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
 
@@ -99,10 +111,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                        IsRng = tempMathGamePaySetting.IsRng,
                        NeedToReplace = true
                    };
-                    if (GameDisabled != false && m_GameDisable.IsEnabled == true)
-                        GameDisabled = false;
+
+                  
                     tempList.Add(newB3MathGamePay);
                }
+               IsGameEnable.IsEnabled = true;
            }
 
             B3MathGamePayList = tempList;
@@ -123,16 +136,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }
         }
 
-        private bool m_GameDisabled;
-        public bool GameDisabled
-        {
-            get { return m_GameDisabled; }
-            set
-            {
-                m_GameDisabled = value;
-                RaisePropertyChanged("GameDisabled");
-           }
-        }
+      
+      
 
         public GamePayTableModel GamePayTableModel
         {

@@ -251,6 +251,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+
+        public void UpdatePayTableUI(B3IsGameEnabledSetting x)
+        {
+         var cc =   PayTableSettingVm.ListGamePayTableVm.Single(l => l.IsGameEnable.GameType == x.GameType);
+         cc.UpdatePayTableUIDisableGame(x);
+        }
+
         private void LoadSettingList(bool IsDakotaMode)
         {
             m_settingList.Clear();      
@@ -284,7 +291,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 if (m_selectedSettingCategoryType == B3SettingCategory.Player)//This one goes first need to update UI after saved.
                 {
                     var enableDisableGameSetting = PlayerSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
-                    if (enableDisableGameSetting.Count != 0)
+                    if (enableDisableGameSetting.Count != 0)//Do not send if no changes was made.
                     {
                         foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
                         {

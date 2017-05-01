@@ -86,7 +86,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (CrazyBoutPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == CrazyBoutPayTableVm)); break; }
                                         CrazyBoutPayTableVm = new GamePayTableVm(setting);
-                                        CrazyBoutPayTableVm.IsGameEnable (PayTableSettings.CrazyboutGameSetting);
+                                        CrazyBoutPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.CrazyboutGameSetting);
                                         ListGamePayTableVm.Add(CrazyBoutPayTableVm);
                                         break;
                                     }
@@ -94,7 +94,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (JailBreakPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == JailBreakPayTableVm)); break; }
                                         JailBreakPayTableVm = new GamePayTableVm(setting);
-                                        JailBreakPayTableVm.IsGameEnable(PayTableSettings.JailBreakGameSetting);
+                                        JailBreakPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.JailBreakGameSetting);
                                         ListGamePayTableVm.Add(JailBreakPayTableVm);
                                         break;
                                     }
@@ -102,7 +102,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (MayaMoneyPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == MayaMoneyPayTableVm)); break; }
                                         MayaMoneyPayTableVm = new GamePayTableVm(setting);
-                                        MayaMoneyPayTableVm.IsGameEnable(PayTableSettings.MayaMoneyGameSetting);
+                                        MayaMoneyPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.MayaMoneyGameSetting);
                                         ListGamePayTableVm.Add(MayaMoneyPayTableVm);
                                         break;
                                     }
@@ -110,7 +110,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (Spirit76PayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == Spirit76PayTableVm)); break; }
                                         Spirit76PayTableVm = new GamePayTableVm(setting);
-                                        Spirit76PayTableVm.IsGameEnable(PayTableSettings.Spirit76GameSetting);
+                                        Spirit76PayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.Spirit76GameSetting);
                                         ListGamePayTableVm.Add(Spirit76PayTableVm);
                                         break;
                                     }
@@ -118,7 +118,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (TimeBombPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == TimeBombPayTableVm)); break; }
                                         TimeBombPayTableVm = new GamePayTableVm(setting);
-                                        TimeBombPayTableVm.IsGameEnable( PayTableSettings.TimeBombGameSetting);
+                                        TimeBombPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.TimeBombGameSetting);
                                         ListGamePayTableVm.Add(TimeBombPayTableVm);
                                         break;
                                     }
@@ -126,7 +126,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (UkickEmPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == UkickEmPayTableVm)); break; }
                                         UkickEmPayTableVm = new GamePayTableVm(setting);
-                                        UkickEmPayTableVm.IsGameEnable( PayTableSettings.UKickemGameSetting);
+                                        UkickEmPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.UKickemGameSetting);
                                         ListGamePayTableVm.Add(UkickEmPayTableVm);
                                         break;
                                     }
@@ -134,7 +134,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (WildBallPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == WildBallPayTableVm)); break; }
                                         WildBallPayTableVm = new GamePayTableVm(setting);
-                                        WildBallPayTableVm.IsGameEnable( PayTableSettings.WildBallGameSetting);
+                                        WildBallPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.WildBallGameSetting);
                                         ListGamePayTableVm.Add(WildBallPayTableVm);
                                         break;
                                     }
@@ -142,7 +142,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     {
                                         if (WildFirePayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == WildFirePayTableVm)); break; }
                                         WildFirePayTableVm = new GamePayTableVm(setting);
-                                        WildFirePayTableVm.IsGameEnable( PayTableSettings.WildFireGameSetting);
+                                        WildFirePayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.WildFireGameSetting);
                                         ListGamePayTableVm.Add(WildFirePayTableVm);
                                         break;
                                     }
@@ -261,6 +261,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
             WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
         }
+
+
+      
 
        public List<B3SettingGlobal> Save()
        {

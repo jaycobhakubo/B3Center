@@ -36,9 +36,11 @@
             ItemsSource="{Binding B3MathGamePayList}" 
             DisplayMemberPath="PackageDesc"
             SelectedItem="{Binding GamePayTableModel.MathPayValue}" SelectionChanged="ComboBox_SelectionChanged" 
-            IsEnabled="{Binding GameDisabled, Converter={StaticResource RevertValueConverter}}"      
+            IsEnabled="{Binding IsGameEnable.IsEnabled}"      
             ItemContainerStyle="{StaticResource cmbxitemFORPayTableSettingUI}"
             >        
         </ComboBox>
     </Grid>
 </UserControl>
+<!--IsEnabled="{Binding IsGameEnable.IsEnabled, Converter={StaticResource RevertValueConverter}}"-->     
+    

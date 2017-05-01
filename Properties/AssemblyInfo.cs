@@ -30,5 +30,5 @@ using System.Windows;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.ExternalAssembly)]
 
-[assembly: AssemblyVersion("0.4.1.4")]
-[assembly: AssemblyFileVersion("0.4.1.4")]
+[assembly: AssemblyVersion("0.4.1.5")]
+[assembly: AssemblyFileVersion("0.4.1.5")]
