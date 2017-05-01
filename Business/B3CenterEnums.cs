@@ -91,6 +91,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         MathPayTableSetting = 58,
         CallSpeedMin = 59,
         CallSpeedBonus = 60,
+        W2Trigger = 61,
     }
 
 }
