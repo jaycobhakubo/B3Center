@@ -50,7 +50,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3SettingCategory m_selectedSettingCategoryType;
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
-        private bool m_hasChanged;
         private bool m_isRngBallCall;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
@@ -145,6 +144,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SystemSettingVm InitializeSystemSettingVm()
         {
             var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System && l.IsPayTableSettings == false).ToList();
+            var testx = m_controller.Settings.B3GlobalSettings.Where(l => l.SettingType == B3SettingType.W2Trigger);
             var systemSettingVm = new SystemSettingVm(systemSettingsFromServer);
             m_systemSettingView = new SystemSettingView(systemSettingVm);
             return systemSettingVm;
@@ -253,19 +253,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void LoadSettingList(bool IsDakotaMode)
         {
-            m_settingList.Clear();
-            var categories = Enum.GetValues(typeof(B3SettingCategory)).Cast<B3SettingCategory>();
-
+            m_settingList.Clear();      
+            var categories = Enum.GetNames(typeof(B3SettingCategory)).OrderBy(l => l);
+          
             foreach (var b3SettingCategory in categories)
             {
-                if (b3SettingCategory != B3SettingCategory.Operator)
+                if (b3SettingCategory != B3SettingCategory.Operator.ToString())
                 {
-                    if (b3SettingCategory == B3SettingCategory.ServerGame && !IsDakotaMode)
+                    if (b3SettingCategory == B3SettingCategory.ServerGame.ToString() && !IsDakotaMode)
+                    {
+                        continue;
+                    }
+
+                    if (b3SettingCategory == B3SettingCategory.PayTable.ToString() && !GetStaffPayTablePermission())
                     {
                         continue;
                     }
                     m_settingList.Add(b3SettingCategory.ToString());
-                }             
+                }
             }
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
@@ -339,6 +344,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             { tempresult = PayTableSettingVm.EnforceMix; }
             else {tempresult = m_controller.Settings.EnforceMix; }
             return tempresult;
+        }
+
+        public bool GetStaffPayTablePermission()
+        {
+            var result = false;
+           foreach (int x in m_controller.ModuleFeatureList)
+            {
+                if ((B3ModuleFeatures)x == B3ModuleFeatures.B3PaytableSettings)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
         public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()

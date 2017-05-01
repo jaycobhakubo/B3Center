@@ -57,12 +57,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         #region Methods
 
-        /// <summary>
-        /// Converts the game settings list to model. Updates local model with game settings
-        /// </summary>
-        /// <param name="gameSettingList">The b3 setting.</param>
-        /// <param name="isGameEnabledSetting">The is game enabled setting.</param>
-        /// <returns></returns>
+        // Converts the game settings list to model. Updates local model with game settings
         private void UpdateGameSettingsListToModel(List<B3SettingGlobal> gameSettingList, B3IsGameEnabledSetting isGameEnabledSetting)
         {
             Settings.EnableGameSetting = isGameEnabledSetting;

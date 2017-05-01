@@ -20,7 +20,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
     public enum B3SettingCategory
     {
         Games = 1,
-        Operator = 2,
+        Operator = 2,     
         Player = 3,
         Sales = 4,
         ServerGame = 5,
@@ -91,6 +91,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         MathPayTableSetting = 58,
         CallSpeedMin = 59,
         CallSpeedBonus = 60,
+        W2Trigger = 61,
     }
 
+
+    public enum B3ModuleFeatures
+    {
+        B3Reports = 43,
+        B3Settings = 44,
+        B3PaytableSettings = 47
+    }
 }
