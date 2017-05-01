@@ -16,6 +16,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         private List<B3MathGamePay> m_b3MathGamePayList;
         private readonly B3SettingGlobal m_originalPayTableSettings;
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
+        B3IsGameEnabledSetting m_GameDisable = new B3IsGameEnabledSetting();
         public string GameName { get; set; }
         
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
@@ -33,6 +34,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         public void IsGameEnable(B3IsGameEnabledSetting IsEnabled)
         {
+            m_GameDisable = IsEnabled;
             if (!IsEnabled.IsEnabled || m_b3MathGamePayList.Count == 1)
             {
                 GameDisabled = true;
@@ -49,7 +51,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
             x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
             m_b3MathGamePayList = x;
-            GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);         
+            GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);  
+                   
         }
     
         private B3MathGamePay GetB3MathGamePay(string MathPackageId)
@@ -61,7 +64,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
             B3MathGamePay tempMathGamePaySetting = new B3MathGamePay();
             var tempList = m_b3MathGamePayList;
-            if (GameDisabled != false) GameDisabled = false;
+      
 
            if (tempList.Count == 0)//If selected setting dont support RNG or 55455 then lets disable this game
            {
@@ -84,7 +87,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
            {
 
                var ItExists = m_b3MathGamePayList.Exists(l => l.MathPackageId == mathPackageId);
-               if (ItExists == false)
+               if (ItExists == false && m_GameDisable.IsEnabled == true)
                {
                    tempMathGamePaySetting = m_b3MathGamePayFullList.Single(l => l.MathPackageId == mathPackageId);
 
@@ -96,7 +99,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                        IsRng = tempMathGamePaySetting.IsRng,
                        NeedToReplace = true
                    };
-                   tempList.Add(newB3MathGamePay);
+                    if (GameDisabled != false && m_GameDisable.IsEnabled == true)
+                        GameDisabled = false;
+                    tempList.Add(newB3MathGamePay);
                }
            }
 
