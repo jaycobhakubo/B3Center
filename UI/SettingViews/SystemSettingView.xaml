@@ -45,7 +45,18 @@
                          PreviewTextInput="_PreviewTextInput"      
                         />
 
-                <Label x:Name="LblMaxCardsCopy"  Content="VIP point multiplier" />
+                    <Label Content="W2 trigger"/>
+                    <TextBox 
+                        Name="txtbxW2Trigger" 
+                        Tag="42" 
+                        Text="{Binding SystemSettings.W2Trigger}"	 
+                        MaxLength="19" 
+                         TextChanged="ValidateUserInput"                                          
+                         PreviewKeyDown="DontAllowThisKeyboardinput" 
+                         PreviewTextInput="_PreviewTextInput"      
+                        />
+
+                    <Label x:Name="LblMaxCardsCopy"  Content="VIP point multiplier" />
                     <TextBox 
                         x:Name="TxtbxVipPointPlayer"  
                         Tag="44" TabIndex="3"
