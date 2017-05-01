@@ -47,8 +47,7 @@
 
                     <Label Content="W2 trigger"/>
                     <TextBox 
-                        Name="txtbxW2Trigger" 
-                        Tag="42" 
+                              
                         Text="{Binding SystemSettings.W2Trigger}"	 
                         MaxLength="19" 
                          TextChanged="ValidateUserInput"                                          

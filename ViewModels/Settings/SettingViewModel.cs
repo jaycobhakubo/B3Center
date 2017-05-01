@@ -145,6 +145,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private SystemSettingVm InitializeSystemSettingVm()
         {
             var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System && l.IsPayTableSettings == false).ToList();
+            var testx = m_controller.Settings.B3GlobalSettings.Where(l => l.SettingType == B3SettingType.W2Trigger);
             var systemSettingVm = new SystemSettingVm(systemSettingsFromServer);
             m_systemSettingView = new SystemSettingView(systemSettingVm);
             return systemSettingVm;

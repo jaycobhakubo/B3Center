@@ -28,8 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         #region Properties
         public List<string> VolumeList{get;set;}
-        public List<string> CurrencyList{get;set;}
-		
+        public List<string> CurrencyList{get;set;}		
         public List<string> AutoSessionEndList
         {
             get;
@@ -108,6 +107,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         break;
                     case B3SettingType.SystemMainVolume:
                         SystemSettings.SystemMainVolume = Business.Helpers.GetVolumeEquivValue(Convert.ToInt32(setting.B3SettingValue));
+                        break;
+                    case B3SettingType.W2Trigger:
+                        SystemSettings.W2Trigger = setting.B3SettingValue;
                         break;
                 }
             }
