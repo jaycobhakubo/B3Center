@@ -50,7 +50,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private B3SettingCategory m_selectedSettingCategoryType;
         private UserControl m_selectedSettingView = new UserControl();
         private B3SettingCategory m_previousB3SettingCategory;
-        private bool m_hasChanged;
         private bool m_isRngBallCall;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
@@ -265,6 +264,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         continue;
                     }
+                    
+                    if(b3SettingCategory == B3SettingCategory.PayTable && !GetStaffPayTablePermission())
+                    {
+                        continue;
+                    }
                     m_settingList.Add(b3SettingCategory.ToString());
                 }             
             }
@@ -340,6 +344,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             { tempresult = PayTableSettingVm.EnforceMix; }
             else {tempresult = m_controller.Settings.EnforceMix; }
             return tempresult;
+        }
+
+        public bool GetStaffPayTablePermission()
+        {
+            var result = false;
+           foreach (int x in m_controller.ModuleFeatureList)
+            {
+                if ((B3ModuleFeatures)x == B3ModuleFeatures.B3PaytableSettings)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
         public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()
