@@ -1,0 +1,19 @@
+﻿
+ public enum B3ModuleFeatures
+    {
+        B3Reports = 43,
+        B3Settings = 44,
+        B3PaytableSettings = 47
+    }
+
+GETNAMES
+
+var categories = Enum.GetNames(typeof(B3SettingCategory));
+
+GETVALUES
+
+Enum.GetValues(typeof(B3SettingCategory));
+
+GETSPECIFIC NAME
+
+       var categoriesx = Enum.GetName(typeof(B3SettingCategory),8);

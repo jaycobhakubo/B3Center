@@ -253,12 +253,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private void LoadSettingList(bool IsDakotaMode)
         {
-            m_settingList.Clear();
-            //  var categories = Enum.GetNames(typeof(B3SettingCategory)).Cast<B3SettingCategory>().OrderBy(x => x.ToString()).ToList();
+            m_settingList.Clear();      
             var categories = Enum.GetNames(typeof(B3SettingCategory)).OrderBy(l => l);
-            //Enum vjj = Enum.GetNames(typeof(B3SettingCategory)).OrderBy(l => l).Cast<B3SettingCategory>();
-            //var xx = Enum.GetValues(typeof(B3SettingCategory));
-            var categoriesx = Enum.GetName(typeof(B3SettingCategory),8);
+          
             foreach (var b3SettingCategory in categories)
             {
                 if (b3SettingCategory != B3SettingCategory.Operator.ToString())
