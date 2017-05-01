@@ -27,8 +27,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             m_b3MathGamePayFullList = SettingViewModel.Instance.GetB3MathGamePlay(b3SettingGlobal.GameType).ToList();
             m_originalPayTableSettings = b3SettingGlobal;                 
             m_b3MathGamePayList = m_b3MathGamePayFullList.Where(l => l.IsRng == !tempEnforceMix).ToList();
-            GamePayTableModel.MathPayValue = GetB3MathGamePay(b3SettingGlobal.B3SettingValue);
+            GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
+        }
+
+        public void IsGameEnable(B3IsGameEnabledSetting IsEnabled)
+        {
+            if (!IsEnabled.IsEnabled || m_b3MathGamePayList.Count == 1)
+            {
+                GameDisabled = true;
+            }
+            else
+            {
+                GameDisabled = false;
+            }
         }
 
         public void UpdateMathPayTableUI(bool isRng)
