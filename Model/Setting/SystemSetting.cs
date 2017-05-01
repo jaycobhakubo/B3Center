@@ -7,6 +7,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
         #region Fields
 
         private string m_handPayTrigger;
+        private string m_w2Trigger;
         private string m_minimumPlayers;
         private string m_vipPointMultiplier;
         private string m_magCardSentinelStart;
@@ -37,6 +38,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
                 RaisePropertyChanged("HandPayTrigger");
             }
         }
+
+
+        public string W2Trigger
+        {
+            get { return m_w2Trigger; }
+            set
+            {
+                m_w2Trigger = value;
+                RaisePropertyChanged("W2Trigger");
+            }
+        }
+
 
         public string MinimumPlayers
         {

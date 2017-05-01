@@ -34,15 +34,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
             foreach (int moduleFeatureId in controller.ModuleFeatureList)     //No need to initialize if staff dont have permission.
             {
-                switch (moduleFeatureId)
+             
+                switch ((B3ModuleFeatures)moduleFeatureId)
                 {
-                    case 43://Reports
+                    case B3ModuleFeatures.B3Reports:
                             ReportsVm = ReportsViewModel.Instance;
                             ReportsVm.Initialize(controller.B3Controller);                         
                             HasB3RptPermission = true;
                     break;
 
-                    case 44://Settings
+                    case B3ModuleFeatures.B3Settings://Settings
                         SettingVm = SettingViewModel.Instance;
                         SettingVm.Initialize(controller.B3Controller);
                         HasB3SettingPermission = true;
