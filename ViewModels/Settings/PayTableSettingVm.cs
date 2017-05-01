@@ -85,64 +85,63 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                 case B3GameType.Crazybout:
                                     {
                                         if (CrazyBoutPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == CrazyBoutPayTableVm)); break; }
-                                        CrazyBoutPayTableVm = new GamePayTableVm(setting);
-                                        CrazyBoutPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.CrazyboutGameSetting);
+                                        CrazyBoutPayTableVm = new GamePayTableVm(setting, PayTableSettings.CrazyboutGameSetting);
+                                      
                                         ListGamePayTableVm.Add(CrazyBoutPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Jailbreak:
                                     {
                                         if (JailBreakPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == JailBreakPayTableVm)); break; }
-                                        JailBreakPayTableVm = new GamePayTableVm(setting);
-                                        JailBreakPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.JailBreakGameSetting);
+                                        JailBreakPayTableVm = new GamePayTableVm(setting, PayTableSettings.JailBreakGameSetting);
+                                     
                                         ListGamePayTableVm.Add(JailBreakPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Mayamoney:
                                     {
                                         if (MayaMoneyPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == MayaMoneyPayTableVm)); break; }
-                                        MayaMoneyPayTableVm = new GamePayTableVm(setting);
-                                        MayaMoneyPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.MayaMoneyGameSetting);
+                                        MayaMoneyPayTableVm = new GamePayTableVm(setting, PayTableSettings.MayaMoneyGameSetting);
+                                      
                                         ListGamePayTableVm.Add(MayaMoneyPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Spirit76:
                                     {
                                         if (Spirit76PayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == Spirit76PayTableVm)); break; }
-                                        Spirit76PayTableVm = new GamePayTableVm(setting);
-                                        Spirit76PayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.Spirit76GameSetting);
+                                        Spirit76PayTableVm = new GamePayTableVm(setting, PayTableSettings.Spirit76GameSetting);
+                                     
                                         ListGamePayTableVm.Add(Spirit76PayTableVm);
                                         break;
                                     }
                                 case B3GameType.Timebomb:
                                     {
                                         if (TimeBombPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == TimeBombPayTableVm)); break; }
-                                        TimeBombPayTableVm = new GamePayTableVm(setting);
-                                        TimeBombPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.TimeBombGameSetting);
+                                        TimeBombPayTableVm = new GamePayTableVm(setting, PayTableSettings.TimeBombGameSetting);
+                                     
                                         ListGamePayTableVm.Add(TimeBombPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Ukickem:
                                     {
                                         if (UkickEmPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == UkickEmPayTableVm)); break; }
-                                        UkickEmPayTableVm = new GamePayTableVm(setting);
-                                        UkickEmPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.UKickemGameSetting);
+                                        UkickEmPayTableVm = new GamePayTableVm(setting, PayTableSettings.UKickemGameSetting);
+                                     
                                         ListGamePayTableVm.Add(UkickEmPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Wildball:
                                     {
                                         if (WildBallPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == WildBallPayTableVm)); break; }
-                                        WildBallPayTableVm = new GamePayTableVm(setting);
-                                        WildBallPayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.WildBallGameSetting);
+                                        WildBallPayTableVm = new GamePayTableVm(setting, PayTableSettings.WildBallGameSetting);
+                                      
                                         ListGamePayTableVm.Add(WildBallPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Wildfire:
                                     {
                                         if (WildFirePayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == WildFirePayTableVm)); break; }
-                                        WildFirePayTableVm = new GamePayTableVm(setting);
-                                        WildFirePayTableVm.UpdatePayTableUIDisableGame(PayTableSettings.WildFireGameSetting);
+                                        WildFirePayTableVm = new GamePayTableVm(setting, PayTableSettings.WildFireGameSetting);                                    
                                         ListGamePayTableVm.Add(WildFirePayTableVm);
                                         break;
                                     }
@@ -251,15 +250,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        }
 
        public void IsRngCheckEvent()
-        {               
-            CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
-            JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
-            MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
-            Spirit76PayTableVm.UpdateMathPayTableUI(IsRNG);
-            TimeBombPayTableVm.UpdateMathPayTableUI(IsRNG);
-            UkickEmPayTableVm.UpdateMathPayTableUI(IsRNG);
-            WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
-            WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
+       {
+           foreach (var x in ListGamePayTableVm.Where(l => l.IsGameEnable.IsEnabled == true && l.IsPayTableSettingNotApplicable == false))
+           {
+               x.UpdateMathPayTableUI(IsRNG);
+           }
         }
 
 

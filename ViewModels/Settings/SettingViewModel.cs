@@ -372,6 +372,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return B3IsGameEnabledSettings;
         }
 
+       public B3IsGameEnabledSetting GetEnableDisableSettingValue(B3GameType gameType)
+        {
+            return B3IsGameEnabledSettings.Single(l => l.GameType == gameType);
+        }
+
         public void SelectedItemEvent()
         {
             m_selectedSettingCategoryType = (B3SettingCategory)Enum.Parse(typeof(B3SettingCategory), SelectedB3SettingsCategory);
