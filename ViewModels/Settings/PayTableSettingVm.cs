@@ -74,19 +74,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            {
                switch (setting.SettingType)
                {
-                   case B3SettingType.CommonRngBallCall:
-                        {                          
-                            {                         
-                                PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();
-                            }
-                                       
-                           break;
-                       }
-                   case B3SettingType.EnforceMix:
-                       {
-                           PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool();                          
-                            break;
-                       }
+                   case B3SettingType.CommonRngBallCall: PayTableSettings.CommonRngBallCall = setting.ConvertB3StringValueToBool();break;
+                    case B3SettingType.EnforceMix: PayTableSettings.EnforceMix = setting.ConvertB3StringValueToBool(); break;
                     case B3SettingType.MathPayTableSetting:
                        {
                            var tempGameType = setting.GameType;
@@ -157,8 +146,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        }
 
        private void UpdateModelToSettingsList()
-       {
-    
+       {  
            foreach (var setting in m_originalPayTableSettings)
            {
                 setting.HasChanged = false;
@@ -168,8 +156,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                {
                         case B3SettingType.CommonRngBallCall:
                        {                                               
-                               setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
-                                //IsRNG = (setting.B3SettingValue == "T") ? true : false;                         
+                               setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();                      
                            break;
                        }
                         case B3SettingType.EnforceMix:

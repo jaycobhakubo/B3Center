@@ -175,7 +175,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         gameEnabledSetting.IsEnabled = PlayerSetting.UKickemGameSetting.IsEnabled;
                         break;
                     case B3GameType.Wildball:
-                        //ModifiedB3GameEnabledSettings.Add(PlayerSetting.WildBallGameSetting);
                         gameEnabledSetting.IsEnabled = PlayerSetting.WildBallGameSetting.IsEnabled;
                         break;
                     case B3GameType.Wildfire:

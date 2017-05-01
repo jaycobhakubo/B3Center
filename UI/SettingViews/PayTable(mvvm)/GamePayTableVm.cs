@@ -1,6 +1,7 @@
 ﻿using GameTech.Elite.Base;
 using GameTech.Elite.Client.Modules.B3Center.Business;
 using GameTech.Elite.Client.Modules.B3Center.ViewModels;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                tempList.Add(newB3MathGamePay);
                mathPackageId = 0;
                if (GameDisabled != true) GameDisabled = true;
+
            }
            else
            {
