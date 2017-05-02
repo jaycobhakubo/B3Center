@@ -216,9 +216,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     break;
                                 case B3GameType.Timebomb:
                                     {
-                                        if (TimeBombPayTableVm.MathPayValue != null
-                                                  && TimeBombPayTableVm.MathPayValue.IsRng == IsRNG)
-                                            setting.B3SettingValue = TimeBombPayTableVm.MathPayValue.MathPackageId.ToString();
+                                        if (TimeBombPayTableVm.GamePayTableModel.MathPayValue != null
+                                                  && TimeBombPayTableVm.GamePayTableModel.MathPayValue.IsRng == IsRNG)
+                                            setting.B3SettingValue = TimeBombPayTableVm.GamePayTableModel.MathPayValue.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Ukickem:

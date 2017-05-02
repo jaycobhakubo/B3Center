@@ -149,7 +149,7 @@
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
-    <Compile Include="Model\Setting\PayTableSetting.cs" />
+    <Compile Include="Model\Setting\PayTable\PayTableSetting.cs" />
     <Compile Include="Model\Setting\PlayerSetting.cs" />
     <Compile Include="Model\Setting\SalesSettings.cs" />
     <Compile Include="Model\Setting\ServerSetting.cs" />
@@ -198,12 +198,12 @@
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
       <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\PayTable%28mvvm%29\GamePayTable.xaml.cs">
+    <Compile Include="UI\SettingViews\PayTableView\GamePayTable.xaml.cs">
       <DependentUpon>GamePayTable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingViews\PayTable%28mvvm%29\GamePayTableModel.cs" />
-    <Compile Include="UI\SettingViews\PayTable%28mvvm%29\GamePayTableVm.cs" />
-    <Compile Include="UI\SettingViews\PayTableSettingView.xaml.cs">
+    <Compile Include="Model\Setting\PayTable\GamePayTableModel.cs" />
+    <Compile Include="ViewModels\Settings\PayTableVm\GamePayTableVm.cs" />
+    <Compile Include="UI\SettingViews\PayTableView\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Shared\DatePickerUserView.xaml.cs">
@@ -272,7 +272,7 @@
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVm\GameSettingVm.cs" />
     <Compile Include="ViewModels\Settings\GameSettingVm\GameSettingVmAllGame.cs" />
-    <Compile Include="ViewModels\Settings\PayTableSettingVm.cs" />
+    <Compile Include="ViewModels\Settings\PayTableVm\PayTableSettingVm.cs" />
     <Compile Include="ViewModels\Settings\PlayerSettingVm.cs" />
     <Compile Include="ViewModels\Settings\SalesSettingVm.cs" />
     <Compile Include="ViewModels\Settings\ServerSettingVm.cs" />
@@ -340,11 +340,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\SettingViews\PayTable%28mvvm%29\GamePayTable.xaml">
+    <Page Include="UI\SettingViews\PayTableView\GamePayTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SettingViews\PayTableSettingView.xaml">
+    <Page Include="UI\SettingViews\PayTableView\PayTableSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

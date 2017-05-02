@@ -34,10 +34,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
       
             if (vm.IsGameEnable == true)
             {
-                mathgamepay = vm.MathPayValue;
+                mathgamepay = vm.GamePayTableModel.MathPayValue;
                 if (mathgamepay != null)
                 {
-                    if (vm.MathPayValue.ChangeForeground == true)
+                    if (vm.GamePayTableModel.MathPayValue.ChangeForeground == true)
                     {
                         if (vm.UpdateUIControl != true)
                         {

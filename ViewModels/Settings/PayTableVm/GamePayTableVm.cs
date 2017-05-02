@@ -11,15 +11,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
     public class GamePayTableVm : ViewModelBase
     {
-       
-      
+          
+   
         private readonly B3SettingGlobal m_originalPayTableSettings;
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
+        private List<B3MathGamePay> m_b3MathGamePayList;
+        private B3IsGameEnabledSetting m_gameEnable;
+        private GamePayTableModel m_gamePayTableModel;
+        private B3MathGamePay m_mathPayValue;
+        private bool m_updateUIControl;
+        private bool m_GameDisabled;
         private bool m_enforceMix;
         private bool m_originalSetting;
+        private bool m_isGameEnable;
 
-        public string GameName { get; set; }
-        
+      
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
         {
             m_originalPayTableSettings = b3SettingGlobal;
@@ -63,7 +69,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                         var currentSettingExists = tempPayTableList.Exists(l => l.MathPackageId == tempMathPackageId);
                         if (currentSettingExists)
                         {
-                            MathPayValue = tempPayTableList.FirstOrDefault(l => l.MathPackageId == tempMathPackageId);
+                            m_gamePayTableModel.MathPayValue = tempPayTableList.FirstOrDefault(l => l.MathPackageId == tempMathPackageId);
                         }
                         else//If it dont exists show current setting .
                         {
@@ -79,7 +85,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                             };
 
                             tempPayTableList.Add(newB3MathGamePay);
-                            MathPayValue = tempPayTableList.FirstOrDefault(l => l.MathPackageId == tempMathPackageId);
+                            m_gamePayTableModel.MathPayValue = tempPayTableList.FirstOrDefault(l => l.MathPackageId == tempMathPackageId);
                         }
                     }//If its not set then, just show the paytable setting.
                     else
@@ -95,15 +101,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }          
         }
 
-        private B3IsGameEnabledSetting m_gameEnable;
-        private GamePayTableModel m_gamePayTableModel;
-        private bool m_updateUIControl;
-        private bool m_GameDisabled;
-        private B3MathGamePay m_mathPayValue;
-        private List<B3MathGamePay> m_b3MathGamePayList;
-        private bool m_isGameEnable;
 
         #region PROPERTIES
+
+        public string GameName { get; set; }
 
         public GamePayTableModel GamePayTableModel
         {
@@ -129,30 +130,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
             }
         }
-
-        public bool GameDisabled
-        {
-            get { return m_GameDisabled; }
-            set
-            {
-                m_GameDisabled = value;
-                RaisePropertyChanged("GameDisabled");
-           }
-        }
-
-        public B3MathGamePay MathPayValue
-        {
-            get
-            {
-                return m_mathPayValue;
-            }
-            set
-            {
-                m_mathPayValue = value;
-                RaisePropertyChanged("MathPayValue");
-            }
-        }
-
+   
         public List<B3MathGamePay> B3MathGamePayList
         {
             get { return m_b3MathGamePayList; }
@@ -173,18 +151,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }
         }
 
-        public B3IsGameEnabledSetting GameEnable
-        {
-            get
-            {
-                return SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType);
-            }
-            set
-            {
-                m_gameEnable = value;
-                RaisePropertyChanged("GameEnable");
-            }
-        }
+        //public B3IsGameEnabledSetting GameEnable
+        //{
+        //    get
+        //    {
+        //        return SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType);
+        //    }
+        //    set
+        //    {
+        //        m_gameEnable = value;
+        //        RaisePropertyChanged("GameEnable");
+        //    }
+        //}
         #endregion
 
     }
