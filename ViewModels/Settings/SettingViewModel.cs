@@ -326,44 +326,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }       
         }
 
-        public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
-        {
-            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
-            return tempResult;
-        }
-
-        public bool GetIsRngSetting()
-        {
-            return m_isRngBallCall;
-        }
-
-        public bool GetEnforceMixSetting()
-        {
-            var tempresult = false;
-            if (PayTableSettingVm != null)
-            { tempresult = PayTableSettingVm.EnforceMix; }
-            else {tempresult = m_controller.Settings.EnforceMix; }
-            return tempresult;
-        }
-
-        public bool GetStaffPayTablePermission()
-        {
-            var result = false;
-           foreach (int x in m_controller.ModuleFeatureList)
-            {
-                if ((B3ModuleFeatures)x == B3ModuleFeatures.B3PaytableSettings)
-                {
-                    result = true;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()
-        {
-            return B3IsGameEnabledSettings;
-        }
 
         public void SelectedItemEvent()
         {
@@ -475,6 +437,50 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     }
             }
         }
+
+
+
+        public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
+        {
+            var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
+            return tempResult;
+        }
+
+        public bool GetIsRngSetting()
+        {
+            return m_isRngBallCall;
+        }
+
+        public bool GetEnforceMixSetting()
+        {
+            return (PayTableSettingVm != null) ? PayTableSettingVm.EnforceMix : m_controller.Settings.EnforceMix;
+        }
+
+
+        public B3IsGameEnabledSetting GetEnableDisableSettingValue(B3GameType gameType)
+        {
+            return B3IsGameEnabledSettings.Single(l => l.GameType == gameType);
+        }
+
+        public bool GetStaffPayTablePermission()
+        {
+            var result = false;
+            foreach (int x in m_controller.ModuleFeatureList)
+            {
+                if ((B3ModuleFeatures)x == B3ModuleFeatures.B3PaytableSettings)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()
+        {
+            return B3IsGameEnabledSettings;
+        }
+
         #endregion
 
         #region Properties(singleton instance)

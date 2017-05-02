@@ -10,6 +10,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
     public class GamePayTableModel : Notifier
     {
+
+        private List<B3MathGamePay> m_b3MathGamePayList;
+        public List<B3MathGamePay> B3MathGamePayList
+        {
+            get { return m_b3MathGamePayList; }
+            set
+            {
+                m_b3MathGamePayList = value;
+                RaisePropertyChanged("B3MathGamePayList");
+            }
+        }
+
         private B3MathGamePay m_mathPayValue;
         public B3MathGamePay MathPayValue
         {
@@ -23,5 +35,20 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                 RaisePropertyChanged("MathPayValue");
             }
         }
+
+        //private B3IsGameEnabledSetting m_gameEnable;
+        //public B3IsGameEnabledSetting GameEnable
+        //{
+        //    get
+        //    {
+        //        return m_gameEnable;
+        //    }
+        //    set
+        //    {
+        //        m_gameEnable = value;
+        //        RaisePropertyChanged("GameEnable");
+        //    }
+
+        //}
     }
 }
