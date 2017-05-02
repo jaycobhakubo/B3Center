@@ -17,6 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         private readonly B3SettingGlobal m_originalPayTableSettings;
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
         private bool m_enforceMix;//are we going to use this again?
+        private bool m_originalSetting;
 
         public string GameName { get; set; }
         
@@ -28,7 +29,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             m_b3MathGamePayFullList = GetFullListPayTableSetting();       //This wont change all game has 55455 or rng setting
 
             m_isGameEnable = SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType).IsEnabled;
-          
+            m_originalSetting = m_isGameEnable;
 
             if (m_isGameEnable)//check if game is enable
             {
@@ -184,12 +185,67 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         public void UpdateMathPayTableUI(bool isRng)
         {
-            //var x  = new List<B3MathGamePay>();
+           IsGameEnable = SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType).IsEnabled;
+
+
+            if (m_isGameEnable)//check if game is enable
+            {
+                m_enforceMix = !isRng;
+             
+
+                var tempPayTableList = m_b3MathGamePayFullList.Where(l => l.IsRng == !m_enforceMix).ToList();
+                if (tempPayTableList.Count != 0)//If current setting result is not null
+                {
+
+
+                    //Check if this has current paytablesetting
+                    int tempMathPackageId = Convert.ToInt32(m_originalPayTableSettings.B3SettingValue);
+                    if (tempMathPackageId != 0)
+                    {
+                        //check if the current setting exists on the b3setting list
+                        var currentSettingExists = tempPayTableList.Exists(l => l.MathPackageId == tempMathPackageId);
+                        if (currentSettingExists)
+                        {
+                            MathPayValue = tempPayTableList.FirstOrDefault(l => l.MathPackageId == tempMathPackageId);
+                        }
+                        else//If it dont exists show current setting 
+                        {
+                            var c = m_b3MathGamePayFullList.Single(l => l.MathPackageId == tempMathPackageId);
+
+                            var newB3MathGamePay = new B3MathGamePay()
+                            {
+                                MathPackageId = c.MathPackageId,
+                                GameType = c.GameType,
+                                PackageDesc = "Current math package is " + c.PackageDesc,
+                                IsRng = c.IsRng,
+                                NeedToReplace = true
+                            };
+
+                            tempPayTableList.Add(newB3MathGamePay);
+                            MathPayValue = tempPayTableList.FirstOrDefault(l => l.MathPackageId == tempMathPackageId);
+                        }
+                    }//If its not set then just show the paytable setting
+                    else
+                    {
+
+                    }
+
+                    //B3MathGamePayList = tempPayTableList;
+
+                }
+                else//If no available math package then disable this game
+                {
+                    IsGameEnable = false;
+                }
+                B3MathGamePayList = tempPayTableList;
+            }
+           
+            //var x = new List<B3MathGamePay>();
             //x = m_b3MathGamePayFullList.Where(l => l.IsRng == isRng).ToList();
             //x.Select(c => { c.NeedToReplace = false; return c; }).ToList();
             //m_b3MathGamePayList = x;
-            //GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);      
-            
+            //GamePayTableModel.MathPayValue = GetB3MathGamePay(m_originalPayTableSettings.B3SettingValue);
+
         }
     
         private B3MathGamePay GetB3MathGamePay(string MathPackageId)
