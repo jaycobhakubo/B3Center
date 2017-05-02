@@ -65,7 +65,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm)
        {
-           gamePayTableVm.UpdateMathPayTableUI(IsRNG);
+           gamePayTableVm.UpdateMathPayTableUI();
        }
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList) 
@@ -216,9 +216,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                     break;
                                 case B3GameType.Timebomb:
                                     {
-                                        if (TimeBombPayTableVm.GamePayTableModel.MathPayValue != null
-                                                  && TimeBombPayTableVm.GamePayTableModel.MathPayValue.IsRng == IsRNG)
-                                            setting.B3SettingValue = TimeBombPayTableVm.GamePayTableModel.MathPayValue.MathPackageId.ToString();
+                                        if (TimeBombPayTableVm.MathPayValue != null
+                                                  && TimeBombPayTableVm.MathPayValue.IsRng == IsRNG)
+                                            setting.B3SettingValue = TimeBombPayTableVm.MathPayValue.MathPackageId.ToString();
                                     }
                                     break;
                                 case B3GameType.Ukickem:
@@ -256,15 +256,23 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        }
 
        public void IsRngCheckEvent()
-        {               
-            CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
-            JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
-            MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
-            Spirit76PayTableVm.UpdateMathPayTableUI(IsRNG);
-            TimeBombPayTableVm.UpdateMathPayTableUI(IsRNG);
-            UkickEmPayTableVm.UpdateMathPayTableUI(IsRNG);
-            WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
-            WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
+        {
+            CrazyBoutPayTableVm.UpdateMathPayTableUI();
+            JailBreakPayTableVm.UpdateMathPayTableUI();
+            MayaMoneyPayTableVm.UpdateMathPayTableUI();
+            Spirit76PayTableVm.UpdateMathPayTableUI();
+            TimeBombPayTableVm.UpdateMathPayTableUI();
+            UkickEmPayTableVm.UpdateMathPayTableUI();
+            WildBallPayTableVm.UpdateMathPayTableUI();
+            WildFirePayTableVm.UpdateMathPayTableUI();
+            //CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
+            //JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
+            //MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
+            //Spirit76PayTableVm.UpdateMathPayTableUI(IsRNG);
+            //TimeBombPayTableVm.UpdateMathPayTableUI(IsRNG);
+            //UkickEmPayTableVm.UpdateMathPayTableUI(IsRNG);
+            //WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
+            //WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
         }
 
        public List<B3SettingGlobal> Save()
