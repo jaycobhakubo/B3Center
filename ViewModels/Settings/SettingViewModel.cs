@@ -143,8 +143,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private SystemSettingVm InitializeSystemSettingVm()
         {
-            var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System && l.IsPayTableSettings == false).ToList();
-            var testx = m_controller.Settings.B3GlobalSettings.Where(l => l.SettingType == B3SettingType.W2Trigger);
+            var systemSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.System && l.IsPayTableSetting == false).ToList();
             var systemSettingVm = new SystemSettingVm(systemSettingsFromServer);
             m_systemSettingView = new SystemSettingView(systemSettingVm);
             return systemSettingVm;
@@ -152,7 +151,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private PayTableSettingVm InitializePayTableSettingVm()
         {
-            var payTableSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.IsPayTableSettings == true).ToList();
+            var payTableSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.IsPayTableSetting == true).ToList();
             var payTableSettingVm = new PayTableSettingVm(payTableSettingsFromServer);
             m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
             return payTableSettingVm;
@@ -439,47 +438,39 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         }
 
 
-
+        //Get the list of math pay table of a particular game.
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
         {
             var tempResult = new ObservableCollection<B3MathGamePay>(m_controller.Settings.B3MathGamePays.Where(l => l.GameType == gameType));
             return tempResult;
         }
 
-        public bool GetIsRngSetting()
-        {
-            return m_isRngBallCall;
-        }
+        //Get all enable/disable settings for all game.
+        public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting(){  return B3IsGameEnabledSettings;}
+ 
+        //Get current setting for RNG.
+        public bool GetIsRngSetting() { return m_isRngBallCall; }
+            
+        //Get current setting for enforce mix.
+        public bool GetEnforceMixSetting() { return (PayTableSettingVm != null) ? PayTableSettingVm.EnforceMix : m_controller.Settings.EnforceMix; }
 
-        public bool GetEnforceMixSetting()
-        {
-            return (PayTableSettingVm != null) ? PayTableSettingVm.EnforceMix : m_controller.Settings.EnforceMix;
-        }
+        //Get enable disable setting value of a  specific game.
+        public B3IsGameEnabledSetting GetEnableDisableSettingValue(B3GameType gameType) { return B3IsGameEnabledSettings.Single(l => l.GameType == gameType); }
 
-
-        public B3IsGameEnabledSetting GetEnableDisableSettingValue(B3GameType gameType)
-        {
-            return B3IsGameEnabledSettings.Single(l => l.GameType == gameType);
-        }
-
+        //Check if current staff has permission to view Paytable settings
         public bool GetStaffPayTablePermission()
         {
             var result = false;
-            foreach (int x in m_controller.ModuleFeatureList)
+            foreach (int modulefeature in m_controller.ModuleFeatureList)
             {
-                if ((B3ModuleFeatures)x == B3ModuleFeatures.B3PaytableSettings)
+                if ((B3ModuleFeatures)modulefeature == B3ModuleFeatures.B3PaytableSettings)
                 {
                     result = true;
                     break;
                 }
             }
             return result;
-        }
-
-        public List<B3IsGameEnabledSetting> GetAllB3GameEnableSetting()
-        {
-            return B3IsGameEnabledSettings;
-        }
+        }       
 
         #endregion
 

@@ -65,7 +65,6 @@
                          PreviewKeyDown="DontAllowThisKeyboardinput" 
                          PreviewTextInput="_PreviewTextInput"      
                         />
-                    <!--MaxLength="15"-->
 
                     <Label x:Name="LblMaxCardsCopy1" Content="Mag card sentinel start" />
                     <TextBox Text="{Binding SystemSettings.MagCardSentinelStart}" 

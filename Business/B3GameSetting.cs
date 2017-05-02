@@ -118,7 +118,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         }
         
         public bool UIUpdateRequired {get; set;}
-        public bool IsPayTableSettings { get; set; }
+        public bool IsPayTableSetting { get; set; }
         public bool HasChanged { get; set; }
         public bool IsGameENabled { get; set; }
 
@@ -191,7 +191,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
             set;
         }
 
-        public bool NeedToReplace
+        public bool ChangeForeground
         {
             get;
             set;

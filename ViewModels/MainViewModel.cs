@@ -33,8 +33,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SessionVm.Initialize(controller.B3Controller); 
 
             foreach (int moduleFeatureId in controller.ModuleFeatureList)     //No need to initialize if staff dont have permission.
-            {
-             
+            {             
                 switch ((B3ModuleFeatures)moduleFeatureId)
                 {
                     case B3ModuleFeatures.B3Reports:
@@ -43,7 +42,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                             HasB3RptPermission = true;
                     break;
 
-                    case B3ModuleFeatures.B3Settings://Settings
+                    case B3ModuleFeatures.B3Settings:
                         SettingVm = SettingViewModel.Instance;
                         SettingVm.Initialize(controller.B3Controller);
                         HasB3SettingPermission = true;

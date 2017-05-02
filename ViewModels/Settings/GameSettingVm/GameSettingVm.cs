@@ -31,7 +31,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             foreach (var gameTypeObj in Enum.GetValues(typeof(B3GameType)))
             {
                 var gameType = (B3GameType)gameTypeObj;
-                var gameSettings = m_b3GameStting.Where(l => l.GameType == gameType && l.IsPayTableSettings != true).ToList();
+                var gameSettings = m_b3GameStting.Where(l => l.GameType == gameType && l.IsPayTableSetting != true).ToList();
                 var gameSettingViewModel = new GameSettingVmAllGame(gameSettings, gameType, GetEnableDisableSettingValue(gameType));
                 m_gameSettingViewModels.Add(gameSettingViewModel);
                 switch (gameType)

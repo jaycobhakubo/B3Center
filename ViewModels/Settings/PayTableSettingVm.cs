@@ -12,24 +12,30 @@ using GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable;
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 {
    public class PayTableSettingVm : ViewModelBase
-    {
+   {
+        #region MEMBER(var)
+
         private PayTableSetting m_PayTableSettings; 
         private readonly List<B3SettingGlobal> m_originalPayTableSettings;
         private bool m_isRNGEnable;
         private bool m_enforceMixEnable;
-
+       
+        #endregion
         #region CONSTRUCTOR
-        public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
-       {
-           ListGamePayTableVm = new List<GamePayTableVm>();
-           PayTableSettings = new PayTableSetting();
-           UpdateSettingsListToModel(payTableSettingList);
-           UpdateEnableB3GameSettingToModel();
-           m_originalPayTableSettings = payTableSettingList;               
-       }
-       #endregion
 
-       private void UpdateEnableB3GameSettingToModel()
+        public PayTableSettingVm(List<B3SettingGlobal> payTableSettingList)
+           {
+               ListGamePayTableVm = new List<GamePayTableVm>();
+               PayTableSettings = new PayTableSetting();
+               UpdateSettingsListToModel(payTableSettingList);
+               UpdateEnableB3GameSettingToModel();
+               m_originalPayTableSettings = payTableSettingList;               
+           }
+
+       #endregion
+        #region  METHOD 
+
+        private void UpdateEnableB3GameSettingToModel()
        {
            foreach (var enablesetting in SettingViewModel.Instance.GetAllB3GameEnableSetting())
            {
@@ -61,11 +67,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                             break;
                 }
             }           
-       }
-
-       private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm)
-       {
-           gamePayTableVm.UpdateMathPayTableUI();
        }
 
         private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList) 
@@ -168,8 +169,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                {
                         case B3SettingType.CommonRngBallCall:
                        {                                               
-                               setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();
-                                //IsRNG = (setting.B3SettingValue == "T") ? true : false;                         
+                               setting.B3SettingValue = PayTableSettings.CommonRngBallCall.ConvertToB3StringValue();                       
                            break;
                        }
                         case B3SettingType.EnforceMix:
@@ -265,15 +265,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UkickEmPayTableVm.UpdateMathPayTableUI();
             WildBallPayTableVm.UpdateMathPayTableUI();
             WildFirePayTableVm.UpdateMathPayTableUI();
-            //CrazyBoutPayTableVm.UpdateMathPayTableUI(IsRNG);
-            //JailBreakPayTableVm.UpdateMathPayTableUI(IsRNG);
-            //MayaMoneyPayTableVm.UpdateMathPayTableUI(IsRNG);
-            //Spirit76PayTableVm.UpdateMathPayTableUI(IsRNG);
-            //TimeBombPayTableVm.UpdateMathPayTableUI(IsRNG);
-            //UkickEmPayTableVm.UpdateMathPayTableUI(IsRNG);
-            //WildBallPayTableVm.UpdateMathPayTableUI(IsRNG);
-            //WildFirePayTableVm.UpdateMathPayTableUI(IsRNG);
         }
+
+       private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm)
+       {
+           gamePayTableVm.UpdateMathPayTableUI();
+       }
 
        public List<B3SettingGlobal> Save()
        {
@@ -283,22 +280,24 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        public void ValidateUserInput()
        {
-           var x = ListGamePayTableVm.Exists(l => l.changeme == true);
-           if (x == true)
+           var tempResult = ListGamePayTableVm.Exists(l => l.UpdateUIControl == true);
+           if (tempResult == true)
            {
                SettingViewModel.Instance.BtnSaveIsEnabled = false;
            }
            else
            {
                SettingViewModel.Instance.BtnSaveIsEnabled = true;
-           }
-          
+           }          
        }
 
        public void ResetSettingsToDefault()
        {
            UpdateSettingsListToModel(m_originalPayTableSettings);
        }
+
+        #endregion
+        #region PROPERTIES
 
        public bool HasChanged { get; set; }
        public List<GamePayTableVm> ListGamePayTableVm { get; set; }//not used 
@@ -310,9 +309,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
        public GamePayTableVm UkickEmPayTableVm { get; set; }
        public GamePayTableVm WildBallPayTableVm { get; set; }
        public GamePayTableVm WildFirePayTableVm { get; set; }
-
-        public bool EnforceMix { get { return PayTableSettings.EnforceMix; } }
-        public bool IsRNG { get { return !PayTableSettings.EnforceMix; } }
+       public bool EnforceMix { get { return PayTableSettings.EnforceMix; } }
+       public bool IsRNG { get { return !PayTableSettings.EnforceMix; } }
 
        public PayTableSetting PayTableSettings
        {
@@ -325,6 +323,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                m_PayTableSettings = value;
                RaisePropertyChanged("PayTableSettings");
            }
-       }     
+       }
+
+       #endregion
     }
 }

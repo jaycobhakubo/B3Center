@@ -9,12 +9,17 @@
              >
         <UserControl.Resources>
             
-        <converter:ReverseBoolConverter x:Key="RevertValueConverter"></converter:ReverseBoolConverter>
-
-        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource lblFORPayTableSettingUI}"></Style>
-        <Style TargetType="ComboBox" BasedOn="{StaticResource cmbxForPayTableSettingUI}"></Style>
+        <converter:ReverseBoolConverter x:Key="RevertValueConverter">
+		</converter:ReverseBoolConverter>
+		
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource lblPayTableSettingUI}">
+		</Style>
+		
+        <Style TargetType="ComboBox" BasedOn="{StaticResource cmbxPayTableSettingUI}">
+		</Style>
+		
         <Style TargetType="{x:Type Grid}">
-            <Setter Property="Margin" Value="0,12.5,0,0"></Setter>
+			<Setter Property="Margin" Value="0,12.5,0,0"></Setter>
         </Style>
             
     </UserControl.Resources>
@@ -37,7 +42,7 @@
             DisplayMemberPath="PackageDesc"
             SelectedItem="{Binding MathPayValue}" SelectionChanged="ComboBox_SelectionChanged" 
             IsEnabled="{Binding IsGameEnable}"      
-            ItemContainerStyle="{StaticResource cmbxitemFORPayTableSettingUI}"
+            ItemContainerStyle="{StaticResource cmbxitemPayTableSettingUI}"
             >        
         </ComboBox>
     </Grid>

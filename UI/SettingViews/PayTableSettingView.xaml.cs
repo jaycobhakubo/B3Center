@@ -14,25 +14,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             DataContext = vm;
         }
 
-        private void RadioButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void rdobtn_RNGOr55455_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            RadioButton rdobtn = (RadioButton)sender;
-            PayTableSettingVm ii = (PayTableSettingVm)DataContext;
-            ii.IsRngCheckEvent();
-        }
-
-        //private void rdobtnEnforceMix_Checked(object sender, System.Windows.RoutedEventArgs e)
-        //{
-        //    RadioButton rdobtn = (RadioButton)sender;         
-        //    PayTableSettingVm ii = (PayTableSettingVm)DataContext;
-        //    ii.IsRngCheckEvent();
-        //}
-
-        //private void rdobtnEnforceMix_Unchecked(object sender, System.Windows.RoutedEventArgs e)
-        //{
-        //    RadioButton rdobtn = (RadioButton)sender;
-        //    PayTableSettingVm ii = (PayTableSettingVm)DataContext;
-        //    ii.IsRngCheckEvent();
-        //}
+            PayTableSettingVm vm = (PayTableSettingVm)DataContext;
+            vm.IsRngCheckEvent();
+        }       
     }
 }

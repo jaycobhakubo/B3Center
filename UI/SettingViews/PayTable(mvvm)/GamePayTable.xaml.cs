@@ -29,27 +29,27 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GamePayTableVm ii = (GamePayTableVm)DataContext;
-            B3MathGamePay y = new B3MathGamePay();
+            GamePayTableVm vm = (GamePayTableVm)DataContext;
+            B3MathGamePay mathgamepay = new B3MathGamePay();
       
-            if (ii.IsGameEnable == true)
+            if (vm.IsGameEnable == true)
             {
-                y = ii.MathPayValue;
-                if (y != null)
+                mathgamepay = vm.MathPayValue;
+                if (mathgamepay != null)
                 {
-                    if (ii.MathPayValue.NeedToReplace == true)
+                    if (vm.MathPayValue.ChangeForeground == true)
                     {
-                        if (ii.changeme != true)
+                        if (vm.UpdateUIControl != true)
                         {
-                            ii.changeme = true;
+                            vm.UpdateUIControl = true;
                             SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
                         }
                     }
                     else
                     {
-                        if (ii.changeme != false)
+                        if (vm.UpdateUIControl != false)
                         {
-                            ii.changeme = false;
+                            vm.UpdateUIControl = false;
                             SettingViewModel.Instance.PayTableSettingVm.ValidateUserInput();
 
                         }
