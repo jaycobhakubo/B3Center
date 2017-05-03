@@ -11,21 +11,21 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 {
     public class GamePayTableVm : ViewModelBase
     {
-          
-   
+        #region VARIABLES 
+
         private readonly B3SettingGlobal m_originalPayTableSettings;
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
         private List<B3MathGamePay> m_b3MathGamePayList;
         private readonly B3IsGameEnabledSetting m_originalGameEnableSetting;
         private GamePayTableModel m_gamePayTableModel;
-        //private B3MathGamePay m_mathPayValue;
         private bool m_updateUIControl;
-        //private bool m_GameDisabled;
         private bool m_enforceMix;
         private bool m_originalSetting;
-        //private bool m_isGameEnable;
 
-      
+        #endregion
+
+        #region CONSTRUCTOR
+
         public GamePayTableVm( B3SettingGlobal b3SettingGlobal, B3IsGameEnabledSetting enableSetting)
         {
             m_originalPayTableSettings = b3SettingGlobal;
@@ -33,24 +33,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
             m_b3MathGamePayFullList = GetFullListPayTableSetting();
             m_gamePayTableModel.IsGameEnable = enableSetting.IsEnabled;
-            //m_originalSetting = m_isGameEnable;
             m_originalGameEnableSetting = enableSetting;
             UpdateMathPayTableUI();         
         }
 
-        private List<B3MathGamePay> GetFullListPayTableSetting()
-        {
-            return  SettingViewModel.Instance.GetB3MathGamePlay(m_originalPayTableSettings.GameType).ToList();
-        }
+        #endregion
 
-        private void GetListPayTableSetting()
-        {
-            var PayTableList = GetFullListPayTableSetting().Where(l => l.IsRng == !GetEnforceMixesSetting()).ToList();
-        }
+        #region METHODS (private)
 
-        private bool GetEnforceMixesSetting()
+        private List<B3MathGamePay> GetFullListPayTableSetting(){return  SettingViewModel.Instance.GetB3MathGamePlay(m_originalPayTableSettings.GameType).ToList();}        
+        private bool GetEnforceMixesSetting(){ return SettingViewModel.Instance.GetEnforceMixSetting();}
+
+
+        #endregion
+
+
+        #region METHODS (public)
+
+        public B3GameType GetThisB3GameType()
         {
-           return SettingViewModel.Instance.GetEnforceMixSetting();
+            return m_originalPayTableSettings.GameType;
         }
 
         public void UpdateMathPayTableUI()
@@ -107,10 +109,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
            }
         }
 
-        public B3GameType GetThisB3GameType()
-        {
-            return m_originalPayTableSettings.GameType;
-        }
+        #endregion
 
         #region PROPERTIES
 
@@ -162,28 +161,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                 GamePayTableModel.IsGameEnable = value;
             }
         }
-        //public bool IsGameEnable
-        //{
-        //    get { return m_gamePayTableModel.IsGameEnable; }
-        //    set
-        //    {
-        //        m_gamePayTableModel.IsGameEnable = value;
-        //        RaisePropertyChanged("IsGameEnable");
-        //    }
-        //}
 
-        //public B3IsGameEnabledSetting GameEnable
-        //{
-        //    get
-        //    {
-        //        return SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType);
-        //    }
-        //    set
-        //    {
-        //        m_gameEnable = value;
-        //        RaisePropertyChanged("GameEnable");
-        //    }
-        //}
         #endregion
 
     }
