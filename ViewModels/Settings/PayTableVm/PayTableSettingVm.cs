@@ -35,7 +35,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        #endregion
 
-        #region  METHODS 
+        #region  FUNCTION 
 
         public List<B3IsGameEnabledSetting> GetCurrentEnableDisableGameSettings() { return m_originalGameEnableSettings; }
         private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm) { gamePayTableVm.UpdateMathPayTableUI(); }
