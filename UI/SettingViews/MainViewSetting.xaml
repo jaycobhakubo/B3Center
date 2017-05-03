@@ -10,7 +10,7 @@
             >
     <UserControl.Resources>
         <converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></converter:BoolToVisibilityConvHidden>
-
+        <converter:BoolToVisibilityConv x:Key="ConvertBoolToVisibility"></converter:BoolToVisibilityConv>
     </UserControl.Resources>
     <Border >
         <Grid >
@@ -41,11 +41,24 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" x:Name="ErrBackground" Margin="0,5" Style="{DynamicResource SemiTransparentNoBorder}" VerticalAlignment="bottom" Visibility="Hidden">
-                                <StackPanel Orientation="Horizontal">
+                            <Border Grid.Row="0" x:Name="ErrBackground" Margin="0,5" Background="Transparent"  VerticalAlignment="bottom" Visibility="{Binding IsSaved, Converter={StaticResource ConvertBoolToVisibility}}">
+
+                            <StackPanel  Orientation="Horizontal" Margin="15,0,0,0" Grid.ColumnSpan="2" Grid.Row="2" Height="25">
+                                    <!--<Ellipse  Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />-->
+                                    <Rectangle  Fill="{DynamicResource CheckIcon}" Width="20" Height="20" />
+                                    <TextBlock Text="{Binding StatusText}" Margin="5,0" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <!--<StackPanel Orientation="Horizontal" Margin="15,0,0,0" Grid.ColumnSpan="2" Grid.Row="2" Height="25">
+                                    <Ellipse Visibility="{Binding ErrorIconEnabled, Converter={StaticResource BoolToVisConverter}}" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
+                                    <Rectangle Visibility="{Binding CheckIconEnabled, Converter={StaticResource BoolToVisConverter}}" Fill="{DynamicResource CheckIcon}" Width="20" Height="20" />
+                                    <TextBlock Text="{Binding StatusText}" Margin="5,0" VerticalAlignment="Center" />
+                                </StackPanel>-->
+
+                                <!--<StackPanel Orientation="Horizontal">
                                     <Ellipse x:Name="ErrIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
                                     <Label x:Name="TxtblckErr" FontWeight="Bold" />
-                                </StackPanel>
+                                </StackPanel>-->
                             </Border>
 
                             <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >

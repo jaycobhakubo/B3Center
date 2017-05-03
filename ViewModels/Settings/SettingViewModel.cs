@@ -283,12 +283,32 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        private void SetStatusText(bool SaveOk)
+        {
+            if (SaveOk == true)
+            {
+                IsSaved = SaveOk;
+                StatusText = "Saved sucessfully";
+            }
+        }
+
+        public bool m_isSaved;
+        public bool IsSaved
+        {
+            get { return m_isSaved; }
+            set 
+            { 
+                m_isSaved = value;
+                RaisePropertyChanged("IsSaved");
+            }
+        }
+
         public void SaveSetting()   //All saved transaction should go here
         {
             try
             {             
                 SetNewValue();
-
+                var tempIsSaved = false;
                 if (m_selectedSettingCategoryType == B3SettingCategory.Player)//This one goes first need to update UI after saved.
                 {
                     var enableDisableGameSetting = PlayerSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
@@ -303,10 +323,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
                                 {
                                     throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                                    
                                 }
                                 else
                                 {
                                     UpdateUIGameSettingChanged(gameEnabledSetting.GameType, gameEnabledSetting);
+                                    tempIsSaved  = true;
                                 }
                             }
                             catch (ServerCommException ex)
@@ -328,9 +350,18 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     catch
                     {
                         if (msg.ReturnCode != ServerReturnCode.Success)
+                        {
                             throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
+                        }
+                        else
+                        {
+                            tempIsSaved = true;
+                        }
                     }
                 }
+
+                SetStatusText(tempIsSaved);
+               
             }
             catch (Exception ex)
             {
@@ -522,6 +553,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public GameSettingVm GameSettingsVm { get; set; }
         public PayTableSettingVm PayTableSettingVm { get; set; }
 
+        public string m_statusText;
+        public string StatusText
+        {
+            get { return m_statusText; }
+            set
+            {
+                m_statusText = value;
+                RaisePropertyChanged("StatusText");
+            }
+            
+        }
 
         public bool IndicatorVisibility
         {
