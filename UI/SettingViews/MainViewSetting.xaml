@@ -25,12 +25,9 @@
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+					
                     <Border Grid.Row="0" Margin="8" Style="{DynamicResource LightBlueBorderNoBackGround}" BorderThickness="0"  >
-                        <Border.Resources>
-                          
-                        </Border.Resources>
                         <ContentPresenter Content="{Binding SelectedSettingView}" />
-                        <!--<local:GameSettingView ></local:GameSettingView>-->
                     </Border>
 
                     <Border Grid.Row="1"  Margin="8">
@@ -44,21 +41,9 @@
                             <Border Grid.Row="0" x:Name="ErrBackground" Margin="0,5" Background="Transparent"  VerticalAlignment="bottom" Visibility="{Binding IsSaved, Converter={StaticResource ConvertBoolToVisibility}}">
 
                             <StackPanel  Orientation="Horizontal" Margin="15,0,0,0" Grid.ColumnSpan="2" Grid.Row="2" Height="25">
-                                    <!--<Ellipse  Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />-->
                                     <Rectangle  Fill="{DynamicResource CheckIcon}" Width="20" Height="20" />
                                     <TextBlock Text="{Binding StatusText}" Margin="5,0" VerticalAlignment="Center" />
-                                </StackPanel>
-
-                                <!--<StackPanel Orientation="Horizontal" Margin="15,0,0,0" Grid.ColumnSpan="2" Grid.Row="2" Height="25">
-                                    <Ellipse Visibility="{Binding ErrorIconEnabled, Converter={StaticResource BoolToVisConverter}}" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
-                                    <Rectangle Visibility="{Binding CheckIconEnabled, Converter={StaticResource BoolToVisConverter}}" Fill="{DynamicResource CheckIcon}" Width="20" Height="20" />
-                                    <TextBlock Text="{Binding StatusText}" Margin="5,0" VerticalAlignment="Center" />
-                                </StackPanel>-->
-
-                                <!--<StackPanel Orientation="Horizontal">
-                                    <Ellipse x:Name="ErrIcon" Fill="{DynamicResource ErrorIcon}" Width="20" Height="20" />
-                                    <Label x:Name="TxtblckErr" FontWeight="Bold" />
-                                </StackPanel>-->
+                                </StackPanel>                         
                             </Border>
 
                             <Border Grid.Row="1" Style="{DynamicResource SemiTransparentBorder}" >
@@ -106,14 +91,11 @@
                 </Grid>
             </Border>
 
-
-
                 <Border Name="BrdrSettingMenuCol" Grid.Column="0"  Style="{DynamicResource DarkBlueBorder}" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <!--FontWeight="Regular"-->
                     <ScrollViewer Grid.Row="0" Grid.Column="0"  VerticalScrollBarVisibility="Auto" >
                         <ListBox                        
                             Name="LstbxSettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SelectedB3SettingsCategory}" SelectionChanged="lstbx_SettingList_SelectionChanged"  >                         
@@ -124,8 +106,3 @@
         </Grid>
     </Border>
 </UserControl>
-
-<!--<ListBox Name="lstbx_SettingList" Margin="15"   ItemsSource="{Binding SettingList}" SelectedItem="{Binding SettingSelected}" SelectionChanged="ListBox_SelectionChanged" >-->
-<!--<Label
-                                    Style="{x:Null}"
-                                    HorizontalAlignment="Left" Content="* Indicates a required field" Foreground="Red"/>-->
