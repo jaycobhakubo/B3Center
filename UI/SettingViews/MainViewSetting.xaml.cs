@@ -21,7 +21,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
         private void UserControl_GotFocus(object sender, System.Windows.RoutedEventArgs e)
         {
             SettingViewModel vm = (SettingViewModel)DataContext;
-            if (vm.IsSaved != false) vm.IsSaved = false;
+            if (vm.SaveSuccess != false) vm.SaveSuccess = false;
         }      
     }
 }

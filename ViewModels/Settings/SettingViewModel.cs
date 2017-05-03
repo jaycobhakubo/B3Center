@@ -295,19 +295,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         {
             if (SaveOk == true)
             {
-                IsSaved = SaveOk;
+                SaveSuccess = SaveOk;
                 StatusText = Resources.SaveSuccess;
             }
         }
 
-        public bool m_isSaved;
-        public bool IsSaved
+        public bool m_saveSuccess;
+        public bool SaveSuccess
         {
-            get { return m_isSaved; }
+            get { return m_saveSuccess; }
             set 
             { 
-                m_isSaved = value;
-                RaisePropertyChanged("IsSaved");
+                m_saveSuccess = value;
+                RaisePropertyChanged("SaveSuccess");
             }
         }
 
