@@ -17,6 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private PayTableSetting m_PayTableSettings; 
         private readonly List<B3SettingGlobal> m_originalPayTableSettings;
+        private readonly List<B3IsGameEnabledSetting> m_originalGameEnableSettings;
         private bool m_isRNGEnable;
         private bool m_enforceMixEnable;
        
@@ -27,9 +28,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            {
                ListGamePayTableVm = new List<GamePayTableVm>();
                PayTableSettings = new PayTableSetting();
-               UpdateSettingsListToModel(payTableSettingList);
-               UpdateEnableB3GameSettingToModel();
-               m_originalPayTableSettings = payTableSettingList;               
+               m_originalGameEnableSettings = SettingViewModel.Instance.GetAllB3GameEnableSetting();
+               UpdateSettingsListToModel(payTableSettingList, m_originalGameEnableSettings);
+               m_originalPayTableSettings = payTableSettingList;
            }
 
        #endregion
@@ -37,40 +38,42 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         private void UpdateEnableB3GameSettingToModel()
        {
-           foreach (var enablesetting in SettingViewModel.Instance.GetAllB3GameEnableSetting())
-           {
-                 switch (enablesetting.GameType)
-                {
-                    case B3GameType.Crazybout:
-                        PayTableSettings.CrazyboutGameSetting = enablesetting;
-                            break;
-                    case B3GameType.Jailbreak:
-                            PayTableSettings.JailBreakGameSetting = enablesetting;
-                            break;
-                    case B3GameType.Mayamoney:
-                            PayTableSettings.MayaMoneyGameSetting = enablesetting;
-                            break;
-                    case B3GameType.Spirit76:
-                            PayTableSettings.Spirit76GameSetting = enablesetting;
-                            break;
-                    case B3GameType.Timebomb:
-                            PayTableSettings.TimeBombGameSetting = enablesetting;
-                            break;
-                    case B3GameType.Ukickem:
-                            PayTableSettings.UKickemGameSetting = enablesetting;
-                            break;
-                    case B3GameType.Wildball:
-                            PayTableSettings.WildBallGameSetting = enablesetting;
-                            break;
-                    case B3GameType.Wildfire:
-                            PayTableSettings.WildFireGameSetting = enablesetting;
-                            break;
-                }
-            }           
+          
        }
 
-        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList) 
-       {        
+        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList, List<B3IsGameEnabledSetting> m_originalGameEnableSettings) 
+       {
+           foreach (var enablesetting in m_originalGameEnableSettings)
+           {
+               switch (enablesetting.GameType)
+               {
+                   case B3GameType.Crazybout:
+                       PayTableSettings.CrazyboutGameSetting = enablesetting;
+                       break;
+                   case B3GameType.Jailbreak:
+                       PayTableSettings.JailBreakGameSetting = enablesetting;
+                       break;
+                   case B3GameType.Mayamoney:
+                       PayTableSettings.MayaMoneyGameSetting = enablesetting;
+                       break;
+                   case B3GameType.Spirit76:
+                       PayTableSettings.Spirit76GameSetting = enablesetting;
+                       break;
+                   case B3GameType.Timebomb:
+                       PayTableSettings.TimeBombGameSetting = enablesetting;
+                       break;
+                   case B3GameType.Ukickem:
+                       PayTableSettings.UKickemGameSetting = enablesetting;
+                       break;
+                   case B3GameType.Wildball:
+                       PayTableSettings.WildBallGameSetting = enablesetting;
+                       break;
+                   case B3GameType.Wildfire:
+                       PayTableSettings.WildFireGameSetting = enablesetting;
+                       break;
+               }
+           }      
+
            foreach (var setting in settingsList)
            {
                switch (setting.SettingType)
@@ -97,56 +100,56 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                                 case B3GameType.Crazybout:
                                     {
                                         if (CrazyBoutPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == CrazyBoutPayTableVm)); break; }
-                                        CrazyBoutPayTableVm = new GamePayTableVm(setting);
+                                        CrazyBoutPayTableVm = new GamePayTableVm(setting, PayTableSettings.CrazyboutGameSetting);
                                         ListGamePayTableVm.Add(CrazyBoutPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Jailbreak:
                                     {
                                         if (JailBreakPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == JailBreakPayTableVm)); break; }
-                                        JailBreakPayTableVm = new GamePayTableVm(setting);
+                                        JailBreakPayTableVm = new GamePayTableVm(setting, PayTableSettings.JailBreakGameSetting);
                                         ListGamePayTableVm.Add(JailBreakPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Mayamoney:
                                     {
                                         if (MayaMoneyPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == MayaMoneyPayTableVm)); break; }
-                                        MayaMoneyPayTableVm = new GamePayTableVm(setting);
+                                        MayaMoneyPayTableVm = new GamePayTableVm(setting, PayTableSettings.MayaMoneyGameSetting);
                                         ListGamePayTableVm.Add(MayaMoneyPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Spirit76:
                                     {
                                         if (Spirit76PayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == Spirit76PayTableVm)); break; }
-                                        Spirit76PayTableVm = new GamePayTableVm(setting);
+                                        Spirit76PayTableVm = new GamePayTableVm(setting, PayTableSettings.Spirit76GameSetting);
                                         ListGamePayTableVm.Add(Spirit76PayTableVm);
                                         break;
                                     }
                                 case B3GameType.Timebomb:
                                     {
                                         if (TimeBombPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == TimeBombPayTableVm)); break; }
-                                        TimeBombPayTableVm = new GamePayTableVm(setting);
+                                        TimeBombPayTableVm = new GamePayTableVm(setting, PayTableSettings.TimeBombGameSetting);
                                         ListGamePayTableVm.Add(TimeBombPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Ukickem:
                                     {
                                         if (UkickEmPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == UkickEmPayTableVm)); break; }
-                                        UkickEmPayTableVm = new GamePayTableVm(setting);
+                                        UkickEmPayTableVm = new GamePayTableVm(setting, PayTableSettings.UKickemGameSetting);
                                         ListGamePayTableVm.Add(UkickEmPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Wildball:
                                     {
                                         if (WildBallPayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == WildBallPayTableVm)); break; }
-                                        WildBallPayTableVm = new GamePayTableVm(setting);
+                                        WildBallPayTableVm = new GamePayTableVm(setting, PayTableSettings.WildBallGameSetting);
                                         ListGamePayTableVm.Add(WildBallPayTableVm);
                                         break;
                                     }
                                 case B3GameType.Wildfire:
                                     {
                                         if (WildFirePayTableVm != null) { UpdateSettingPayTableUI(ListGamePayTableVm.Single(l => l == WildFirePayTableVm)); break; }
-                                        WildFirePayTableVm = new GamePayTableVm(setting);
+                                        WildFirePayTableVm = new GamePayTableVm(setting, PayTableSettings.WildFireGameSetting);
                                         ListGamePayTableVm.Add(WildFirePayTableVm);
                                         break;
                                     }
@@ -155,6 +158,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                     }                 
                }
            }
+
+      
        }
 
        private void UpdateModelToSettingsList()
@@ -253,6 +258,51 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                    setting.HasChanged = true;
                }
            }
+
+
+           foreach (var gameEnabledSetting in m_originalGameEnableSettings)
+           {
+               gameEnabledSetting.HasChanged = false;
+               var tempOldSettingValue = gameEnabledSetting.IsEnabled;//saved current setting value
+               switch (gameEnabledSetting.GameType)
+               {
+                   case B3GameType.Crazybout:
+                       gameEnabledSetting.IsEnabled =  CrazyBoutPayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.CrazyboutGameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Jailbreak:
+                       gameEnabledSetting.IsEnabled = JailBreakPayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.JailBreakGameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Mayamoney:
+                       gameEnabledSetting.IsEnabled = MayaMoneyPayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.MayaMoneyGameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Spirit76:
+                       gameEnabledSetting.IsEnabled = Spirit76PayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.Spirit76GameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Timebomb:
+                       gameEnabledSetting.IsEnabled = TimeBombPayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.TimeBombGameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Ukickem:
+                       gameEnabledSetting.IsEnabled = UkickEmPayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.UKickemGameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Wildball:
+                       //ModifiedB3GameEnabledSettings.Add(PlayerSetting.WildBallGameSetting);
+                       gameEnabledSetting.IsEnabled = WildBallPayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.WildBallGameSetting.IsEnabled;
+                       break;
+                   case B3GameType.Wildfire:
+                       gameEnabledSetting.IsEnabled = WildFirePayTableVm.GamePayTableModel.IsGameEnable;//PayTableSettings.WildFireGameSetting.IsEnabled;
+                       break;
+               }
+               if (tempOldSettingValue != gameEnabledSetting.IsEnabled)//check if current = new setting
+               {
+                   gameEnabledSetting.B3SettingDefaultValue = tempOldSettingValue;
+                   gameEnabledSetting.HasChanged = true;
+               }
+           }          
+       }
+
+       public List<B3IsGameEnabledSetting> GetCurrentEnableDisableGameSettings()
+       {
+           return m_originalGameEnableSettings;
        }
 
        public void IsRngCheckEvent()
@@ -293,7 +343,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
        public void ResetSettingsToDefault()
        {
-           UpdateSettingsListToModel(m_originalPayTableSettings);
+           UpdateSettingsListToModel(m_originalPayTableSettings, m_originalGameEnableSettings);
        }
 
         #endregion

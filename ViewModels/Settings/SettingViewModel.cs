@@ -284,6 +284,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        public void UpdateUIPlayerSettingChanged(List<B3IsGameEnabledSetting> isEnableNewSettingValue)
+        {
+
+            PlayerSettingVm.UpdateUI(isEnableNewSettingValue);
+          
+        }
+
         private void SetStatusText(bool SaveOk)
         {
             if (SaveOk == true)
@@ -330,6 +337,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 {
                                     UpdateUIGameSettingChanged(gameEnabledSetting.GameType, gameEnabledSetting);
                                     tempIsSaved  = true;
+                                  
                                 }
                             }
                             catch (ServerCommException ex)
@@ -337,6 +345,38 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 throw new Exception("SetGameEnableSetting: " + ex.Message);
                             }
                         }
+                        UpdateUIPlayerSettingChanged(enableDisableGameSetting);
+                    } 
+                }
+
+                if (m_selectedSettingCategoryType == B3SettingCategory.PayTable)//This one goes first need to update UI after saved.
+                {
+                    var enableDisableGameSetting = PayTableSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
+                    if (enableDisableGameSetting.Count != 0)
+                    {
+                        foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
+                        {
+                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
+                            try
+                            {
+                                setGameEnabledMessage.Send();
+                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
+                                {
+                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+
+                                }
+                                else
+                                {
+                                   
+                                    tempIsSaved = true;
+                                }
+                            }
+                            catch (ServerCommException ex)
+                            {
+                                throw new Exception("SetGameEnableSetting: " + ex.Message);
+                            }
+                        }
+                        UpdateUIPlayerSettingChanged(enableDisableGameSetting);
                     }
                 }
 

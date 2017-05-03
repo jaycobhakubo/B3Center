@@ -16,24 +16,25 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
         private readonly B3SettingGlobal m_originalPayTableSettings;
         private readonly List<B3MathGamePay> m_b3MathGamePayFullList;
         private List<B3MathGamePay> m_b3MathGamePayList;
-        private B3IsGameEnabledSetting m_gameEnable;
+        private readonly B3IsGameEnabledSetting m_originalGameEnableSetting;
         private GamePayTableModel m_gamePayTableModel;
-        private B3MathGamePay m_mathPayValue;
+        //private B3MathGamePay m_mathPayValue;
         private bool m_updateUIControl;
-        private bool m_GameDisabled;
+        //private bool m_GameDisabled;
         private bool m_enforceMix;
         private bool m_originalSetting;
-        private bool m_isGameEnable;
+        //private bool m_isGameEnable;
 
       
-        public GamePayTableVm( B3SettingGlobal b3SettingGlobal)
+        public GamePayTableVm( B3SettingGlobal b3SettingGlobal, B3IsGameEnabledSetting enableSetting)
         {
             m_originalPayTableSettings = b3SettingGlobal;
             m_gamePayTableModel = new GamePayTableModel();
             GameName = Business.Helpers.B3GameActualName[b3SettingGlobal.GameType];
-            m_b3MathGamePayFullList = GetFullListPayTableSetting();    
-            m_isGameEnable = SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType).IsEnabled;
-            m_originalSetting = m_isGameEnable;
+            m_b3MathGamePayFullList = GetFullListPayTableSetting();
+            m_gamePayTableModel.IsGameEnable = enableSetting.IsEnabled;
+            //m_originalSetting = m_isGameEnable;
+            m_originalGameEnableSetting = enableSetting;
             UpdateMathPayTableUI();         
         }
 
@@ -54,10 +55,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
 
         public void UpdateMathPayTableUI()
         {
-           IsGameEnable = SettingViewModel.Instance.GetEnableDisableSettingValue(m_originalPayTableSettings.GameType).IsEnabled;
+            IsGameEnable = m_originalGameEnableSetting.IsEnabled;
            m_enforceMix = GetEnforceMixesSetting();
-
-           if (m_isGameEnable)//check if this game is enable
+           var tempIsGameEnable = false;
+           tempIsGameEnable = IsGameEnable;
+           if (tempIsGameEnable)//check if this game is enable
            {
                var tempPayTableList = m_b3MathGamePayFullList.Where(l => l.IsRng == !m_enforceMix).ToList();
                if (tempPayTableList.Count != 0)//If current setting result is not null.
@@ -149,15 +151,26 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
             }
         }
 
-        public bool IsGameEnable
+        public bool IsGameEnable 
         {
-            get { return m_isGameEnable; }
+            get 
+            {
+                return GamePayTableModel.IsGameEnable;
+            }
             set
             {
-                m_isGameEnable = value;
-                RaisePropertyChanged("IsGameEnable");
+                GamePayTableModel.IsGameEnable = value;
             }
         }
+        //public bool IsGameEnable
+        //{
+        //    get { return m_gamePayTableModel.IsGameEnable; }
+        //    set
+        //    {
+        //        m_gamePayTableModel.IsGameEnable = value;
+        //        RaisePropertyChanged("IsGameEnable");
+        //    }
+        //}
 
         //public B3IsGameEnabledSetting GameEnable
         //{
