@@ -274,6 +274,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
 
+        public void UpdateUIGameSettingChanged(B3GameType b3Gametype, B3IsGameEnabledSetting isEnableNewSettingValue)
+        {
+            if (PayTableSettingVm != null)
+            {
+                var x =  PayTableSettingVm.ListGamePayTableVm.Single(l => l.GetThisB3GameType() == b3Gametype);
+                x.UpdateMathPayTableUI();
+            }
+        }
+
         public void SaveSetting()   //All saved transaction should go here
         {
             try
@@ -294,6 +303,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
                                 {
                                     throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                                }
+                                else
+                                {
+                                    UpdateUIGameSettingChanged(gameEnabledSetting.GameType, gameEnabledSetting);
                                 }
                             }
                             catch (ServerCommException ex)
