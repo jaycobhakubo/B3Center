@@ -34,14 +34,33 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            }
 
        #endregion
-        #region  METHOD 
 
-        private void UpdateEnableB3GameSettingToModel()
-       {
-          
-       }
+        #region  METHODS 
 
-        private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList, List<B3IsGameEnabledSetting> m_originalGameEnableSettings) 
+        public List<B3IsGameEnabledSetting> GetCurrentEnableDisableGameSettings() { return m_originalGameEnableSettings; }
+        private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm) { gamePayTableVm.UpdateMathPayTableUI(); }
+        public void ResetSettingsToDefault() { UpdateSettingsListToModel(m_originalPayTableSettings, m_originalGameEnableSettings); }
+
+        public List<B3SettingGlobal> Save()
+        {
+            UpdateModelToSettingsList();
+            return m_originalPayTableSettings.Where(l => l.HasChanged == true).ToList();
+        }
+
+        public void ValidateUserInput()
+        {
+            var tempResult = ListGamePayTableVm.Exists(l => l.UpdateUIControl == true);
+            if (tempResult == true)
+            {
+                SettingViewModel.Instance.BtnSaveIsEnabled = false;
+            }
+            else
+            {
+                SettingViewModel.Instance.BtnSaveIsEnabled = true;
+            }
+        }
+
+       private void UpdateSettingsListToModel(List<B3SettingGlobal> settingsList, List<B3IsGameEnabledSetting> m_originalGameEnableSettings) 
        {
            foreach (var enablesetting in m_originalGameEnableSettings)
            {
@@ -300,10 +319,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            }          
        }
 
-       public List<B3IsGameEnabledSetting> GetCurrentEnableDisableGameSettings()
-       {
-           return m_originalGameEnableSettings;
-       }
+      
 
        public void IsRngCheckEvent()
         {
@@ -317,34 +333,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             WildFirePayTableVm.UpdateMathPayTableUI();
         }
 
-       private void UpdateSettingPayTableUI(GamePayTableVm gamePayTableVm)
-       {
-           gamePayTableVm.UpdateMathPayTableUI();
-       }
 
-       public List<B3SettingGlobal> Save()
-       {
-           UpdateModelToSettingsList();
-           return m_originalPayTableSettings.Where(l => l.HasChanged == true).ToList();
-       }
-
-       public void ValidateUserInput()
-       {
-           var tempResult = ListGamePayTableVm.Exists(l => l.UpdateUIControl == true);
-           if (tempResult == true)
-           {
-               SettingViewModel.Instance.BtnSaveIsEnabled = false;
-           }
-           else
-           {
-               SettingViewModel.Instance.BtnSaveIsEnabled = true;
-           }          
-       }
-
-       public void ResetSettingsToDefault()
-       {
-           UpdateSettingsListToModel(m_originalPayTableSettings, m_originalGameEnableSettings);
-       }
 
         #endregion
         #region PROPERTIES
