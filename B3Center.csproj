@@ -122,9 +122,6 @@
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
     <Compile Include="Business\B3Controller.cs" />
-    <Compile Include="ForMyEyesOnly\Template\B3GamePayTable.xaml.cs">
-      <DependentUpon>B3GamePayTable.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
@@ -289,10 +286,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Page Include="ForMyEyesOnly\Template\B3GamePayTable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UI\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -466,13 +459,6 @@
   <ItemGroup>
     <Resource Include="Resources\fullscreen.png" />
     <Resource Include="Resources\fullscreen_exit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ForMyEyesOnly\helper\manualupdate.sql" />
-    <Resource Include="ForMyEyesOnly\Ref2\Binding.txt" />
-    <Resource Include="ForMyEyesOnly\Ref2\Enum.txt" />
-    <Resource Include="ForMyEyesOnly\Ref2\Lambda.txt" />
-    <Resource Include="ForMyEyesOnly\Ref2\TriggerXaml.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
