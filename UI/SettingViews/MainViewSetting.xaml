@@ -6,7 +6,7 @@
              xmlns:converters=   "clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
                  xmlns:local="clr-namespace:GameTech.Elite.Client.Modules.B3Center.UI.SettingViews"
              mc:Ignorable="d" 
-    xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers"
+    xmlns:converter ="clr-namespace:GameTech.Elite.Client.Modules.B3Center.Helpers" GotFocus="UserControl_GotFocus"
             >
     <UserControl.Resources>
         <converter:BoolToVisibilityConvHidden x:Key="ConvertBooltoVisHidden" ></converter:BoolToVisibilityConvHidden>

@@ -21,6 +21,7 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Threading.Tasks;
 using GameTech.Elite.Client.Modules.B3Center.Model;
+using GameTech.Elite.Client.Modules.B3Center.Properties;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -288,7 +289,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (SaveOk == true)
             {
                 IsSaved = SaveOk;
-                StatusText = "Saved sucessfully";
+                StatusText = Resources.SaveSuccess;
             }
         }
 
@@ -346,16 +347,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         msg.Send();
                         UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
+                        tempIsSaved = true;
                     }
                     catch
                     {
                         if (msg.ReturnCode != ServerReturnCode.Success)
                         {
                             throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
-                        }
-                        else
-                        {
-                            tempIsSaved = true;
                         }
                     }
                 }
