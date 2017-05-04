@@ -450,8 +450,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (e.Error == null)
             {
                 SetIconStatus(true);
-                SessionStatusMessage = Resources.SessionStartSuccess;
-                //After starting a new session, the new session does not show in the report parameter field "Session" .           
+                SessionStatusMessage = Resources.SessionStartSuccess;        
             }
             else
             {
