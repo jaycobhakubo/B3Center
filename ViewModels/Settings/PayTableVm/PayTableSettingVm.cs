@@ -34,7 +34,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            }
 
        #endregion
-
         #region  FUNCTION 
 
         public List<B3IsGameEnabledSetting> GetCurrentEnableDisableGameSettings() { return m_originalGameEnableSettings; }
