@@ -420,8 +420,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             else
             {
                 m_controller.SessionStart(new Business.Operator(0, "B3 Session"));
-            }     
-            while (m_controller.IsBusy == true) { } ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();              
+            }
+            m_controller.SessionStartCompleted += M_controller_SessionStartCompleted;
+          ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();              
+        }
+
+        private void M_controller_SessionStartCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            ReportsViewModel.Instance.UpdateReportUIOnStartNewSession(); throw new NotImplementedException();
         }
 
         /// <summary>
@@ -448,8 +454,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             if (e.Error == null)
             {
                 SetIconStatus(true);
-                SessionStatusMessage = Resources.SessionStartSuccess;
-              //  while (m_controller.IsBusy == true) { } ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();                             
+                SessionStatusMessage = Resources.SessionStartSuccess;                          
             }
             else
             {

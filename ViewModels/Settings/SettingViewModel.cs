@@ -54,6 +54,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private bool m_isRngBallCall;
         private bool m_indicatorVisibility;
         private bool m_btnSaveIsEnabled;
+        private bool m_saveSuccess;
         private int m_borderValue;
         private string m_selectedB3SettingsCategory;
         //static
@@ -98,7 +99,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         #endregion
 
-        #region Method
+        #region Method(Initialize settingVm)
 
         private GameSettingVm InitializeGameSettingVm()
         {
@@ -158,12 +159,113 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             return payTableSettingVm;
         }
 
+        #endregion
+
+        #region Method(saved command)
 
         private void RunSavedCommand()
         {
             Mouse.OverrideCursor = Cursors.Wait;
             SaveSetting();
             Mouse.OverrideCursor = null;
+        }
+
+        public void SaveSetting()   //All saved transaction should go here
+        {
+            try
+            {
+                SetNewValue();
+                var tempIsSaved = false;
+
+                //Update UI isenable game setting. 
+                //Player setting can enable disable game manually.
+                //Paytable setting will disable game automatically if theres no available math package for selected setting (55455 or RNG).
+                if (m_selectedSettingCategoryType == B3SettingCategory.Player || m_selectedSettingCategoryType == B3SettingCategory.PayTable)
+                {
+                    tempIsSaved = SaveGameEnableSetting();
+                }
+
+                if (m_settingTobeSaved.Count != 0)//Do not send if no changes was made.
+                {
+                    SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
+                    try
+                    {
+                        msg.Send();
+                        UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
+                        tempIsSaved = true;
+                    }
+                    catch
+                    {
+                        if (msg.ReturnCode != ServerReturnCode.Success)
+                        {
+                            throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
+                        }
+                    }
+                }
+                SetStatusText(tempIsSaved);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SetGameEnableSetting: " + ex.Message);
+            }
+        }
+
+        private bool SaveGameEnableSetting()
+        {
+            var tempIsSaved = false;
+            var isPlayerSetting = false;
+            var enableDisableGameSetting = new List<B3IsGameEnabledSetting>();
+
+            if (m_selectedSettingCategoryType == B3SettingCategory.Player)//This one goes first need to update UI after saved.
+            {
+                enableDisableGameSetting = PlayerSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
+                isPlayerSetting = true;
+            }
+            else
+            if (m_selectedSettingCategoryType == B3SettingCategory.PayTable)//This one goes first need to update UI after saved.
+            {
+                enableDisableGameSetting = PayTableSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
+            }
+
+            if (enableDisableGameSetting.Count != 0)
+            {
+                foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
+                {
+                    var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
+                    try
+                    {
+                        setGameEnabledMessage.Send();
+                        if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
+                        {
+
+                            throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
+                        }
+                        else
+                        {
+                            if (isPlayerSetting == true)
+                            {
+                                if (PayTableSettingVm != null)
+                                {
+                                    var paytableVm = PayTableSettingVm.ListGamePayTableVm.Single(l => l.GetThisB3GameType() == gameEnabledSetting.GameType);
+                                    paytableVm.UpdateMathPayTableUI();
+                                }
+                            }
+
+                        }
+                    }
+                    catch (ServerCommException ex)
+                    {
+                        throw new Exception("SetGameEnableSetting: " + ex.Message);
+                    }
+
+                }
+                tempIsSaved = true;
+                if (isPlayerSetting == false)
+                {
+                    PlayerSettingVm.UpdateUIGameEnable(enableDisableGameSetting);
+                }
+            }
+            return tempIsSaved;
         }
 
         private void SetNewValue()
@@ -212,44 +314,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
-        //Update UI for certain B3 Setting changed.
-        private void UpdateUIPerSettingChanged(List<B3SettingGlobal> b3settingList)
-        {
-            foreach (B3SettingGlobal b3setting in b3settingList)
-            {
-                switch (b3setting.SettingType)
-                {
-                    case B3SettingType.CommonRngBallCall:
-                        {
-                            m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
-                            var rptViewModel = ReportsViewModel.Instance;          //Show BallCallReport by Game or by session
-                            rptViewModel.ReportSelectedIndex = 0;
-                            rptViewModel.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
-                          
-                            break;
-                        }
-                    case B3SettingType.NorthDakotaMode:
-                        {
-                            if (b3setting.B3SettingValue == "T")
-                            {
-                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
-                                {
-                                    var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
-                                    SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());
-                                }
-                            }
-                            else
-                            {
-                                if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
-                                {
-                                    SettingList.Remove(B3SettingCategory.ServerGame.ToString());
-                                }
-                            }
-                            break;
-                        }
-                }
-            }
-        }
+        #endregion
+
+        #region Method(load, selecteditemchanged, cancel)
 
         private void LoadSettingList(bool IsDakotaMode)
         {
@@ -273,140 +340,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
-        }
-
-        public void UpdateUIGameSettingChanged(B3GameType b3Gametype, B3IsGameEnabledSetting isEnableNewSettingValue)
-        {
-            if (PayTableSettingVm != null)
-            {
-                var x =  PayTableSettingVm.ListGamePayTableVm.Single(l => l.GetThisB3GameType() == b3Gametype);
-                x.UpdateMathPayTableUI();
-            }
-        }
-
-        public void UpdateUIPlayerSettingChanged(List<B3IsGameEnabledSetting> isEnableNewSettingValue)
-        {
-
-            PlayerSettingVm.UpdateUI(isEnableNewSettingValue);
-          
-        }
-
-        private void SetStatusText(bool SaveOk)
-        {
-            if (SaveOk == true)
-            {
-                SaveSuccess = SaveOk;
-                StatusText = Resources.SaveSuccess;
-            }
-        }
-
-        public bool m_saveSuccess;
-        public bool SaveSuccess
-        {
-            get { return m_saveSuccess; }
-            set 
-            { 
-                m_saveSuccess = value;
-                RaisePropertyChanged("SaveSuccess");
-            }
-        }
-
-        public void SaveSetting()   //All saved transaction should go here
-        {
-            try
-            {             
-                SetNewValue();
-                var tempIsSaved = false;
-                if (m_selectedSettingCategoryType == B3SettingCategory.Player)//This one goes first need to update UI after saved.
-                {
-                    var enableDisableGameSetting = PlayerSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
-                    if (enableDisableGameSetting.Count != 0)
-                    {
-                        foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
-                        {
-                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
-                            try
-                            {
-                                setGameEnabledMessage.Send();
-                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
-                                {
-                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
-                                    
-                                }
-                                else
-                                {
-                                    UpdateUIGameSettingChanged(gameEnabledSetting.GameType, gameEnabledSetting);
-                                    tempIsSaved  = true;
-                                  
-                                }
-                            }
-                            catch (ServerCommException ex)
-                            {
-                                throw new Exception("SetGameEnableSetting: " + ex.Message);
-                            }
-                        }
-                        UpdateUIPlayerSettingChanged(enableDisableGameSetting);
-                    } 
-                }
-
-                if (m_selectedSettingCategoryType == B3SettingCategory.PayTable)//This one goes first need to update UI after saved.
-                {
-                    var enableDisableGameSetting = PayTableSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
-                    if (enableDisableGameSetting.Count != 0)
-                    {
-                        foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
-                        {
-                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
-                            try
-                            {
-                                setGameEnabledMessage.Send();
-                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
-                                {
-                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
-
-                                }
-                                else
-                                {
-                                   
-                                    tempIsSaved = true;
-                                }
-                            }
-                            catch (ServerCommException ex)
-                            {
-                                throw new Exception("SetGameEnableSetting: " + ex.Message);
-                            }
-                        }
-                        UpdateUIPlayerSettingChanged(enableDisableGameSetting);
-                    }
-                }
-
-                if (m_settingTobeSaved.Count != 0)//Do not send if no changes was made.
-                {
-                    SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
-                    try
-                    {
-                        msg.Send();
-                        UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
-                        tempIsSaved = true;
-                    }
-                    catch
-                    {
-                        if (msg.ReturnCode != ServerReturnCode.Success)
-                        {
-                            throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
-                        }
-                    }
-                }
-
-                SetStatusText(tempIsSaved);
-               
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("SetGameEnableSetting: " + ex.Message);
-            }       
-        }
-
+        }      
 
         public void SelectedItemEvent()
         {
@@ -519,6 +453,51 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             }
         }
 
+        #endregion
+
+        #region Method(UI update)
+
+        //Update UI for certain B3 Setting changed.
+        private void UpdateUIPerSettingChanged(List<B3SettingGlobal> b3settingList)
+        {
+            foreach (B3SettingGlobal b3setting in b3settingList)
+            {
+                switch (b3setting.SettingType)
+                {
+                    case B3SettingType.CommonRngBallCall:
+                        {
+                            m_isRngBallCall = PayTableSettingVm.PayTableSettings.CommonRngBallCall;
+                            var rptViewModel = ReportsViewModel.Instance;          //Show BallCallReport by Game or by session
+                            rptViewModel.ReportSelectedIndex = 0;
+                            rptViewModel.SetBallCallReportBySessionOrByGame(b3setting.B3SettingValue);
+
+                            break;
+                        }
+                    case B3SettingType.NorthDakotaMode:
+                        {
+                            if (b3setting.B3SettingValue == "T")
+                            {
+                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                                {
+                                    var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
+                                    SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());
+                                }
+                            }
+                            else
+                            {
+                                if (SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                                {
+                                    SettingList.Remove(B3SettingCategory.ServerGame.ToString());
+                                }
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+        #endregion
+
+        #region Method(helper)
 
         //Get the list of math pay table of a particular game.
         public ObservableCollection<B3MathGamePay> GetB3MathGamePlay(B3GameType gameType)
@@ -539,6 +518,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         //Get enable disable setting value of a  specific game.
         public B3IsGameEnabledSetting GetEnableDisableSettingValue(B3GameType gameType) { return B3IsGameEnabledSettings.Single(l => l.GameType == gameType); }
 
+        #endregion
+
+        #region Method
+
         //Check if current staff has permission to view Paytable settings
         public bool GetStaffPayTablePermission()
         {
@@ -552,7 +535,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 }
             }
             return result;
-        }       
+        }
+
+        private void SetStatusText(bool SaveOk)
+        {
+            if (SaveOk == true)
+            {
+                SaveSuccess = SaveOk;
+                StatusText = Resources.SaveSuccess;
+            }
+        }
 
         #endregion
 
@@ -747,7 +739,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             get { return m_settingList; }
         }
 
-     
+        public bool SaveSuccess
+        {
+            get { return m_saveSuccess; }
+            set
+            {
+                m_saveSuccess = value;
+                RaisePropertyChanged("SaveSuccess");
+            }
+        }
+
         #endregion
     }
 }

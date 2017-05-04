@@ -76,7 +76,7 @@
                 </StackPanel>
                 <ComboBox 
                               
-                               ItemsSource="{Binding SessionList, Mode=TwoWay}"
+                               ItemsSource="{Binding SessionList}"
                                SelectedItem="{Binding SelectedSession}"
                                SelectionChanged="SessionCombobox_SelectionChanged"
                                DisplayMemberPath="DisplayName"
