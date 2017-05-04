@@ -45,16 +45,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.Messages
                     var number = responseReader.ReadInt32();
 
                     var nameLength = responseReader.ReadInt16();
-
                     var name = responseReader.ReadChars(nameLength);
 
                     var startLength = responseReader.ReadInt16();
-
                     var startTime = responseReader.ReadChars(startLength);
 
                     var endLength = responseReader.ReadInt16();
-
-                    var endTime = responseReader.ReadChars(startLength);
+                    var endTime = responseReader.ReadChars(endLength);
 
                     var active = responseReader.ReadBoolean();
 
