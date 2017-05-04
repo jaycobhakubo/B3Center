@@ -410,7 +410,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        
             //if multioperator, then send selected operator
             //else send default operator
-            if (Settings.IsMultiOperator)
+            if (Settings.IsMultiOperator)//knc
             {
                 if (SelectedOperator != null)
                 {
@@ -444,7 +444,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller.VoidOutstandingSessionTickets();
         }
 
-        private void OnStartDone(object sender, AsyncCompletedEventArgs e)
+        private void OnStartDone(object sender, AsyncCompletedEventArgs e)//knc
         {
             if (e.Error == null)
             {

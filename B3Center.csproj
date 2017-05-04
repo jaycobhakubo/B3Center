@@ -122,6 +122,7 @@
     <Compile Include="Business\Operator.cs" />
     <Compile Include="Business\Session.cs" />
     <Compile Include="Business\B3Controller.cs" />
+    <Resource Include="ForMyEyesOnly\ISSUE\MultiOperatorNotChangingAfterSaveSuccess.txt" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Messages\GetB3AccountNumber.cs" />
@@ -452,6 +453,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="B3CenterKey.snk" />
+    <None Include="ForMyEyesOnly\ISSUE\MultiOperatorNotChangingAfterSaveSuccess.docx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\back_icon.png" />

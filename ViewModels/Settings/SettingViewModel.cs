@@ -111,6 +111,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private PlayerSettingVm InitializePlayerSettingVm()
         {
+       
             var playerSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.Player).ToList();
             var playerSettingVm = new PlayerSettingVm(playerSettingsFromServer, B3IsGameEnabledSettings);
             m_playerSettingView = new PlayerSettingView(playerSettingVm);
@@ -276,11 +277,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 switch (m_selectedSettingCategoryType)
                 {
                     case B3SettingCategory.Games: m_settingTobeSaved = GameSettingsVm.SelectedGameVm.Save().Where(l => l.HasChanged == true).ToList(); break;
-                    case B3SettingCategory.Player: m_settingTobeSaved = PlayerSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.Player:
+                        {
+                            m_settingTobeSaved = PlayerSettingVm.Save().Where(l => l.HasChanged == true).ToList();
+                            break;
+                        }
                     case B3SettingCategory.Sales: m_settingTobeSaved = SalesSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
                     case B3SettingCategory.ServerGame: m_settingTobeSaved = ServerSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
                     case B3SettingCategory.Session: m_settingTobeSaved = SessionSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
-                    case B3SettingCategory.System: m_settingTobeSaved = SystemSettingVm.Save().Where(l => l.HasChanged == true).ToList(); break;
+                    case B3SettingCategory.System:
+                        {
+                            m_settingTobeSaved = SystemSettingVm.Save().Where(l => l.HasChanged == true).ToList();
+                            var t = m_settingTobeSaved.Exists(l => l.SettingType == B3SettingType.MultiOperator);
+                            if (t == true)
+                            {
+                                try
+                                {
+                                    var g = m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MultiOperator);
+                                    m_controller.Settings.IsMultiOperator = Business.Helpers.ConvertB3StringValueToBool(g);
+                                        // convert //Convert.ToBoolean(m_settingTobeSaved.Single(l => l.SettingType == B3SettingType.MultiOperator).B3SettingValue);
+                                   
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                            break;
+                        }
 
                     case B3SettingCategory.PayTable:
                         {
@@ -309,6 +333,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                     m_settingTobeSaved.AddRange(tempAllgamesetting);
                             }
                             break;
+                         
                         }
                 }           
             }

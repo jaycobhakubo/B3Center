@@ -1,0 +1,40 @@
+﻿20170504
+ISSUE #1:  
+
+  private void StartSession()
+        {
+            SessionStatusMessage = Resources.SessionStartProgress;
+       
+            //if multioperator, then send selected operator
+            //else send default operator
+            if (Settings.IsMultiOperator)//knc
+            {
+                if (SelectedOperator != null)
+                {
+                    m_controller.SessionStart(SelectedOperator);
+                }
+            }
+            else
+            {
+                m_controller.SessionStart(new Business.Operator(0, "B3 Session"));
+            }
+            while (m_controller.IsBusy == true) { }ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();
+        }
+
+
+public B3CenterSettings Settings
+        {
+            get
+            {
+                if (m_controller == null)
+                {
+                    return null;
+                }
+
+                return m_controller.Settings;
+            }
+        }
+
+m_controller.Settings;
+
+private B3Controller m_controller;
