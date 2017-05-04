@@ -60,7 +60,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         public Visibility ReportParameterVisible
         {
-            get { return ReportTemplateModel.DefaultViewerm; }//knc
+            get { return ReportTemplateModel.DefaultViewerm; }
             set
             {
                 var testdd = ReportTemplateModel;

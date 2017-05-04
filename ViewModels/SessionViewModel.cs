@@ -410,7 +410,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
        
             //if multioperator, then send selected operator
             //else send default operator
-            if (Settings.IsMultiOperator)//knc
+            if (Settings.IsMultiOperator)
             {
                 if (SelectedOperator != null)
                 {
@@ -421,7 +421,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 m_controller.SessionStart(new Business.Operator(0, "B3 Session"));
             }
-            while (m_controller.IsBusy == true) { }ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();
+
+            
         }
 
 
@@ -444,12 +445,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_controller.VoidOutstandingSessionTickets();
         }
 
-        private void OnStartDone(object sender, AsyncCompletedEventArgs e)//knc
+        private void OnStartDone(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Error == null)
             {
                 SetIconStatus(true);
-                SessionStatusMessage = Resources.SessionStartSuccess;                          
+                SessionStatusMessage = Resources.SessionStartSuccess;
+                //After starting a new session, the new session does not show in the report parameter field "Session" .           
             }
             else
             {
@@ -533,6 +535,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                 {
                     SessionList.Add(session);
                 }
+
+                ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();       
             }));
         }
 
