@@ -24,16 +24,5 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.PayTable
                 RaisePropertyChanged("MathPayValue");
             }
         }
-
-        private bool m_isGameEnable;
-        public bool IsGameEnable
-        {
-            get { return m_isGameEnable; }
-            set
-            {
-                m_isGameEnable = value;
-                RaisePropertyChanged("IsGameEnable");
-            }
-        }
     }
 }

@@ -48,40 +48,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UpdateSettingsListToModel(m_origianlPlayerSettings, m_originalEnableDisableSetings);
         }
 
-        public void UpdateUI(List<B3IsGameEnabledSetting> isGameEnabledSettings)
-        {
-            foreach (var gameEnabledSetting in isGameEnabledSettings)
-            {
-                switch (gameEnabledSetting.GameType)
-                {
-                    case B3GameType.Crazybout:
-                        PlayerSetting.CrazyboutGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Jailbreak:
-                        PlayerSetting.JailBreakGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Mayamoney:
-                        PlayerSetting.MayaMoneyGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Spirit76:
-                        PlayerSetting.Spirit76GameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Timebomb:
-                        PlayerSetting.TimeBombGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Ukickem:
-                        PlayerSetting.UKickemGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Wildball:
-                        PlayerSetting.WildBallGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                    case B3GameType.Wildfire:
-                        PlayerSetting.WildFireGameSetting.IsEnabled = gameEnabledSetting.IsEnabled;
-                        break;
-                }
-            }
-        }
-
         private void UpdateSettingsListToModel(List<B3SettingGlobal> playerSettingsList, List<B3IsGameEnabledSetting> isGameEnabledSettings)
         {
        

@@ -21,7 +21,6 @@ using GameTech.Elite.Client.Modules.B3Center.Model.Setting;
 using GameTech.Elite.Client.Modules.B3Center.Messages;
 using System.Threading.Tasks;
 using GameTech.Elite.Client.Modules.B3Center.Model;
-using GameTech.Elite.Client.Modules.B3Center.Properties;
 
 namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 {
@@ -275,48 +274,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             SelectedB3SettingsCategory = m_settingList.FirstOrDefault();
         }
 
-        public void UpdateUIGameSettingChanged(B3GameType b3Gametype, B3IsGameEnabledSetting isEnableNewSettingValue)
-        {
-            if (PayTableSettingVm != null)
-            {
-                var x =  PayTableSettingVm.ListGamePayTableVm.Single(l => l.GetThisB3GameType() == b3Gametype);
-                x.UpdateMathPayTableUI();
-            }
-        }
-
-        public void UpdateUIPlayerSettingChanged(List<B3IsGameEnabledSetting> isEnableNewSettingValue)
-        {
-
-            PlayerSettingVm.UpdateUI(isEnableNewSettingValue);
-          
-        }
-
-        private void SetStatusText(bool SaveOk)
-        {
-            if (SaveOk == true)
-            {
-                SaveSuccess = SaveOk;
-                StatusText = Resources.SaveSuccess;
-            }
-        }
-
-        public bool m_saveSuccess;
-        public bool SaveSuccess
-        {
-            get { return m_saveSuccess; }
-            set 
-            { 
-                m_saveSuccess = value;
-                RaisePropertyChanged("SaveSuccess");
-            }
-        }
-
         public void SaveSetting()   //All saved transaction should go here
         {
             try
             {             
                 SetNewValue();
-                var tempIsSaved = false;
+
                 if (m_selectedSettingCategoryType == B3SettingCategory.Player)//This one goes first need to update UI after saved.
                 {
                     var enableDisableGameSetting = PlayerSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
@@ -331,13 +294,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
                                 {
                                     throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
-                                    
-                                }
-                                else
-                                {
-                                    UpdateUIGameSettingChanged(gameEnabledSetting.GameType, gameEnabledSetting);
-                                    tempIsSaved  = true;
-                                  
                                 }
                             }
                             catch (ServerCommException ex)
@@ -345,38 +301,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                                 throw new Exception("SetGameEnableSetting: " + ex.Message);
                             }
                         }
-                        UpdateUIPlayerSettingChanged(enableDisableGameSetting);
-                    } 
-                }
-
-                if (m_selectedSettingCategoryType == B3SettingCategory.PayTable)//This one goes first need to update UI after saved.
-                {
-                    var enableDisableGameSetting = PayTableSettingVm.GetCurrentEnableDisableGameSettings().Where(l => l.HasChanged == true).ToList();
-                    if (enableDisableGameSetting.Count != 0)
-                    {
-                        foreach (var gameEnabledSetting in enableDisableGameSetting)//Check for enabledisablesetting update
-                        {
-                            var setGameEnabledMessage = new SetGameEnableSetting(gameEnabledSetting.GameType, gameEnabledSetting.IsEnabled);
-                            try
-                            {
-                                setGameEnabledMessage.Send();
-                                if (setGameEnabledMessage.ReturnCode != ServerReturnCode.Success)
-                                {
-                                    throw new Exception(ServerErrorTranslator.GetReturnCodeMessage(setGameEnabledMessage.ReturnCode));
-
-                                }
-                                else
-                                {
-                                   
-                                    tempIsSaved = true;
-                                }
-                            }
-                            catch (ServerCommException ex)
-                            {
-                                throw new Exception("SetGameEnableSetting: " + ex.Message);
-                            }
-                        }
-                        UpdateUIPlayerSettingChanged(enableDisableGameSetting);
                     }
                 }
 
@@ -387,19 +311,13 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     {
                         msg.Send();
                         UpdateUIPerSettingChanged(m_settingTobeSaved.Where(l => l.UIUpdateRequired == true && l.B3SettingDefaultValue != l.B3SettingValue).ToList());
-                        tempIsSaved = true;
                     }
                     catch
                     {
                         if (msg.ReturnCode != ServerReturnCode.Success)
-                        {
                             throw new B3CenterException(string.Format(CultureInfo.CurrentCulture, "B3 Set Server Setting Failed"));
-                        }
                     }
                 }
-
-                SetStatusText(tempIsSaved);
-               
             }
             catch (Exception ex)
             {
@@ -591,17 +509,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public GameSettingVm GameSettingsVm { get; set; }
         public PayTableSettingVm PayTableSettingVm { get; set; }
 
-        public string m_statusText;
-        public string StatusText
-        {
-            get { return m_statusText; }
-            set
-            {
-                m_statusText = value;
-                RaisePropertyChanged("StatusText");
-            }
-            
-        }
 
         public bool IndicatorVisibility
         {

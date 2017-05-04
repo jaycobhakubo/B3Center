@@ -287,7 +287,4 @@ Would you like to void all outstanding accounts? </value>
   <data name="NoOutstandingAccountsToVoidString" xml:space="preserve">
     <value>There are no accounts to void</value>
   </data>
-  <data name="SaveSuccess" xml:space="preserve">
-    <value>Saved sucessfully</value>
-  </data>
 </root>
