@@ -74,9 +74,8 @@
                     <TextBlock  Text="* " Foreground="Red" />
                     <TextBlock Text="Session:" Name="Sessionpar"  Visibility="{Binding SessionInput}"/>
                 </StackPanel>
-                <ComboBox 
-                              
-                               ItemsSource="{Binding SessionList}"
+                <ComboBox                              
+                               ItemsSource="{Binding SessionList, Mode=TwoWay}"
                                SelectedItem="{Binding SelectedSession}"
                                SelectionChanged="SessionCombobox_SelectionChanged"
                                DisplayMemberPath="DisplayName"

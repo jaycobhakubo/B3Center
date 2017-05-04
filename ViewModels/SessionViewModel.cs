@@ -421,14 +421,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             {
                 m_controller.SessionStart(new Business.Operator(0, "B3 Session"));
             }
-            m_controller.SessionStartCompleted += M_controller_SessionStartCompleted;
-          ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();              
+            while (m_controller.IsBusy == true) { }ReportsViewModel.Instance.UpdateReportUIOnStartNewSession();
         }
 
-        private void M_controller_SessionStartCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            ReportsViewModel.Instance.UpdateReportUIOnStartNewSession(); throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Notifies the controller to end a session.
