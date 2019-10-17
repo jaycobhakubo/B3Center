@@ -37,8 +37,7 @@
             <viewer:CrystalReportsViewer 
                 x:Name="CrViewer"  
                 ShowToolbar="True"
-                Focusable="True"
-                ToggleSidePanel="None"/>
+                Focusable="True"/>
         </Border>
         <Grid Grid.Row="1">
             <Border  Visibility="{Binding ReportParameterVisible}">

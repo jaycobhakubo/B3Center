@@ -176,7 +176,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Helpers
         {
             int callSpeedValue;
 
-            if (int.TryParse(value.ToString(), out callSpeedValue))
+            if (value != null && int.TryParse(value.ToString(), out callSpeedValue))
             {
                 string tempCallSpeed = "";
                 if (callSpeedValue == 100) { tempCallSpeed = "10"; }

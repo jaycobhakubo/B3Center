@@ -1,4 +1,5 @@
-﻿using GameTech.Elite.Base;
+﻿using System;
+using GameTech.Elite.Base;
 
 namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
 {
@@ -11,6 +12,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
        private string m_consolationPrize;
        private string m_gameRecallPassword;
        private string m_waitCountDown;
+       private bool m_handPayCalculateByGame;
+       private bool m_handPayCalculateByPattern;
+       private string m_rfRequiredForPlayTimeout;
+       private bool m_singlePlayerMode;
+       private bool m_multiplayerMode;
        #endregion
 
        #region Properties
@@ -76,6 +82,79 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
            {
                m_waitCountDown = value;
                RaisePropertyChanged("WaitCountDown");
+           }
+       }
+
+       public bool IsHandPayCalculateByGame
+       {
+           get
+           {
+               return m_handPayCalculateByGame;
+           }
+           set
+           {
+               m_handPayCalculateByGame = value;
+               RaisePropertyChanged("HandPayCalculateByGame");
+           }
+       }
+
+       public bool IsHandPayCalculateByPattern
+       {
+           get
+           {
+               return m_handPayCalculateByPattern;
+           }
+           set
+           {
+               m_handPayCalculateByPattern = value;
+               RaisePropertyChanged("HandPayCalculateByPattern");
+           }
+       }
+
+       public string RfRequiredForPlayTimeout
+       {
+           get
+           {
+               return m_rfRequiredForPlayTimeout;
+           }
+           set
+           {
+               m_rfRequiredForPlayTimeout = value;
+               RaisePropertyChanged("RfRequiredForPlayTimeout");
+           }
+       }
+
+       public bool IsSinglePlayerMode
+       {
+           get
+           {
+               return m_singlePlayerMode;
+           }
+           set
+           {
+               m_singlePlayerMode = value;
+               if (m_singlePlayerMode && Int32.Parse(MinPlayer) > 1)
+               {
+                   MinPlayer = 1.ToString();
+               }
+               RaisePropertyChanged("IsSinglePlayerMode");
+           }
+       }
+
+       public bool IsMultiplayerMode
+       {
+           get
+           {
+               return m_multiplayerMode;
+           }
+           set
+           {
+               m_multiplayerMode = value;
+               if (m_multiplayerMode && Int32.Parse(MinPlayer) <= 1)
+               {
+                   MinPlayer = 2.ToString();
+               }
+               RaisePropertyChanged("IsMultiplayerMode");
            }
        }
        #endregion

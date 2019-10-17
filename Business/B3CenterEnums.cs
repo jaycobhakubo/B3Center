@@ -17,7 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         Wildfire = 8,
     }
 
-    public enum B3SettingCategory
+    public enum B3SettingCategory//knc
     {
         Games = 1,
         Operator = 2,     
@@ -27,6 +27,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         Session = 6,
         System = 7,
         PayTable = 8,
+        Geofencing = 9,
     }
 
     public enum B3SettingType
@@ -92,6 +93,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         CallSpeedMin = 59,
         CallSpeedBonus = 60,
         W2Trigger = 61,
+        HandpayByPattern = 62,
+        RfRequiredForPlay = 63,
     }
 
 

@@ -348,16 +348,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_settingList.Clear();      
             var categories = Enum.GetNames(typeof(B3SettingCategory)).OrderBy(l => l);
           
-            foreach (var b3SettingCategory in categories)
+            foreach (var b3SettingCategory in categories)//knc
             {
+       
                 if (b3SettingCategory != B3SettingCategory.Operator.ToString())
                 {
-                    if (b3SettingCategory == B3SettingCategory.ServerGame.ToString() && !IsDakotaMode)
-                    {
-                        continue;
-                    }
+                    //if (b3SettingCategory == B3SettingCategory.ServerGame.ToString() && !IsDakotaMode)
+                    //{
+                    //    continue;
+                    //}
 
-                    if (b3SettingCategory == B3SettingCategory.PayTable.ToString() && !GetStaffPayTablePermission())
+                    if (b3SettingCategory == B3SettingCategory.PayTable.ToString() && !GetStaffPayTablePermission())//knc
                     {
                         continue;
                     }
@@ -502,7 +503,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         {
                             if (b3setting.B3SettingValue == "T")
                             {
-                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
+                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))//knc
                                 {
                                     var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
                                     SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());

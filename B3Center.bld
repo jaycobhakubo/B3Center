@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<project version='7' encrypted='1'>
+<project version='8' encrypted='1'>
 	<steps type='0'>
 		<step action='Make VS 2010'>
 			<AssemblyVer type='11'>-1</AssemblyVer>
@@ -29,18 +29,41 @@
 			<Recurse type='11'>-1</Recurse>
 			<name>Delete Latest Folder</name>
 		</step>
+		<step action='Delete Files'>
+			<Ext><![CDATA[System.Windows.Interactivity.dll
+WindowsInput.dll]]></Ext>
+			<HideOn type='11'>-1</HideOn>
+			<LogDel type='11'>-1</LogDel>
+			<Path>%SRC_ROOT%\Dev\ClientModules\B3Center\bin\Release</Path>
+			<SysOn type='11'>-1</SysOn>
+			<buildfailsteps type='11'>0</buildfailsteps>
+			<description>Deletes system files from the release that are not included in the package.</description>
+			<name>Delete Release Files</name>
+		</step>
 		<step action='Copy Files'>
 			<Converted type='11'>-1</Converted>
 			<Delay>15</Delay>
 			<DestDir>%BUILD_PATH%\Client\B3Center\Latest</DestDir>
 			<Ext>*.dll</Ext>
-			<Incremental type='11'>0</Incremental>
 			<LogCopied type='11'>-1</LogCopied>
 			<ReadOnly type='11'>-1</ReadOnly>
 			<Retries>10</Retries>
 			<SourceDir>%SRC_ROOT%\Dev\ClientModules\B3Center\bin\Release</SourceDir>
 			<TBD type='11'>-1</TBD>
 			<name>Copy Files To Latest Folder</name>
+		</step>
+		<step action='Copy Files'>
+			<Converted type='11'>-1</Converted>
+			<Delay>15</Delay>
+			<DestDir>%BUILD_PATH%\Client\B3Center\Latest\PDB</DestDir>
+			<Ext>*.PDB</Ext>
+			<LogCopied type='11'>-1</LogCopied>
+			<ReadOnly type='11'>-1</ReadOnly>
+			<Retries>10</Retries>
+			<SourceDir>%SRC_ROOT%\Dev\ClientModules\B3Center\bin\Release</SourceDir>
+			<TBD type='11'>-1</TBD>
+			<description>Copy the Program Database files to the latest pdb folder</description>
+			<name>Copy PDB files To Latest Folder</name>
 		</step>
 		<step action='Run Program'>
 			<command>%PACKAGER% "%SRC_ROOT%\Dev\ClientModules\B3Center\B3Center.gtp" -generate</command>
@@ -53,7 +76,6 @@
 			<Delay>15</Delay>
 			<DestDir>%BUILD_PATH%\Client\B3Center\Latest</DestDir>
 			<Ext>*.gtipackage</Ext>
-			<Incremental type='11'>0</Incremental>
 			<LogCopied type='11'>-1</LogCopied>
 			<Move type='11'>-1</Move>
 			<ReadOnly type='11'>-1</ReadOnly>
@@ -70,7 +92,6 @@
 			<Converted type='11'>-1</Converted>
 			<Delay>15</Delay>
 			<DestDir>%BUILD_PATH%\Client\B3Center\%VSNET_ASSEM_VER%</DestDir>
-			<Incremental type='11'>0</Incremental>
 			<LogCopied type='11'>-1</LogCopied>
 			<ReadOnly type='11'>-1</ReadOnly>
 			<Recurse type='11'>-1</Recurse>

@@ -19,6 +19,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
            ServerSettings = new ServerSetting();
            UpdateSettingsListToModel(serversettingsList);
            m_origianlServerSettings = serversettingsList;
+
        }
        #endregion
 
@@ -49,6 +50,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                {
                    case B3SettingType.MinPlayer:
                        ServerSettings.MinPlayer = setting.B3SettingValue;
+                       if (int.Parse(ServerSettings.MinPlayer) > 1)
+                       {
+                           ServerSettings.IsMultiplayerMode = true;
+                           ServerSettings.IsSinglePlayerMode = false;
+                       }
+                       else
+                       {
+                           ServerSettings.IsMultiplayerMode = false;
+                           ServerSettings.IsSinglePlayerMode = true;
+                       }
                        break;
                    case B3SettingType.GameStartDelay:
                        ServerSettings.GameStartDelay = setting.B3SettingValue;
@@ -62,9 +73,15 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                    case B3SettingType.WaitCountDown:
                        ServerSettings.WaitCountDown = setting.B3SettingValue;
                        break;
-               }
+                  case B3SettingType.HandpayByPattern:
+                       ServerSettings.IsHandPayCalculateByPattern = setting.ConvertB3StringValueToBool();
+                       ServerSettings.IsHandPayCalculateByGame = !ServerSettings.IsHandPayCalculateByPattern;
+                       break;
+                  case B3SettingType.RfRequiredForPlay:
+                       ServerSettings.RfRequiredForPlayTimeout = setting.B3SettingValue;
+                       break;
 
-              
+               }
            }
        }
 
@@ -90,6 +107,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        break;
                    case B3SettingType.WaitCountDown:
                        setting.B3SettingValue = ServerSettings.WaitCountDown;
+                       break;
+                   case B3SettingType.HandpayByPattern:
+                       setting.B3SettingValue = ServerSettings.IsHandPayCalculateByPattern.ConvertToB3StringValue();
+                       break;
+                   case B3SettingType.RfRequiredForPlay:
+                       setting.B3SettingValue = ServerSettings.RfRequiredForPlayTimeout;
                        break;
                }
 
