@@ -194,7 +194,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             UpdateSettingsListToModel(m_originalSystemSettings);
         }
 		
-				public static List<string> BetLevel()
+		public static List<string> BetLevel()
         {
             return Business.Helpers.OneToTenList;
         }

@@ -206,6 +206,7 @@
       <DependentUpon>GamePayTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Setting\PayTable\GamePayTableModel.cs" />
+    <Compile Include="ViewModels\Settings\GeofencingVm.cs" />
     <Compile Include="ViewModels\Settings\PayTableVm\GamePayTableVm.cs" />
     <Compile Include="UI\SettingViews\PayTableView\PayTableSettingView.xaml.cs">
       <DependentUpon>PayTableSettingView.xaml</DependentUpon>
