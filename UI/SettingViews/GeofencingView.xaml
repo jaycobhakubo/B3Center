@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="GameTech.Elite.Client.Modules.B3Center.UI.SettingViews.GeofencingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource B3RequiredFieldLabelStyle}">
+            <Setter Property="ContentStringFormat" Value="{}{0}:"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Border>
+        <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,15,0,0" Name="GridSessionSettings"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="279"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="279"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Name="StkpnlSessionSetting" Grid.Column="1">
+                <CheckBox Name="chkbxEnableGeofencing" Content="Enable Geofencing"   TabIndex="1"/>
+                <Label x:Name="lblLongtitude"  Content="Longtitude" />
+                <TextBox TabIndex="1" Name="txtbxLongtitude"/>
+                <Label x:Name="lblLatitude"  Content="Latitude" />
+                <TextBox TabIndex="2" Name="txtbxLatitude"/>
+                <Label x:Name="lblYellowZone"  Content="Yellow zone (meters)" />
+                <TextBox TabIndex="1" Name="txtbxYellowZone"/>
+                <Label x:Name="lblRedZone"  Content="Red zone (meters)" />
+                <TextBox TabIndex="1" Name="txtbxRedZone"/>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</UserControl>

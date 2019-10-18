@@ -198,6 +198,9 @@
     <Compile Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml.cs">
       <DependentUpon>GameSettingWildFire.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SettingViews\GeofencingView.xaml.cs">
+      <DependentUpon>GeofencingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SettingViews\PayTableView\GamePayTable.xaml.cs">
       <DependentUpon>GamePayTable.xaml</DependentUpon>
     </Compile>
@@ -339,6 +342,10 @@
     <Page Include="UI\SettingViews\GameSettingView\GameSettingWildFire.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SettingViews\GeofencingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\SettingViews\PayTableView\GamePayTable.xaml">
       <SubType>Designer</SubType>
