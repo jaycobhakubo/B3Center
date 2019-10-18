@@ -149,6 +149,7 @@
     <Compile Include="Model\Report\Reports.cs" />
     <Compile Include="Model\Report\ReportTemplateModel.cs" />
     <Compile Include="Model\Setting\GameSetting.cs" />
+    <Compile Include="Model\Setting\GeofencingModel.cs" />
     <Compile Include="Model\Setting\PayTable\PayTableSetting.cs" />
     <Compile Include="Model\Setting\PlayerSetting.cs" />
     <Compile Include="Model\Setting\SalesSettings.cs" />
