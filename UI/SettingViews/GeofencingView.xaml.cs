@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings;
 
 namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 {
@@ -19,9 +20,10 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
     /// </summary>
     public partial class GeofencingView : UserControl
     {
-        public GeofencingView()
+        public GeofencingView(GeofencingVm geofencingViewModel)
         {
             InitializeComponent();
+            DataContext = geofencingViewModel;
         }
     }
 }

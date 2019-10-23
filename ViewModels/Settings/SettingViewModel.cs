@@ -38,6 +38,8 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private PlayerSettingView m_playerSettingView;
         private SessionSettingView m_sessionSettingView;
         private PayTableSettingView m_payTableSettingView;
+        private GeofencingView m_geofencingView;
+
         private readonly Lazy<GameSettingVm> m_lazyGameSettingVm;
         private readonly Lazy<PlayerSettingVm> m_lazyPlayerSettingVm;
         private readonly Lazy<SalesSettingVm> m_lazySalesSettingVm;
@@ -45,6 +47,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         private readonly Lazy<SessionSettingVm> m_lazySessionSettingVm;
         private readonly Lazy<SystemSettingVm> m_lazySystemSettingVm;
         private readonly Lazy<PayTableSettingVm> m_lazyPayTableSettingVm;
+        private readonly Lazy<GeofencingVm> m_lazyGeofencingSettingVm;
         //Other
         private List<B3SettingGlobal> m_settingTobeSaved;
         private ObservableCollection<string> m_settingList = new ObservableCollection<string>();
@@ -73,6 +76,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_lazySessionSettingVm = new Lazy<SessionSettingVm>(InitializeSessionSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
             m_lazySystemSettingVm = new Lazy<SystemSettingVm>(InitializeSystemSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
             m_lazyPayTableSettingVm = new Lazy<PayTableSettingVm>(InitializePayTableSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
+            m_lazyGeofencingSettingVm = new Lazy<GeofencingVm>(InitializeGeofencingSettingVm, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
         #endregion
@@ -158,6 +162,14 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             var payTableSettingVm = new PayTableSettingVm(payTableSettingsFromServer);
             m_payTableSettingView = new PayTableSettingView(payTableSettingVm);
             return payTableSettingVm;
+        }
+
+        private GeofencingVm InitializeGeofencingSettingVm()
+        {
+            var geofencingSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.Session).ToList();
+            var geofencingSettingVm = new GeofencingVm(geofencingSettingsFromServer);
+            m_geofencingView = new GeofencingView(geofencingSettingVm);
+            return geofencingSettingVm;
         }
 
         #endregion
@@ -432,6 +444,12 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         SelectedSettingView = m_payTableSettingView;
                         break; 
                     }
+                case B3SettingCategory.Geofencing:
+                    {
+                        GeofencingSettingVm = m_lazyGeofencingSettingVm.Value;
+                        SelectedSettingView = m_geofencingView;
+                        break;
+                    }
             }
 
             m_previousB3SettingCategory = m_selectedSettingCategoryType;
@@ -608,6 +626,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         public SystemSettingVm SystemSettingVm { get; set; }
         public GameSettingVm GameSettingsVm { get; set; }
         public PayTableSettingVm PayTableSettingVm { get; set; }
+        public GeofencingVm GeofencingSettingVm { get; set; }
 
         public string m_statusText;
         public string StatusText
