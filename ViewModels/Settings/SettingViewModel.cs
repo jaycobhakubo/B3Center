@@ -166,7 +166,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
         private GeofencingVm InitializeGeofencingSettingVm()
         {
-            var geofencingSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.Session).ToList();
+            var geofencingSettingsFromServer = m_controller.Settings.B3GlobalSettings.Where(l => l.B3SettingCategoryType == B3SettingCategory.Geofencing).ToList();
             var geofencingSettingVm = new GeofencingVm(geofencingSettingsFromServer);
             m_geofencingView = new GeofencingView(geofencingSettingVm);
             return geofencingSettingVm;
@@ -445,7 +445,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break; 
                     }
                 case B3SettingCategory.Geofencing:
-                    {
+                    {//knc
                         GeofencingSettingVm = m_lazyGeofencingSettingVm.Value;
                         SelectedSettingView = m_geofencingView;
                         break;
