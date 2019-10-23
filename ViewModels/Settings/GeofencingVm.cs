@@ -24,7 +24,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
 
         #endregion
 
-
         #region Properties
 
         public GeofencingModel GeofencingModel

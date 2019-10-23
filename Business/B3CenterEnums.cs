@@ -96,7 +96,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         HandpayByPattern = 62,
         RfRequiredForPlay = 63,
         EnableGeofencing = 64,
-        Longtitude = 65,
+        Longitude = 65,
         Latitude = 66,
         YellowZone = 67,
         RedZone = 68,

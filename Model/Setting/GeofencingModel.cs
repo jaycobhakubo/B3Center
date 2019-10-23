@@ -6,7 +6,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
     {
         #region Fields
         private bool m_enableGeofencing;
-        private string m_longtitude;
+        private string m_longitude;
         private string m_latitude;
         private string m_yellowZone;
         private string m_redZone;
@@ -27,16 +27,16 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
         }
 
-        public string Longtitude
+        public string Longitude
         {
             get
             {
-                return m_longtitude;
+                return m_longitude;
             }
             set
             {
-                m_longtitude = value;
-                RaisePropertyChanged("Longtitude");
+                m_longitude = value;
+                RaisePropertyChanged("Longitude");
             }
         }
 
