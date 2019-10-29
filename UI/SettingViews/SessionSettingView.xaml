@@ -36,7 +36,7 @@
                         Name="TxtbxJackpotlimit"
                         TextChanged="ValidateUserInput"                                          
                         PreviewKeyDown="DontAllowThisKeyboardinput" 
-                        PreviewTextInput="_PreviewTextInput"     
+                     
                     />
             </StackPanel>
     </Grid>

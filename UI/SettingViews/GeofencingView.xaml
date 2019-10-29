@@ -22,7 +22,11 @@
             <StackPanel Name="StkpnlSessionSetting" Grid.Column="1">
                 <CheckBox Name="chkbxEnableGeofencing" Content="Enable Geofencing"   TabIndex="1"/>
                 <Label x:Name="lblLongitude"  Content="Longitude" />
-                <TextBox TabIndex="1" Name="txtbxLongitude" Text="{Binding GeofencingModel.Longitude}"/>
+                <TextBox TabIndex="1" Name="txtbxLongitude" Text="{Binding GeofencingModel.Longitude}"
+                                                      
+                        PreviewKeyDown="DontAllowThisKeyboardinput" 
+                        PreviewTextInput="_PreviewTextInput"     
+                         />
                 <Label x:Name="lblLatitude"  Content="Latitude" />
                 <TextBox TabIndex="2" Name="txtbxLatitude" Text="{Binding GeofencingModel.Latitude}"/>
                 <Label x:Name="lblYellowZone"  Content="Yellow zone (meters)" />
