@@ -48,9 +48,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
             {
                 switch (setting.SettingType)
                 {
-                    case B3SettingType.EnableGeofencing:
-                        GeofencingModel.EnableGeofencing = setting.ConvertB3StringValueToBool();
-                        break;
+                    //case B3SettingType.EnableGeofencing:
+                    //    GeofencingModel.EnableGeofencing = setting.ConvertB3StringValueToBool();
+                    //    break;
                     case B3SettingType.Longitude:
                         GeofencingModel.Longitude = setting.B3SettingValue;
                         break;
@@ -76,9 +76,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                 
                 switch (setting.SettingType)
                 {
-                    case B3SettingType.EnableGeofencing:
-                        setting.B3SettingValue = GeofencingModel.EnableGeofencing.ConvertToB3StringValue();
-                        break;
+                    //case B3SettingType.EnableGeofencing:
+                    //    setting.B3SettingValue = GeofencingModel.EnableGeofencing.ConvertToB3StringValue();
+                    //    break;
                     case B3SettingType.Longitude:
                         setting.B3SettingValue = GeofencingModel.Longitude;
                         break;

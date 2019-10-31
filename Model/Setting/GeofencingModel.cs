@@ -35,7 +35,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
             set
             {
-                m_longitude = value;
+                m_longitude = value;             
                 RaisePropertyChanged("Longitude");
             }
         }
@@ -75,6 +75,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             set
             {
                 m_redZone = value;
+                if (m_redZone == "0")
+                {
+                    EnableGeofencing = false;
+                }
+
                 RaisePropertyChanged("RedZone");
             }
         }

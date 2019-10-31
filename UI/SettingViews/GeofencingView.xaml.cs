@@ -28,7 +28,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             DataContext = geofencingViewModel;
         }
 
-        /*
+     
         private void ValidateUserInput(object sender, TextChangedEventArgs e)
         {
             TextBox currentTextBox = (TextBox)sender;
@@ -39,19 +39,31 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 ii.BtnSaveIsEnabled = false;
             }
             else//If its not empty then lets validate all values.
-            {
-                var tempResult = false;
-                long tempResultInt64;
+            {               
+                int tempResultIntRed = 0;
+                int tempResultIntYellow = 0;
+                decimal tempResultDec = 0M;
+                bool tempResult = false;
 
-                //if (long.TryParse(TxtbxPayoutLimit.Text, out tempResultInt64))
-                //{
-                //    if (long.TryParse(TxtbxJackpotlimit.Text, out tempResultInt64))
-                //    {
-                //        tempResult = true;
-                //        var ii = SettingViewModel.Instance;
-                //        ii.BtnSaveIsEnabled = true;
-                //    }
-                //}
+                if ( 
+                    Decimal.TryParse(txtbxLongitude.Text, out tempResultDec)
+                    && Decimal.TryParse ( txtbxLatitude.Text, out tempResultDec)
+                    && int.TryParse(txtbxYellowZone.Text, out tempResultIntYellow)
+                       && int.TryParse(txtbxRedZone.Text, out tempResultIntRed)
+                    )
+                {
+                    if (tempResultIntRed > tempResultIntYellow)
+                    {
+                        tempResult = true;
+                        var ii = SettingViewModel.Instance;
+                        ii.BtnSaveIsEnabled = true;
+                    }
+                    else
+                    {
+                        var ii = SettingViewModel.Instance;
+                        ii.BtnSaveIsEnabled = false;
+                    }
+                }
 
                 if (tempResult == false)
                 {
@@ -60,7 +72,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
                 }
             }
         }
-         * */
+         
 
         private void DontAllowThisKeyboardinput(object sender, KeyEventArgs e)
         {

@@ -20,19 +20,28 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Name="StkpnlSessionSetting" Grid.Column="1">
-                <CheckBox Name="chkbxEnableGeofencing" Content="Enable Geofencing"   TabIndex="1"/>
-                <Label x:Name="lblLongitude"  Content="Longitude" />
+                <CheckBox Name="chkbxEnableGeofencing" Content="Enable Geofencing"   TabIndex="1" IsChecked="{Binding GeofencingModel.EnableGeofencing}"/>
+                <Label x:Name="lblLongitude"  Content="Longitude" IsEnabled="{Binding GeofencingModel.EnableGeofencing}" 
+                       />
                 <TextBox TabIndex="1" Name="txtbxLongitude" Text="{Binding GeofencingModel.Longitude}"
-                                                      
+                        IsEnabled="{Binding GeofencingModel.EnableGeofencing}"                          
                         PreviewKeyDown="DontAllowThisKeyboardinput" 
-                        PreviewTextInput="_PreviewTextInput"     
-                         />
-                <Label x:Name="lblLatitude"  Content="Latitude" />
-                <TextBox TabIndex="2" Name="txtbxLatitude" Text="{Binding GeofencingModel.Latitude}"/>
-                <Label x:Name="lblYellowZone"  Content="Yellow zone (meters)" />
-                <TextBox TabIndex="1" Name="txtbxYellowZone" Text="{Binding GeofencingModel.YellowZone}"/>
-                <Label x:Name="lblRedZone"  Content="Red zone (meters)" />
-                <TextBox TabIndex="1" Name="txtbxRedZone" Text="{Binding GeofencingModel.RedZone}"/>
+                        PreviewTextInput="_PreviewTextInput" TextChanged="ValidateUserInput" />
+                <Label x:Name="lblLatitude"  Content="Latitude"  
+                       IsEnabled="{Binding GeofencingModel.EnableGeofencing}"  />
+                <TextBox TabIndex="2" Name="txtbxLatitude" 
+                         Text="{Binding GeofencingModel.Latitude}"     
+                         IsEnabled="{Binding GeofencingModel.EnableGeofencing}" TextChanged="ValidateUserInput" />
+                <Label x:Name="lblYellowZone"  Content="Yellow zone (meters)"     
+                       IsEnabled="{Binding GeofencingModel.EnableGeofencing}"  />
+                <TextBox TabIndex="1" Name="txtbxYellowZone" 
+                         Text="{Binding GeofencingModel.YellowZone}"    
+                         IsEnabled="{Binding GeofencingModel.EnableGeofencing}" TextChanged="ValidateUserInput" />
+                <Label x:Name="lblRedZone"  Content="Red zone (meters)"     
+                       IsEnabled="{Binding GeofencingModel.EnableGeofencing}"   />
+                <TextBox TabIndex="1" Name="txtbxRedZone" 
+                         Text="{Binding GeofencingModel.RedZone}"    
+                         IsEnabled="{Binding GeofencingModel.EnableGeofencing}" TextChanged="ValidateUserInput" />
             </StackPanel>
 
         </Grid>
