@@ -74,12 +74,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
             }
             set
             {
-                m_redZone = value;
-                if (m_redZone == "0")
-                {
-                    EnableGeofencing = false;
-                }
-
+                m_redZone = value;              
                 RaisePropertyChanged("RedZone");
             }
         }

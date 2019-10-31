@@ -65,6 +65,34 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                         break;
                 }
             }
+
+            if (GeofencingModel.Longitude != ""
+                && GeofencingModel.Latitude != ""
+                && GeofencingModel.YellowZone != "0"
+                && GeofencingModel.RedZone != "0")
+            {
+                GeofencingModel.EnableGeofencing = true;
+            }
+            else
+            {
+                GeofencingModel.EnableGeofencing = false;
+            }
+        }
+
+        public void SetValueByCheckedStatus(bool IsEnable)
+        {
+            if (IsEnable)
+            {
+                ResetSettingsToDefault();
+            }
+            else
+            {
+                GeofencingModel.Longitude = "";
+                GeofencingModel.Latitude = "";
+                GeofencingModel.YellowZone = "0";
+                GeofencingModel.RedZone = "0";
+            }
+
         }
 
         private void UpdateModelToSettingsList()

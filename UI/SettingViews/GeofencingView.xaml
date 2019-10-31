@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Name="StkpnlSessionSetting" Grid.Column="1">
-                <CheckBox Name="chkbxEnableGeofencing" Content="Enable Geofencing"   TabIndex="1" IsChecked="{Binding GeofencingModel.EnableGeofencing}"/>
+                <CheckBox Name="chkbxEnableGeofencing" Content="Enable Geofencing"   TabIndex="1" IsChecked="{Binding GeofencingModel.EnableGeofencing}" Checked="chkbxEnableGeofencing_Checked" Unchecked="chkbxEnableGeofencing_Unchecked" />
                 <Label x:Name="lblLongitude"  Content="Longitude" IsEnabled="{Binding GeofencingModel.EnableGeofencing}" 
                        />
                 <TextBox TabIndex="1" Name="txtbxLongitude" Text="{Binding GeofencingModel.Longitude}"

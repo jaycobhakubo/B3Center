@@ -495,6 +495,11 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                        PayTableSettingVm.ResetSettingsToDefault();
                         break;
                     }
+                case B3SettingCategory.Geofencing:
+                    {
+                        GeofencingSettingVm.ResetSettingsToDefault();
+                        break;
+                    }
             }
         }
 

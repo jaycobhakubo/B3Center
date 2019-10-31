@@ -127,5 +127,17 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
 
             //e.Handled = NotAllow;
         }
+
+        private void chkbxEnableGeofencing_Checked(object sender, RoutedEventArgs e)
+        {      
+            var vm = (GeofencingVm)DataContext;        
+            vm.SetValueByCheckedStatus(true);             
+        }
+
+        private void chkbxEnableGeofencing_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var vm = (GeofencingVm)DataContext;
+            vm.SetValueByCheckedStatus(false);      
+        }
     }
 }
