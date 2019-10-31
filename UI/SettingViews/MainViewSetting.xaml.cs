@@ -11,7 +11,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.UI.SettingViews
             InitializeComponent();          
         }
 
-        private void lstbx_SettingList_SelectionChanged(object sender, SelectionChangedEventArgs e)//knc
+        private void lstbx_SettingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SettingViewModel vm = (SettingViewModel)DataContext;
             vm.SelectedItemEvent();

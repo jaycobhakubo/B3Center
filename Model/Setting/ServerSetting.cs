@@ -17,6 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
        private string m_rfRequiredForPlayTimeout;
        private bool m_singlePlayerMode;
        private bool m_multiplayerMode;
+       private string m_gameThread;
        #endregion
 
        #region Properties
@@ -155,6 +156,19 @@ namespace GameTech.Elite.Client.Modules.B3Center.Model.Setting
                    MinPlayer = 2.ToString();
                }
                RaisePropertyChanged("IsMultiplayerMode");
+           }
+       }
+
+       public string GameThread
+       {
+           get
+           {
+               return m_gameThread;
+           }
+           set
+           {
+               m_gameThread = value;
+               RaisePropertyChanged("GameThread");
            }
        }
        #endregion

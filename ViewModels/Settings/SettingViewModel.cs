@@ -200,7 +200,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
 
                 if (m_settingTobeSaved.Count != 0)//Do not send if no changes was made.
                 {
-                    SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);//knc
+                    SetB3SettingsMessage msg = new SetB3SettingsMessage(m_settingTobeSaved);
                     try
                     {
                         msg.Send();
@@ -361,7 +361,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
             m_settingList.Clear();      
             var categories = Enum.GetNames(typeof(B3SettingCategory)).OrderBy(l => l);
           
-            foreach (var b3SettingCategory in categories)//knc
+            foreach (var b3SettingCategory in categories)
             {
        
                 if (b3SettingCategory != B3SettingCategory.Operator.ToString())
@@ -371,7 +371,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                     //    continue;
                     //}
 
-                    if (b3SettingCategory == B3SettingCategory.PayTable.ToString() && !GetStaffPayTablePermission())//knc
+                    if (b3SettingCategory == B3SettingCategory.PayTable.ToString() && !GetStaffPayTablePermission())
                     {
                         continue;
                     }
@@ -446,7 +446,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         break; 
                     }
                 case B3SettingCategory.Geofencing:
-                    {//knc
+                    {
                         GeofencingSettingVm = m_lazyGeofencingSettingVm.Value;
                         SelectedSettingView = m_geofencingView;
                         break;
@@ -527,7 +527,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
                         {
                             if (b3setting.B3SettingValue == "T")
                             {
-                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))//knc
+                                if (!SettingList.Contains(B3SettingCategory.ServerGame.ToString()))
                                 {
                                     var indexOfSalesSetting = SettingList.IndexOf(B3SettingCategory.Sales.ToString());
                                     SettingList.Insert(indexOfSalesSetting + 1, B3SettingCategory.ServerGame.ToString());

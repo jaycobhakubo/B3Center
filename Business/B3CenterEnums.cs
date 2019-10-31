@@ -17,7 +17,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         Wildfire = 8,
     }
 
-    public enum B3SettingCategory//knc
+    public enum B3SettingCategory
     {
         Games = 1,
         Operator = 2,     
@@ -100,6 +100,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.Business
         Latitude = 66,
         YellowZone = 67,
         RedZone = 68,
+        GameThread = 69,
     }
 
 

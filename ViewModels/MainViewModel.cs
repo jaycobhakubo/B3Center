@@ -24,7 +24,7 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels
         /// <summary>
         /// Initializes a new instance of the MainVeiwModel class.
         /// </summary>
-        public MainViewModel(B3CenterController controller)//knc
+        public MainViewModel(B3CenterController controller)
         {
             if (controller == null)throw new ArgumentNullException("controller");
             Controller = controller;
