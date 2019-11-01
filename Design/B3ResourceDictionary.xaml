@@ -85,6 +85,29 @@
         </Setter>
     </Style>
 
+    <Style x:Key="lblStyleGeofencing" TargetType="{x:Type Label}" BasedOn="{StaticResource B3RequiredFieldLabelStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="RequiredAsterisk"  Foreground="Red" Text="* "/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              RecognizesAccessKey="True" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter Property="Background"  Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="B3DefaultStyleLabel" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0,15,0,2"/>

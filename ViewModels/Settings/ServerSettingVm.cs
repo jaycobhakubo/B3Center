@@ -83,7 +83,6 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                   case B3SettingType.GameThread:
                        ServerSettings.GameThread = setting.B3SettingValue;
                        break;
-
                }
            }
        }
@@ -116,6 +115,9 @@ namespace GameTech.Elite.Client.Modules.B3Center.ViewModels.Settings
                        break;
                    case B3SettingType.RfRequiredForPlay:
                        setting.B3SettingValue = ServerSettings.RfRequiredForPlayTimeout;
+                       break;
+                   case B3SettingType.GameThread:
+                       setting.B3SettingValue = ServerSettings.GameThread;
                        break;
                }
 

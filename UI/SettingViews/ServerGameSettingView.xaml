@@ -165,7 +165,7 @@
             <Grid  Grid.Column="0" Grid.Row="8" >
                 <TextBlock Text="Game Threads" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBox Name="txtbxGameThreads" 
-                         Text="{Binding ServerSettings.ServerSettings.GameThread}"   
+                         Text="{Binding ServerSettings.GameThread}"   
                          MaxLength="25" 
                          Tag="37"                         
                          HorizontalAlignment="Right" 
